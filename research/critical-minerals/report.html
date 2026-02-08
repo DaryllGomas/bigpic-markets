@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rare Earth &amp; Critical Minerals — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #0c0a08;
+  --bg-card: rgba(18, 14, 10, 0.90);
+  --bg-card-hover: rgba(28, 22, 14, 0.94);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(205,133,63,0.22);
+  --text-primary: #e8dfd4;
+  --text-secondary: #9a8d7e;
+  --text-muted: #5a5044;
+  --accent-copper: #cd853f;
+  --accent-gold: #daa520;
+  --accent-amber: #d4a030;
+  --accent-teal: #2dd4a8;
+  --accent-rose: #e05555;
+  --accent-blue: #4a90d9;
+  --accent-violet: #9b6fd0;
+  --accent-emerald: #34d399;
+  --glow-copper: 0 0 30px rgba(205,133,63,0.15);
+  --glow-gold: 0 0 30px rgba(218,165,32,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-copper) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-copper); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#crystalfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(205,133,63,0.08);
+  border: 1px solid rgba(205,133,63,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-copper);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-copper); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-copper) 0%, var(--accent-gold) 40%, var(--accent-amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stats.six-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+.hero-stat {
+  background: var(--bg-card);
+  padding: 28px 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-copper));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-copper);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-copper); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-copper);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* WATERFALL BARS */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+
+/* AREA CHART */
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+
+/* HEATMAP TABLE */
+.heatmap-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.heatmap-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.heatmap-table th:last-child, .heatmap-table td:last-child { text-align: right; }
+.heatmap-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.heatmap-table tr:hover td { background: rgba(255,255,255,0.04); }
+.heatmap-table td:first-child { border-radius: 8px 0 0 8px; font-weight: 600; }
+.heatmap-table td:last-child { border-radius: 0 8px 8px 0; }
+.risk-badge { padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.risk-badge.critical { background: rgba(224,85,85,0.12); color: var(--accent-rose); border: 1px solid rgba(224,85,85,0.25); }
+.risk-badge.high { background: rgba(212,160,48,0.12); color: var(--accent-amber); border: 1px solid rgba(212,160,48,0.25); }
+.risk-badge.medium { background: rgba(45,212,168,0.12); color: var(--accent-teal); border: 1px solid rgba(45,212,168,0.25); }
+
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-copper); }
+.company-card.tier-2::after { background: var(--accent-gold); }
+.company-card.tier-3::after { background: var(--accent-teal); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-copper); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.t1 { background: rgba(205,133,63,0.12); color: var(--accent-copper); border: 1px solid rgba(205,133,63,0.25); }
+.tier-badge.t2 { background: rgba(218,165,32,0.12); color: var(--accent-gold); border: 1px solid rgba(218,165,32,0.25); }
+.tier-badge.t3 { background: rgba(45,212,168,0.12); color: var(--accent-teal); border: 1px solid rgba(45,212,168,0.25); }
+.tier-badge.private-co { background: rgba(155,111,208,0.12); color: var(--accent-violet); border: 1px solid rgba(155,111,208,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-copper); color: var(--text-primary); }
+.filter-pill.active { background: rgba(205,133,63,0.12); border-color: var(--accent-copper); color: var(--accent-copper); }
+
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-copper), var(--accent-gold), var(--accent-teal));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-copper);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(205,133,63,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.gold { background: var(--accent-gold); box-shadow: 0 0 12px rgba(218,165,32,0.4); }
+.timeline-dot.teal { background: var(--accent-teal); box-shadow: 0 0 12px rgba(45,212,168,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(224,85,85,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(155,111,208,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-copper); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(224,85,85,0.2); background: rgba(224,85,85,0.03); }
+.risk-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(224,85,85,0.1); }
+.risk-icon.medium { background: rgba(212,160,48,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(205,133,63,0.06), rgba(218,165,32,0.06));
+  border: 1px solid rgba(205,133,63,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-copper); background: rgba(205,133,63,0.06); }
+
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content {
+  padding: 0 28px 24px;
+  columns: 2;
+  column-gap: 40px;
+}
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-copper); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-gold); }
+
+/* SECTION DIVIDER */
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .hero-stat .value { font-size: 1.6rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="crystalfield"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Critical Minerals</span> Imperative</h1>
+  <p class="subtitle">China controls 90% of rare earth processing. The West is spending $25B+ to break free. A generational supply chain reshoring across rare earths, lithium, copper, and cobalt.</p>
+  <div class="hero-stats six-col">
+    <div class="hero-stat">
+      <div class="value" data-count="90" data-suffix="%" data-prefix="">0</div>
+      <div class="label">China REE Processing</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="25" data-prefix="$" data-suffix="B+">$0</div>
+      <div class="label">Allied Investment</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="50" data-suffix="" data-prefix="">0</div>
+      <div class="label">Critical Minerals Listed</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="330" data-suffix="K" data-prefix="">0</div>
+      <div class="label">Copper Deficit (MT)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="92" data-suffix="%" data-prefix="">0</div>
+      <div class="label">China Magnet Share</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="7" data-suffix="" data-prefix="">0</div>
+      <div class="label">REEs Under Export Ban</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: MARKET OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">The Strategic Minerals Landscape</h2>
+      <p class="section-desc">A $350B+ market across rare earths, lithium, copper, and cobalt &mdash; with demand set to double by 2030, driven by EVs, defense, and the energy transition.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market Size by Mineral (2025)</h3>
+        <div class="bar-chart" id="market-chart">
+          <div class="gridlines" id="market-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">China's Supply Chain Control</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-china"></svg>
+          <div class="donut-legend" id="donut-china-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Demand Growth Projections</h3>
+      <table class="heatmap-table">
+        <thead>
+          <tr>
+            <th>Mineral</th>
+            <th>2025 Demand</th>
+            <th>2030 Projection</th>
+            <th>CAGR</th>
+            <th>Supply Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Rare Earth Oxides</td><td style="font-family:var(--font-mono);">~200K MT</td><td style="font-family:var(--font-mono);">~400K MT</td><td style="font-family:var(--font-mono);color:var(--accent-copper);">8-13%</td><td><span class="risk-badge high">High</span></td></tr>
+          <tr><td>NdPr (Magnets)</td><td style="font-family:var(--font-mono);">~55K MT</td><td style="font-family:var(--font-mono);">~90K+ MT</td><td style="font-family:var(--font-mono);color:var(--accent-copper);">10-12%</td><td><span class="risk-badge high">High</span></td></tr>
+          <tr><td>Dysprosium</td><td style="font-family:var(--font-mono);">~2.5K MT</td><td style="font-family:var(--font-mono);">~4K+ MT</td><td style="font-family:var(--font-mono);color:var(--accent-rose);">10%+</td><td><span class="risk-badge critical">Critical</span></td></tr>
+          <tr><td>Lithium (LCE)</td><td style="font-family:var(--font-mono);">~1.0M MT</td><td style="font-family:var(--font-mono);">~2.0M+ MT</td><td style="font-family:var(--font-mono);color:var(--accent-copper);">~18%</td><td><span class="risk-badge high">High</span></td></tr>
+          <tr><td>Copper</td><td style="font-family:var(--font-mono);">28M MT</td><td style="font-family:var(--font-mono);">~33M MT</td><td style="font-family:var(--font-mono);color:var(--accent-gold);">~7%</td><td><span class="risk-badge critical">Critical</span></td></tr>
+          <tr><td>Gallium</td><td style="font-family:var(--font-mono);">~700 MT</td><td style="font-family:var(--font-mono);">~1K+ MT</td><td style="font-family:var(--font-mono);color:var(--accent-rose);">~8%</td><td><span class="risk-badge critical">Critical</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: MINING -->
+<section id="mining">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Mining &amp; Extraction</div>
+      <h2 class="section-title">The Resource Base</h2>
+      <p class="section-desc">Mining is the most geographically diversified stage. MP Materials, Lynas, Freeport, and Albemarle lead the Western charge.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Rare Earth Producers (NdPr Capacity)</h3>
+        <div class="cost-waterfall" id="ree-producers"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Copper Producers (FY2025 Output)</h3>
+        <div class="cost-waterfall" id="copper-producers"></div>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Lithium Market Recovery</h3>
+        <div style="text-align:center;padding:20px 0 10px;">
+          <div style="display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;">
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;color:var(--text-muted);text-decoration:line-through;">$80K</div>
+              <div style="font-size:11px;color:var(--text-muted);">Li2CO3/t peak (2022)</div>
+            </div>
+            <div style="font-size:2rem;color:var(--text-muted);">&rarr;</div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;color:var(--accent-rose);">&lt;$10K</div>
+              <div style="font-size:11px;color:var(--text-muted);">Lithium Winter low (2024)</div>
+            </div>
+            <div style="font-size:2rem;color:var(--text-muted);">&rarr;</div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;color:var(--accent-teal);">$18.5K</div>
+              <div style="font-size:11px;color:var(--text-muted);">Stabilized (early 2026)</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="metric"><div class="metric-label">Lithium Market</div><div class="metric-value" style="color:var(--accent-gold);">$44B</div></div>
+          <div class="metric"><div class="metric-label">2030 Target</div><div class="metric-value" style="color:var(--accent-copper);">$75B</div></div>
+          <div class="metric"><div class="metric-label">Growth</div><div class="metric-value">~18% CAGR</div></div>
+          <div class="metric"><div class="metric-label">Demand 2026</div><div class="metric-value">&gt;1.7M MT LCE</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Copper Structural Deficit</h3>
+        <div class="area-chart">
+          <svg id="copper-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: PROCESSING -->
+<section id="processing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Processing &amp; Refining</div>
+      <h2 class="section-title">The Strategic Chokepoint</h2>
+      <p class="section-desc">Processing is where geopolitical leverage concentrates. China built its dominance over three decades. The West needs $15-25B and a decade to close the gap.</p>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px; margin-bottom: 24px; border-color: rgba(224,85,85,0.15);">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px;">The Western Processing Gap</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin: 0 auto;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:900;color:var(--accent-rose);line-height:1;">-75%</div>
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;">Light REE (NdPr) gap<br><span style="font-size:11px;">15K MT capacity vs 60K demand</span></div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:900;color:var(--accent-rose);line-height:1;">-100%</div>
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;">Heavy REE (Dy/Tb) gap<br><span style="font-size:11px;">0 MT at scale vs 4K demand</span></div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:900;color:var(--accent-rose);line-height:1;">-90%</div>
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;">NdFeB Magnet gap<br><span style="font-size:11px;">2.5K MT vs 25K demand</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Western Processing Facilities</h3>
+        <div class="cost-waterfall" id="processing-facilities"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Government Investment</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">DOD / MP Materials</span><div style="font-size:0.75rem;color:var(--text-muted);">Equity + procurement + OSC loan</div></div>
+            <span class="inline-stat">$550M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">CHIPS Act / USA Rare Earth</span><div style="font-size:0.75rem;color:var(--text-muted);">Debt-and-equity package</div></div>
+            <span class="inline-stat">$1.6B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">NDS Expansion</span><div style="font-size:0.75rem;color:var(--text-muted);">One Big Beautiful Act (FY2025)</div></div>
+            <span class="inline-stat">$2.0B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Industrial Base Fund</span><div style="font-size:0.75rem;color:var(--text-muted);">Supply chain support</div></div>
+            <span class="inline-stat">$5.0B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(155,111,208,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">DOE Loan / Lithium Americas</span><div style="font-size:0.75rem;color:var(--text-muted);">Thacker Pass lithium mine</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$1.97B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: DEMAND -->
+<section id="demand">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Defense &amp; Industrial Demand</div>
+      <h2 class="section-title">The Non-Negotiable Consumer</h2>
+      <p class="section-desc">Every F-35 requires 920 lbs of rare earths. Every Virginia-class sub needs 9,200 lbs. The military cannot substitute &mdash; it must secure supply.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Rare Earth Content by Platform</h3>
+        <div class="bar-chart" id="defense-chart">
+          <div class="gridlines" id="defense-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Demand by End-Use (2025)</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-demand"></svg>
+          <div class="donut-legend" id="donut-demand-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Demand Metrics</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">EV NdPr Demand (2030)</div><div class="metric-value" style="color: var(--accent-copper);">~21K MT</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">~50% of global NdPr output</div></div>
+        <div class="metric"><div class="metric-label">Haliade-X Turbine</div><div class="metric-value" style="color: var(--accent-gold);">4-6 MT</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">NdFeB magnets per unit</div></div>
+        <div class="metric"><div class="metric-label">Military Magnets</div><div class="metric-value">3-4K t/yr</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">DOD annual consumption</div></div>
+        <div class="metric"><div class="metric-label">AI DC Copper (2040)</div><div class="metric-value" style="color: var(--accent-teal);">2.5M MT</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Up from 1.1M MT (2025)</div></div>
+        <div class="metric"><div class="metric-label">NdFeB in EVs</div><div class="metric-value" style="color: var(--accent-gold);">96%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">of RE magnet demand</div></div>
+        <div class="metric"><div class="metric-label">Cobalt Price Surge</div><div class="metric-value" style="color: var(--accent-rose);">+162%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">DRC export ban impact</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: GEOPOLITICS -->
+<section id="geopolitics">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">China &amp; Geopolitics</div>
+      <h2 class="section-title">The Catalyst and the Risk</h2>
+      <p class="section-desc">Beijing has systematically weaponized mineral dominance since July 2023. The November 2026 trade deal expiry is the single most important near-term catalyst.</p>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto; margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Export Control Escalation Timeline</h3>
+      <table class="heatmap-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Action</th>
+            <th>Impact</th>
+            <th>Severity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Jul 2023</td><td>Gallium/Germanium controls</td><td style="font-family:var(--font-mono);color:var(--accent-rose);">Exports &rarr; zero; +150% price</td><td><span class="risk-badge critical">Critical</span></td></tr>
+          <tr><td>Aug 2024</td><td>Antimony controls</td><td style="font-family:var(--font-mono);color:var(--accent-rose);">+200% price; shipments -97%</td><td><span class="risk-badge critical">Critical</span></td></tr>
+          <tr><td>Apr 2025</td><td>7 heavy REEs + magnets</td><td style="font-family:var(--font-mono);color:var(--accent-amber);">Auto production cuts</td><td><span class="risk-badge high">High</span></td></tr>
+          <tr><td>Oct 2025</td><td>Extraterritorial controls</td><td style="font-family:var(--font-mono);color:var(--accent-amber);">Most extensive to date</td><td><span class="risk-badge high">High</span></td></tr>
+          <tr><td>Nov 2025</td><td>Temporary suspension</td><td style="font-family:var(--font-mono);color:var(--accent-teal);">Until Nov 2026; architecture intact</td><td><span class="risk-badge medium">Pause</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Scenario Probabilities (Nov 2026)</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; padding: 10px 0;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:50px;text-align:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:800;color:var(--accent-amber);">45%</div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:0.95rem;">Managed Tension</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Agreement extended with modifications. Some controls remain.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:50px;text-align:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:800;color:var(--accent-rose);">35%</div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:0.95rem;">Continued Escalation</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">All controls reimposed. Massively bullish for Western miners.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:50px;text-align:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:800;color:var(--accent-teal);">20%</div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:0.95rem;">Detente</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Permanent relaxation. Western mining equities correct near-term.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">IRA FEOC Mineral Thresholds</h3>
+        <div class="area-chart">
+          <svg id="feoc-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From vertically-integrated mine-to-magnet leaders to early-stage development plays. Filter by conviction tier to explore.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3</div>
+      <div class="filter-pill" data-filter="tier-private">Private</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: TIMELINE -->
+<section id="timing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">From near-term production milestones to the pivotal November 2026 trade agreement expiry and long-term secular trends.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks spanning commodity volatility, execution delays, geopolitical uncertainty, and valuation compression.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Focus on vertically-integrated Western producers with government backing. The November 2026 U.S.-China trade deal expiry is the single most important catalyst. Position for structural supply chain reshoring across rare earths, lithium, and copper.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Mining &amp; Extraction</h4>
+          <ul>
+            <li>MP Materials Q3 2025 Results (investors.mpmaterials.com)</li>
+            <li>Lynas Rare Earths Full Year 2025 Results (weblink.com.au)</li>
+            <li>Energy Fuels Heavy REE Oxide Production (investors.energyfuels.com)</li>
+            <li>Albemarle 2026 Rebound Analysis (markets.financialcontent.com)</li>
+            <li>Rio Tinto Arcadium Lithium Acquisition (riotinto.com)</li>
+            <li>SQM Q3 2025 Record Lithium Sales (investing.com)</li>
+            <li>Pilbara Minerals Record FY2025 Production (investingnews.com)</li>
+            <li>Freeport-McMoRan Q4 2025 Results (q4cdn.com)</li>
+            <li>Southern Copper Tia Maria Progress (simplywall.st)</li>
+            <li>ICSG Copper Surplus/Deficit Projections (miningweekly.com)</li>
+            <li>DRC Cobalt Export Quotas (spglobal.com)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Processing &amp; Refining</h4>
+          <ul>
+            <li>IEA Global Critical Minerals Outlook 2025 (iea.org)</li>
+            <li>CSIS Developing Rare Earth Processing Hubs (csis.org)</li>
+            <li>MP Materials DOD Partnership (investors.mpmaterials.com)</li>
+            <li>USA Rare Earth CHIPS Funding (okenergytoday.com)</li>
+            <li>Neo Performance Estonia Magnet Plant (neomaterials.com)</li>
+            <li>Ucore RapidSX Technology (ucore.com)</li>
+            <li>Cyclic Materials South Carolina Campus (businesswire.com)</li>
+            <li>Redwood Materials Overview (redwoodmaterials.com)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Defense &amp; Industrial Demand</h4>
+          <ul>
+            <li>U.S. Army Elemental Issue (army.mil)</li>
+            <li>CRS Rare Earth Elements in National Defense (fas.org)</li>
+            <li>Pentagon $1B Critical Minerals Stockpile (mining-technology.com)</li>
+            <li>IDTechEx Rare Earth Magnet Market (idtechex.com)</li>
+            <li>S&amp;P Global Copper in the Age of AI (spglobal.com)</li>
+            <li>2026 Critical Minerals Ministerial (state.gov)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>China &amp; Geopolitics</h4>
+          <ul>
+            <li>CSIS China Gallium Supply Chain Threat (csis.org)</li>
+            <li>CSIS Antimony Export Restrictions Impact (csis.org)</li>
+            <li>China Pauses Rare Earth Export Curbs (fdd.org)</li>
+            <li>White House U.S.-China Trade Deal (whitehouse.gov)</li>
+            <li>IRA Section 30D / FEOC Rules (federalregister.gov)</li>
+            <li>Goldman Sachs Geopolitics of Critical Minerals (goldmansachs.com)</li>
+            <li>Atlantic Council Critical Minerals Stress Testing (atlanticcouncil.org)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Rare Earth &amp; Critical Minerals &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// CRYSTAL FIELD ANIMATION
+(function() {
+  const canvas = document.getElementById('crystalfield');
+  const ctx = canvas.getContext('2d');
+  let nodes = [], edges = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    nodes = [];
+    edges = [];
+    const count = Math.min(Math.floor(w * h / 10000), 160);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2 + 0.5,
+        a: Math.random() * 0.35 + 0.05,
+        pulse: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.001 + 0.0003,
+        shape: Math.random() < 0.3 ? 'hex' : 'circle'
+      });
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140 && Math.random() < 0.25) {
+          edges.push({ a: i, b: j, dist });
+        }
+      }
+    }
+  }
+
+  function drawHex(x, y, r, alpha) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = Math.PI / 3 * i - Math.PI / 6;
+      const px = x + r * Math.cos(angle);
+      const py = y + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(205, 133, 63, ' + alpha + ')';
+    ctx.fill();
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    edges.forEach(function(e) {
+      const a = nodes[e.a], b = nodes[e.b];
+      const flicker = Math.sin(t * 0.001 + e.a) * 0.3 + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(205, 133, 63, ' + (0.03 * flicker) + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+    nodes.forEach(function(n) {
+      const flicker = Math.sin(t * n.speed * 1000 + n.pulse) * 0.4 + 0.6;
+      if (n.shape === 'hex') {
+        drawHex(n.x, n.y, n.r * 2, n.a * flicker);
+      } else {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(218, 165, 32, ' + (n.a * flicker) + ')';
+        ctx.fill();
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize();
+  init();
+  requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(function(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '';
+    var isDecimal = el.dataset.decimal;
+    var duration = 2000;
+    var start = performance.now();
+
+    function update(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      if (isDecimal) {
+        el.textContent = prefix + current.toFixed(1) + suffix;
+      } else {
+        el.textContent = prefix + Math.round(current) + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// MARKET SIZE BAR CHART
+(function() {
+  var data = [
+    { label: 'Copper', value: 250, color: 'var(--accent-copper)' },
+    { label: 'Lithium', value: 44, color: 'var(--accent-gold)' },
+    { label: 'Nickel', value: 40, color: 'var(--accent-blue)' },
+    { label: 'NdFeB', value: 20, color: 'var(--accent-teal)' },
+    { label: 'Cobalt', value: 15, color: 'var(--accent-violet)' },
+    { label: 'REE', value: 14, color: 'var(--accent-amber)' },
+  ];
+  var max = 275;
+  var chart = document.getElementById('market-chart');
+  var gridlines = document.getElementById('market-gridlines');
+
+  [250, 200, 150, 100, 50, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    var pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// CHINA SUPPLY CHAIN DONUT
+(function() {
+  var segments = [
+    { label: 'Magnet Mfg', value: 92, color: '#cd853f' },
+    { label: 'REE Refining', value: 90, color: '#daa520' },
+    { label: 'Gallium', value: 98, color: '#e05555' },
+    { label: 'Graphite', value: 90, color: '#9b6fd0' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-china');
+  var legend = document.getElementById('donut-china-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(12,10,8,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e8dfd4');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '16');
+  text.setAttribute('font-weight', '800');
+  text.textContent = 'China';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#5a5044');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'Control Share';
+  svg.appendChild(sub);
+})();
+
+// REE PRODUCERS WATERFALL
+(function() {
+  var data = [
+    { name: 'MP Materials', cost: 721, label: '721 MT NdPr (Q3)', color: 'var(--accent-copper)' },
+    { name: 'Lynas', cost: 7000, label: '7,000 t REO/yr', color: 'var(--accent-gold)' },
+    { name: 'Energy Fuels', cost: 1000, label: '1,000 t NdPr cap', color: 'var(--accent-teal)' },
+    { name: 'Iluka (2027)', cost: 5500, label: '5,500 t NdPr plan', color: 'var(--accent-violet)' },
+    { name: 'Arafura', cost: 4440, label: '4,440 t NdPr plan', color: 'var(--accent-blue)' },
+  ];
+  var max = 7000;
+  var container = document.getElementById('ree-producers');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';font-size:11px;">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// COPPER PRODUCERS WATERFALL
+(function() {
+  var data = [
+    { name: 'S. Copper (SCCO)', cost: 959, label: '959K t Cu', color: 'var(--accent-copper)' },
+    { name: 'Freeport (FCX)', cost: 1542, label: '3.4B lbs Cu', color: 'var(--accent-gold)' },
+  ];
+  var max = 1542;
+  var container = document.getElementById('copper-producers');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  // add market cap context
+  [
+    { name: 'SCCO Market Cap', cost: 155, label: '$154.6B', color: 'var(--accent-amber)' },
+    { name: 'FCX Market Cap', cost: 87, label: '$87.2B', color: 'var(--accent-teal)' },
+    { name: 'SCCO Reserves', cost: 155, label: '>112B lbs', color: 'var(--accent-rose)' },
+  ].forEach(function(d) {
+    var pct = Math.max((d.cost / 155) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// COPPER SUPPLY/DEMAND AREA CHART
+(function() {
+  var svg = document.getElementById('copper-svg');
+  var data = [
+    { year: '2024', val: 28.0, balance: 'Surplus' },
+    { year: '2025', val: 28.5, balance: '+178K' },
+    { year: '2026E', val: 29.5, balance: '-150K' },
+    { year: '2028E', val: 31.0, balance: '-330K' },
+    { year: '2030E', val: 33.0, balance: 'Deficit' },
+    { year: '2035E', val: 37.0, balance: '-10M gap' },
+  ];
+  var maxVal = 40;
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 10, 20, 30, 40].forEach(function(v) {
+    var y = pad.t + cH - (v / maxVal) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#5a5044'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + 'M';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].val);
+  for (var i = 1; i < data.length; i++) {
+    var px = getX(i-1), py = getY(data[i-1].val);
+    var cx2 = getX(i), cy2 = getY(data[i].val);
+    var cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d);
+  area.setAttribute('fill', 'rgba(205,133,63,0.08)');
+  svg.appendChild(area);
+
+  var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD);
+  line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#cd853f');
+  line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.val);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#cd853f'); c.setAttribute('stroke', '#0c0a08'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#cd853f'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = pt.val + 'M';
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#5a5044'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+
+  // Deficit marker line at 2026
+  var deficitX = getX(2);
+  var dl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  dl.setAttribute('x1', deficitX); dl.setAttribute('x2', deficitX);
+  dl.setAttribute('y1', pad.t); dl.setAttribute('y2', pad.t + cH);
+  dl.setAttribute('stroke', 'rgba(224,85,85,0.3)');
+  dl.setAttribute('stroke-dasharray', '6 4');
+  svg.appendChild(dl);
+  var dt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  dt.setAttribute('x', deficitX + 6); dt.setAttribute('y', pad.t + 14);
+  dt.setAttribute('fill', '#e05555'); dt.setAttribute('font-size', '9');
+  dt.setAttribute('font-family', 'var(--font-sans)'); dt.setAttribute('font-weight', '600');
+  dt.textContent = 'DEFICIT BEGINS';
+  svg.appendChild(dt);
+})();
+
+// PROCESSING FACILITIES WATERFALL
+(function() {
+  var data = [
+    { name: 'MP (Magnets)', cost: 10000, label: '10K MT/yr (2028)', color: 'var(--accent-copper)' },
+    { name: 'Lynas (REO)', cost: 12000, label: '12K t REO/yr', color: 'var(--accent-gold)' },
+    { name: 'USA Rare Earth', cost: 5000, label: '5K MT magnets', color: 'var(--accent-teal)' },
+    { name: 'Neo (Estonia)', cost: 2000, label: '2K t separation', color: 'var(--accent-blue)' },
+    { name: 'Ucore RapidSX', cost: 1500, label: 'Modular/scaling', color: 'var(--accent-violet)' },
+    { name: 'REEtec (Norway)', cost: 720, label: '720 t NdPr', color: 'var(--accent-amber)' },
+  ];
+  var max = 12000;
+  var container = document.getElementById('processing-facilities');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';font-size:11px;">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// DEFENSE RARE EARTH BAR CHART
+(function() {
+  var data = [
+    { label: 'Virginia Sub', value: 9200, color: 'var(--accent-copper)' },
+    { label: 'F-35', value: 920, color: 'var(--accent-gold)' },
+    { label: 'DDG-51', value: 500, color: 'var(--accent-teal)' },
+    { label: 'JDAM', value: 5, color: 'var(--accent-blue)' },
+  ];
+  var max = 10000;
+  var chart = document.getElementById('defense-chart');
+  var gridlines = document.getElementById('defense-gridlines');
+
+  [10000, 7500, 5000, 2500, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>' + (v >= 1000 ? (v/1000) + 'K' : v) + ' lbs</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    var pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">' + d.value.toLocaleString() + ' lbs</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 120);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// DEMAND DONUT
+(function() {
+  var segments = [
+    { label: 'EV Motors', value: 35, color: '#cd853f' },
+    { label: 'Consumer Electronics', value: 20, color: '#daa520' },
+    { label: 'Wind Energy', value: 15, color: '#2dd4a8' },
+    { label: 'Defense', value: 8, color: '#e05555' },
+    { label: 'Data Centers/AI', value: 5, color: '#4a90d9' },
+    { label: 'Industrial/Other', value: 17, color: '#9b6fd0' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-demand');
+  var legend = document.getElementById('donut-demand-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(12,10,8,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e8dfd4');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '16');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '2025';
+  svg.appendChild(text);
+  var sub2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub2.setAttribute('x', cx); sub2.setAttribute('y', cy + 14);
+  sub2.setAttribute('text-anchor', 'middle');
+  sub2.setAttribute('fill', '#5a5044');
+  sub2.setAttribute('font-family', 'var(--font-sans)');
+  sub2.setAttribute('font-size', '10');
+  sub2.textContent = 'RE Magnet Demand';
+  svg.appendChild(sub2);
+})();
+
+// FEOC THRESHOLDS AREA CHART
+(function() {
+  var svg = document.getElementById('feoc-svg');
+  var data = [
+    { year: '2023', pct: 40 },
+    { year: '2024', pct: 50 },
+    { year: '2025', pct: 60 },
+    { year: '2026', pct: 70 },
+    { year: '2027', pct: 80 },
+    { year: '2029+', pct: 80 },
+  ];
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 25, 50, 75, 100].forEach(function(v) {
+    var y = pad.t + cH - (v / 100) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#5a5044'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + '%';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / 100) * cH; }
+
+  // Staircase path
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].pct);
+  for (var i = 1; i < data.length; i++) {
+    d += ' L ' + getX(i) + ' ' + getY(data[i-1].pct);
+    d += ' L ' + getX(i) + ' ' + getY(data[i].pct);
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d);
+  area.setAttribute('fill', 'rgba(205,133,63,0.1)');
+  svg.appendChild(area);
+  var ln = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  ln.setAttribute('d', lineD);
+  ln.setAttribute('fill', 'none');
+  ln.setAttribute('stroke', '#cd853f');
+  ln.setAttribute('stroke-width', '2.5');
+  svg.appendChild(ln);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.pct);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#cd853f'); c.setAttribute('stroke', '#0c0a08'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#cd853f'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = pt.pct + '%';
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#5a5044'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+
+  // Title
+  var tl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  tl.setAttribute('x', pad.l); tl.setAttribute('y', 14);
+  tl.setAttribute('fill', '#9a8d7e'); tl.setAttribute('font-size', '11');
+  tl.setAttribute('font-family', 'var(--font-sans)');
+  tl.textContent = 'IRA Critical Mineral % Required for EV Tax Credit';
+  svg.appendChild(tl);
+})();
+
+// COMPANY CARDS
+(function() {
+  var companies = [
+    { ticker: 'MP', name: 'MP Materials', tier: 'tier-1', badge: 't1', badgeText: 'Tier 1', mcap: '$10.0B', metric: '721 MT NdPr (Q3 record)', position: 'Mine-to-Magnet (US)', thesis: 'Only integrated US mine-to-magnet. $400M DOD equity makes Pentagon largest shareholder. 10-X facility targets 10K MT/yr magnets by 2028. Record NdPr production.' },
+    { ticker: 'LYC.AX', name: 'Lynas Rare Earths', tier: 'tier-1', badge: 't1', badgeText: 'Tier 1', mcap: '~$10B', metric: 'Revenue 2x FY2026E', position: 'Mine + Separation (AU/MY)', thesis: 'Largest non-Chinese REE producer. Revenue doubling to A$1.1B. Only company with non-Chinese Dy production at any scale. Texas HREE facility uncertain.' },
+    { ticker: 'FCX', name: 'Freeport-McMoRan', tier: 'tier-1', badge: 't1', badgeText: 'Tier 1', mcap: '$87.2B', metric: '3.4B lbs Cu FY2025', position: 'Copper mining (global)', thesis: 'Premier copper play. Grasberg restart Q2 2026 is the key catalyst. World-class resource. Structural copper deficit starting 2026.' },
+    { ticker: 'ALB', name: 'Albemarle', tier: 'tier-1', badge: 't1', badgeText: 'Tier 1', mcap: '$19.2B', metric: '$4.9B revenue', position: 'Lithium mining (global)', thesis: 'World\'s largest lithium producer. $450M cost savings achieved. Kings Mountain restart. Institutional-grade lithium recovery play.' },
+    { ticker: 'SQM', name: 'SQM', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '$20.4B', metric: 'Lowest-cost brine', position: 'Lithium brine (Chile)', thesis: 'Lowest-cost global lithium. Codelco JV through 2060. Expanding to 240K MT Li2CO3 + 100K MT LiOH. Chilean sovereign risk premium.' },
+    { ticker: 'UUUU', name: 'Energy Fuels', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '$5.0B', metric: 'Dy/Tb by Q4 2026', position: 'REE + Uranium (US)', thesis: 'Unique dual uranium/REE exposure. ~$1B war chest. Commercial Dy/Tb by Q4 2026. Poised to produce 6 of 7 controlled REE oxides.' },
+    { ticker: 'SCCO', name: 'Southern Copper', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '$154.6B', metric: '$4.3B net income', position: 'Copper mining (Mex/Peru)', thesis: 'Industry\'s largest copper reserves (>112B lbs). Tia Maria catalyst (120K t/yr by late 2026). Premium valuation reflects quality.' },
+    { ticker: 'PLS.AX', name: 'Pilbara Minerals', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '~A$13B', metric: '754K t SC record', position: 'Lithium hard-rock (AU)', thesis: 'Pure-play hard-rock lithium. Declining costs. Record FY2025 production. BMX auction platform provides price discovery.' },
+    { ticker: 'USAR', name: 'USA Rare Earth', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '~$1.5B', metric: '$1.6B CHIPS funding', position: 'Magnet mfg (US)', thesis: '$1.6B CHIPS Act backing. Building largest non-Chinese magnet facility. Round Top heavy REE deposit. Pre-revenue risk.' },
+    { ticker: 'RIO', name: 'Rio Tinto (Arcadium)', tier: 'tier-2', badge: 't2', badgeText: 'Tier 2', mcap: '$130B+', metric: '>200K t LCE by 2028', position: 'Diversified mining + Li', thesis: '$6.7B Arcadium acquisition gives dominant Argentine brine portfolio. Tier 1 DLE assets. Institutional-grade diversified exposure.' },
+    { ticker: 'LAC', name: 'Lithium Americas', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '$1.6B', metric: '$1.97B DOE loan', position: 'Lithium development (US)', thesis: 'Largest US lithium project. Thacker Pass Phase 1 (40K t/yr). GM partnership. Late 2027 completion target. High optionality.' },
+    { ticker: 'NEO.TO', name: 'Neo Performance', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '~$0.5B', metric: 'Narva plant ramping', position: 'Separation + Magnets (EU)', thesis: 'Only EU rare earth separator and magnet maker. Europe\'s first NdFeB plant. Narva production ramping 2026. HREE pilot at Silmet.' },
+    { ticker: 'ILU.AX', name: 'Iluka Resources', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '~A$5B', metric: 'A$1.65B govt backing', position: 'REE refining (AU)', thesis: 'Australia\'s first integrated REE refinery. Government non-recourse financing. 5,500 t NdPr + 750 t Dy/Tb. Production from 2027.' },
+    { ticker: 'PPTA', name: 'Perpetua Resources', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '~$1B', metric: 'Only US antimony', position: 'Antimony/Gold (US)', thesis: 'Only significant US antimony deposit. Antimony prices +200% on China controls. DPA Title III support. Permitting risk.' },
+    { ticker: 'UCU.V', name: 'Ucore Rare Metals', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '~$60M', metric: 'RapidSX 3x efficiency', position: 'Separation tech (US)', thesis: 'Proprietary RapidSX separation at 3x conventional efficiency. Louisiana deployment mid-2026. $22.4M DOD agreement. Micro-cap risk.' },
+    { ticker: 'TMRC', name: 'Texas Mineral Resources', tier: 'tier-3', badge: 't3', badgeText: 'Tier 3', mcap: '<$50M', metric: '$1.6B LOI', position: 'Heavy REE dev (US)', thesis: 'Round Top HREE deposit with $1.6B government LOI. Severe dilution risk. 18.7% declining stake. Speculative only.' },
+    { ticker: 'Redwood', name: 'Redwood Materials', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '~$5-6B', metric: '100 GWh target', position: 'Battery recycling', thesis: 'JB Straubel (Tesla co-founder). Largest US battery recycler. 20K MT critical minerals recovered annually. Carson City + Charleston facilities.' },
+    { ticker: 'Cyclic', name: 'Cyclic Materials', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$75M Series C', metric: 'MIT Top 10 Climate', position: 'RE magnet recycling', thesis: 'Most advanced pure-play RE recycler. $82M South Carolina campus. 2,000-6,000 t/yr magnet processing. VACUUMSCHMELZE agreement.' },
+  ];
+
+  var grid = document.getElementById('company-grid');
+  var filters = document.getElementById('company-filters');
+
+  companies.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Key Metric</div><div class="metric-value" style="font-size:0.8rem;">' + c.metric + '</div></div>' +
+      '</div>' +
+      '<div class="metric" style="margin-bottom:16px;"><div class="metric-label">Position</div><div class="metric-value" style="font-size:0.8rem;">' + c.position + '</div></div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// TIMELINE
+(function() {
+  var events = [
+    { date: 'Q1 2026', title: 'MP Materials magnet revenue ramp', desc: 'Q4 2025 and Q1 2026 earnings should show inflection toward profitability from magnetics segment.', dot: '' },
+    { date: 'Q2 2026', title: 'Freeport Grasberg restart', desc: 'Phased restart of the world\'s largest gold and second-largest copper mine. Expected to reach 1.6B lbs Cu/yr for 2027-2029.', dot: 'gold' },
+    { date: 'H1 2026', title: 'USA Rare Earth initial production', desc: 'Commercial production of first 1,200 t/yr magnet line at Stillwater, Oklahoma.', dot: '' },
+    { date: 'Mid-2026', title: 'Ucore Louisiana RapidSX deployment', desc: 'Modular separation technology validation at commercial scale. 2-3 lines by mid-2026.', dot: 'teal' },
+    { date: 'Q4 2026', title: 'Energy Fuels commercial Dy/Tb', desc: '48 MT/yr dysprosium + 14 MT/yr terbium at White Mesa Mill. First US-produced heavy rare earths.', dot: 'gold' },
+    { date: 'Nov 2026', title: 'U.S.-China trade agreement expiry', desc: 'THE catalyst event. Reimposition of October 2025 controls would be massively bullish for Western miners.', dot: 'rose' },
+    { date: '2026-2027', title: 'IRA FEOC threshold reaches 70-80%', desc: 'Progressively disqualifies vehicles with Chinese mineral inputs from EV tax credits.', dot: 'gold' },
+    { date: 'Late 2027', title: 'Thacker Pass Phase 1 completion', desc: 'Lithium Americas\' 40,000 t/yr lithium carbonate. Largest US lithium project.', dot: 'teal' },
+    { date: '~2028', title: 'MP Materials 10-X facility', desc: 'Multi-billion dollar magnet factory commissioning. 10,000 MT/yr total US magnet capacity.', dot: 'gold' },
+    { date: '2028-2030', title: 'Western processing share reaches 20%', desc: 'Multiple separation and magnet facilities at scale. Heavy REE separation begins.', dot: 'teal' },
+    { date: '2030+', title: 'Copper deficit widens to 10M MT', desc: 'S&P Global projects potential 10M MT supply gap by 2040. Structural undersupply through the 2030s.', dot: 'rose' },
+  ];
+  var container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  var risks = [
+    { icon: '\u26A0', level: 'high', title: 'China Price Manipulation', desc: 'China can flood markets with cheap minerals to undermine Western investment economics, reprising the 1990s strategy that destroyed the original Mountain Pass mine.' },
+    { icon: '\u26A0', level: 'high', title: 'Commodity Price Volatility', desc: 'Lithium crashed from $80K to under $10K in 18 months. NdPr, copper, and cobalt face similar boom-bust risks driven by demand cycles.' },
+    { icon: '\u26A0', level: 'high', title: 'Processing Execution Risk', desc: 'Nearly every Western REE project has experienced delays and cost overruns. Lynas Texas stalled, Li-Cycle Rochester paused ($475M+ overruns).' },
+    { icon: '\u26A0', level: 'high', title: 'Nickel Oversupply', desc: 'Indonesian production drives 212-288K tonne surplus through 2026. Nickel-exposed miners face continued price pressure until production cuts materialize.' },
+    { icon: '\u26CF', level: 'medium', title: 'Technology Gap vs China', desc: 'Western facilities remain 5-10 years behind. Chinese SX plants operate at 35K MT/yr vs Western 2-5K MT. 70% of separation patents are Chinese.' },
+    { icon: '\u26CF', level: 'medium', title: 'Policy Discontinuity', desc: 'Western REE strategy depends on sustained government support across multiple election cycles. Priority shifts could strand partially built facilities.' },
+    { icon: '\u26CF', level: 'medium', title: 'EV Demand Uncertainty', desc: 'If rare-earth-free motors (SRM, wound-rotor) gain traction faster than projected, rare earth demand growth could disappoint. Currently 95% use RE magnets.' },
+    { icon: '\u26CF', level: 'medium', title: 'Permitting Risk', desc: 'Despite NEPA reform (14-day EA reviews), mining projects face litigation and community opposition. Southern Copper Tia Maria took years.' },
+    { icon: '\u26CF', level: 'medium', title: 'Valuation Compression', desc: 'MP Materials +230% in 2025 ($10B), Lynas +160%. Western miners already price substantial growth. Execution stumbles trigger sharp corrections.' },
+    { icon: '\u26CF', level: 'medium', title: 'Taiwan Strait Escalation', desc: 'Low probability but catastrophic impact. Would trigger immediate mineral supply disruption and 30-40% drop in global EV production within 3 months.' },
+  ];
+  var container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    var item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  var picks = [
+    { ticker: 'MP', color: '#cd853f' },
+    { ticker: 'LYC.AX', color: '#cd853f' },
+    { ticker: 'FCX', color: '#cd853f' },
+    { ticker: 'ALB', color: '#cd853f' },
+    { ticker: 'SQM', color: '#daa520' },
+    { ticker: 'UUUU', color: '#daa520' },
+    { ticker: 'SCCO', color: '#daa520' },
+    { ticker: 'PLS.AX', color: '#daa520' },
+    { ticker: 'USAR', color: '#daa520' },
+    { ticker: 'LAC', color: '#2dd4a8' },
+    { ticker: 'NEO.TO', color: '#2dd4a8' },
+    { ticker: 'PPTA', color: '#2dd4a8' },
+    { ticker: 'ILU.AX', color: '#2dd4a8' },
+    { ticker: 'UCU.V', color: '#2dd4a8' },
+  ];
+  var container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    var pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

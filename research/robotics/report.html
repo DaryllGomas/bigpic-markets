@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotics &amp; Automation — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #0b0d12;
+  --bg-card: rgba(14, 18, 28, 0.90);
+  --bg-card-hover: rgba(20, 26, 40, 0.94);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(255,120,30,0.18);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-orange: #f57c20;
+  --accent-silver: #a8b4c4;
+  --accent-cyan: #22d3ee;
+  --accent-amber: #f59e0b;
+  --accent-violet: #8b5cf6;
+  --accent-rose: #f43f5e;
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+  --accent-lime: #84cc16;
+  --glow-orange: 0 0 30px rgba(255,120,30,0.15);
+  --glow-silver: 0 0 30px rgba(168,180,196,0.10);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-orange) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#circuitfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* NAV */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(11,13,18,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+.topnav a {
+  padding: 14px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  border-bottom: 2px solid transparent;
+}
+.topnav a:hover { color: var(--accent-orange); border-bottom-color: var(--accent-orange); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 80px 24px 60px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(245,124,32,0.08);
+  border: 1px solid rgba(245,124,32,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-orange);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-orange); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-amber) 40%, var(--accent-silver) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stats.six { grid-template-columns: repeat(3, 1fr); }
+.hero-stat {
+  background: var(--bg-card);
+  padding: 24px 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-orange);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-orange); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-orange);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* HORIZONTAL BAR / WATERFALL */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+
+/* AREA CHART */
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-orange); }
+.company-card.tier-2::after { background: var(--accent-cyan); }
+.company-card.tier-3::after { background: var(--accent-amber); }
+.company-card.tier-avoid::after { background: var(--accent-rose); }
+.company-card.tier-private::after { background: var(--accent-violet); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-orange); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-orange); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.high { background: rgba(245,124,32,0.12); color: var(--accent-orange); border: 1px solid rgba(245,124,32,0.25); }
+.tier-badge.medium { background: rgba(34,211,238,0.12); color: var(--accent-cyan); border: 1px solid rgba(34,211,238,0.25); }
+.tier-badge.speculative { background: rgba(245,158,11,0.12); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.25); }
+.tier-badge.avoid { background: rgba(244,63,94,0.12); color: var(--accent-rose); border: 1px solid rgba(244,63,94,0.25); }
+.tier-badge.private-co { background: rgba(139,92,246,0.12); color: var(--accent-violet); border: 1px solid rgba(139,92,246,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-orange); color: var(--text-primary); }
+.filter-pill.active { background: rgba(245,124,32,0.12); border-color: var(--accent-orange); color: var(--accent-orange); }
+
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-orange), var(--accent-cyan), var(--accent-violet));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(245,124,32,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(139,92,246,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(244,63,94,0.4); }
+.timeline-dot.green { background: var(--accent-green); box-shadow: 0 0 12px rgba(16,185,129,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-orange); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(244,63,94,0.2); background: rgba(244,63,94,0.03); }
+.risk-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(244,63,94,0.1); }
+.risk-icon.medium { background: rgba(245,158,11,0.1); }
+.risk-icon.low { background: rgba(16,185,129,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(245,124,32,0.06), rgba(139,92,246,0.06));
+  border: 1px solid rgba(245,124,32,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-orange); background: rgba(245,124,32,0.06); }
+
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content {
+  padding: 0 28px 24px;
+  columns: 2;
+  column-gap: 40px;
+}
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-orange); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+.sources-section .source-group a { color: var(--accent-cyan); text-decoration: none; }
+.sources-section .source-group a:hover { text-decoration: underline; }
+
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+
+/* SECTION DIVIDER */
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+
+/* DATA TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.data-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.data-table th:last-child, .data-table td:last-child { text-align: right; }
+.data-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.data-table tr:hover td { background: rgba(255,255,255,0.04); }
+.data-table td:first-child { border-radius: 8px 0 0 8px; }
+.data-table td:last-child { border-radius: 0 8px 8px 0; }
+.data-table .ticker-cell { font-family: var(--font-mono); font-weight: 600; color: var(--accent-orange); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-stat .value { font-size: 1.6rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+  .topnav { display: none; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="circuitfield"></canvas>
+
+<!-- NAV -->
+<nav class="topnav">
+  <a href="#overview">Overview</a>
+  <a href="#industrial">Industrial</a>
+  <a href="#humanoid">Humanoid</a>
+  <a href="#surgical">Surgical</a>
+  <a href="#av">Autonomous</a>
+  <a href="#companies">Companies</a>
+  <a href="#catalysts">Catalysts</a>
+  <a href="#risks">Risks</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Robotics &amp; Automation</span> Revolution</h1>
+  <p class="subtitle">$300B+ total addressable market by 2030. Four converging sectors &mdash; industrial automation, humanoid robots, surgical robotics, and autonomous vehicles &mdash; all accelerated by AI.</p>
+  <div class="hero-stats six">
+    <div class="hero-stat">
+      <div class="value" data-count="300" data-prefix="$" data-suffix="B+">$0</div>
+      <div class="label">Combined TAM by 2030</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="162" data-suffix="" data-prefix="">0</div>
+      <div class="label">Global Robot Density / 10K</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="400" data-suffix="K" data-prefix="">0</div>
+      <div class="label">Waymo Weekly Rides</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="22.7" data-prefix="$" data-suffix="B" data-decimal="1">$0</div>
+      <div class="label">Symbotic Backlog</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="30" data-suffix="+" data-prefix="">0</div>
+      <div class="label">Public Companies Tracked</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="3.1" data-prefix="$" data-suffix="B" data-decimal="1">$0</div>
+      <div class="label">Humanoid VC (H1 2025)</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: MARKET OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">The Automation Supercycle</h2>
+      <p class="section-desc">AI is the accelerant transforming four robotics sectors simultaneously. Manufacturing costs are plummeting, labor shortages are chronic, and what was speculative five years ago is now generating revenue.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market Size by Sector (2030E, $B)</h3>
+        <div class="bar-chart" id="market-chart">
+          <div class="gridlines" id="market-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Sector Growth Rates (CAGR)</h3>
+        <div class="cost-waterfall" id="cagr-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Comprehensive Market Map</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Sector</th>
+            <th>2025 Size</th>
+            <th>2030 Projection</th>
+            <th>CAGR</th>
+            <th>Key Driver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="ticker-cell">Industrial Automation</td><td>$48B</td><td>$90B+</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">13-14%</td><td style="color:var(--text-secondary);font-size:13px;">China installations, AI integration</td></tr>
+          <tr><td class="ticker-cell">Warehouse Automation</td><td>$25.2B</td><td>~$45B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">15.1%</td><td style="color:var(--text-secondary);font-size:13px;">E-commerce, AMR adoption, RaaS</td></tr>
+          <tr><td class="ticker-cell">Surgical Robotics</td><td>$13.7B</td><td>$27.1B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">14.7%</td><td style="color:var(--text-secondary);font-size:13px;">Aging demographics, MIS shift</td></tr>
+          <tr><td class="ticker-cell">Cobots</td><td>$2-3.7B</td><td>$3.4-12B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">19-36%</td><td style="color:var(--text-secondary);font-size:13px;">SME adoption, &lt;$25K entry price</td></tr>
+          <tr><td class="ticker-cell">Robotaxi</td><td>~$2B</td><td>$45.7-147B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">92-99%</td><td style="color:var(--text-secondary);font-size:13px;">Fleet scaling, regulatory clarity</td></tr>
+          <tr><td class="ticker-cell">AI-Driven Robotics</td><td>$5.5B</td><td>$49.1B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">24.4%</td><td style="color:var(--text-secondary);font-size:13px;">Vision AI, adaptive systems</td></tr>
+          <tr><td class="ticker-cell">RaaS</td><td>$2.4B</td><td>$12.4B+</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">18%</td><td style="color:var(--text-secondary);font-size:13px;">SME access, subscription model</td></tr>
+          <tr><td class="ticker-cell">ADAS</td><td>~$30B</td><td>$107.8B</td><td style="font-family:var(--font-mono);color:var(--accent-orange);">~15%</td><td style="color:var(--text-secondary);font-size:13px;">L2+ ubiquity, L3 certification</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px; margin-top: 24px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 780px; margin: 0 auto; line-height: 1.8;">
+        The convergence of <strong style="color: var(--accent-orange);">AI capability</strong>, <strong style="color: var(--accent-cyan);">declining hardware costs</strong>, and <strong style="color: var(--accent-amber);">chronic labor shortages</strong> is compressing the adoption timeline across industrial, medical, and mobility applications. Own the dominant platforms at reasonable entry points while maintaining watchlist positions in high-conviction pure-plays during pullbacks.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: INDUSTRIAL AUTOMATION -->
+<section id="industrial">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Industrial Automation</div>
+      <h2 class="section-title">The Cyclical Recovery</h2>
+      <p class="section-desc">The most mature robotics sector. $48B market growing to $90B+ by 2030. The 2024-2025 downturn is ending as Fanuc and Rockwell post double-digit growth.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Robot Density by Country (per 10K workers)</h3>
+        <div class="cost-waterfall" id="density-waterfall"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">China Robot Market Share</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-china"></svg>
+          <div class="donut-legend" id="donut-china-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Structural Dynamics</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">Global Installations (2024)</div><div class="metric-value" style="color: var(--accent-orange);">2.03M</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">China >50% of global demand</div></div>
+        <div class="metric"><div class="metric-label">Big Four Market Share</div><div class="metric-value">55%+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Fanuc, ABB, Yaskawa, KUKA</div></div>
+        <div class="metric"><div class="metric-label">Chinese Price Advantage</div><div class="metric-value" style="color: var(--accent-rose);">30-50%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Estun, SIASUN, Inovance</div></div>
+        <div class="metric"><div class="metric-label">ABB Robotics Sale</div><div class="metric-value" style="color: var(--accent-cyan);">$5.4B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">SoftBank at 17.2x EV/EBITDA</div></div>
+        <div class="metric"><div class="metric-label">AI Robotics TAM (2034)</div><div class="metric-value" style="color: var(--accent-green);">$49.1B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Up from $5.5B at 24.4% CAGR</div></div>
+        <div class="metric"><div class="metric-label">RaaS TAM (2035)</div><div class="metric-value" style="color: var(--accent-violet);">$12.4B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Eliminating SME capex barriers</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: HUMANOID ROBOTS -->
+<section id="humanoid">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Humanoid Robots</div>
+      <h2 class="section-title">From Demos to Deployment</h2>
+      <p class="section-desc">Most speculative but highest-upside sector. $3.1B VC in H1 2025 alone exceeded $2.9B from the entire 2010-2024 period. Goldman Sachs projects $38B-$154B TAM by 2035.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Humanoid Landscape</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Tesla Optimus</span><div style="font-size:0.75rem;color:var(--text-muted);">Gen 3 mass production started Jan 2026</div></div>
+            <span class="inline-stat" style="color:var(--accent-orange);">50K target</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Figure AI + BMW</span><div style="font-size:0.75rem;color:var(--text-muted);">30K BMW cars produced with Figure 02</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$39B val</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Boston Dynamics</span><div style="font-size:0.75rem;color:var(--text-muted);">Atlas production started; 2026 fully committed</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">+ DeepMind</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Unitree G1</span><div style="font-size:0.75rem;color:var(--text-muted);">Cheapest purchasable humanoid at $13,500</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">~$7B IPO</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(139,92,246,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Apptronik Apollo</span><div style="font-size:0.75rem;color:var(--text-muted);">Mercedes-Benz pilot; Google + ARK backed</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$5.5B val</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Critical Patterns</h3>
+        <div style="display: flex; flex-direction: column; gap: 20px; padding: 10px 0;">
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--accent-orange);">Automotive OEM Validation</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;">Nearly every leading humanoid company has partnered with an automaker: Tesla/own, Figure/BMW, Apptronik/Mercedes, BD/Hyundai, Sanctuary/Magna. Automotive manufacturing provides structured environments ideal for first-wave deployment.</div>
+          </div>
+          <div style="border-top:1px solid var(--border-subtle);padding-top:16px;">
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--accent-cyan);">AI Foundation Model Pairing</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;">The winner may be determined by AI partner quality: Boston Dynamics + Google DeepMind, Figure + OpenAI, Tesla in-house FSD-derived AI. The BD+DeepMind and Figure+OpenAI combinations are the most potent.</div>
+          </div>
+          <div style="border-top:1px solid var(--border-subtle);padding-top:16px;">
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--accent-rose);">Key Constraints</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;">Battery life ~2 hours vs. 8-hour shifts. Dexterous manipulation ~30% success on complex objects. No safety regulatory framework. These may take 5-10 years to fully resolve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="font-family:var(--font-mono);font-size:3rem;font-weight:900;color:var(--accent-orange);line-height:1;margin-bottom:8px;">$3.1B</p>
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px;">VC Funding in H1 2025 alone</p>
+      <p style="font-size: 1rem; max-width: 640px; margin: 0 auto; line-height: 1.8; color: var(--text-secondary);">
+        Exceeds the <strong style="color:var(--accent-amber);">$2.9B</strong> invested across the entire 2010-2024 period. Humanoid costs dropped <strong style="color:var(--accent-green);">40%</strong> in a single year (2023-2024). The <em>great valuation chasm</em> means $1B+ in funding is becoming table stakes to compete.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: SURGICAL & MEDICAL ROBOTICS -->
+<section id="surgical">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Surgical &amp; Medical Robotics</div>
+      <h2 class="section-title">The Deepest Moat in Robotics</h2>
+      <p class="section-desc">Highest-margin, most defensible sector. $13.7B growing to $27B+ by 2030 at 14.7% CAGR. Switching costs measured in decades, 85% recurring revenue.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Installed Base &amp; Revenue Model</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="metric"><div class="metric-label">da Vinci Systems</div><div class="metric-value" style="color: var(--accent-orange);">11,106</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">12% growth; 85% recurring rev</div></div>
+          <div class="metric"><div class="metric-label">Mako Systems</div><div class="metric-value" style="color: var(--accent-cyan);">3,000+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Spine/shoulder expansion</div></div>
+          <div class="metric"><div class="metric-label">System Cost</div><div class="metric-value">$1.5-2.5M</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">+ 100+ hrs surgeon training</div></div>
+          <div class="metric"><div class="metric-label">Procedure Growth</div><div class="metric-value" style="color: var(--accent-green);">18%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">da Vinci procedures in 2025</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Competitive Landscape</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Intuitive Surgical</span><div style="font-size:0.75rem;color:var(--text-muted);">da Vinci 5: force feedback + 10,000x compute</div></div>
+            <span class="inline-stat" style="color:var(--accent-orange);">$176B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">J&amp;J OTTAVA</span><div style="font-size:0.75rem;color:var(--text-muted);">FDA submitted Jan 2026 via De Novo</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">Challenger</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Medtronic Hugo</span><div style="font-size:0.75rem;color:var(--text-muted);">FDA cleared Dec 2025 for urology</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">Global reach</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(139,92,246,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Globus ExcelsiusGPS</span><div style="font-size:0.75rem;color:var(--text-muted);">59% robot placement growth; NuVasive synergies</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$11.9B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Adjacent Medical Robotics Markets</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">Medical Exoskeletons</div><div class="metric-value" style="color: var(--accent-cyan);">$8.7B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">by 2035 at 19.2% CAGR</div></div>
+        <div class="metric"><div class="metric-label">AI Medical Imaging</div><div class="metric-value" style="color: var(--accent-orange);">$19.8B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">by 2033 at 34.7% CAGR</div></div>
+        <div class="metric"><div class="metric-label">FDA AI/ML Clearances</div><div class="metric-value">873</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">devices cleared by mid-2025</div></div>
+        <div class="metric"><div class="metric-label">ASC Expansion</div><div class="metric-value" style="color: var(--accent-green);">15%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">CAGR growth vector through 2030</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: AUTONOMOUS VEHICLES -->
+<section id="av">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Autonomous Vehicles</div>
+      <h2 class="section-title">Winners Scaling, Losers Exiting</h2>
+      <p class="section-desc">Inflection point reached. Waymo at 400K+ weekly rides, Aurora launched commercial driverless trucking, while Cruise ($12.1B loss) and Luminar (Chapter 11) demonstrate brutal attrition.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Robotaxi Platforms</h3>
+        <div class="cost-waterfall" id="robotaxi-waterfall"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">AV Sector Revenue Mix</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-av"></svg>
+          <div class="donut-legend" id="donut-av-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Autonomous Trucking</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Aurora Innovation</span><div style="font-size:0.75rem;color:var(--text-muted);">First commercial driverless trucks (Dallas-Houston)</div></div>
+            <span class="inline-stat" style="color:var(--accent-orange);">$8.3B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Kodiak Robotics</span><div style="font-size:0.75rem;color:var(--text-muted);">10 trucks, 5,200+ hrs paid; H2 2026 long-haul</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">Public</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Torc / Daimler</span><div style="font-size:0.75rem;color:var(--text-muted);">L4 Freightliner Cascadia; 2027 driver-out</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">Daimler</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-color: rgba(244,63,94,0.15);">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--accent-rose);">Lessons from Failures</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(244,63,94,0.03);border-radius:8px;border:1px solid rgba(244,63,94,0.1);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Cruise (GM)</span><div style="font-size:0.75rem;color:var(--text-muted);">Shut down entirely</div></div>
+            <span style="font-family:var(--font-mono);font-weight:700;color:var(--accent-rose);">-$12.1B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(244,63,94,0.03);border-radius:8px;border:1px solid rgba(244,63,94,0.1);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Luminar</span><div style="font-size:0.75rem;color:var(--text-muted);">Chapter 11, $488M debt</div></div>
+            <span style="font-family:var(--font-mono);font-weight:700;color:var(--accent-rose);">Bankrupt</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(244,63,94,0.03);border-radius:8px;border:1px solid rgba(244,63,94,0.1);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Embark</span><div style="font-size:0.75rem;color:var(--text-muted);">$5.16B to $71M acquisition</div></div>
+            <span style="font-family:var(--font-mono);font-weight:700;color:var(--accent-rose);">-99%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From dominant platforms to speculative pure-plays. Filter by conviction tier to explore the full robotics &amp; automation stack.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1 &mdash; Core</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2 &mdash; Growth</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3 &mdash; Speculative</div>
+      <div class="filter-pill" data-filter="tier-avoid">Avoid</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: CATALYST TIMELINE -->
+<section id="catalysts">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key events and structural shifts across near-term, mid-term, and long-term horizons that could move the sector.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks spanning cyclicality, valuation, geopolitics, execution, and regulation that could derail the thesis.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Build core positions in dominant platforms on any weakness. Maintain watchlist positions in high-conviction pure-plays during pullbacks. The key tension is valuation versus execution &mdash; many leaders trade at extreme multiples pricing in years of flawless execution.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Industry Reports &amp; Market Data</h4>
+          <ul>
+            <li><a href="https://ifr.org" target="_blank">IFR World Robotics 2025 Report</a></li>
+            <li>Goldman Sachs: Humanoid robot market projections ($38B-$154B by 2035)</li>
+            <li>MarketsandMarkets: Surgical Robots, Collaborative Robot, Robotaxi, Machine Vision markets</li>
+            <li>Mordor Intelligence: Warehouse Automation, Rehabilitation Robots markets</li>
+            <li>Precedence Research: AI-Driven Industrial Robotics ($49.1B by 2034), ADAS ($107.8B by 2035)</li>
+            <li>Grand View Research: AI Medical Imaging, Robotaxi Market ($147.25B by 2033)</li>
+            <li>UBS: Robotaxi TAM ($2T+ by 2030), Pony.ai/WeRide coverage</li>
+            <li>ARK Invest: Humanoid TAM ($24T), Tesla robotaxi valuation</li>
+            <li>Morgan Stanley: Humanoid Robot Value Chain, Self-Driving Vehicle Market</li>
+            <li>McKinsey &amp; Bain: Humanoid robots deployment analyses</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Company Filings &amp; Earnings</h4>
+          <ul>
+            <li>Intuitive Surgical Q3/Q4 2025 Earnings</li>
+            <li>Stryker FY2025 Results and 2026 Outlook</li>
+            <li>J&amp;J OTTAVA FDA Submission (Jan 2026), MONARCH QUEST, VELYS</li>
+            <li>Medtronic Hugo FDA Clearance (Dec 2025), Q2 FY26 Results</li>
+            <li>Symbotic FY2025 Results, Q1 FY2026 Guidance</li>
+            <li>Cognex Q3 2025, Rockwell Q1 FY2026, Emerson FY2025 Results</li>
+            <li>Fanuc FY2025/FY2026 Guidance</li>
+            <li>ABB Q3/Q4 2025, SoftBank Robotics Acquisition</li>
+            <li>Aurora Innovation Commercial Launch, Q2-Q3 2025</li>
+            <li>Mobileye Q3 2025, Hesai Q3 2025, Globus Medical Q3/Q4 2025</li>
+            <li>Procept BioRobotics Q3 2025, Pony.ai IPO filings</li>
+            <li>Alphabet Q4 2025 (Waymo), Teradyne Q4 2025</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>News &amp; Analysis</h4>
+          <ul>
+            <li>CNBC: SoftBank/ABB, Waymo expansion, GM Cruise, Unitree IPO</li>
+            <li>TechCrunch: Waymo, Zoox, 1X NEO, Apptronik, WeRide</li>
+            <li>The Robot Report: Fanuc, Teradyne, Stryker Mako, Sanctuary AI</li>
+            <li>Seeking Alpha: Cognex, PROCEPT, Aurora, Tesla, Pony.ai</li>
+            <li>Medtech Dive: CMR Surgical, Stryker, J&amp;J VELYS</li>
+            <li>FreightWaves: Torc Robotics / Daimler Truck</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Regulatory &amp; Framework</h4>
+          <ul>
+            <li>NHTSA AV Framework (April 2025), AV STEP proposal</li>
+            <li>SELF DRIVE Act of 2026 discussion draft</li>
+            <li>FDA: De Novo pathway, 510(k), eSTAR format</li>
+            <li>FDA AI/ML device clearances: 873 total by mid-2025</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Robotics &amp; Automation &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// CIRCUIT / ROBOTIC ARM FIELD ANIMATION
+(function() {
+  const canvas = document.getElementById('circuitfield');
+  const ctx = canvas.getContext('2d');
+  let nodes = [], edges = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    nodes = [];
+    edges = [];
+    const count = Math.min(Math.floor(w * h / 8000), 200);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.5,
+        a: Math.random() * 0.4 + 0.05,
+        pulse: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.001 + 0.0003
+      });
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150 && Math.random() < 0.3) {
+          edges.push({ a: i, b: j, dist });
+        }
+      }
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    edges.forEach(function(e) {
+      const a = nodes[e.a], b = nodes[e.b];
+      const flicker = Math.sin(t * 0.001 + e.a) * 0.3 + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(245, 124, 32, ' + (0.03 * flicker) + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+    nodes.forEach(function(n) {
+      const flicker = Math.sin(t * n.speed * 1000 + n.pulse) * 0.4 + 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(245, 124, 32, ' + (n.a * flicker) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize();
+  init();
+  requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(function(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '$';
+    var isDecimal = el.dataset.decimal;
+    var duration = 2000;
+    var start = performance.now();
+
+    function update(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      if (isDecimal) {
+        el.textContent = prefix + current.toFixed(1) + suffix;
+      } else {
+        el.textContent = prefix + Math.round(current) + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// MARKET SIZE BAR CHART
+(function() {
+  var data = [
+    { label: 'ADAS', value: 108, color: 'var(--accent-blue)' },
+    { label: 'Industrial', value: 90, color: 'var(--accent-orange)' },
+    { label: 'Robotaxi', value: 75, color: 'var(--accent-cyan)' },
+    { label: 'AI Robotics', value: 49, color: 'var(--accent-green)' },
+    { label: 'Warehouse', value: 45, color: 'var(--accent-amber)' },
+    { label: 'Surgical', value: 27, color: 'var(--accent-violet)' },
+    { label: 'Cobots', value: 12, color: 'var(--accent-rose)' },
+  ];
+  var max = 120;
+  var chart = document.getElementById('market-chart');
+  var gridlines = document.getElementById('market-gridlines');
+
+  [120, 90, 60, 30, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    var pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// CAGR WATERFALL
+(function() {
+  var data = [
+    { name: 'Robotaxi', cost: 95, label: '92-99%', color: 'var(--accent-cyan)' },
+    { name: 'Cobots', cost: 28, label: '19-36%', color: 'var(--accent-rose)' },
+    { name: 'AI Robotics', cost: 24, label: '24.4%', color: 'var(--accent-green)' },
+    { name: 'RaaS', cost: 18, label: '18%', color: 'var(--accent-violet)' },
+    { name: 'Warehouse', cost: 15, label: '15.1%', color: 'var(--accent-amber)' },
+    { name: 'Surgical', cost: 15, label: '14.7%', color: 'var(--accent-orange)' },
+    { name: 'ADAS', cost: 15, label: '~15%', color: 'var(--accent-blue)' },
+    { name: 'Industrial', cost: 14, label: '13-14%', color: 'var(--accent-silver)' },
+  ];
+  var max = 100;
+  var container = document.getElementById('cagr-waterfall');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// ROBOT DENSITY WATERFALL
+(function() {
+  var data = [
+    { name: 'South Korea', cost: 1012, color: 'var(--accent-orange)' },
+    { name: 'China', cost: 470, color: 'var(--accent-rose)' },
+    { name: 'Germany', cost: 415, color: 'var(--accent-cyan)' },
+    { name: 'Japan', cost: 397, color: 'var(--accent-amber)' },
+    { name: 'USA', cost: 295, color: 'var(--accent-blue)' },
+    { name: 'Global Avg', cost: 162, color: 'var(--accent-silver)' },
+  ];
+  var max = 1012;
+  var container = document.getElementById('density-waterfall');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.cost + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// CHINA ROBOT MARKET DONUT
+(function() {
+  var segments = [
+    { label: 'Chinese Domestic', value: 57, color: '#f43f5e' },
+    { label: 'Fanuc', value: 14, color: '#f59e0b' },
+    { label: 'ABB', value: 10, color: '#22d3ee' },
+    { label: 'Yaskawa', value: 9, color: '#8b5cf6' },
+    { label: 'Other Foreign', value: 10, color: '#4b5568' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-china');
+  var legend = document.getElementById('donut-china-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(11,13,18,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '18');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '2024';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'Market Share';
+  svg.appendChild(sub);
+})();
+
+// ROBOTAXI WATERFALL
+(function() {
+  var data = [
+    { name: 'Waymo', cost: 400, label: '400K+/wk', color: 'var(--accent-orange)' },
+    { name: 'Baidu Apollo', cost: 220, label: '2.2M/qtr', color: 'var(--accent-rose)' },
+    { name: 'Tesla', cost: 50, label: 'Testing', color: 'var(--accent-cyan)' },
+    { name: 'Zoox', cost: 30, label: '~50 vehicles', color: 'var(--accent-amber)' },
+    { name: 'Pony.ai', cost: 25, label: '961 vehicles', color: 'var(--accent-violet)' },
+  ];
+  var max = 400;
+  var container = document.getElementById('robotaxi-waterfall');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 5);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// AV SECTOR DONUT
+(function() {
+  var segments = [
+    { label: 'ADAS Market', value: 45, color: '#3b82f6' },
+    { label: 'Robotaxi', value: 25, color: '#f57c20' },
+    { label: 'Autonomous Trucking', value: 15, color: '#22d3ee' },
+    { label: 'LiDAR/Sensors', value: 10, color: '#f59e0b' },
+    { label: 'Mapping/SW', value: 5, color: '#8b5cf6' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-av');
+  var legend = document.getElementById('donut-av-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(11,13,18,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '18');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '2030E';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'Revenue Mix';
+  svg.appendChild(sub);
+})();
+
+// COMPANY CARDS
+(function() {
+  var companies = [
+    { ticker: 'ISRG', name: 'Intuitive Surgical', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$176B', keyMetric: '11,106 systems', sector: 'Surgical', thesis: 'Dominant surgical robotics platform. 85% recurring revenue from instruments and services. da Vinci 5 upgrade cycle with force feedback and 10,000x computing power. Deepest competitive moat in all of robotics.' },
+    { ticker: 'SYK', name: 'Stryker', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$141B', keyMetric: '3,000+ Mako', sector: 'Surgical', thesis: 'Orthopedic robotics leader expanding into spine and shoulder. Implant bundling creates decades-long switching cost lock-in. Diversified MedSurg portfolio reduces volatility.' },
+    { ticker: 'SYM', name: 'Symbotic', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$37.5B', keyMetric: '$22.7B backlog', sector: 'Industrial', thesis: 'Highest-conviction warehouse automation pure-play. Just turned profitable with 80-85% gross margins on technology deployment. Massive backlog provides revenue visibility.' },
+    { ticker: 'GOOG', name: 'Alphabet (Waymo)', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$2.3T', keyMetric: '400K+ weekly rides', sector: 'AV', thesis: 'Safest AV bet with proven technology and massive scale. 90% fewer serious injuries vs. human drivers. $126B standalone valuation. Expanding to 20+ cities in 2026.' },
+    { ticker: 'CGNX', name: 'Cognex', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$6.7B', keyMetric: '18% rev growth', sector: 'Industrial', thesis: 'Machine vision leader with AI integration driving defect detection superiority. Logistics expansion opens large new TAM. $600M cash, zero debt. Pure-play on automation sensing.' },
+    { ticker: 'AUR', name: 'Aurora Innovation', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$8.3B', keyMetric: 'First driverless trucks', sector: 'AV', thesis: 'First-mover in commercial driverless trucking on the Dallas-Houston corridor. $800B+ U.S. trucking TAM with chronic driver shortage. $1.6B cash runway to H2 2027.' },
+    { ticker: 'HSAI', name: 'Hesai Group', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$3.8B', keyMetric: '1M+ units shipped', sector: 'AV', thesis: 'Only profitable LiDAR company globally. 92% China ADAS market share. Diversifying into robotics with 40% of revenue target by 2026.' },
+    { ticker: 'MBLY', name: 'Mobileye', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$7.1B', keyMetric: '37M+ EyeQ/yr', sector: 'AV', thesis: 'Dominant ADAS chip supplier. 75% off IPO highs creates potential value entry. SuperVision and Chauffeur upsell path. EyeQ6 design wins secured.' },
+    { ticker: 'GMED', name: 'Globus Medical', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$11.9B', keyMetric: '59% robot growth', sector: 'Surgical', thesis: 'Spine robotics leader with ExcelsiusGPS. NuVasive integration driving margin expansion. Reasonable valuation relative to growth rate.' },
+    { ticker: 'KYCCF', name: 'Keyence', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$90B', keyMetric: '50%+ op margins', sector: 'Industrial', thesis: 'Premium compounder with broadest automation sensing portfolio. Zero debt. Direct sales moat. Buy strictly on cyclical pullbacks at these multiples (40-50x).' },
+    { ticker: 'ROK', name: 'Rockwell Automation', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$45B', keyMetric: '+12% sales Q1', sector: 'Industrial', thesis: 'US industrial automation bellwether. Cyclical recovery underway with 67% EPS growth in Q1 FY2026. Digital transformation pivot adds recurring revenue stream.' },
+    { ticker: 'HYMTF', name: 'Hyundai Motor', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$40B', keyMetric: '80% Boston Dynamics', sector: 'Humanoid', thesis: '80% owner of Boston Dynamics. Atlas + Google DeepMind is a potent combination. $26B US manufacturing investment. Auto-industry multiples provide valuation floor.' },
+    { ticker: 'TER', name: 'Teradyne', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$36B', keyMetric: 'UR cobots + semi', sector: 'Industrial', thesis: 'Universal Robots cobot leader plus semiconductor test. NVIDIA AI partnership for robot intelligence. Expecting "significant growth" customer deal in 2026.' },
+    { ticker: 'EMR', name: 'Emerson Electric', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$70B', keyMetric: '30% EBITA target', sector: 'Industrial', thesis: 'AspenTech-driven software transformation. 7x Industrial IoT Company of the Year. $21B revenue target. Software mix expanding margins structurally.' },
+    { ticker: 'FANUY', name: 'Fanuc', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$30B', keyMetric: 'World #1 robots', sector: 'Industrial', thesis: "World's largest robot maker with CNC dominance. Dec 2024 quarter showed 20% YoY sales growth. Positioned for full cyclical recovery in 2026." },
+    { ticker: 'TSLA', name: 'Tesla', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '$1.54T', keyMetric: '259x earnings', sector: 'Humanoid/AV', thesis: 'Optimus production ramp + Cybercab April 2026 launch. Unmatched manufacturing scale and AI data advantage. Extreme valuation prices in massive execution risk.' },
+    { ticker: 'PONY', name: 'Pony.ai', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$7.1B', keyMetric: 'Gen-7 UE breakeven', sector: 'AV', thesis: 'Most investable Chinese robotaxi pure-play. Achieved unit economics breakeven. Tripling fleet by end 2026. NASDAQ + HK dual listed. UBS initiated at Buy.' },
+    { ticker: 'BIDU', name: 'Baidu', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$30B', keyMetric: 'Per-vehicle profit', sector: 'AV', thesis: 'Apollo Go achieving per-vehicle profitability in Wuhan. 2.2M rides per quarter. Dubai expansion underway. Significant China geopolitical risk.' },
+    { ticker: 'PRCT', name: 'Procept BioRobotics', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$1.6B', keyMetric: '43% rev growth', sector: 'Surgical', thesis: 'Pure-play urology robotics (Aquablation). 653 US systems installed. 12M+ men in U.S. BPH market. Razor-and-blade model. Path to profitability by 2027.' },
+    { ticker: 'YASKY', name: 'Yaskawa', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$8B', keyMetric: 'Servo motors', sector: 'Industrial', thesis: 'Servo motor specialist and higher-beta cyclical recovery play. Benefits from same industrial robot cycle as Fanuc but with more upside volatility.' },
+    { ticker: 'JNJ', name: 'J&J', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$500B', keyMetric: 'OTTAVA FDA sub', sector: 'Surgical', thesis: 'OTTAVA submitted to FDA Jan 2026 via De Novo pathway. First credible da Vinci challenger in general surgery. Robotics is a catalyst within a massive diversified business.' },
+    { ticker: 'MDT', name: 'Medtronic', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$127B', keyMetric: 'Hugo cleared', sector: 'Surgical', thesis: 'Hugo FDA cleared Dec 2025 for urology. Enters U.S. years behind da Vinci but leverages global hospital relationships. Robotics catalyst in diversified MedTech.' },
+    { ticker: 'OUST', name: 'Ouster', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$1.6B', keyMetric: 'Western LiDAR #1', sector: 'AV', thesis: 'Leading Western LiDAR company. Infrastructure diversification beyond automotive. Still unprofitable but strongest non-China position.' },
+    { ticker: 'ABB', name: 'ABB', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$139B', keyMetric: 'Post-robotics sale', sector: 'Industrial', thesis: 'Post SoftBank robotics sale becomes pure electrification/automation play. Deal closure mid-to-late 2026. Potential future listing of standalone robotics entity by SoftBank.' },
+    { ticker: 'BRKS', name: 'Brooks Automation', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$1.7B', keyMetric: '-33% in 2025', sector: 'Industrial', thesis: 'Niche semi/life sciences automation. Significant pullback creates potential entry. High customer concentration in semiconductor OEMs is key risk.' },
+    { ticker: 'INVZ', name: 'Innoviz', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '$196M', keyMetric: 'BMW/VW/Daimler', sector: 'AV', thesis: 'Strong OEM pipeline with BMW L3, VW ID. Buzz, and Daimler Truck programs. Micro-cap ($196M) makes this highly speculative. 2026 program ramps are catalyst.' },
+    { ticker: 'RBOT', name: 'Vicarious Surgical', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: '$15.5M', keyMetric: 'Pre-revenue', sector: 'Surgical', thesis: 'Micro-cap with repeated delays and 99%+ decline from SPAC. Pre-revenue with no clear path to commercialization. Exemplifies SPAC-era surgical robotics speculation.' },
+    { ticker: 'LAZR', name: 'Luminar', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: 'Bankrupt', keyMetric: 'Chapter 11', sector: 'AV', thesis: 'Filed Chapter 11 in December 2025 with $488M debt and negative gross margins. Demonstrates that having OEM wins is insufficient without positive unit economics.' },
+  ];
+
+  var grid = document.getElementById('company-grid');
+  var filters = document.getElementById('company-filters');
+
+  companies.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Key Metric</div><div class="metric-value">' + c.keyMetric + '</div></div>' +
+      '</div>' +
+      '<div style="margin-bottom:12px;"><span style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent-orange);font-weight:600;">' + c.sector + '</span></div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        card.style.transform = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// CATALYST TIMELINE
+(function() {
+  var events = [
+    { date: 'Q1-Q2 2026', title: 'Industrial Cycle Recovery Confirmed', desc: 'Watch Fanuc and Rockwell Q1-Q2 2026 orders. Fanuc already showing 20% YoY sales growth. Rockwell Q1 FY2026 delivered 12% sales and 67% EPS growth.', dot: '' },
+    { date: 'Q2 2026', title: 'Aurora Removes Safety Observers', desc: 'Dramatically improves unit economics for driverless trucking on Dallas-Houston corridor. Key milestone for the entire autonomous trucking sector.', dot: 'cyan' },
+    { date: 'April 2026', title: 'Tesla Cybercab Production Start', desc: 'Validates or undermines Tesla robotaxi timeline. Camera-only approach is the key technical debate. Mass production capability is the real test.', dot: 'amber' },
+    { date: 'H1 2026', title: 'Unitree IPO (Shanghai STAR)', desc: 'First pure-play humanoid robotics IPO at ~$7B valuation. G1 at $13,500 is the cheapest purchasable humanoid. Sets pricing for the sector.', dot: 'violet' },
+    { date: 'H1 2026', title: 'Innoviz BMW L3 + VW ID. Buzz Ramp', desc: 'Critical catalyst for LiDAR sector validation. BMW L3 program and Volkswagen ID. Buzz deployments test commercial LiDAR demand.', dot: '' },
+    { date: 'Mid-2026', title: 'ABB Robotics / SoftBank Deal Closure', desc: '$5.375B acquisition at 17.2x EV/EBITDA. Potential future listing of standalone AI-enabled robotics entity. Signals strong institutional conviction.', dot: 'amber' },
+    { date: 'H2 2026', title: 'J&J OTTAVA FDA Decision', desc: 'First credible challenger to da Vinci in general surgery. Creates competitive dynamics in surgical robotics. Could expand the overall market.', dot: 'cyan' },
+    { date: 'H2 2026', title: 'Honeywell Separation', desc: 'Separating into 3 companies may create standalone warehouse automation pure-play. Watch for valuation re-rating of automation segment.', dot: '' },
+    { date: '2026', title: 'Waymo Targets 1M Weekly Trips', desc: 'Proves robotaxi unit economics at massive scale. Expanding to 20+ cities. 90% fewer serious injuries vs. human drivers.', dot: 'green' },
+    { date: '2026', title: 'Humanoid Production Ramp Test', desc: 'Tesla targeting 50K Optimus units. Hyundai building 30K/year Atlas factory. Real production numbers vs. stated targets is the key test.', dot: 'amber' },
+    { date: '2026-2027', title: 'CMR Versius Plus U.S. Launch', desc: 'First credible da Vinci competitor in U.S. general surgery. Medtronic Hugo U.S. commercial ramp tests second-mover viability.', dot: 'violet' },
+    { date: '2027+', title: 'Figure AI / Agility Robotics IPO Prep', desc: 'Figure at $39B, Agility with first RaaS commercial deployment. These IPOs will define public market pricing for humanoid robotics.', dot: 'violet' },
+    { date: '2027-2031', title: 'Humanoid Two-Year Payback Achieved', desc: 'Goldman Sachs projects factory applications reach two-year payback by 2027. Consumer applications follow 2028-2031. Battery and manipulation improvements are gating factors.', dot: 'green' },
+    { date: '2030', title: 'Global Robot Density Doubles', desc: 'From 162 to 300+ per 10K workers. RaaS model matures. AI-driven industrial robotics expands from $5.5B to $49B. Chinese makers achieve global competitiveness.', dot: 'rose' },
+  ];
+
+  var container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  var risks = [
+    { icon: '\u26A0', level: 'high', title: 'Cyclicality', desc: 'Industrial automation spending is highly correlated with manufacturing capex cycles. Downturns can reduce order intake 20-30% in a single year. Fanuc, Yaskawa, Rockwell, and Cognex are all cyclically exposed.' },
+    { icon: '\u26A0', level: 'high', title: 'Valuation Compression', desc: 'Many leaders trade at extreme multiples: ISRG at 55-60x, Keyence at 40-50x, TSLA at 259x. Growth disappointment or AI sentiment shift could drive significant multiple compression.' },
+    { icon: '\u26A0', level: 'high', title: 'China Geopolitical Risk', desc: 'China accounts for 50%+ of global robot installations. US-China tensions, export controls, tariffs, and potential NASDAQ delisting of Chinese companies (PONY, BIDU) create material risk.' },
+    { icon: '\u26A0', level: 'high', title: 'Humanoid Execution Risk', desc: 'Every major humanoid player has missed stated timelines. Current valuations demand flawless execution. 2-hour battery, 30% manipulation success rate, and absent safety frameworks are unresolved.' },
+    { icon: '\u26CF', level: 'medium', title: 'Technology Disruption', desc: 'Camera-only vs. multi-sensor AV debates, AI favoring software-centric companies over hardware incumbents, and rapid AI improvement could shift competitive advantages unpredictably.' },
+    { icon: '\u26CF', level: 'medium', title: 'Regulatory Uncertainty', desc: 'No comprehensive humanoid safety framework exists. FDA predicate creep concerns could slow surgical robot iterations. U.S. AV regulation remains state-by-state patchwork.' },
+    { icon: '\u26CF', level: 'medium', title: 'Capital Intensity / Attrition', desc: 'AV sector saw massive attrition: Cruise ($12.1B), Luminar (Ch.11), TuSimple, Embark, Argo AI. Humanoid robotics will likely see similar attrition as $1B+ funding becomes table stakes.' },
+    { icon: '\u26CF', level: 'medium', title: 'Customer Concentration', desc: "Symbotic's Walmart dependence, Brooks' semiconductor OEM concentration, Teradyne Robotics' small revenue base, and ISRG's single-platform risk all create vulnerability." },
+    { icon: '\u26CF', level: 'medium', title: 'Reimbursement & Pricing Pressure', desc: 'Healthcare payors scrutinize cost-effectiveness of robotic vs. laparoscopic surgery. Chinese competitors create industrial pricing pressure. Robotaxi economics require massive scale.' },
+    { icon: '\u26CF', level: 'low', title: 'Labor & Social Backlash', desc: 'Humanoid robots directly threaten manual labor jobs. Union opposition, political pressure, and social resistance could slow enterprise adoption. Each robot displaces ~1.6 jobs but creates 0.4 new ones.' },
+  ];
+
+  var container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    var item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  var picks = [
+    { ticker: 'ISRG', color: '#f57c20' },
+    { ticker: 'SYK', color: '#f57c20' },
+    { ticker: 'SYM', color: '#f57c20' },
+    { ticker: 'GOOG', color: '#f57c20' },
+    { ticker: 'CGNX', color: '#f57c20' },
+    { ticker: 'AUR', color: '#22d3ee' },
+    { ticker: 'HSAI', color: '#22d3ee' },
+    { ticker: 'MBLY', color: '#22d3ee' },
+    { ticker: 'GMED', color: '#22d3ee' },
+    { ticker: 'KYCCF', color: '#22d3ee' },
+    { ticker: 'ROK', color: '#22d3ee' },
+    { ticker: 'HYMTF', color: '#22d3ee' },
+    { ticker: 'TER', color: '#22d3ee' },
+    { ticker: 'TSLA', color: '#22d3ee' },
+    { ticker: 'PRCT', color: '#f59e0b' },
+    { ticker: 'PONY', color: '#f59e0b' },
+    { ticker: 'INVZ', color: '#f59e0b' },
+    { ticker: 'Unitree IPO', color: '#8b5cf6' },
+  ];
+
+  var container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    var pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

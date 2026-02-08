@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intel Investment Analysis | The Memory Crisis Changes Everything</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #18181b;
+            --bg-card: #1c1c1f;
+            --border-color: #27272a;
+            --border-accent: #3f3f46;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f97316;
+            --gradient-1: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --gradient-crisis: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--text-muted) 1px, transparent 1px),
+                linear-gradient(90deg, var(--text-muted) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .bg-gradient-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-red);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            bottom: -200px;
+            left: -200px;
+            background: var(--accent-orange);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        /* Breaking News Banner */
+        .breaking-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            background: var(--gradient-crisis);
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            animation: pulse-bg 2s ease infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+
+        .breaking-banner span {
+            margin-right: 1rem;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 28px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .nav-logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-date {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-red);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            max-width: 1000px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            background: var(--gradient-crisis);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title .blue-gradient {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.8s;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-value.crisis {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Crisis Alert Box */
+        .crisis-alert {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(249, 115, 22, 0.1) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid var(--accent-red);
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .crisis-alert-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .crisis-alert-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .crisis-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+
+        .crisis-stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-bottom: 0.25rem;
+        }
+
+        .crisis-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Key Metrics Strip */
+        .metrics-strip {
+            position: relative;
+            z-index: 1;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            overflow: hidden;
+        }
+
+        .metrics-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-value.positive { color: var(--accent-emerald); }
+        .metric-value.negative { color: var(--accent-red); }
+        .metric-value.neutral { color: var(--accent-amber); }
+        .metric-value.highlight { 
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metric-value.crisis-highlight {
+            background: var(--gradient-crisis);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .metric-sublabel {
+            font-size: 0.625rem;
+            color: var(--accent-red);
+            margin-top: 0.25rem;
+        }
+
+        /* Main Content */
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Article Styles */
+        .article {
+            max-width: 720px;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent-cyan);
+        }
+
+        .section-label.crisis {
+            color: var(--accent-red);
+        }
+
+        .section-label.crisis::before {
+            background: var(--accent-red);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .article p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+        }
+
+        .article strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .article .crisis-text {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .highlight-box.crisis {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+            border-left-color: var(--accent-red);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Data Tables */
+        .data-table-wrapper {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        .data-table .positive { color: var(--accent-emerald); }
+        .data-table .negative { color: var(--accent-red); }
+
+        /* Price Projection Chart */
+        .price-projection {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .price-projection-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .price-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .price-bar-label {
+            width: 120px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .price-bar-track {
+            flex: 1;
+            height: 32px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .price-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: width 1.5s ease;
+        }
+
+        .price-bar-fill.current {
+            background: var(--accent-blue);
+        }
+
+        .price-bar-fill.projected {
+            background: var(--gradient-crisis);
+        }
+
+        .price-bar-fill.intel {
+            background: var(--gradient-1);
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+
+        .comparison-card.featured {
+            border-color: var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
+        }
+
+        .comparison-card.crisis {
+            border-color: var(--accent-red);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+        }
+
+        .comparison-card h4 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-card .price {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .comparison-card .price-projected {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-card .perf {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-card .badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.value { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); }
+        .badge.premium { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); }
+        .badge.flagship { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
+        .badge.crisis { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toc-title {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .toc-list a::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .toc-list a:hover::before {
+            opacity: 1;
+        }
+
+        .toc-list a.crisis-link {
+            color: var(--accent-red);
+        }
+
+        /* Verdict Box */
+        .verdict-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .verdict-title {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .verdict-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .rating-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-primary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: var(--gradient-2);
+            border-radius: 3px;
+            width: 65%;
+        }
+
+        .rating-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-emerald);
+        }
+
+        .verdict-targets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .target {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+        }
+
+        .target-label {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .target-value {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .target.bull .target-value { color: var(--accent-emerald); }
+        .target.bear .target-value { color: var(--accent-red); }
+
+        /* Crisis Timeline */
+        .crisis-timeline {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .crisis-timeline-title {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .crisis-timeline-title::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        .timeline-item-small {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.1);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .timeline-item-small:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-date-small {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--accent-red);
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .timeline-text-small {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .chart-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bar-label {
+            width: 100px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 24px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--text-primary);
+            transition: width 1s ease;
+        }
+
+        .bar-fill.nvidia { background: var(--gradient-2); }
+        .bar-fill.amd { background: var(--accent-red); }
+        .bar-fill.intel { background: var(--gradient-1); }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 10px;
+            height: 10px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+        }
+
+        .timeline-item.crisis::before {
+            border-color: var(--accent-red);
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item.crisis .timeline-date {
+            color: var(--accent-red);
+        }
+
+        .timeline-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Bull/Bear Section */
+        .thesis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .thesis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .thesis-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .thesis-card.bull {
+            border-top: 3px solid var(--accent-emerald);
+        }
+
+        .thesis-card.bear {
+            border-top: 3px solid var(--accent-red);
+        }
+
+        .thesis-card h4 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .thesis-card.bull h4 { color: var(--accent-emerald); }
+        .thesis-card.bear h4 { color: var(--accent-red); }
+
+        .thesis-card ul {
+            list-style: none;
+        }
+
+        .thesis-card li {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .thesis-card li:last-child {
+            border-bottom: none;
+        }
+
+        .thesis-card li::before {
+            content: '→';
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .footer-meta {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+            
+            .hero-meta {
+                gap: 1.5rem;
+            }
+            
+            .metrics-container {
+                gap: 2rem;
+            }
+            
+            .content {
+                padding: 3rem 1.5rem;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+
+            .crisis-alert {
+                margin: 0 1rem 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Live indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="breaking-banner">
+        <span>⚠️ Breaking: Memory Crisis Accelerating</span>
+        <span>RTX 5090 Expected to Hit $5,000 in 2026</span>
+        <span>DRAM Prices Tripled YoY</span>
+    </div>
+
+    <div class="bg-grid"></div>
+    <div class="bg-gradient-orb orb-1"></div>
+    <div class="bg-gradient-orb orb-2"></div>
+
+    <nav class="nav">
+        <div class="nav-logo">Research<span>/</span>Crisis</div>
+        <ul class="nav-links">
+            <li><a href="#crisis">Memory Crisis</a></li>
+            <li><a href="#thesis">Thesis</a></li>
+            <li><a href="#gpu">GPU Analysis</a></li>
+            <li><a href="#fundamentals">Fundamentals</a></li>
+            <li><a href="#verdict">Verdict</a></li>
+        </ul>
+        <div class="nav-date">
+            <span class="live-indicator"><span class="live-dot"></span>Live</span>
+            Jan 2026
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">Contrarian Investment Thesis</div>
+        <h1 class="hero-title">The <em>Memory Apocalypse</em> Makes Intel's <span class="blue-gradient">Value GPU Play</span> Suddenly Critical</h1>
+        <p class="hero-subtitle">As DRAM prices triple and Nvidia prepares to raise the RTX 5090 to $5,000, Intel's Arc GPUs transform from interesting sideshow to potential industry disruptor. The thesis has fundamentally changed.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <span class="meta-label">Ticker</span>
+                <span class="meta-value">NASDAQ: INTC</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Current Price</span>
+                <span class="meta-value">~$20</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">RTX 5090 Now</span>
+                <span class="meta-value">$1,999</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">RTX 5090 Projected</span>
+                <span class="meta-value crisis">$5,000</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Thesis Rating</span>
+                <span class="meta-value crisis">UPGRADED</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="crisis-alert">
+        <div class="crisis-alert-title">
+            <span class="live-dot"></span>
+            Memory Crisis — Real-Time Data
+        </div>
+        <div class="crisis-alert-content">
+            <div class="crisis-stat">
+                <div class="crisis-stat-value">+264%</div>
+                <div class="crisis-stat-label">DDR5 Module Price (May→Nov '25)</div>
+            </div>
+            <div class="crisis-stat">
+                <div class="crisis-stat-value">3x</div>
+                <div class="crisis-stat-label">DRAM Prices YoY</div>
+            </div>
+            <div class="crisis-stat">
+                <div class="crisis-stat-value">80%</div>
+                <div class="crisis-stat-label">Memory Share of GPU Cost</div>
+            </div>
+            <div class="crisis-stat">
+                <div class="crisis-stat-value">2027-28</div>
+                <div class="crisis-stat-label">Expected Shortage Duration</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="metrics-strip">
+        <div class="metrics-container">
+            <div class="metric-card">
+                <div class="metric-value highlight">$249</div>
+                <div class="metric-label">Arc B580 MSRP</div>
+                <div class="metric-sublabel">Holding steady</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value positive">+11%</div>
+                <div class="metric-label">vs RTX 4060 @ 1440p</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value crisis-highlight">$5,000</div>
+                <div class="metric-label">RTX 5090 Projected</div>
+                <div class="metric-sublabel">+150% from MSRP</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value neutral">$11.1B</div>
+                <div class="metric-label">Gov't Support</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value negative">-9%</div>
+                <div class="metric-label">IDC PC Market Forecast</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="content">
+        <div class="content-grid">
+            <article class="article">
+                
+                <section class="section" id="crisis">
+                    <div class="section-label crisis">Breaking Development</div>
+                    <h2 class="section-title">The Memory Apocalypse Changes Everything</h2>
+                    <p>In the past 72 hours, the investment thesis for Intel has <strong>fundamentally transformed</strong>. Reports from South Korean outlet Newsis, confirmed by multiple industry sources, indicate that <span class="crisis-text">Nvidia will raise the RTX 5090 from $1,999 to as high as $5,000 in 2026</span>—a 150% increase. AMD is expected to follow with similar hikes on the RX 9000 series.</p>
+                    
+                    <p>This isn't speculation. The price increases are driven by a structural memory crisis that industry analysts now call <strong>"a potentially permanent, strategic reallocation of the world's silicon wafer capacity."</strong></p>
+
+                    <div class="highlight-box crisis">
+                        <p><strong>IDC Warning (Dec 2025):</strong> "What began as an AI infrastructure boom has now rippled outward, with tightening memory supply, inflating prices, and reshaping product and pricing strategies across both consumer and enterprise devices... The year 2026 is shaping up to be one in which technology becomes more expensive."</p>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">The Numbers Are Staggering</h3>
+                    
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Memory Metric</th>
+                                    <th>Before</th>
+                                    <th>Now</th>
+                                    <th>Change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DDR5 16G Module</td>
+                                    <td>$5.50 (May '25)</td>
+                                    <td>$20.00 (Nov '25)</td>
+                                    <td class="negative">+264%</td>
+                                </tr>
+                                <tr>
+                                    <td>DRAM Prices (YoY)</td>
+                                    <td>Baseline</td>
+                                    <td>Tripled</td>
+                                    <td class="negative">+300%</td>
+                                </tr>
+                                <tr>
+                                    <td>Memory % of GPU Cost</td>
+                                    <td>~30-40%</td>
+                                    <td>80%</td>
+                                    <td class="negative">+40-50 ppts</td>
+                                </tr>
+                                <tr>
+                                    <td>Supply/Demand Gap</td>
+                                    <td>Balanced</td>
+                                    <td>10% deficit</td>
+                                    <td class="negative">Growing</td>
+                                </tr>
+                                <tr>
+                                    <td>Inventory Levels</td>
+                                    <td>12+ weeks</td>
+                                    <td>8 weeks</td>
+                                    <td class="negative">Critical</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">Why This Is Happening: AI Is Eating Consumer Electronics</h3>
+                    <p>The root cause is straightforward but devastating: <strong>AI data centers are consuming all available memory production capacity.</strong> The math is brutal:</p>
+                    
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.75rem;"><strong>HBM production requires 3x the wafer capacity</strong> of DDR5 per bit. Every HBM module for an Nvidia AI GPU is a DDR5 module that doesn't get made.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>AI will consume 20% of total DRAM production in 2026</strong>, up from single digits just two years ago.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>Micron is exiting the consumer market entirely</strong> after February 2026, leaving only Samsung and SK Hynix for consumer DRAM.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>Memory manufacturers are prioritizing HBM</strong> because margins are dramatically higher—they're not building new consumer capacity.</li>
+                    </ul>
+
+                    <div class="highlight-box crisis">
+                        <p><strong>TrendForce Analyst Avril Wu:</strong> "I keep telling everybody that if you want a device, you buy it now... I myself bought an iPhone 17 already."</p>
+                    </div>
+
+                    <p>The crisis is expected to persist through <strong>2027-2028</strong>. Micron's new Idaho fab won't come online until 2027, and even then, most output will be allocated to AI customers.</p>
+                </section>
+
+                <section class="section" id="thesis">
+                    <div class="section-label">Revised Investment Thesis</div>
+                    <h2 class="section-title">Why Intel's Position Just Got Dramatically Stronger</h2>
+                    <p>The original thesis was: "Intel's Arc B580 offers good value, but the GPU business is too small to matter." <strong>The memory crisis inverts this logic.</strong></p>
+                    
+                    <p>When the RTX 5090 costs $5,000 and even mid-range GPUs see 50-100% price increases, Intel's ability to offer a $249 GPU that outperforms Nvidia's budget options becomes a <strong>strategic asset</strong>, not a rounding error.</p>
+
+                    <div class="price-projection">
+                        <div class="price-projection-title">GPU Price Trajectory: 2025 → 2026</div>
+                        <div class="price-bar-container">
+                            <div class="price-bar-row">
+                                <div class="price-bar-label">RTX 5090 (Now)</div>
+                                <div class="price-bar-track">
+                                    <div class="price-bar-fill current" style="width: 40%;">$1,999</div>
+                                </div>
+                            </div>
+                            <div class="price-bar-row">
+                                <div class="price-bar-label">RTX 5090 (2026)</div>
+                                <div class="price-bar-track">
+                                    <div class="price-bar-fill projected" style="width: 100%;">$5,000</div>
+                                </div>
+                            </div>
+                            <div class="price-bar-row">
+                                <div class="price-bar-label">Arc B580</div>
+                                <div class="price-bar-track">
+                                    <div class="price-bar-fill intel" style="width: 5%;">$249</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">Intel's Structural Advantages in the Crisis</h3>
+                    
+                    <p><strong>1. Government Backstop Enables Loss-Leader Pricing</strong></p>
+                    <p>Intel received $11.1 billion in government support, including a 9.9% equity stake. This capital cushion allows Intel to potentially <strong>subsidize Arc GPU pricing</strong> to capture market share while competitors are forced to pass through memory costs.</p>
+
+                    <p><strong>2. Vertical Integration for CPUs</strong></p>
+                    <p>Intel manufactures its own CPUs internally on Intel 4/Intel 3 nodes. While Arc GPUs still use TSMC, Intel's core business isn't paying TSMC premiums. This gives Intel more flexibility to cross-subsidize.</p>
+
+                    <p><strong>3. Strategic Importance = Potential Memory Allocation Priority</strong></p>
+                    <p>As a designated "national champion" with government equity, Intel may be able to secure preferential memory allocation that pure commercial customers cannot.</p>
+
+                    <p><strong>4. Desperate Consumers Need Alternatives</strong></p>
+                    <p>When the RTX 5070 (currently $549) potentially rises to $800-1,000, and the RTX 5060 Ti may be <strong>discontinued entirely</strong> due to memory constraints, Intel's Arc lineup becomes one of the only affordable options for PC gaming.</p>
+
+                    <div class="highlight-box">
+                        <p><strong>The Key Question Has Changed:</strong> It's no longer "can Intel compete with Nvidia?" It's "can Intel capitalize on Nvidia's forced retreat from the value segment?"</p>
+                    </div>
+                </section>
+
+                <section class="section" id="gpu">
+                    <div class="section-label">GPU Business Analysis</div>
+                    <h2 class="section-title">Arc's Value Proposition in a $5,000 GPU World</h2>
+                    <p>Intel's Arc B580, launched December 2024 at <strong>$249</strong>, now exists in a fundamentally different competitive landscape than when it launched.</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card featured">
+                            <h4>Intel Arc B580</h4>
+                            <div class="price">$249</div>
+                            <div class="price-projected">Stable pricing expected</div>
+                            <div class="perf">12GB VRAM • 10-15% faster @ 1440p</div>
+                            <span class="badge value">Value Champion</span>
+                        </div>
+                        <div class="comparison-card">
+                            <h4>Nvidia RTX 5070</h4>
+                            <div class="price">$549</div>
+                            <div class="price-projected">→ $800-1,000+ projected</div>
+                            <div class="perf">12GB VRAM • May face cuts</div>
+                            <span class="badge crisis">Supply Risk</span>
+                        </div>
+                        <div class="comparison-card">
+                            <h4>Nvidia RTX 5060 Ti</h4>
+                            <div class="price">$449</div>
+                            <div class="price-projected">→ Discontinuation rumored</div>
+                            <div class="perf">16GB variant at risk</div>
+                            <span class="badge crisis">May Be Killed</span>
+                        </div>
+                        <div class="comparison-card crisis">
+                            <h4>Nvidia RTX 5090</h4>
+                            <div class="price">$1,999</div>
+                            <div class="price-projected">→ $5,000 projected</div>
+                            <div class="perf">32GB VRAM • Flagship</div>
+                            <span class="badge crisis">+150% Increase</span>
+                        </div>
+                    </div>
+
+                    <p>The competitive dynamics have inverted. Previously, Intel needed to convince gamers to take a risk on immature drivers for modest savings. Now, Intel may be the <strong>only option</strong> for budget-conscious consumers as Nvidia and AMD are forced to vacate the value segment.</p>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">Arc B580 Technical Performance</h3>
+                    <p>The hardware fundamentals remain strong:</p>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>10-15% faster</strong> than RTX 4060 at 1440p resolution</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>50% more VRAM</strong> (12GB vs 8GB)—critical for modern games</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>28% better ray tracing</strong> performance at 1440p</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Significantly improved drivers</strong> since Alchemist launch</li>
+                    </ul>
+
+                    <p>The driver situation—previously Intel's Achilles heel—has improved substantially. While DX11/DX9 legacy titles remain problematic, modern games run well. In a market where the alternative is paying $800+ for an Nvidia mid-range card, driver quirks become more tolerable.</p>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Discrete GPU Market Share — Room to Grow</div>
+                        <div class="bar-chart">
+                            <div class="bar-row">
+                                <span class="bar-label">Nvidia</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill nvidia" style="width: 88%;">88%</div>
+                                </div>
+                            </div>
+                            <div class="bar-row">
+                                <span class="bar-label">AMD</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill amd" style="width: 11%;">11%</div>
+                                </div>
+                            </div>
+                            <div class="bar-row">
+                                <span class="bar-label">Intel</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill intel" style="width: 1%;">~1%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Intel currently holds approximately <strong>1%</strong> of discrete GPU market share. In normal circumstances, growing this would be nearly impossible against entrenched competitors. But the memory crisis creates a <strong>structural opening</strong>—Nvidia is literally cutting production of consumer GPUs to prioritize AI, and may be forced to abandon the sub-$500 segment entirely.</p>
+
+                    <div class="highlight-box">
+                        <p><strong>Market Opportunity:</strong> Even capturing 5% of the discrete GPU market would generate $600-800M in annual revenue. If Nvidia vacates the value segment, Intel could potentially capture 10-15%+ of unit sales in the sub-$400 tier.</p>
+                    </div>
+                </section>
+
+                <section class="section" id="fundamentals">
+                    <div class="section-label">Financial Analysis</div>
+                    <h2 class="section-title">Intel's Distressed Financials Meet Crisis Opportunity</h2>
+                    <p>Intel's financial position remains challenged, but the context has changed. A company with government backing, trading at book value, now has a potential catalyst that didn't exist three months ago.</p>
+
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>FY2024</th>
+                                    <th>FY2021 (Peak)</th>
+                                    <th>Change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Revenue</td>
+                                    <td>$53.1B</td>
+                                    <td>$79.0B</td>
+                                    <td class="negative">-33%</td>
+                                </tr>
+                                <tr>
+                                    <td>Gross Margin</td>
+                                    <td>32.7%</td>
+                                    <td>55.4%</td>
+                                    <td class="negative">-22.7 ppts</td>
+                                </tr>
+                                <tr>
+                                    <td>Intel Foundry Loss</td>
+                                    <td>-$13.4B</td>
+                                    <td>N/A</td>
+                                    <td class="negative">Ongoing</td>
+                                </tr>
+                                <tr>
+                                    <td>Client Computing (CPUs)</td>
+                                    <td>+$10.9B op. income</td>
+                                    <td>Profitable</td>
+                                    <td class="positive">Cash cow</td>
+                                </tr>
+                                <tr>
+                                    <td>Government Support</td>
+                                    <td>$11.1B</td>
+                                    <td>$0</td>
+                                    <td class="positive">New capital</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>The math is stark: Intel Foundry loses $13.4 billion annually, while Client Computing generates $10.9 billion in operating income. The company is essentially burning the CPU business profits (and more) to fund the foundry transformation.</p>
+
+                    <p><strong>But here's what's changed:</strong> Government equity support of $8.9 billion (plus $2.2 billion already disbursed) provides runway that didn't exist before. Intel can afford to <strong>subsidize Arc GPU pricing</strong> as a market share play while Nvidia and AMD cannot.</p>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">Valuation: Priced for Failure</h3>
+                    <p>Intel trades at approximately <strong>1.0x book value</strong>—a level typically reserved for companies investors believe will never earn adequate returns on equity. The market has already priced in substantial probability of failure.</p>
+
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Valuation Metric</th>
+                                    <th>Intel</th>
+                                    <th>AMD</th>
+                                    <th>Nvidia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Price/Book</td>
+                                    <td>1.0x</td>
+                                    <td>4.5x</td>
+                                    <td>40x</td>
+                                </tr>
+                                <tr>
+                                    <td>Price/Sales</td>
+                                    <td>1.8x</td>
+                                    <td>8.5x</td>
+                                    <td>35x</td>
+                                </tr>
+                                <tr>
+                                    <td>Analyst Buy %</td>
+                                    <td>5-13%</td>
+                                    <td>45%</td>
+                                    <td>85%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>This creates <strong>asymmetric upside</strong>. If Intel captures meaningful GPU market share during the memory crisis while foundry execution improves, re-rating to even 1.5-2x book value implies 50-100% upside. The downside is largely priced in.</p>
+                </section>
+
+                <section class="section" id="foundry">
+                    <div class="section-label">Foundry Strategy</div>
+                    <h2 class="section-title">The 18A Node: Still the Main Event</h2>
+                    <p>While the memory crisis elevates the GPU opportunity, the foundry business remains Intel's existential bet. The good news: <strong>18A achieved volume production in late 2025</strong>, technically ahead of TSMC.</p>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Late 2025 ✓</div>
+                            <div class="timeline-content">
+                                <h4>18A Volume Production Achieved</h4>
+                                <p>Intel became first to volume production at 2nm-class. Panther Lake CPUs in production.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item crisis">
+                            <div class="timeline-date">Jan 2026</div>
+                            <div class="timeline-content">
+                                <h4>Memory Crisis Price Hikes Begin</h4>
+                                <p>AMD begins GPU price increases. Intel's relative value proposition strengthens.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item crisis">
+                            <div class="timeline-date">Feb 2026</div>
+                            <div class="timeline-content">
+                                <h4>Nvidia Price Hikes Follow</h4>
+                                <p>RTX 50-series prices begin monthly increases toward $5,000 target.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">H1 2026</div>
+                            <div class="timeline-content">
+                                <h4>Clearwater Forest Server Launch</h4>
+                                <p>First external foundry customer products expected to reach volume.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2027</div>
+                            <div class="timeline-content">
+                                <h4>18A Yield Normalization Target</h4>
+                                <p>Intel projects industry-standard 70%+ yields by 2027. Foundry profitability possible.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Key foundry developments:</p>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Microsoft committed</strong> to 18A for Maia 2 AI accelerator</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>AWS signed</strong> multi-billion-dollar framework agreement</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Nvidia paused</strong> 18A testing (yield concerns)—a risk factor</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>14A development</strong> contingent on customer commitments</li>
+                    </ul>
+
+                    <p>The foundry thesis hasn't changed: it's a multi-year transformation with significant execution risk. But the memory crisis provides a <strong>bridge catalyst</strong>—if Intel can capture GPU market share while foundry yields improve, it buys time and builds market credibility.</p>
+                </section>
+
+                <section class="section" id="government">
+                    <div class="section-label">Government Support</div>
+                    <h2 class="section-title">The $11.1 Billion Backstop</h2>
+                    <p>The U.S. government's decision to take a 9.9% equity stake in Intel is unprecedented and changes the risk calculus.</p>
+
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Support Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Equity Stake (9.9%)</td>
+                                    <td>$8.9B</td>
+                                    <td>Completed Aug 2025</td>
+                                </tr>
+                                <tr>
+                                    <td>CHIPS Act (Disbursed)</td>
+                                    <td>$2.2B</td>
+                                    <td>Received</td>
+                                </tr>
+                                <tr>
+                                    <td>DoD Secure Enclave</td>
+                                    <td>$3.0B</td>
+                                    <td>Awarded</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>$11.1B+</strong></td>
+                                    <td>—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>This support provides several advantages in the memory crisis context:</p>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Capital to subsidize Arc pricing</strong> while competitors must pass through costs</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Strategic priority</strong> for memory allocation as national champion</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Eliminated clawback provisions</strong> from original CHIPS Act grant</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Implicit guarantee</strong> against bankruptcy—too important to fail</li>
+                    </ul>
+                </section>
+
+                <section class="section" id="verdict">
+                    <div class="section-label">Investment Thesis</div>
+                    <h2 class="section-title">Upgraded: From Lottery Ticket to Asymmetric Opportunity</h2>
+                    <p>The memory crisis has fundamentally changed the Intel investment thesis. This is no longer purely a foundry turnaround bet—it's now also a potential beneficiary of the most significant consumer electronics disruption in decades.</p>
+                    
+                    <div class="thesis-grid">
+                        <div class="thesis-card bull">
+                            <h4>Bull Case ($35-52) — Strengthened</h4>
+                            <ul>
+                                <li>Arc captures 5-15% of value GPU segment as Nvidia retreats</li>
+                                <li>18A yields normalize by 2027, foundry turns profitable</li>
+                                <li>Government backing enables aggressive pricing strategy</li>
+                                <li>Memory crisis forces competitors to cede market share</li>
+                                <li>At $35, Intel trades at 1.75x book—still below historical norms</li>
+                                <li>At $52, Intel trades at 2.5x book—reasonable for improved execution</li>
+                            </ul>
+                        </div>
+                        <div class="thesis-card bear">
+                            <h4>Bear Case ($15-20) — Still Present</h4>
+                            <ul>
+                                <li>Arc GPUs also hit by memory costs, can't maintain $249 pricing</li>
+                                <li>18A yields remain problematic, external customers don't materialize</li>
+                                <li>Memory crisis shorter than expected, Nvidia/AMD regain ground</li>
+                                <li>Government support insufficient to bridge foundry losses</li>
+                                <li>Driver issues prevent Arc adoption despite price advantage</li>
+                                <li>Management execution fails under new CEO Lip-Bu Tan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <p><strong>Critical Risk Factor:</strong> Intel's Arc GPUs are still manufactured at TSMC and still require GDDR6/GDDR7 memory. Intel faces the same cost pressures as competitors. The thesis depends on Intel's willingness to <strong>absorb losses on GPUs</strong> using government capital and CPU profits to capture market share. If Intel raises Arc prices in lockstep with Nvidia/AMD, the opportunity evaporates.</p>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">Investment Timeframe: Revised</h3>
+                    <p>The memory crisis adds a <strong>near-term catalyst</strong> that didn't exist before. Previously, this was a 2-3 year foundry transformation bet. Now there are potential inflection points in:</p>
+                    
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Q1 2026:</strong> Nvidia/AMD price hikes begin—Intel's relative positioning improves</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>H1 2026:</strong> Arc sales data reveals whether Intel is capturing share</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>H2 2026:</strong> Foundry customer volume production milestones</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>2027:</strong> Memory crisis potentially eases, but Intel market share gains could be sticky</li>
+                    </ul>
+
+                    <p>This is still a high-risk investment, but the <strong>risk/reward has shifted favorably</strong>. The market has priced in failure (1x book value), while a structural industry disruption has created an opportunity that wasn't in anyone's models.</p>
+                </section>
+
+                <section class="section">
+                    <div class="section-label">Conclusion</div>
+                    <h2 class="section-title">The Memory Apocalypse Creates Intel's Window</h2>
+                    <p>72 hours ago, Intel's contrarian case rested entirely on a multi-year foundry transformation with uncertain probability of success. Today, a structural industry disruption has created a <strong>near-term catalyst</strong> that could accelerate Intel's relevance in consumer GPUs.</p>
+                    
+                    <p>The thesis is simple: When the RTX 5090 costs $5,000 and mid-range GPUs are either discontinued or priced beyond consumer reach, Intel's Arc B580 at $249 becomes the last affordable option for PC gaming. If Intel can maintain competitive pricing—using government support and CPU profits to subsidize GPU losses—it could capture meaningful market share that persists even after the memory crisis eases.</p>
+
+                    <p>This doesn't eliminate Intel's foundry execution risk. It doesn't guarantee the Arc driver situation will improve fast enough. It doesn't mean Intel's management will make the right strategic decisions. But it does mean that <strong>Intel now has an opportunity that didn't exist before</strong>—and the market hasn't priced it in.</p>
+
+                    <div class="highlight-box">
+                        <p><strong>Position Recommendation:</strong> For investors with high risk tolerance, Intel at ~$20 (1x book value) offers asymmetric upside. The memory crisis provides a potential catalyst, government backing provides a floor, and the market has already priced in significant failure probability. Position sizing should still reflect the speculative nature of the thesis, but the upgraded opportunity justifies a larger allocation than the pure foundry bet warranted.</p>
+                    </div>
+                </section>
+
+            </article>
+
+            <aside class="sidebar">
+                <div class="crisis-timeline">
+                    <div class="crisis-timeline-title">Memory Crisis Timeline</div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">Jan '26</div>
+                        <div class="timeline-text-small">AMD GPU price hikes begin</div>
+                    </div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">Feb '26</div>
+                        <div class="timeline-text-small">Nvidia price hikes follow</div>
+                    </div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">Feb '26</div>
+                        <div class="timeline-text-small">Micron exits consumer market</div>
+                    </div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">2026</div>
+                        <div class="timeline-text-small">Monthly price increases</div>
+                    </div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">2027</div>
+                        <div class="timeline-text-small">Micron Idaho fab online</div>
+                    </div>
+                    <div class="timeline-item-small">
+                        <div class="timeline-date-small">2027-28</div>
+                        <div class="timeline-text-small">Crisis expected to ease</div>
+                    </div>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title">Contents</div>
+                    <ul class="toc-list">
+                        <li><a href="#crisis" class="crisis-link">⚠️ Memory Crisis</a></li>
+                        <li><a href="#thesis">Revised Thesis</a></li>
+                        <li><a href="#gpu">GPU Analysis</a></li>
+                        <li><a href="#fundamentals">Financials</a></li>
+                        <li><a href="#foundry">Foundry Strategy</a></li>
+                        <li><a href="#government">Government Support</a></li>
+                        <li><a href="#verdict">Investment Verdict</a></li>
+                    </ul>
+                </div>
+
+                <div class="verdict-box">
+                    <div class="verdict-title">Thesis Rating — UPGRADED</div>
+                    <div class="verdict-rating">
+                        <div class="rating-bar">
+                            <div class="rating-fill"></div>
+                        </div>
+                        <span class="rating-label">FAVORABLE</span>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0;">Memory crisis creates near-term catalyst. Government backstop + 1x book valuation = asymmetric opportunity.</p>
+                    
+                    <div class="verdict-targets">
+                        <div class="target bull">
+                            <div class="target-label">Bull Target</div>
+                            <div class="target-value">$35-52</div>
+                        </div>
+                        <div class="target bear">
+                            <div class="target-label">Bear Target</div>
+                            <div class="target-value">$15-20</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toc" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);">
+                    <div class="toc-title">Key Catalysts</div>
+                    <ul class="toc-list">
+                        <li><a href="#crisis" style="font-size: 0.8125rem;">Q1 2026: Price hikes begin</a></li>
+                        <li><a href="#gpu" style="font-size: 0.8125rem;">H1 2026: Arc sales data</a></li>
+                        <li><a href="#foundry" style="font-size: 0.8125rem;">H1 2026: Clearwater Forest</a></li>
+                        <li><a href="#foundry" style="font-size: 0.8125rem;">2027: 18A yield normalization</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-disclaimer">This analysis is for informational purposes only and does not constitute investment advice. The author may hold positions in securities discussed. Past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions. The memory crisis situation is evolving rapidly—data may change.</p>
+            <p class="footer-meta">Research compiled January 2026 • Updated with breaking memory crisis news • Data sources: Intel IR, Newsis, IDC, TrendForce, Tom's Hardware, WCCFTech, NPR</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate bar charts on scroll
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.bar-fill, .price-bar-fill');
+                    bars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.width = bar.style.width;
+                        }, index * 150);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.chart-container, .price-projection').forEach(chart => {
+            chartObserver.observe(chart);
+        });
+
+        // Nav background on scroll
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 11, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 11, 0.8)';
+            }
+        });
+
+        // Update time display
+        const updateTime = () => {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        };
+        updateTime();
+        setInterval(updateTime, 60000);
+    </script>
+</body>
+</html>

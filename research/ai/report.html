@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Infrastructure Supercycle — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #0a0f1a;
+  --bg-card: rgba(12, 20, 35, 0.88);
+  --bg-card-hover: rgba(16, 28, 50, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(16,185,129,0.18);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-green: #10b981;
+  --accent-cyan: #22d3ee;
+  --accent-amber: #f59e0b;
+  --accent-violet: #8b5cf6;
+  --accent-rose: #f43f5e;
+  --accent-blue: #3b82f6;
+  --accent-lime: #84cc16;
+  --accent-emerald: #34d399;
+  --glow-green: 0 0 30px rgba(16,185,129,0.15);
+  --glow-cyan: 0 0 30px rgba(34,211,238,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-green) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#circuitfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-green);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-cyan) 40%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 780px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stat {
+  background: var(--bg-card);
+  padding: 28px 24px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-green);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-green); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* WATERFALL BARS */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+
+/* AREA CHART */
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-green); }
+.company-card.tier-2::after { background: var(--accent-cyan); }
+.company-card.tier-3::after { background: var(--accent-amber); }
+.company-card.tier-avoid::after { background: var(--accent-rose); }
+.company-card.tier-private::after { background: var(--accent-violet); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-green); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.high { background: rgba(16,185,129,0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.25); }
+.tier-badge.medium { background: rgba(34,211,238,0.12); color: var(--accent-cyan); border: 1px solid rgba(34,211,238,0.25); }
+.tier-badge.speculative { background: rgba(245,158,11,0.12); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.25); }
+.tier-badge.avoid { background: rgba(244,63,94,0.12); color: var(--accent-rose); border: 1px solid rgba(244,63,94,0.25); }
+.tier-badge.private-co { background: rgba(139,92,246,0.12); color: var(--accent-violet); border: 1px solid rgba(139,92,246,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-green); color: var(--text-primary); }
+.filter-pill.active { background: rgba(16,185,129,0.12); border-color: var(--accent-green); color: var(--accent-green); }
+
+/* IPO TABLE */
+.ipo-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.ipo-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.ipo-table th:last-child, .ipo-table td:last-child { text-align: right; }
+.ipo-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.ipo-table tr:hover td { background: rgba(255,255,255,0.04); }
+.ipo-table td:first-child { border-radius: 8px 0 0 8px; }
+.ipo-table td:last-child { border-radius: 0 8px 8px 0; }
+.ipo-table .ticker-cell { font-family: var(--font-mono); font-weight: 600; color: var(--accent-cyan); }
+
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan), var(--accent-violet));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(16,185,129,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(139,92,246,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(244,63,94,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-green); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(244,63,94,0.2); background: rgba(244,63,94,0.03); }
+.risk-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(244,63,94,0.1); }
+.risk-icon.medium { background: rgba(245,158,11,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(139,92,246,0.06));
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-green); background: rgba(16,185,129,0.06); }
+
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content {
+  padding: 0 28px 24px;
+  columns: 2;
+  column-gap: 40px;
+}
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-green); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+
+/* TABS */
+.tab-bar {
+  display: flex; gap: 4px;
+  background: var(--bg-glass);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-subtle);
+  width: fit-content;
+}
+.tab-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { background: rgba(16,185,129,0.12); color: var(--accent-green); font-weight: 600; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* SECTION DIVIDER */
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stat .value { font-size: 1.8rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="circuitfield"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">AI Infrastructure</span> Supercycle</h1>
+  <p class="subtitle">$650B in hyperscaler capex. A 4% monetization rate. Three investable layers across chips, power, cloud, and software &mdash; from structural winners to the IPO wave ahead.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="value" data-count="650" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">2026 Hyperscaler Capex</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="4.5" data-prefix="$" data-suffix="T" data-decimal="1">$0</div>
+      <div class="label">NVIDIA Market Cap</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="4" data-suffix="%" data-prefix="">0</div>
+      <div class="label">AI Monetization Rate</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">The AI Spending Stack</h2>
+      <p class="section-desc">The Big 5 hyperscalers will spend ~$650B in 2026, up from $241B in 2024. Three-quarters flows directly into AI infrastructure across four layers.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">AI Market Layers (2026E)</h3>
+        <div class="bar-chart" id="stack-chart">
+          <div class="gridlines" id="stack-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Hyperscaler AI Capex (2026E)</h3>
+        <div class="cost-waterfall" id="capex-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 740px; margin: 0 auto; line-height: 1.8;">
+        We are in a <strong style="color: var(--accent-green);">multi-year AI infrastructure supercycle</strong> with three investable layers &mdash; picks-and-shovels infrastructure (highest visibility), platform/cloud (high growth, leverage risk), and application software (longest duration, monetization proving out). <strong style="color: var(--accent-amber);">Power availability is the #1 constraint.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: CHIPS -->
+<section id="chips">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Chips &amp; Semiconductors</div>
+      <h2 class="section-title">NVIDIA Dominance &amp; the Custom Silicon Threat</h2>
+      <p class="section-desc">NVIDIA holds 86-97% discrete GPU share with $187B TTM revenue. But custom silicon is growing from 37% to 45% of AI chips by 2028.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">AI Chip Market Share</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-chips"></svg>
+          <div class="donut-legend" id="donut-chips-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">NVIDIA Architecture Roadmap</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; padding: 10px 0;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 8px rgba(16,185,129,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Blackwell</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Current &mdash; B200/GB200, 4-5x inference over H100</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-green);">2024-25</div>
+          </div>
+          <div style="width:2px;height:20px;background:rgba(16,185,129,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-cyan);box-shadow:0 0 8px rgba(34,211,238,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Rubin</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">HBM4, next-gen interconnect, ~60% TSMC CoWoS allocation</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-cyan);">Mid-2026</div>
+          </div>
+          <div style="width:2px;height:20px;background:rgba(34,211,238,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-violet);box-shadow:0 0 8px rgba(139,92,246,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Feynman</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Next paradigm shift, details TBD</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-violet);">2028</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">HBM Memory: The Structural Margin Upgrade</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">2025 Market</div><div class="metric-value" style="color: var(--accent-cyan);">$38B</div></div>
+        <div class="metric"><div class="metric-label">2026E Market</div><div class="metric-value" style="color: var(--accent-green);">$58B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">+53% YoY</div></div>
+        <div class="metric"><div class="metric-label">SK Hynix Share</div><div class="metric-value">62%</div></div>
+        <div class="metric"><div class="metric-label">Micron Share</div><div class="metric-value">21%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Best US-listed play</div></div>
+        <div class="metric"><div class="metric-label">HBM Gross Margins</div><div class="metric-value" style="color: var(--accent-green);">~70%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">vs 30-40% commodity DRAM</div></div>
+        <div class="metric"><div class="metric-label">HBM4 Timing</div><div class="metric-value">H2 2026</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Rubin platform</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: DATA CENTERS & POWER -->
+<section id="power">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Data Centers &amp; Power</div>
+      <h2 class="section-title">Power Is the New Bottleneck</h2>
+      <p class="section-desc">US data center power demand grows from 40 GW to 134 GW by 2030. Grid spending needs ~$720B. Transformer lead times stretch 2-4 years.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">US Data Center Power Demand (GW)</h3>
+        <div class="area-chart">
+          <svg id="power-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Nuclear Deals for Data Centers</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Microsoft / Constellation</span><div style="font-size:0.75rem;color:var(--text-muted);">TMI restart, 20-year PPA</div></div>
+            <span class="inline-stat">837 MW</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Amazon / Talen</span><div style="font-size:0.75rem;color:var(--text-muted);">Susquehanna through 2042</div></div>
+            <span class="inline-stat">1,920 MW</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Meta / Vistra</span><div style="font-size:0.75rem;color:var(--text-muted);">Nuclear fleet deal</div></div>
+            <span class="inline-stat">2.6 GW</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(139,92,246,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Meta / Oklo</span><div style="font-size:0.75rem;color:var(--text-muted);">SMR, first phase ~2030</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">1.2 GW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Power Equipment Backlogs</h3>
+      <div class="cost-waterfall" id="backlog-waterfall"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: CLOUD & INFERENCE -->
+<section id="inference">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Cloud &amp; Inference</div>
+      <h2 class="section-title">2026: The Inference Crossover</h2>
+      <p class="section-desc">Inference spending exceeds training for the first time at 55% of AI compute. Token prices have fallen 200x since January 2024.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Training vs Inference Spend</h3>
+        <div class="area-chart">
+          <svg id="inference-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Token Price Deflation</h3>
+        <div style="text-align:center;padding:20px 0 10px;">
+          <div style="font-family:var(--font-mono);font-size:3rem;font-weight:900;color:var(--accent-rose);">200x</div>
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:24px;">price decline per year since Jan 2024</div>
+        </div>
+        <div style="display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;color:var(--text-muted);text-decoration:line-through;">$60</div>
+            <div style="font-size:11px;color:var(--text-muted);">GPT-4 equiv (2024)</div>
+          </div>
+          <div style="font-size:2rem;color:var(--text-muted);">&rarr;</div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;color:var(--accent-green);">$0.40</div>
+            <div style="font-size:11px;color:var(--text-muted);">per M tokens (2026)</div>
+          </div>
+        </div>
+        <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border-subtle);font-size:0.85rem;color:var(--text-secondary);text-align:center;">
+          Revenue growth requires volume to <strong style="color:var(--accent-amber);">massively outpace</strong> price compression
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Hyperscaler AI Revenue</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">Azure AI Run Rate</div><div class="metric-value" style="color: var(--accent-cyan);">$26B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Doubled in one fiscal year</div></div>
+        <div class="metric"><div class="metric-label">AWS Trainium</div><div class="metric-value" style="color: var(--accent-amber);">Multi-B$</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">150% QoQ growth</div></div>
+        <div class="metric"><div class="metric-label">GCP Vertex AI</div><div class="metric-value" style="color: var(--accent-green);">20x YoY</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Usage growth</div></div>
+        <div class="metric"><div class="metric-label">CoreWeave Backlog</div><div class="metric-value" style="color: var(--accent-violet);">$55.6B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">$863M GAAP loss, 6yr depreciation</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: SOFTWARE & MODELS -->
+<section id="software">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Software &amp; Models</div>
+      <h2 class="section-title">The Monetization Proof Point</h2>
+      <p class="section-desc">Foundation models are concentrating into 3-4 winners. Enterprise AI is growing 20-60% YoY. But the 4% problem looms large.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Foundation Model Valuations</h3>
+        <div class="cost-waterfall" id="model-valuations"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Enterprise AI Traction</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Palantir AIP</span><div style="font-size:0.75rem;color:var(--text-muted);">Guided $7.2B FY2026 (+61%)</div></div>
+            <span class="inline-stat">189x P/E</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Salesforce Agentforce</span><div style="font-size:0.75rem;color:var(--text-muted);">9,500+ paid deals</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">330% ARR</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">GitHub Copilot</span><div style="font-size:0.75rem;color:var(--text-muted);">42% market share, 20M users</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">$7.4B mkt</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">ServiceNow AI ACV</span><div style="font-size:0.75rem;color:var(--text-muted);">Targeting FY2026</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$1B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px; border-color: rgba(244,63,94,0.15);">
+      <p style="font-family:var(--font-mono);font-size:3.5rem;font-weight:900;color:var(--accent-rose);line-height:1;margin-bottom:8px;">4%</p>
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px;">The Monetization Problem</p>
+      <p style="font-size: 1rem; max-width: 640px; margin: 0 auto; line-height: 1.8; color: var(--text-secondary);">
+        Only <strong style="color:var(--accent-rose);">~$25B</strong> in direct AI service revenue vs <strong style="color:var(--accent-amber);">$600B+</strong> infrastructure spend. 42% of companies abandoned AI initiatives in 2025. The market is shifting from <em>promise phase</em> to <em>proof phase</em>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From structural winners to speculative bets. Filter by conviction tier to explore the full stack.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Core Holdings</div>
+      <div class="filter-pill" data-filter="tier-2">High Growth</div>
+      <div class="filter-pill" data-filter="tier-3">Opportunistic</div>
+      <div class="filter-pill" data-filter="tier-private">Private / IPO</div>
+      <div class="filter-pill" data-filter="tier-avoid">Avoid</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: IPO PIPELINE -->
+<section id="ipo-pipeline">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Events</div>
+      <h2 class="section-title">The AI IPO Wave</h2>
+      <p class="section-desc">The largest AI IPO cycle in history is building. Private valuations at 25-30x revenue vs public SaaS at 6x &mdash; the gap must resolve.</p>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto;">
+      <table class="ipo-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Valuation</th>
+            <th>Timeline</th>
+            <th>ARR / Revenue</th>
+            <th>Key Signal</th>
+          </tr>
+        </thead>
+        <tbody id="ipo-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: TIMELINE -->
+<section id="timing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key dates that could move the sector, from chip launches to IPO filings and energy milestones.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 9: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks that could derail the thesis, from capex deceleration to the token price death spiral.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Build core infrastructure positions now. Evaluate the IPO wave at pricing. Watch for the 4% monetization ratio to improve &mdash; it is the single most important signal for the thesis.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Company Filings &amp; Earnings</h4>
+          <ul>
+            <li>NVIDIA quarterly earnings, 10-K/10-Q filings (FY2025-2026)</li>
+            <li>TSMC quarterly earnings calls, monthly revenue reports</li>
+            <li>Broadcom FY2025 earnings, AI revenue disclosures</li>
+            <li>AMD MI300/MI400 product announcements, quarterly filings</li>
+            <li>Micron Technology earnings, HBM revenue breakouts</li>
+            <li>ASML quarterly reports, order backlog data</li>
+            <li>Arista Networks quarterly earnings, 800G port data</li>
+            <li>Corning Incorporated earnings, Springboard plan updates</li>
+            <li>Ciena FY2025 earnings, FY2026 guidance</li>
+            <li>Vertiv Holdings earnings, backlog disclosures</li>
+            <li>Eaton Corporation earnings, Boyd Thermal acquisition</li>
+            <li>Constellation Energy earnings, Microsoft TMI PPA</li>
+            <li>CoreWeave S-1 filing, quarterly reports post-IPO</li>
+            <li>Palantir Technologies FY2025 earnings, AIP metrics</li>
+            <li>Salesforce Agentforce metrics, quarterly earnings</li>
+            <li>ServiceNow AI ACV targets, quarterly disclosures</li>
+            <li>Equinix and Digital Realty quarterly earnings</li>
+            <li>Quanta Services earnings, backlog disclosures</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Industry Research</h4>
+          <ul>
+            <li>MarketsAndMarkets &mdash; AI chip, cooling, and data center market reports</li>
+            <li>Grand View Research &mdash; data center cooling, edge AI market sizing</li>
+            <li>Mordor Intelligence &mdash; liquid cooling, HBM market analysis</li>
+            <li>IDC &mdash; AI PC market forecasts, server market data</li>
+            <li>Gartner &mdash; enterprise AI adoption, agentic AI projections</li>
+            <li>Dell'Oro Group &mdash; data center capex, networking market share</li>
+            <li>Goldman Sachs &mdash; AI infrastructure supercycle research</li>
+            <li>UBS &mdash; HBM market share estimates, TSMC CoWoS analysis</li>
+            <li>MIT/RAND &mdash; AI project failure rate studies</li>
+            <li>Similarweb &mdash; chatbot market share data (Jan 2026)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Regulatory &amp; Government</h4>
+          <ul>
+            <li>SEC filings (10-K, 10-Q, S-1) for all public companies listed</li>
+            <li>US Bureau of Industry and Security (BIS) &mdash; export control actions</li>
+            <li>CHIPS and Science Act disclosures, Intel government stake</li>
+            <li>NRC &mdash; NuScale SMR certification documents</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Financial News &amp; Analysis</h4>
+          <ul>
+            <li>Bloomberg, Reuters, CNBC &mdash; earnings coverage, IPO pipeline</li>
+            <li>The Information &mdash; private company valuations</li>
+            <li>Sequoia Capital &mdash; AI market analysis</li>
+            <li>J.P. Morgan, Bank of America &mdash; sector research notes</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>AI Infrastructure Supercycle &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// CIRCUIT FIELD ANIMATION
+(function() {
+  const canvas = document.getElementById('circuitfield');
+  const ctx = canvas.getContext('2d');
+  let nodes = [], edges = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    nodes = [];
+    edges = [];
+    const count = Math.min(Math.floor(w * h / 8000), 200);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.5,
+        a: Math.random() * 0.4 + 0.05,
+        pulse: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.001 + 0.0003
+      });
+    }
+    // Create edges between nearby nodes
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150 && Math.random() < 0.3) {
+          edges.push({ a: i, b: j, dist });
+        }
+      }
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    // Draw edges
+    edges.forEach(e => {
+      const a = nodes[e.a], b = nodes[e.b];
+      const flicker = Math.sin(t * 0.001 + e.a) * 0.3 + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = `rgba(16, 185, 129, ${0.03 * flicker})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+    // Draw nodes
+    nodes.forEach(n => {
+      const flicker = Math.sin(t * n.speed * 1000 + n.pulse) * 0.4 + 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(16, 185, 129, ${n.a * flicker})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(el => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '$';
+    const isDecimal = el.dataset.decimal;
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      if (isDecimal) {
+        el.textContent = prefix + current.toFixed(1) + suffix;
+      } else {
+        el.textContent = prefix + Math.round(current) + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// AI SPENDING STACK BAR CHART
+(function() {
+  const data = [
+    { label: 'Capex', value: 650, color: 'var(--accent-green)' },
+    { label: 'Software', value: 644, color: 'var(--accent-violet)' },
+    { label: 'Servers', value: 400, color: 'var(--accent-cyan)' },
+    { label: 'Chips', value: 240, color: 'var(--accent-amber)' },
+    { label: 'Cloud AI', value: 170, color: 'var(--accent-blue)' },
+    { label: 'HBM', value: 58, color: '#34d399' },
+    { label: 'Power', value: 41, color: 'var(--accent-rose)' },
+  ];
+  const max = 700;
+  const chart = document.getElementById('stack-chart');
+  const gridlines = document.getElementById('stack-gridlines');
+
+  [700, 525, 350, 175, 0].forEach(v => {
+    const line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(d => {
+    const group = document.createElement('div');
+    group.className = 'bar-group';
+    const pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  const chartObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// HYPERSCALER CAPEX WATERFALL
+(function() {
+  const data = [
+    { name: 'Amazon', cost: 200, color: 'var(--accent-amber)' },
+    { name: 'Alphabet', cost: 180, color: 'var(--accent-green)' },
+    { name: 'Microsoft', cost: 145, color: 'var(--accent-cyan)' },
+    { name: 'Meta', cost: 125, color: 'var(--accent-blue)' },
+    { name: 'Oracle', cost: 40, color: 'var(--accent-violet)' },
+  ];
+  const max = 200;
+  const container = document.getElementById('capex-waterfall');
+
+  data.forEach(d => {
+    const pct = Math.max((d.cost / max) * 100, 3);
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">$' + d.cost + 'B</div>';
+    container.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// DONUT: AI CHIP MARKET SHARE
+(function() {
+  const segments = [
+    { label: 'NVIDIA GPUs', value: 60, color: '#10b981' },
+    { label: 'Custom Silicon', value: 25, color: '#f59e0b' },
+    { label: 'AMD', value: 5, color: '#f43f5e' },
+    { label: 'Other (Inference ASICs)', value: 10, color: '#8b5cf6' },
+  ];
+  const total = segments.reduce((s, d) => s + d.value, 0);
+  const svg = document.getElementById('donut-chips');
+  const legend = document.getElementById('donut-chips-legend');
+  const r = 80, cx = 110, cy = 110, sw = 26;
+  const circumference = 2 * Math.PI * r;
+  let offset = 0;
+
+  segments.forEach(seg => {
+    const pct = seg.value / total;
+    const dashLen = circumference * pct;
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  // Center text
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(10,15,26,0.8)');
+  svg.appendChild(bg);
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '18');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '2026E';
+  svg.appendChild(text);
+  const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'Market Share';
+  svg.appendChild(sub);
+})();
+
+// POWER DEMAND AREA CHART
+(function() {
+  const svg = document.getElementById('power-svg');
+  const data = [
+    { year: '2023', gw: 40 },
+    { year: '2024', gw: 52 },
+    { year: '2025', gw: 65 },
+    { year: '2026E', gw: 80 },
+    { year: '2028E', gw: 105 },
+    { year: '2030E', gw: 134 },
+  ];
+  const maxVal = 150;
+  const pad = { t: 20, r: 30, b: 40, l: 55 };
+  const cW = 600 - pad.l - pad.r;
+  const cH = 280 - pad.t - pad.b;
+
+  [0, 50, 100, 150].forEach(v => {
+    const y = pad.t + cH - (v / maxVal) * cH;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + ' GW';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  // Area
+  let d = 'M ' + getX(0) + ' ' + getY(data[0].gw);
+  for (let i = 1; i < data.length; i++) {
+    const px = getX(i-1), py = getY(data[i-1].gw);
+    const cx2 = getX(i), cy2 = getY(data[i].gw);
+    const cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  const lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d);
+  area.setAttribute('fill', 'rgba(16,185,129,0.08)');
+  svg.appendChild(area);
+
+  const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD);
+  line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#10b981');
+  line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach((pt, i) => {
+    const x = getX(i), y = getY(pt.gw);
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#10b981'); c.setAttribute('stroke', '#0a0f1a'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    // Value label
+    const vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#10b981'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = pt.gw;
+    svg.appendChild(vt);
+    // Year label
+    const yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+})();
+
+// BACKLOG WATERFALL
+(function() {
+  const data = [
+    { name: 'Quanta Services', cost: 39.2, color: 'var(--accent-green)' },
+    { name: 'Eaton', cost: 15.3, color: 'var(--accent-cyan)' },
+    { name: 'Vertiv', cost: 9.5, color: 'var(--accent-amber)' },
+  ];
+  const max = 39.2;
+  const container = document.getElementById('backlog-waterfall');
+
+  data.forEach(d => {
+    const pct = Math.max((d.cost / max) * 100, 3);
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">$' + d.cost + 'B</div>';
+    container.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// TRAINING VS INFERENCE AREA CHART
+(function() {
+  const svg = document.getElementById('inference-svg');
+  const data = [
+    { year: '2023', training: 65, inference: 35 },
+    { year: '2024', training: 55, inference: 45 },
+    { year: '2025', training: 50, inference: 50 },
+    { year: '2026E', training: 45, inference: 55 },
+    { year: '2028E', training: 30, inference: 70 },
+    { year: '2030E', training: 22, inference: 78 },
+  ];
+  const pad = { t: 20, r: 30, b: 40, l: 55 };
+  const cW = 600 - pad.l - pad.r;
+  const cH = 280 - pad.t - pad.b;
+
+  [0, 25, 50, 75, 100].forEach(v => {
+    const y = pad.t + cH - (v / 100) * cH;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + '%';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / 100) * cH; }
+
+  // Inference area (bottom)
+  function makeArea(key, color, opacity) {
+    let d2 = 'M ' + getX(0) + ' ' + getY(data[0][key]);
+    for (let i = 1; i < data.length; i++) {
+      const px = getX(i-1), py = getY(data[i-1][key]);
+      const cx2 = getX(i), cy2 = getY(data[i][key]);
+      const cpx = (px + cx2) / 2;
+      d2 += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+    }
+    const lineD2 = d2;
+    d2 += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+    const a = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    a.setAttribute('d', d2); a.setAttribute('fill', color); a.setAttribute('opacity', opacity);
+    svg.appendChild(a);
+    const l = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    l.setAttribute('d', lineD2); l.setAttribute('fill', 'none');
+    l.setAttribute('stroke', color); l.setAttribute('stroke-width', '2.5');
+    svg.appendChild(l);
+  }
+
+  makeArea('inference', '#10b981', '0.1');
+  makeArea('training', '#f59e0b', '0.08');
+
+  // Crossover line at 50%
+  const mid = pad.t + cH / 2;
+  const cl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  cl.setAttribute('x1', pad.l); cl.setAttribute('x2', pad.l + cW);
+  cl.setAttribute('y1', mid); cl.setAttribute('y2', mid);
+  cl.setAttribute('stroke', 'rgba(255,255,255,0.15)');
+  cl.setAttribute('stroke-dasharray', '8 4');
+  svg.appendChild(cl);
+
+  data.forEach((pt, i) => {
+    const x = getX(i);
+    // Dots
+    const ci = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    ci.setAttribute('cx', x); ci.setAttribute('cy', getY(pt.inference)); ci.setAttribute('r', 3.5);
+    ci.setAttribute('fill', '#10b981'); ci.setAttribute('stroke', '#0a0f1a'); ci.setAttribute('stroke-width', 2);
+    svg.appendChild(ci);
+    const ct = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    ct.setAttribute('cx', x); ct.setAttribute('cy', getY(pt.training)); ct.setAttribute('r', 3.5);
+    ct.setAttribute('fill', '#f59e0b'); ct.setAttribute('stroke', '#0a0f1a'); ct.setAttribute('stroke-width', 2);
+    svg.appendChild(ct);
+    // Year
+    const yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+
+  // Legend
+  [{label:'Inference',color:'#10b981',x:pad.l},{label:'Training',color:'#f59e0b',x:pad.l+100}].forEach(l => {
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', l.x); c.setAttribute('cy', 10); c.setAttribute('r', 4);
+    c.setAttribute('fill', l.color);
+    svg.appendChild(c);
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', l.x + 10); t.setAttribute('y', 14);
+    t.setAttribute('fill', '#8a96ad'); t.setAttribute('font-size', '11');
+    t.setAttribute('font-family', 'var(--font-sans)');
+    t.textContent = l.label;
+    svg.appendChild(t);
+  });
+})();
+
+// MODEL VALUATIONS
+(function() {
+  const data = [
+    { name: 'OpenAI', cost: 830, label: '$300-830B', color: 'var(--accent-green)' },
+    { name: 'Anthropic', cost: 350, label: '$183-350B', color: 'var(--accent-cyan)' },
+    { name: 'Databricks', cost: 134, label: '$134B', color: 'var(--accent-amber)' },
+    { name: 'Cerebras', cost: 23, label: '$23B', color: 'var(--accent-violet)' },
+    { name: 'Crusoe Energy', cost: 10, label: '$10B+', color: 'var(--accent-blue)' },
+  ];
+  const max = 830;
+  const container = document.getElementById('model-valuations');
+
+  data.forEach(d => {
+    const pct = Math.max((d.cost / max) * 100, 2);
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// COMPANY CARDS
+(function() {
+  const companies = [
+    { ticker: 'NVDA', name: 'NVIDIA', tier: 'tier-1', badge: 'high', badgeText: 'Core', mcap: '~$4.5T', rev: '$187B TTM', growth: '+65%', thesis: 'GPU monopoly, CUDA moat, 73% gross margins. Annual architecture cadence (Blackwell\u2192Rubin\u2192Feynman). Expensive but justified by earnings power.' },
+    { ticker: 'TSM', name: 'TSMC', tier: 'tier-1', badge: 'high', badgeText: 'Core', mcap: '~$1.0T', rev: '$123B', growth: '+32%', thesis: 'Foundry monopoly. Every AI chip goes through TSMC. CoWoS packaging is the binding constraint. Reasonable valuation for irreplaceable asset.' },
+    { ticker: 'AVGO', name: 'Broadcom', tier: 'tier-1', badge: 'high', badgeText: 'Core', mcap: '~$1.1T', rev: '$56B', growth: '+44%', thesis: 'Best custom silicon play. XPU revenue doubling annually. Benefits regardless of NVIDIA vs custom outcome. Google, Meta, +3 undisclosed customers.' },
+    { ticker: 'VRT', name: 'Vertiv', tier: 'tier-1', badge: 'high', badgeText: 'Core', mcap: '~$50B', rev: '$10B+', growth: '+24%', thesis: 'Power/cooling picks-and-shovels. $9.5B backlog, 1.4x book-to-bill. Mandatory infrastructure for every AI data center.' },
+    { ticker: 'ANET', name: 'Arista Networks', tier: 'tier-1', badge: 'high', badgeText: 'Core', mcap: '~$120B', rev: '$8.75B', growth: '+25%', thesis: '#1 in 800G DC switching (27.5% share, surpassed Cisco). 800G ports tripled sequentially. Every GPU cluster needs networking.' },
+    { ticker: 'MRVL', name: 'Marvell', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$95B', rev: '$7.5B', growth: '+45%', thesis: 'Custom silicon + electro-optics. Celestial AI acquisition adds optical interconnect. Smaller but faster growing than Broadcom.' },
+    { ticker: 'MU', name: 'Micron', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$120B', rev: '$30B', growth: '+50%', thesis: 'Best US-listed HBM play. Cheapest valuation in AI semis (~15x P/E). HBM4 samples shipping. 70% HBM gross margins vs 30-40% commodity.' },
+    { ticker: 'ETN', name: 'Eaton', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$130B', rev: '$27.4B', growth: '+10%', thesis: '$15.3B backlog, DC orders +200% YoY. Power distribution monopoly position. $9.5B Boyd Thermal acquisition for cooling.' },
+    { ticker: 'CEG', name: 'Constellation Energy', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$111B', rev: '\u2014', growth: '+11%', thesis: 'Largest US nuclear fleet. Microsoft TMI restart deal (837 MW, 20-year PPA). Clean energy structural demand from data centers.' },
+    { ticker: 'GLW', name: 'Corning', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$45B', rev: '$16B', growth: '+14%', thesis: 'Optical revenue +39%, enterprise +58%. Every AI cluster node needs fiber connections. Structural demand from data center buildout.' },
+    { ticker: 'PLTR', name: 'Palantir', tier: 'tier-2', badge: 'medium', badgeText: 'Growth', mcap: '~$350B', rev: '$4.5B', growth: '+56%', thesis: 'AIP as enterprise AI operating system. 61% FY2026 guided growth. The 189x P/E is the debate \u2014 priced for perfection.' },
+    { ticker: 'ASML', name: 'ASML', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$350B', rev: '\u20AC32.7B', growth: '+20%', thesis: 'EUV monopoly. Sole lithography provider for sub-7nm. Essential but already well-valued at ~28x P/E.' },
+    { ticker: 'AMD', name: 'AMD', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$220B', rev: '$34B', growth: '+14%', thesis: 'Gaining share but far behind NVIDIA. MI400 launch Q1 2026 is key catalyst. ROCm maturity determines if real competition emerges.' },
+    { ticker: 'CRWV', name: 'CoreWeave', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$50B', rev: '$5B', growth: '+150%', thesis: '$55.6B backlog but $863M GAAP loss. 6-year GPU depreciation on hardware with 4-5x jumps every 2 years. Neocloud bellwether.' },
+    { ticker: 'PWR', name: 'Quanta Services', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$50B', rev: '$27.5B', growth: '+19%', thesis: '$39.2B backlog. Grid modernization and data center power infrastructure. Less pure AI play but strongest execution.' },
+    { ticker: 'VST', name: 'Vistra', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$59B', rev: '\u2014', growth: '\u2014', thesis: '44 GW fleet, 2.6 GW Meta nuclear deal. Nuclear + gas diversification. Energy play on AI power demand.' },
+    { ticker: 'CIEN', name: 'Ciena', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$12B', rev: '$4.77B', growth: '+19%', thesis: 'Optical networking. $5.7-6.1B FY2026 guide. WaveLogic 6 Nano 800G pluggable launch H1 2026.' },
+    { ticker: 'NOW', name: 'ServiceNow', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$230B', rev: '$13.6B', growth: '+22%', thesis: 'Targeting $1B AI ACV in FY2026. Enterprise AI workflow platform. Proven SaaS model with AI upside.' },
+    { ticker: 'INTC', name: 'Intel', tier: 'tier-3', badge: 'speculative', badgeText: 'Opportunistic', mcap: '~$191B', rev: '$53.5B', growth: '-1%', thesis: 'Deep turnaround. CHIPS Act (govt owns 9.9%), 18A node. High risk, high optionality if foundry strategy works.' },
+    { ticker: 'OpenAI', name: 'OpenAI', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$300-830B', rev: '$20B+ ARR', growth: '\u2014', thesis: 'The defining AI company. IPO late 2026/2027. 750M+ ChatGPT MAU. Will reprice entire AI software sector at listing.' },
+    { ticker: 'Anthropic', name: 'Anthropic', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$183-350B', rev: '$5B+ ARR', growth: '5x YoY', thesis: 'Enterprise AI leader (~33% share). IPO discussions started. Fastest revenue ramp in AI history ($1B\u2192$5B in one year).' },
+    { ticker: 'Databricks', name: 'Databricks', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$134B', rev: '$4.8B ARR', growth: '+55%', thesis: 'Data infrastructure backbone. IPO expected H2 2026. $7B debt raised. ~28x ARR valuation in private market.' },
+    { ticker: 'Cerebras', name: 'Cerebras', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$23B', rev: '\u2014', growth: '\u2014', thesis: 'Wafer-scale inference silicon. IPO Q2 2026 (Nasdaq). NVIDIA acquired Groq for ~$20B, validating inference ASIC market.' },
+    { ticker: 'ARM', name: 'ARM Holdings', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: '~$200B', rev: '$4.5B', growth: '+25%', thesis: 'Structural winner but ~70x forward P/E prices in perfection. Any stumble gets punished severely. Neoverse approaching 50% of hyperscaler CPUs.' },
+  ];
+
+  const grid = document.getElementById('company-grid');
+  const filters = document.getElementById('company-filters');
+
+  companies.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Revenue</div><div class="metric-value">' + c.rev + '</div></div>' +
+      '</div>' +
+      (c.growth ? '<div class="metric" style="margin-bottom:16px;"><div class="metric-label">Growth</div><div class="metric-value" style="font-size:0.85rem;">' + c.growth + '</div></div>' : '') +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    const pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// IPO PIPELINE TABLE
+(function() {
+  const ipos = [
+    { company: 'Databricks', val: '$134B', timeline: 'H2 2026', rev: '$4.8B ARR (+55%)', signal: 'Largest data/AI software IPO' },
+    { company: 'Cerebras', val: '$23B', timeline: 'Q2 2026', rev: 'Pre-revenue', signal: 'Inference silicon market validation' },
+    { company: 'OpenAI', val: '$300-830B', timeline: 'Late 2026/2027', rev: '$20B+ ARR', signal: 'Defines AI software valuations' },
+    { company: 'Anthropic', val: '$183-350B', timeline: '2026-2027', rev: '$5B+ ARR', signal: 'Enterprise AI market pricing' },
+    { company: 'Lambda Labs', val: 'TBD', timeline: 'H2 2026 (tentative)', rev: '\u2014', signal: 'Neocloud market test' },
+  ];
+
+  const tbody = document.getElementById('ipo-tbody');
+  ipos.forEach(function(s) {
+    const row = document.createElement('tr');
+    row.innerHTML =
+      '<td class="ticker-cell">' + s.company + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;">' + s.val + '</td>' +
+      '<td style="font-size:13px;">' + s.timeline + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;">' + s.rev + '</td>' +
+      '<td style="font-size:13px;color:var(--text-secondary);">' + s.signal + '</td>';
+    tbody.appendChild(row);
+  });
+})();
+
+// TIMELINE
+(function() {
+  const events = [
+    { date: 'Q1 2026', title: 'AMD MI400 Launch', desc: 'Tests whether NVIDIA faces real GPU competition. ROCm maturity is the key variable.', dot: '' },
+    { date: 'Q2 2026', title: 'Cerebras IPO (Nasdaq)', desc: 'Inference silicon pure-play goes public. Validates the inference-specific ASIC market.', dot: 'cyan' },
+    { date: 'H1 2026', title: 'Ciena WaveLogic 6 Nano GA', desc: '800G pluggable volume production. Drives next optical networking upgrade cycle.', dot: '' },
+    { date: 'Mid-2026', title: 'NVIDIA Rubin Architecture', desc: 'Next-gen GPU with HBM4. Begins the next upgrade cycle. Controls ~60% of TSMC CoWoS capacity.', dot: 'amber' },
+    { date: 'H2 2026', title: 'Databricks IPO', desc: 'Largest data/AI software IPO. $134B private valuation (~28x $4.8B ARR). Market reception sets tone.', dot: 'violet' },
+    { date: 'H2 2026', title: 'Lambda Labs IPO (tentative)', desc: 'Another neocloud market test after CoreWeave. Validates or challenges GPU cloud model.', dot: '' },
+    { date: 'Late 2026', title: 'OpenAI IPO Filing (possible)', desc: 'Will define AI software valuations. $300-830B range. The biggest tech IPO since... ever?', dot: 'amber' },
+    { date: '2027', title: 'Anthropic IPO (possible)', desc: 'Enterprise AI market pricing event. $183-350B valuation. ~33% enterprise share.', dot: 'violet' },
+    { date: '2028', title: 'Oklo First Commercial SMR', desc: 'Nuclear for data centers validation. If SMRs work, unlocks massive power capacity.', dot: 'cyan' },
+    { date: '2028', title: 'NVIDIA Feynman Architecture', desc: 'Next paradigm shift. Maintains annual cadence that keeps NVIDIA ahead.', dot: 'amber' },
+    { date: '2030', title: '134 GW Data Center Power', desc: 'US data center power demand 3.4x today. Grid infrastructure test. ~$720B investment needed.', dot: 'rose' },
+  ];
+  const container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    const item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  const risks = [
+    { icon: '\u26A0', level: 'high', title: 'Hyperscaler Capex Deceleration', desc: '$650B assumes AI ROI materializes. If 42% enterprise abandonment persists, capex cuts cascade across the entire stack.' },
+    { icon: '\u26A0', level: 'high', title: 'The 4% Monetization Problem', desc: 'Only ~$25B AI service revenue on $600B+ spend. If the ratio doesn\'t improve by late 2026, expect a narrative reset.' },
+    { icon: '\u26A0', level: 'high', title: 'NVIDIA Margin Compression', desc: 'Custom silicon growing 37%\u219245%. Inference (more competitive, lower margin) overtaking training. 73% gross margins may not hold.' },
+    { icon: '\u26A0', level: 'high', title: 'GPU Depreciation Risk', desc: 'Neoclouds depreciating over 6 years while performance jumps 4-5x every 2 years. Write-downs could be significant.' },
+    { icon: '\u26CF', level: 'medium', title: 'Private/Public Valuation Gap', desc: 'AI private market at 25-30x EV/Revenue vs public SaaS at 6x. Either private corrects or public expands. IPO wave tests which.' },
+    { icon: '\u26CF', level: 'medium', title: 'Export Control Whiplash', desc: 'US-China chip policy changes quarterly. Creates revenue uncertainty for NVIDIA, AMD, and equipment makers.' },
+    { icon: '\u26CF', level: 'medium', title: 'Power Grid Bottleneck', desc: '134 GW demand by 2030 requires ~$720B in grid spending. Transformer lead times of 2-4 years. If power can\'t keep up, AI slows.' },
+    { icon: '\u26CF', level: 'medium', title: 'Token Price Deflation', desc: '200x/year decline means inference providers face brutal margin pressure. Volume must massively outpace price compression.' },
+    { icon: '\u26CF', level: 'medium', title: 'Open-Source Commoditization', desc: 'Meta Llama strategy could commoditize the model layer, compressing margins for OpenAI/Anthropic and benefiting application companies.' },
+    { icon: '\u26CF', level: 'medium', title: 'Concentration Risk', desc: 'Top 5 hyperscalers are the vast majority of AI chip demand. Any single company pulling back is material to the entire supply chain.' },
+  ];
+  const container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    const item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  const picks = [
+    { ticker: 'NVDA', color: '#10b981' },
+    { ticker: 'TSM', color: '#10b981' },
+    { ticker: 'AVGO', color: '#10b981' },
+    { ticker: 'VRT', color: '#10b981' },
+    { ticker: 'ANET', color: '#10b981' },
+    { ticker: 'MU', color: '#22d3ee' },
+    { ticker: 'ETN', color: '#22d3ee' },
+    { ticker: 'CEG', color: '#22d3ee' },
+    { ticker: 'PLTR', color: '#22d3ee' },
+    { ticker: 'GLW', color: '#22d3ee' },
+    { ticker: 'AMD', color: '#f59e0b' },
+    { ticker: 'CRWV', color: '#f59e0b' },
+    { ticker: 'INTC', color: '#f59e0b' },
+    { ticker: 'Databricks IPO', color: '#8b5cf6' },
+    { ticker: 'Cerebras IPO', color: '#8b5cf6' },
+    { ticker: 'OpenAI IPO', color: '#8b5cf6' },
+  ];
+  const container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    const pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defense &amp; Aerospace — Investment Thesis 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root {
+  --bg-deep: #0b0f14;
+  --bg-card: rgba(14, 20, 30, 0.90);
+  --bg-card-hover: rgba(20, 30, 45, 0.94);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(220,38,38,0.18);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-red: #dc2626;
+  --accent-crimson: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-slate: #94a3b8;
+  --accent-green: #10b981;
+  --accent-violet: #8b5cf6;
+  --accent-rose: #f43f5e;
+  --glow-red: 0 0 30px rgba(220,38,38,0.15);
+  --glow-cyan: 0 0 30px rgba(34,211,238,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-red) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-red); border-radius: 3px; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+canvas#radarfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+/* NAV */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(11,15,20,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px;
+  transition: var(--transition);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-brand { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent-red); letter-spacing: 1px; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a {
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px;
+  transition: var(--transition);
+}
+.nav-links a:hover { color: var(--accent-red); }
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 80px 24px 60px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px;
+  background: rgba(220,38,38,0.08);
+  border: 1px solid rgba(220,38,38,0.2);
+  border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  color: var(--accent-red);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-red); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-amber) 50%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 700px; line-height: 1.7;
+  font-weight: 400; margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px; width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stat {
+  background: var(--bg-card);
+  padding: 24px 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2rem; font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 11px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin-top: 6px; font-weight: 500;
+}
+.scroll-hint {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  color: var(--text-muted); font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--accent-red); margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-red); }
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em;
+  margin-bottom: 16px; line-height: 1.15;
+}
+.section-desc {
+  font-size: 1.1rem; color: var(--text-secondary);
+  max-width: 620px; margin-bottom: 48px; line-height: 1.7;
+}
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0; transition: var(--transition);
+}
+.card:hover { border-color: var(--border-glow); box-shadow: var(--glow-red); transform: translateY(-2px); }
+.card:hover::before { opacity: 1; }
+/* BAR CHART */
+.bar-chart {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: 12px; height: 320px;
+  padding: 0 20px 40px; position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute; top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex; flex-direction: column;
+  justify-content: space-between; pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute; left: -55px; top: -8px;
+  font-size: 11px; color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.bar-group {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  gap: 8px; flex: 1; max-width: 80px; position: relative;
+}
+.bar {
+  width: 100%; border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer; min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute; top: -36px; left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff; padding: 4px 10px;
+  border-radius: 6px; font-size: 12px;
+  font-family: var(--font-mono); font-weight: 600;
+  white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: var(--transition); z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label { font-size: 11px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+/* WATERFALL */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid; grid-template-columns: 140px 1fr 100px;
+  align-items: center; gap: 16px; padding: 8px 0;
+  cursor: pointer; transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%; border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px; transition: var(--transition);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-red); }
+.company-card.tier-2::after { background: var(--accent-amber); }
+.company-card.tier-3::after { background: var(--accent-slate); }
+.company-card.tier-watch::after { background: var(--accent-violet); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-red); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.t1 { background: rgba(220,38,38,0.12); color: var(--accent-red); border: 1px solid rgba(220,38,38,0.25); }
+.tier-badge.t2 { background: rgba(245,158,11,0.12); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.25); }
+.tier-badge.t3 { background: rgba(148,163,184,0.12); color: var(--accent-slate); border: 1px solid rgba(148,163,184,0.25); }
+.tier-badge.tw { background: rgba(139,92,246,0.12); color: var(--accent-violet); border: 1px solid rgba(139,92,246,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px; border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer; transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-red); color: var(--text-primary); }
+.filter-pill.active { background: rgba(220,38,38,0.12); border-color: var(--accent-red); color: var(--accent-red); }
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 24px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--accent-red), var(--accent-amber), var(--accent-cyan));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent-red);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(220,38,38,0.4);
+  flex-shrink: 0; margin-top: 6px;
+  position: relative; left: 19px; z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(139,92,246,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-red); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex; gap: 14px; padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(220,38,38,0.2); background: rgba(220,38,38,0.03); }
+.risk-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(220,38,38,0.1); }
+.risk-icon.medium { background: rgba(245,158,11,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(220,38,38,0.06), rgba(245,158,11,0.06));
+  border: 1px solid rgba(220,38,38,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px; text-align: center; position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px; font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition); cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-red); background: rgba(220,38,38,0.06); }
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px; font-size: 1rem; font-weight: 600;
+  color: var(--text-secondary); cursor: pointer;
+  list-style: none; display: flex; align-items: center;
+  gap: 10px; transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content { padding: 0 28px 24px; columns: 2; column-gap: 40px; }
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-red); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+/* SECTION DIVIDER */
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .hero-stat .value { font-size: 1.6rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+  .nav-links { display: none; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="radarfield"></canvas>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-brand">DEFENSE // THESIS 2026</div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#primes">Primes</a>
+      <a href="#tech">Tech</a>
+      <a href="#munitions">Munitions</a>
+      <a href="#space">Space</a>
+      <a href="#companies">Companies</a>
+      <a href="#timing">Timing</a>
+      <a href="#risks">Risks</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Defense &amp; Aerospace</span> Supercycle</h1>
+  <p class="subtitle">$800B+ in combined backlogs. NATO rearming to 3.5% GDP. Munitions production surging 7x. Space defense entering its operational era &mdash; a generational investment window.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="value" data-count="891" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">FY2026 Defense Budget</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="800" data-prefix="$" data-suffix="B+">$0</div>
+      <div class="label">Combined Prime Backlog</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="3.5" data-suffix="%" data-prefix="" data-decimal="1">0</div>
+      <div class="label">NATO GDP Target</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="28.8" data-prefix="$" data-suffix="B" data-decimal="1">$0</div>
+      <div class="label">Multi-Year Procurement</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="40" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">Space Force Budget</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="100" data-suffix="K/mo" data-prefix="">0</div>
+      <div class="label">155mm Shell Target</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">A Generational Rearmament Cycle</h2>
+      <p class="section-desc">Three converging forces &mdash; NATO rearmament, munitions replenishment, and space defense &mdash; are creating structural demand growth not seen since the Reagan era.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">U.S. Defense Budget Trajectory ($B)</h3>
+        <div class="bar-chart" id="budget-chart">
+          <div class="gridlines" id="budget-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">NATO Spending (% GDP)</h3>
+        <div class="cost-waterfall" id="nato-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Market Segments (2025E)</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-segments"></svg>
+          <div class="donut-legend" id="donut-segments-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Sector Fundamentals</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;">
+          <div class="metric"><div class="metric-label">Book-to-Bill</div><div class="metric-value" style="color: var(--accent-green);">&gt;1.0x</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Across all primes</div></div>
+          <div class="metric"><div class="metric-label">RTX B2B (Missiles)</div><div class="metric-value" style="color: var(--accent-red);">2.27x</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Demand exceeds capacity</div></div>
+          <div class="metric"><div class="metric-label">Margin Expansion</div><div class="metric-value" style="color: var(--accent-amber);">+230 bps</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">2025, +120 bps exp. 2026</div></div>
+          <div class="metric"><div class="metric-label">EPS CAGR Guide</div><div class="metric-value">8-10%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Primes through FY2028</div></div>
+          <div class="metric"><div class="metric-label">Workforce Gap</div><div class="metric-value" style="color: var(--accent-rose);">25%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">At or near retirement</div></div>
+          <div class="metric"><div class="metric-label">Counter-Drone CAGR</div><div class="metric-value" style="color: var(--accent-cyan);">25.1%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">$6.6B to $20.3B by 2030</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 760px; margin: 0 auto; line-height: 1.8;">
+        We are in a <strong style="color: var(--accent-red);">generational defense supercycle</strong> driven by NATO rearmament, munitions replenishment, and space defense operationalization. Record backlogs provide multi-year revenue visibility. <strong style="color: var(--accent-amber);">Production capacity &mdash; not demand &mdash; is the binding constraint.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: PRIMES -->
+<section id="primes">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Defense Primes</div>
+      <h2 class="section-title">$800B+ in Combined Backlogs</h2>
+      <p class="section-desc">The six major primes hold record order books representing 2-3 years of revenue, with book-to-bill ratios above 1.0x confirming the demand wave is still building.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Backlog by Prime ($B)</h3>
+        <div class="bar-chart" id="backlog-chart">
+          <div class="gridlines" id="backlog-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">FY2025 Revenue ($B)</h3>
+        <div class="cost-waterfall" id="revenue-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Prime Contractor Profiles</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">RTX Corporation</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">RTX</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">$50B Patriot sustainment umbrella. Five landmark missile framework agreements for Tomahawk, AMRAAM, SM-6 (2-4x production increases)</div></div>
+          <div style="text-align:right;"><span class="inline-stat">$268B</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">Lockheed Martin</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">LMT</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">F-35 franchise (191 deliveries in 2025). PAC-3 MSE ramping to 2,000/yr. $5B internal investment in 2026 (+35% YoY)</div></div>
+          <div style="text-align:right;"><span class="inline-stat">$194B</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">General Dynamics</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">GD</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Columbia-class submarine (Navy's #1 priority, 60% complete). Gulfstream delivered 158 jets. GD-OTS leads large-caliber ammo</div></div>
+          <div style="text-align:right;"><span class="inline-stat">$118B</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">Northrop Grumman</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">NOC</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">B-21 Raider in LRIP ($4.5B acceleration). Sentinel ICBM ($140.9B). ~$11B space segment with SDA satellites</div></div>
+          <div style="text-align:right;"><span class="inline-stat">$95.7B</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">Boeing Defense</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">BA</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Turnaround play. Fixed-price contract burn-off; margin improving from -41.9% to -6.8%. Record backlog if execution improves</div></div>
+          <div style="text-align:right;"><span class="inline-stat">$85B</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(16,185,129,0.2);">
+          <div style="flex:1;"><span style="font-size:0.9rem;font-weight:700;">L3Harris</span> <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:8px;">LHX</span><div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Highest margins (~16%). Aerojet Rocketdyne driving 12% organic growth. Five new rocket motor factories. Missile Solutions IPO H2 2026</div></div>
+          <div style="text-align:right;"><span class="inline-stat" style="color:var(--accent-green);">$38B+</span><div style="font-size:10px;color:var(--text-muted);">backlog</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: EMERGING TECH -->
+<section id="tech">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Emerging Defense Tech</div>
+      <h2 class="section-title">The Autonomous Warfare Revolution</h2>
+      <p class="section-desc">Software-defined defense companies are challenging the traditional industrial base. REPLICATOR, DIU's $979M budget, and CJADC2 are accelerating the shift to autonomous systems.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Defense Tech Valuations ($B)</h3>
+        <div class="cost-waterfall" id="deftech-valuations"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Programs</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Palantir AIP/Maven</span><div style="font-size:0.75rem;color:var(--text-muted);">Defense AI OS. 56% YoY growth</div></div>
+            <span class="inline-stat">$1.275B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Anduril Arsenal-1</span><div style="font-size:0.75rem;color:var(--text-muted);">5M sq ft, 4,000+ workers by 2035</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">July 2026</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Kratos XQ-58A Valkyrie</span><div style="font-size:0.75rem;color:var(--text-muted);">CCA at ~$10M/unit vs $80M+ manned</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">MUX Win</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">AeroVironment Switchblade</span><div style="font-size:0.75rem;color:var(--text-muted);">Scaling to 1,200 systems/month</div></div>
+            <span class="inline-stat" style="color:var(--accent-red);">$990M IDIQ</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(139,92,246,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Saronic Corsair ASV</span><div style="font-size:0.75rem;color:var(--text-muted);">Fastest founding-to-contract in defense</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$392M Navy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px; border-color: rgba(220,38,38,0.15);">
+      <p style="font-family:var(--font-mono);font-size:3.5rem;font-weight:900;color:var(--accent-red);line-height:1;margin-bottom:8px;">$979M</p>
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px;">DIU FY2026 Budget</p>
+      <p style="font-size: 1rem; max-width: 640px; margin: 0 auto; line-height: 1.8; color: var(--text-secondary);">
+        The Pentagon is shifting from <strong style="color:var(--accent-amber);">exquisite platforms to mass-produced autonomous systems</strong>. REPLICATOR aims for thousands of unmanned systems. The defense tech IPO wave (Anduril, Shield AI, Saronic) creates new public market entry points in <strong style="color:var(--accent-red);">2026-2027</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: MUNITIONS -->
+<section id="munitions">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Munitions &amp; Sustainment</div>
+      <h2 class="section-title">The Arsenal of Democracy, Rebuilt</h2>
+      <p class="section-desc">The munitions industrial base is undergoing its most dramatic expansion since the Cold War. $28.8B in multi-year procurement signals structural, not cyclical, demand.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">155mm Shell Production (K/month)</h3>
+        <div class="bar-chart" id="ammo-chart">
+          <div class="gridlines" id="ammo-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Missile Production Targets (/yr)</h3>
+        <div class="cost-waterfall" id="missile-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Sustainment Market</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">Annual Sustainment</div><div class="metric-value" style="color: var(--accent-red);">$80B+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">5-7% CAGR</div></div>
+        <div class="metric"><div class="metric-label">F-35 Lifetime</div><div class="metric-value" style="color: var(--accent-amber);">$1.3T</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">76% of $1.7T lifecycle cost</div></div>
+        <div class="metric"><div class="metric-label">F-35 Fleet</div><div class="metric-value">1,300+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">$7.5M/tail/year</div></div>
+        <div class="metric"><div class="metric-label">Naval Maintenance Gap</div><div class="metric-value" style="color: var(--accent-rose);">$2.3B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Deferred backlog</div></div>
+        <div class="metric"><div class="metric-label">Ship Repair Investment</div><div class="metric-value" style="color: var(--accent-cyan);">$12.57B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Planned</div></div>
+        <div class="metric"><div class="metric-label">Aviation MRO</div><div class="metric-value" style="color: var(--accent-green);">$44.6B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Global military MRO</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: SPACE DEFENSE -->
+<section id="space">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Space Defense</div>
+      <h2 class="section-title">The Final High Ground</h2>
+      <p class="section-desc">Space Force budget surging to ~$40B in FY2026 &mdash; a 159% increase from its founding. PWSA and Golden Dome are rewriting the architecture of national defense.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">PWSA Constellation Deployment</h3>
+        <div class="bar-chart" id="pwsa-chart">
+          <div class="gridlines" id="pwsa-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Golden Dome Funding</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">FY2025-26 Funding</span><div style="font-size:0.75rem;color:var(--text-muted);">Initial appropriations</div></div>
+            <span class="inline-stat" style="color:var(--accent-red);">$24.4B + $13.4B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Space Kill Chain</span><div style="font-size:0.75rem;color:var(--text-muted);">Space-based long-range systems</div></div>
+            <span class="inline-stat">$7.7B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">NGI (LMT)</span><div style="font-size:0.75rem;color:var(--text-muted);">Next Generation Interceptor</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">$17.7B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Total Estimate Range</span><div style="font-size:0.75rem;color:var(--text-muted);">White House to AEI projections</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">$175B&ndash;$3.6T</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(34,211,238,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">SpaceX NSSL Phase 3</span><div style="font-size:0.75rem;color:var(--text-muted);">52% of launch missions</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$5.9B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">PWSA Architecture: Resilience Through Numbers</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">Cost Per Sat</div><div class="metric-value" style="color: var(--accent-green);">$40-50M</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">vs $2-5B legacy GEO</div></div>
+        <div class="metric"><div class="metric-label">Replenishment</div><div class="metric-value" style="color: var(--accent-cyan);">12-18 mo</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">vs 5-7 years legacy</div></div>
+        <div class="metric"><div class="metric-label">Tech Refresh</div><div class="metric-value">Every 2 yrs</div></div>
+        <div class="metric"><div class="metric-label">MILNET (SpaceX)</div><div class="metric-value" style="color: var(--accent-amber);">480 sats</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Military SATCOM</div></div>
+        <div class="metric"><div class="metric-label">Starshield</div><div class="metric-value">183+ sats</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">NRO constellation</div></div>
+        <div class="metric"><div class="metric-label">Commercial SDA</div><div class="metric-value" style="color: var(--accent-violet);">$7B by 2033</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">15% CAGR</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From established primes to pre-IPO disruptors. Filter by conviction tier to explore the full defense stack.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3</div>
+      <div class="filter-pill" data-filter="tier-watch">Pre-IPO</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: TIMING -->
+<section id="timing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key milestones from production ramps to IPOs that define the investment window across near, mid, and long-term horizons.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks that could impair the thesis, from production execution to geopolitical escalation.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Build core positions in the primes with best execution and backlog visibility. Monitor the defense tech IPO wave for entry points. The demand is structural and multi-year &mdash; production ramp execution is the key differentiator.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Prime Contractors</h4>
+          <ul>
+            <li>Lockheed Martin Q4 2025 Earnings Release (investors.lockheedmartin.com)</li>
+            <li>Lockheed Martin $194B Backlog (Benzinga, Feb 2026)</li>
+            <li>F-35 Record 191 Deliveries in 2025 (news.lockheedmartin.com)</li>
+            <li>F-35 Lots 18-19 Contract for 296 Aircraft (f35.com)</li>
+            <li>PAC-3 MSE Record Production Year (lockheedmartin.com)</li>
+            <li>THAAD Interceptor Production Quadrupled (lockheedmartin.com)</li>
+            <li>RTX 2025 Financial Results and 2026 Outlook (GovConWire)</li>
+            <li>RTX $268B Backlog Rearmament Super-Cycle (FinTerra, Jan 2026)</li>
+            <li>RTX $50B Patriot Sustainment Contract (Army Recognition)</li>
+            <li>RTX Five Landmark Missile Framework Agreements (rtx.com, Feb 2026)</li>
+            <li>Northrop Grumman $95.7B Record Backlog (FinTerra, Jan 2026)</li>
+            <li>B-21 Raider Production Acceleration Contract (Air &amp; Space Forces)</li>
+            <li>Sentinel ICBM $140.9B Revised Cost (war.gov)</li>
+            <li>General Dynamics Q4/FY2025 Financial Results (investorrelations.gd.com)</li>
+            <li>Columbia-Class Submarine 60% Complete (USNI News)</li>
+            <li>Boeing Defense Q4 2025 Revenue Growth (Airforce Technology)</li>
+            <li>L3Harris FY2025 Results and 2026 Guidance (Business Wire)</li>
+            <li>L3Harris Solid Rocket Motor Factories (l3harris.com)</li>
+            <li>Pentagon $1B Investment in L3Harris Rocket Motor Spinoff (Defense News)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Emerging Defense Technology</h4>
+          <ul>
+            <li>Palantir Q4 2025 Earnings Report (CNBC, Feb 2026)</li>
+            <li>Palantir Maven Contract Increase to $1B+ (DefenseScoop)</li>
+            <li>Anduril $2.5B Series G at $30.5B Valuation (TechCrunch)</li>
+            <li>Shield AI $5.6B Valuation (Fortune)</li>
+            <li>Kratos Marine Corps MUX TACAIR Contract (DefenseScoop)</li>
+            <li>AeroVironment FY2025 Revenue and Guidance (Nasdaq)</li>
+            <li>Saronic $392M Navy Contract (DefenseScoop)</li>
+            <li>REPLICATOR Initiative Congressional Report (congress.gov)</li>
+            <li>DIU FY2026 $979M Budget (nerdrums.com)</li>
+            <li>Counter-UAS Market $20.3B by 2030 (MarketsandMarkets)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Munitions &amp; Sustainment</h4>
+          <ul>
+            <li>Army Falls Short of 155mm Production Goal (National Defense Magazine)</li>
+            <li>Army Invests $635M in Artillery Ammunition Facility (army.mil)</li>
+            <li>Javelin Production Capacity Expansion (lockheedmartin.com)</li>
+            <li>Lockheed Martin Doubles HIMARS Production (Army Recognition)</li>
+            <li>Lockheed Martin $9.5B JASSM/LRASM Contract (Overt Defense)</li>
+            <li>Pentagon and Lockheed Announce Plans to Triple PAC-3 (Breaking Defense)</li>
+            <li>Multi-Year Procurement in the NDAA (RealClearDefense)</li>
+            <li>F-35 Sustainment GAO Report (gao.gov)</li>
+            <li>NATO 3.5% GDP Target &mdash; The Hague Summit (nato.int)</li>
+            <li>Germany EUR 95B Defense Budget (ICDS)</li>
+            <li>FY2026 NDAA Summary (Holland &amp; Knight)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Space Defense</h4>
+          <ul>
+            <li>Space Force FY2026 Budget Tops $40B (SpacePolicyOnline)</li>
+            <li>SDA Tranche 1 Launch Campaign (DefenseScoop)</li>
+            <li>SDA Awards $3.5B Tranche 3 Tracking Contracts (Payload Space)</li>
+            <li>Rocket Lab Awarded $816M SDA Contract (rocketlabcorp.com)</li>
+            <li>Space Force and SpaceX MILNET Constellation (SatNews)</li>
+            <li>Trump Estimates Golden Dome at $175B (Defense News)</li>
+            <li>NGI $17.7B Lockheed Martin Contract (Defense News)</li>
+            <li>MDA Taps Northrop for Glide Phase Interceptor (DefenseScoop)</li>
+            <li>NSSL Phase 3 $13.7B Launch Contracts (Spaceflight Now)</li>
+            <li>Defense Tech Margin Expansion Fundamentals (Global X)</li>
+            <li>2026 Aerospace and Defense Industry Outlook (PSWare)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Defense &amp; Aerospace Supercycle &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// RADAR FIELD ANIMATION
+(function(){
+var canvas=document.getElementById('radarfield');
+var ctx=canvas.getContext('2d');
+var w,h,cx,cy,angle=0;
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;cx=w/2;cy=h/2;}
+function draw(t){
+ctx.clearRect(0,0,w,h);
+var maxR=Math.max(w,h)*0.6;
+for(var i=1;i<=5;i++){var r=(maxR/5)*i;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(220,38,38,0.03)';ctx.lineWidth=1;ctx.stroke();}
+ctx.beginPath();ctx.moveTo(cx-maxR,cy);ctx.lineTo(cx+maxR,cy);ctx.moveTo(cx,cy-maxR);ctx.lineTo(cx,cy+maxR);ctx.strokeStyle='rgba(220,38,38,0.02)';ctx.lineWidth=1;ctx.stroke();
+angle+=0.005;
+var sx=cx+Math.cos(angle)*maxR;var sy=cy+Math.sin(angle)*maxR;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(sx,sy);ctx.strokeStyle='rgba(220,38,38,0.08)';ctx.lineWidth=1.5;ctx.stroke();
+if(typeof ctx.createConicGradient==='function'){var trailAngle=0.5;var grad=ctx.createConicGradient(angle-trailAngle,cx,cy);grad.addColorStop(0,'rgba(220,38,38,0)');grad.addColorStop(trailAngle/(Math.PI*2),'rgba(220,38,38,0.04)');grad.addColorStop(trailAngle/(Math.PI*2)+0.001,'rgba(220,38,38,0)');grad.addColorStop(1,'rgba(220,38,38,0)');ctx.beginPath();ctx.arc(cx,cy,maxR,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();}
+if(Math.random()<0.02){var br=Math.random()*maxR*0.8+maxR*0.1;var ba=Math.random()*Math.PI*2;var bx=cx+Math.cos(ba)*br;var by=cy+Math.sin(ba)*br;ctx.beginPath();ctx.arc(bx,by,2,0,Math.PI*2);ctx.fillStyle='rgba(220,38,38,0.3)';ctx.fill();}
+requestAnimationFrame(draw);
+}
+window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters(){
+document.querySelectorAll('.hero-stat .value').forEach(function(el){
+var target=parseFloat(el.dataset.count);
+var suffix=el.dataset.suffix||'';
+var prefix=el.dataset.prefix!==undefined?el.dataset.prefix:'$';
+var isDecimal=el.dataset.decimal;
+var duration=2000;var start=performance.now();
+function update(now){
+var elapsed=now-start;var progress=Math.min(elapsed/duration,1);
+var eased=1-Math.pow(1-progress,3);var current=target*eased;
+if(isDecimal){el.textContent=prefix+current.toFixed(parseInt(isDecimal))+suffix;}
+else{el.textContent=prefix+Math.round(current).toLocaleString()+suffix;}
+if(progress<1)requestAnimationFrame(update);
+}
+requestAnimationFrame(update);
+});
+}
+setTimeout(animateCounters,400);
+
+// SCROLL REVEAL
+var observer=new IntersectionObserver(function(entries){
+entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+
+// HELPER: animated bar chart
+function buildBarChart(chartId,gridId,data,max,gridValues,unit){
+var chart=document.getElementById(chartId);
+var gridlines=document.getElementById(gridId);
+gridValues.forEach(function(v){var line=document.createElement('div');line.className='gridline';line.innerHTML='<span>'+unit+v+'</span>';gridlines.appendChild(line);});
+data.forEach(function(d){
+var pct=(d.value/max*100);var group=document.createElement('div');group.className='bar-group';
+group.innerHTML='<div class="bar" style="height:0%;background:'+d.color+';" data-height="'+pct+'"><div class="bar-tooltip">'+d.tooltip+'</div></div><div class="bar-label">'+d.label+'</div>';
+chart.appendChild(group);
+});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.bar').forEach(function(bar,i){setTimeout(function(){bar.style.height=bar.dataset.height+'%';},i*80);});obs.unobserve(e.target);}});},{threshold:0.3});
+obs.observe(chart);
+}
+
+// HELPER: animated waterfall
+function buildWaterfall(containerId,data,max){
+var container=document.getElementById(containerId);
+data.forEach(function(d){
+var pct=Math.max((d.cost/max)*100,3);var row=document.createElement('div');row.className='cost-row';
+row.innerHTML='<div class="vehicle-name">'+d.name+'</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:'+d.color+';" data-width="'+pct+'"></div></div><div class="cost-value" style="color:'+d.color+';">'+d.label+'</div>';
+container.appendChild(row);
+});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.bar-fill').forEach(function(bar,i){setTimeout(function(){bar.style.width=bar.dataset.width+'%';},i*100);});obs.unobserve(e.target);}});},{threshold:0.3});
+obs.observe(container);
+}
+
+// BUDGET BAR CHART
+buildBarChart('budget-chart','budget-gridlines',[
+{label:'FY2024',value:858,color:'var(--accent-slate)',tooltip:'$858B'},
+{label:'FY2025',value:886,color:'var(--accent-amber)',tooltip:'$886B'},
+{label:'FY2026',value:891,color:'var(--accent-red)',tooltip:'$891B'},
+{label:'FY2027E',value:915,color:'rgba(220,38,38,0.6)',tooltip:'~$915B'},
+{label:'FY2028E',value:935,color:'rgba(220,38,38,0.5)',tooltip:'~$935B'},
+{label:'FY2030E',value:950,color:'rgba(220,38,38,0.4)',tooltip:'~$950B'}
+],1000,[1000,750,500,250,0],'$');
+
+// NATO WATERFALL
+buildWaterfall('nato-waterfall',[
+{name:'Poland',cost:4.7,label:'~4.7%',color:'var(--accent-red)'},
+{name:'Greece',cost:3.5,label:'~3.5%',color:'var(--accent-amber)'},
+{name:'United States',cost:3.4,label:'~3.4%',color:'var(--accent-cyan)'},
+{name:'Germany',cost:2.4,label:'~2.4%',color:'var(--accent-blue)'},
+{name:'United Kingdom',cost:2.3,label:'~2.3%',color:'var(--accent-slate)'},
+{name:'France',cost:2.1,label:'~2.1%',color:'var(--accent-violet)'}
+],5.0);
+
+// DONUT: MARKET SEGMENTS
+(function(){
+var segments=[
+{label:'U.S. Defense Budget',value:45,color:'#dc2626'},
+{label:'NATO Europe',value:20,color:'#f59e0b'},
+{label:'Sustainment/MRO',value:15,color:'#22d3ee'},
+{label:'Space Defense',value:10,color:'#8b5cf6'},
+{label:'Munitions',value:5,color:'#10b981'},
+{label:'Counter-Drone',value:5,color:'#f43f5e'}
+];
+var total=segments.reduce(function(s,d){return s+d.value;},0);
+var svg=document.getElementById('donut-segments');
+var legend=document.getElementById('donut-segments-legend');
+var r=80,cxx=110,cyy=110,sw=26;
+var circumference=2*Math.PI*r;var offset=0;
+segments.forEach(function(seg){
+var pct=seg.value/total;var dashLen=circumference*pct;
+var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+circle.setAttribute('cx',cxx);circle.setAttribute('cy',cyy);circle.setAttribute('r',r);
+circle.setAttribute('fill','none');circle.setAttribute('stroke',seg.color);circle.setAttribute('stroke-width',sw);
+circle.setAttribute('stroke-dasharray',dashLen+' '+(circumference-dashLen));
+circle.setAttribute('stroke-dashoffset',-offset);
+circle.setAttribute('transform','rotate(-90 '+cxx+' '+cyy+')');
+svg.appendChild(circle);offset+=dashLen;
+var item=document.createElement('div');item.className='legend-item';
+item.innerHTML='<div class="legend-dot" style="background:'+seg.color+'"></div><span class="legend-label">'+seg.label+'</span><span class="legend-value">'+seg.value+'%</span>';
+legend.appendChild(item);
+});
+var bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+bg.setAttribute('cx',cxx);bg.setAttribute('cy',cyy);bg.setAttribute('r',r-sw/2-2);bg.setAttribute('fill','rgba(11,15,20,0.8)');svg.appendChild(bg);
+var text=document.createElementNS('http://www.w3.org/2000/svg','text');
+text.setAttribute('x',cxx);text.setAttribute('y',cyy-4);text.setAttribute('text-anchor','middle');
+text.setAttribute('fill','#e2e8f0');text.setAttribute('font-family','var(--font-mono)');text.setAttribute('font-size','18');text.setAttribute('font-weight','800');text.textContent='2026E';svg.appendChild(text);
+var sub=document.createElementNS('http://www.w3.org/2000/svg','text');
+sub.setAttribute('x',cxx);sub.setAttribute('y',cyy+14);sub.setAttribute('text-anchor','middle');
+sub.setAttribute('fill','#4b5568');sub.setAttribute('font-family','var(--font-sans)');sub.setAttribute('font-size','10');sub.textContent='Share of Spend';svg.appendChild(sub);
+})();
+
+// BACKLOG BAR CHART
+buildBarChart('backlog-chart','backlog-gridlines',[
+{label:'RTX',value:268,color:'var(--accent-red)',tooltip:'$268B'},
+{label:'LMT',value:194,color:'var(--accent-amber)',tooltip:'$194B'},
+{label:'GD',value:118,color:'var(--accent-cyan)',tooltip:'$118B'},
+{label:'NOC',value:95.7,color:'var(--accent-blue)',tooltip:'$95.7B'},
+{label:'BA',value:85,color:'var(--accent-slate)',tooltip:'$85B'},
+{label:'LHX',value:38,color:'var(--accent-green)',tooltip:'$38B+'}
+],300,[300,225,150,75,0],'$');
+
+// REVENUE WATERFALL
+buildWaterfall('revenue-waterfall',[
+{name:'RTX',cost:88.6,label:'$88.6B',color:'var(--accent-red)'},
+{name:'LMT',cost:75.0,label:'$75.0B',color:'var(--accent-amber)'},
+{name:'GD',cost:52.6,label:'$52.6B',color:'var(--accent-cyan)'},
+{name:'NOC',cost:41.8,label:'$41.8B',color:'var(--accent-blue)'},
+{name:'BA (Defense)',cost:27.2,label:'$27.2B',color:'var(--accent-slate)'},
+{name:'LHX',cost:21.9,label:'$21.9B',color:'var(--accent-green)'}
+],88.6);
+
+// DEFENSE TECH VALUATIONS
+buildWaterfall('deftech-valuations',[
+{name:'Palantir',cost:350,label:'$330-376B',color:'var(--accent-red)'},
+{name:'Anduril',cost:79.6,label:'$30.5-79.6B',color:'var(--accent-amber)'},
+{name:'AeroVironment',cost:15,label:'~$12-15B',color:'var(--accent-cyan)'},
+{name:'Rocket Lab',cost:15,label:'~$12-15B',color:'var(--accent-green)'},
+{name:'Kratos',cost:10,label:'~$8-10B',color:'var(--accent-blue)'},
+{name:'Shield AI',cost:5.6,label:'$5.6B',color:'var(--accent-violet)'},
+{name:'Saronic',cost:4,label:'$4.0B',color:'var(--accent-rose)'}
+],376);
+
+// AMMO BAR CHART
+buildBarChart('ammo-chart','ammo-gridlines',[
+{label:'Pre-War',value:14,color:'var(--accent-slate)',tooltip:'14K/mo'},
+{label:'Current',value:40,color:'var(--accent-amber)',tooltip:'40K/mo'},
+{label:'Target',value:100,color:'var(--accent-red)',tooltip:'100K/mo'}
+],120,[120,90,60,30,0],'');
+
+// MISSILE WATERFALL
+buildWaterfall('missile-waterfall',[
+{name:'PAC-3 MSE',cost:2000,label:'2,000/yr',color:'var(--accent-red)'},
+{name:'AMRAAM',cost:1900,label:'>1,900/yr',color:'var(--accent-amber)'},
+{name:'Tomahawk',cost:1000,label:'>1,000/yr',color:'var(--accent-cyan)'},
+{name:'JASSM/LRASM',cost:565,label:'565/yr',color:'var(--accent-green)'},
+{name:'SM-6',cost:500,label:'>500/yr',color:'var(--accent-blue)'},
+{name:'THAAD',cost:400,label:'400/yr',color:'var(--accent-violet)'},
+{name:'PrSM',cost:400,label:'400/yr',color:'var(--accent-rose)'}
+],2000);
+
+// PWSA BAR CHART
+buildBarChart('pwsa-chart','pwsa-gridlines',[
+{label:'T0',value:27,color:'var(--accent-slate)',tooltip:'27 sats'},
+{label:'T1',value:158,color:'var(--accent-amber)',tooltip:'158 sats'},
+{label:'T2',value:170,color:'var(--accent-red)',tooltip:'170+ sats'},
+{label:'T3',value:72,color:'var(--accent-cyan)',tooltip:'72+ sats'}
+],200,[200,150,100,50,0],'');
+
+// COMPANY CARDS
+(function(){
+var companies=[
+{ticker:'LMT',name:'Lockheed Martin',tier:'tier-1',badge:'t1',badgeText:'Tier 1',mcap:'~$134B',pe:'~16x',backlog:'$194B',divYield:'2.3%',thesis:'F-35 franchise + PAC-3/THAAD/PrSM ramp + $194B backlog at 16x forward P/E. Best risk-adjusted combination of growth visibility and reasonable valuation among primes.'},
+{ticker:'RTX',name:'RTX Corporation',tier:'tier-1',badge:'t1',badgeText:'Tier 1',mcap:'~$166B',pe:'~29x',backlog:'$268B',divYield:'1.4%',thesis:'Largest backlog ($268B), five missile framework agreements represent 2-4x production increases, $50B Patriot sustainment umbrella. GTF recovery extends through 2030.'},
+{ticker:'NOC',name:'Northrop Grumman',tier:'tier-1',badge:'t1',badgeText:'Tier 1',mcap:'~$98B',pe:'~19x',backlog:'$95.7B',divYield:'1.3%',thesis:'B-21 production ramp (2027-2029), GPI prime contractor, $11B space segment with SDA satellites. Highest classified program exposure provides earnings stability.'},
+{ticker:'LHX',name:'L3Harris Technologies',tier:'tier-1',badge:'t1',badgeText:'Tier 1',mcap:'~$54B',pe:'~22x',backlog:'$38B+',divYield:'1.6%',thesis:'Highest margins (~16%) among primes, Aerojet Rocketdyne driving 12% organic growth. Missile Solutions IPO in H2 2026 could unlock significant value.'},
+{ticker:'GD',name:'General Dynamics',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$92B',pe:'~18x',backlog:'$118B',divYield:'1.7%',thesis:'Columbia-class submarine (Navy\'s #1 priority), Gulfstream diversification, $118B backlog at 18x forward P/E. Ammunition segment carries execution risk.'},
+{ticker:'PLTR',name:'Palantir Technologies',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$350B',pe:'190+',backlog:'N/A',divYield:'0%',thesis:'Dominant AI platform for defense (Maven, TITAN, AIP). 56% revenue growth, 41% GAAP operating margin. Valuation at 190+ P/E is the central risk.'},
+{ticker:'AVAV',name:'AeroVironment',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$12-15B',pe:'N/A',backlog:'$764M',divYield:'0%',thesis:'Premier loitering munitions manufacturer. Scaling Switchblade to 14,400/year. $990M IDIQ, international revenue at 52%. Revenue guide nearly doubling.'},
+{ticker:'RKLB',name:'Rocket Lab',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$12-15B',pe:'N/A',backlog:'$1.33B+',divYield:'0%',thesis:'Fastest-growing defense space contractor. $1.33B+ in SDA contracts. Vertical integration reduces supply chain risk. Neutron opens NSSL market.'},
+{ticker:'KTOS',name:'Kratos Defense',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$8-10B',pe:'N/A',backlog:'$1.23B',divYield:'0%',thesis:'Affordable CCA factory \u2014 XQ-58A Valkyrie at $10M/unit. Marine Corps MUX TACAIR win validates platform. 15-23% growth trajectory.'},
+{ticker:'HII',name:'Huntington Ingalls',tier:'tier-2',badge:'t2',badgeText:'Tier 2',mcap:'~$12B',pe:'~14x',backlog:'Large',divYield:'2.2%',thesis:'Sole builder of nuclear aircraft carriers and Virginia-class submarine manufacturer. Naval maintenance backlog creates decades of demand.'},
+{ticker:'BA',name:'Boeing (Defense)',tier:'tier-3',badge:'t3',badgeText:'Tier 3',mcap:'~$191B*',pe:'N/M',backlog:'$85B',divYield:'0%',thesis:'Turnaround play. Fixed-price contract burn-off could drive margin recovery from -6.8% toward breakeven. High risk but asymmetric upside.'},
+{ticker:'OLN',name:'Olin Corp / Winchester',tier:'tier-3',badge:'t3',badgeText:'Tier 3',mcap:'~$5-6B',pe:'~15x',backlog:'N/A',divYield:'1.8%',thesis:'Near-monopoly on U.S. military small-caliber ammunition. NGSW 6.8mm transition creates multi-year demand cycle.'},
+{ticker:'CW',name:'Curtiss-Wright',tier:'tier-3',badge:'t3',badgeText:'Tier 3',mcap:'~$12B',pe:'~28x',backlog:'Growing',divYield:'0.4%',thesis:'Niche play on naval electronics, nuclear propulsion, and aircraft handling. FFG-62 Constellation-class contracts. High margins (~17%).'},
+{ticker:'LDOS',name:'Leidos',tier:'tier-3',badge:'t3',badgeText:'Tier 3',mcap:'~$22B',pe:'~17x',backlog:'Large',divYield:'1.0%',thesis:'Missile defense C2, systems integration, Golden Dome battle management. Benefits from CJADC2 and space defense spending.'},
+{ticker:'Anduril',name:'Anduril (Private)',tier:'tier-watch',badge:'tw',badgeText:'Pre-IPO',mcap:'$30.5-79.6B',pe:'N/A',backlog:'Large',divYield:'N/A',thesis:'Full-stack autonomous defense platform. Arsenal-1 factory (July 2026), Fury CCA, Ghost Shark ($1.1B). IPO expected 2026-2027.'},
+{ticker:'Shield AI',name:'Shield AI (Private)',tier:'tier-watch',badge:'tw',badgeText:'Pre-IPO',mcap:'$5.6B',pe:'N/A',backlog:'N/A',divYield:'N/A',thesis:'Hivemind AI pilot combat-proven in Ukraine (130+ V-BAT sorties). L3Harris strategic investment and EW partnership.'},
+{ticker:'Saronic',name:'Saronic (Private)',tier:'tier-watch',badge:'tw',badgeText:'Pre-IPO',mcap:'$4.0B',pe:'N/A',backlog:'$392M+',divYield:'N/A',thesis:'Autonomous surface vessels. $392M Navy OTA, $300M Louisiana shipyard. Fastest trajectory from founding to contract in defense history.'}
+];
+var grid=document.getElementById('company-grid');
+var filters=document.getElementById('company-filters');
+companies.forEach(function(c){
+var card=document.createElement('div');card.className='company-card '+c.tier;card.dataset.tier=c.tier;
+card.innerHTML='<div class="card-header"><div><div class="ticker">'+c.ticker+'</div><div class="company-name">'+c.name+'</div></div><div class="tier-badge '+c.badge+'">'+c.badgeText+'</div></div><div class="metrics"><div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">'+c.mcap+'</div></div><div class="metric"><div class="metric-label">Forward P/E</div><div class="metric-value">'+c.pe+'</div></div><div class="metric"><div class="metric-label">Backlog</div><div class="metric-value">'+c.backlog+'</div></div><div class="metric"><div class="metric-label">Div Yield</div><div class="metric-value">'+c.divYield+'</div></div></div><div class="thesis">'+c.thesis+'</div>';
+grid.appendChild(card);
+});
+filters.addEventListener('click',function(e){
+var pill=e.target.closest('.filter-pill');if(!pill)return;
+filters.querySelectorAll('.filter-pill').forEach(function(p){p.classList.remove('active');});
+pill.classList.add('active');var filter=pill.dataset.filter;
+grid.querySelectorAll('.company-card').forEach(function(card){
+if(filter==='all'||card.dataset.tier===filter){card.style.display='';card.style.opacity='1';}else{card.style.display='none';}
+});
+});
+})();
+
+// TIMELINE
+(function(){
+var events=[
+{date:'Q1 2026',title:'RTX Five Framework Agreements',desc:'Production ramp contracts for Tomahawk, AMRAAM, SM-6, SM-3 signal sustained multi-year demand.',dot:''},
+{date:'Q1 2026',title:'Dark Eagle Hypersonic Fielding',desc:'First battery completing. Second battery Q4 FY2026. Validates U.S. hypersonic capability.',dot:'amber'},
+{date:'Mar 2026',title:'Next-Gen OPIR GEO-1 Launch',desc:'Successful deployment validates SBIRS replacement for missile warning.',dot:'cyan'},
+{date:'Mid-2026',title:'155mm Production Milestone',desc:'100,000 rounds/month target. GD-OTS execution is the key variable.',dot:''},
+{date:'Jul 2026',title:'Anduril Arsenal-1 Production Start',desc:'5M sq ft factory begins operations. Demonstrates manufacturing scale for autonomous systems.',dot:'amber'},
+{date:'H2 2026',title:'L3Harris Missile Solutions IPO',desc:'Creates a new pure-play solid rocket motor investment vehicle backed by $1B DOD investment.',dot:'violet'},
+{date:'2026',title:'PrSM Increment 4 First Flight',desc:'Extends range for Indo-Pacific scenarios. Validates next-gen precision strike.',dot:'cyan'},
+{date:'2027',title:'PWSA Tranche 1 IOC',desc:'Initial warfighting capability validates proliferated satellite architecture at scale.',dot:'amber'},
+{date:'2027-2029',title:'B-21 Raider Financial Impact',desc:'Production acceleration benefits accruing. $4.5B appropriation drives NOC revenue growth.',dot:''},
+{date:'2026-2027',title:'Anduril IPO Window',desc:'Would create a new large-cap defense tech name. $30.5-79.6B valuation range.',dot:'violet'},
+{date:'Late 2027',title:'Boeing Defense Margin Inflection',desc:'Fixed-price contract burn-off could push BDS toward breakeven.',dot:'amber'},
+{date:'2030',title:'PAC-3 MSE at 2,000/yr',desc:'Full production ramp from 650/year. 3x increase in air defense capacity.',dot:''},
+{date:'Through 2035',title:'NATO 3.5% GDP Ramp',desc:'European defense budgets trending toward $600B+ combined. U.S. primes capture disproportionate share.',dot:'cyan'},
+{date:'2032-2035',title:'GPI Operational',desc:'Glide Phase Interceptor for hypersonic defense. Northrop Grumman prime contractor.',dot:'violet'}
+];
+var container=document.getElementById('timeline');
+events.forEach(function(e){
+var item=document.createElement('div');item.className='timeline-item';
+item.innerHTML='<div class="timeline-dot '+e.dot+'"></div><div class="timeline-content"><div class="timeline-date">'+e.date+'</div><div class="timeline-title">'+e.title+'</div><div class="timeline-desc">'+e.desc+'</div></div>';
+container.appendChild(item);
+});
+})();
+
+// RISK GRID
+(function(){
+var risks=[
+{icon:'\u26A0',level:'high',title:'Execution & Production Ramp Risk',desc:'Record backlogs mean nothing if production cannot scale. GD-OTS failures, 155mm target slippage, and Sentinel\'s 81% cost overrun demonstrate that defense manufacturing is difficult.'},
+{icon:'\u26A0',level:'high',title:'Fixed-Price Contract Losses',desc:'Boeing Defense has destroyed billions through KC-46, T-7A, and Starliner losses. The fixed-price model creates asymmetric downside when programs run over budget.'},
+{icon:'\u26A0',level:'high',title:'Defense Tech Valuation Risk',desc:'Palantir at 190+ P/E prices in years of hypergrowth. Anduril at $30.5-79.6B faces IPO pricing risk. Deceleration could cause significant multiple compression.'},
+{icon:'\u26CF',level:'medium',title:'Supply Chain Fragility',desc:'Single-source dependencies are critical vulnerabilities. Radford AAP is the sole U.S. propellant source. Solid rocket motor capacity is concentrated.'},
+{icon:'\u26CF',level:'medium',title:'Political & Budget Risk',desc:'Defense spending has bipartisan support but is subject to continuing resolutions, sequestration risk, and shifting priorities between administrations.'},
+{icon:'\u26CF',level:'medium',title:'SpaceX Concentration Risk',desc:'SpaceX dominance in launch (52% NSSL Phase 3), SATCOM, and manufacturing creates DOD dependency and competitive pressure for public peers.'},
+{icon:'\u26CF',level:'medium',title:'Technology Risk',desc:'Hypersonic programs have histories of test failures. Space-based interceptors remain unproven. Autonomous systems at REPLICATOR scale have never been attempted.'},
+{icon:'\u26CF',level:'medium',title:'Labor Shortage Constraint',desc:'25% of the defense workforce at or near retirement. Security clearance bottleneck up 1,000% since 2014. Labor is the binding constraint.'},
+{icon:'\u26CF',level:'medium',title:'Sustainment Cost Overruns',desc:'F-35 sustainment costs remain above targets ($7.5M vs $6.8M/tail/year). Naval ship maintenance has a $2.3B deferred backlog.'},
+{icon:'\u26CF',level:'medium',title:'Ukraine Funding Uncertainty',desc:'Reduction in Ukraine military aid would remove a demand vector for munitions replenishment, though NATO rearmament is now self-sustaining.'}
+];
+var container=document.getElementById('risk-grid');
+risks.forEach(function(r){
+var item=document.createElement('div');item.className='risk-item';
+item.innerHTML='<div class="risk-icon '+r.level+'">'+r.icon+'</div><div><div class="risk-title">'+r.title+'</div><div class="risk-desc">'+r.desc+'</div></div>';
+container.appendChild(item);
+});
+})();
+
+// WATCHLIST PILLS
+(function(){
+var picks=[
+{ticker:'LMT',color:'#dc2626'},{ticker:'RTX',color:'#dc2626'},{ticker:'NOC',color:'#dc2626'},{ticker:'LHX',color:'#dc2626'},
+{ticker:'GD',color:'#f59e0b'},{ticker:'PLTR',color:'#f59e0b'},{ticker:'AVAV',color:'#f59e0b'},{ticker:'RKLB',color:'#f59e0b'},{ticker:'KTOS',color:'#f59e0b'},{ticker:'HII',color:'#f59e0b'},
+{ticker:'BA',color:'#94a3b8'},{ticker:'OLN',color:'#94a3b8'},{ticker:'CW',color:'#94a3b8'},{ticker:'LDOS',color:'#94a3b8'},
+{ticker:'Anduril IPO',color:'#8b5cf6'},{ticker:'Shield AI IPO',color:'#8b5cf6'},{ticker:'Saronic IPO',color:'#8b5cf6'}
+];
+var container=document.getElementById('watchlist-pills');
+picks.forEach(function(p){
+var pill=document.createElement('div');pill.className='watchlist-pill';
+pill.innerHTML='<span class="pill-dot" style="background:'+p.color+';"></span>'+p.ticker;
+container.appendChild(pill);
+});
+})();
+
+// NAV SCROLL
+(function(){var nav=document.querySelector('.top-nav');window.addEventListener('scroll',function(){if(window.scrollY>100){nav.style.borderBottomColor='rgba(220,38,38,0.15)';}else{nav.style.borderBottomColor='rgba(255,255,255,0.06)';}});})();
+</script>
+</body>
+</html>

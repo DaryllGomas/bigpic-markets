@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The New Space Economy — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #06080d;
+  --bg-card: rgba(12, 17, 30, 0.85);
+  --bg-card-hover: rgba(18, 25, 45, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(100,160,255,0.15);
+  --text-primary: #e8ecf4;
+  --text-secondary: #8a94a8;
+  --text-muted: #505a6e;
+  --accent-blue: #4d9fff;
+  --accent-cyan: #22d3ee;
+  --accent-violet: #8b5cf6;
+  --accent-orange: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-green: #10b981;
+  --accent-lime: #84cc16;
+  --glow-blue: 0 0 30px rgba(77,159,255,0.15);
+  --glow-cyan: 0 0 30px rgba(34,211,238,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-blue) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(77,159,255,0.08);
+  border: 1px solid rgba(77,159,255,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-blue);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); animation: pulse-dot 2s infinite; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 40%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 640px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 720px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stat {
+  background: var(--bg-card);
+  padding: 28px 24px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* ═══ SECTIONS ═══ */
+section {
+  padding: 100px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-blue); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ═══ REVEAL ANIMATION ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ CARDS ═══ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-blue);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* ═══ ECONOMY GROWTH CHART ═══ */
+.chart-container {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline {
+  border-top: 1px dashed rgba(255,255,255,0.05);
+  position: relative;
+}
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ═══ LAUNCH COST WATERFALL ═══ */
+.cost-waterfall {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 0;
+}
+.cost-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cost-row .bar-track {
+  height: 28px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 2px; height: 100%;
+  background: rgba(255,255,255,0.4);
+  border-radius: 1px;
+}
+.cost-row .cost-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ═══ LAUNCH CADENCE AREA CHART ═══ */
+.cadence-chart {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 20px 0;
+}
+.cadence-chart svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ═══ BUDGET CHART ═══ */
+.budget-visual {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  padding: 20px 0;
+}
+.budget-year {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-radius: var(--radius);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+.budget-year:hover { border-color: var(--accent-orange); box-shadow: 0 0 20px rgba(245,158,11,0.1); }
+.budget-year .fy {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.budget-year .amount {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+.budget-year .budget-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(245,158,11,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.budget-year .budget-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-orange), #fbbf24);
+  border-radius: 3px;
+  transition: width 1s ease-out;
+}
+.budget-year .note {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ═══ COMPANY CARDS ═══ */
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  border-radius: 4px 0 0 4px;
+  transition: var(--transition);
+}
+.company-card.tier-1::after { background: var(--accent-green); }
+.company-card.tier-2::after { background: var(--accent-blue); }
+.company-card.tier-3::after { background: var(--accent-orange); }
+.company-card.tier-avoid::after { background: var(--accent-rose); }
+
+.company-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-blue);
+}
+.company-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.company-card .ticker {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+.company-card .company-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.company-card .tier-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.tier-badge.high { background: rgba(16,185,129,0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.25); }
+.tier-badge.medium { background: rgba(77,159,255,0.12); color: var(--accent-blue); border: 1px solid rgba(77,159,255,0.25); }
+.tier-badge.speculative { background: rgba(245,158,11,0.12); color: var(--accent-orange); border: 1px solid rgba(245,158,11,0.25); }
+.tier-badge.avoid { background: rgba(244,63,94,0.12); color: var(--accent-rose); border: 1px solid rgba(244,63,94,0.25); }
+
+.company-card .metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.metric {
+  padding: 10px;
+  background: var(--bg-glass);
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+}
+.metric .metric-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.metric .metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.company-card .thesis {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+/* ═══ FILTER PILLS ═══ */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.filter-pill.active {
+  background: rgba(77,159,255,0.12);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* ═══ SPAC TABLE ═══ */
+.spac-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.spac-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.spac-table th:last-child, .spac-table td:last-child { text-align: right; }
+.spac-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.spac-table tr:hover td { background: rgba(255,255,255,0.04); }
+.spac-table td:first-child { border-radius: 8px 0 0 8px; }
+.spac-table td:last-child { border-radius: 0 8px 8px 0; }
+.spac-table .ticker-cell {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+.spac-table .change-cell {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.change-positive { color: var(--accent-green); }
+.change-negative { color: var(--accent-rose); }
+.drawdown-bar {
+  display: inline-block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent-rose);
+  margin-right: 8px;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+/* ═══ ETF COMPARISON ═══ */
+.etf-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.etf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.etf-card:hover { border-color: var(--border-glow); box-shadow: var(--glow-blue); transform: translateY(-3px); }
+.etf-card .etf-ticker {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.etf-card .etf-name { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+.etf-card .etf-return {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent-green);
+  margin-bottom: 4px;
+}
+.etf-card .etf-period { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+.etf-card .etf-focus {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+.etf-card .ring {
+  width: 120px; height: 120px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+.etf-card .ring svg { transform: rotate(-90deg); }
+.etf-card .ring-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ═══ TIMELINE ═══ */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-blue), var(--accent-violet), var(--accent-cyan));
+  opacity: 0.3;
+}
+.timeline-item {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  position: relative;
+}
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(77,159,255,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.orange { background: var(--accent-orange); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(139,92,246,0.4); }
+.timeline-dot.green { background: var(--accent-green); box-shadow: 0 0 12px rgba(16,185,129,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+.timeline-content {
+  flex: 1;
+  padding-left: 16px;
+}
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-blue);
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══ SECTOR DONUT ═══ */
+.donut-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.donut-svg { width: 240px; height: 240px; }
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-left: auto;
+  padding-left: 16px;
+}
+
+/* ═══ RISK GRID ═══ */
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(244,63,94,0.2); background: rgba(244,63,94,0.03); }
+.risk-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(244,63,94,0.1); }
+.risk-icon.medium { background: rgba(245,158,11,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ═══ CONCLUSION ═══ */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(77,159,255,0.06), rgba(139,92,246,0.06));
+  border: 1px solid rgba(77,159,255,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.conclusion-box p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.watchlist-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.watchlist-pill:hover { border-color: var(--accent-blue); background: rgba(77,159,255,0.06); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 1;
+}
+footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stat .value { font-size: 1.8rem; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .spac-table { font-size: 12px; }
+  .spac-table th, .spac-table td { padding: 10px 8px; }
+  .budget-visual { grid-template-columns: repeat(3, 1fr); }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .etf-cards { grid-template-columns: 1fr; }
+  .budget-visual { grid-template-columns: repeat(2, 1fr); }
+  .risk-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══ DIVIDER ═══ */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  margin: 0;
+}
+
+/* ═══ STAT CALLOUT ═══ */
+.stat-callout {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.stat-callout .big-num {
+  font-family: var(--font-mono);
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.stat-callout .big-unit {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Two-col layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+/* Tabs */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-glass);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-subtle);
+  width: fit-content;
+}
+.tab-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active {
+  background: rgba(77,159,255,0.12);
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.inline-stat {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The New <span class="gradient-text">Space Economy</span></h1>
+  <p class="subtitle">A structural growth cycle driven by collapsing launch costs, surging defense spending, and commercial revenue inflection. From overview to actionable watchlist.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="value" data-count="613" data-suffix="B">$0</div>
+      <div class="label">2024 Space Economy</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="315">0</div>
+      <div class="label">Orbital Launches 2025</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="1.8" data-suffix="T" data-decimal="1">$0</div>
+      <div class="label">2035 Projection</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- ═══════════════════ SECTION 1: OVERVIEW ═══════════════════ -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">A $613B Economy Heading to $1.8T</h2>
+      <p class="section-desc">The global space economy grew 7.8% in 2024, driven by commercial services (78% of total). By 2035, Morgan Stanley projects it nearly triples.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Satellite Industry Revenue (2024)</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 240 240" id="donut-sat">
+            <circle cx="120" cy="120" r="90" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="28"/>
+          </svg>
+          <div class="donut-legend" id="donut-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Space Economy Growth Trajectory</h3>
+        <div class="bar-chart" id="economy-chart">
+          <div class="gridlines" id="economy-gridlines"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 740px; margin: 0 auto; line-height: 1.8;">
+        We are in the early innings of a <strong style="color: var(--accent-cyan);">multi-decade space infrastructure buildout</strong>, analogous to the internet infrastructure boom of the late 1990s &mdash; but with stronger government demand underpinning. The SpaceX IPO will be the defining sector catalyst.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 2: LAUNCH ═══════════════════ -->
+<section id="launch">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Launch Economics</div>
+      <h2 class="section-title">The Reusability Revolution</h2>
+      <p class="section-desc">Launch costs have fallen 95% since the Shuttle era. Starship aims for another 99% reduction &mdash; potentially opening entirely new categories of space activity.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Cost per kg to LEO</h3>
+        <div class="cost-waterfall" id="cost-waterfall"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Global Orbital Launch Cadence</h3>
+        <div class="cadence-chart">
+          <svg id="cadence-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Launch Provider Landscape (2025)</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">SpaceX</div><div class="metric-value" style="color: var(--accent-cyan);">167 launches</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">53% global share</div></div>
+        <div class="metric"><div class="metric-label">China (All)</div><div class="metric-value" style="color: var(--accent-orange);">90 launches</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">29% global share</div></div>
+        <div class="metric"><div class="metric-label">Rocket Lab</div><div class="metric-value" style="color: var(--accent-green);">21 launches</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">100% success rate</div></div>
+        <div class="metric"><div class="metric-label">Rest of World</div><div class="metric-value" style="color: var(--accent-violet);">37 launches</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Europe, India, Japan, Russia</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 3: DEFENSE ═══════════════════ -->
+<section id="defense">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Defense Spending</div>
+      <h2 class="section-title">The Strongest Structural Tailwind</h2>
+      <p class="section-desc">US Space Force budget doubled in five years. Golden Dome adds a step-function increase &mdash; the largest space defense program since Reagan-era SDI.</p>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">US Space Force Budget (Billions USD)</h3>
+      <div class="budget-visual" id="budget-visual"></div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 16px;">Golden Dome Cost Estimates</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">Estimates span 20x &mdash; a key risk factor for the largest space defense procurement in US history.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <span style="font-size:0.85rem;">White House</span>
+            <span class="inline-stat">$175B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <span style="font-size:0.85rem;">Congressional Budget Office</span>
+            <span class="inline-stat">$831B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(244,63,94,0.2);">
+            <span style="font-size:0.85rem;">American Enterprise Inst.</span>
+            <span class="inline-stat" style="color:var(--accent-rose);">$3.6T</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 16px;">Defense Prime Space Revenue</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">Annual space segment revenue for major contractors.</p>
+        <div id="defense-primes-bars" style="display: flex; flex-direction: column; gap: 8px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 4: COMPANIES ═══════════════════ -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From high-conviction core positions to speculative monitors. Filter by conviction tier to explore.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">High Conviction</div>
+      <div class="filter-pill" data-filter="tier-2">Opportunistic</div>
+      <div class="filter-pill" data-filter="tier-3">Speculative</div>
+      <div class="filter-pill" data-filter="tier-avoid">Avoid</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 5: SPACs & ETFs ═══════════════════ -->
+<section id="spacs-etfs">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Vehicles</div>
+      <h2 class="section-title">SPACs, ETFs &amp; Lessons Learned</h2>
+      <p class="section-desc">The 2021 space SPAC class averaged -65% from highs. But survivors with real revenue have staged remarkable recoveries.</p>
+    </div>
+
+    <div class="tab-bar reveal">
+      <button class="tab-btn active" data-tab="spacs">SPAC Scorecard</button>
+      <button class="tab-btn" data-tab="etfs">Space ETFs</button>
+    </div>
+
+    <div class="tab-panel active reveal" id="panel-spacs">
+      <div class="card" style="overflow-x: auto;">
+        <table class="spac-table" id="spac-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Company</th>
+              <th>SPAC Year</th>
+              <th>ATH</th>
+              <th>Current</th>
+              <th>From ATH</th>
+            </tr>
+          </thead>
+          <tbody id="spac-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-panel reveal" id="panel-etfs">
+      <div class="etf-cards" id="etf-cards"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 6: TIMELINE ═══════════════════ -->
+<section id="timing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key dates that could move the sector, from Artemis II to the SpaceX IPO and beyond.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 7: RISKS ═══════════════════ -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">No thesis is complete without stress-testing the bear case.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ CONCLUSION ═══════════════════ -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>The highest-conviction names span proven defense demand, commercial inflection, and sector-wide exposure. Build positions now, evaluate the SpaceX IPO at pricing.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. All data from company filings, SpaceNews, Payload Space, SIA, Goldman Sachs Research, and industry reports.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>The New Space Economy &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════ STARFIELD ═══════════════════
+(function() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    const count = Math.min(Math.floor(w * h / 4000), 400);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.2 + 0.3,
+        a: Math.random() * 0.6 + 0.1,
+        speed: Math.random() * 0.0003 + 0.0001,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    stars.forEach(s => {
+      const flicker = Math.sin(t * s.speed * 1000 + s.phase) * 0.3 + 0.7;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180, 200, 255, ${s.a * flicker})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize();
+  initStars();
+  requestAnimationFrame(draw);
+})();
+
+// ═══════════════════ COUNTER ANIMATION ═══════════════════
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(el => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = el.dataset.decimal;
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      if (isDecimal) {
+        el.textContent = '$' + current.toFixed(1) + suffix;
+      } else if (suffix) {
+        el.textContent = '$' + Math.round(current) + suffix;
+      } else {
+        el.textContent = Math.round(current).toLocaleString();
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// ═══════════════════ SCROLL REVEAL ═══════════════════
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ═══════════════════ ECONOMY BAR CHART ═══════════════════
+(function() {
+  const data = [
+    { year: '2020', value: 371, color: 'var(--accent-blue)' },
+    { year: '2021', value: 386, color: 'var(--accent-blue)' },
+    { year: '2022', value: 464, color: 'var(--accent-blue)' },
+    { year: '2023', value: 569, color: 'var(--accent-blue)' },
+    { year: '2024', value: 613, color: 'var(--accent-cyan)' },
+    { year: '2026E', value: 720, color: 'rgba(77,159,255,0.5)', dashed: true },
+    { year: '2030E', value: 1000, color: 'rgba(139,92,246,0.5)', dashed: true },
+    { year: '2035E', value: 1800, color: 'rgba(139,92,246,0.5)', dashed: true },
+  ];
+  const max = 1800;
+  const chart = document.getElementById('economy-chart');
+  const gridlines = document.getElementById('economy-gridlines');
+
+  [0, 450, 900, 1350, 1800].forEach(v => {
+    const line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = `<span>$${v === 0 ? '0' : (v >= 1000 ? (v/1000).toFixed(1) + 'T' : v + 'B')}</span>`;
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(d => {
+    const group = document.createElement('div');
+    group.className = 'bar-group';
+    const pct = (d.value / max * 100);
+    group.innerHTML = `
+      <div class="bar" style="height: 0%; background: ${d.color}; ${d.dashed ? 'background: repeating-linear-gradient(0deg, ' + d.color + ', ' + d.color + ' 4px, transparent 4px, transparent 8px);' : ''}" data-height="${pct}">
+        <div class="bar-tooltip">$${d.value >= 1000 ? (d.value/1000).toFixed(1) + 'T' : d.value + 'B'}</div>
+      </div>
+      <div class="bar-label">${d.year}</div>
+    `;
+    chart.appendChild(group);
+  });
+
+  const chartObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// ═══════════════════ DONUT CHART ═══════════════════
+(function() {
+  const segments = [
+    { label: 'Ground Equipment', value: 155.3, color: '#4d9fff' },
+    { label: 'Satellite Services', value: 108.3, color: '#22d3ee' },
+    { label: 'Manufacturing', value: 20.0, color: '#8b5cf6' },
+    { label: 'Launch Services', value: 9.3, color: '#f59e0b' },
+  ];
+  const total = segments.reduce((s, d) => s + d.value, 0);
+  const svg = document.getElementById('donut-sat');
+  const legend = document.getElementById('donut-legend');
+  const r = 90, cx = 120, cy = 120, sw = 28;
+  const circumference = 2 * Math.PI * r;
+  let offset = 0;
+
+  segments.forEach(seg => {
+    const pct = seg.value / total;
+    const dashLen = circumference * pct;
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', `${dashLen} ${circumference - dashLen}`);
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+    circle.style.transition = 'opacity var(--transition)';
+    circle.style.cursor = 'pointer';
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <div class="legend-dot" style="background:${seg.color}"></div>
+      <span class="legend-label">${seg.label}</span>
+      <span class="legend-value">$${seg.value}B</span>
+    `;
+    legend.appendChild(item);
+  });
+
+  // Center text
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx);
+  text.setAttribute('y', cy - 6);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e8ecf4');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '22');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '$293B';
+  svg.appendChild(text);
+
+  const subtext = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  subtext.setAttribute('x', cx);
+  subtext.setAttribute('y', cy + 16);
+  subtext.setAttribute('text-anchor', 'middle');
+  subtext.setAttribute('fill', '#505a6e');
+  subtext.setAttribute('font-family', 'var(--font-sans)');
+  subtext.setAttribute('font-size', '11');
+  subtext.textContent = 'Total (2024)';
+  svg.appendChild(subtext);
+})();
+
+// ═══════════════════ LAUNCH COST WATERFALL ═══════════════════
+(function() {
+  const data = [
+    { name: 'Space Shuttle', cost: 54500, color: '#f43f5e' },
+    { name: 'Delta IV Heavy', cost: 14000, color: '#f97316' },
+    { name: 'Atlas V', cost: 13000, color: '#f59e0b' },
+    { name: 'Ariane 5', cost: 10000, color: '#eab308' },
+    { name: 'Falcon 9 (expendable)', cost: 5000, color: '#22d3ee' },
+    { name: 'Falcon 9 (reusable)', cost: 2700, color: '#4d9fff' },
+    { name: 'Falcon Heavy', cost: 1500, color: '#4d9fff' },
+    { name: 'Starship (target)', cost: 50, color: '#10b981' },
+  ];
+  const max = 54500;
+  const container = document.getElementById('cost-waterfall');
+
+  data.forEach(d => {
+    const pct = Math.max((d.cost / max) * 100, 1.5);
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML = `
+      <div class="vehicle-name">${d.name}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 0%; background: ${d.color};" data-width="${pct}"></div>
+      </div>
+      <div class="cost-value" style="color: ${d.color};">$${d.cost >= 1000 ? (d.cost/1000).toFixed(1) + 'K' : d.cost}</div>
+    `;
+    container.appendChild(row);
+  });
+
+  const costObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        costObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  costObs.observe(container);
+})();
+
+// ═══════════════════ CADENCE CHART ═══════════════════
+(function() {
+  const svg = document.getElementById('cadence-svg');
+  const data = [
+    { year: '2020', total: 114, spacex: 26 },
+    { year: '2021', total: 146, spacex: 31 },
+    { year: '2022', total: 186, spacex: 61 },
+    { year: '2023', total: 223, spacex: 98 },
+    { year: '2024', total: 259, spacex: 134 },
+    { year: '2025', total: 315, spacex: 167 },
+    { year: '2026E', total: 375, spacex: 185 },
+  ];
+  const maxVal = 400;
+  const pad = { t: 20, r: 30, b: 40, l: 50 };
+  const chartW = 600 - pad.l - pad.r;
+  const chartH = 280 - pad.t - pad.b;
+
+  // Grid
+  [0, 100, 200, 300, 400].forEach(v => {
+    const y = pad.t + chartH - (v / maxVal) * chartH;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + chartW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', pad.l - 8); text.setAttribute('y', y + 4);
+    text.setAttribute('text-anchor', 'end');
+    text.setAttribute('fill', '#505a6e'); text.setAttribute('font-size', '10');
+    text.setAttribute('font-family', 'var(--font-mono)');
+    text.textContent = v;
+    svg.appendChild(text);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * chartW; }
+  function getY(v) { return pad.t + chartH - (v / maxVal) * chartH; }
+
+  // Area paths
+  function makePath(key, color, opacity) {
+    let d = `M ${getX(0)} ${getY(data[0][key])}`;
+    for (let i = 1; i < data.length; i++) {
+      const prevX = getX(i-1), prevY = getY(data[i-1][key]);
+      const currX = getX(i), currY = getY(data[i][key]);
+      const cpx = (prevX + currX) / 2;
+      d += ` C ${cpx} ${prevY}, ${cpx} ${currY}, ${currX} ${currY}`;
+    }
+    const lineD = d;
+    d += ` L ${getX(data.length-1)} ${pad.t + chartH} L ${getX(0)} ${pad.t + chartH} Z`;
+
+    const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    area.setAttribute('d', d);
+    area.setAttribute('fill', color);
+    area.setAttribute('opacity', opacity);
+    svg.appendChild(area);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    line.setAttribute('d', lineD);
+    line.setAttribute('fill', 'none');
+    line.setAttribute('stroke', color);
+    line.setAttribute('stroke-width', '2.5');
+    svg.appendChild(line);
+  }
+
+  makePath('total', '#4d9fff', '0.08');
+  makePath('spacex', '#22d3ee', '0.12');
+
+  // Dots + labels
+  data.forEach((d, i) => {
+    const x = getX(i);
+    // Total dot
+    const ct = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    ct.setAttribute('cx', x); ct.setAttribute('cy', getY(d.total)); ct.setAttribute('r', 3.5);
+    ct.setAttribute('fill', '#4d9fff'); ct.setAttribute('stroke', '#06080d'); ct.setAttribute('stroke-width', 2);
+    svg.appendChild(ct);
+    // SpaceX dot
+    const cs = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    cs.setAttribute('cx', x); cs.setAttribute('cy', getY(d.spacex)); cs.setAttribute('r', 3.5);
+    cs.setAttribute('fill', '#22d3ee'); cs.setAttribute('stroke', '#06080d'); cs.setAttribute('stroke-width', 2);
+    svg.appendChild(cs);
+    // Year label
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', x); text.setAttribute('y', pad.t + chartH + 24);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('fill', '#505a6e'); text.setAttribute('font-size', '11');
+    text.setAttribute('font-family', 'var(--font-mono)');
+    text.textContent = d.year;
+    svg.appendChild(text);
+  });
+
+  // Legend
+  [{ label: 'Global', color: '#4d9fff', x: pad.l },
+   { label: 'SpaceX', color: '#22d3ee', x: pad.l + 90 }].forEach(l => {
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', l.x); c.setAttribute('cy', 10); c.setAttribute('r', 4);
+    c.setAttribute('fill', l.color);
+    svg.appendChild(c);
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', l.x + 10); t.setAttribute('y', 14);
+    t.setAttribute('fill', '#8a94a8'); t.setAttribute('font-size', '11');
+    t.setAttribute('font-family', 'var(--font-sans)');
+    t.textContent = l.label;
+    svg.appendChild(t);
+  });
+})();
+
+// ═══════════════════ BUDGET VISUAL ═══════════════════
+(function() {
+  const data = [
+    { fy: 'FY21', amount: 15.4, pct: 38, note: 'First USSF budget' },
+    { fy: 'FY22', amount: 18.1, pct: 45, note: '' },
+    { fy: 'FY23', amount: 26.3, pct: 66, note: 'Major jump' },
+    { fy: 'FY24', amount: 28.7, pct: 72, note: '' },
+    { fy: 'FY25', amount: 28.9, pct: 72, note: '' },
+    { fy: 'FY26', amount: 40.1, pct: 100, note: '+Golden Dome' },
+  ];
+  const container = document.getElementById('budget-visual');
+
+  data.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'budget-year';
+    el.innerHTML = `
+      <div class="fy">${d.fy}</div>
+      <div class="amount">$${d.amount}B</div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width: 0%;" data-width="${d.pct}"></div></div>
+      <div class="note">${d.note}</div>
+    `;
+    container.appendChild(el);
+  });
+
+  const budgetObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.budget-bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 120);
+        });
+        budgetObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  budgetObs.observe(container);
+})();
+
+// ═══════════════════ DEFENSE PRIMES BARS ═══════════════════
+(function() {
+  const primes = [
+    { name: 'Lockheed Martin', rev: 12.5, color: '#4d9fff' },
+    { name: 'Northrop Grumman', rev: 11.7, color: '#22d3ee' },
+    { name: 'L3Harris', rev: 6.9, color: '#8b5cf6' },
+    { name: 'Rocket Lab', rev: 1.3, color: '#10b981' },
+  ];
+  const max = 12.5;
+  const container = document.getElementById('defense-primes-bars');
+  primes.forEach(p => {
+    const pct = (p.rev / max) * 100;
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:12px;';
+    row.innerHTML = `
+      <div style="width:130px;font-size:13px;font-weight:500;color:var(--text-secondary);flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+      <div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:4px;overflow:hidden;">
+        <div style="width:${pct}%;height:100%;background:${p.color};border-radius:4px;transition:width 1s ease-out;"></div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:${p.color};width:50px;text-align:right;">$${p.rev}B</div>
+    `;
+    container.appendChild(row);
+  });
+})();
+
+// ═══════════════════ COMPANY CARDS ═══════════════════
+(function() {
+  const companies = [
+    { ticker: 'PL', name: 'Planet Labs', tier: 'tier-1', badge: 'high', badgeText: 'High', mcap: '~$7B', rev: '$282M', catalyst: 'Backlog $734M (+216%)', thesis: 'Defense EO inflection, near breakeven, Swedish Armed Forces multi-year deal. Growing NATO military contracts signal sustained demand.' },
+    { ticker: 'LUNR', name: 'Intuitive Machines', tier: 'tier-1', badge: 'high', badgeText: 'High', mcap: '~$3.5B', rev: '$275M (FY25)', catalyst: '$919M FY26 consensus', thesis: 'Only public lunar company with real revenue. Two successful landings. EBITDA positive in 2026. Lanteris acquisition adds $800M revenue.' },
+    { ticker: 'RKLB', name: 'Rocket Lab', tier: 'tier-1', badge: 'high', badgeText: 'High', mcap: '~$44B', rev: '~$620M (FY25E)', catalyst: 'Neutron first flight', thesis: 'Only pure-play launch stock. 100% Electron success in 2025. $1.3B+ SDA contracts. Valuation risk is real at these levels.' },
+    { ticker: 'LMT', name: 'Lockheed Martin', tier: 'tier-1', badge: 'high', badgeText: 'High', mcap: '~$140B', rev: '$75B total', catalyst: 'Golden Dome + Next-Gen OPIR', thesis: 'Largest defense space prime. $12.5B space segment. SDA Tranche 3, GPS IIIF, classified programs. Durable growth floor.' },
+    { ticker: 'NOC', name: 'Northrop Grumman', tier: 'tier-2', badge: 'medium', badgeText: 'Opportunistic', mcap: '~$80B', rev: '$41B total', catalyst: 'GPI + Golden Dome SBI', thesis: '$11.7B space systems. SDA Transport/Tracking, Glide Phase Interceptor, in-orbit servicing. Cancelled program headwind fading.' },
+    { ticker: 'BKSY', name: 'BlackSky Technology', tier: 'tier-2', badge: 'medium', badgeText: 'Opportunistic', mcap: '~$1B', rev: '~$75M', catalyst: '$322.7M backlog (91% int\'l)', thesis: 'Strong Buy consensus (6 analysts). Real-time tasking capability. International intelligence demand growing. Small-cap risk.' },
+    { ticker: 'LHX', name: 'L3Harris', tier: 'tier-2', badge: 'medium', badgeText: 'Opportunistic', mcap: '~$45B', rev: '$21.9B total', catalyst: 'SDA production ramp', thesis: '$6.9B space & airborne. SDA Tracking Layer across all tranches. 2026 growth expected as production timing improves.' },
+    { ticker: 'RDW', name: 'Redwire', tier: 'tier-3', badge: 'speculative', badgeText: 'Speculative', mcap: '~$800M', rev: '$320-340M (FY25)', catalyst: 'ZBLAN scaling', thesis: 'In-space manufacturing play. Record ZBLAN fiber draws. Down 55% from highs -- potential value entry. Conglomerate structure a negative.' },
+    { ticker: 'SPIR', name: 'Spire Global', tier: 'tier-3', badge: 'speculative', badgeText: 'Speculative', mcap: '~$800M', rev: '~$85-95M (FY25E)', catalyst: '30%+ growth target 2026', thesis: 'Post-maritime divestiture restructuring. $200M+ RPOs. Targeting EBITDA breakeven by Q4 2026. Execution risk.' },
+    { ticker: 'SPCE', name: 'Virgin Galactic', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: '~$200M', rev: '$0.4M', catalyst: 'Delta-class 2027', thesis: 'Down 99% from ATH. Zero revenue vehicle. Cash burn $100M/quarter with ~4 quarters runway. Extreme execution and dilution risk.' },
+  ];
+
+  const grid = document.getElementById('company-grid');
+  const filters = document.getElementById('company-filters');
+
+  companies.forEach(c => {
+    const card = document.createElement('div');
+    card.className = `company-card ${c.tier}`;
+    card.dataset.tier = c.tier;
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="ticker">${c.ticker}</div>
+          <div class="company-name">${c.name}</div>
+        </div>
+        <div class="tier-badge ${c.badge}">${c.badgeText}</div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">${c.mcap}</div></div>
+        <div class="metric"><div class="metric-label">Revenue</div><div class="metric-value">${c.rev}</div></div>
+      </div>
+      <div class="metric" style="margin-bottom:16px;"><div class="metric-label">Key Catalyst</div><div class="metric-value" style="font-size:0.85rem;">${c.catalyst}</div></div>
+      <div class="thesis">${c.thesis}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', e => {
+    const pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(card => {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        card.style.transform = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// ═══════════════════ SPAC TABLE ═══════════════════
+(function() {
+  const spacs = [
+    { ticker: 'PL', name: 'Planet Labs', year: 2021, ath: '$13', current: '$28.78', change: '+121%', positive: true },
+    { ticker: 'LUNR', name: 'Intuitive Machines', year: 2023, ath: '$82', current: '$21.58', change: '-74%', positive: false },
+    { ticker: 'BKSY', name: 'BlackSky', year: 2021, ath: '$33', current: '$20.99', change: '-36%', positive: false },
+    { ticker: 'MNTS', name: 'Momentus', year: 2021, ath: '$28', current: '$12.86', change: '-54%', positive: false },
+    { ticker: 'SPIR', name: 'Spire Global', year: 2021, ath: '$22', current: '$11.45', change: '-48%', positive: false },
+    { ticker: 'RDW', name: 'Redwire', year: 2021, ath: '$26.66', current: '$10.00', change: '-62%', positive: false },
+    { ticker: 'SATL', name: 'Satellogic', year: 2022, ath: '$11', current: '$3.67', change: '-67%', positive: false },
+    { ticker: 'SPCE', name: 'Virgin Galactic', year: 2019, ath: '$1,200*', current: '$2.35', change: '-99.8%', positive: false },
+    { ticker: 'ASTR', name: 'Astra Space', year: 2021, ath: '$17', current: '$0.54', change: '-96.8%', positive: false },
+  ];
+
+  const tbody = document.getElementById('spac-tbody');
+  spacs.forEach(s => {
+    const changeNum = parseFloat(s.change);
+    const barWidth = s.positive ? 0 : Math.min(Math.abs(changeNum), 100);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="ticker-cell">${s.ticker}</td>
+      <td>${s.name}</td>
+      <td style="font-family:var(--font-mono);font-size:13px;">${s.year}</td>
+      <td style="font-family:var(--font-mono);font-size:13px;">${s.ath}</td>
+      <td style="font-family:var(--font-mono);font-size:13px;">${s.current}</td>
+      <td class="change-cell ${s.positive ? 'change-positive' : 'change-negative'}">
+        ${!s.positive ? `<span class="drawdown-bar" style="width:${barWidth * 0.6}px;"></span>` : ''}${s.change}
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+})();
+
+// ═══════════════════ ETF CARDS ═══════════════════
+(function() {
+  const etfs = [
+    { ticker: 'ROKT', name: 'SPDR Kensho Final Frontiers', return1y: '78.1%', focus: 'Space + Deep Sea (Passive)', color: '#8b5cf6' },
+    { ticker: 'UFO', name: 'Procure Space ETF', return1y: '73.6%', focus: 'Pure Space (Passive, S-Network)', color: '#4d9fff' },
+    { ticker: 'ARKX', name: 'ARK Space & Defense', return1y: '54.5%', focus: 'Space + Defense (Active, Cathie Wood)', color: '#22d3ee' },
+  ];
+  const container = document.getElementById('etf-cards');
+  etfs.forEach(e => {
+    const pct = parseFloat(e.return1y);
+    const card = document.createElement('div');
+    card.className = 'etf-card';
+    card.innerHTML = `
+      <div class="etf-ticker" style="color:${e.color};">${e.ticker}</div>
+      <div class="etf-name">${e.name}</div>
+      <div class="ring">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="${e.color}" stroke-width="8"
+            stroke-dasharray="${(pct / 100) * 314} ${314 - (pct / 100) * 314}"
+            stroke-linecap="round" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="ring-label" style="color:${e.color};">${e.return1y}</div>
+      </div>
+      <div class="etf-period">1-Year Return</div>
+      <div class="etf-focus">${e.focus}</div>
+    `;
+    container.appendChild(card);
+  });
+})();
+
+// ═══════════════════ TABS ═══════════════════
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    btn.closest('.tab-bar') && btn.closest('section').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btn.closest('section').querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + tab);
+    });
+  });
+});
+
+// ═══════════════════ TIMELINE ═══════════════════
+(function() {
+  const events = [
+    { date: 'Mar 6, 2026', title: 'Artemis II Launch', desc: 'First crewed lunar flyby since Apollo. Major sentiment catalyst for lunar economy.', dot: '' },
+    { date: 'Q1 2026', title: 'NASA CLD Phase 2 Awards', desc: 'Determines funding for commercial space stations (Vast, Axiom, Starlab).', dot: 'cyan' },
+    { date: 'May 2026', title: 'Vast Haven-1 Launch', desc: 'First commercial space station reaches orbit. Validates post-ISS commercial model.', dot: 'violet' },
+    { date: 'Mid-2026', title: 'SpaceX IPO', desc: 'Targeting ~$1.5T valuation. Likely the largest IPO ever. Sector-defining repricing event.', dot: 'orange' },
+    { date: 'Late 2026', title: 'Neutron First Flight', desc: 'Rocket Lab\'s medium-lift rocket. Make-or-break for RKLB\'s bull case at current valuation.', dot: 'cyan' },
+    { date: 'Late 2026', title: 'Relativity Terran R', desc: 'Eric Schmidt-led company attempts first 3D-printed medium-lift rocket flight.', dot: '' },
+    { date: '2027', title: 'Axiom PPTM Module', desc: 'First ISS-attached commercial module. Stepping stone to free-flying station.', dot: 'violet' },
+    { date: '2028', title: 'Artemis III (NET)', desc: 'First crewed lunar landing since Apollo 17. SpaceX Starship HLS.', dot: 'green' },
+    { date: 'Jan 2031', title: 'ISS Deorbit', desc: 'End of an era. Commercial stations must be operational. Structural demand transition.', dot: 'orange' },
+    { date: '2035', title: '$1.8T Space Economy', desc: 'Morgan Stanley / WEF projection. Nearly 3x current size.', dot: 'green' },
+  ];
+  const container = document.getElementById('timeline');
+  events.forEach(e => {
+    const item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML = `
+      <div class="timeline-dot ${e.dot}"></div>
+      <div class="timeline-content">
+        <div class="timeline-date">${e.date}</div>
+        <div class="timeline-title">${e.title}</div>
+        <div class="timeline-desc">${e.desc}</div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+})();
+
+// ═══════════════════ RISK GRID ═══════════════════
+(function() {
+  const risks = [
+    { icon: '&#9888;', level: 'high', title: 'SpaceX Concentration', desc: 'One company dominates launch, LEO broadband, and defense. Sector-wide key-person risk.' },
+    { icon: '&#9888;', level: 'high', title: 'Valuation Stretch', desc: 'RKLB trades at extreme P/S ratios. SpaceX IPO prices in decades of growth at $1.5T.' },
+    { icon: '&#9888;', level: 'high', title: 'Political/Budget Risk', desc: 'Golden Dome cost estimates span 20x. Administration change could reshape priorities overnight.' },
+    { icon: '&#9679;', level: 'medium', title: 'Chinese Competition', desc: '90 launches in 2025 with reusable rockets targeting 2026. Could undercut non-ITAR pricing.' },
+    { icon: '&#9679;', level: 'medium', title: 'SPAC History', desc: 'Average space SPAC lost -65% from highs. Pre-revenue companies consistently destroy capital.' },
+    { icon: '&#9679;', level: 'medium', title: 'Technical Risk', desc: 'Starship: 5 of 11 failed in 2025. Neutron had tank rupture. New vehicles frequently fail.' },
+    { icon: '&#9679;', level: 'medium', title: 'Demand Concentration', desc: 'Mega-constellation buildout drives bulk of launch demand. Plateau = demand drop.' },
+    { icon: '&#9679;', level: 'medium', title: 'Fixed-Price Losses', desc: 'Boeing and RTX lost billions on fixed-price defense contracts. Margin compression is real.' },
+  ];
+  const container = document.getElementById('risk-grid');
+  risks.forEach(r => {
+    const item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML = `
+      <div class="risk-icon ${r.level}">${r.icon}</div>
+      <div>
+        <div class="risk-title">${r.title}</div>
+        <div class="risk-desc">${r.desc}</div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+})();
+
+// ═══════════════════ WATCHLIST PILLS ═══════════════════
+(function() {
+  const picks = [
+    { ticker: 'PL', color: '#10b981' },
+    { ticker: 'LUNR', color: '#10b981' },
+    { ticker: 'RKLB', color: '#10b981' },
+    { ticker: 'LMT', color: '#10b981' },
+    { ticker: 'UFO', color: '#4d9fff' },
+    { ticker: 'NOC', color: '#4d9fff' },
+    { ticker: 'BKSY', color: '#4d9fff' },
+    { ticker: 'LHX', color: '#4d9fff' },
+    { ticker: 'SpaceX IPO', color: '#f59e0b' },
+    { ticker: 'York IPO', color: '#f59e0b' },
+    { ticker: 'PLTR', color: '#8b5cf6' },
+    { ticker: 'RDW', color: '#8b5cf6' },
+  ];
+  const container = document.getElementById('watchlist-pills');
+  picks.forEach(p => {
+    const pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = `<span class="pill-dot" style="background:${p.color};"></span>${p.ticker}`;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

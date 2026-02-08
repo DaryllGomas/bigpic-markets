@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Storage &amp; Batteries — Investment Thesis 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root {
+  --bg-deep: #060d12;
+  --bg-card: rgba(8, 18, 25, 0.90);
+  --bg-card-hover: rgba(12, 28, 38, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(0,230,118,0.18);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-green: #00e676;
+  --accent-cyan: #00bcd4;
+  --accent-amber: #ffab00;
+  --accent-violet: #7c4dff;
+  --accent-rose: #ff5252;
+  --accent-blue: #448aff;
+  --accent-lime: #76ff03;
+  --accent-teal: #1de9b6;
+  --glow-green: 0 0 30px rgba(0,230,118,0.15);
+  --glow-cyan: 0 0 30px rgba(0,188,212,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-green) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 3px; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+canvas#energyfield {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  position: relative; padding: 60px 24px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: rgba(0,230,118,0.08);
+  border: 1px solid rgba(0,230,118,0.2); border-radius: 100px;
+  font-size: 13px; font-weight: 500; color: var(--accent-green);
+  letter-spacing: 0.5px; margin-bottom: 32px;
+  backdrop-filter: blur(10px); animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900;
+  line-height: 1.05; letter-spacing: -0.03em;
+  margin-bottom: 24px; animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-cyan) 40%, var(--accent-blue) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem); color: var(--text-secondary);
+  max-width: 700px; line-height: 1.7; font-weight: 400;
+  margin-bottom: 48px; animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--border-subtle); border-radius: var(--radius-lg);
+  overflow: hidden; max-width: 900px; width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stat {
+  background: var(--bg-card); padding: 28px 24px; text-align: center;
+  backdrop-filter: blur(20px); transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2.2rem; font-weight: 800; font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-green));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-stat .label {
+  font-size: 12px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-top: 6px; font-weight: 500;
+}
+.scroll-hint {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-muted); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+section { padding: 100px 0; position: relative; z-index: 1; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--accent-green); margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-green); }
+.section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.15; }
+.section-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 48px; line-height: 1.7; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 32px;
+  backdrop-filter: blur(20px); transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0; transition: var(--transition);
+}
+.card:hover { border-color: var(--border-glow); box-shadow: var(--glow-green); transform: translateY(-2px); }
+.card:hover::before { opacity: 1; }
+.bar-chart {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: 12px; height: 320px; padding: 0 20px 40px; position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute; top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex; flex-direction: column; justify-content: space-between; pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute; left: -55px; top: -8px;
+  font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);
+}
+.bar-group {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-end; gap: 8px; flex: 1; max-width: 80px; position: relative;
+}
+.bar {
+  width: 100%; border-radius: 6px 6px 2px 2px; position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute; top: -36px; left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9); border: 1px solid var(--border-glow);
+  color: #fff; padding: 4px 10px; border-radius: 6px;
+  font-size: 12px; font-family: var(--font-mono); font-weight: 600;
+  white-space: nowrap; opacity: 0; pointer-events: none;
+  transition: var(--transition); z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label { font-size: 11px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid; grid-template-columns: 140px 1fr 100px;
+  align-items: center; gap: 16px; padding: 8px 0; cursor: pointer; transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%; border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 24px; transition: var(--transition);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-green); }
+.company-card.tier-2::after { background: var(--accent-cyan); }
+.company-card.tier-3::after { background: var(--accent-amber); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-green); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.high { background: rgba(0,230,118,0.12); color: var(--accent-green); border: 1px solid rgba(0,230,118,0.25); }
+.tier-badge.medium { background: rgba(0,188,212,0.12); color: var(--accent-cyan); border: 1px solid rgba(0,188,212,0.25); }
+.tier-badge.speculative { background: rgba(255,171,0,0.12); color: var(--accent-amber); border: 1px solid rgba(255,171,0,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  color: var(--text-secondary); cursor: pointer; transition: var(--transition); user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-green); color: var(--text-primary); }
+.filter-pill.active { background: rgba(0,230,118,0.12); border-color: var(--accent-green); color: var(--accent-green); }
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan), var(--accent-violet)); opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px; border-radius: 50%; background: var(--accent-green);
+  border: 2px solid var(--bg-deep); box-shadow: 0 0 12px rgba(0,230,118,0.4);
+  flex-shrink: 0; margin-top: 6px; position: relative; left: 19px; z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(255,171,0,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(124,77,255,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(0,188,212,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(255,82,82,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-green); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex; gap: 14px; padding: 18px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(255,82,82,0.2); background: rgba(255,82,82,0.03); }
+.risk-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(255,82,82,0.1); }
+.risk-icon.medium { background: rgba(255,171,0,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(0,230,118,0.06), rgba(0,188,212,0.06));
+  border: 1px solid rgba(0,230,118,0.15); border-radius: var(--radius-lg);
+  padding: 48px; text-align: center; position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; background: var(--bg-glass);
+  border: 1px solid var(--border-subtle); border-radius: 100px;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+  color: var(--text-primary); transition: var(--transition); cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-green); background: rgba(0,230,118,0.06); }
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px; font-size: 1rem; font-weight: 600;
+  color: var(--text-secondary); cursor: pointer; list-style: none;
+  display: flex; align-items: center; gap: 10px; transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content { padding: 0 28px 24px; columns: 2; column-gap: 40px; }
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-green); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+.tab-bar {
+  display: flex; gap: 4px; background: var(--bg-glass); border-radius: 10px;
+  padding: 4px; margin-bottom: 24px; border: 1px solid var(--border-subtle); width: fit-content;
+}
+.tab-btn {
+  padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer; transition: var(--transition);
+  border: none; background: none; font-family: var(--font-sans);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { background: rgba(0,230,118,0.12); color: var(--accent-green); font-weight: 600; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stat .value { font-size: 1.8rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<canvas id="energyfield"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Energy Storage</span> Revolution</h1>
+  <p class="subtitle">Battery costs breaking $100/kWh. Grid storage growing 50-60% annually. 20M EVs sold globally. From lithium mines to virtual power plants &mdash; the electrification supercycle is here.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="value" data-count="20" data-suffix="M" data-prefix="">0</div>
+      <div class="label">Global EV Sales 2025</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="108" data-prefix="$" data-suffix="/kWh">$0</div>
+      <div class="label">Record Low Pack Price</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="19.6" data-suffix=" GW" data-prefix="" data-decimal="1">0</div>
+      <div class="label">US BESS Additions 2025</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="170" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">CATL Market Cap</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="186" data-suffix="K" data-prefix="">0</div>
+      <div class="label">US Public Charging Ports</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="1187" data-suffix=" GWh" data-prefix="">0</div>
+      <div class="label">Global Battery Installs</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: MARKET OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">The Electrification Value Chain</h2>
+      <p class="section-desc">From mine to wheel to grid. Three structural forces converge: lithium price recovery, battery cost breakthroughs, and explosive grid storage deployment.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market Size by Segment (2026E)</h3>
+        <div class="bar-chart" id="market-chart">
+          <div class="gridlines" id="market-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Market Metrics</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;">
+          <div class="metric"><div class="metric-label">Li Carbonate Price</div><div class="metric-value" style="color: var(--accent-green);">$20K+/t</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Rebounding from $10K bottom</div></div>
+          <div class="metric"><div class="metric-label">LFP Pack Price</div><div class="metric-value" style="color: var(--accent-cyan);">$81/kWh</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">37% cheaper than NMC</div></div>
+          <div class="metric"><div class="metric-label">LFP Market Share</div><div class="metric-value">~60%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Overtook NMC in 2025</div></div>
+          <div class="metric"><div class="metric-label">US BESS Cumulative</div><div class="metric-value" style="color: var(--accent-amber);">~42 GW</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Targeting 64 GW by 2026</div></div>
+          <div class="metric"><div class="metric-label">IRA 45X Credit</div><div class="metric-value" style="color: var(--accent-green);">$45/kWh</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">$2,700/vehicle for 60 kWh</div></div>
+          <div class="metric"><div class="metric-label">China NEV Share</div><div class="metric-value" style="color: var(--accent-rose);">~60%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">BYD + CATL dominance</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 740px; margin: 0 auto; line-height: 1.8;">
+        The energy storage value chain is at an <strong style="color: var(--accent-green);">inflection point</strong>: lithium prices have bottomed, battery costs are breaking $100/kWh, and grid storage is creating an entirely new demand pillar. The investment opportunity lies in companies that can <strong style="color: var(--accent-amber);">navigate the tension between Western onshoring and Chinese dominance</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: LITHIUM -->
+<section id="lithium">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Lithium Supply Chain</div>
+      <h2 class="section-title">The Cycle Has Bottomed</h2>
+      <p class="section-desc">From $80K to below $10K and back above $20K. Survivors emerge stronger as supply-demand tightens toward deficit in 2026.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Lithium Price Cycle ($/tonne LCE)</h3>
+        <div class="area-chart">
+          <svg id="lithium-price-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Extraction Cost Tiers</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(0,230,118,0.15);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Chilean Brine (SQM)</span><div style="font-size:0.75rem;color:var(--text-muted);">Salar de Atacama, lowest-cost globally</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">$3.5-4.5K/t</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">AU Hard Rock (Pilbara)</span><div style="font-size:0.75rem;color:var(--text-muted);">Pilgangoora spodumene concentrate</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$8-12K/t</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(124,77,255,0.15);">
+            <div><span style="font-size:0.85rem;font-weight:600;">DLE Technology</span><div style="font-size:0.75rem;color:var(--text-muted);">Standard Lithium, Lilac Solutions (pre-commercial)</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">TBD</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Recycling (Redwood)</span><div style="font-size:0.75rem;color:var(--text-muted);">70-90% NA market share, 20-25 GWh/yr</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">$10-12B mkt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Lithium Supply vs Demand (MT LCE)</h3>
+      <div class="cost-waterfall" id="lithium-balance"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: BATTERY MANUFACTURING -->
+<section id="batteries">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Battery Manufacturing</div>
+      <h2 class="section-title">Chinese Dominance &amp; the Western Catch-Up</h2>
+      <p class="section-desc">CATL and BYD control 55.6% of global EV battery share. LFP chemistry has overtaken NMC. The IRA is the lifeline for Western manufacturers.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Global EV Battery Market Share (2025)</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-battery"></svg>
+          <div class="donut-legend" id="donut-battery-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Battery Chemistry Comparison</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;padding:10px 0;">
+          <div style="text-align:center;padding:10px 0;">
+            <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:900;color:var(--accent-green);">$108</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Record low average pack price ($/kWh, 2025)</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div style="text-align:center;padding:16px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(0,230,118,0.15);">
+              <div style="font-family:var(--font-mono);font-size:1.5rem;font-weight:800;color:var(--accent-green);">$81</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">LFP Pack $/kWh</div>
+              <div style="font-size:11px;color:var(--accent-green);margin-top:2px;">3,000-10,000 cycles</div>
+            </div>
+            <div style="text-align:center;padding:16px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(0,188,212,0.15);">
+              <div style="font-family:var(--font-mono);font-size:1.5rem;font-weight:800;color:var(--accent-cyan);">$128</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">NMC Pack $/kWh</div>
+              <div style="font-size:11px;color:var(--accent-cyan);margin-top:2px;">Higher energy density</div>
+            </div>
+          </div>
+          <div style="padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(255,171,0,0.15);text-align:center;">
+            <span style="font-size:0.85rem;font-weight:600;">Next frontier:</span>
+            <span style="font-family:var(--font-mono);color:var(--accent-amber);font-weight:700;"> CATL Naxtra Na-ion</span>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px;">175 Wh/kg, $0.04/Wh target, commercial 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Battery Pack Cost Trajectory ($/kWh)</h3>
+      <div class="area-chart">
+        <svg id="battery-cost-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: GRID STORAGE -->
+<section id="grid-storage">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Grid-Scale Storage</div>
+      <h2 class="section-title">The Infrastructure Backbone</h2>
+      <p class="section-desc">The fastest-growing demand driver for batteries. US added 10.4 GW in 2024 and is targeting ~19.6 GW in 2025. IRA standalone storage ITC transformed project economics.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">US BESS Deployment (GW)</h3>
+        <div class="area-chart">
+          <svg id="bess-deploy-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Grid Storage Leaders</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(0,230,118,0.15);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Tesla Megapack</span><div style="font-size:0.75rem;color:var(--text-muted);">39% US share, 46.7 GWh deployed</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">130 GWh/yr</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Fluence Energy</span><div style="font-size:0.75rem;color:var(--text-muted);">$5.5B backlog, Mosaic software</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$3.2-3.6B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Eos Energy (LDES)</span><div style="font-size:0.75rem;color:var(--text-muted);">Zinc-based, 35x YoY revenue growth</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">$303M DOE</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(124,77,255,0.15);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Form Energy (LDES)</span><div style="font-size:0.75rem;color:var(--text-muted);">100-hour iron-air, GE Vernova backing</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">Private</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal" style="text-align: center; padding: 40px; border-color: rgba(0,230,118,0.15);">
+      <p style="font-family:var(--font-mono);font-size:3rem;font-weight:900;color:var(--accent-green);line-height:1;margin-bottom:8px;">50%</p>
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px;">IRA Storage ITC (Maximum)</p>
+      <p style="font-size: 1rem; max-width: 640px; margin: 0 auto; line-height: 1.8; color: var(--text-secondary);">
+        A 100 MW/400 MWh BESS that was <strong style="color:var(--accent-amber);">marginally economic</strong> pre-IRA now achieves <strong style="color:var(--accent-green);">5-7 year payback</strong> at the maximum credit level. This single policy change is the primary driver of the 2024-2025 deployment surge.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: EV ECOSYSTEM -->
+<section id="ev">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">EV Ecosystem</div>
+      <h2 class="section-title">The 20% Inflection Point</h2>
+      <p class="section-desc">Global EV penetration crossed 20% in 2024 with 17M units sold. BYD leads with 4.6M NEVs. The S-curve of mass adoption has begun.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">EV Sales by Region</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-ev"></svg>
+          <div class="donut-legend" id="donut-ev-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Charging Infrastructure</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;">
+          <div class="metric"><div class="metric-label">US Public Ports</div><div class="metric-value" style="color: var(--accent-cyan);">~186K</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">1.2M needed by 2030</div></div>
+          <div class="metric"><div class="metric-label">Tesla NACS Stalls</div><div class="metric-value" style="color: var(--accent-green);">35,682</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">52.5% of US DCFC</div></div>
+          <div class="metric"><div class="metric-label">ChargePoint Ports</div><div class="metric-value">1.3M</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Software pivot, 33% margin</div></div>
+          <div class="metric"><div class="metric-label">VPP Customers</div><div class="metric-value" style="color: var(--accent-amber);">106K</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Sunrun, 400% growth</div></div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(0,230,118,0.1);text-align:center;">
+          <span style="font-size:0.85rem;color:var(--text-secondary);">California VPP test: </span>
+          <span style="font-family:var(--font-mono);color:var(--accent-green);font-weight:700;">100K batteries = 535 MW</span>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px;">Equivalent to a mid-size gas peaker plant</div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Global EV Adoption S-Curve</h3>
+      <div class="area-chart">
+        <svg id="ev-adoption-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From lithium miners to grid storage pure-plays. Filter by conviction tier across the full energy storage value chain.</p>
+    </div>
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1 &mdash; Core</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2 &mdash; Growth</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3 &mdash; Speculative</div>
+    </div>
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: TIMELINE -->
+<section id="timing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key dates from lithium price triggers to solid-state validation and grid storage milestones.</p>
+    </div>
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks across the value chain, from Chinese dominance to policy reversal and technology disruption.</p>
+    </div>
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Position in cost-advantaged lithium producers and grid storage leaders now. Watch for the $100/kWh battery cost barrier to break &mdash; it unlocks unsubsidized EV-ICE price parity and accelerates the entire value chain.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Lithium &amp; Mining</h4>
+          <ul>
+            <li>Albemarle Q3 2025 Results, Kings Mountain Project (Seeking Alpha)</li>
+            <li>SQM-Codelco NovaAndino Litio Partnership; SQM $2.7B Expansion (CarbonCredits)</li>
+            <li>Pilbara Minerals FY2026 Guidance (ShareCafe); Q4 FY25 Results</li>
+            <li>Rio Tinto Completes Arcadium Acquisition (riotinto.com)</li>
+            <li>Ganfeng Lithium 2025 Earnings Forecast (EnergyTrend)</li>
+            <li>Lithium Americas Thacker Pass Q3 2025; DOE Loan Agreement</li>
+            <li>Standard Lithium DFS Results; Lilac Solutions IXM Manufacturing</li>
+            <li>Lithium Price Surge 2026 (CarbonCredits); S&amp;P Global Outlook</li>
+            <li>Redwood Materials $350M Raise; Glencore Li-Cycle Acquisition</li>
+            <li>Li-Ion Battery Recycling Market (Precedence Research)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Battery Manufacturing</h4>
+          <ul>
+            <li>CnEVPost, Electrive: Global EV battery market share 2025</li>
+            <li>BloombergNEF record low battery prices; Battery Tech Online data</li>
+            <li>InsideEVs LFP dominance; IEA Global EV Outlook 2025</li>
+            <li>CATL sodium-ion commercial production (CleanTechnica)</li>
+            <li>QuantumScape solid-state breakthrough (AINvest)</li>
+            <li>BMW-Solid Power-Samsung SDI consortium (BMW Press)</li>
+            <li>C2ES 30D &amp; 45X credits; Akin IRA reconciliation</li>
+            <li>McKinsey Battery 2035; BYD vertical integration (EVBoosters)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Grid Storage</h4>
+          <ul>
+            <li>Fluence Energy FY2025 Results, Record Backlog (GlobeNewsWire)</li>
+            <li>Tesla Megapack milestones (Teslarati, Wood Mackenzie)</li>
+            <li>EIA battery capacity data; Wood Mackenzie US storage installs</li>
+            <li>FERC Order 2222 Fact Sheet; CAISO, ISO-NE implementation</li>
+            <li>California VPP test (CleanTechnica, Energy-Storage.News)</li>
+            <li>Form Energy factory and financing (WESA, Utility Dive)</li>
+            <li>Eos Energy Q3 2025 revenue, DOE loan (investors.eose.com)</li>
+            <li>IRA Storage ITC (McGuireWoods, IRS); NREL cost projections</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>EV Ecosystem</h4>
+          <ul>
+            <li>IEA Global EV Outlook 2025; Tesla Q4 2025 deliveries</li>
+            <li>ChargePoint Q3 FY2026 results; EVgo Q3 2025 results</li>
+            <li>Rivian R2 pricing (Car and Driver); DOE loan (TechCrunch)</li>
+            <li>BYD 2025 sales (eletric-vehicles.com, Triden Technology)</li>
+            <li>NEVI program status (GreenCars); US EV adoption (S&amp;P Global)</li>
+            <li>Sunrun VPP growth (Utility Dive, pv magazine)</li>
+            <li>EV adoption S-curve analysis (RMI)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Energy Storage &amp; Batteries &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// ENERGY FIELD ANIMATION (battery/energy flow particles)
+(function() {
+  var canvas = document.getElementById('energyfield');
+  var ctx = canvas.getContext('2d');
+  var particles = [], streams = [];
+  var w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    particles = []; streams = [];
+    var count = Math.min(Math.floor(w * h / 10000), 150);
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w, y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.5, a: Math.random() * 0.3 + 0.05,
+        vx: (Math.random() - 0.5) * 0.3, vy: Math.random() * 0.2 + 0.1,
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+    // Vertical energy streams
+    for (var j = 0; j < 8; j++) {
+      streams.push({
+        x: Math.random() * w, speed: Math.random() * 0.5 + 0.3,
+        length: Math.random() * 100 + 50, phase: Math.random() * h
+      });
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    // Streams
+    streams.forEach(function(s) {
+      var y = (s.phase + t * s.speed * 0.05) % (h + s.length) - s.length;
+      var grad = ctx.createLinearGradient(s.x, y, s.x, y + s.length);
+      grad.addColorStop(0, 'rgba(0, 230, 118, 0)');
+      grad.addColorStop(0.5, 'rgba(0, 230, 118, 0.03)');
+      grad.addColorStop(1, 'rgba(0, 230, 118, 0)');
+      ctx.beginPath();
+      ctx.moveTo(s.x, y);
+      ctx.lineTo(s.x, y + s.length);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+    // Particles
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y > h) { p.y = 0; p.x = Math.random() * w; }
+      if (p.x < 0 || p.x > w) { p.x = Math.random() * w; }
+      var flicker = Math.sin(t * 0.003 + p.pulse) * 0.4 + 0.6;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 230, 118, ' + (p.a * flicker) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize(); init(); requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(function(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '$';
+    var isDecimal = el.dataset.decimal;
+    var duration = 2000;
+    var start = performance.now();
+    function update(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      if (isDecimal) { el.textContent = prefix + current.toFixed(1) + suffix; }
+      else { el.textContent = prefix + Math.round(current) + suffix; }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// MARKET SIZE BAR CHART
+(function() {
+  var data = [
+    { label: 'EV Sales', value: 1200, color: 'var(--accent-green)' },
+    { label: 'Batteries', value: 150, color: 'var(--accent-cyan)' },
+    { label: 'Lithium', value: 30, color: 'var(--accent-amber)' },
+    { label: 'Grid BESS', value: 12.6, color: 'var(--accent-blue)' },
+    { label: 'Recycling', value: 12, color: 'var(--accent-violet)' },
+    { label: 'Charging', value: 8, color: 'var(--accent-teal)' },
+  ];
+  var max = 1400;
+  var chart = document.getElementById('market-chart');
+  var gridlines = document.getElementById('market-gridlines');
+
+  [1400, 1050, 700, 350, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var pct = (d.value / max * 100);
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// LITHIUM PRICE AREA CHART
+(function() {
+  var svg = document.getElementById('lithium-price-svg');
+  var data = [
+    { year: '2020', price: 8 },
+    { year: '2021', price: 25 },
+    { year: '2022', price: 80 },
+    { year: '2023', price: 30 },
+    { year: '2024', price: 10 },
+    { year: '2025', price: 11 },
+    { year: '2026E', price: 20 },
+  ];
+  var maxVal = 90;
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 30, 60, 90].forEach(function(v) {
+    var y = pad.t + cH - (v / maxVal) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = '$' + v + 'K';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].price);
+  for (var i = 1; i < data.length; i++) {
+    var px = getX(i-1), py = getY(data[i-1].price);
+    var cx2 = getX(i), cy2 = getY(data[i].price);
+    var cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d); area.setAttribute('fill', 'rgba(0,230,118,0.08)');
+  svg.appendChild(area);
+  var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD); line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#00e676'); line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.price);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#00e676'); c.setAttribute('stroke', '#060d12'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#00e676'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = '$' + pt.price + 'K';
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+})();
+
+// LITHIUM SUPPLY/DEMAND WATERFALL
+(function() {
+  var data = [
+    { name: '2024 Supply', cost: 1.40, color: 'var(--accent-cyan)' },
+    { name: '2024 Demand', cost: 1.25, color: 'var(--accent-green)' },
+    { name: '2025 Supply', cost: 1.44, color: 'var(--accent-cyan)' },
+    { name: '2025 Demand', cost: 1.30, color: 'var(--accent-green)' },
+    { name: '2026E Supply', cost: 1.58, color: 'var(--accent-cyan)' },
+    { name: '2026E Demand', cost: 1.48, color: 'var(--accent-green)' },
+  ];
+  var max = 1.60;
+  var container = document.getElementById('lithium-balance');
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.cost.toFixed(2) + 'M t</div>';
+    container.appendChild(row);
+  });
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// DONUT: BATTERY MARKET SHARE
+(function() {
+  var segments = [
+    { label: 'CATL', value: 39.2, color: '#00e676' },
+    { label: 'BYD', value: 16.4, color: '#00bcd4' },
+    { label: 'LG Energy', value: 9.3, color: '#ffab00' },
+    { label: 'Panasonic', value: 6.5, color: '#7c4dff' },
+    { label: 'Samsung SDI', value: 4.8, color: '#448aff' },
+    { label: 'Others', value: 23.8, color: '#4b5568' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-battery');
+  var legend = document.getElementById('donut-battery-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none'); circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(6,13,18,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle'); text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '18'); text.setAttribute('font-weight', '800');
+  text.textContent = '2025';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle'); sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)'); sub.setAttribute('font-size', '10');
+  sub.textContent = 'EV Battery Share';
+  svg.appendChild(sub);
+})();
+
+// BATTERY COST AREA CHART
+(function() {
+  var svg = document.getElementById('battery-cost-svg');
+  var data = [
+    { year: '2015', cost: 380 },
+    { year: '2017', cost: 250 },
+    { year: '2019', cost: 170 },
+    { year: '2021', cost: 140 },
+    { year: '2023', cost: 139 },
+    { year: '2025', cost: 108 },
+    { year: '2026E', cost: 95 },
+  ];
+  var maxVal = 420;
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 100, 200, 300, 400].forEach(function(v) {
+    var y = pad.t + cH - (v / maxVal) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = '$' + v;
+    svg.appendChild(t);
+  });
+
+  // $100 parity line
+  var parityY = pad.t + cH - (100 / maxVal) * cH;
+  var pl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  pl.setAttribute('x1', pad.l); pl.setAttribute('x2', pad.l + cW);
+  pl.setAttribute('y1', parityY); pl.setAttribute('y2', parityY);
+  pl.setAttribute('stroke', 'rgba(255,82,82,0.3)');
+  pl.setAttribute('stroke-dasharray', '8 4');
+  svg.appendChild(pl);
+  var plT = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  plT.setAttribute('x', pad.l + cW + 4); plT.setAttribute('y', parityY + 4);
+  plT.setAttribute('fill', '#ff5252'); plT.setAttribute('font-size', '9');
+  plT.setAttribute('font-family', 'var(--font-mono)');
+  plT.textContent = '$100 parity';
+  svg.appendChild(plT);
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].cost);
+  for (var i = 1; i < data.length; i++) {
+    var px = getX(i-1), py = getY(data[i-1].cost);
+    var cx2 = getX(i), cy2 = getY(data[i].cost);
+    var cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d); area.setAttribute('fill', 'rgba(0,188,212,0.08)');
+  svg.appendChild(area);
+  var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD); line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#00bcd4'); line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.cost);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#00bcd4'); c.setAttribute('stroke', '#060d12'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#00bcd4'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = '$' + pt.cost;
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+})();
+
+// BESS DEPLOYMENT AREA CHART
+(function() {
+  var svg = document.getElementById('bess-deploy-svg');
+  var data = [
+    { year: '2022', gw: 5 },
+    { year: '2023', gw: 7 },
+    { year: '2024', gw: 10.4 },
+    { year: '2025E', gw: 19.6 },
+    { year: '2026E', gw: 22 },
+    { year: '2028E', gw: 35 },
+    { year: '2030E', gw: 50 },
+  ];
+  var maxVal = 55;
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 15, 30, 45].forEach(function(v) {
+    var y = pad.t + cH - (v / maxVal) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + ' GW';
+    svg.appendChild(t);
+  });
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].gw);
+  for (var i = 1; i < data.length; i++) {
+    var px = getX(i-1), py = getY(data[i-1].gw);
+    var cx2 = getX(i), cy2 = getY(data[i].gw);
+    var cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d); area.setAttribute('fill', 'rgba(0,230,118,0.1)');
+  svg.appendChild(area);
+  var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD); line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#00e676'); line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.gw);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#00e676'); c.setAttribute('stroke', '#060d12'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#00e676'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = pt.gw;
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+})();
+
+// DONUT: EV SALES BY REGION
+(function() {
+  var segments = [
+    { label: 'China', value: 48, color: '#ff5252' },
+    { label: 'Europe', value: 25, color: '#00bcd4' },
+    { label: 'US', value: 13, color: '#00e676' },
+    { label: 'Rest of World', value: 14, color: '#ffab00' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-ev');
+  var legend = document.getElementById('donut-ev-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none'); circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(6,13,18,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle'); text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '18'); text.setAttribute('font-weight', '800');
+  text.textContent = '20M+';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle'); sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)'); sub.setAttribute('font-size', '10');
+  sub.textContent = 'Global EV Sales';
+  svg.appendChild(sub);
+})();
+
+// EV ADOPTION S-CURVE
+(function() {
+  var svg = document.getElementById('ev-adoption-svg');
+  var data = [
+    { year: '2019', pct: 3 },
+    { year: '2020', pct: 4 },
+    { year: '2021', pct: 9 },
+    { year: '2022', pct: 14 },
+    { year: '2023', pct: 18 },
+    { year: '2024', pct: 20 },
+    { year: '2025E', pct: 25 },
+    { year: '2030E', pct: 50 },
+  ];
+  var maxVal = 60;
+  var pad = { t: 20, r: 30, b: 40, l: 55 };
+  var cW = 600 - pad.l - pad.r;
+  var cH = 280 - pad.t - pad.b;
+
+  [0, 20, 40, 60].forEach(function(v) {
+    var y = pad.t + cH - (v / maxVal) * cH;
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', pad.l); line.setAttribute('x2', pad.l + cW);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-dasharray', '4 4');
+    svg.appendChild(line);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', pad.l - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('fill', '#4b5568'); t.setAttribute('font-size', '10');
+    t.setAttribute('font-family', 'var(--font-mono)');
+    t.textContent = v + '%';
+    svg.appendChild(t);
+  });
+
+  // 20% inflection line
+  var inflY = pad.t + cH - (20 / maxVal) * cH;
+  var il = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  il.setAttribute('x1', pad.l); il.setAttribute('x2', pad.l + cW);
+  il.setAttribute('y1', inflY); il.setAttribute('y2', inflY);
+  il.setAttribute('stroke', 'rgba(255,171,0,0.3)');
+  il.setAttribute('stroke-dasharray', '8 4');
+  svg.appendChild(il);
+  var ilt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  ilt.setAttribute('x', pad.l + cW + 4); ilt.setAttribute('y', inflY + 4);
+  ilt.setAttribute('fill', '#ffab00'); ilt.setAttribute('font-size', '9');
+  ilt.setAttribute('font-family', 'var(--font-mono)');
+  ilt.textContent = 'Inflection';
+  svg.appendChild(ilt);
+
+  function getX(i) { return pad.l + (i / (data.length - 1)) * cW; }
+  function getY(v) { return pad.t + cH - (v / maxVal) * cH; }
+
+  var d = 'M ' + getX(0) + ' ' + getY(data[0].pct);
+  for (var i = 1; i < data.length; i++) {
+    var px = getX(i-1), py = getY(data[i-1].pct);
+    var cx2 = getX(i), cy2 = getY(data[i].pct);
+    var cpx = (px + cx2) / 2;
+    d += ' C ' + cpx + ' ' + py + ', ' + cpx + ' ' + cy2 + ', ' + cx2 + ' ' + cy2;
+  }
+  var lineD = d;
+  d += ' L ' + getX(data.length - 1) + ' ' + (pad.t + cH) + ' L ' + getX(0) + ' ' + (pad.t + cH) + ' Z';
+
+  var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d); area.setAttribute('fill', 'rgba(0,230,118,0.08)');
+  svg.appendChild(area);
+  var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line2.setAttribute('d', lineD); line2.setAttribute('fill', 'none');
+  line2.setAttribute('stroke', '#00e676'); line2.setAttribute('stroke-width', '2.5');
+  svg.appendChild(line2);
+
+  data.forEach(function(pt, i) {
+    var x = getX(i), y = getY(pt.pct);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#00e676'); c.setAttribute('stroke', '#060d12'); c.setAttribute('stroke-width', 2);
+    svg.appendChild(c);
+    var vt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    vt.setAttribute('x', x); vt.setAttribute('y', y - 12);
+    vt.setAttribute('text-anchor', 'middle');
+    vt.setAttribute('fill', '#00e676'); vt.setAttribute('font-size', '11');
+    vt.setAttribute('font-family', 'var(--font-mono)'); vt.setAttribute('font-weight', '600');
+    vt.textContent = pt.pct + '%';
+    svg.appendChild(vt);
+    var yt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yt.setAttribute('x', x); yt.setAttribute('y', pad.t + cH + 24);
+    yt.setAttribute('text-anchor', 'middle');
+    yt.setAttribute('fill', '#4b5568'); yt.setAttribute('font-size', '11');
+    yt.setAttribute('font-family', 'var(--font-mono)');
+    yt.textContent = pt.year;
+    svg.appendChild(yt);
+  });
+})();
+
+// COMPANY CARDS
+(function() {
+  var companies = [
+    { ticker: 'ALB', name: 'Albemarle', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$19B', sector: 'Lithium', keyMetric: '200K t LCE', thesis: 'Most diversified lithium producer. Kings Mountain restart provides IRA-eligible US supply. Cost restructuring complete. Positioned for lithium price rerating.' },
+    { ticker: 'SQM', name: 'SQM', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$12-14B', sector: 'Lithium', keyMetric: '240K t LiCarb', thesis: 'Lowest-cost global producer (Salar de Atacama, $3.5-4.5K/t). Massive scale. Volume growth offsets Codelco JV margin compression.' },
+    { ticker: 'TSLA', name: 'Tesla', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '$1.36T', sector: 'EV + Grid', keyMetric: '39% US BESS', thesis: 'Dominant grid storage (46.7 GWh). NACS charging moat. Megapack 3 generational upgrade. Energy business increasingly core to the story.' },
+    { ticker: 'FLNC', name: 'Fluence Energy', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$4B', sector: 'Grid Storage', keyMetric: '$5.5B backlog', thesis: 'Best pure-play utility-scale BESS. Record backlog, 48% revenue growth guided. Hardware+software model creates recurring revenue.' },
+    { ticker: '1211.HK', name: 'BYD', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$115B', sector: 'EV + Battery', keyMetric: '4.6M NEVs', thesis: 'Ultimate vertical integration: battery cells, motors, semiconductors, and vehicles. 15-20% structural cost advantage. Exports quadrupling.' },
+    { ticker: '300750.SZ', name: 'CATL', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$170B', sector: 'Batteries', keyMetric: '39.2% share', thesis: '39.2% global share, more than double any rival. LFP + NMC + Na-ion pioneer. Licensing model for US market (FEOC constraints).' },
+    { ticker: '051910.KS', name: 'LG Energy Solution', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$65B', sector: 'Batteries', keyMetric: '90 GWh US', thesis: 'Korean battery leader pivoting to ESS. Diversified customer base. 45X credit beneficiary at US plants. 9.3% global share.' },
+    { ticker: 'RIO', name: 'Rio Tinto', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$100B+', sector: 'Lithium', keyMetric: '200K t target', thesis: 'Counter-cyclical lithium development through Arcadium acquisition. $57B revenue balance sheet. Diversified commodity base reduces risk.' },
+    { ticker: 'PLS.AX', name: 'Pilbara Minerals', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~A$12-14B', sector: 'Lithium', keyMetric: '755K t conc.', thesis: 'Lowest-cost Australian spodumene. P2000 doubles capacity optionality. BMX auction captures spot premiums. Strong balance sheet.' },
+    { ticker: 'EOSE', name: 'Eos Energy', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$2B', sector: 'LDES', keyMetric: '35x YoY rev', thesis: 'Most advanced US-manufactured LDES. 35x YoY revenue growth. $303M DOE loan. Zinc technology, domestic content IRA eligible.' },
+    { ticker: 'RUN', name: 'Sunrun', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$3B', sector: 'VPP/Solar', keyMetric: '106K VPP', thesis: 'VPP market leader with 400% participation growth. 70% battery attachment rate. FERC 2222 unlocks wholesale market participation.' },
+    { ticker: '002460', name: 'Ganfeng Lithium', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$8-10B', sector: 'Lithium', keyMetric: '130K t LCE', thesis: 'Integrated global portfolio. Returning to profitability. Diversified across brine, hard rock, and recycling. Chinese market exposure.' },
+    { ticker: '6752.T', name: 'Panasonic', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$25B', sector: 'Batteries', keyMetric: 'Tesla partner', thesis: 'Tesla partnership anchor. NCA/NMC focus. 4680 cell development. Nevada and Kansas facilities for US production.' },
+    { ticker: 'QS', name: 'QuantumScape', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$5.1B', sector: 'Solid-State', keyMetric: '844 Wh/L', thesis: 'Highest-upside solid-state bet. Eagle Line pilot Feb 2026. VW/PowerCo anchor customer. Pre-revenue, binary outcome.' },
+    { ticker: 'RIVN', name: 'Rivian', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$15B', sector: 'EV', keyMetric: 'R2 H1 2026', thesis: 'R2 at $45K targets mainstream market. $7B cash + $6.6B DOE loan. VW partnership validates tech. Must prove manufacturing execution.' },
+    { ticker: 'CHPT', name: 'ChargePoint', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$2B', sector: 'Charging', keyMetric: '1.3M ports', thesis: 'Largest North American network. Software/subscription pivot (40% of revenue). 33% gross margin. Path to profitability uncertain.' },
+    { ticker: 'EVGO', name: 'EVgo', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$1B', sector: 'Charging', keyMetric: '37% rev growth', thesis: 'DCFC-focused with utility partnerships. GM/Pilot 200+ locations. Prefabricated deployment accelerating buildout.' },
+    { ticker: 'LAC', name: 'Lithium Americas', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$1.5-2B', sector: 'Lithium Dev', keyMetric: 'Thacker Pass', thesis: 'Largest US lithium deposit. GM 38% JV partner. $435M DOE first draw. IRA-eligible domestic production. High execution risk.' },
+    { ticker: 'SLDP', name: 'Solid Power', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$845M', sector: 'Solid-State', keyMetric: 'BMW partner', thesis: 'Electrolyte/licensing model lowers capital risk. BMW+Samsung SDI+Ford validation. $300M liquidity. Longer timeline than QS.' },
+    { ticker: 'PLL', name: 'Piedmont Lithium', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$200-300M', sector: 'Lithium', keyMetric: 'US pipeline', thesis: 'IRA-eligible US production pipeline. NAL JV + Tennessee conversion. LG Chem offtake. Small-cap with high execution risk.' },
+  ];
+
+  var grid = document.getElementById('company-grid');
+  var filters = document.getElementById('company-filters');
+
+  companies.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Sector</div><div class="metric-value" style="font-size:0.85rem;">' + c.sector + '</div></div>' +
+      '</div>' +
+      '<div class="metric" style="margin-bottom:16px;"><div class="metric-label">Key Metric</div><div class="metric-value" style="font-size:0.85rem;">' + c.keyMetric + '</div></div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// TIMELINE
+(function() {
+  var events = [
+    { date: 'Q1 2026', title: 'Lithium Price Above $20K/t', desc: 'If sustained, triggers producer margin expansion and potential re-ratings across ALB, SQM, PLS.', dot: '' },
+    { date: 'Feb 2026', title: 'QuantumScape Eagle Line Inauguration', desc: 'Validation event for solid-state technology. QSE-5 cells at 844 Wh/L. Success/failure moves QS and SLDP.', dot: 'cyan' },
+    { date: 'H1 2026', title: 'Rivian R2 Production Start', desc: 'Existential execution test at $45K price point. Production ramp determines company viability.', dot: 'amber' },
+    { date: '2026', title: 'Standard Lithium Phase 1A First Production', desc: 'First commercial DLE output from Arkansas brine. Validates the entire DLE technology class.', dot: 'violet' },
+    { date: 'H2 2026', title: 'Tesla Megapack 3 / Megablock Shipments', desc: '28% energy density increase and 40% lower construction costs. Accelerates grid storage deployment.', dot: '' },
+    { date: 'Mar 2026', title: 'Pilbara P2000 Study Results', desc: 'Potential doubling of capacity outlook moves hard-rock lithium sentiment.', dot: 'cyan' },
+    { date: '2026-2027', title: 'Battery Packs Break $100/kWh', desc: 'Unlocks unsubsidized EV-ICE price parity. Mass-market adoption accelerates dramatically.', dot: 'amber' },
+    { date: 'Nov 2026', title: 'ISO-NE FERC Order 2222 Implementation', desc: 'Enables VPP participation in wholesale markets. Sunrun and distributed storage benefit.', dot: '' },
+    { date: '2027-2028', title: 'Toyota Solid-State Battery Deployment', desc: 'Sulfide-based solid-state in vehicles. Could disrupt NMC chemistry if scaling succeeds.', dot: 'violet' },
+    { date: '2028', title: 'Thacker Pass Full Production', desc: 'Largest US lithium deposit reaches commercial operation. De-risks LAC thesis.', dot: 'cyan' },
+    { date: '2030', title: '50% Global EV Penetration', desc: '40-50M annual EV sales. 180 GW US grid storage. 250M+ global EV fleet = 16+ TWh distributed storage.', dot: 'rose' },
+  ];
+  var container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  var risks = [
+    { icon: '\u26A0', level: 'high', title: 'Chinese Supply Chain Dominance', desc: 'China controls 70%+ of battery material processing, 66% of global BESS, and 55.6% of EV battery manufacturing. FEOC cannot eliminate this within 5 years.' },
+    { icon: '\u26A0', level: 'high', title: 'Lithium Price Volatility', desc: 'The 13x boom and 85% bust from 2020-2024 demonstrates extreme cyclicality. Curtailed mines can restart quickly at $15-18K/t, capping recovery.' },
+    { icon: '\u26A0', level: 'high', title: 'IRA / Policy Reversal Risk', desc: 'OBBBA tightened FEOC restrictions on 45X credits. Further legislative changes could reduce or eliminate clean energy tax credits entirely.' },
+    { icon: '\u26CF', level: 'medium', title: 'Solid-State Execution Risk', desc: 'No solid-state battery has achieved sustained commercial-scale production. Cost remains 4-8x conventional ($400-800/kWh vs $108). Binary outcomes for QS, SLDP.' },
+    { icon: '\u26CF', level: 'medium', title: 'Grid Interconnection Bottleneck', desc: '890 GW of storage in queues with 5+ year waits. Only 14-21% of queued projects reach commercial operation. Structural constraint persists.' },
+    { icon: '\u26CF', level: 'medium', title: 'Sodium-Ion Disruption', desc: 'CATL Naxtra Na-ion (175 Wh/kg, 20-30% cheaper than LFP) could cannibalize LFP demand. Benefits battery makers but threatens lithium miners.' },
+    { icon: '\u26CF', level: 'medium', title: 'Legacy OEM Retreat from BEVs', desc: 'Ford $19.5B write-off, GM $6B impairment. Pivot to hybrids could slow adoption, reduce battery demand, consolidate market among Asian players.' },
+    { icon: '\u26CF', level: 'medium', title: 'DLE Commercial Scaling Failure', desc: 'No DLE technology has achieved sustained commercial-scale production. Sorbent degradation, cost overruns, and competing approaches create selection risk.' },
+    { icon: '\u26CF', level: 'medium', title: 'Interest Rate & Capital Cost Pressure', desc: 'Grid storage and EV infrastructure are capital-intensive with long paybacks. Higher cost of capital pressures pre-revenue companies (QS, SLDP, LAC).' },
+    { icon: '\u26CF', level: 'medium', title: 'Geopolitical & Resource Nationalism', desc: 'Chile Codelco JV captures 70-85% of SQM Atacama margin. Rising royalties across Argentina, Mexico, Africa. BYD faces 35.3% EU tariffs.' },
+  ];
+  var container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    var item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  var picks = [
+    { ticker: 'ALB', color: '#00e676' },
+    { ticker: 'SQM', color: '#00e676' },
+    { ticker: 'TSLA', color: '#00e676' },
+    { ticker: 'FLNC', color: '#00e676' },
+    { ticker: 'BYD', color: '#00e676' },
+    { ticker: 'CATL', color: '#00e676' },
+    { ticker: 'EOSE', color: '#00bcd4' },
+    { ticker: 'PLS.AX', color: '#00bcd4' },
+    { ticker: 'RIO', color: '#00bcd4' },
+    { ticker: 'RUN', color: '#00bcd4' },
+    { ticker: 'LG Energy', color: '#00bcd4' },
+    { ticker: 'QS', color: '#ffab00' },
+    { ticker: 'LAC', color: '#ffab00' },
+    { ticker: 'RIVN', color: '#ffab00' },
+    { ticker: 'CHPT', color: '#ffab00' },
+  ];
+  var container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    var pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUBBLE & LOGIC — When History Rhymes at $4.5 Trillion</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f5f0e8;
+  --paper-dark: #ebe5d8;
+  --ink: #1a1510;
+  --ink-light: #4a4235;
+  --ink-faded: #8a8070;
+  --red: #c0392b;
+  --red-light: #e74c3c;
+  --red-bg: #c0392b10;
+  --blue: #1a3a5c;
+  --blue-light: #2980b9;
+  --green: #1a5c3a;
+  --green-light: #27ae60;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --amber: #e67e22;
+  --purple: #6c3483;
+  --serif: 'Playfair Display', Georgia, serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.75;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' type='fractalNoise'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 10000;
+}
+
+::selection { background: var(--red); color: var(--paper); }
+
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+
+/* ─── MASTHEAD ─── */
+.masthead {
+  text-align: center;
+  padding: 36px 24px 0;
+  border-bottom: 4px double var(--ink);
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.masthead-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 10px;
+}
+.masthead-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8vw, 110px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 6px;
+}
+.masthead-title .amp { font-style: italic; font-weight: 400; color: var(--red); }
+.mast-rule { width: 50px; height: 3px; background: var(--red); margin: 14px auto; }
+.masthead-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  padding-bottom: 16px;
+}
+
+/* ─── HEADLINE ─── */
+.headline-block {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 36px 28px 32px;
+  border-bottom: 1px solid var(--ink);
+}
+.headline-block h1 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 50px);
+  font-weight: 700;
+  line-height: 1.12;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.headline-block h1 .drop { color: var(--red); }
+.headline-deck {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--ink-light);
+  text-align: center;
+  max-width: 660px;
+  margin: 18px auto 0;
+  line-height: 1.65;
+}
+
+/* ─── SECTION STRUCTURE ─── */
+.report-section {
+  padding: 48px 0;
+  border-bottom: 1px solid #ccc5b8;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.section-title .hl-red { color: var(--red); }
+.section-title .hl-gold { color: var(--gold); }
+.section-title .hl-green { color: var(--green-light); }
+
+.prose {
+  font-size: 16.5px;
+  color: var(--ink-light);
+  max-width: 680px;
+  margin-bottom: 16px;
+  text-align: justify;
+  hyphens: auto;
+}
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* ─── CHART CONTAINERS ─── */
+.chart-panel {
+  background: white;
+  border: 1px solid #ddd5c8;
+  border-radius: 3px;
+  padding: 28px 24px 20px;
+  margin: 28px 0;
+  position: relative;
+}
+.chart-panel-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 4px;
+}
+.chart-panel-subtitle {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.chart-canvas-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* Side-by-side charts */
+.chart-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 28px 0;
+}
+
+/* ─── KEY METRIC STRIPS ─── */
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: #ccc5b8;
+  border: 1px solid #ccc5b8;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 28px 0;
+}
+.metric-cell {
+  background: white;
+  padding: 20px;
+  text-align: center;
+}
+.metric-val {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.metric-val.red { color: var(--red); }
+.metric-val.green { color: var(--green-light); }
+.metric-val.blue { color: var(--blue-light); }
+.metric-val.gold { color: var(--gold); }
+.metric-val.amber { color: var(--amber); }
+.metric-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-top: 6px;
+}
+.metric-context {
+  font-size: 12px;
+  color: var(--ink-faded);
+  margin-top: 4px;
+}
+
+/* ─── LEDGER TABLE ─── */
+.ledger-wrap {
+  margin: 28px 0;
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #ddd5c8;
+  border-radius: 3px;
+}
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ledger caption {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ink-faded);
+  padding: 16px 16px 8px;
+}
+.ledger th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  padding: 8px 14px;
+  border-bottom: 2px solid var(--ink);
+  text-align: left;
+  font-weight: 500;
+}
+.ledger td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #eee8dd;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-light);
+}
+.ledger tr:hover td { background: #faf6ef; }
+.ledger .row-label { font-family: var(--body); font-weight: 600; color: var(--ink); font-size: 13.5px; }
+.ledger .num-red { color: var(--red); font-weight: 600; }
+.ledger .num-green { color: var(--green-light); font-weight: 600; }
+.ledger .num-blue { color: var(--blue-light); font-weight: 600; }
+
+/* ─── CALLOUT / PULL QUOTE ─── */
+.pullquote {
+  margin: 36px 0;
+  padding: 28px 0;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+.pullquote blockquote {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.pullquote cite {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-style: normal;
+}
+
+/* ─── ANALYST NOTE ─── */
+.analyst-note {
+  background: var(--red-bg);
+  border-left: 3px solid var(--red);
+  padding: 16px 20px;
+  margin: 24px 0;
+  position: relative;
+  transform: rotate(-0.3deg);
+}
+.analyst-note::before {
+  content: '⚠';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: var(--red);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.analyst-note p {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--red);
+  line-height: 1.6;
+}
+
+/* ─── GRAVEYARD ─── */
+.graveyard {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 28px 24px;
+  margin: 28px 0;
+  border-radius: 3px;
+}
+.graveyard-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+.tombstone {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid #333;
+}
+.tombstone:last-child { border-bottom: none; }
+.tombstone-name { font-family: var(--serif); font-size: 14px; font-weight: 700; }
+.tombstone-detail { font-family: var(--mono); font-size: 10px; color: #aaa; }
+.tombstone-fall { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--red-light); }
+
+/* ─── VERDICT STRIP ─── */
+.verdict-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+  margin: 48px 0 0;
+}
+.verdict-col {
+  padding: 28px 24px;
+  border-right: 1px solid #ccc5b8;
+}
+.verdict-col:last-child { border-right: none; }
+.verdict-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.verdict-tag.bear { color: var(--red); }
+.verdict-tag.base { color: var(--gold); }
+.verdict-tag.bull { color: var(--green-light); }
+.verdict-col h3 { font-family: var(--serif); font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+.verdict-col p { font-size: 14px; color: var(--ink-light); line-height: 1.65; }
+
+/* ─── CLOSING QUOTE ─── */
+.closing {
+  padding: 56px 28px;
+  text-align: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.closing blockquote {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 34px);
+  font-style: italic;
+  line-height: 1.35;
+  max-width: 780px;
+  margin: 0 auto 16px;
+}
+.closing .rule { width: 40px; height: 3px; background: var(--red); margin: 18px auto; }
+.closing cite {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-style: normal;
+}
+
+.colophon {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px 28px;
+  border-top: 4px double var(--ink);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.colophon p {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--ink-faded);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 800px) {
+  .chart-duo { grid-template-columns: 1fr; }
+  .verdict-strip { grid-template-columns: 1fr; }
+  .verdict-col { border-right: none; border-bottom: 1px solid #ccc5b8; }
+  .metric-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead">
+  <div class="masthead-date">Portland, Oregon &bull; Friday, February 6, 2026 &bull; Special Report</div>
+  <div class="masthead-title">BUBBLE <span class="amp">&amp;</span> LOGIC</div>
+  <div class="mast-rule"></div>
+  <div class="masthead-sub">A data-driven comparative analysis of speculative manias</div>
+</header>
+
+<div class="headline-block">
+  <h1>$600 Billion a Year in AI Spending. $650 Billion in Revenue <span class="drop">That Doesn't Exist Yet.</span></h1>
+  <p class="headline-deck">The AI infrastructure boom rhymes with the dot-com era in structure but diverges in financial fundamentals. Here's what the data actually shows.</p>
+</div>
+
+<!-- ═══ KEY METRICS ═══ -->
+<div class="wrap">
+  <div class="metric-strip">
+    <div class="metric-cell">
+      <div class="metric-val red">$600B+</div>
+      <div class="metric-label">2026 AI Capex</div>
+      <div class="metric-context">Combined hyperscaler spend</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val amber">$650B</div>
+      <div class="metric-label">Revenue Gap</div>
+      <div class="metric-context">J.P. Morgan estimate</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val green">~45× P/E</div>
+      <div class="metric-label">NVIDIA TTM</div>
+      <div class="metric-context">vs. Cisco's 200× in 2000</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val blue">25 yrs</div>
+      <div class="metric-label">Cisco Recovery</div>
+      <div class="metric-context">Peak to new high</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val red">−78%</div>
+      <div class="metric-label">NASDAQ 2000–02</div>
+      <div class="metric-context">$5T destroyed</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val gold">34%</div>
+      <div class="metric-label">Mag 7 Weight</div>
+      <div class="metric-context">S&P 500 concentration</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 1: NVIDIA vs CISCO ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 01 — Valuation Forensics</div>
+    <div class="section-title">NVIDIA vs. Cisco: <span class="hl-red">The CEO's company at peak euphoria</span></div>
+
+    <p class="prose">Cisco peaked at $80.06 on March 27, 2000, briefly becoming the world's most valuable company at <strong>~$555 billion</strong>, trading at roughly 200–220× trailing earnings. CEO John Chambers proclaimed the internet was "the most significant economic shift since the Industrial Revolution." The stock then fell 89% and did not recover its 2000 high until <strong>December 2025</strong>.</p>
+
+    <p class="prose">NVIDIA sits at ~$4.5 trillion in market cap — 8× Cisco's nominal peak. But the valuation picture is fundamentally different. NVIDIA's trailing P/E of ~45× is <strong>one-fifth of Cisco's</strong> at its peak. The earnings are real, audited, and accelerating. The question is whether the growth rate can sustain the multiple.</p>
+
+    <!-- CHART: P/E Comparison -->
+    <div class="chart-duo">
+      <div class="chart-panel">
+        <div class="chart-panel-title">Exhibit A</div>
+        <div class="chart-panel-subtitle">Valuation at Peak Euphoria (P/E Ratio)</div>
+        <div class="chart-canvas-wrap"><canvas id="peChart" height="280"></canvas></div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-panel-title">Exhibit B</div>
+        <div class="chart-panel-subtitle">Revenue Scale Comparison ($B)</div>
+        <div class="chart-canvas-wrap"><canvas id="revenueChart" height="280"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <caption>Full Comparison — Cisco (March 2000) vs. NVIDIA (February 2026)</caption>
+        <thead><tr><th>Metric</th><th>Cisco 2000</th><th>NVIDIA 2026</th><th>Ratio</th></tr></thead>
+        <tbody>
+          <tr><td class="row-label">Market Cap</td><td class="num-red">$555B</td><td class="num-blue">$4,500B</td><td>8.1×</td></tr>
+          <tr><td class="row-label">Trailing P/E</td><td class="num-red">~200×</td><td class="num-green">~45×</td><td>0.23×</td></tr>
+          <tr><td class="row-label">Forward P/E</td><td class="num-red">N/M</td><td class="num-green">~25×</td><td>—</td></tr>
+          <tr><td class="row-label">Annual Revenue</td><td>$19B</td><td class="num-blue">$130.5B</td><td>6.9×</td></tr>
+          <tr><td class="row-label">Revenue Growth</td><td>55%</td><td class="num-green">62–69%</td><td>~1.2×</td></tr>
+          <tr><td class="row-label">Gross Margin</td><td>~65%</td><td class="num-green">73–75%</td><td>~1.1×</td></tr>
+          <tr><td class="row-label">Customer Concentration</td><td class="num-red">Telecom carriers</td><td class="num-red">~4 hyperscalers</td><td>Both high</td></tr>
+          <tr><td class="row-label">Peak Drawdown</td><td class="num-red">−89%</td><td>TBD</td><td>—</td></tr>
+          <tr><td class="row-label">Recovery Time</td><td class="num-red">25 years</td><td>TBD</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pullquote">
+      <blockquote>"Is there going to be a train wreck? Yes — for those that aren't able to translate the technology into a sustainable competitive advantage."</blockquote>
+      <cite>John Chambers, Former Cisco CEO — October 2025</cite>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 2: CAPEX ARMS RACE ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 02 — Capital Expenditure Analysis</div>
+    <div class="section-title">The Infrastructure Arms Race: <span class="hl-gold">$600 billion and counting</span></div>
+
+    <p class="prose">The dot-com telecom buildout consumed an estimated $500B–$2T between 1996–2001, financed almost entirely by debt. By 2001, <strong>95% of installed fiber was dark</strong>. Today's spending dwarfs that era — but the spenders generate enormous cash flows rather than running on borrowed money. The risk isn't insolvency; it's whether returns ever justify the outlay.</p>
+
+    <!-- CHART: Capex Comparison -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">Exhibit C</div>
+      <div class="chart-panel-subtitle">Hyperscaler AI Capital Expenditure — 2024 Actual vs. 2026 Projected ($B)</div>
+      <div class="chart-canvas-wrap"><canvas id="capexChart" height="320"></canvas></div>
+    </div>
+
+    <div class="analyst-note">
+      <p>Critical difference: dot-com telecoms funded buildouts with debt and went bankrupt. Today's hyperscalers fund capex with cash flow — Alphabet generated $132B in net income in 2025. But debt IS growing: hyperscalers raised $108B in bonds during 2025, and J.P. Morgan projects $1.5T in investment-grade bonds needed over five years.</p>
+    </div>
+
+    <!-- CHART: Revenue Gap -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">Exhibit D — The $600 Billion Question</div>
+      <div class="chart-panel-subtitle">AI Infrastructure Spending vs. AI Application Revenue ($B annual)</div>
+      <div class="chart-canvas-wrap"><canvas id="gapChart" height="300"></canvas></div>
+    </div>
+
+    <div class="pullquote">
+      <blockquote>"Our biggest fear would be a repeat of the telecom and fiber buildout experience, where the revenue curve failed to materialize at a pace that justified continued investment."</blockquote>
+      <cite>J.P. Morgan — AI Spending Analysis, 2025</cite>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 3: MARKET CONCENTRATION ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 03 — Concentration Risk</div>
+    <div class="section-title">The Great Narrowing: <span class="hl-red">concentration has shattered all records</span></div>
+
+    <p class="prose">The Magnificent Seven represent <strong>~34%</strong> of the S&P 500, having peaked near 37% in October 2025. The top 10 account for ~40–41% — roughly <strong>50% higher</strong> than the ~27% set during the dot-com peak. But the valuation story is more nuanced than raw weight suggests.</p>
+
+    <div class="chart-duo">
+      <div class="chart-panel">
+        <div class="chart-panel-title">Exhibit E</div>
+        <div class="chart-panel-subtitle">S&P 500 Top-10 Concentration (%)</div>
+        <div class="chart-canvas-wrap"><canvas id="concentrationChart" height="280"></canvas></div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-panel-title">Exhibit F</div>
+        <div class="chart-panel-subtitle">Weight vs. Earnings Share — Then & Now</div>
+        <div class="chart-canvas-wrap"><canvas id="weightEarningsChart" height="280"></canvas></div>
+      </div>
+    </div>
+
+    <div class="analyst-note">
+      <p>Michael Burry has taken a $1.1B short position against NVIDIA and Palantir, warning that passive indexing concentration could make any correction "more drawn-out" than the dot-com bust. Only Microsoft from the 2000 top 10 remains in today's top 10 — dominance is impermanent.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 4: CIRCULAR ECONOMY ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 04 — Revenue Quality</div>
+    <div class="section-title">The Money Carousel: <span class="hl-gold">circular financing inflates demand signals</span></div>
+
+    <p class="prose">A pattern of circular AI financing has emerged where hyperscalers invest in AI startups that immediately spend the capital on those same hyperscalers' cloud infrastructure. The revenue looks organic until you trace where it came from.</p>
+
+    <!-- CHART: Circular flows -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">Exhibit G</div>
+      <div class="chart-panel-subtitle">The Circular Flow — Invested vs. Returned to Cloud ($B)</div>
+      <div class="chart-canvas-wrap"><canvas id="circularChart" height="300"></canvas></div>
+    </div>
+
+    <p class="prose">Microsoft invested <strong>$13B</strong> in OpenAI, which spent <strong>$12.43B on Azure</strong> — a 96% recapture rate. Amazon invested $8B in Anthropic, which spent $2.66B on AWS — exceeding Anthropic's total revenue. Google invested ~$3B in Anthropic while signing a massive GCP deal. AI captured <strong>~50% of all global VC funding</strong> in 2025 ($202B), with the vast majority flowing to cloud compute.</p>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 5: THE WRECKAGE ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 05 — Historical Precedent</div>
+    <div class="section-title">The Dot-Com Wreckage: <span class="hl-red">a field guide to destruction & recovery</span></div>
+
+    <p class="prose">The NASDAQ fell 78% from its peak of 5,048 (March 10, 2000) to 1,114 (October 9, 2002), destroying approximately $5 trillion. The index did not recover until <strong>April 2015 — fifteen years later</strong>. At least 4,854 internet companies were acquired or shut down.</p>
+
+    <!-- CHART: Drawdown comparison -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">Exhibit H</div>
+      <div class="chart-panel-subtitle">Dot-Com Peak-to-Trough Drawdowns (%)</div>
+      <div class="chart-canvas-wrap"><canvas id="drawdownChart" height="320"></canvas></div>
+    </div>
+
+    <div class="graveyard">
+      <div class="graveyard-title">In Memoriam, 2000–2009</div>
+      <div class="tombstone"><div><div class="tombstone-name">WorldCom</div><div class="tombstone-detail">$9B fraud · $41B debt · Largest U.S. bankruptcy</div></div><div class="tombstone-fall">−99.9%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">Nortel Networks</div><div class="tombstone-detail">Was 35% of Toronto Stock Exchange</div></div><div class="tombstone-fall">−99.6%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">Amazon</div><div class="tombstone-detail">Survived with 10 months cash · Recovered 2009</div></div><div class="tombstone-fall">−95.1%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">Yahoo!</div><div class="tombstone-detail">Eventually sold to Verizon for parts</div></div><div class="tombstone-fall">−93.0%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">Cisco Systems</div><div class="tombstone-detail">$2.25B inventory write-off · Recovered Dec 2025</div></div><div class="tombstone-fall">−89.0%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">Intel</div><div class="tombstone-detail">Never recovered dot-com high</div></div><div class="tombstone-fall">−84.0%</div></div>
+      <div class="tombstone"><div><div class="tombstone-name">NASDAQ Composite</div><div class="tombstone-detail">$5T destroyed · 15-year recovery</div></div><div class="tombstone-fall">−78.0%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 6: GPU HOARDING & GARTNER ═══════ -->
+<div class="wrap">
+  <div class="report-section">
+    <div class="section-label">Section 06 — Leading Indicators</div>
+    <div class="section-title">GPU Hoarding, Price Collapse, <span class="hl-gold">& the Hype Cycle Turn</span></div>
+
+    <p class="prose">During 1999–2000, Cisco's supply chain suffered catastrophic double-ordering — a team needing 10,000 units triggered 30,000 in production. Today, Meta aimed for <strong>350,000 H100s</strong> (~$10B worth), NVIDIA reports a <strong>$500B order backlog</strong>, and companies hoard GPUs as strategic assets. But the first cracks are visible.</p>
+
+    <!-- CHART: GPU price collapse -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">Exhibit I</div>
+      <div class="chart-panel-subtitle">H100 Cloud Rental Price Collapse ($/GPU-hour)</div>
+      <div class="chart-canvas-wrap"><canvas id="gpuPriceChart" height="280"></canvas></div>
+    </div>
+
+    <div class="analyst-note">
+      <p>Microsoft canceled leases for up to 2 GW of data center capacity. AWS paused international colocation discussions. Over 300 new GPU cloud providers entered the market in 2025, driving aggressive price competition. Gartner's 2025 Hype Cycle moved generative AI into the Trough of Disillusionment — projecting 2–5 years before the Plateau of Productivity. Less than 30% of CEOs reported satisfaction with GenAI ROI.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ VERDICT ═══════ -->
+<div class="wrap">
+  <div class="verdict-strip">
+    <div class="verdict-col">
+      <div class="verdict-tag bear">Bear Case</div>
+      <h3>The Revenue Never Comes</h3>
+      <p>The $650B gap persists. Circular financing unwinds. Capex slashed. AI names correct 50–80%. Cisco's 25-year recovery becomes the template.</p>
+    </div>
+    <div class="verdict-col">
+      <div class="verdict-tag base">Base Case</div>
+      <h3>Rationalization, Not Ruin</h3>
+      <p>30–50% correction in AI-levered names. Capex growth decelerates but doesn't collapse. Transformation plays out over 10–15 years. Patient capital wins.</p>
+    </div>
+    <div class="verdict-col">
+      <div class="verdict-tag bull">Bull Case</div>
+      <h3>The Gap Closes</h3>
+      <p>Enterprise adoption hits escape velocity. Revenue accelerates faster than capex. NVIDIA's earnings justify valuation. The Trough is shallow and brief.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CLOSING ═══════ -->
+<div class="closing">
+  <blockquote>The people who made generational wealth from the internet didn't buy Pets.com in 1999 — they bought Amazon at $5.51 in 2001 after it had fallen 95%. The AI equivalent of that trade is probably still ahead of us.</blockquote>
+  <span class="rule"></span>
+  <cite>Risk management isn't pessimism. It's patience with a plan.</cite>
+</div>
+
+<div class="colophon wrap">
+  <p>Sources: NVIDIA IR, SEC filings, Sequoia Capital, J.P. Morgan, Gartner, IMF, Goldman Sachs, CNBC, Bank of England</p>
+  <p>For informational purposes only — Not financial advice — February 2026</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CHARTS
+     ═══════════════════════════════════════ -->
+<script>
+const paperBg = '#f5f0e8';
+const inkFaded = '#8a8070';
+const ink = '#1a1510';
+const red = '#c0392b';
+const redLight = '#e74c3c';
+const blue = '#2980b9';
+const green = '#27ae60';
+const gold = '#d4a017';
+const amber = '#e67e22';
+const purple = '#8e44ad';
+
+Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = inkFaded;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
+
+// ─── Exhibit A: P/E Comparison ───
+new Chart(document.getElementById('peChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Trailing P/E', 'Forward P/E'],
+    datasets: [
+      {
+        label: 'Cisco 2000',
+        data: [210, null],
+        backgroundColor: red + 'cc',
+        borderColor: red,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.6,
+      },
+      {
+        label: 'NVIDIA 2026',
+        data: [45, 25],
+        backgroundColor: blue + 'cc',
+        borderColor: blue,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + '×' } }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => v + '×' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── Exhibit B: Revenue Scale ───
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['At Peak/Current', 'Projected Next Year'],
+    datasets: [
+      {
+        label: 'Cisco 2000',
+        data: [19, 22],
+        backgroundColor: red + 'cc',
+        borderColor: red,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.6,
+      },
+      {
+        label: 'NVIDIA 2026',
+        data: [130.5, 213],
+        backgroundColor: green + 'cc',
+        borderColor: green,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => '$' + v + 'B' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── Exhibit C: Capex ───
+new Chart(document.getElementById('capexChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Amazon', 'Alphabet', 'Meta', 'Microsoft'],
+    datasets: [
+      {
+        label: '2024 Actual',
+        data: [83, 52.5, 39.2, 55.7],
+        backgroundColor: inkFaded + '99',
+        borderColor: inkFaded,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.5,
+      },
+      {
+        label: '2025 Guided',
+        data: [125, 91, 71, 80],
+        backgroundColor: gold + 'aa',
+        borderColor: gold,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.5,
+      },
+      {
+        label: '2026 Projected',
+        data: [200, 180, 125, 110],
+        backgroundColor: red + 'cc',
+        borderColor: red,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => '$' + v + 'B' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── Exhibit D: Revenue Gap ───
+new Chart(document.getElementById('gapChart'), {
+  type: 'bar',
+  data: {
+    labels: ['AI Infrastructure Spending\n(Annual)', 'Revenue Needed\nfor 10% Return (JPM)', 'Actual Enterprise\nAI Revenue', 'Total AI Startup\nRevenue (est.)'],
+    datasets: [{
+      data: [600, 650, 37, 75],
+      backgroundColor: [red + 'cc', amber + 'cc', green + 'cc', blue + '99'],
+      borderColor: [red, amber, green, blue],
+      borderWidth: 1,
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => '$' + v + 'B' }
+      },
+      y: {
+        grid: { display: false },
+        ticks: { font: { size: 10 } }
+      }
+    }
+  }
+});
+
+// ─── Exhibit E: Concentration ───
+new Chart(document.getElementById('concentrationChart'), {
+  type: 'bar',
+  data: {
+    labels: ['1990', '1995', '2000\n(Dot-Com)', '2005', '2010', '2015', '2020', '2025\n(AI Era)'],
+    datasets: [{
+      label: 'Top 10 % of S&P 500',
+      data: [18, 20, 27, 19, 20, 21, 28, 40],
+      backgroundColor: ctx => ctx.dataIndex === 7 ? red + 'dd' : ctx.dataIndex === 2 ? amber + 'bb' : inkFaded + '55',
+      borderColor: ctx => ctx.dataIndex === 7 ? red : ctx.dataIndex === 2 ? amber : inkFaded,
+      borderWidth: 1,
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 50,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => v + '%' }
+      },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ─── Exhibit F: Weight vs Earnings ───
+new Chart(document.getElementById('weightEarningsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2000 (Dot-Com)', '2025 (AI Era)'],
+    datasets: [
+      {
+        label: 'Index Weight %',
+        data: [27, 40],
+        backgroundColor: red + 'bb',
+        borderColor: red,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.5,
+      },
+      {
+        label: 'Earnings Share %',
+        data: [18, 32],
+        backgroundColor: green + 'bb',
+        borderColor: green,
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 50,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => v + '%' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── Exhibit G: Circular Flows ───
+new Chart(document.getElementById('circularChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Microsoft → OpenAI', 'OpenAI → Azure', 'Amazon → Anthropic', 'Anthropic → AWS', 'Google → Anthropic', 'Anthropic → GCP'],
+    datasets: [{
+      label: 'Amount ($B)',
+      data: [13, 12.43, 8, 2.66, 3, null],
+      backgroundColor: ctx => [0,2,4].includes(ctx.dataIndex) ? blue + 'bb' : red + 'bb',
+      borderColor: ctx => [0,2,4].includes(ctx.dataIndex) ? blue : red,
+      borderWidth: 1,
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => (ctx.raw ? '$' + ctx.raw + 'B' : 'Tens of $B (reported)') } }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => '$' + v + 'B' }
+      },
+      y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ─── Exhibit H: Drawdowns ───
+new Chart(document.getElementById('drawdownChart'), {
+  type: 'bar',
+  data: {
+    labels: ['WorldCom', 'Nortel', 'Amazon', 'Yahoo!', 'Cisco', 'Intel', 'NASDAQ'],
+    datasets: [{
+      label: 'Peak-to-Trough Decline (%)',
+      data: [-99.9, -99.6, -95.1, -93, -89, -84, -78],
+      backgroundColor: ctx => {
+        const v = ctx.raw;
+        if (v < -95) return '#7b241c';
+        if (v < -90) return red;
+        if (v < -85) return redLight;
+        return amber;
+      },
+      borderColor: '#1a1510',
+      borderWidth: 1,
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.raw + '%' } }
+    },
+    scales: {
+      x: {
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => v + '%' },
+        min: -110,
+        max: 0
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ─── Exhibit I: GPU Price Collapse ───
+new Chart(document.getElementById('gpuPriceChart'), {
+  type: 'line',
+  data: {
+    labels: ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023', 'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+    datasets: [{
+      label: 'H100 Cloud Rental ($/GPU-hr)',
+      data: [10, 9.5, 8.5, 7, 5.5, 4.8, 4.2, 3.8, 3.5, 3.0, 2.5, 2.2],
+      borderColor: red,
+      backgroundColor: red + '22',
+      fill: true,
+      tension: 0.35,
+      pointBackgroundColor: red,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 2.5,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e0dbd0' },
+        ticks: { callback: v => '$' + v }
+      },
+      x: {
+        grid: { color: '#eee8dd' },
+        ticks: { font: { size: 9 } }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #050a08;
+  --bg-card: rgba(8, 18, 12, 0.90);
+  --bg-card-hover: rgba(12, 28, 18, 0.94);
+  --bg-glass: rgba(255,255,255,0.025);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(0,255,136,0.18);
+  --text-primary: #d8f0e0;
+  --text-secondary: #7a9a88;
+  --text-muted: #3a5a48;
+  --accent-green: #00ff88;
+  --accent-cyan: #00e5ff;
+  --accent-amber: #ffc107;
+  --accent-violet: #b388ff;
+  --accent-rose: #ff3d71;
+  --accent-blue: #448aff;
+  --accent-lime: #76ff03;
+  --accent-emerald: #00e676;
+  --accent-teal: #1de9b6;
+  --glow-green: 0 0 30px rgba(0,255,136,0.12);
+  --glow-cyan: 0 0 30px rgba(0,229,255,0.10);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-green) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#matrixfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-green);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent-green); } 50% { opacity: 0.3; box-shadow: none; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-cyan) 50%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--text-secondary);
+  max-width: 700px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stats.six-col { grid-template-columns: repeat(3, 1fr); }
+.hero-stat {
+  background: var(--bg-card);
+  padding: 24px 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* NAV */
+.sticky-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(5,10,8,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+.sticky-nav.visible { transform: translateY(0); }
+.sticky-nav .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  overflow-x: auto;
+}
+.sticky-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+.sticky-nav a:hover { color: var(--accent-green); }
+.sticky-nav .nav-logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-green);
+  font-size: 14px;
+  margin-right: 16px;
+}
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-green);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-green); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* WATERFALL BARS */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+
+/* AREA CHART */
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-green); }
+.company-card.tier-2::after { background: var(--accent-cyan); }
+.company-card.tier-3::after { background: var(--accent-amber); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-green); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.high { background: rgba(0,255,136,0.1); color: var(--accent-green); border: 1px solid rgba(0,255,136,0.25); }
+.tier-badge.medium { background: rgba(0,229,255,0.1); color: var(--accent-cyan); border: 1px solid rgba(0,229,255,0.25); }
+.tier-badge.speculative { background: rgba(255,193,7,0.1); color: var(--accent-amber); border: 1px solid rgba(255,193,7,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-green); color: var(--text-primary); }
+.filter-pill.active { background: rgba(0,255,136,0.1); border-color: var(--accent-green); color: var(--accent-green); }
+
+/* DATA TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.data-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.data-table th:last-child, .data-table td:last-child { text-align: right; }
+.data-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.data-table tr:hover td { background: rgba(255,255,255,0.04); }
+.data-table td:first-child { border-radius: 8px 0 0 8px; }
+.data-table td:last-child { border-radius: 0 8px 8px 0; }
+.data-table .ticker-cell { font-family: var(--font-mono); font-weight: 600; color: var(--accent-cyan); }
+
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan), var(--accent-violet));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(0,255,136,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(255,193,7,0.4); }
+.timeline-dot.violet { background: var(--accent-violet); box-shadow: 0 0 12px rgba(179,136,255,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(0,229,255,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(255,61,113,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-green); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(255,61,113,0.2); background: rgba(255,61,113,0.03); }
+.risk-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(255,61,113,0.1); }
+.risk-icon.medium { background: rgba(255,193,7,0.1); }
+.risk-icon.low-medium { background: rgba(0,229,255,0.1); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(0,255,136,0.04), rgba(179,136,255,0.04));
+  border: 1px solid rgba(0,255,136,0.12);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 660px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-green); background: rgba(0,255,136,0.05); }
+
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content {
+  padding: 0 28px 24px;
+  columns: 2;
+  column-gap: 40px;
+}
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-green); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+.sources-section .source-group a { color: var(--accent-cyan); text-decoration: none; transition: var(--transition); }
+.sources-section .source-group a:hover { color: var(--accent-green); text-decoration: underline; }
+
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+
+/* SECTION DIVIDER */
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+
+/* HEATMAP TABLE */
+.heatmap-table { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.heatmap-table th {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-muted); font-weight: 600; padding: 10px 14px; text-align: left;
+}
+.heatmap-table td {
+  padding: 12px 14px; font-size: 13px; border-radius: 8px;
+  font-family: var(--font-mono); font-weight: 500;
+  transition: var(--transition); text-align: center;
+}
+.heatmap-table td:first-child { text-align: left; font-family: var(--font-sans); font-weight: 600; }
+.heatmap-table tr:hover td { filter: brightness(1.2); }
+.heatmap-cell { position: relative; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats.six-col { grid-template-columns: repeat(2, 1fr); }
+  .hero-stat .value { font-size: 1.6rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+  .heatmap-table { font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrixfield"></canvas>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-logo">&#x1f6e1; CYBER</span>
+    <a href="#overview">Overview</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#companies">Companies</a>
+    <a href="#catalysts">Catalysts</a>
+    <a href="#risks">Risks</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Cybersecurity</span> Imperative</h1>
+  <p class="subtitle">AI-powered attacks demand AI-powered defense. Platform consolidation is creating winner-take-most dynamics. $235B+ market with a $2T expanded TAM &mdash; and 3.5M unfilled positions globally.</p>
+  <div class="hero-stats six-col">
+    <div class="hero-stat">
+      <div class="value" data-count="272" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">Global Market (2025)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="2" data-prefix="$" data-suffix="T">$0</div>
+      <div class="label">AI-Expanded TAM</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="84" data-prefix="$" data-suffix="B+">$0</div>
+      <div class="label">2025 M&amp;A Activity</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="420" data-suffix="+">0</div>
+      <div class="label">M&amp;A Deals (2025)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="3.5" data-suffix="M+" data-decimal="1">0</div>
+      <div class="label">Unfilled Positions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="15.1" data-prefix="$" data-suffix="B" data-decimal="1">$0</div>
+      <div class="label">Pentagon Cyber FY26</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: MARKET OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">A Structural Transformation</h2>
+      <p class="section-desc">Three converging forces reshape cybersecurity: AI-powered attacks demanding AI-powered defense, platform consolidation replacing point solutions, and identity replacing the network perimeter.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Sub-Segment Market Size (2025)</h3>
+        <div class="bar-chart" id="market-chart">
+          <div class="gridlines" id="market-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Fastest-Growing Segments (CAGR)</h3>
+        <div class="cost-waterfall" id="cagr-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market Segment Heatmap</h3>
+      <table class="heatmap-table">
+        <thead>
+          <tr><th>Segment</th><th>2025 Size</th><th>2030 Forecast</th><th>CAGR</th><th>Growth Rating</th></tr>
+        </thead>
+        <tbody id="heatmap-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px; margin-top: 24px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.1rem; font-weight: 500; max-width: 760px; margin: 0 auto; line-height: 1.8;">
+        We are in a <strong style="color: var(--accent-green);">generational consolidation wave</strong> as platforms absorb adjacent markets. The winners &mdash; PANW, CRWD, and Microsoft &mdash; are concentrating value while <strong style="color: var(--accent-amber);">regulatory mandates convert discretionary budgets into non-discretionary spending</strong>. Identity is the new perimeter. AI is the new differentiator.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: SECTOR BREAKDOWN -->
+<section id="sectors">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Sector Breakdown</div>
+      <h2 class="section-title">Four Pillars of Cyber Investment</h2>
+      <p class="section-desc">Enterprise security, identity &amp; access management, cloud security, and defense/gov cyber &mdash; each with distinct dynamics and investment profiles.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Sector Revenue Allocation</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-sectors"></svg>
+          <div class="donut-legend" id="donut-sectors-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Platform Metrics</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">PANW XSIAM</span><div style="font-size:0.75rem;color:var(--text-muted);">~400 customers at $1M+ ARR</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">60% MTTR</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">CRWD Falcon Flex</span><div style="font-size:0.75rem;color:var(--text-muted);">Dynamic module allocation</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$1.35B ARR</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Vendor Consolidation</span><div style="font-size:0.75rem;color:var(--text-muted);">62% of enterprises actively consolidating</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">45% &lt;15</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(179,136,255,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Machine:Human IDs</span><div style="font-size:0.75rem;color:var(--text-muted);">Non-human identities accelerating</div></div>
+            <span class="inline-stat" style="color:var(--accent-violet);">17:1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enterprise Security -->
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-green);display:inline-block;"></span>
+        Enterprise Security &mdash; $60-80B
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div class="metric"><div class="metric-label">EDR/XDR</div><div class="metric-value" style="color: var(--accent-cyan);">$5.1B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">24.8% CAGR to $15.5B</div></div>
+        <div class="metric"><div class="metric-label">NGFW</div><div class="metric-value" style="color: var(--accent-green);">$5.9-6.7B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">FortiGate refresh driver</div></div>
+        <div class="metric"><div class="metric-label">MDR</div><div class="metric-value">~$5-6B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">21-24% CAGR (talent shortage)</div></div>
+        <div class="metric"><div class="metric-label">Vuln. Mgmt</div><div class="metric-value" style="color: var(--accent-amber);">$16-18B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Top 5 hold 56% share</div></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">The core operational stack is shifting from best-of-breed to integrated platforms. AI-powered copilots (Charlotte AI, Purple AI, XSIAM) are early differentiators. SIEM is being disrupted by AI-native platforms and hyperscaler offerings.</p>
+    </div>
+
+    <!-- Identity & Access -->
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-cyan);display:inline-block;"></span>
+        Identity &amp; Access Management &mdash; $23-26B
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div class="metric"><div class="metric-label">PAM</div><div class="metric-value" style="color: var(--accent-green);">$4.3-5.5B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Fastest IAM: 20-24% CAGR</div></div>
+        <div class="metric"><div class="metric-label">IGA</div><div class="metric-value" style="color: var(--accent-cyan);">$9.3-9.7B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Compliance-driven: 13.8% CAGR</div></div>
+        <div class="metric"><div class="metric-label">Passkey Adoption</div><div class="metric-value">74%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Consumer awareness rate</div></div>
+        <div class="metric"><div class="metric-label">PANW/CyberArk</div><div class="metric-value" style="color: var(--accent-amber);">$25B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Identity-network convergence</div></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Identity has become the foundational control plane. Machine identities outnumber human 17:1 and accelerating with agentic AI. PANW's CyberArk acquisition signals identity-network convergence. Post-quantum migration creates multi-year certificate upgrade demand.</p>
+    </div>
+
+    <!-- Cloud Security -->
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-violet);display:inline-block;"></span>
+        Cloud Security &mdash; $35.8B (2024)
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div class="metric"><div class="metric-label">SASE/SSE</div><div class="metric-value" style="color: var(--accent-green);">$13-15.5B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">23-29% CAGR to $32-45B</div></div>
+        <div class="metric"><div class="metric-label">CNAPP</div><div class="metric-value" style="color: var(--accent-cyan);">$10-15B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Google/Wiz: $32B validation</div></div>
+        <div class="metric"><div class="metric-label">API Security</div><div class="metric-value" style="color: var(--accent-amber);">$1.25B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">29.7% CAGR (109% attack rise)</div></div>
+        <div class="metric"><div class="metric-label">Sovereign Cloud</div><div class="metric-value" style="color: var(--accent-violet);">$169B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">By 2028 (Gartner, 36% CAGR)</div></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Full SD-WAN/SSE convergence expected by 2027. Google's $32B Wiz acquisition validates CNAPP at 45-65x ARR and concentrates exposure in CRWD and PANW. DSPM and API security being absorbed through acquisitions.</p>
+    </div>
+
+    <!-- Defense/Gov -->
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-amber);display:inline-block;"></span>
+        Defense &amp; Government Cyber &mdash; $25B+
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div class="metric"><div class="metric-label">Pentagon Cyber</div><div class="metric-value" style="color: var(--accent-green);">$15.1B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">FY2026 cyberspace activities</div></div>
+        <div class="metric"><div class="metric-label">CMMC Impacted</div><div class="metric-value" style="color: var(--accent-cyan);">220K+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Contractors need certification</div></div>
+        <div class="metric"><div class="metric-label">CISA Cut</div><div class="metric-value" style="color: var(--accent-rose);">-$146M</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Civilian cyber cuts (5%)</div></div>
+        <div class="metric"><div class="metric-label">JWCC</div><div class="metric-value" style="color: var(--accent-violet);">$9B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Classified cloud contract</div></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Defense spending surges while civilian faces cuts. CMMC 2.0 creates multi-billion-dollar compliance market. Only ~200 of 80,000 needed C3PAO assessments complete. China's Volt Typhoon pre-positioned in US critical infrastructure for 5+ years.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From platform leaders to defense contractors to speculative turnarounds. Filter by conviction tier to explore.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All (20)</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1 &mdash; Core</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2 &mdash; Growth</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3 &mdash; Speculative</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: CATALYST TIMELINE -->
+<section id="catalysts">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Near-term events, structural mid-term shifts, and long-term secular trends that shape the cybersecurity investment landscape.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: RISK ASSESSMENT -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Assessment</div>
+      <h2 class="section-title">Threat Model for Investors</h2>
+      <p class="section-desc">Ten risks that could disrupt the thesis, from valuation compression to hyperscaler bundling and AI commoditization.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Position in platform winners and defense leaders. Monitor CMMC compliance spending for timing. Watch AI copilot monetization as the key proof point for pricing power. Identity is the highest-growth structural sub-sector.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Market Research &amp; Sizing</h4>
+          <ul>
+            <li><a href="https://www.fortunebusinessinsights.com">Fortune Business Insights</a>, <a href="https://www.grandviewresearch.com">Grand View Research</a>, <a href="https://www.marketsandmarkets.com">MarketsandMarkets</a> &mdash; Cybersecurity Market Size</li>
+            <li><a href="https://cybersecurityventures.com">Cybersecurity Ventures</a> &mdash; 2026 Market Report Predictions</li>
+            <li>McKinsey &mdash; AI Expanding Cybersecurity TAM to $2T</li>
+            <li>Mordor Intelligence &mdash; EDR, API Security, Vulnerability Management reports</li>
+            <li>Precedence Research &mdash; NGFW, IAM, PAM, CSPM forecasts</li>
+            <li>Gartner &mdash; Platform Consolidation Survey, SSE Magic Quadrant, SASE Forecast</li>
+            <li>Deltek &mdash; Federal Cybersecurity Market 2026-2028</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Company Filings &amp; Earnings</h4>
+          <ul>
+            <li>CrowdStrike Q3 FY2026, FY2025 Financial Results</li>
+            <li>Palo Alto Networks FY2025, CyberArk Acquisition</li>
+            <li>Fortinet Q4 and FY2025 Results</li>
+            <li>SentinelOne Q3 FY2026, Purple AI</li>
+            <li>Zscaler Q1 FY2026, Cloudflare Q3 2025</li>
+            <li>Okta FY2025, SailPoint Q3 FY2026</li>
+            <li>CyberArk Record FY2025 Results</li>
+            <li>Palantir Q4 2025, Booz Allen Hamilton Q2 FY2026</li>
+            <li>CACI FY2025, Leidos Q2 2025, Parsons</li>
+            <li>Netskope IPO, JFrog Q3 2025</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>M&amp;A &amp; Deals</h4>
+          <ul>
+            <li>Google/Wiz $32B &mdash; Largest cybersecurity deal ever</li>
+            <li>Palo Alto/CyberArk $25B &mdash; Identity-network convergence</li>
+            <li>Cisco/Splunk $28B &mdash; Integration in progress</li>
+            <li>Sophos/Secureworks $859M</li>
+            <li>Zscaler/Red Canary ~$675M</li>
+            <li>Noname Security/Akamai $450M</li>
+            <li>Momentum Cyber &mdash; 2025 M&amp;A Report</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Regulatory &amp; Policy</h4>
+          <ul>
+            <li>SEC Cybersecurity Disclosure Rules (4-day requirement)</li>
+            <li>CMMC 2.0 Timeline and Compliance (Phase 1 live Nov 2025)</li>
+            <li>FedRAMP 20x launch (Feb 2026)</li>
+            <li>CIRCIA Final Rule (May 2026) &mdash; 316K entities</li>
+            <li>NIST Post-Quantum Cryptography Standards (Aug 2024)</li>
+            <li>EU CRA / SBOM / eIDAS 2.0</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Threat Landscape</h4>
+          <ul>
+            <li>Volt Typhoon Advisory (CISA) &mdash; 5+ years in US critical infrastructure</li>
+            <li>Salt Typhoon &mdash; US telecom carrier breaches</li>
+            <li>Sandworm 2025 &mdash; New wiper malware against Ukraine</li>
+            <li>Pentagon $15.1B Cyber FY2026 (military.com, congress.gov)</li>
+            <li>BeyondTrust Treasury Breach (Dec 2024)</li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Industry Analysis</h4>
+          <ul>
+            <li>Zero Trust Adoption Statistics (10% mature by 2026)</li>
+            <li>FIDO/Passkey Adoption Reports (74% consumer awareness)</li>
+            <li>Microsoft Security Copilot / Entra</li>
+            <li>Platform Consolidation 2026 (Gartner: 62% consolidating)</li>
+            <li>Sovereign Cloud 2026 ($169B by 2028)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Cybersecurity Investment Thesis &mdash; 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// MATRIX-STYLE BACKGROUND
+(function() {
+  var canvas = document.getElementById('matrixfield');
+  var ctx = canvas.getContext('2d');
+  var w, h;
+  var nodes = [], edges = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    nodes = [];
+    edges = [];
+    var count = Math.min(Math.floor(w * h / 9000), 180);
+    for (var i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.3,
+        a: Math.random() * 0.35 + 0.04,
+        pulse: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.001 + 0.0003
+      });
+    }
+    for (var i = 0; i < nodes.length; i++) {
+      for (var j = i + 1; j < nodes.length; j++) {
+        var dx = nodes[i].x - nodes[j].x;
+        var dy = nodes[i].y - nodes[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140 && Math.random() < 0.25) {
+          edges.push({ a: i, b: j, dist: dist });
+        }
+      }
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (var k = 0; k < edges.length; k++) {
+      var e = edges[k];
+      var a = nodes[e.a], b = nodes[e.b];
+      var flicker = Math.sin(t * 0.001 + e.a) * 0.3 + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(0, 255, 136, ' + (0.025 * flicker) + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+    for (var k = 0; k < nodes.length; k++) {
+      var n = nodes[k];
+      var flicker = Math.sin(t * n.speed * 1000 + n.pulse) * 0.4 + 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 255, 136, ' + (n.a * flicker) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize();
+  init();
+  requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(function(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '';
+    var isDecimal = el.dataset.decimal;
+    var duration = 2000;
+    var start = performance.now();
+
+    function update(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      if (isDecimal) {
+        el.textContent = prefix + current.toFixed(parseInt(isDecimal)) + suffix;
+      } else {
+        el.textContent = prefix + Math.round(current) + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+var revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+// STICKY NAV
+(function() {
+  var nav = document.getElementById('sticky-nav');
+  var hero = document.querySelector('.hero');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > hero.offsetHeight - 100) {
+      nav.classList.add('visible');
+    } else {
+      nav.classList.remove('visible');
+    }
+  });
+})();
+
+// MARKET SIZE BAR CHART
+(function() {
+  var data = [
+    { label: 'Enterprise', value: 80, color: 'var(--accent-green)' },
+    { label: 'Cloud Sec', value: 36, color: 'var(--accent-violet)' },
+    { label: 'Zero Trust', value: 38, color: 'var(--accent-cyan)' },
+    { label: 'IAM', value: 26, color: 'var(--accent-amber)' },
+    { label: 'Fed Cyber', value: 25, color: 'var(--accent-blue)' },
+    { label: 'Vuln Mgmt', value: 18, color: 'var(--accent-rose)' },
+    { label: 'SASE', value: 15, color: 'var(--accent-teal)' }
+  ];
+  var max = 90;
+  var chart = document.getElementById('market-chart');
+  var gridlines = document.getElementById('market-gridlines');
+
+  [90, 60, 30, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var pct = (d.value / max * 100);
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// CAGR WATERFALL
+(function() {
+  var data = [
+    { name: 'API Security', cost: 29.7, color: 'var(--accent-green)' },
+    { name: 'EDR/XDR', cost: 24.8, color: 'var(--accent-cyan)' },
+    { name: 'SASE/SSE', cost: 26, color: 'var(--accent-violet)' },
+    { name: 'PAM', cost: 22, color: 'var(--accent-amber)' },
+    { name: 'MDR', cost: 22.5, color: 'var(--accent-blue)' },
+    { name: 'CNAPP', cost: 22.5, color: 'var(--accent-teal)' },
+    { name: 'Zero Trust', cost: 17.7, color: 'var(--accent-rose)' }
+  ];
+  var max = 30;
+  var container = document.getElementById('cagr-waterfall');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.cost + '%</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// HEATMAP TABLE
+(function() {
+  var segments = [
+    { name: 'SASE/SSE', size: '$13-15.5B', forecast: '$32-45B', cagr: '23-29%', rating: 5 },
+    { name: 'EDR/XDR', size: '$5.1B', forecast: '$15.5B', cagr: '24.8%', rating: 5 },
+    { name: 'API Security', size: '$1.25B', forecast: '$4.6B', cagr: '29.7%', rating: 5 },
+    { name: 'CNAPP', size: '$10-15B', forecast: '$28B+', cagr: '20-25%', rating: 4 },
+    { name: 'PAM', size: '$4.3-5.5B', forecast: '$20-31B', cagr: '20-24%', rating: 4 },
+    { name: 'MDR', size: '~$5-6B', forecast: '$8.4-11.8B', cagr: '21-24%', rating: 4 },
+    { name: 'Zero Trust', size: '$38.4B', forecast: '$86.6B', cagr: '17.7%', rating: 3 },
+    { name: 'IGA', size: '$9.3-9.7B', forecast: '$23-24B', cagr: '13.8-14.5%', rating: 3 },
+    { name: 'Enterprise Total', size: '$60-80B', forecast: 'Above avg', cagr: '12-15%', rating: 3 },
+    { name: 'NGFW', size: '$5.9-6.7B', forecast: '$12-17B', cagr: '11-13%', rating: 2 },
+    { name: 'Vuln. Mgmt', size: '$16-18B', forecast: '$24B', cagr: '6.5-8%', rating: 2 }
+  ];
+
+  var tbody = document.getElementById('heatmap-tbody');
+  var colors = ['', 'rgba(0,229,255,0.08)', 'rgba(255,193,7,0.10)', 'rgba(0,255,136,0.12)', 'rgba(0,255,136,0.18)', 'rgba(0,255,136,0.25)'];
+  var labels = ['', 'Low', 'Moderate', 'High', 'Very High', 'Explosive'];
+  var textColors = ['', 'var(--accent-cyan)', 'var(--accent-amber)', 'var(--accent-green)', 'var(--accent-green)', 'var(--accent-lime)'];
+
+  segments.forEach(function(s) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + s.name + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;">' + s.size + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;">' + s.forecast + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;color:' + textColors[s.rating] + ';">' + s.cagr + '</td>' +
+      '<td style="background:' + colors[s.rating] + ';color:' + textColors[s.rating] + ';font-weight:600;font-size:12px;letter-spacing:0.5px;">' + labels[s.rating] + '</td>';
+    tbody.appendChild(tr);
+  });
+})();
+
+// DONUT: SECTOR ALLOCATION
+(function() {
+  var segments = [
+    { label: 'Enterprise Security', value: 42, color: '#00ff88' },
+    { label: 'Cloud Security', value: 20, color: '#b388ff' },
+    { label: 'Identity & Access', value: 14, color: '#00e5ff' },
+    { label: 'Defense/Gov Cyber', value: 14, color: '#ffc107' },
+    { label: 'Other/Emerging', value: 10, color: '#ff3d71' }
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-sectors');
+  var legend = document.getElementById('donut-sectors-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(5,10,8,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#d8f0e0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '16');
+  text.setAttribute('font-weight', '800');
+  text.textContent = '$272B';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#3a5a48');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'Total Market 2025';
+  svg.appendChild(sub);
+})();
+
+// COMPANY CARDS
+(function() {
+  var companies = [
+    { ticker: 'PANW', name: 'Palo Alto Networks', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$138B', rev: '$9.2B', growth: '15% rev / 29% NGS ARR', thesis: 'Most ambitious consolidation play: network + cloud + SOC + identity via CyberArk. $5.9B NGS ARR, 120% NRR for platform customers. Near-term catalyst: CyberArk close.' },
+    { ticker: 'CRWD', name: 'CrowdStrike', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$105B', rev: '$3.95B*', growth: '29% rev / 23% ARR', thesis: 'Dominant endpoint/XDR with strongest module adoption. Charlotte AI and Falcon Flex ($1.35B ARR, 200%+ growth). Post-outage recovery validates brand resilience. ~21x ARR requires execution.' },
+    { ticker: 'FTNT', name: 'Fortinet', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$60B', rev: '$6.80B', growth: '15%', thesis: 'Best margin profile (25%+ operating margins). FortiGate refresh cycle provides 2026-2027 visibility. SASE expansion at 40% billings growth. Most reasonable mega-cap at ~8.5x rev.' },
+    { ticker: 'ZS', name: 'Zscaler', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$27B', rev: '$3.2B+ ARR', growth: '23-25%', thesis: 'Pure-play zero trust leader. Cloud-native architecture is genuine competitive moat. Significant de-rating from peak provides entry. FCF positive at 27% margin.' },
+    { ticker: 'LDOS', name: 'Leidos', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$23.5B', rev: '~$17.3B TTM', growth: 'Mid-single digits', thesis: 'Largest defense IT/cyber backlog ($46.2B). NorthStar 2030 strategy targeting cyber/AI. $700M+ in cyber wins. Most diversified defense cyber exposure.' },
+    { ticker: 'CACI', name: 'CACI International', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$11.3B', rev: '$8.63B (FY25)', growth: '12.6%', thesis: 'Best-in-class organic growth, EW leadership ($2B rev), massive backlog ($33.9B). No meaningful civil exposure risk. Cleanest defense cyber growth story.' },
+    { ticker: 'NET', name: 'Cloudflare', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$76B', rev: '$2.14B (FY25)', growth: '28-31%', thesis: 'Unique position spanning security + CDN + edge compute + developer platform. Workers AI creates AI inference opportunity. Risk: ~36x revenue, breadth may limit depth.' },
+    { ticker: 'OKTA', name: 'Okta', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$15B', rev: '$2.84B TTM', growth: '10-12%', thesis: 'Post-breach recovery at ~5.3x forward rev offers value. AI agent identity ($200M+ ARR) is genuine differentiator vs. Microsoft. Auth0 for agentic AI.' },
+    { ticker: 'NTSK', name: 'Netskope', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$8.6B', rev: '$754M ARR', growth: '34%', thesis: 'Fastest-growing public SASE name. Fresh IPO with strong enterprise traction. Path to profitability is key watchpoint.' },
+    { ticker: 'S', name: 'SentinelOne', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$5.2B', rev: '~$0.86B*', growth: '23%', thesis: 'AI-native challenger at ~5x ARR (significant CrowdStrike discount). First full year of positive FCF. Purple AI FedRAMP-High. Non-endpoint >50% of bookings.' },
+    { ticker: 'ESTC', name: 'Elastic', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$7.7B', rev: '$1.48B', growth: '16%', thesis: 'Open-source SIEM differentiation. CISA $26M contract (potential $130M), strong federal traction. ~4.5x FY2026 revenue is reasonable.' },
+    { ticker: 'BAH', name: 'Booz Allen Hamilton', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$10.7B', rev: '~$11.3-11.5B', growth: '-4% to -6%', thesis: '#1 federal cyber provider at compressed multiples (near 52-week low). $2.5B+ cyber revenue. Contrarian value play if defense pivot offsets civil decline.' },
+    { ticker: 'PSN', name: 'Parsons', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$7.4B', rev: '~$1.8B', growth: '28%', thesis: 'Growth-oriented defense tech via M&A (Altamira). Cyber + space + critical infrastructure exposure. Mid-cap with upside leverage.' },
+    { ticker: 'CHKP', name: 'Check Point', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$19B', rev: '$2.68B', growth: '~5%', thesis: 'Value play at ~7x revenue with consistent profitability. Every analyst has buy-equivalent rating. Low volatility cybersecurity exposure.' },
+    { ticker: 'FROG', name: 'JFrog', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$4-5B', rev: '$525M (FY25)', growth: '26%', thesis: 'Software supply chain security at reasonable valuation. Cloud revenue +50%. SBOM regulatory tailwinds. Security at 12% of RPO (vs 3% of revenue) signals inflection.' },
+    { ticker: 'QLYS', name: 'Qualys', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$4.6B', rev: '~$0.67B', growth: '8%', thesis: 'Cash cow: 40%+ operating margins, $200M buyback. Low-beta (0.53) cybersecurity exposure with downside protection.' },
+    { ticker: 'TENB', name: 'Tenable', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$2.7B', rev: '$1.00B', growth: '11%', thesis: 'Cheapest vulnerability management name at ~2.5x revenue. Crossing $1B revenue. AI security and platform catalysts. Potential M&A target.' },
+    { ticker: 'SAIL', name: 'SailPoint', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$8.3B', rev: '$1.04B ARR', growth: '28% ARR', thesis: '28% ARR growth and $1B+ milestone are compelling, but 36% below IPO price. Thoma Bravo 88% lockup overhang creates selling pressure risk.' },
+    { ticker: 'PLTR', name: 'Palantir', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$322B', rev: 'Guided $7.2B FY26', growth: '66% (U.S. gov)', thesis: 'Dominant government AI platform with CMMC/FedRAMP certs. But ~45x+ forward revenue prices in years of hypergrowth. Extreme valuation risk.' },
+    { ticker: 'TLS', name: 'Telos', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$477M', rev: '~$140M TTM', growth: '26% (Q2)', thesis: 'CMMC compliance play via Xacta platform (93% efficiency improvement). $5B pipeline, but small scale and execution risk.' },
+    { ticker: 'RPD', name: 'Rapid7', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$1.1B', rev: '$0.86B', growth: '3%', thesis: 'Deep value at ~1.2x revenue if turnaround succeeds. InsightVM 6.0 refresh. Contrarian with high conviction requirement.' },
+    { ticker: 'BBAI', name: 'BigBear.ai', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$2.5B', rev: '~$144M TTM', growth: '-7%', thesis: 'Speculative AI-defense play. Revenue declining but $250M Ask Sage acquisition and 8x pipeline growth. Must demonstrate revenue inflection.' }
+  ];
+
+  var grid = document.getElementById('company-grid');
+  var filters = document.getElementById('company-filters');
+
+  companies.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Revenue</div><div class="metric-value">' + c.rev + '</div></div>' +
+      '</div>' +
+      '<div class="metric" style="margin-bottom:16px;"><div class="metric-label">Growth</div><div class="metric-value" style="font-size:0.85rem;">' + c.growth + '</div></div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    var visibleCount = 0;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(function() {
+          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, visibleCount * 50);
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    // Update count
+    var allPill = filters.querySelector('[data-filter="all"]');
+    if (filter === 'all') {
+      allPill.textContent = 'All (' + companies.length + ')';
+    }
+  });
+})();
+
+// TIMELINE
+(function() {
+  var events = [
+    { date: 'Feb 2026', title: 'Google/Wiz Close (EU Verdict)', desc: 'EU regulatory verdict expected Feb 10. Closing validates CNAPP at 45-65x ARR, removes independent competitor.', dot: '' },
+    { date: 'Feb 2026', title: 'FedRAMP 20x Launch', desc: 'New streamlined authorization pathway for Low/Moderate systems. Accelerates commercial vendor entry into government markets.', dot: 'cyan' },
+    { date: 'H1 2026', title: 'PANW/CyberArk Close', desc: 'Creates first network + identity + cloud integrated platform at scale. $25B deal reshapes identity security.', dot: 'amber' },
+    { date: 'May 2026', title: 'CIRCIA Final Rule', desc: 'Cyber incident reporting mandate affecting ~316,000 critical infrastructure entities. Creates new compliance spending wave.', dot: '' },
+    { date: 'Q2-Q3 2026', title: 'FortiGate Refresh Cycle', desc: '40-50% of major 2026 refresh complete as of Q4 2025. Ongoing activity drives FTNT growth through 2027.', dot: 'cyan' },
+    { date: 'H2 2026', title: 'AI Copilot Monetization Proof', desc: 'Next 12 months determine if AI security features command sustainable premiums. Watch Charlotte AI, Purple AI, XSIAM trends.', dot: 'amber' },
+    { date: 'Nov 2026', title: 'CMMC Phase 2', desc: 'Level 2 C3PAO certification required for most CUI-handling contracts. Massive compliance spending wave begins.', dot: '' },
+    { date: '2026-2027', title: 'SASE Convergence Acceleration', desc: 'Full SD-WAN/SSE convergence by 2027, forcing enterprises to select platform. Benefits ZS, PANW, NTSK, Cato.', dot: 'violet' },
+    { date: '2026-2027', title: 'Agentic AI Identity Demand', desc: 'Machine-to-human identity ratios expanding rapidly. Okta (Auth0 for AI Agents) and PANW/CyberArk are early beneficiaries.', dot: 'violet' },
+    { date: 'Jan 2027', title: 'PQC NSS Compliance Deadline', desc: 'Mandatory National Security System compliance with NIST post-quantum standards. Multi-year certificate infrastructure upgrade.', dot: 'rose' },
+    { date: '~2028', title: 'Platform Consolidation Endgame', desc: '45% of organizations projected to use fewer than 15 cybersecurity tools (vs 13% in 2023). Survivor pool narrows to 5-8 platforms.', dot: 'amber' },
+    { date: '~2028', title: 'CMMC Full Enforcement', desc: 'Every DIB contractor expected to be certified. Creates permanent compliance baseline for 220,000+ companies.', dot: '' },
+    { date: '2028+', title: 'Identity Explosion: 100:1 Ratio', desc: 'Machine-to-human identity ratios may reach 100:1+ as AI agents proliferate, massively expanding IAM TAM.', dot: 'violet' }
+  ];
+  var container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  var risks = [
+    { icon: '\u26A0', level: 'high', title: 'Valuation Risk', desc: 'CRWD (~21x ARR), PANW (~15x rev), NET (~36x rev), PLTR (~45x+ forward). Any growth deceleration compresses multiples. Okta dropped from $45B to $15B despite revenue doubling.' },
+    { icon: '\u26A0', level: 'high', title: 'Hyperscaler Bundling', desc: 'Microsoft Sentinel, Google Chronicle/SecOps, AWS Security Hub benefit from deep integration. Google\'s $32B Wiz acquisition signals intent to own cloud security natively.' },
+    { icon: '\u26A0', level: 'medium', title: 'AI Commoditization', desc: 'If AI-powered security features become table stakes, pricing premiums erode. Every vendor is investing heavily. Counterpoint: early monetization evidence suggests willingness to pay.' },
+    { icon: '\u26A0', level: 'medium', title: 'M&A Integration Risk', desc: 'PANW\'s aggressive M&A (CyberArk $25B, Chronosphere $3.35B, Protect AI) creates execution complexity. Historical precedent: integration is most common value destruction point.' },
+    { icon: '\u26CF', level: 'medium', title: 'Macro Sensitivity', desc: 'While cybersecurity spending is generally resilient, budget scrutiny delays deals and compresses growth rates. Enterprise security decelerated measurably in 2023 before recovering.' },
+    { icon: '\u26CF', level: 'medium', title: 'Regulatory/Political Risk', desc: 'DOGE-driven CISA cuts, potential SEC enforcement changes, shifting federal priorities. However, defense cyber spending has bipartisan support.' },
+    { icon: '\u26CF', level: 'medium', title: 'Vendor Trust Paradox', desc: 'Okta (2023), BeyondTrust (2024 leading to Treasury compromise) -- security vendors becoming attack vectors erodes the trust premium that justifies pricing.' },
+    { icon: '\u26CF', level: 'medium', title: 'Talent Shortage', desc: '3.5M+ unfilled positions globally (500K+ in US) creates execution risk for all vendors, though it also drives MDR and AI automation adoption.' },
+    { icon: '\u26CF', level: 'medium', title: 'Continuing Resolution Risk', desc: 'Extended CRs prevent new program starts and limit spending to prior-year levels, delaying contract awards for defense IT/cyber contractors.' },
+    { icon: '\u26CF', level: 'low-medium', title: 'Open-Source Commoditization', desc: 'Keycloak, Authentik gaining traction. Elastic\'s OSS foundation cuts both ways. Core capabilities may commoditize while differentiation shifts to AI and platform integration.' }
+  ];
+  var container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    var item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  var picks = [
+    { ticker: 'PANW', color: '#00ff88' },
+    { ticker: 'CRWD', color: '#00ff88' },
+    { ticker: 'FTNT', color: '#00ff88' },
+    { ticker: 'ZS', color: '#00ff88' },
+    { ticker: 'LDOS', color: '#00ff88' },
+    { ticker: 'CACI', color: '#00ff88' },
+    { ticker: 'NET', color: '#00e5ff' },
+    { ticker: 'OKTA', color: '#00e5ff' },
+    { ticker: 'NTSK', color: '#00e5ff' },
+    { ticker: 'S', color: '#00e5ff' },
+    { ticker: 'ESTC', color: '#00e5ff' },
+    { ticker: 'BAH', color: '#00e5ff' },
+    { ticker: 'FROG', color: '#00e5ff' },
+    { ticker: 'TENB', color: '#00e5ff' },
+    { ticker: 'PLTR', color: '#ffc107' },
+    { ticker: 'TLS', color: '#ffc107' },
+    { ticker: 'SAIL', color: '#ffc107' }
+  ];
+  var container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    var pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>

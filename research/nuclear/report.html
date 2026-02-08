@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear Energy Renaissance — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #060b12;
+  --bg-card: rgba(10, 18, 30, 0.90);
+  --bg-card-hover: rgba(14, 24, 42, 0.94);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(16,185,129,0.18);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-green: #10b981;
+  --accent-yellow: #eab308;
+  --accent-amber: #f59e0b;
+  --accent-cyan: #22d3ee;
+  --accent-violet: #8b5cf6;
+  --accent-rose: #f43f5e;
+  --accent-blue: #3b82f6;
+  --accent-lime: #84cc16;
+  --glow-green: 0 0 30px rgba(16,185,129,0.15);
+  --glow-yellow: 0 0 30px rgba(234,179,8,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-green) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#atomfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(234,179,8,0.08);
+  border: 1px solid rgba(234,179,8,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-yellow);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-yellow); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.08;
+  margin-bottom: 24px;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, var(--accent-yellow), var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+.hero-stat {
+  padding: 24px 40px;
+  text-align: center;
+}
+.hero-stat + .hero-stat { border-left: 1px solid var(--border-subtle); }
+.hero-stat .num {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  display: block;
+}
+.hero-stat .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: float 3s ease-in-out infinite;
+}
+.scroll-cue svg { display: block; margin: 8px auto 0; width: 24px; height: 24px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+@keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* SECTIONS */
+section { padding: 100px 0; }
+.section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-yellow);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before { content: ''; width: 32px; height: 1px; background: var(--accent-yellow); }
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.section-desc {
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: rgba(234,179,8,0.15);
+  background: var(--bg-card-hover);
+  box-shadow: var(--glow-yellow);
+}
+
+/* TWO COL */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* COST WATERFALL */
+.cost-waterfall {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cost-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cost-row .name {
+  width: 110px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+  flex-shrink: 0;
+}
+.cost-row .track {
+  flex: 1;
+  height: 28px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.cost-row .fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 0;
+}
+.cost-row .val {
+  width: 60px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* DONUT */
+.donut-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.donut-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.donut-legend-item .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.donut-legend-item .pct {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+/* AREA CHART */
+.area-chart-container { position: relative; margin: 20px 0; }
+.area-chart-container svg { width: 100%; height: auto; }
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-yellow), var(--accent-green), transparent);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-yellow);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 8px rgba(234,179,8,0.3);
+}
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-yellow);
+  margin-bottom: 4px;
+}
+.timeline-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.timeline-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* RISK GRID */
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.risk-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  gap: 14px;
+  transition: var(--transition);
+}
+.risk-card:hover { border-color: rgba(244,63,94,0.2); box-shadow: 0 0 20px rgba(244,63,94,0.06); }
+.risk-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.risk-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* COMPANY CARDS */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(234,179,8,0.1);
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+.company-card:hover {
+  border-color: rgba(234,179,8,0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-yellow);
+}
+.company-card .ticker {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+.company-card .name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.company-card .metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.company-card .metric-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+.company-card .metric-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+.company-card .thesis {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.tier-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* WATCHLIST */
+.watchlist-section {
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(234,179,8,0.04), rgba(16,185,129,0.04));
+  border: 1px solid rgba(234,179,8,0.1);
+  border-radius: var(--radius-lg);
+}
+.watchlist-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.pill:hover { border-color: rgba(234,179,8,0.3); background: var(--bg-card-hover); }
+.pill .pdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* IPO TABLE */
+.ipo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.ipo-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.ipo-table td {
+  padding: 14px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.ipo-table tr:hover td { background: rgba(255,255,255,0.02); }
+.ipo-table .mono { font-family: var(--font-mono); font-weight: 600; }
+
+/* SOURCES */
+details.sources-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px 28px;
+  margin-bottom: 60px;
+}
+details.sources-section summary {
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 8px 0;
+  list-style: none;
+}
+details.sources-section summary::before {
+  content: '►';
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.2s;
+  font-size: 12px;
+  color: var(--accent-yellow);
+}
+details.sources-section[open] summary::before { content: '▼'; }
+.sources-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+.sources-grid h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-yellow);
+  margin-bottom: 10px;
+}
+.sources-grid p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.sources-grid a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.sources-grid a:hover { color: var(--accent-yellow); }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 24px 60px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; }
+  .hero-stat + .hero-stat { border-left: none; border-top: 1px solid var(--border-subtle); }
+  .hero-stat { padding: 16px 32px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .sources-grid { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .bar-chart { height: 220px; gap: 6px; }
+  section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .bar-chart { height: 180px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="atomfield"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="highlight">Nuclear Energy</span> Renaissance</h1>
+  <p class="hero-sub">10+ GW of hyperscaler commitments. A 30M lb uranium deficit. Three investable layers across fleet operators, fuel cycle, and next-gen technology.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num" data-target="10" data-suffix="+GW">0</span><span class="label">Hyperscaler Nuclear</span></div>
+    <div class="hero-stat"><span class="num" data-target="100" data-prefix="$" data-suffix="/lb">0</span><span class="label">Uranium Spot Price</span></div>
+    <div class="hero-stat"><span class="num" data-target="93" data-suffix="%">0</span><span class="label">Fleet Capacity Factor</span></div>
+  </div>
+  <div class="scroll-cue">Explore<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- SECTION 1: OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">The Nuclear Renaissance</h2>
+      <p class="section-desc">AI-driven power demand meets a supply-constrained nuclear fleet. Hyperscalers have contracted $50B+ in long-term PPAs, repricing existing plants as irreplaceable infrastructure.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Hyperscaler Nuclear Commitments (MW)</h3>
+        <div class="bar-chart" id="deals-chart">
+          <div class="gridlines" id="deals-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Uranium Supply-Demand Gap</h3>
+        <div class="cost-waterfall" id="supply-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Core Thesis</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 740px; margin: 0 auto; line-height: 1.8;">
+        A <strong style="color: var(--accent-yellow);">multi-decade investment cycle</strong> spanning three layers &mdash; existing fleet operators (highest near-term visibility), fuel cycle companies (structural supply deficit), and next-gen technology (highest growth optionality). <strong style="color: var(--accent-green);">Nuclear is the only scalable 24/7 carbon-free solution for AI power.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: FLEET OPERATORS -->
+<section id="fleet">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Fleet Operators</div>
+      <h2 class="section-title">The Nuclear Titans</h2>
+      <p class="section-desc">Four publicly traded fleet operators control the US nuclear fleet. Their plants — operating at ~$30/MWh — are now selling 20-year contracts at $80-120/MWh to Big Tech.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Nuclear Fleet Comparison (GW)</h3>
+        <div class="bar-chart" id="fleet-chart">
+          <div class="gridlines" id="fleet-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Nuclear Economics ($/MWh)</h3>
+        <div class="cost-waterfall" id="economics-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 48px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Major Hyperscaler Nuclear PPAs</h3>
+      <table class="ipo-table">
+        <thead><tr><th>Buyer</th><th>Partner</th><th>Plant / Tech</th><th>Capacity</th><th>Term</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Microsoft</td><td>Constellation</td><td class="mono">TMI Unit 1 (restart)</td><td class="mono">835 MW</td><td>20 yr</td><td>Target 2027-28</td></tr>
+          <tr><td>Meta</td><td>Constellation</td><td class="mono">Clinton (IL)</td><td class="mono">1,121 MW</td><td>20 yr</td><td>June 2027</td></tr>
+          <tr><td>Meta</td><td>Vistra</td><td class="mono">Perry/Davis-Besse/BV + uprates</td><td class="mono">2,609 MW</td><td>20 yr</td><td>Late 2026</td></tr>
+          <tr><td>Amazon</td><td>Talen</td><td class="mono">Susquehanna (PA)</td><td class="mono">1,920 MW</td><td>17 yr</td><td>Ramp 2026-32</td></tr>
+          <tr><td>Meta</td><td>Oklo</td><td class="mono">New build (OH)</td><td class="mono">1,200 MW</td><td>—</td><td>~2030</td></tr>
+          <tr><td>Google</td><td>Kairos Power</td><td class="mono">SMR fleet</td><td class="mono">500 MW</td><td>—</td><td>Through 2035</td></tr>
+          <tr><td>Amazon</td><td>X-energy</td><td class="mono">Xe-100 deployments</td><td class="mono">5+ GW</td><td>—</td><td>By 2039</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: URANIUM & FUEL CYCLE -->
+<section id="uranium">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Fuel Cycle</div>
+      <h2 class="section-title">Uranium & the Supply Deficit</h2>
+      <p class="section-desc">Primary mine supply covers ~75% of demand. Secondary sources are depleted. Every stage — conversion, enrichment, HALEU — faces capacity constraints. Spot uranium breached $100/lb in January 2026.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Enrichment Market Share</h3>
+        <div class="donut-container">
+          <svg viewBox="0 0 200 200" width="180" height="180" id="enrichment-donut"></svg>
+          <div class="donut-legend" id="enrichment-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Fuel Cycle Bottlenecks</h3>
+        <div class="cost-waterfall" id="bottleneck-waterfall"></div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 48px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Key Uranium Producers</h3>
+      <table class="ipo-table">
+        <thead><tr><th>Company</th><th>Ticker</th><th>Role</th><th>Production / Status</th><th>Key Catalyst</th></tr></thead>
+        <tbody>
+          <tr><td>Kazatomprom</td><td class="mono">KAP</td><td>Largest miner (40% global)</td><td class="mono">27.5-29K tU (2026)</td><td>Production discipline</td></tr>
+          <tr><td>Cameco</td><td class="mono">CCJ</td><td>#2 Western miner</td><td class="mono">20M lbs (guidance)</td><td>Rising contract prices</td></tr>
+          <tr><td>NexGen Energy</td><td class="mono">NXE</td><td>Largest dev-stage project</td><td class="mono">30M lbs/yr capacity</td><td>CNSC hearing Feb 2026</td></tr>
+          <tr><td>Denison Mines</td><td class="mono">DNN</td><td>Wheeler River ISR</td><td class="mono">Construction-ready Q1 2026</td><td>First Athabasca ISR</td></tr>
+          <tr><td>Uranium Energy</td><td class="mono">UEC</td><td>Largest US-focused</td><td class="mono">ISR ramp-up across 3 hubs</td><td>Burke Hollow ramp</td></tr>
+          <tr><td>Energy Fuels</td><td class="mono">UUUU</td><td>Only US conv. mill + REE</td><td class="mono">>1M lbs (2025)</td><td>Rare earth pivot</td></tr>
+          <tr><td>Centrus Energy</td><td class="mono">LEU</td><td>Only Western HALEU</td><td class="mono">900 kg/yr (pilot)</td><td>$900M DOE expansion</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: SMR & ADVANCED -->
+<section id="smr">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Advanced Nuclear</div>
+      <h2 class="section-title">SMRs & Next-Gen Technology</h2>
+      <p class="section-desc">$6B+ in DOE funding. 10+ GW of hyperscaler commitments. First commercial units expected 2029-2032. But FOAK cost premiums and HALEU supply gaps remain key risks.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">SMR Developer Status</h3>
+        <div class="cost-waterfall" id="smr-waterfall"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">LCOE Comparison ($/MWh)</h3>
+        <div class="bar-chart" id="lcoe-chart">
+          <div class="gridlines" id="lcoe-gridlines"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 48px;">
+      <div class="card" style="padding: 32px;">
+        <div style="text-align: center;">
+          <div style="font-size: 3.5rem; font-weight: 900; color: var(--accent-rose);">$9.3B</div>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">UAMPS Final Cost Est. (cancelled)</div>
+          <div style="margin: 16px auto; width: 80%; height: 1px; background: var(--border-subtle);"></div>
+          <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+            NuScale's first project jumped from <strong style="color: var(--accent-amber);">$5.3B → $9.3B</strong> (+75%) before cancellation. FOAK cost premiums are severe. LCOE rose from $58 to $89/MWh. Cost per kW hit ~$20,139 — comparable to Vogtle.
+          </div>
+        </div>
+      </div>
+      <div class="card" style="padding: 32px;">
+        <div style="text-align: center;">
+          <div style="font-size: 3.5rem; font-weight: 900; color: var(--accent-green);">$6B+</div>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">DOE Advanced Nuclear Funding</div>
+          <div style="margin: 16px auto; width: 80%; height: 1px; background: var(--border-subtle);"></div>
+          <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+            ARDP demonstration awards, loan guarantees, and HALEU availability programs. <strong style="color: var(--accent-yellow);">ADVANCE Act</strong> cut NRC fees 50%+, set 18-month licensing deadlines, and opened foreign investment.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: GLOBAL BUILDOUT -->
+<section id="global">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Global</div>
+      <h2 class="section-title">Worldwide Nuclear Expansion</h2>
+      <p class="section-desc">63-68 reactors under construction globally. China building half. COP28 pledge to triple capacity by 2050. US racing to match with NRC reform and SMR exports.</p>
+    </div>
+
+    <div class="risk-grid reveal" style="margin-bottom: 48px;">
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(244,63,94,0.1); color: var(--accent-rose);">🇨🇳</div>
+        <div><h4>China — Dominant Scale</h4><p>~62 GWe operating, ~43 GWe under construction. 10 new reactors approved April 2025 (~$27.5B). Target: 200 GW by 2035, 400-500 GW by 2050.</p></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(59,130,246,0.1); color: var(--accent-blue);">🇬🇧</div>
+        <div><h4>UK — Sizewell C</h4><p>GBP 38B (~$51B) FID signed July 2025. Two EPR units. Largest single UK energy infrastructure commitment in decades.</p></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(139,92,246,0.1); color: var(--accent-violet);">🇫🇷</div>
+        <div><h4>France — EPR2 Revival</h4><p>EUR 50B program for 6 EPR2 reactors plus SMR pipeline. Rebuilding nuclear industrial base and workforce skills.</p></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">🇰🇷</div>
+        <div><h4>South Korea — Export Champion</h4><p>Barakah (UAE) delivered on time and on budget — rare in nuclear. APR-1400 positioned as default Western-aligned option.</p></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(234,179,8,0.1); color: var(--accent-yellow);">🇮🇳</div>
+        <div><h4>India — 100 GW by 2047</h4><p>From 8.2 GW to 22.5 GW by 2032. SMR LOI with France. 5+ domestic SMRs by 2033. Private sector participation enabled.</p></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon" style="background: rgba(234,179,8,0.1); color: var(--accent-amber);">🇷🇺</div>
+        <div><h4>Russia — Fuel Monopoly</h4><p>Rosatom: 46% enrichment, only commercial HALEU source. 6 reactors in Uzbekistan. Western decoupling underway but 5-7 years to close gap.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Companies</div>
+      <h2 class="section-title">Public Company Analysis</h2>
+      <p class="section-desc">From fleet operators to uranium miners to SMR developers — the investable universe across the nuclear value chain.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="tier1">Tier 1</button>
+      <button class="filter-btn" data-filter="tier2">Tier 2</button>
+      <button class="filter-btn" data-filter="tier3">Tier 3</button>
+      <button class="filter-btn" data-filter="etf">ETFs</button>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+  </div>
+</section>
+
+<!-- SECTION 7: IPO PIPELINE -->
+<section id="ipo">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Private & Pre-IPO</div>
+      <h2 class="section-title">Ones to Watch</h2>
+    </div>
+    <div class="card reveal">
+      <table class="ipo-table">
+        <thead><tr><th>Company</th><th>Technology</th><th>Total Funding</th><th>Est. Valuation</th><th>Key Backers</th><th>IPO Outlook</th></tr></thead>
+        <tbody>
+          <tr><td>X-energy</td><td>Xe-100 HTGR</td><td class="mono">$1.8B</td><td class="mono">$3-5B</td><td>Jane Street, ARK, Amazon</td><td>Strong candidate 2026-27</td></tr>
+          <tr><td>Kairos Power</td><td>Molten salt-cooled</td><td class="mono">$500M+</td><td class="mono">$2-4B</td><td>Google, DOE ARDP</td><td>Possible 2027+</td></tr>
+          <tr><td>TerraPower</td><td>Natrium sodium fast</td><td class="mono">$1B+</td><td class="mono">$4-6B</td><td>Bill Gates, DOE</td><td>Possible 2027+</td></tr>
+          <tr><td>Commonwealth Fusion</td><td>Tokamak fusion</td><td class="mono">~$3B</td><td class="mono">$5-6B</td><td>Nvidia, Google, Tiger</td><td>Venture-stage, 2028+</td></tr>
+          <tr><td>Helion Energy</td><td>FRC fusion</td><td class="mono">$600M+</td><td class="mono">$3-5B</td><td>Sam Altman, Microsoft</td><td>Venture-stage</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: CATALYST TIMELINE -->
+<section id="catalysts">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Catalysts</div>
+      <h2 class="section-title">Key Events & Milestones</h2>
+    </div>
+    <div class="two-col reveal">
+      <div class="timeline" id="timeline-left"></div>
+      <div class="timeline" id="timeline-right"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Assessment</div>
+      <h2 class="section-title">Key Risk Factors</h2>
+    </div>
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<!-- SECTION 10: WATCHLIST -->
+<section id="watchlist">
+  <div class="container">
+    <div class="reveal">
+      <div class="watchlist-section">
+        <h2 class="section-title">Recommended Watchlist</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 8px; font-size: 1rem;">Build positions in fleet operators and fuel cycle. Watch SMR developers for de-risking catalysts. Size fusion as call options.</p>
+        <div class="watchlist-pills" id="watchlist-pills"></div>
+        <p style="color: var(--text-muted); font-size: 12px; margin-top: 20px;">Research compiled February 2026. Not investment advice. See sources below.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="container">
+    <details class="sources-section reveal">
+      <summary>Sources &amp; References</summary>
+      <div class="sources-grid">
+        <div>
+          <h4>Company Filings & Earnings</h4>
+          <p>
+            <a href="https://www.constellationenergy.com/newsroom/2025/11/constellation-reports-third-quarter-2025-results.html">Constellation Q3 2025 Results</a><br>
+            <a href="https://investor.vistracorp.com/2025-11-06-Vistra-Reports-Third-Quarter-2025-Results">Vistra Q3 2025 Results</a><br>
+            <a href="https://investors.bwxt.com/news-releases/news-release-details/bwx-technologies-reports-third-quarter-2025-results">BWX Technologies Q3 2025 Results</a><br>
+            <a href="https://www.cameco.com/media/news/cameco-provides-production-update-strategically-well-positioned-for-continued-long-term">Cameco Production Update</a><br>
+            <a href="https://www.kazatomprom.kz/en/media/view/1h2025_financial_results">Kazatomprom 1H2025 Results</a><br>
+            <a href="https://www.prnewswire.com/news-releases/uranium-energy-corp-reports-results-for-first-quarter-of-fiscal-2026-302637477.html">UEC Q1 FY2026 Results</a><br>
+            <a href="https://www.prnewswire.com/news-releases/energy-fuels-us-uranium-business-continues-to-deliver-302650065.html">Energy Fuels Year-End Production</a><br>
+            <a href="https://ir.talenenergy.com/news-releases/news-release-details/talen-energy-expands-nuclear-energy-relationship-amazon">Talen Energy Amazon Relationship</a>
+          </p>
+          <h4 style="margin-top: 20px;">Hyperscaler Nuclear Deals</h4>
+          <p>
+            <a href="https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center">Constellation TMI-Microsoft Restart</a><br>
+            <a href="https://about.fb.com/news/2026/01/meta-nuclear-energy-projects-power-american-ai-leadership/">Meta 6.6 GW Nuclear Announcement</a><br>
+            <a href="https://investor.vistracorp.com/2026-01-09-Vistra-and-Meta-Announce-Agreements">Vistra-Meta Nuclear Agreements</a><br>
+            <a href="https://www.powermag.com/talen-amazon-launch-18b-nuclear-ppa/">Talen-Amazon $18B Nuclear PPA</a><br>
+            <a href="https://blog.google/outreach-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/">Google-Kairos Power Agreement</a><br>
+            <a href="https://oklo.com/newsroom/news-details/2026/Oklo-Meta-Announce-Agreement">Oklo-Meta 1.2 GW Agreement</a>
+          </p>
+        </div>
+        <div>
+          <h4>Uranium Market & Supply</h4>
+          <p>
+            <a href="https://sprottetfs.com/insights/uranium-outlook-2026/">Sprott Uranium Outlook 2026</a><br>
+            <a href="https://www.world-nuclear-news.org/articles/kazatomprom-to-lower-uranium-production-in-2026">Kazatomprom 2026 Production Cut</a><br>
+            <a href="https://www.cameco.com/invest/markets/supply-demand">Cameco Supply & Demand</a><br>
+            <a href="https://world-nuclear.org/news-and-media/press-statements/world-nuclear-fuel-report-2025">World Nuclear Fuel Report 2025</a><br>
+            <a href="https://investors.centrusenergy.com/news-releases/news-release-details/centrus-awarded-900-million-expand-uranium-enrichment-ohio">Centrus $900M Expansion Award</a><br>
+            <a href="https://www.ans.org/news/2025-12-19/article-7633/urenco-usa-marks-enrichment-milestones/">Urenco USA Enrichment Milestones</a>
+          </p>
+          <h4 style="margin-top: 20px;">Policy & Regulation</h4>
+          <p>
+            <a href="https://www.nrc.gov/about-nrc/governing-laws/advance-act/about-advance-act">ADVANCE Act — NRC</a><br>
+            <a href="https://www.nrc.gov/reactors/new-reactors/advanced/modernizing/rulemaking/part-53">NRC Part 53 Rulemaking</a><br>
+            <a href="https://www.catf.us/resource/actions-address-executive-order-14300/">EO 14300 NRC Reform Actions</a><br>
+            <a href="https://www.energy.gov/articles/biden-harris-administration-enacts-law-banning-importation-russian-uranium">Russian Uranium Import Ban</a><br>
+            <a href="https://www.energy.gov/EDF">DOE Loan Programs Office</a>
+          </p>
+          <h4 style="margin-top: 20px;">Industry Data</h4>
+          <p>
+            <a href="https://world-nuclear.org/information-library/facts-and-figures/world-nuclear-power-reactors-and-uranium-requireme">World Nuclear Power Reactors — WNA</a><br>
+            <a href="https://world-nuclear.org/information-library/economic-aspects/economics-of-nuclear-power">Economics of Nuclear Power — WNA</a><br>
+            <a href="https://www.iea.org/reports/the-path-to-a-new-era-for-nuclear-energy/outlook-for-nuclear-investment">IEA Nuclear Investment Outlook</a><br>
+            <a href="https://www.lazard.com/media/uounhon4/lazards-lcoeplus-june-2025.pdf">Lazard LCOE+ June 2025</a><br>
+            <a href="https://www.iea.org/news/ai-is-set-to-drive-surging-electricity-demand-from-data-centres">IEA AI Data Center Demand</a>
+          </p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <p>Nuclear Energy Renaissance — Investment Thesis 2026</p>
+  <p style="margin-top: 4px;">Generated from BigPic research &middot; namkuzu-da</p>
+</footer>
+
+<script>
+// ATOM FIELD ANIMATION
+(function() {
+  const canvas = document.getElementById('atomfield');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 0.5,
+      color: ['rgba(234,179,8,', 'rgba(16,185,129,', 'rgba(34,211,238,'][Math.floor(Math.random() * 3)]
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + '0.4)';
+      ctx.fill();
+    });
+    // connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 150) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(234,179,8,' + (0.06 * (1 - d / 150)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// COUNTER ANIMATION
+document.querySelectorAll('.hero-stat .num').forEach(el => {
+  const target = +el.dataset.target;
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  let current = 0;
+  const step = target / 60;
+  function count() {
+    current += step;
+    if (current >= target) { current = target; el.textContent = prefix + target + suffix; return; }
+    el.textContent = prefix + Math.floor(current) + suffix;
+    requestAnimationFrame(count);
+  }
+  count();
+});
+
+// SCROLL REVEAL
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// DEALS BAR CHART
+(function() {
+  const data = [
+    { label: 'Meta', value: 5530, color: 'var(--accent-blue)' },
+    { label: 'Amazon', value: 6920, color: 'var(--accent-amber)' },
+    { label: 'Microsoft', value: 835, color: 'var(--accent-cyan)' },
+    { label: 'Google', value: 500, color: 'var(--accent-green)' },
+  ];
+  const max = 8000;
+  const chart = document.getElementById('deals-chart');
+  const gridlines = document.getElementById('deals-gridlines');
+
+  [8000, 6000, 4000, 2000, 0].forEach(v => {
+    const line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>' + (v / 1000) + ' GW</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(d => {
+    const group = document.createElement('div');
+    group.className = 'bar-group';
+    const pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">' + (d.value / 1000).toFixed(1) + ' GW</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chart);
+})();
+
+// SUPPLY WATERFALL
+(function() {
+  const data = [
+    { name: 'Reactor Demand', cost: 179, color: 'var(--accent-rose)' },
+    { name: 'Mine Supply', cost: 145, color: 'var(--accent-green)' },
+    { name: 'Secondary', cost: 10, color: 'var(--accent-cyan)' },
+    { name: 'Annual Gap', cost: 35, color: 'var(--accent-amber)' },
+  ];
+  const max = 179;
+  const el = document.getElementById('supply-waterfall');
+  data.forEach(d => {
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="name">' + d.name + '</div>' +
+      '<div class="track"><div class="fill" style="background:' + d.color + ';" data-width="' + (d.cost / max * 100) + '"></div></div>' +
+      '<div class="val" style="color:' + d.color + ';">' + d.cost + 'M lbs</div>';
+    el.appendChild(row);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.fill').forEach((f, i) => {
+          setTimeout(() => { f.style.width = f.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// FLEET BAR CHART
+(function() {
+  const data = [
+    { label: 'CEG', value: 22.6, color: 'var(--accent-yellow)' },
+    { label: 'VST', value: 6.4, color: 'var(--accent-green)' },
+    { label: 'PEG', value: 3.6, color: 'var(--accent-cyan)' },
+    { label: 'TLN', value: 2.5, color: 'var(--accent-blue)' },
+  ];
+  const max = 25;
+  const chart = document.getElementById('fleet-chart');
+  const gridlines = document.getElementById('fleet-gridlines');
+
+  [25, 20, 15, 10, 5, 0].forEach(v => {
+    const line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>' + v + ' GW</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(d => {
+    const group = document.createElement('div');
+    group.className = 'bar-group';
+    const pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">' + d.value + ' GW</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chart);
+})();
+
+// ECONOMICS WATERFALL
+(function() {
+  const data = [
+    { name: 'Operating Cost', cost: 30, color: 'var(--accent-green)' },
+    { name: 'Wholesale Price', cost: 65, color: 'var(--accent-cyan)' },
+    { name: 'PPA Rate (est)', cost: 100, color: 'var(--accent-yellow)' },
+    { name: 'New Build LCOE', cost: 110, color: 'var(--accent-rose)' },
+  ];
+  const max = 120;
+  const el = document.getElementById('economics-waterfall');
+  data.forEach(d => {
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="name">' + d.name + '</div>' +
+      '<div class="track"><div class="fill" style="background:' + d.color + ';" data-width="' + (d.cost / max * 100) + '"></div></div>' +
+      '<div class="val" style="color:' + d.color + ';">$' + d.cost + '</div>';
+    el.appendChild(row);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.fill').forEach((f, i) => {
+          setTimeout(() => { f.style.width = f.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// ENRICHMENT DONUT
+(function() {
+  const data = [
+    { label: 'Rosatom (Russia)', pct: 44, color: '#f43f5e' },
+    { label: 'Urenco (Western)', pct: 30, color: '#22d3ee' },
+    { label: 'Orano (France)', pct: 12, color: '#8b5cf6' },
+    { label: 'CNNC (China)', pct: 10, color: '#eab308' },
+    { label: 'Other/Centrus', pct: 4, color: '#10b981' },
+  ];
+  const svg = document.getElementById('enrichment-donut');
+  const legend = document.getElementById('enrichment-legend');
+  const cx = 100, cy = 100, r = 70, inner = 45;
+  let cumAngle = -90;
+  data.forEach(d => {
+    const angle = d.pct / 100 * 360;
+    const start = cumAngle;
+    const end = cumAngle + angle;
+    const startRad = start * Math.PI / 180;
+    const endRad = end * Math.PI / 180;
+    const largeArc = angle > 180 ? 1 : 0;
+    const x1 = cx + r * Math.cos(startRad), y1 = cy + r * Math.sin(startRad);
+    const x2 = cx + r * Math.cos(endRad), y2 = cy + r * Math.sin(endRad);
+    const ix1 = cx + inner * Math.cos(endRad), iy1 = cy + inner * Math.sin(endRad);
+    const ix2 = cx + inner * Math.cos(startRad), iy2 = cy + inner * Math.sin(startRad);
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' A ' + r + ' ' + r + ' 0 ' + largeArc + ' 1 ' + x2 + ' ' + y2 + ' L ' + ix1 + ' ' + iy1 + ' A ' + inner + ' ' + inner + ' 0 ' + largeArc + ' 0 ' + ix2 + ' ' + iy2 + ' Z');
+    path.setAttribute('fill', d.color);
+    path.setAttribute('opacity', '0.85');
+    path.style.transition = 'opacity 0.2s';
+    path.addEventListener('mouseenter', () => path.setAttribute('opacity', '1'));
+    path.addEventListener('mouseleave', () => path.setAttribute('opacity', '0.85'));
+    svg.appendChild(path);
+    cumAngle = end;
+
+    legend.innerHTML += '<div class="donut-legend-item"><span class="dot" style="background:' + d.color + '"></span>' + d.label + '<span class="pct">' + d.pct + '%</span></div>';
+  });
+  // center text
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 5);
+  text.setAttribute('text-anchor', 'middle'); text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-size', '14'); text.setAttribute('font-weight', '700');
+  text.setAttribute('font-family', 'JetBrains Mono, monospace');
+  text.textContent = '~60M';
+  svg.appendChild(text);
+  const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle'); sub.setAttribute('fill', '#8a96ad');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'SWU/yr';
+  svg.appendChild(sub);
+})();
+
+// BOTTLENECK WATERFALL
+(function() {
+  const data = [
+    { name: 'Conversion Util.', cost: 91, color: 'var(--accent-rose)' },
+    { name: 'Enrichment Gap', cost: 46, color: 'var(--accent-amber)' },
+    { name: 'HALEU (Western)', cost: 1, color: 'var(--accent-violet)' },
+    { name: 'Utility Coverage', cost: 75, color: 'var(--accent-cyan)' },
+  ];
+  const max = 100;
+  const el = document.getElementById('bottleneck-waterfall');
+  const labels = ['91% util.', '46% Russia', '900 kg/yr', '75% covered'];
+  data.forEach((d, i) => {
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="name">' + d.name + '</div>' +
+      '<div class="track"><div class="fill" style="background:' + d.color + ';" data-width="' + (d.cost / max * 100) + '"></div></div>' +
+      '<div class="val" style="color:' + d.color + ';">' + labels[i] + '</div>';
+    el.appendChild(row);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.fill').forEach((f, i) => {
+          setTimeout(() => { f.style.width = f.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// SMR STATUS WATERFALL
+(function() {
+  const data = [
+    { name: 'NuScale', cost: 100, color: 'var(--accent-green)' },
+    { name: 'GE Hitachi', cost: 85, color: 'var(--accent-cyan)' },
+    { name: 'Kairos', cost: 80, color: 'var(--accent-yellow)' },
+    { name: 'TerraPower', cost: 75, color: 'var(--accent-amber)' },
+    { name: 'X-energy', cost: 60, color: 'var(--accent-blue)' },
+    { name: 'Oklo', cost: 40, color: 'var(--accent-violet)' },
+  ];
+  const max = 100;
+  const el = document.getElementById('smr-waterfall');
+  const labels = ['NRC Certified', 'CP Approved (CA)', 'Demo Building', 'CP Expected Q1', 'App Filed', 'Re-applying'];
+  data.forEach((d, i) => {
+    const row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="name">' + d.name + '</div>' +
+      '<div class="track"><div class="fill" style="background:' + d.color + ';" data-width="' + (d.cost / max * 100) + '"></div></div>' +
+      '<div class="val" style="color:' + d.color + '; font-size: 11px;">' + labels[i] + '</div>';
+    el.appendChild(row);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.fill').forEach((f, i) => {
+          setTimeout(() => { f.style.width = f.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// LCOE BAR CHART
+(function() {
+  const data = [
+    { label: 'Solar', value: 32, color: 'var(--accent-amber)' },
+    { label: 'Wind', value: 41, color: 'var(--accent-cyan)' },
+    { label: 'Gas', value: 78, color: 'var(--accent-blue)' },
+    { label: 'Solar+Stor', value: 75, color: 'var(--accent-yellow)' },
+    { label: 'SMR (FOAK)', value: 103, color: 'var(--accent-green)' },
+    { label: 'Offshore', value: 102, color: 'var(--accent-violet)' },
+  ];
+  const max = 120;
+  const chart = document.getElementById('lcoe-chart');
+  const gridlines = document.getElementById('lcoe-gridlines');
+
+  [120, 90, 60, 30, 0].forEach(v => {
+    const line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + '</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(d => {
+    const group = document.createElement('div');
+    group.className = 'bar-group';
+    const pct = (d.value / max * 100);
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + '/MWh</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 80);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chart);
+})();
+
+// COMPANY CARDS
+(function() {
+  const companies = [
+    { ticker: 'CEG', name: 'Constellation Energy', tier: 'tier1', mcap: '$90B', pe: '~31x', nuclear: '22.6 GW', growth: '21% EPS', thesis: 'Largest nuclear fleet globally. TMI restart + Clinton PPA. Calpine acquisition creates 55 GW clean energy giant.' },
+    { ticker: 'VST', name: 'Vistra Corp', tier: 'tier1', mcap: '$50B', pe: '~15x', nuclear: '6.4 GW', growth: '73-93%', thesis: 'Best value fleet operator. Meta 2,609 MW deal with 433 MW uprates. Massive earnings ramp into 2026.' },
+    { ticker: 'CCJ', name: 'Cameco Corporation', tier: 'tier1', mcap: '$25B+', pe: '—', nuclear: '20M lbs', growth: '+5-10%', thesis: 'Blue-chip uranium. Rising contract prices, production discipline. Safest way to play the structural deficit.' },
+    { ticker: 'LEU', name: 'Centrus Energy', tier: 'tier1', mcap: '$4B+', pe: '—', nuclear: 'HALEU', growth: '$900M DOE', thesis: 'Only Western HALEU producer. Monopoly positioning in strategically critical supply chain. Commercial-scale by 2029.' },
+    { ticker: 'TLN', name: 'Talen Energy', tier: 'tier2', mcap: '$15B', pe: '—', nuclear: '2.5 GW', growth: 'Strong Buy', thesis: '$18B Amazon/Susquehanna contract. Extraordinary revenue visibility. Single-asset concentration risk.' },
+    { ticker: 'BWXT', name: 'BWX Technologies', tier: 'tier2', mcap: '$14B', pe: '—', nuclear: '$6B backlog', growth: 'Low-teens', thesis: 'De-risked advanced nuclear. Navy reactor monopoly. Only profitable pure-play. Project Pele microreactor core builder.' },
+    { ticker: 'NXE', name: 'NexGen Energy', tier: 'tier2', mcap: '$5B+', pe: '—', nuclear: '30M lbs/yr', growth: 'CNSC Feb 26', thesis: 'Largest development-stage uranium mine. CNSC hearing is make-or-break near-term catalyst.' },
+    { ticker: 'UEC', name: 'Uranium Energy Corp', tier: 'tier2', mcap: '$3B+', pe: '—', nuclear: 'ISR ramp', growth: 'Expanding', thesis: 'Largest US-focused uranium producer. Low-cost ISR across 3 hubs. Operating leverage to uranium price.' },
+    { ticker: 'UUUU', name: 'Energy Fuels', tier: 'tier2', mcap: '$2B+', pe: '—', nuclear: '>1M lbs', growth: 'REE pivot', thesis: 'Only operating US conventional uranium mill. Dual uranium/rare earth optionality provides downside protection.' },
+    { ticker: 'DNN', name: 'Denison Mines', tier: 'tier3', mcap: '$2B+', pe: '—', nuclear: 'Dev-stage', growth: 'Q1 2026', thesis: 'Wheeler River ISR construction-ready. First Athabasca Basin ISR mine. $700M+ war chest.' },
+    { ticker: 'OKLO', name: 'Oklo Inc.', tier: 'tier3', mcap: '$11B', pe: '—', nuclear: '$0 rev', growth: '+166% 1yr', thesis: '1.2 GW Meta deal. Fuel recycling IP. Pre-revenue at $11B = high risk. Original NRC app denied.' },
+    { ticker: 'SMR', name: 'NuScale Power', tier: 'tier3', mcap: '$5B', pe: '—', nuclear: '$37M rev', growth: '6 GW MOU', thesis: 'Only NRC-certified SMR. 6 GW TVA/ENTRA1 MOU. UAMPS failure demonstrates FOAK cost risk.' },
+    { ticker: 'PEG', name: 'PSEG', tier: 'tier3', mcap: '$40B', pe: '—', nuclear: '3.6 GW', growth: 'Exploring', thesis: 'Salem-Hope Creek complex. Regulated utility = lower volatility. Exploring hyperscaler deals but none announced.' },
+    { ticker: 'SRUUF', name: 'Sprott Uranium Trust', tier: 'etf', mcap: '$7.3B', pe: '—', nuclear: '78.4M lbs', growth: 'Physical', thesis: 'Direct physical uranium exposure. At-the-market buying program acts as structural demand floor for spot prices.' },
+    { ticker: 'URA', name: 'Global X Uranium ETF', tier: 'etf', mcap: '$5.0B', pe: '—', nuclear: '50 stocks', growth: '+110% 1yr', thesis: 'Broadest uranium sector exposure. Top: Cameco 23%, Oklo 12%, UEC 6%. 0.69% expense ratio.' },
+    { ticker: 'URNM', name: 'Sprott Uranium Miners', tier: 'etf', mcap: '—', pe: '—', nuclear: '34 stocks', growth: '+93% 1yr', thesis: 'Purer uranium play with 11.6% physical uranium allocation. More concentrated than URA.' },
+  ];
+
+  const grid = document.getElementById('company-grid');
+  const tierColors = { tier1: '#eab308', tier2: '#22d3ee', tier3: '#f59e0b', etf: '#8b5cf6' };
+  const tierLabels = { tier1: 'Tier 1 — Highest Conviction', tier2: 'Tier 2 — High Conviction', tier3: 'Tier 3 — Speculative', etf: 'ETF / Physical' };
+
+  companies.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'company-card';
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="ticker"><span class="tier-dot" style="background:' + tierColors[c.tier] + ';"></span>' + c.ticker + '</div>' +
+      '<div class="name">' + c.name + ' · ' + tierLabels[c.tier] + '</div>' +
+      '<div class="metrics">' +
+        '<div><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div><div class="metric-label">Fwd P/E</div><div class="metric-value">' + c.pe + '</div></div>' +
+        '<div><div class="metric-label">Nuclear</div><div class="metric-value">' + c.nuclear + '</div></div>' +
+        '<div><div class="metric-label">Growth</div><div class="metric-value">' + c.growth + '</div></div>' +
+      '</div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  // Filter
+  document.getElementById('company-filters').addEventListener('click', e => {
+    if (!e.target.classList.contains('filter-btn')) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    const filter = e.target.dataset.filter;
+    document.querySelectorAll('.company-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.tier === filter) ? '' : 'none';
+    });
+  });
+})();
+
+// TIMELINE
+(function() {
+  const events = [
+    { date: 'Feb 2026', title: 'NexGen CNSC Hearing', desc: 'Final regulatory decision for Rook I — largest new uranium mine.', side: 'left' },
+    { date: 'Feb-Mar 2026', title: 'Palisades Restart', desc: 'First US nuclear plant reactivated from decommissioning (800 MW).', side: 'left' },
+    { date: 'Q1 2026', title: 'TerraPower CP', desc: 'NRC construction permit for Natrium. Validates reform timeline.', side: 'left' },
+    { date: 'Mar 2026', title: 'Part 53 Final Rule', desc: 'Technology-inclusive licensing framework for advanced reactors.', side: 'left' },
+    { date: 'Mid-2026', title: 'Urenco LEU+ Production', desc: 'First Western LEU+ enrichment capacity online.', side: 'left' },
+    { date: 'Late 2026', title: 'Vistra-Meta Deliveries', desc: 'First hyperscaler nuclear PPA revenue from existing fleet.', side: 'left' },
+    { date: 'June 2027', title: 'Constellation-Meta Clinton', desc: '1,121 MW nuclear PPA begins delivering. 30 MW uprate included.', side: 'right' },
+    { date: '2027-28', title: 'TMI Unit 1 Restart', desc: '835 MW back online for Microsoft. $1.6B investment.', side: 'right' },
+    { date: 'Mid-2028', title: 'Denison Phoenix Production', desc: 'First Athabasca Basin ISR mine — new uranium supply.', side: 'right' },
+    { date: '2029', title: 'Centrus Commercial HALEU', desc: 'First commercial-scale Western HALEU. Breaks Russian monopoly.', side: 'right' },
+    { date: '2030', title: 'BWRX-300 Operational (Ontario)', desc: 'First North American SMR. GE Hitachi / Ontario Power Generation.', side: 'right' },
+    { date: '2030', title: 'TerraPower Natrium Commercial', desc: 'First sodium-cooled fast reactor at commercial scale.', side: 'right' },
+  ];
+
+  const left = document.getElementById('timeline-left');
+  const right = document.getElementById('timeline-right');
+  events.forEach(e => {
+    const item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-date">' + e.date + '</div>' +
+      '<div class="timeline-title">' + e.title + '</div>' +
+      '<div class="timeline-desc">' + e.desc + '</div>';
+    (e.side === 'left' ? left : right).appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  const risks = [
+    { icon: '💰', color: 'rgba(244,63,94,0.1)', title: 'Construction Cost Escalation', desc: 'Vogtle: $14B → $35B. UAMPS: $5.3B → $9.3B cancelled. FOAK premiums are the norm, not exception.' },
+    { icon: '👥', color: 'rgba(234,179,8,0.1)', title: 'NRC Staffing Crisis', desc: '~195 departures since Jan 2025 with hiring freeze. Most ambitious workload + shrinking workforce = bottleneck.' },
+    { icon: '⚛️', color: 'rgba(139,92,246,0.1)', title: 'HALEU Supply Gap', desc: 'Western production: 900 kg/yr. Advanced reactors need orders of magnitude more. Commercial scale 2029+.' },
+    { icon: '📉', color: 'rgba(244,63,94,0.1)', title: 'Valuation Risk (Pre-Revenue)', desc: 'Oklo at $11B, NuScale at $5B with zero/minimal revenue. Any setback = severe multiple compression.' },
+    { icon: '🔌', color: 'rgba(59,130,246,0.1)', title: 'Hyperscaler Demand Risk', desc: 'If AI capex slows or energy efficiency improves, power demand growth could underperform projections.' },
+    { icon: '⚡', color: 'rgba(34,211,238,0.1)', title: 'Electricity Price Risk', desc: 'If wholesale prices decline, merchant nuclear margins compress. 20-year PPAs mitigate for contracted fleet.' },
+    { icon: '🇷🇺', color: 'rgba(244,63,94,0.1)', title: 'Russian Enrichment Leverage', desc: 'Russia controls 46% of enrichment. Western decoupling underway but 5-7 years to close the gap.' },
+    { icon: '⏱️', color: 'rgba(234,179,8,0.1)', title: 'SMR Timeline Slippage', desc: 'Most commercial units 4-8 years away. Sodium, molten salt, HTGR never operated at commercial scale.' },
+    { icon: '☢️', color: 'rgba(139,92,246,0.1)', title: 'Nuclear Waste Policy', desc: '90,000 metric tons of spent fuel stored at reactor sites. No permanent disposal pathway. Yucca stalled.' },
+    { icon: '☀️', color: 'rgba(16,185,129,0.1)', title: 'Renewables Competition', desc: 'Solar + battery costs declining. For some applications, may erode nuclear economic case.' },
+  ];
+
+  const grid = document.getElementById('risk-grid');
+  risks.forEach(r => {
+    grid.innerHTML += '<div class="risk-card"><div class="risk-icon" style="background:' + r.color + ';">' + r.icon + '</div><div><h4>' + r.title + '</h4><p>' + r.desc + '</p></div></div>';
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  const tickers = [
+    { t: 'CEG', c: '#eab308' }, { t: 'VST', c: '#eab308' }, { t: 'CCJ', c: '#eab308' }, { t: 'LEU', c: '#eab308' },
+    { t: 'TLN', c: '#22d3ee' }, { t: 'BWXT', c: '#22d3ee' }, { t: 'NXE', c: '#22d3ee' }, { t: 'UEC', c: '#22d3ee' }, { t: 'UUUU', c: '#22d3ee' },
+    { t: 'DNN', c: '#f59e0b' }, { t: 'OKLO', c: '#f59e0b' }, { t: 'SMR', c: '#f59e0b' }, { t: 'SRUUF', c: '#8b5cf6' }, { t: 'URA', c: '#8b5cf6' },
+  ];
+  const el = document.getElementById('watchlist-pills');
+  tickers.forEach(tk => {
+    el.innerHTML += '<span class="pill"><span class="pdot" style="background:' + tk.c + ';"></span>' + tk.t + '</span>';
+  });
+})();
+</script>
+</body>
+</html>

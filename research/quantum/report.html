@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Computing — Investment Thesis 2026</title>
+<style>
+:root {
+  --bg-deep: #06080f;
+  --bg-card: rgba(10, 14, 28, 0.90);
+  --bg-card-hover: rgba(14, 20, 42, 0.94);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-glow: rgba(99,102,241,0.22);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --accent-blue: #6366f1;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a855f7;
+  --accent-violet: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-indigo: #818cf8;
+  --glow-blue: 0 0 30px rgba(99,102,241,0.15);
+  --glow-purple: 0 0 30px rgba(168,85,247,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-blue) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#wavefield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  backdrop-filter: blur(12px);
+  background: rgba(6,8,15,0.7);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: var(--transition);
+}
+.nav a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+}
+.nav a:hover { color: var(--text-primary); background: var(--bg-glass); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 80px 24px 60px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-blue);
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 40%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stats.six { grid-template-columns: repeat(3, 1fr); }
+.hero-stat {
+  background: var(--bg-card);
+  padding: 24px 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+.hero-stat:hover { background: var(--bg-card-hover); }
+.hero-stat .value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); animation: bounce-arrow 2s infinite; }
+@keyframes bounce-arrow { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(45deg) translate(4px, 4px); } }
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent-blue); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-blue);
+  transform: translateY(-2px);
+}
+.card:hover::before { opacity: 1; }
+
+/* BAR CHART */
+.bar-chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  height: 320px;
+  padding: 0 20px 40px;
+  position: relative;
+}
+.bar-chart .gridlines {
+  position: absolute;
+  top: 0; left: 60px; right: 20px; bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.bar-chart .gridline { border-top: 1px dashed rgba(255,255,255,0.05); position: relative; }
+.bar-chart .gridline span {
+  position: absolute;
+  left: -55px;
+  top: -8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+}
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 4px;
+}
+.bar:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.bar .bar-tooltip {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid var(--border-glow);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+}
+.bar:hover .bar-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
+.bar-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* WATERFALL BARS */
+.cost-waterfall { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+.cost-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cost-row:hover { background: var(--bg-glass); border-radius: 8px; padding: 8px 12px; margin: 0 -12px; }
+.cost-row .vehicle-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cost-row .bar-track { height: 28px; background: rgba(255,255,255,0.02); border-radius: 6px; position: relative; overflow: hidden; }
+.cost-row .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.cost-row .bar-fill::after { content: ''; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.cost-row .cost-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; }
+
+/* DONUT */
+.donut-container { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
+.donut-svg { width: 220px; height: 220px; }
+.donut-legend { display: flex; flex-direction: column; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); padding: 6px 12px; border-radius: 8px; }
+.legend-item:hover { background: var(--bg-glass); }
+.legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.legend-label { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+.legend-value { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-left: auto; padding-left: 16px; }
+
+/* AREA CHART */
+.area-chart { position: relative; width: 100%; height: 300px; margin: 20px 0; }
+.area-chart svg { width: 100%; height: 100%; }
+
+/* COMPANY CARDS */
+.company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.company-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.company-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 4px 0 0 4px; transition: var(--transition); }
+.company-card.tier-1::after { background: var(--accent-blue); }
+.company-card.tier-2::after { background: var(--accent-cyan); }
+.company-card.tier-3::after { background: var(--accent-amber); }
+.company-card.tier-avoid::after { background: var(--accent-rose); }
+.company-card.tier-private::after { background: var(--accent-purple); }
+.company-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--glow-blue); }
+.company-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.company-card .ticker { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); }
+.company-card .company-name { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.company-card .tier-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; }
+.tier-badge.high { background: rgba(99,102,241,0.12); color: var(--accent-blue); border: 1px solid rgba(99,102,241,0.25); }
+.tier-badge.medium { background: rgba(34,211,238,0.12); color: var(--accent-cyan); border: 1px solid rgba(34,211,238,0.25); }
+.tier-badge.speculative { background: rgba(245,158,11,0.12); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.25); }
+.tier-badge.avoid { background: rgba(244,63,94,0.12); color: var(--accent-rose); border: 1px solid rgba(244,63,94,0.25); }
+.tier-badge.private-co { background: rgba(168,85,247,0.12); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.25); }
+.company-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.metric { padding: 10px; background: var(--bg-glass); border-radius: 8px; border: 1px solid var(--border-subtle); }
+.metric .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric .metric-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.company-card .thesis { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+
+/* FILTER PILLS */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.filter-pill:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.filter-pill.active { background: rgba(99,102,241,0.12); border-color: var(--accent-blue); color: var(--accent-blue); }
+
+/* TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.data-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.data-table th:last-child, .data-table td:last-child { text-align: right; }
+.data-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  background: var(--bg-glass);
+  transition: var(--transition);
+}
+.data-table tr:hover td { background: rgba(255,255,255,0.04); }
+.data-table td:first-child { border-radius: 8px 0 0 8px; }
+.data-table td:last-child { border-radius: 0 8px 8px 0; }
+.data-table .ticker-cell { font-family: var(--font-mono); font-weight: 600; color: var(--accent-cyan); }
+
+/* TIMELINE */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan), var(--accent-purple));
+  opacity: 0.3;
+}
+.timeline-item { display: flex; gap: 24px; padding: 16px 0; position: relative; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 12px rgba(99,102,241,0.4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  position: relative;
+  left: 19px;
+  z-index: 2;
+}
+.timeline-dot.amber { background: var(--accent-amber); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+.timeline-dot.purple { background: var(--accent-purple); box-shadow: 0 0 12px rgba(168,85,247,0.4); }
+.timeline-dot.cyan { background: var(--accent-cyan); box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+.timeline-dot.rose { background: var(--accent-rose); box-shadow: 0 0 12px rgba(244,63,94,0.4); }
+.timeline-dot.green { background: var(--accent-green); box-shadow: 0 0 12px rgba(16,185,129,0.4); }
+.timeline-content { flex: 1; padding-left: 16px; }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; color: var(--accent-blue); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.5px; }
+.timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* RISK GRID */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.risk-item:hover { border-color: rgba(244,63,94,0.2); background: rgba(244,63,94,0.03); }
+.risk-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.risk-icon.high { background: rgba(244,63,94,0.1); }
+.risk-icon.medium-high { background: rgba(245,158,11,0.12); }
+.risk-icon.medium { background: rgba(245,158,11,0.08); }
+.risk-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.risk-severity { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.risk-severity.high { color: var(--accent-rose); }
+.risk-severity.medium-high { color: var(--accent-amber); }
+.risk-severity.medium { color: #d97706; }
+.risk-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(99,102,241,0.06), rgba(168,85,247,0.06));
+  border: 1px solid rgba(99,102,241,0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+}
+.conclusion-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.conclusion-box p { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 32px; line-height: 1.7; }
+.watchlist-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.watchlist-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  cursor: default;
+}
+.watchlist-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+.watchlist-pill:hover { border-color: var(--accent-blue); background: rgba(99,102,241,0.06); }
+
+/* SOURCES */
+.sources-section { padding: 40px 0 20px; position: relative; z-index: 1; }
+.sources-section details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sources-section summary {
+  padding: 20px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.sources-section summary::-webkit-details-marker { display: none; }
+.sources-section summary::before { content: '\25B6'; font-size: 10px; transition: transform 0.2s; }
+.sources-section details[open] summary::before { transform: rotate(90deg); }
+.sources-section summary:hover { color: var(--text-primary); }
+.sources-section .sources-content {
+  padding: 0 28px 24px;
+  columns: 2;
+  column-gap: 40px;
+}
+.sources-section .source-group { break-inside: avoid; margin-bottom: 20px; }
+.sources-section .source-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-blue); margin-bottom: 8px; font-weight: 600; }
+.sources-section .source-group ul { list-style: none; }
+.sources-section .source-group li { font-size: 13px; color: var(--text-muted); padding: 3px 0; line-height: 1.5; }
+.sources-section .source-group a { color: var(--accent-indigo); text-decoration: none; transition: var(--transition); }
+.sources-section .source-group a:hover { color: var(--accent-cyan); text-decoration: underline; }
+
+/* FOOTER */
+footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* LAYOUT */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.inline-stat { font-family: var(--font-mono); font-weight: 700; color: var(--accent-cyan); }
+.section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 0; }
+
+/* HEATMAP */
+.heatmap-grid {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 140px repeat(4, 1fr);
+}
+.heatmap-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 10px;
+  text-align: center;
+}
+.heatmap-header:first-child { text-align: left; }
+.heatmap-row-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+}
+.heatmap-cell {
+  padding: 12px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: default;
+  position: relative;
+}
+.heatmap-cell:hover { transform: scale(1.05); z-index: 2; }
+.heatmap-cell .cell-sub {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-sans);
+  margin-top: 2px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-stats, .hero-stats.six { grid-template-columns: 1fr 1fr; }
+  .hero-stat .value { font-size: 1.6rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .bar-chart { height: 220px; gap: 6px; }
+  .cost-row { grid-template-columns: 120px 1fr 80px; }
+  .company-grid { grid-template-columns: 1fr; }
+  .company-card .metrics { grid-template-columns: 1fr; }
+  .donut-container { flex-direction: column; }
+  .conclusion-box { padding: 32px 20px; }
+  .sources-section .sources-content { columns: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 11px; }
+  section { padding: 60px 0; }
+  .heatmap-grid { grid-template-columns: 100px repeat(4, 1fr); font-size: 11px; }
+  .nav { gap: 4px; padding: 12px 16px; }
+  .nav a { font-size: 11px; padding: 5px 10px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .bar-chart { height: 180px; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .heatmap-grid { grid-template-columns: 80px repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="wavefield"></canvas>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#sectors">Sectors</a>
+  <a href="#companies">Companies</a>
+  <a href="#catalysts">Catalysts</a>
+  <a href="#risks">Risks</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">INVESTMENT THESIS 2026</div>
+  <h1>The <span class="gradient-text">Quantum Computing</span> Inflection</h1>
+  <p class="subtitle">Below-threshold error correction achieved. $3.77B in equity funding. Four investable layers from hardware to security &mdash; navigating extreme valuations toward a $2T value creation opportunity.</p>
+  <div class="hero-stats six">
+    <div class="hero-stat">
+      <div class="value" data-count="20" data-prefix="$" data-suffix="B">$0</div>
+      <div class="label">2030 Market Size</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="42" data-suffix="%" data-prefix="">0</div>
+      <div class="label">CAGR 2025-2030</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="3.77" data-prefix="$" data-suffix="B" data-decimal="2">$0</div>
+      <div class="label">2025 Equity Funding</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="2" data-prefix="$" data-suffix="T">$0</div>
+      <div class="label">2035 Value Creation</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="10" data-prefix="$" data-suffix="B+">$0</div>
+      <div class="label">Govt Funding (Cumul.)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value" data-count="14" data-suffix="+" data-prefix="">0</div>
+      <div class="label">Public Companies</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- SECTION 1: MARKET OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Market Overview</div>
+      <h2 class="section-title">From "If" to "When"</h2>
+      <p class="section-desc">Quantum computing stands at ~$1.6-3.5B today. Five competing hardware modalities, no winner yet. The race to fault-tolerant computing converges on 2029 &mdash; with healthy skepticism warranted.</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market Size Projections ($B)</h3>
+        <div class="bar-chart" id="market-chart">
+          <div class="gridlines" id="market-gridlines"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Funding Landscape (2025)</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Q1 2025 Equity Funding</span><div style="font-size:0.75rem;color:var(--text-muted);">+128% year-over-year</div></div>
+            <span class="inline-stat">$1.25B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Q1-Q3 2025 Equity Total</span><div style="font-size:0.75rem;color:var(--text-muted);">Accelerating pace</div></div>
+            <span class="inline-stat">$3.77B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Government Funding (Cumul.)</span><div style="font-size:0.75rem;color:var(--text-muted);">Through April 2025</div></div>
+            <span class="inline-stat">$10B+</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(168,85,247,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">U.S. Federal PQC Budget</span><div style="font-size:0.75rem;color:var(--text-muted);">2025-2035 migration</div></div>
+            <span class="inline-stat" style="color:var(--accent-purple);">$7.1B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(34,211,238,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">EU Quantum Budget</span><div style="font-size:0.75rem;color:var(--text-muted);">July 2025 commitment</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">EUR 1B+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value Creation Heatmap -->
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Value Creation by End-User Sector (McKinsey 2035 Estimates)</h3>
+      <div class="heatmap-grid" id="value-heatmap">
+        <div class="heatmap-header">Sector</div>
+        <div class="heatmap-header">Value Creation</div>
+        <div class="heatmap-header">Market Share</div>
+        <div class="heatmap-header">CAGR</div>
+        <div class="heatmap-header">Confidence</div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="text-align: center; padding: 40px;">
+      <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 8px;">Central Tension</p>
+      <p style="font-size: 1.15rem; font-weight: 500; max-width: 740px; margin: 0 auto; line-height: 1.8;">
+        Pure-play quantum stocks trade at <strong style="color: var(--accent-rose);">100-2,700x trailing revenue</strong>, reflecting speculative premium on technology that remains pre-revenue at meaningful scale. Fault-tolerant quantum computing is <strong style="color: var(--accent-amber);">3-7 years away</strong>. The most attractive near-term opportunity is <strong style="color: var(--accent-blue);">post-quantum cryptography migration</strong> &mdash; driven by regulatory deadlines, not hardware timelines.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: SECTOR BREAKDOWN -->
+<section id="sectors">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Sector Breakdown</div>
+      <h2 class="section-title">Four Investable Layers</h2>
+      <p class="section-desc">Hardware, Software, Networking, and Applications &mdash; each with distinct risk profiles, timelines, and entry points.</p>
+    </div>
+
+    <!-- Hardware -->
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Hardware Modality Comparison</h3>
+        <div class="donut-container" style="gap: 24px;">
+          <svg class="donut-svg" viewBox="0 0 220 220" id="donut-hardware"></svg>
+          <div class="donut-legend" id="donut-hardware-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Fault-Tolerance Roadmap (2029)</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; padding: 10px 0;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 8px rgba(99,102,241,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">IBM Starling</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">200 logical qubits, qLDPC codes, modular architecture</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-blue);">2029</div>
+          </div>
+          <div style="width:2px;height:16px;background:rgba(99,102,241,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-cyan);box-shadow:0 0 8px rgba(34,211,238,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Google (Willow Successor)</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Surface codes, below-threshold demonstrated</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-cyan);">~2029</div>
+          </div>
+          <div style="width:2px;height:16px;background:rgba(34,211,238,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-purple);box-shadow:0 0 8px rgba(168,85,247,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Quantinuum Apollo</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Trapped-ion, hybrid code protocol</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-purple);">2029</div>
+          </div>
+          <div style="width:2px;height:16px;background:rgba(168,85,247,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-amber);box-shadow:0 0 8px rgba(245,158,11,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">IonQ</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">1,600-8,000 logical qubits, accelerated roadmap</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-amber);">2028-29</div>
+          </div>
+          <div style="width:2px;height:16px;background:rgba(245,158,11,0.2);margin-left:5px;"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 8px rgba(16,185,129,0.5);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:1rem;">Xanadu</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Photonic, fault-tolerant by design</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-green);">2029</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segment market sizing -->
+    <div class="card reveal" style="margin-bottom: 24px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Market by Segment ($B)</h3>
+      <div class="cost-waterfall" id="segment-waterfall"></div>
+    </div>
+
+    <!-- Software & Networking -->
+    <div class="two-col reveal" style="margin-bottom: 24px;">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Software &amp; Platforms</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Qiskit (IBM)</span><div style="font-size:0.75rem;color:var(--text-muted);">Market-leading SDK, largest dev community</div></div>
+            <span class="inline-stat" style="color:var(--accent-blue);">Leader</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Amazon Braket (AWS)</span><div style="font-size:0.75rem;color:var(--text-muted);">Multi-vendor marketplace + proprietary chips</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">Scaling</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Classiq</span><div style="font-size:0.75rem;color:var(--text-muted);">Quantum EDA, $200M+ funding, tripled rev</div></div>
+            <span class="inline-stat" style="color:var(--accent-purple);">$200M+</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">NVIDIA cuQuantum/CUDA-Q</span><div style="font-size:0.75rem;color:var(--text-muted);">4,000x simulation speedups, middleware layer</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">Platform</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Riverlane (QEC)</span><div style="font-size:0.75rem;color:var(--text-muted);">Pure-play error correction, $120M+ raised</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">MegaQuOp</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Networking &amp; Security</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">SandboxAQ</span><div style="font-size:0.75rem;color:var(--text-muted);">AI-quantum security, Eric Schmidt chaired</div></div>
+            <span class="inline-stat">$5.75B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">PQShield</span><div style="font-size:0.75rem;color:var(--text-muted);">PQC hardware IP for semiconductors</div></div>
+            <span class="inline-stat" style="color:var(--accent-cyan);">$65.1M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">Toshiba QKD</span><div style="font-size:0.75rem;color:var(--text-muted);">600+ km distance record, hybrid QKD+PQC</div></div>
+            <span class="inline-stat" style="color:var(--accent-amber);">600 km</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid rgba(244,63,94,0.2);">
+            <div><span style="font-size:0.85rem;font-weight:600;">CNSA 2.0 Deadline</span><div style="font-size:0.75rem;color:var(--text-muted);">All new NSS acquisitions compliant</div></div>
+            <span class="inline-stat" style="color:var(--accent-rose);">Jan 2027</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-glass);border-radius:8px;border:1px solid var(--border-subtle);">
+            <div><span style="font-size:0.85rem;font-weight:600;">PQC Already Shipping</span><div style="font-size:0.75rem;color:var(--text-muted);">Chrome, Firefox, Safari, iOS, Android, Windows</div></div>
+            <span class="inline-stat" style="color:var(--accent-green);">Live</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="card reveal">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Enterprise Quantum Programs</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div class="metric"><div class="metric-label">HSBC Bond Trading</div><div class="metric-value" style="color: var(--accent-green);">+34%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Improvement via IBM Quantum</div></div>
+        <div class="metric"><div class="metric-label">Goldman Sachs Risk</div><div class="metric-value" style="color: var(--accent-cyan);">25x</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Risk analysis speedup</div></div>
+        <div class="metric"><div class="metric-label">D-Wave Customers</div><div class="metric-value" style="color: var(--accent-amber);">100+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Production quantum annealing</div></div>
+        <div class="metric"><div class="metric-label">IBM Quantum Revenue</div><div class="metric-value" style="color: var(--accent-purple);">$1B+</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Cumulative to date</div></div>
+        <div class="metric"><div class="metric-label">Bitcoin Exposed</div><div class="metric-value" style="color: var(--accent-rose);">$718B</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Quantum-vulnerable P2PK addresses</div></div>
+        <div class="metric"><div class="metric-label">IBM Error Mitigation</div><div class="metric-value" style="color: var(--accent-blue);">100x</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Cost reduction achieved</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: COMPANIES -->
+<section id="companies">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Analysis</div>
+      <h2 class="section-title">The Investable Universe</h2>
+      <p class="section-desc">From diversified quantum optionality to pure-play bets. Filter by conviction tier to explore the full landscape.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="company-filters">
+      <div class="filter-pill active" data-filter="all">All</div>
+      <div class="filter-pill" data-filter="tier-1">Tier 1</div>
+      <div class="filter-pill" data-filter="tier-2">Tier 2</div>
+      <div class="filter-pill" data-filter="tier-3">Tier 3</div>
+      <div class="filter-pill" data-filter="tier-private">Private / IPO</div>
+      <div class="filter-pill" data-filter="tier-avoid">Avoid</div>
+    </div>
+
+    <div class="company-grid reveal" id="company-grid"></div>
+
+    <!-- IPO Pipeline -->
+    <div class="card reveal" style="overflow-x: auto; margin-top: 32px;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Upcoming IPOs</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Expected Valuation</th>
+            <th>Timeline</th>
+            <th>Significance</th>
+          </tr>
+        </thead>
+        <tbody id="ipo-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: CATALYST TIMELINE -->
+<section id="catalysts">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Investment Timing</div>
+      <h2 class="section-title">Catalyst Calendar</h2>
+      <p class="section-desc">Key events from near-term earnings to long-term fault-tolerance milestones that could move the sector.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Risk Factors</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-desc">Ten risks from extreme valuations to quantum winter &mdash; the sector is priced for perfection in a field where perfection is decades away.</p>
+    </div>
+
+    <div class="risk-grid reveal" id="risk-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <div class="container">
+    <div class="conclusion-box reveal">
+      <h2>Recommended Watchlist</h2>
+      <p>Build positions in diversified quantum optionality (IBM, HON, NVDA). Watch PQC migration for near-term revenue. Monitor 2026-2027 error correction milestones &mdash; they determine whether the 2029 fault-tolerance timeline holds or slips.</p>
+      <div class="watchlist-pills" id="watchlist-pills"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 32px; margin-bottom: 0;">
+        Research compiled February 2026. Not investment advice. See sources below.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="container">
+    <details>
+      <summary>Sources &amp; References</summary>
+      <div class="sources-content">
+        <div class="source-group">
+          <h4>Hardware</h4>
+          <ul>
+            <li><a href="https://www.ibm.com/quantum/hardware" target="_blank">IBM Quantum Hardware and Roadmap</a></li>
+            <li><a href="https://www.ibm.com/quantum/blog/quantum-roadmap-2033" target="_blank">IBM Quantum Roadmap to 2033</a></li>
+            <li><a href="https://blog.google/technology/research/google-willow-quantum-chip/" target="_blank">Google Willow Quantum Chip</a></li>
+            <li><a href="https://www.nature.com/articles/s41586-024-08449-y" target="_blank">Google Willow Error Correction (Nature)</a></li>
+            <li><a href="https://www.ionq.com/blog/accelerating-towards-fault-tolerance-unlocking-99-99-two-qubit-gate" target="_blank">IonQ 99.99% Two-Qubit Gate Fidelity</a></li>
+            <li><a href="https://www.quantinuum.com/products-solutions/quantinuum-systems/system-model-h2" target="_blank">Quantinuum System Model H2</a></li>
+            <li><a href="https://www.psiquantum.com/news-import/psiquantum-1b-fundraise" target="_blank">PsiQuantum $1B Raise</a></li>
+            <li><a href="https://azure.microsoft.com/en-us/blog/quantum/2025/02/19/microsoft-unveils-majorana-1-the-worlds-first-quantum-processor-powered-by-topological-qubits/" target="_blank">Microsoft Majorana 1</a></li>
+            <li><a href="https://www.quera.com/press-releases/quera-computing-marks-record-2025-as-the-year-of-fault-tolerance-and-over-230m-of-new-capital-to-accelerate-industrial-deployment" target="_blank">QuEra $230M Funding</a></li>
+            <li><a href="https://www.dwavequantum.com/company/newsroom/press-release/d-wave-announces-general-availability-of-advantage2-quantum-computer-its-most-advanced-and-performant-system" target="_blank">D-Wave Advantage2</a></li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Software &amp; Algorithms</h4>
+          <ul>
+            <li><a href="https://www.marketsandmarkets.com/Market-Reports/quantum-computing-software-market-179309719.html" target="_blank">Quantum Computing Software Market</a></li>
+            <li><a href="https://www.classiq.io/insights/classiq-raises-110m-in-largest-ever-quantum-software-funding-round" target="_blank">Classiq Raises $110M</a></li>
+            <li><a href="https://www.riverlane.com/press-release/riverlane-raises-75-million-to-meet-surging-global-demand-for-quantum-error-correction-technology" target="_blank">Riverlane $75M Series C</a></li>
+            <li><a href="https://developer.nvidia.com/cuquantum-sdk" target="_blank">NVIDIA cuQuantum SDK</a></li>
+            <li><a href="https://developer.nvidia.com/cuda-q" target="_blank">NVIDIA CUDA-Q</a></li>
+            <li><a href="https://aws.amazon.com/braket/" target="_blank">AWS Braket</a></li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Networking &amp; Security</h4>
+          <ul>
+            <li><a href="https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards" target="_blank">NIST PQC Standards</a></li>
+            <li><a href="https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-and-ibm-plan-launch-joint-solution-accelerate" target="_blank">Palo Alto + IBM Quantum-Safe Solution</a></li>
+            <li><a href="https://news.crunchbase.com/venture/sandboxaq-ai-quantum-raise-googl-nvda/" target="_blank">SandboxAQ $450M Series E</a></li>
+            <li><a href="https://investors.ionq.com/news/news-details/2025/IonQ-Completes-Acquisition-of-ID-Quantique-Cementing-Leadership-in-Quantum-Networking-and-Secure-Communications/default.aspx" target="_blank">IonQ ID Quantique Acquisition</a></li>
+            <li><a href="https://www.marketsandmarkets.com/PressReleases/quantum-key-distribution-qkd.asp" target="_blank">QKD Market Forecast</a></li>
+            <li><a href="https://www.marketsandmarkets.com/Market-Reports/post-quantum-cryptography-market-126986626.html" target="_blank">PQC Market Forecast</a></li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h4>Applications &amp; Market</h4>
+          <ul>
+            <li><a href="https://fortune.com/2025/09/25/hsbc-quantum-computing-bond-trading-cusp-of-a-new-frontier/" target="_blank">HSBC Quantum Bond Trading (Fortune)</a></li>
+            <li><a href="https://www.mckinsey.com/featured-insights/the-rise-of-quantum-computing" target="_blank">McKinsey: Rise of Quantum Computing</a></li>
+            <li><a href="https://www.bcg.com/press/18july2024-quantum-computing-create-up-to-850-billion-of-economic-value-2040" target="_blank">BCG: Quantum $850B by 2040</a></li>
+            <li><a href="https://www.marketsandmarkets.com/PressReleases/quantum-computing.asp" target="_blank">Quantum Computing Market $20.2B by 2030</a></li>
+            <li><a href="https://thequantuminsider.com/2025/10/20/public-quantum-stocks-2025-from-pure-plays-to-tech-giants/" target="_blank">Public Quantum Computing Companies</a></li>
+            <li><a href="https://www.fool.com/investing/2026/01/20/quantum-computing-stocks-415-billion-reality-check/" target="_blank">Quantum Stock Valuations Reality Check</a></li>
+            <li><a href="https://www.citigroup.com/rcs/citigpa/storage/public/Citi_Institute_Quantum_Threat.pdf" target="_blank">Citi: The Trillion-Dollar Security Race</a></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Quantum Computing &mdash; Investment Thesis 2026<br>Generated from BigPic research &middot; namkuzu-da</p>
+  </div>
+</footer>
+
+<script>
+// WAVEFUNCTION FIELD ANIMATION
+(function() {
+  var canvas = document.getElementById('wavefield');
+  var ctx = canvas.getContext('2d');
+  var nodes = [], edges = [];
+  var w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    nodes = [];
+    edges = [];
+    var count = Math.min(Math.floor(w * h / 9000), 180);
+    for (var i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.5,
+        a: Math.random() * 0.35 + 0.05,
+        pulse: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.001 + 0.0003
+      });
+    }
+    for (var i = 0; i < nodes.length; i++) {
+      for (var j = i + 1; j < nodes.length; j++) {
+        var dx = nodes[i].x - nodes[j].x;
+        var dy = nodes[i].y - nodes[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140 && Math.random() < 0.25) {
+          edges.push({ a: i, b: j, dist: dist });
+        }
+      }
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    edges.forEach(function(e) {
+      var a = nodes[e.a], b = nodes[e.b];
+      var flicker = Math.sin(t * 0.001 + e.a) * 0.3 + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(99, 102, 241, ' + (0.03 * flicker) + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+    nodes.forEach(function(n) {
+      var flicker = Math.sin(t * n.speed * 1000 + n.pulse) * 0.4 + 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(99, 102, 241, ' + (n.a * flicker) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize();
+  init();
+  requestAnimationFrame(draw);
+})();
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.hero-stat .value').forEach(function(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix !== undefined ? el.dataset.prefix : '$';
+    var decimals = el.dataset.decimal ? parseInt(el.dataset.decimal) : 0;
+    var duration = 2000;
+    var start = performance.now();
+
+    function update(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      if (decimals > 0) {
+        el.textContent = prefix + current.toFixed(decimals) + suffix;
+      } else {
+        el.textContent = prefix + Math.round(current) + suffix;
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+setTimeout(animateCounters, 400);
+
+// SCROLL REVEAL
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// MARKET SIZE BAR CHART
+(function() {
+  var data = [
+    { label: '2025', value: 2.5, color: 'var(--accent-indigo)' },
+    { label: '2026E', value: 5, color: 'var(--accent-blue)' },
+    { label: '2030E', value: 20, color: 'var(--accent-cyan)' },
+    { label: '2035E', value: 85, color: 'var(--accent-purple)' },
+    { label: '2040E', value: 170, color: 'var(--accent-green)' },
+  ];
+  var max = 180;
+  var chart = document.getElementById('market-chart');
+  var gridlines = document.getElementById('market-gridlines');
+
+  [180, 135, 90, 45, 0].forEach(function(v) {
+    var line = document.createElement('div');
+    line.className = 'gridline';
+    line.innerHTML = '<span>$' + v + 'B</span>';
+    gridlines.appendChild(line);
+  });
+
+  data.forEach(function(d) {
+    var pct = (d.value / max * 100);
+    var group = document.createElement('div');
+    group.className = 'bar-group';
+    group.innerHTML =
+      '<div class="bar" style="height:0%;background:' + d.color + ';" data-height="' + pct + '">' +
+        '<div class="bar-tooltip">$' + d.value + 'B</div>' +
+      '</div>' +
+      '<div class="bar-label">' + d.label + '</div>';
+    chart.appendChild(group);
+  });
+
+  var chartObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.height = bar.dataset.height + '%'; }, i * 100);
+        });
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  chartObs.observe(chart);
+})();
+
+// VALUE CREATION HEATMAP
+(function() {
+  var sectors = [
+    { name: 'Finance (BFSI)', value: '$300-500B', share: '26%', cagr: '~35%', conf: 'High', confColor: 'rgba(16,185,129,0.2)', confText: '#10b981' },
+    { name: 'Chemicals', value: '$300-500B', share: '~12%', cagr: '~30%', conf: 'Med-High', confColor: 'rgba(34,211,238,0.2)', confText: '#22d3ee' },
+    { name: 'Life Sciences', value: '$200-500B', share: '14.9%', cagr: '21.5%', conf: 'Medium', confColor: 'rgba(245,158,11,0.2)', confText: '#f59e0b' },
+    { name: 'Mobility', value: '$200-400B', share: '~10%', cagr: '36.2%', conf: 'Medium', confColor: 'rgba(245,158,11,0.2)', confText: '#f59e0b' },
+    { name: 'Aerospace', value: '--', share: '~9%', cagr: '~28%', conf: 'Medium', confColor: 'rgba(245,158,11,0.15)', confText: '#d97706' },
+    { name: 'Energy', value: '--', share: '~7%', cagr: '~25%', conf: 'Low-Med', confColor: 'rgba(244,63,94,0.15)', confText: '#f43f5e' },
+  ];
+  var grid = document.getElementById('value-heatmap');
+  sectors.forEach(function(s) {
+    grid.innerHTML +=
+      '<div class="heatmap-row-label">' + s.name + '</div>' +
+      '<div class="heatmap-cell" style="background:rgba(99,102,241,0.12);color:var(--accent-indigo);">' + s.value + '</div>' +
+      '<div class="heatmap-cell" style="background:rgba(34,211,238,0.1);color:var(--accent-cyan);">' + s.share + '</div>' +
+      '<div class="heatmap-cell" style="background:rgba(16,185,129,0.1);color:var(--accent-green);">' + s.cagr + '</div>' +
+      '<div class="heatmap-cell" style="background:' + s.confColor + ';color:' + s.confText + ';">' + s.conf + '</div>';
+  });
+})();
+
+// HARDWARE MODALITY DONUT
+(function() {
+  var segments = [
+    { label: 'Superconducting', value: 35, color: '#6366f1' },
+    { label: 'Trapped Ion', value: 25, color: '#22d3ee' },
+    { label: 'Neutral Atom', value: 15, color: '#10b981' },
+    { label: 'Photonic', value: 15, color: '#a855f7' },
+    { label: 'Annealing', value: 5, color: '#f59e0b' },
+    { label: 'Topological', value: 5, color: '#f43f5e' },
+  ];
+  var total = segments.reduce(function(s, d) { return s + d.value; }, 0);
+  var svg = document.getElementById('donut-hardware');
+  var legend = document.getElementById('donut-hardware-legend');
+  var r = 80, cx = 110, cy = 110, sw = 26;
+  var circumference = 2 * Math.PI * r;
+  var offset = 0;
+
+  segments.forEach(function(seg) {
+    var pct = seg.value / total;
+    var dashLen = circumference * pct;
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', seg.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', dashLen + ' ' + (circumference - dashLen));
+    circle.setAttribute('stroke-dashoffset', -offset);
+    circle.setAttribute('transform', 'rotate(-90 ' + cx + ' ' + cy + ')');
+    svg.appendChild(circle);
+    offset += dashLen;
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-dot" style="background:' + seg.color + '"></div>' +
+      '<span class="legend-label">' + seg.label + '</span>' +
+      '<span class="legend-value">' + seg.value + '%</span>';
+    legend.appendChild(item);
+  });
+
+  var bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r - sw/2 - 2);
+  bg.setAttribute('fill', 'rgba(6,8,15,0.8)');
+  svg.appendChild(bg);
+  var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', cx); text.setAttribute('y', cy - 4);
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('fill', '#e2e8f0');
+  text.setAttribute('font-family', 'var(--font-mono)');
+  text.setAttribute('font-size', '16');
+  text.setAttribute('font-weight', '800');
+  text.textContent = 'R&D Focus';
+  svg.appendChild(text);
+  var sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.setAttribute('x', cx); sub.setAttribute('y', cy + 14);
+  sub.setAttribute('text-anchor', 'middle');
+  sub.setAttribute('fill', '#4b5568');
+  sub.setAttribute('font-family', 'var(--font-sans)');
+  sub.setAttribute('font-size', '10');
+  sub.textContent = 'by Modality';
+  svg.appendChild(sub);
+})();
+
+// SEGMENT MARKET WATERFALL
+(function() {
+  var data = [
+    { name: 'QCaaS', cost: 74.36, label: '$74.4B (2033E)', color: 'var(--accent-blue)' },
+    { name: 'PQC', cost: 30, label: '$22.7-30B (2033E)', color: 'var(--accent-purple)' },
+    { name: 'Hardware', cost: 10, label: '$8-10B (2030E)', color: 'var(--accent-cyan)' },
+    { name: 'Networking', cost: 6, label: '$5.4-6B (2030E)', color: 'var(--accent-green)' },
+    { name: 'QKD', cost: 2.6, label: '$2-2.6B (2030E)', color: 'var(--accent-amber)' },
+    { name: 'Software', cost: 1.5, label: '$1.5B (2033E)', color: 'var(--accent-rose)' },
+  ];
+  var max = 74.36;
+  var container = document.getElementById('segment-waterfall');
+
+  data.forEach(function(d) {
+    var pct = Math.max((d.cost / max) * 100, 3);
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.innerHTML =
+      '<div class="vehicle-name">' + d.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + d.color + ';" data-width="' + pct + '"></div></div>' +
+      '<div class="cost-value" style="color:' + d.color + ';">' + d.label + '</div>';
+    container.appendChild(row);
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+          setTimeout(function() { bar.style.width = bar.dataset.width + '%'; }, i * 100);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+})();
+
+// COMPANY CARDS
+(function() {
+  var companies = [
+    { ticker: 'IBM', name: 'IBM', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$230B', metric: '$1B+ QC rev', ps: '3.7x', thesis: 'Low-risk quantum exposure. 13 deployed systems, 47% deal value share, Qiskit platform dominance. Quantum is upside optionality within stable dividend payer.' },
+    { ticker: 'HON', name: 'Honeywell', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$145B', metric: '53% Quantinuum', ps: '3.9x', thesis: '53% Quantinuum stake. IPO at $20B+ unlocks ~7% of HON value. Conventional industrial multiples provide downside protection.' },
+    { ticker: 'IONQ', name: 'IonQ', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$13-18B', metric: '$106-110M (2025E)', ps: '~141x', thesis: 'Largest pure-play. Best revenue trajectory (222% YoY). 99.99% gate fidelity. $3.5B cash. 900+ patents incl. IDQ networking portfolio.' },
+    { ticker: 'NVDA', name: 'NVIDIA', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$3.6T', metric: 'cuQuantum/CUDA-Q', ps: '~28x', thesis: 'Quantum middleware mirrors AI GPU dominance. Cross-modality investments in Quantinuum, PsiQuantum, QuEra. Small but growing optionality.' },
+    { ticker: 'PANW', name: 'Palo Alto Networks', tier: 'tier-1', badge: 'high', badgeText: 'Tier 1', mcap: '~$130B', metric: 'PQC Solutions', ps: '~16x', thesis: 'Near-term PQC beneficiary. Joint IBM quantum-safe solution (Jan 2026). Regulatory-driven demand independent of hardware timelines.' },
+    { ticker: 'QBTS', name: 'D-Wave', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$9-11B', metric: '100+ customers', ps: '~315x', thesis: 'Most commercially mature (100+ customers). Annealing outperformed Frontier supercomputer. Gate-model pivot in 2026 expands TAM.' },
+    { ticker: 'GOOG', name: 'Alphabet', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$2.3T', metric: 'Willow chip', ps: '6.5x', thesis: 'Willow demonstrated strongest error correction results. $230M QuEra investment hedges modalities. Free call option within AI mega-cap.' },
+    { ticker: '6502.T', name: 'Toshiba', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$25B+', metric: 'QKD Leader', ps: 'N/A', thesis: 'QKD distance record (600+ km). First hybrid QKD+PQC commercial system. Engineering depth for scale production.' },
+    { ticker: 'AMZN', name: 'Amazon', tier: 'tier-2', badge: 'medium', badgeText: 'Tier 2', mcap: '~$2.3T', metric: 'Braket + Ocelot', ps: '~3.5x', thesis: 'Braket marketplace leverages AWS distribution. Ocelot/Emerald proprietary chips signal vertical integration. Enterprise experimentation grows.' },
+    { ticker: 'RGTI', name: 'Rigetti', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$6B', metric: '$7M TTM', ps: '~856x', thesis: 'Modular chiplet strategy. India C-DAC $8.4M order. But $1.9M quarterly revenue at $6B market cap is extreme risk.' },
+    { ticker: 'MSFT', name: 'Microsoft', tier: 'tier-3', badge: 'speculative', badgeText: 'Tier 3', mcap: '~$3.1T', metric: 'Majorana 1', ps: '~12x', thesis: 'Topological qubit has highest ceiling but most skepticism. Azure Quantum + Atom Computing hedges. Quantum immaterial to $3.1T company.' },
+    { ticker: '--', name: 'Classiq (Private)', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$200M+ raised', metric: 'Tripled YoY', ps: 'Private', thesis: 'Quantum EDA (circuit synthesis). Blue-chip customers (BMW, Citi). AMD, Qualcomm, IonQ as strategic investors. Watch for IPO.' },
+    { ticker: '--', name: 'SandboxAQ (Private)', tier: 'tier-private', badge: 'private-co', badgeText: 'Private', mcap: '$5.75B val', metric: '$950M+ raised', ps: 'Private', thesis: 'Largest quantum security company. AI-quantum dual focus. Google/Schmidt backing. Enterprise PQC platform with government customers.' },
+    { ticker: '--', name: 'Quantinuum (IPO)', tier: 'tier-private', badge: 'private-co', badgeText: 'IPO', mcap: '$20B+ (est.)', metric: 'Record QV', ps: 'IPO', thesis: 'Arguably strongest quantum technology (all-to-all connectivity). S-1 filed Jan 2026. Wait for post-IPO settling at $20B+ valuation.' },
+    { ticker: '--', name: 'Xanadu (SPAC)', tier: 'tier-private', badge: 'private-co', badgeText: 'SPAC', mcap: '$3.6B', metric: 'PennyLane', ps: 'SPAC', thesis: 'First photonic pure-play. PennyLane platform. SPAC mergers historically underperform; entry after post-listing volatility preferred.' },
+    { ticker: 'QUBT', name: 'QC Inc.', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: '~$2-3B', metric: 'Minimal rev', ps: '~2,760x', thesis: '2,760x P/S. Luminar acquisition is photonics pivot, not quantum computing. Analyst estimates appear disconnected from reality.' },
+    { ticker: 'ARQQ', name: 'Arqit', tier: 'tier-avoid', badge: 'avoid', badgeText: 'Avoid', mcap: '~$300-420M', metric: '$530K rev', ps: 'N/M', thesis: '$530K revenue. Technology claims require validation. ~15 months cash runway. Competes against free NIST-standard PQC.' },
+  ];
+
+  var grid = document.getElementById('company-grid');
+  var filters = document.getElementById('company-filters');
+
+  companies.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'company-card ' + c.tier;
+    card.dataset.tier = c.tier;
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div><div class="ticker">' + c.ticker + '</div><div class="company-name">' + c.name + '</div></div>' +
+        '<div class="tier-badge ' + c.badge + '">' + c.badgeText + '</div>' +
+      '</div>' +
+      '<div class="metrics">' +
+        '<div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">' + c.mcap + '</div></div>' +
+        '<div class="metric"><div class="metric-label">Key Metric</div><div class="metric-value">' + c.metric + '</div></div>' +
+      '</div>' +
+      '<div class="metric" style="margin-bottom:16px;"><div class="metric-label">P/S Ratio</div><div class="metric-value" style="font-size:0.85rem;">' + c.ps + '</div></div>' +
+      '<div class="thesis">' + c.thesis + '</div>';
+    grid.appendChild(card);
+  });
+
+  filters.addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill) return;
+    filters.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    grid.querySelectorAll('.company-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        card.style.transform = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// IPO TABLE
+(function() {
+  var ipos = [
+    { company: 'Quantinuum', val: '$20B+', timeline: '2026 (S-1 filed)', signal: 'Highest-profile quantum IPO; strongest trapped-ion tech' },
+    { company: 'Xanadu', val: '$3.6B (SPAC)', timeline: '2026', signal: 'First photonic pure-play; PennyLane ecosystem' },
+    { company: 'PsiQuantum', val: '$7B', timeline: 'IPO ready, no date', signal: 'Largest private quantum co; GlobalFoundries manufacturing' },
+    { company: 'SandboxAQ', val: '$5.75B', timeline: 'No timeline', signal: 'Largest quantum security company; Google/Schmidt backed' },
+  ];
+  var tbody = document.getElementById('ipo-tbody');
+  ipos.forEach(function(s) {
+    var row = document.createElement('tr');
+    row.innerHTML =
+      '<td class="ticker-cell">' + s.company + '</td>' +
+      '<td style="font-family:var(--font-mono);font-size:13px;">' + s.val + '</td>' +
+      '<td style="font-size:13px;">' + s.timeline + '</td>' +
+      '<td style="font-size:13px;color:var(--text-secondary);">' + s.signal + '</td>';
+    tbody.appendChild(row);
+  });
+})();
+
+// CATALYST TIMELINE
+(function() {
+  var events = [
+    { date: 'Feb 25, 2026', title: 'IonQ Q4 2025 Earnings', desc: 'Validates $106-110M FY2025 guidance and provides 2026 outlook. Key pure-play revenue proof point.', dot: '' },
+    { date: 'H1 2026', title: 'Quantinuum IPO Listing', desc: 'Likely the most significant quantum market event of 2026. HON holders get indirect exposure. $20B+ valuation.', dot: 'purple' },
+    { date: 'H1 2026', title: 'Xanadu SPAC Listing', desc: 'First photonic quantum pure-play trading opportunity. PennyLane ecosystem + Aurora modular architecture.', dot: 'cyan' },
+    { date: 'H2 2026', title: 'CNSA 2.0 Spending Acceleration', desc: 'PQC spending ramps as government agencies race to comply with January 2027 deadline. Benefits PANW, IBM, SandboxAQ.', dot: 'amber' },
+    { date: 'H2 2026', title: 'IBM Kookaburra Processor', desc: 'First QEC-enabled processor with qLDPC memory. Validates IBM\'s error correction approach and 2029 timeline.', dot: '' },
+    { date: 'Late 2026', title: 'Riverlane MegaQuOp Milestone', desc: '1M error-free operations target. Validates error correction infrastructure thesis. Hardware-agnostic positioning.', dot: 'green' },
+    { date: 'Late 2026', title: 'IBM Quantum Advantage Demo', desc: 'IBM claims deliverable by end of 2026 with HPC integration. Would be first commercially relevant quantum advantage.', dot: '' },
+    { date: '2026', title: 'D-Wave Gate-Model Launch', desc: 'Expands TAM beyond annealing if credible. Validates dual-platform strategy for the most commercially mature player.', dot: 'amber' },
+    { date: '2026', title: 'EuroQCI Operational Activities Begin', desc: 'EU-wide quantum communication infrastructure spending ramps across 27 member states. EUR 1B+ budget.', dot: 'cyan' },
+    { date: '2028-2030', title: 'Fault-Tolerant QC Arrives', desc: 'If IBM Starling, Google\'s successor, and Quantinuum Apollo deliver, the NISQ-to-FT transition unlocks pharma, materials, finance.', dot: 'purple' },
+    { date: '2030-2035', title: 'Full PQC Migration Completes', desc: 'All U.S. national security systems quantum-resistant. $7.1B federal spend. PQC becomes standard infrastructure.', dot: 'rose' },
+  ];
+  var container = document.getElementById('timeline');
+  events.forEach(function(e) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML =
+      '<div class="timeline-dot ' + e.dot + '"></div>' +
+      '<div class="timeline-content">' +
+        '<div class="timeline-date">' + e.date + '</div>' +
+        '<div class="timeline-title">' + e.title + '</div>' +
+        '<div class="timeline-desc">' + e.desc + '</div>' +
+      '</div>';
+    container.appendChild(item);
+  });
+})();
+
+// RISK GRID
+(function() {
+  var risks = [
+    { icon: '\u26A0', level: 'high', sev: 'HIGH', title: 'Extreme Valuations', desc: 'Pure-play stocks at 100-2,700x revenue. Any negative catalyst could trigger 50%+ drawdowns. Priced for perfection in a pre-revenue field.' },
+    { icon: '\u26A0', level: 'medium-high', sev: 'MED-HIGH', title: 'Quantum Winter Risk', desc: 'If key 2026-2027 milestones are missed (IBM advantage, Kookaburra QEC, Riverlane MegaQuOp), investor sentiment could collapse.' },
+    { icon: '\u26A0', level: 'medium-high', sev: 'MED-HIGH', title: 'Technology Modality Risk', desc: 'No modality has won. Superconducting, trapped ion, photonic, topological, neutral atom each face unique scaling challenges.' },
+    { icon: '\u26A0', level: 'medium-high', sev: 'MED-HIGH', title: 'Timeline Slippage', desc: 'Every major quantum roadmap has historically slipped. 2029 convergence could push to 2032+, straining pure-play funding.' },
+    { icon: '\u26CF', level: 'medium', sev: 'MEDIUM', title: 'Classical Computing Competition', desc: 'GPUs, TPUs, neuromorphic computing, and quantum-inspired classical algorithms continuously raise the bar for quantum advantage.' },
+    { icon: '\u26CF', level: 'medium', sev: 'MEDIUM', title: 'Dilution Risk', desc: 'All pure-plays are cash-burning. IonQ raised $2B in Oct 2025; Rigetti and D-Wave will need additional capital. Each raise dilutes.' },
+    { icon: '\u26CF', level: 'medium', sev: 'MEDIUM', title: 'Geopolitical / Export Controls', desc: 'China leads in QKD infrastructure. Export controls could fragment the market. BRICS quantum communication plans create parallel ecosystems.' },
+    { icon: '\u26CF', level: 'medium', sev: 'MEDIUM', title: 'Key-Person / IP Risk', desc: 'Many quantum companies are academic spinouts with thin engineering teams. Loss of key researchers could be existential.' },
+    { icon: '\u26CF', level: 'medium', sev: 'MEDIUM', title: 'Consolidation / Shakeout', desc: 'Too many small companies relative to current market size. Expect significant M&A and failures. Zapata\'s near-collapse is an early example.' },
+    { icon: '\u26A0', level: 'medium', sev: 'LOW/HIGH', title: 'PQC Algorithm Compromise', desc: 'If a NIST-standard PQC algorithm is broken, it triggers emergency migration. Low probability but catastrophic impact.' },
+  ];
+  var container = document.getElementById('risk-grid');
+  risks.forEach(function(r) {
+    var item = document.createElement('div');
+    item.className = 'risk-item';
+    item.innerHTML =
+      '<div class="risk-icon ' + r.level + '">' + r.icon + '</div>' +
+      '<div><div class="risk-severity ' + r.level + '">' + r.sev + '</div><div class="risk-title">' + r.title + '</div><div class="risk-desc">' + r.desc + '</div></div>';
+    container.appendChild(item);
+  });
+})();
+
+// WATCHLIST PILLS
+(function() {
+  var picks = [
+    { ticker: 'IBM', color: '#6366f1' },
+    { ticker: 'HON', color: '#6366f1' },
+    { ticker: 'IONQ', color: '#6366f1' },
+    { ticker: 'NVDA', color: '#6366f1' },
+    { ticker: 'PANW', color: '#6366f1' },
+    { ticker: 'QBTS', color: '#22d3ee' },
+    { ticker: 'GOOG', color: '#22d3ee' },
+    { ticker: 'AMZN', color: '#22d3ee' },
+    { ticker: '6502.T', color: '#22d3ee' },
+    { ticker: 'RGTI', color: '#f59e0b' },
+    { ticker: 'MSFT', color: '#f59e0b' },
+    { ticker: 'Quantinuum IPO', color: '#a855f7' },
+    { ticker: 'Xanadu SPAC', color: '#a855f7' },
+    { ticker: 'SandboxAQ', color: '#a855f7' },
+  ];
+  var container = document.getElementById('watchlist-pills');
+  picks.forEach(function(p) {
+    var pill = document.createElement('div');
+    pill.className = 'watchlist-pill';
+    pill.innerHTML = '<span class="pill-dot" style="background:' + p.color + ';"></span>' + p.ticker;
+    container.appendChild(pill);
+  });
+})();
+</script>
+</body>
+</html>
