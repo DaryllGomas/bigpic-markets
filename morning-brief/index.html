@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Brief — Daily Pre-Market Analysis | BigPic Solutions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --bg-deep: #0a0f1a;
+  --bg-card: rgba(18, 26, 46, 0.88);
+  --bg-card-hover: rgba(26, 39, 68, 0.92);
+  --border-subtle: rgba(232,184,125,0.08);
+  --border-glow: rgba(232,184,125,0.18);
+  --text-primary: #fdf6ec;
+  --text-secondary: #c9d6df;
+  --text-muted: #6b7d8e;
+  --accent-gold: #e8b87d;
+  --accent-amber: #f4a261;
+  --accent-coral: #ef8354;
+  --glow-gold: 0 0 30px rgba(232,184,125,0.15);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Newsreader', Georgia, serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-gold) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; gap: 12px;
+}
+.nav a.back {
+  color: var(--text-secondary); text-decoration: none;
+  display: flex; align-items: center; transition: var(--transition);
+}
+.nav a.back:hover { color: var(--accent-gold); }
+.nav .brand { font-weight: 700; font-size: 16px; color: var(--accent-amber); letter-spacing: 1px; }
+
+.hero {
+  padding: 120px 0 60px; text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+  letter-spacing: -0.03em; margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p {
+  font-family: var(--font-mono); color: var(--text-secondary);
+  font-size: 1rem; max-width: 600px; margin: 0 auto;
+}
+
+.month-group { margin-bottom: 40px; }
+.month-label {
+  font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);
+}
+
+.report-list { padding: 0 0 80px; }
+
+.report-entry {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; margin-bottom: 8px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); transition: var(--transition);
+  text-decoration: none; color: inherit;
+}
+.report-entry:hover {
+  background: var(--bg-card-hover); border-color: var(--border-glow);
+  box-shadow: var(--glow-gold); transform: translateY(-1px);
+}
+.report-entry .info { display: flex; flex-direction: column; gap: 2px; }
+.report-entry .day {
+  font-size: 1rem; font-weight: 700; color: var(--text-primary);
+}
+.report-entry .meta {
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);
+}
+.report-entry .load {
+  font-family: var(--font-sans); font-size: 0.65rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+}
+.report-entry .load.heavy { color: #ef4444; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); }
+.report-entry .load.medium { color: var(--accent-amber); background: rgba(244,162,97,0.1); border: 1px solid rgba(244,162,97,0.2); }
+.report-entry .load.light { color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); }
+.report-entry .badge {
+  font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 4px 10px; border-radius: 6px;
+  color: var(--accent-amber); background: rgba(244,162,97,0.1);
+  border: 1px solid rgba(244,162,97,0.2); white-space: nowrap;
+}
+.report-entry .arrow { color: var(--text-muted); font-size: 1.2rem; transition: var(--transition); }
+.report-entry:hover .arrow { color: var(--accent-gold); transform: translateX(4px); }
+
+.empty-state {
+  text-align: center; padding: 60px 24px;
+  color: var(--text-muted); font-family: var(--font-mono);
+}
+
+footer {
+  text-align: center; padding: 40px 24px 60px;
+  color: var(--text-muted); font-size: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+}
+footer a { color: var(--accent-gold); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .report-entry { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .report-entry .arrow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="back" title="Back to BigPic Solutions">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <span class="brand">MORNING BRIEF</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Morning Brief Archive</h1>
+    <p>Daily pre-market analysis — overnight recap, economic calendar, watchlist activity, and today's playbook.</p>
+  </div>
+
+  <div class="report-list">
+    <!-- ARCHIVE_ENTRIES_START -->
+    <div class="month-group">
+      <div class="month-label">February 2026</div>
+      <a href="2026-02/2026-02-10_Mon.md" class="report-entry">
+        <div class="info">
+          <span class="day">Monday, February 10</span>
+          <span class="meta">NFP Tuesday, CPI Thursday, NexGen CNSC hearing</span>
+        </div>
+        <span class="load heavy">Heavy</span>
+        <span class="badge">Latest</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+    <!-- ARCHIVE_ENTRIES_END -->
+  </div>
+
+</div>
+
+<footer>
+  <a href="../index.html">BigPic Solutions</a> &middot; Morning Brief Daily Reports
+</footer>
+
+</body>
+</html>
