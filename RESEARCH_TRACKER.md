@@ -14,7 +14,7 @@ Complete investment thesis research for 6 remaining sectors, bringing each to fu
 
 | # | Sector | Folder | Date | Files | Status |
 |---|--------|--------|------|-------|--------|
-| 1 | Space Economy | `Space/` | 2026-02-06 | 01_Launch_Sector.md, 02_Satellite_Infrastructure.md, 03_Defense_Space.md, 04_Emerging_Sectors.md, SPACE_THESIS.md, Space_Investment_Report.html | Done |
+| 1 | Space Economy | `Space/` | 2026-02-06 | 01_Launch_Sector.md, 02_Satellite_Infrastructure.md, 03_Defense_Space.md, 04_Emerging_Sectors.md, THESIS.md, Space_Investment_Report.html | Done |
 | 2 | AI Infrastructure | `AI/` | 2026-02-07 | 01_Chips_Semiconductors.md, 02_DataCenters_Power.md, 03_Cloud_Inference.md, 04_Software_Models.md, THESIS.md, AI_Infrastructure_Report.html | Done |
 | 3 | Nuclear Energy | `Energy/` | 2026-02-07 | 01_Nuclear_Utilities.md, 02_Uranium_Fuel_Cycle.md, 03_SMR_Advanced_Nuclear.md, 04_Policy_Regulation.md, THESIS.md, Nuclear_Energy_Report.html | Done |
 
@@ -243,7 +243,7 @@ After all 6 sectors are done:
 
 | # | Sector | Folder | Date | Reports | Thesis | HTML | Status |
 |---|--------|--------|------|---------|--------|------|--------|
-| 1 | Space Economy | `Space/` | 2026-02-06 | 4 | SPACE_THESIS.md | Space_Investment_Report.html | Done |
+| 1 | Space Economy | `Space/` | 2026-02-06 | 4 | THESIS.md | Space_Investment_Report.html | Done |
 | 2 | AI Infrastructure | `AI/` | 2026-02-07 | 4 | THESIS.md | AI_Infrastructure_Report.html | Done |
 | 3 | Nuclear Energy | `Energy/` | 2026-02-07 | 4 | THESIS.md | Nuclear_Energy_Report.html | Done |
 | 4 | Quantum Computing | `Quantum/` | 2026-02-07 | 4 | THESIS.md | Quantum_Computing_Report.html | Done |

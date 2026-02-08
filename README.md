@@ -8,7 +8,7 @@ Thematic investment research covering high-conviction secular growth sectors, we
 |--------|--------|--------------------|
 | AI Infrastructure | [THESIS.md](research/ai/THESIS.md) | [report.html](research/ai/report.html) |
 | Nuclear Energy | [THESIS.md](research/nuclear/THESIS.md) | [report.html](research/nuclear/report.html) |
-| Space | [THESIS.md](research/space/SPACE_THESIS.md) | [report.html](research/space/report.html) |
+| Space | [THESIS.md](research/space/THESIS.md) | [report.html](research/space/report.html) |
 | Quantum Computing | [THESIS.md](research/quantum/THESIS.md) | [report.html](research/quantum/report.html) |
 | Robotics & Automation | [THESIS.md](research/robotics/THESIS.md) | [report.html](research/robotics/report.html) |
 | Cybersecurity | [THESIS.md](research/cybersecurity/THESIS.md) | [report.html](research/cybersecurity/report.html) |

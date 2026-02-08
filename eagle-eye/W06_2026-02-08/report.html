@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eagle Eye W06 — Weekly Macro Report | Week Ending 2026-02-06</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-deep: #0a1628;
+  --bg-card: rgba(14, 26, 48, 0.92);
+  --bg-card-hover: rgba(20, 36, 64, 0.95);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(212,168,67,0.12);
+  --border-glow: rgba(212,168,67,0.25);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --gold: #d4a843;
+  --gold-light: #f0d078;
+  --gold-dark: #a07830;
+  --green: #22c55e;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --rose: #f43f5e;
+  --blue: #3b82f6;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 22, 40, 0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+.nav-brand svg { width: 20px; height: 20px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500;
+  padding: 6px 12px; border-radius: 6px; transition: var(--transition);
+}
+.nav-links a:hover { color: var(--gold); background: rgba(212,168,67,0.08); }
+
+/* HERO */
+.hero {
+  min-height: 60vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 120px 24px 60px; position: relative;
+}
+.hero::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,67,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: rgba(212,168,67,0.08);
+  border: 1px solid rgba(212,168,67,0.2); border-radius: 100px;
+  font-size: 13px; font-weight: 500; color: var(--gold);
+  letter-spacing: 0.5px; margin-bottom: 24px;
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900;
+  line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 16px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero h1 .gold { color: var(--gold); }
+.hero .subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--text-secondary);
+  max-width: 700px; line-height: 1.7; margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-date { font-family: var(--font-mono); font-size: 14px; color: var(--gold-dark); letter-spacing: 1px; margin-bottom: 12px; }
+
+/* SCORECARD GRID */
+.scorecard-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px; background: var(--border-subtle); border-radius: var(--radius-lg);
+  overflow: hidden; animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.score-cell {
+  background: var(--bg-card); padding: 20px 16px; text-align: center;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.score-cell:hover { background: var(--bg-card-hover); }
+.score-cell .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.score-cell .value {
+  font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);
+  background: linear-gradient(135deg, #fff, var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.score-cell .delta { font-size: 12px; font-weight: 600; margin-top: 4px; }
+.score-cell .delta.up { color: var(--green); }
+.score-cell .delta.down { color: var(--red); }
+.score-cell .delta.flat { color: var(--text-muted); }
+
+/* SECTIONS */
+section { padding: 80px 0; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 32px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-header h2 {
+  font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;
+}
+.section-header .icon { font-size: 24px; }
+.section-header .tag {
+  margin-left: auto; font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(212,168,67,0.1); color: var(--gold);
+  border: 1px solid rgba(212,168,67,0.15);
+}
+
+/* CARDS */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 24px;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.card:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(212,168,67,0.06); }
+
+/* TAKE SECTION */
+.take-card {
+  background: linear-gradient(135deg, rgba(212,168,67,0.05) 0%, rgba(14,26,48,0.95) 100%);
+  border: 1px solid rgba(212,168,67,0.15); border-radius: var(--radius-lg);
+  padding: 36px; margin-bottom: 32px;
+}
+.take-card h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 16px; }
+.take-card p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+.take-card .signal {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.2); border-radius: 6px;
+  font-size: 13px; font-weight: 600; color: var(--green); margin-top: 8px;
+}
+
+/* HEATMAP */
+.heatmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.heat-cell {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  transition: var(--transition); cursor: default;
+}
+.heat-cell .sector-name { flex: 1; }
+.heat-cell .pct { font-family: var(--font-mono); font-weight: 700; }
+.heat-green-5 { background: rgba(34,197,94,0.25); color: #86efac; }
+.heat-green-4 { background: rgba(34,197,94,0.20); color: #86efac; }
+.heat-green-3 { background: rgba(34,197,94,0.15); color: #86efac; }
+.heat-green-2 { background: rgba(34,197,94,0.10); color: #86efac; }
+.heat-green-1 { background: rgba(34,197,94,0.06); color: #a7f3d0; }
+.heat-red-1 { background: rgba(239,68,68,0.10); color: #fca5a5; }
+.heat-red-2 { background: rgba(239,68,68,0.18); color: #fca5a5; }
+
+/* BAR CHART — CRITICAL: align-items: stretch, NOT flex-end */
+.bar-chart {
+  display: flex; align-items: stretch; gap: 6px;
+  height: 220px; padding: 16px 0; border-bottom: 1px solid var(--border-subtle);
+}
+.bar-col {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: flex-end; align-items: center; gap: 4px; position: relative;
+}
+.bar {
+  width: 100%; border-radius: 4px 4px 0 0;
+  transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative; min-height: 2px;
+}
+.bar.positive { background: linear-gradient(180deg, var(--green), rgba(34,197,94,0.4)); }
+.bar.negative { background: linear-gradient(180deg, rgba(239,68,68,0.4), var(--red)); }
+.bar-label { font-size: 10px; color: var(--text-muted); font-weight: 600; text-align: center; white-space: nowrap; }
+.bar-value { font-size: 11px; font-family: var(--font-mono); font-weight: 600; position: absolute; top: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.bar-value.positive { color: var(--green); }
+.bar-value.negative { color: var(--red); }
+
+/* YIELD CURVE */
+.yield-curve-container { position: relative; padding: 20px; }
+.yield-curve-svg { width: 100%; height: 200px; }
+.yield-label { font-size: 12px; fill: var(--text-secondary); font-family: var(--font-mono); }
+.yield-dot { fill: var(--gold); stroke: rgba(212,168,67,0.3); stroke-width: 3; transition: r 0.3s; }
+.yield-dot:hover { r: 7; }
+.yield-line { stroke: var(--gold); stroke-width: 2; fill: none; }
+.yield-area { fill: url(#yieldGradient); opacity: 0.3; }
+
+/* WATCHLIST TABLE */
+.watchlist-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.filter-btn {
+  padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border-subtle);
+  background: transparent; color: var(--text-secondary); font-size: 12px;
+  font-weight: 600; cursor: pointer; transition: var(--transition);
+  font-family: var(--font-sans);
+}
+.filter-btn:hover, .filter-btn.active { background: rgba(212,168,67,0.12); color: var(--gold); border-color: var(--gold); }
+
+.watchlist-table { width: 100%; border-collapse: collapse; }
+.watchlist-table th {
+  text-align: left; padding: 10px 12px; font-size: 11px;
+  font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px; border-bottom: 1px solid var(--border-subtle);
+}
+.watchlist-table td {
+  padding: 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: var(--transition);
+}
+.watchlist-table tr { transition: var(--transition); }
+.watchlist-table tbody tr:hover { background: rgba(212,168,67,0.04); }
+.watchlist-table .ticker { font-family: var(--font-mono); font-weight: 700; color: var(--gold); }
+.watchlist-table .sector-tag {
+  font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: rgba(212,168,67,0.08); color: var(--gold-light);
+  font-weight: 600; white-space: nowrap;
+}
+.watchlist-table .pct-up { color: var(--green); font-family: var(--font-mono); font-weight: 600; }
+.watchlist-table .pct-down { color: var(--red); font-family: var(--font-mono); font-weight: 600; }
+.watchlist-table .pct-flat { color: var(--text-muted); font-family: var(--font-mono); font-weight: 600; }
+
+/* WEEK AHEAD CALENDAR */
+.calendar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.cal-day {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 16px; min-height: 180px;
+  transition: var(--transition);
+}
+.cal-day:hover { border-color: var(--border-glow); }
+.cal-day .day-header {
+  font-size: 12px; font-weight: 700; color: var(--gold);
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.cal-event {
+  font-size: 11px; color: var(--text-secondary); padding: 4px 0;
+  line-height: 1.4; border-left: 2px solid transparent; padding-left: 8px; margin-bottom: 4px;
+}
+.cal-event.data { border-color: var(--cyan); }
+.cal-event.earnings { border-color: var(--amber); }
+.cal-event.fed { border-color: var(--violet); }
+.cal-event.catalyst { border-color: var(--rose); }
+.cal-event .event-type { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+.cal-event.data .event-type { color: var(--cyan); }
+.cal-event.earnings .event-type { color: var(--amber); }
+.cal-event.fed .event-type { color: var(--violet); }
+.cal-event.catalyst .event-type { color: var(--rose); }
+
+/* RISK RADAR */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.risk-item {
+  display: flex; gap: 12px; padding: 16px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); transition: var(--transition);
+}
+.risk-item:hover { border-color: var(--border-glow); }
+.risk-level {
+  width: 4px; border-radius: 2px; flex-shrink: 0;
+}
+.risk-level.high { background: var(--red); }
+.risk-level.medium { background: var(--amber); }
+.risk-level.low { background: var(--green); }
+.risk-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.risk-content p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* CONVICTION CARDS */
+.conviction-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.conviction-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 18px; transition: var(--transition);
+}
+.conviction-card:hover { border-color: var(--border-glow); }
+.conviction-card .thesis-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.conviction-card .direction {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 700; padding: 3px 10px;
+  border-radius: 4px; margin-bottom: 8px;
+}
+.conviction-card .direction.bullish { background: rgba(34,197,94,0.12); color: var(--green); }
+.conviction-card .direction.cautious { background: rgba(245,158,11,0.12); color: var(--amber); }
+.conviction-card .direction.neutral { background: rgba(100,116,139,0.12); color: var(--text-secondary); }
+.conviction-card .direction.speculative { background: rgba(139,92,246,0.12); color: var(--violet); }
+.conviction-card .rationale { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* COLLAPSIBLE SOURCES */
+.sources-toggle {
+  width: 100%; padding: 14px 20px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  color: var(--text-primary); font-size: 14px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-sans); transition: var(--transition);
+}
+.sources-toggle:hover { border-color: var(--border-glow); }
+.sources-toggle .arrow { transition: transform 0.3s; }
+.sources-toggle.open .arrow { transform: rotate(180deg); }
+.sources-content {
+  max-height: 0; overflow: hidden; transition: max-height 0.5s ease;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+}
+.sources-content.open { max-height: 3000px; }
+.sources-list {
+  padding: 16px 20px; list-style: none;
+  columns: 2; column-gap: 24px;
+}
+.sources-list li {
+  font-size: 12px; color: var(--text-secondary); padding: 4px 0;
+  break-inside: avoid;
+}
+.sources-list a { color: var(--gold); text-decoration: none; }
+.sources-list a:hover { text-decoration: underline; }
+
+/* COUNTER ANIMATION */
+.counter { font-family: var(--font-mono); }
+
+/* SCROLL ANIMATION */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* TOOLTIP */
+[data-tooltip] { position: relative; cursor: help; }
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%;
+  transform: translateX(-50%); padding: 6px 10px;
+  background: rgba(0,0,0,0.9); color: #fff; font-size: 11px;
+  border-radius: 4px; white-space: nowrap; z-index: 10;
+  pointer-events: none; animation: fadeInDown 0.2s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .scorecard-grid { grid-template-columns: repeat(3, 1fr); }
+  .calendar-grid { grid-template-columns: 1fr; }
+  .sources-list { columns: 1; }
+  .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    EAGLE EYE
+  </div>
+  <div class="nav-links">
+    <a href="#scorecard">Scorecard</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#rates">Rates</a>
+    <a href="#watchlist">Watchlist</a>
+    <a href="#commodities">Commodities</a>
+    <a href="#crypto">Crypto</a>
+    <a href="#ahead">Week Ahead</a>
+    <a href="#positioning">Positioning</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-date">W06 / 2026</div>
+  <div class="hero-badge">WEEKLY MACRO REPORT</div>
+  <h1>The Great <span class="gold">Rotation</span></h1>
+  <p class="subtitle">Dow 50K milestone meets SaaSpocalypse selloff. Old Economy leads as AI capex skepticism grows. Crypto flash crashes on tariff war fears.</p>
+</header>
+
+<!-- MARKET SCORECARD -->
+<section id="scorecard">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4CA;</span>
+      <h2>Market Scorecard</h2>
+      <span class="tag">Feb 6 Close</span>
+    </div>
+    <div class="scorecard-grid">
+      <div class="score-cell">
+        <div class="label">S&P 500</div>
+        <div class="value counter" data-target="6932">0</div>
+        <div class="delta down">-0.1%</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Nasdaq</div>
+        <div class="value counter" data-target="23031">0</div>
+        <div class="delta down">-1.8%</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Dow Jones</div>
+        <div class="value counter" data-target="50116">0</div>
+        <div class="delta up">+2.5%</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Russell 2000</div>
+        <div class="value counter" data-target="2700">0</div>
+        <div class="delta up">+3.6%</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">VIX</div>
+        <div class="value counter" data-target="17.76" data-decimals="2">0</div>
+        <div class="delta down">-18.4% Fri</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">10Y Yield</div>
+        <div class="value">4.22%</div>
+        <div class="delta flat">~flat</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">DXY</div>
+        <div class="value counter" data-target="97.69" data-decimals="2">0</div>
+        <div class="delta up">+0.9%</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">WTI Crude</div>
+        <div class="value">$63.70</div>
+        <div class="delta down">Down</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Gold</div>
+        <div class="value counter" data-target="4966" data-prefix="$">0</div>
+        <div class="delta flat">Volatile</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Bitcoin</div>
+        <div class="value counter" data-target="70000" data-prefix="$">0</div>
+        <div class="delta down">-15% to -22%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THIS WEEK'S TAKE -->
+<section id="take">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F441;</span>
+      <h2>This Week's Take</h2>
+    </div>
+    <div class="take-card reveal">
+      <h3>The Great Rotation Accelerated</h3>
+      <p>Two seismic forces collided this week. Anthropic's Claude Cowork launch triggered a $300B SaaS wipeout ("SaaSpocalypse"), while the Dow crossed 50,000 for the first time in history, powered by a furious rotation into industrials, materials, and financials. Meanwhile, a tariff-fueled US-EU standoff over Greenland sent crypto into its worst week since FTX, with Bitcoin flash-crashing to $60,255.</p>
+      <p>The macro picture is structural divergence: Old Economy cyclicals outperform as tariff-driven reshoring and AI infrastructure spend create real-world demand. But the "4% monetization problem" weighs on tech multiples as hyperscalers guide $200B+ in AI capex with limited near-term revenue proof.</p>
+      <p>The Fed remains on hold at 3.50-3.75%, but weak labor data (ADP +22K, claims 231K) and a delayed jobs report have the bond market pricing two cuts by year-end.</p>
+      <div class="signal">KEY SIGNAL: Russell 2000 (+3.6%) massively outperformed S&P 500 (-0.1%) — money is rotating into the real economy</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTOR HEATMAP -->
+<section id="sectors">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F3AF;</span>
+      <h2>Sector Heatmap</h2>
+      <span class="tag">Weekly Performance</span>
+    </div>
+    <div class="heatmap-grid reveal">
+      <div class="heat-cell heat-green-5"><span class="sector-name">XLI Industrials</span><span class="pct">+2.9%</span></div>
+      <div class="heat-cell heat-green-4"><span class="sector-name">XLB Materials</span><span class="pct">+2.5%</span></div>
+      <div class="heat-cell heat-green-3"><span class="sector-name">XLE Energy</span><span class="pct">+2.0%</span></div>
+      <div class="heat-cell heat-green-3"><span class="sector-name">XLF Financials</span><span class="pct">+1.9%</span></div>
+      <div class="heat-cell heat-green-3"><span class="sector-name">XLV Healthcare</span><span class="pct">+1.9%</span></div>
+      <div class="heat-cell heat-green-2"><span class="sector-name">XLY Consumer Disc.</span><span class="pct">+1.5%</span></div>
+      <div class="heat-cell heat-green-1"><span class="sector-name">XLRE Real Estate</span><span class="pct">+1.0%</span></div>
+      <div class="heat-cell heat-green-1"><span class="sector-name">XLU Utilities</span><span class="pct">+0.6%</span></div>
+      <div class="heat-cell heat-green-1"><span class="sector-name">XLC Comm. Svc.</span><span class="pct">+0.5%</span></div>
+      <div class="heat-cell heat-green-1"><span class="sector-name">XLP Staples</span><span class="pct">+0.3%</span></div>
+      <div class="heat-cell heat-red-2"><span class="sector-name">XLK Technology</span><span class="pct">-1.5%</span></div>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="card reveal" style="margin-top: 24px;">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Sector Weekly Returns</h3>
+      <div class="bar-chart" id="sectorBars">
+        <!-- Bars injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YIELD CURVE -->
+<section id="rates">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4C8;</span>
+      <h2>Fed & Rates Outlook</h2>
+      <span class="tag">3.50-3.75% Hold</span>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 16px;">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Treasury Yield Curve — Feb 6, 2026</h3>
+      <div class="yield-curve-container">
+        <svg class="yield-curve-svg" viewBox="0 0 600 200" id="yieldCurve">
+          <defs>
+            <linearGradient id="yieldGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4a843" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="60" y1="20" x2="560" y2="20" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+          <line x1="60" y1="60" x2="560" y2="60" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+          <line x1="60" y1="100" x2="560" y2="100" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+          <line x1="60" y1="140" x2="560" y2="140" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+          <line x1="60" y1="180" x2="560" y2="180" stroke="rgba(255,255,255,0.08)"/>
+          <!-- Y-axis labels -->
+          <text x="50" y="24" class="yield-label" text-anchor="end">5.0%</text>
+          <text x="50" y="64" class="yield-label" text-anchor="end">4.5%</text>
+          <text x="50" y="104" class="yield-label" text-anchor="end">4.0%</text>
+          <text x="50" y="144" class="yield-label" text-anchor="end">3.5%</text>
+          <text x="50" y="184" class="yield-label" text-anchor="end">3.0%</text>
+          <!-- X-axis labels -->
+          <text x="110" y="198" class="yield-label" text-anchor="middle">2Y</text>
+          <text x="235" y="198" class="yield-label" text-anchor="middle">5Y</text>
+          <text x="385" y="198" class="yield-label" text-anchor="middle">10Y</text>
+          <text x="510" y="198" class="yield-label" text-anchor="middle">30Y</text>
+          <!-- Yield curve area -->
+          <path class="yield-area" d="M110,140 C170,134 200,128 235,126 C300,118 340,98 385,94 C440,88 480,56 510,52 L510,180 L110,180 Z"/>
+          <!-- Yield curve line -->
+          <path class="yield-line" d="M110,140 C170,134 200,128 235,126 C300,118 340,98 385,94 C440,88 480,56 510,52"/>
+          <!-- Data points -->
+          <circle class="yield-dot" cx="110" cy="140" r="5" data-tooltip="2Y: 3.50%"/>
+          <circle class="yield-dot" cx="235" cy="126" r="5" data-tooltip="5Y: 3.57%"/>
+          <circle class="yield-dot" cx="385" cy="94" r="5" data-tooltip="10Y: 4.22%"/>
+          <circle class="yield-dot" cx="510" cy="52" r="5" data-tooltip="30Y: 4.85%"/>
+          <!-- Yield labels on dots -->
+          <text x="110" y="132" class="yield-label" text-anchor="middle" fill="#d4a843" font-weight="600">3.50%</text>
+          <text x="235" y="118" class="yield-label" text-anchor="middle" fill="#d4a843" font-weight="600">3.57%</text>
+          <text x="385" y="86" class="yield-label" text-anchor="middle" fill="#d4a843" font-weight="600">4.22%</text>
+          <text x="510" y="44" class="yield-label" text-anchor="middle" fill="#d4a843" font-weight="600">4.85%</text>
+        </svg>
+      </div>
+      <div style="display: flex; gap: 24px; margin-top: 12px; font-size: 13px; color: var(--text-secondary);">
+        <span><strong style="color: var(--gold);">2s10s:</strong> +48 bps (positive)</span>
+        <span><strong style="color: var(--gold);">Fed Funds:</strong> 3.50-3.75%</span>
+        <span><strong style="color: var(--gold);">Next Cut:</strong> June 2026 (most likely)</span>
+      </div>
+    </div>
+
+    <!-- FedWatch -->
+    <div class="card reveal">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">CME FedWatch — Rate Expectations</h3>
+      <table class="watchlist-table">
+        <thead><tr><th>Meeting</th><th>Hold</th><th>25bp Cut</th><th>50bp+ Cut</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td>March 18</td><td>~77%</td><td>~23%</td><td>&lt;1%</td><td>Likely hold</td></tr>
+          <tr><td>June 2026</td><td>~45%</td><td>~40%</td><td>~15%</td><td style="color: var(--gold);">First cut most likely</td></tr>
+          <tr><td>Sept 2026</td><td>~25%</td><td>~40%</td><td>~35%</td><td>Second cut priced</td></tr>
+          <tr><td>Dec 2026</td><td>~15%</td><td>~30%</td><td>~55%</td><td>Third cut possible</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
+        <strong>Bowman:</strong> 3 cuts in 2026 &bull; <strong>Jefferson:</strong> AI productivity can curb inflation &bull; <strong>Powell:</strong> "not on a preset course"
+      </div>
+    </div>
+
+    <!-- Credit -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">INVESTMENT GRADE</h4>
+        <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">78 bps</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OAS &bull; 2nd percentile (very tight)</div>
+      </div>
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">HIGH YIELD</h4>
+        <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">286 bps</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OAS &bull; Near long-term mean</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THESIS WATCHLIST -->
+<section id="watchlist">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4CB;</span>
+      <h2>Thesis Watchlist Tracker</h2>
+      <span class="tag">9 Sectors</span>
+    </div>
+
+    <div class="watchlist-filters" id="watchlistFilters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ai">AI Infra</button>
+      <button class="filter-btn" data-filter="nuclear">Nuclear</button>
+      <button class="filter-btn" data-filter="minerals">Critical Minerals</button>
+      <button class="filter-btn" data-filter="defense">Defense</button>
+      <button class="filter-btn" data-filter="cyber">Cybersecurity</button>
+      <button class="filter-btn" data-filter="storage">Energy Storage</button>
+      <button class="filter-btn" data-filter="robotics">Robotics</button>
+      <button class="filter-btn" data-filter="quantum">Quantum</button>
+      <button class="filter-btn" data-filter="space">Space</button>
+    </div>
+
+    <div class="card reveal" style="overflow-x: auto;">
+      <table class="watchlist-table" id="watchlistTable">
+        <thead>
+          <tr><th>Ticker</th><th>Sector</th><th>Tier</th><th>Close</th><th>Weekly %</th><th>Catalyst / Note</th></tr>
+        </thead>
+        <tbody>
+          <tr data-sector="ai"><td class="ticker">NVDA</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>$185.41</td><td class="pct-down">-1.2%</td><td>Down for week despite +7.9% Fri rebound; SaaS selloff drag</td></tr>
+          <tr data-sector="ai"><td class="ticker">AVGO</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>$332.92</td><td class="pct-up">+2.0%</td><td>Custom silicon thesis intact; hyperscaler capex beneficiary</td></tr>
+          <tr data-sector="ai"><td class="ticker">GOOGL</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>~$343</td><td class="pct-down">-2.0%</td><td>Cloud +48% to $17.7B; $175-185B capex guide weighed</td></tr>
+          <tr data-sector="ai"><td class="ticker">AMZN</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>~$235</td><td class="pct-down">-6.0%</td><td>AWS +24%; $200B capex shock — 4% monetization problem</td></tr>
+          <tr data-sector="ai"><td class="ticker">AMD</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>~$148</td><td class="pct-down">-4.0%</td><td>Record Q4 $10.3B; DC $5.4B (+39%); MI350 ramping</td></tr>
+          <tr data-sector="ai"><td class="ticker">VRT</td><td><span class="sector-tag">AI Infra</span></td><td>2</td><td>$195.58</td><td class="pct-up">+10.0%</td><td>Power/cooling demand; "physical AI" rotation beneficiary</td></tr>
+          <tr data-sector="ai"><td class="ticker">PLTR</td><td><span class="sector-tag">AI / Defense</span></td><td>2</td><td>$135.90</td><td class="pct-up">+4.5%</td><td>Q4 beat: $1.41B (+70% YoY); FY26 guide $7.2B crushed est</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">CEG</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td>$261.42</td><td class="pct-up">+5.8%</td><td>22.6 GW fleet; AI power demand; TMI restart on track</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">VST</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td>$149.65</td><td class="pct-up">+4.6%</td><td>Meta 2.6 GW nuclear PPA; earnings growth +73-93%</td></tr>
+          <tr data-sector="minerals"><td class="ticker">MP</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td>$61.26</td><td class="pct-up">+8.3%</td><td>Rare earth sentiment; DOD equity; NdPr +15% YTD</td></tr>
+          <tr data-sector="minerals"><td class="ticker">FCX</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td>$60.65</td><td class="pct-up">+2.4%</td><td>Copper $5.77/lb; Grasberg Q2 restart; structural deficit</td></tr>
+          <tr data-sector="minerals"><td class="ticker">ALB</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td>~$163</td><td class="pct-down">-4.3%</td><td>Lithium pullback from CNY 180K; capex-intensive</td></tr>
+          <tr data-sector="defense"><td class="ticker">LMT</td><td><span class="sector-tag">Defense</span></td><td>1</td><td>~$510</td><td class="pct-up">+3.0%</td><td>$194B backlog; PAC-3 ramp; rotation beneficiary</td></tr>
+          <tr data-sector="defense"><td class="ticker">RTX</td><td><span class="sector-tag">Defense</span></td><td>1</td><td>~$136</td><td class="pct-up">+4.0%</td><td>Five missile framework agreements; Dow 50K beneficiary</td></tr>
+          <tr data-sector="space defense"><td class="ticker">RKLB</td><td><span class="sector-tag">Space</span></td><td>2</td><td>~$40</td><td class="pct-up">+5.0%</td><td>SDA contracts; defense space spending</td></tr>
+          <tr data-sector="cyber"><td class="ticker">CRWD</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td>~$415</td><td class="pct-down">-5.0%</td><td>Strong fundamentals but SaaS rotation headwind</td></tr>
+          <tr data-sector="cyber"><td class="ticker">PANW</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td>~$195</td><td class="pct-down">-4.0%</td><td>Software selloff drag; CyberArk deal pending</td></tr>
+          <tr data-sector="storage"><td class="ticker">EOSE</td><td><span class="sector-tag">Storage</span></td><td>3</td><td>~$6.20</td><td class="pct-up">+8.5%</td><td>$303M DOE loan; 35x YoY revenue growth</td></tr>
+          <tr data-sector="storage"><td class="ticker">QS</td><td><span class="sector-tag">Storage</span></td><td>3</td><td>~$7.50</td><td class="pct-down">-3.5%</td><td>Pre-revenue; Eagle Line pilot Feb 2026; binary outcome</td></tr>
+          <tr data-sector="robotics"><td class="ticker">ISRG</td><td><span class="sector-tag">Robotics</span></td><td>1</td><td>~$600</td><td class="pct-down">-2.0%</td><td>Slight pullback; fundamentals strong</td></tr>
+          <tr data-sector="robotics"><td class="ticker">SYM</td><td><span class="sector-tag">Robotics</span></td><td>2</td><td>~$52</td><td class="pct-up">+3.0%</td><td>Warehouse automation; industrial capex rotation</td></tr>
+          <tr data-sector="quantum"><td class="ticker">IONQ</td><td><span class="sector-tag">Quantum</span></td><td>1</td><td>~$35.00</td><td class="pct-up">+14.2%</td><td>Strong rebound Feb 6; Q4 earnings Feb 25</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- COMMODITIES & FOREX -->
+<section id="commodities">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x26CF;</span>
+      <h2>Commodities & Forex Snapshot</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <!-- Energy -->
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ENERGY</h4>
+        <table class="watchlist-table">
+          <thead><tr><th>Commodity</th><th>Close</th><th>Weekly</th></tr></thead>
+          <tbody>
+            <tr><td>WTI Crude</td><td>~$63.70/bbl</td><td class="pct-down">Down</td></tr>
+            <tr><td>Brent Crude</td><td>~$68.05/bbl</td><td class="pct-down">Down</td></tr>
+            <tr><td>Natural Gas</td><td>$3.42/MMBtu</td><td class="pct-down">-2.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Metals -->
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">METALS & MINERALS</h4>
+        <table class="watchlist-table">
+          <thead><tr><th>Commodity</th><th>Level</th><th>Move</th></tr></thead>
+          <tbody>
+            <tr><td>Gold</td><td>~$4,966/oz</td><td class="pct-flat">Volatile</td></tr>
+            <tr><td>Silver</td><td>~$77.98/oz</td><td class="pct-up">+10% Fri</td></tr>
+            <tr><td>Copper</td><td>~$5.77/lb</td><td class="pct-down">Worst wk since Nov</td></tr>
+            <tr><td>Uranium</td><td>$85.25/lb</td><td class="pct-down">-9.5% from peak</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Forex -->
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">FOREX</h4>
+        <table class="watchlist-table">
+          <thead><tr><th>Pair</th><th>Level</th><th>Weekly</th></tr></thead>
+          <tbody>
+            <tr><td>DXY</td><td>97.69</td><td class="pct-up">+0.9%</td></tr>
+            <tr><td>EUR/USD</td><td>1.1812</td><td class="pct-up">+0.32% Fri</td></tr>
+            <tr><td>USD/JPY</td><td>156.70</td><td class="pct-flat">+0.07%</td></tr>
+            <tr><td>GBP/USD</td><td>1.3603</td><td class="pct-up">+0.62% Fri</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Supply Chain -->
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">SUPPLY CHAINS & TRADE</h4>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 6px;"><strong style="color: var(--gold);">BDI:</strong> 1,923 (down 5 consecutive days)</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--rose);">Chip tariff:</strong> 25% revenue-sharing on advanced semis</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--rose);">Auto tariff:</strong> S. Korea vehicles 15%&rarr;25%</p>
+          <p><strong style="color: var(--rose);">Pharma:</strong> 100% on branded drugs outside discount platforms</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRYPTO SNAPSHOT -->
+<section id="crypto">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x20BF;</span>
+      <h2>Crypto Snapshot</h2>
+      <span class="tag">Flash Crash Week</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+      <div class="card reveal" style="text-align: center;">
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">BITCOIN</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">$70,000</div>
+        <div style="font-size: 12px; color: var(--red); font-weight: 600;">-15% to -22% weekly</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Flash crash low: $60,255</div>
+      </div>
+      <div class="card reveal" style="text-align: center;">
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">ETHEREUM</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">$2,073</div>
+        <div style="font-size: 12px; color: var(--red); font-weight: 600;">-28% to -34% weekly</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Intraday low: $1,748</div>
+      </div>
+      <div class="card reveal" style="text-align: center;">
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">24HR LIQUIDATIONS</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--red);">$2.6B</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">$2.31B longs</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Worst since FTX</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ETF FLOWS</h4>
+        <table class="watchlist-table">
+          <thead><tr><th>Fund</th><th>Flow</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>BTC Spot ETFs</td><td class="pct-down">Net outflows</td><td>Pre-crash inflows reversed</td></tr>
+            <tr><td>ETH Spot ETFs</td><td class="pct-down">-$447M</td><td>Worst since inception</td></tr>
+            <tr><td>&mdash; ETHA (BlackRock)</td><td class="pct-down">-$264M</td><td>Largest single withdrawal</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card reveal">
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">CRYPTO-EQUITIES</h4>
+        <table class="watchlist-table">
+          <thead><tr><th>Ticker</th><th>Close</th><th>Weekly</th></tr></thead>
+          <tbody>
+            <tr><td class="ticker">COIN</td><td>~$146-166</td><td class="pct-down">-20% to -25%</td></tr>
+            <tr><td class="ticker">MSTR</td><td>~$135</td><td class="pct-down">-10% WoW</td></tr>
+            <tr><td class="ticker">MARA</td><td>&mdash;</td><td class="pct-down">-20%+</td></tr>
+            <tr><td class="ticker">RIOT</td><td>&mdash;</td><td class="pct-down">-15%+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top: 12px;">
+      <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">KEY METRICS</h4>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary);">
+        <span><strong style="color: var(--gold);">BTC Dominance:</strong> 57-59%</span>
+        <span><strong style="color: var(--gold);">Hash Rate:</strong> ~970 EH/s</span>
+        <span><strong style="color: var(--gold);">Stablecoin Cap:</strong> $307.6B (record)</span>
+        <span><strong style="color: var(--gold);">Total Crypto Cap:</strong> ~$2.4-2.6T</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK AHEAD -->
+<section id="ahead">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4C5;</span>
+      <h2>The Week Ahead</h2>
+      <span class="tag">Feb 10-14</span>
+    </div>
+
+    <div class="calendar-grid reveal">
+      <div class="cal-day">
+        <div class="day-header">MON Feb 10</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>McDonald's (MCD)</div>
+      </div>
+      <div class="cal-day">
+        <div class="day-header">TUE Feb 11</div>
+        <div class="cal-event data"><span class="event-type">Data — Critical</span>January Employment Report (delayed)</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Coca-Cola (KO)</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Shopify (SHOP)</div>
+      </div>
+      <div class="cal-day">
+        <div class="day-header">WED Feb 12</div>
+        <div class="cal-event data"><span class="event-type">Data — Critical</span>January CPI</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Coinbase (COIN)</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Cisco (CSCO)</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Reddit (RDDT)</div>
+      </div>
+      <div class="cal-day">
+        <div class="day-header">THU Feb 13</div>
+        <div class="cal-event data"><span class="event-type">Data</span>Initial Jobless Claims</div>
+        <div class="cal-event data"><span class="event-type">Data</span>January PPI</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Deere & Co (DE)</div>
+        <div class="cal-event earnings"><span class="event-type">Earnings</span>Applied Materials (AMAT)</div>
+      </div>
+      <div class="cal-day">
+        <div class="day-header">FRI Feb 14</div>
+        <div class="cal-event data"><span class="event-type">Data</span>January Retail Sales</div>
+        <div class="cal-event catalyst"><span class="event-type">Catalyst</span>QS Eagle Line Pilot (ongoing)</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+      <div class="card reveal" style="flex: 1; min-width: 200px;">
+        <h4 style="font-size: 12px; color: var(--cyan); margin-bottom: 6px;">THESIS CATALYSTS</h4>
+        <ul style="font-size: 12px; color: var(--text-secondary); list-style: none; line-height: 1.8;">
+          <li>&#x2022; Feb 8-10: BTC difficulty adj. (-16% to -18%)</li>
+          <li>&#x2022; Feb 8: Japan snap election</li>
+          <li>&#x2022; Feb 9-13: NexGen CNSC hearing (uranium)</li>
+          <li>&#x2022; Feb 12: Coinbase earnings</li>
+          <li>&#x2022; Feb 13: Applied Materials earnings</li>
+          <li>&#x2022; Feb 25: IONQ Q4 earnings</li>
+        </ul>
+      </div>
+      <div class="card reveal" style="flex: 1; min-width: 200px;">
+        <h4 style="font-size: 12px; color: var(--violet); margin-bottom: 6px;">FED WATCH</h4>
+        <ul style="font-size: 12px; color: var(--text-secondary); list-style: none; line-height: 1.8;">
+          <li>&#x2022; Multiple FOMC speakers expected</li>
+          <li>&#x2022; Watch for NFP reaction from Fed officials</li>
+          <li>&#x2022; CPI data could shift cut timeline</li>
+          <li>&#x2022; Jobs + CPI back-to-back = vol risk</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK RADAR -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x26A0;</span>
+      <h2>Risk Radar</h2>
+    </div>
+    <div class="risk-grid reveal">
+      <div class="risk-item">
+        <div class="risk-level high"></div>
+        <div class="risk-content">
+          <h4>Delayed Data Whipsaw</h4>
+          <p>NFP (Feb 11) and CPI (Feb 12) back-to-back could create extreme volatility in rates and equities.</p>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level high"></div>
+        <div class="risk-content">
+          <h4>SaaSpocalypse Contagion</h4>
+          <p>If AI displacement fears spread beyond SaaS to broader tech, rotation could accelerate further.</p>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level medium"></div>
+        <div class="risk-content">
+          <h4>Crypto Leverage Rebuild</h4>
+          <p>$2.6B liquidation cleared leverage but fast $70K recovery may rebuild speculative positions prematurely.</p>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level medium"></div>
+        <div class="risk-content">
+          <h4>Credit Supply Indigestion</h4>
+          <p>Record $1T bond issuance pace could widen spreads if institutional demand falters.</p>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level medium"></div>
+        <div class="risk-content">
+          <h4>US-Iran Escalation</h4>
+          <p>New sanctions post-Oman talks + unresolved nuclear issues = oil supply disruption risk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING & THESIS UPDATE -->
+<section id="positioning">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F3AF;</span>
+      <h2>Positioning & Thesis Update</h2>
+    </div>
+    <div class="conviction-grid reveal">
+      <div class="conviction-card">
+        <div class="thesis-name">AI Infrastructure</div>
+        <div class="direction cautious">CAUTIOUS</div>
+        <div class="rationale">$200B AMZN + $175B GOOGL capex spooked market. "4% monetization problem" intensifying. SaaSpocalypse signals AI disruption fears.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Nuclear Energy</div>
+        <div class="direction bullish">BULLISH</div>
+        <div class="rationale">CEG +5.8%, VST +4.6%. Power demand thesis intact. Rotation into "physical AI" infrastructure beneficiaries.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Critical Minerals</div>
+        <div class="direction bullish">BULLISH</div>
+        <div class="rationale">MP +8.3%, NdPr +15% YTD. Structural deficits in copper, uranium, rare earths. China export controls tightening.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Defense & Aerospace</div>
+        <div class="direction bullish">BULLISH</div>
+        <div class="rationale">LMT +3%, RTX +4%, RKLB +5%. Tariff-driven reshoring + geopolitical tensions = sustained demand.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Cybersecurity</div>
+        <div class="direction cautious">CAUTIOUS</div>
+        <div class="rationale">CRWD -5%, PANW -4%. Strong fundamentals but caught in SaaS rotation headwind. May take time to re-rate.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Energy Storage</div>
+        <div class="direction neutral">NEUTRAL</div>
+        <div class="rationale">Mixed signals. EOSE +8.5% but FLNC volatile. Rate sensitivity high. QS binary outcome ahead.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Robotics</div>
+        <div class="direction neutral">NEUTRAL</div>
+        <div class="rationale">SYM +3% on industrial rotation. ISRG -2% on multiple compression.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Quantum Computing</div>
+        <div class="direction speculative">SPECULATIVE</div>
+        <div class="rationale">IONQ +14.2% rebound. Pre-revenue, high-duration. Q4 earnings Feb 25 is key binary event.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Space</div>
+        <div class="direction bullish">BULLISH</div>
+        <div class="rationale">RKLB +5%. Defense space spending accelerating. SDA contracts driving momentum.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F517;</span>
+      <h2>Sources</h2>
+    </div>
+    <button class="sources-toggle" id="sourcesToggle">
+      <span>58 cited sources — click to expand</span>
+      <span class="arrow">&#x25BC;</span>
+    </button>
+    <div class="sources-content" id="sourcesContent">
+      <ol class="sources-list">
+        <li><a href="https://www.cnbc.com/2026/02/05/stock-market-today-live-updates.html" target="_blank">CNBC: Dow surges 1,200 points for first close above 50,000</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/04/stock-market-today-live-updates.html" target="_blank">CNBC: Dow tumbles nearly 600 points</a></li>
+        <li><a href="https://finance.yahoo.com/news/live/stock-market-today-dow-crosses-50000-mark-leading-sp-500-nasdaq-higher-as-wall-street-rebounds-from-rout-192439513.html" target="_blank">Yahoo Finance: Dow crosses 50,000 mark</a></li>
+        <li><a href="https://www.cnn.com/2026/02/06/investing/dow-index-us-stocks-50k" target="_blank">CNN: Stocks hit historic milestone</a></li>
+        <li><a href="https://www.washingtonpost.com/business/2026/02/06/stock-market-hits-all-time-high-dow-closes-above-50000/" target="_blank">Washington Post: Dow closes above 50,000</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/02/palantir-pltr-q4-2025-earnings.html" target="_blank">CNBC: Palantir Q4 2025 earnings</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/04/alphabet-googl-q4-2025-earnings.html" target="_blank">CNBC: Alphabet Q4 2025 earnings</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/05/amazon-amzn-q4-earnings-report-2025.html" target="_blank">CNBC: Amazon Q4 earnings report</a></li>
+        <li><a href="https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Fourth-Quarter-Results/" target="_blank">Amazon IR: Fourth Quarter Results</a></li>
+        <li><a href="https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html" target="_blank">AMD: Q4 and Full Year 2025 Results</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/04/novo-nordisk-stock-ceo-earnings-guidance-ozempic-wegovy.html" target="_blank">CNBC: Novo Nordisk shares tumble</a></li>
+        <li><a href="https://fortune.com/2026/02/04/why-saas-stocks-tech-selloff-freefall-like-deepseek-2025-overblown-paradox-irrational/" target="_blank">Fortune: SaaS selloff analysis</a></li>
+        <li><a href="https://www.bloomberg.com/news/articles/2026-02-04/what-s-behind-the-saaspocalypse-plunge-in-software-stocks" target="_blank">Bloomberg: SaaSpocalypse</a></li>
+        <li><a href="https://www.morningstar.com/markets/is-stock-market-rotation-underway-these-sectors-are-outpacing-tech-2026" target="_blank">Morningstar: Sector rotation</a></li>
+        <li><a href="https://fred.stlouisfed.org/series/VIXCLS" target="_blank">FRED: VIX</a></li>
+        <li><a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026" target="_blank">U.S. Treasury Daily Rates</a></li>
+        <li><a href="https://fred.stlouisfed.org/series/T10Y2Y" target="_blank">FRED: 10Y-2Y Spread</a></li>
+        <li><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm" target="_blank">FOMC Statement — January 28, 2026</a></li>
+        <li><a href="https://www.cnbc.com/2026/01/28/fed-rate-decision-january-2026.html" target="_blank">CNBC: Fed Holds Rates</a></li>
+        <li><a href="https://www.federalreserve.gov/newsevents/speech/jefferson20260206a.htm" target="_blank">Jefferson Speech — Feb 6</a></li>
+        <li><a href="https://www.federalreserve.gov/newsevents/speech/bowman20260130a.htm" target="_blank">Bowman Speech — Jan 30</a></li>
+        <li><a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html" target="_blank">CME FedWatch Tool</a></li>
+        <li><a href="https://www.bankrate.com/banking/federal-reserve/will-the-fed-cut-rates-in-2026/" target="_blank">Bankrate: Rate Cuts 2026</a></li>
+        <li><a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2" target="_blank">FRED: HY OAS</a></li>
+        <li><a href="https://www.bloomberg.com/news/articles/2026-02-02/global-bond-sales-reach-1-trillion-at-their-fastest-pace-ever" target="_blank">Bloomberg: $1T Bond Sales</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/02/fridays-jobs-report-will-be-delayed-because-of-the-partial-government-shutdown.html" target="_blank">CNBC: Jobs Report Delayed</a></li>
+        <li><a href="https://seekingalpha.com/news/4547859-us-yield-curve-steepens-as-2s10s-spread-hits-widest-since-january-2022" target="_blank">Seeking Alpha: 2s10s Spread</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/crude-oil" target="_blank">Trading Economics: WTI Crude</a></li>
+        <li><a href="https://fortune.com/article/current-price-of-gold-02-06-2026/" target="_blank">Fortune: Gold Price Feb 6</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/05/will-gold-silver-price-rise-2026-sell-off-slv-spot.html" target="_blank">CNBC: Gold & Silver Analysis</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/copper" target="_blank">Trading Economics: Copper</a></li>
+        <li><a href="https://www.investing.com/analysis/copper-outlook-2026-institutional-rotation-supply-deficits-technical-analysis-200673451" target="_blank">Investing.com: Copper Outlook</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/uranium" target="_blank">Trading Economics: Uranium</a></li>
+        <li><a href="https://sprottetfs.com/insights/uranium-outlook-2026/" target="_blank">Sprott: Uranium Outlook</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/lithium" target="_blank">Trading Economics: Lithium</a></li>
+        <li><a href="https://tradingeconomics.com/united-states/currency" target="_blank">Trading Economics: US Dollar</a></li>
+        <li><a href="https://www.mufgresearch.com/fx/monthly-foreign-exchange-outlook-february-2026/" target="_blank">MUFG: FX Outlook</a></li>
+        <li><a href="https://www.aljazeera.com/news/2026/2/6/iran-us-hold-talks-in-oman-as-fears-of-war-hang-over-region" target="_blank">Al Jazeera: US-Iran Talks</a></li>
+        <li><a href="https://kpmg.com/us/en/articles/2026/global-trade-outlook-2026.html" target="_blank">KPMG: 2026 Trade Outlook</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/baltic" target="_blank">Trading Economics: Baltic Dry Index</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/05/bitcoin-price-today-70000-in-focus.html" target="_blank">CNBC: Bitcoin drops 15%</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/06/bitcoin-price-today-60000-in-focus.html" target="_blank">CNBC: Bitcoin rebounds above $70K</a></li>
+        <li><a href="https://www.coindesk.com/markets/2026/02/05/bitcoin-drops-below-usd65-000-heading-to-worst-one-day-drawdown-since-ftx-blowup" target="_blank">CoinDesk: Bitcoin spirals toward $60K</a></li>
+        <li><a href="https://blog.tapbit.com/ethereum-crashes-34-5-weekly-to-1850-full-breakdown-outlook-february-2026/" target="_blank">Tapbit: Ethereum crashes 34.5%</a></li>
+        <li><a href="https://blog.tapbit.com/ethereum-crash-february-2026-2110-low-negative-funding-447m-etf-outflows-explained/" target="_blank">Tapbit: $447M ETF outflows</a></li>
+        <li><a href="https://www.coindesk.com/markets/2026/01/06/circle-s-usdc-outpaces-growth-of-tether-s-usdt-for-second-year-running" target="_blank">CoinDesk: USDC growth</a></li>
+        <li><a href="https://finance.yahoo.com/news/us-crypto-etfs-draw-670-110114860.html" target="_blank">Yahoo Finance: Crypto ETF flows</a></li>
+        <li><a href="https://incrypted.com/en/bitcoins-drop-to-60-000-triggers-2-6-billion-in-liquidations/" target="_blank">Incrypted: $2.6B liquidations</a></li>
+        <li><a href="https://bitcoinsuisse.com/industry-blog/largest-crypto-liquidation-event-history-extreme-fear-market" target="_blank">Bitcoin Suisse: Liquidation event</a></li>
+        <li><a href="https://www.dlnews.com/articles/regulation/key-dates-for-us-crypto-regulation-in-2026/" target="_blank">DL News: Crypto regulation 2026</a></li>
+        <li><a href="https://www.coindesk.com/markets/2026/02/06/citi-cuts-coinbase-price-target-to-usd400-after-stock-s-65-plunge-from-record-high" target="_blank">CoinDesk: Citi cuts Coinbase PT</a></li>
+        <li><a href="https://www.macrotrends.net/stocks/charts/PLTR/palantir-technologies/stock-price-history" target="_blank">MacroTrends: PLTR verified $135.90</a></li>
+        <li><a href="https://www.marketbeat.com/instant-alerts/ionq-nyseionq-stock-price-up-142-heres-what-happened-2026-02-06/" target="_blank">MarketBeat: IONQ +14.2% verified</a></li>
+        <li><a href="https://stockinvest.us/stock/FCX" target="_blank">StockInvest: FCX verified $60.65</a></li>
+        <li><a href="https://www.fool.com/investing/2026/02/06/is-mp-materials-stock-still-a-buy-after-its-224-ra/" target="_blank">Motley Fool: MP Materials verified $61.26</a></li>
+        <li><a href="https://tradingeconomics.com/united-states/government-bond-yield" target="_blank">Trading Economics: 10Y verified 4.22%</a></li>
+        <li><a href="https://www.aaii.com/investingideas/article/402588-why-vertiv-holdings-co8217s-vrt-stock-is-up-752" target="_blank">AAII: VRT verified $195.58</a></li>
+        <li><a href="https://www.advisorperspectives.com/dshort/updates/2026/02/06/treasury-yields-snapshot-february-6-2026" target="_blank">Advisor Perspectives: Treasury Yields Snapshot</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border-subtle); margin-top: 40px;">
+  <div style="font-size: 13px; color: var(--text-muted);">
+    Eagle Eye W06 &bull; BigPic Solutions &bull; Week Ending 2026-02-06 &bull; Compiled 2026-02-08
+  </div>
+  <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+    Data verification applied. Cross-report discrepancies corrected via independent source checks.
+  </div>
+</footer>
+
+<script>
+// Counter Animation
+function animateCounters() {
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    const prefix = el.dataset.prefix || '';
+    const duration = 1500;
+    const start = performance.now();
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      if (decimals > 0) {
+        el.textContent = prefix + current.toFixed(decimals);
+      } else {
+        el.textContent = prefix + Math.round(current).toLocaleString();
+      }
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+// Sector Bar Chart
+function initBarChart() {
+  const sectors = [
+    { name: 'XLI', pct: 2.9 }, { name: 'XLB', pct: 2.5 }, { name: 'XLE', pct: 2.0 },
+    { name: 'XLF', pct: 1.9 }, { name: 'XLV', pct: 1.9 }, { name: 'XLY', pct: 1.5 },
+    { name: 'XLRE', pct: 1.0 }, { name: 'XLU', pct: 0.6 }, { name: 'XLC', pct: 0.5 },
+    { name: 'XLP', pct: 0.3 }, { name: 'XLK', pct: -1.5 }
+  ];
+  const maxAbs = Math.max(...sectors.map(s => Math.abs(s.pct)));
+  const container = document.getElementById('sectorBars');
+  sectors.forEach(s => {
+    const col = document.createElement('div');
+    col.className = 'bar-col';
+    const bar = document.createElement('div');
+    bar.className = 'bar ' + (s.pct >= 0 ? 'positive' : 'negative');
+    const heightPct = (Math.abs(s.pct) / maxAbs) * 100;
+    bar.style.height = '0%';
+    setTimeout(() => { bar.style.height = heightPct + '%'; }, 500);
+    const val = document.createElement('span');
+    val.className = 'bar-value ' + (s.pct >= 0 ? 'positive' : 'negative');
+    val.textContent = (s.pct >= 0 ? '+' : '') + s.pct + '%';
+    bar.appendChild(val);
+    const label = document.createElement('span');
+    label.className = 'bar-label';
+    label.textContent = s.name;
+    col.appendChild(bar);
+    col.appendChild(label);
+    container.appendChild(col);
+  });
+}
+
+// Watchlist Filter
+function initFilters() {
+  const btns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('#watchlistTable tbody tr');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      rows.forEach(row => {
+        if (filter === 'all') { row.style.display = ''; return; }
+        const sector = row.dataset.sector || '';
+        row.style.display = sector.includes(filter) ? '' : 'none';
+      });
+    });
+  });
+}
+
+// Collapsible Sources
+function initSources() {
+  const toggle = document.getElementById('sourcesToggle');
+  const content = document.getElementById('sourcesContent');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    content.classList.toggle('open');
+  });
+}
+
+// Scroll Reveal
+function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// Tooltip for yield dots
+document.querySelectorAll('.yield-dot').forEach(dot => {
+  dot.addEventListener('mouseenter', function(e) {
+    const tooltip = this.getAttribute('data-tooltip');
+    if (!tooltip) return;
+    const tip = document.createElement('div');
+    tip.className = 'yield-tooltip';
+    tip.textContent = tooltip;
+    tip.style.cssText = 'position:fixed;padding:4px 8px;background:rgba(0,0,0,0.9);color:#fff;font-size:11px;border-radius:4px;pointer-events:none;z-index:100;font-family:var(--font-mono);';
+    document.body.appendChild(tip);
+    const rect = this.getBoundingClientRect();
+    tip.style.left = rect.left + rect.width/2 - tip.offsetWidth/2 + 'px';
+    tip.style.top = rect.top - 30 + 'px';
+    this._tooltip = tip;
+  });
+  dot.addEventListener('mouseleave', function() {
+    if (this._tooltip) { this._tooltip.remove(); this._tooltip = null; }
+  });
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  animateCounters();
+  initBarChart();
+  initFilters();
+  initSources();
+  initReveal();
+});
+</script>
+
+</body>
+</html>
