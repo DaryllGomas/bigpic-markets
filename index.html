@@ -28,11 +28,13 @@
   --font-sans: 'Space Grotesk', sans-serif;
   --font-mono: 'Newsreader', Georgia, serif;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Aliases for shared nav CSS */
+  /* Aliases for shared design system */
   --deep: var(--bg-deep);
   --light: var(--text-primary);
   --mist: var(--text-secondary);
   --dawn: var(--accent-gold);
+  --sunrise: var(--accent-amber);
+  --star: #ffffff;
   --font-display: var(--font-sans);
 }
 
@@ -56,6 +58,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Navigation */
@@ -219,6 +223,128 @@ nav a.nav-active,
   }
 }
 
+/* Stars background */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--star);
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.8; }
+}
+
+/* Celestial elements */
+.celestial {
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 250px;
+  pointer-events: none;
+}
+
+.celestial-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--dawn) 0%, transparent 70%);
+  opacity: 0.3;
+  animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.4; }
+}
+
+.celestial-body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--dawn) 0%, var(--sunrise) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 80px var(--dawn), 0 0 120px rgba(232, 184, 125, 0.5);
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(232, 184, 125, 0.2);
+  border-radius: 50%;
+  animation: rotate 60s linear infinite;
+  pointer-events: none;
+}
+
+.orbit-1 {
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-2 {
+  width: 550px;
+  height: 550px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 90s;
+  animation-direction: reverse;
+}
+
+.orbit-3 {
+  width: 750px;
+  height: 750px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 120s;
+}
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.orbit-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--dawn);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--dawn);
+}
+
+.orbit-1 .orbit-dot { top: 0; left: 50%; transform: translateX(-50%); }
+.orbit-2 .orbit-dot { top: 50%; right: 0; transform: translateY(-50%); }
+.orbit-3 .orbit-dot { bottom: 0; left: 50%; transform: translateX(-50%); }
+
+@media (max-width: 768px) {
+  .orbit-2, .orbit-3 {
+    display: none;
+  }
+}
+
 /* HERO */
 .hero {
   min-height: 60vh;
@@ -229,16 +355,29 @@ nav a.nav-active,
   text-align: center;
   padding: 120px 24px 40px;
   position: relative;
+  overflow: hidden;
 }
 
 .hero::before {
   content: '';
   position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(232,184,125,0.08) 0%, transparent 70%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(45, 74, 111, 0.2) 30%,
+    rgba(232, 184, 125, 0.15) 60%,
+    rgba(244, 162, 97, 0.1) 100%
+  );
   pointer-events: none;
+}
+
+.hero h1, .hero .subtitle, .hero .meta {
+  position: relative;
+  z-index: 10;
 }
 
 .hero h1 {
@@ -450,6 +589,8 @@ footer {
   font-size: 0.85rem;
   border-top: 1px solid var(--border-subtle);
   margin-top: 40px;
+  position: relative;
+  z-index: 10;
 }
 
 footer a {
@@ -465,6 +606,9 @@ footer a {
 </style>
 </head>
 <body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
 
 <!-- Navigation -->
 <nav>
@@ -510,6 +654,15 @@ footer a {
 <div class="container">
 
   <section class="hero">
+    <div class="celestial">
+      <div class="celestial-glow"></div>
+      <div class="celestial-body"></div>
+    </div>
+
+    <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+    <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+    <div class="orbit orbit-3"><div class="orbit-dot"></div></div>
+
     <h1>BigPic Solutions</h1>
     <p class="subtitle">Investment Research & Market Intelligence. Thematic sector analysis, weekly macro reports, and daily pre-market briefings.</p>
     <p class="meta">9 sectors &middot; weekly eagle eye &middot; daily morning brief</p>
@@ -681,6 +834,18 @@ footer a {
 </footer>
 
 <script>
+    // Generate stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.setProperty('--duration', (3 + Math.random() * 4) + 's');
+        star.style.setProperty('--delay', Math.random() * 5 + 's');
+        starsContainer.appendChild(star);
+    }
+
     // Mobile Navigation
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
