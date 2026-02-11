@@ -1,260 +1,393 @@
 # Morning Brief -- Markets Research
-**Tuesday, February 10, 2026**
+**Wednesday, February 11, 2026**
 
 ---
 
 ## Event Load Rating
 
-**LIGHT-TO-MEDIUM** -- No major macro releases today (CPI, NFP, FOMC all off-calendar). NFIB Small Business Optimism was the lone data point this morning (already released at 6:00 AM ET). Earnings from BDX (beat), ON Semi, and Halliburton are secondary movers. The bigger overhang is MCD reporting Wednesday pre-market and the delayed January jobs report (expected Wednesday) due to the partial government shutdown. Markets are in a holding pattern ahead of that data cluster. The ongoing crypto crash and tariff uncertainty add background noise but no single catalyst dominates today.
+**HEAVY** -- The rescheduled January nonfarm payrolls report blew past expectations (+130K vs. +55K consensus), triggering a sharp intraday reversal in equities and a surge in Treasury yields. Fed Chair Powell testifies before the House Financial Services Committee today (Humphrey-Hawkins, Day 2). Multiple Fed speakers (Bowman, Waller, Jefferson, Cook) scheduled. On the earnings front, **Vertiv (VRT) reports pre-market** -- a Tier 1 AI Infrastructure watchlist name -- alongside MCD, TMUS, SHOP, and GFS. After the close, Cisco (CSCO) and AppLovin (APP) report. Gold is above $5,000, crypto is crashing, and the January jobs surprise is reshaping rate-cut expectations for the rest of 2026.
 
 ---
 
-## Pre-Market Snapshot
+## 1. Overnight Futures & Market Snapshot
 
-| Index | Level | Change | % Change |
-|-------|-------|--------|----------|
-| S&P 500 Futures (ES) | 6,991.00 | +7.75 | +0.11% |
-| Nasdaq 100 Futures (NQ) | 25,365.25 | +11.25 | +0.04% |
-| Dow Futures (YM) | 50,249 | +30 | +0.06% |
-| Russell 2000 Futures (RTY) | 2,688 | +10.20 | +0.38% |
+US equity futures initially traded flat to slightly lower overnight, then spiked on the 8:30 AM ET January jobs report before reversing sharply.
 
-*Source: [CNBC Pre-Markets](https://www.cnbc.com/pre-markets/), [Investing.com](https://www.investing.com/indices/us-spx-500-futures)*
-
-US equity futures are modestly higher across the board, with the Russell 2000 outperforming (+0.38%), suggesting some risk-on tilt in small caps. Futures are muted ahead of a light data day, with the market digesting last week's volatility and positioning for Wednesday's delayed jobs report and MCD earnings.
-
----
-
-## Overnight / Global Markets
-
-### Asia Recap
-
-| Index | Close | Change |
-|-------|-------|--------|
-| Nikkei 225 | 57,650.54 | +2.28% (record close) |
-| Topix | 3,855.28 | +1.90% (record close) |
-| Hang Seng | 27,183.15 | +0.58% |
-| Shanghai Composite | ~Flat | -0.02% |
-| Kospi | 5,301.69 | +0.1% |
-| Kosdaq | 1,115.20 | -1.10% |
-
-**Key Developments:**
-- **Japan surged to record highs.** The Nikkei 225 rallied 2.28% to an all-time closing high of 57,650, riding the "Takaichi trade" following PM Sanae Takaichi's landslide Lower House victory. The Topix also closed at a record.
-- **SoftBank spiked +10.7%** after its subsidiary upgraded full-year forecasts -- relevant for our robotics thesis (SoftBank's $5.375B ABB Robotics acquisition) and AI infra thesis.
-- **Hong Kong modestly higher** (+0.58%), Shanghai essentially flat. China remains range-bound ahead of further clarity on stimulus measures and US-China trade dynamics.
-- **India opened green** on strong global cues (Sensex, Nifty in the green).
-
-*Source: [CNBC Asia Markets](https://www.cnbc.com/2026/02/10/asia-markets-live-nikkei-topix-takaichi-kospi-hang-seng.html), [India TV News](https://www.indiatvnews.com/business/markets/stock-market-news-today-february-10-2026-gift-nifty-sensex-today-eternal-axis-bank-trent-ntpc-hcl-tech-infosys-tech-mahindra-in-focus-2026-02-10-1029587)*
-
-### Europe Session (Still Trading at Time of Writing)
+**Pre-Jobs Data (Overnight):**
 
 | Index | Level | Change |
 |-------|-------|--------|
-| STOXX 600 | ~621+ | ~+0.7% (est.) |
-| DAX (Germany) | ~25,015+ | ~+1.2% (est.) |
-| FTSE 100 (UK) | ~10,386+ | ~+0.2% (est.) |
+| S&P 500 (ES) | ~6,935 | -0.05% |
+| Nasdaq 100 (NQ) | ~20,550 | -0.22% |
+| Dow (YM) | ~50,200 | +0.06% |
+| Russell 2000 (RTY) | ~2,564 | +0.06% |
 
-European markets are trading higher, led by the DAX. European defense stocks remain well-bid as NATO rearmament continues. The euro is firm against the dollar (EUR/USD ~1.19), reflecting ongoing dollar weakness. Markets positioned ahead of further earnings and economic data.
+**Post-Jobs Data (8:30 AM+ reaction):**
 
-*Source: [Yahoo Finance STOXX History](https://finance.yahoo.com/quote/%5ESTOXX/history/), [CNBC Europe](https://www.cnbc.com/2026/02/02/european-markets-sotxx-600-ftse-dax-cac-global-markets-silver-gold-bitcoin.html)*
+| Index | Level | Change |
+|-------|-------|--------|
+| S&P 500 (ES) | ~6,977 | +0.51% |
+| Nasdaq 100 (NQ) | ~20,738 | +0.67% |
+| Dow (YM) | ~50,450 | +0.50% |
+| Russell 2000 (RTY) | ~2,566 | +0.06% |
 
----
+**Key dynamic: The rally failed.** S&P 500 futures initially surged ~0.6% on the strong jobs print, briefly putting the index on track for all-time highs. But the advance sputtered as traders digested the implications: fewer rate cuts, surging yields, and a brutal selloff in software stocks (software ETF -3.5%). Most megacaps reversed lower. Money markets shifted the expected next Fed rate cut from **June to July**.
 
-## Yields & Currency
-
-| Instrument | Level | Change |
-|------------|-------|--------|
-| US 10-Year | ~4.22% | Steady |
-| US 2-Year | ~3.50% | Steady |
-| US 30-Year | ~4.85% | Steady |
-| 2s/10s Spread | ~+72 bps | Positive (steepening) |
-| DXY Dollar Index | 96.84 | -0.03% (near 97) |
-| EUR/USD | 1.1901 | -0.09% (euro strong) |
-| USD/JPY | 155.26 | Yen strengthening |
-
-**Key Observations:**
-- **Yields flat** ahead of delayed economic data. The 10Y holds at ~4.22%, well below the October 2025 highs. Markets are pricing in further Fed easing with the dollar under sustained pressure.
-- **DXY down to ~97** -- the dollar has weakened 10.3% over the past 12 months and 2.0% in the past month. Weak labor data and concerns about tariff drag on growth are driving the greenback lower.
-- **Yen firming** to 155.26 amid intervention fears following Japan's election results and BoJ policy normalization expectations.
-- **Euro at 1.19** -- up 14.9% over the past year, reflecting relative economic resilience in Europe and dollar sell-off. The "sell America" / TACO trade narrative remains active.
-- **2s/10s spread positive at ~72bps** -- steepening curve signals growth expectations remain intact but markets expect more short-end cuts.
-
-*Source: [US Treasury Daily Rates](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026), [FRED DGS10](https://fred.stlouisfed.org/series/DGS10), [Trading Economics DXY](https://tradingeconomics.com/united-states/currency), [Trading Economics EUR](https://tradingeconomics.com/euro-area/currency)*
+**Tuesday's Close (Feb 10):**
+- S&P 500: 6,941.81 (-0.3%) -- briefly topped its all-time high before fading
+- Dow: 50,188.14 (+0.1%) -- third consecutive record close
+- Nasdaq: 23,102.47 (-0.6%) -- tech underperformance continued
 
 ---
 
-## Commodities
+## 2. Asia Recap
 
-| Commodity | Level | Change |
-|-----------|-------|--------|
-| WTI Crude | $64.17-64.32/bbl | +0.97% |
-| Brent Crude | ~$68.00/bbl | +0.5% |
-| Gold (Spot) | ~$5,039-5,070/oz | +2.0% |
-| Silver (Spot) | ~$82.65/oz | +5.0% |
-| Natural Gas | $3.14/MMBtu | -8.2% |
-| Copper | $5.91/lb | -0.94% |
+Asian markets were broadly positive overnight, led by a surging Japan.
 
-**Key Observations:**
-- **Gold surged above $5,000** again, rising ~2% to ~$5,070 on softer real yields, weaker USD, and renewed safe-haven demand. Gold continues its remarkable 2025-2026 rally as central bank buying and geopolitical uncertainty persist. This is bullish backdrop for our critical minerals thesis (MP, ALB, FCX benefit from broader metals sentiment).
-- **Silver rebounding sharply (+5%)** to ~$82.65/oz after the dramatic January selloff from record $121. Silver erased all 2026 gains in the late-January margin-call-driven crash before stabilizing.
-- **Oil modestly higher** -- WTI above $64 and Brent near $68. Markets weighing US-Iran negotiations and uncertainty around Indian oil imports from Russia following trade deal announcements. Oil remains range-bound as OPEC+ production discipline offsets demand concerns.
-- **Natural gas plunged -8.2%** to $3.14 as mid-February weather forecasts shifted warmer, particularly across the Northeast, cutting expected heating demand.
-- **Copper slipped modestly** (-0.94%) to $5.91/lb despite structural deficit thesis. Supports the long-term bull case for FCX and SCCO but near-term is demand-sensitive.
+| Index | Close | Change | Driver |
+|-------|-------|--------|--------|
+| Nikkei 225 | **CLOSED** | -- | National Foundation Day holiday. Closed Tues at record 57,651 (+2.3%) |
+| Hang Seng | 27,266 | +0.3% | Modest gains despite soft China CPI |
+| Shanghai / CSI 300 | 4,140 | +0.3% | Shrugged off CPI miss |
+| Kospi | 5,346 | +1.0% | Extended recent gains |
+| ASX 200 | 9,015 | +1.5% | Strong session |
+| Taiwan TAIEX | -- | +1.7% | Semiconductor strength |
 
-*Source: [Trading Economics Crude Oil](https://tradingeconomics.com/commodity/crude-oil), [Trading Economics Gold](https://tradingeconomics.com/commodity/gold), [Trading Economics Silver](https://tradingeconomics.com/commodity/silver), [Trading Economics Natural Gas](https://tradingeconomics.com/commodity/natural-gas), [Trading Economics Copper](https://tradingeconomics.com/commodity/copper), [FX Daily Report WTI](https://fxdailyreport.com/wti-crude-oil-price-analysis-for-february-10-2026/)*
+**Key Developments:**
 
----
+- **China CPI miss:** January CPI +0.2% YoY (vs. +0.4% consensus, down from +0.8% in December). PPI -1.4% YoY (slightly better than -1.5% expected). Food prices -0.7% YoY. Persistent deflation concerns linger. Shanghai and Hong Kong largely shrugged off the data, suggesting stimulus expectations remain a floor.
 
-## Crypto
+- **Japan closed for National Foundation Day** but closed at record highs Tuesday (Nikkei 57,651, +2.3%) on the "Takaichi trade" after PM Takaichi's landslide LDP victory. Yen strengthening to 153.66/USD on BoJ rate hike expectations (April meeting).
 
-| Asset | Price | 24h Change |
-|-------|-------|------------|
-| Bitcoin (BTC) | ~$69,093 | -3.1% |
-| Ethereum (ETH) | ~$2,010 | -2.7% |
-
-**Key Observations:**
-- **Bitcoin remains under severe pressure**, down ~3% and struggling to hold $70K after a brutal early-February selloff that saw BTC crash from $80K+ to briefly below $61K (the worst drawdown since FTX). Institutional sellers are now net distributors per CryptoQuant. BTC has fallen in 7 of the last 8 sessions.
-- **Ethereum at ~$2,010** -- down 2.7% and trading near levels not seen since late 2024. The 52-week range of $1,388-$4,956 shows the severity of the drawdown from highs.
-- **Context:** The crypto selloff correlates with the broader risk-off move (Nasdaq weakness, tariff concerns, global liquidity contraction). The quantum computing thesis notes ~$718B in Bitcoin held in quantum-vulnerable addresses (P2PK) as a long-term overhang.
-- **Our thesis watchlist exposure:** Crypto weakness has minimal direct impact on our sector watchlists, but it reflects risk appetite broadly. PLTR, TSLA, and other high-beta names in our watchlists tend to correlate with crypto sentiment.
-
-*Source: [CNBC Bitcoin](https://www.cnbc.com/2026/02/06/bitcoin-price-today-60000-in-focus.html), [CoinMarketCap ETH](https://coinmarketcap.com/currencies/ethereum/), [CoinDesk](https://www.coindesk.com/markets/2026/02/05/bitcoin-drops-below-usd65-000-heading-to-worst-one-day-drawdown-since-ftx-blowup)*
+- **Asian markets broadly higher** despite weak US retail sales released Tuesday. The "bad news is good news" dynamic had been in play -- weaker US data raises rate-cut expectations. Taiwan +1.7% on semiconductor strength is notable for the AI/chip thesis.
 
 ---
 
-## Today's Economic Calendar
+## 3. Europe Recap
 
-| Time (ET) | Release | Actual | Consensus | Prior | Significance |
-|-----------|---------|--------|-----------|-------|-------------|
-| 6:00 AM | NFIB Small Business Optimism (Jan) | **99.3** | 99.8 | 99.5 | LOW -- Slight miss, but remains above 52-year average. Uncertainty sub-index rose 7 pts to 91. |
-| -- | No other major releases | -- | -- | -- | -- |
+European markets near record highs heading into Wednesday, following mixed earnings-driven sessions.
 
-**Delayed Data (Expected This Week):**
-- **Wednesday (Feb 11):** January jobs report (delayed from government shutdown) -- this is the week's macro catalyst
-- **Wednesday (Feb 11):** December retail sales data (also delayed)
-- **Wednesday (Feb 11):** McDonald's (MCD) Q4 2025 earnings before open
+| Index | Level | Change (Tues close) | Notes |
+|-------|-------|---------------------|-------|
+| STOXX 600 | ~621 | +0.7% | At/near record high |
+| DAX | ~25,015 | +1.2% | Defense spending & industrial strength |
+| FTSE 100 | ~10,386 | +0.2% | Modest, defensive tilt |
+| CAC 40 | ~8,323 | +0.6% | Dassault Systemes -19% weighed |
 
-*Source: [Trading Economics Calendar](https://tradingeconomics.com/united-states/calendar), [Investing Live NFIB](https://investinglive.com/news/us-january-nfib-small-business-optimism-index-993-vs-998-expected-20260210/), [NFIB Report](https://www.nfib.com/news/monthly_report/sbet/)*
+**Notable European movers:**
+- **Dassault Systemes** plunged **19%** -- worst STOXX 600 performer after profit miss and modest 2026 growth guidance
+- **Siemens Energy** surged **5%** after net profit nearly tripled
+- **Heineken** +3% on higher FY25 profits
+
+The STOXX 600 has reached record highs. European markets had been pricing in weaker US data supporting Fed rate cuts, but the strong US jobs print may cause a reassessment. The DAX continues to lead, driven by defense spending commitments and industrial strength.
 
 ---
 
-## Fed Speakers
+## 4. Pre-Market Movers
 
-**No major Fed speeches scheduled for today (February 10, 2026).**
+### Today's Key Pre-Market Movers (Earnings-Driven)
 
-**Background Context:**
-- The Fed remains in a politically charged environment. The DOJ served the Federal Reserve with grand jury subpoenas related to Chair Powell's Senate Banking Committee testimony from June 2025, though Senate Banking Chair Tim Scott publicly stated he doesn't believe Powell committed any crime.
-- Senate Democrats are urging a hold on Kevin Warsh's confirmation hearing for Fed Chair until the Powell investigation is resolved.
-- Markets are pricing in further rate cuts with the Fed Funds rate expected to move lower in 2026. The weaker dollar and soft economic data reinforce easing expectations.
-- **Next FOMC Meeting:** March 17-18, 2026.
+**Winners:**
 
-*Source: [Federal Reserve Calendar](https://www.federalreserve.gov/newsevents/calendar.htm), [CNBC Powell/Scott](https://www.cnbc.com/2026/02/04/scott-trump-powell-fed-warsh-tillis-doj.html)*
+| Ticker | Move | Catalyst |
+|--------|------|----------|
+| **TDC** (Teradata) | **+18%** | Strong FY26 outlook -- adj. EPS $2.55-$2.65 vs. $2.54 consensus |
+| **LSCC** (Lattice Semi) | **+11%** | Strong current-quarter guidance; edge AI/programmable logic demand |
+| **NET** (Cloudflare) | **+7%** | Q4 beat + FY26 revenue guide $2.79-2.80B vs. $2.74B consensus |
+| **GNRC** (Generac) | **+6%** | Despite Q4 miss, data center backlog growing; hyperscaler demand cited |
+| **HUM** (Humana) | +2% | Q4 loss of $3.96 (adj.) beat est. of $4.01 loss; revenue $32.52B beat |
+| **F** (Ford) | **+1.5%** | FY26 adj. EBIT guidance $8.0-10.0B vs. $8.86B consensus |
+| **STLD** (Steel Dynamics) | +3.6% | Earnings beat |
+| **VNT** (Ventas) | +3.7% | Strong results |
+| **AKAM** (Akamai) | +5.4% | Earnings beat |
+
+**Losers:**
+
+| Ticker | Move | Catalyst |
+|--------|------|----------|
+| **MAT** (Mattel) | **-26%** | Missed FY25 sales and profit targets; disappointing FY26 guidance |
+| **LYFT** | **-17%** | Q4 bookings in-line; weak Q1 adj. EBITDA guide ($120-140M vs. $139.8M) |
+| **AVTR** (Avantor) | **-11%** | FY26 EPS guidance 77-83c far below 90c consensus |
+| **MRNA** (Moderna) | **-10%** | FDA refused to review application for experimental flu shot mRNA-1010 |
+| **SPGI** (S&P Global) | **-9%** | Weak Q4 adj. EPS + below-consensus FY26 guidance |
+| **ZG** (Zillow) | **-7%** | Q4 EPS miss ($0.39 vs. $0.40); weak Q1 adj. EBITDA guide |
+| **UPST** (Upstart) | -3.8% | Despite Q4 beats on both EBITDA and revenue |
+| **GILD** (Gilead) | -2% | FY26 product revenue guide $29.6-30.0B vs. $30.26B consensus |
+
+### Thesis-Relevant Tickers in Pre-Market
+
+- **NET (Cloudflare) +7%** -- **Cybersecurity Thesis Tier 2 name.** Strong Q4 beat and raised FY26 guide ($2.79-2.80B) validates the security/CDN/edge compute thesis. 28-31% growth sustained. Bullish for cloud security/SASE convergence theme.
+
+- **GNRC (Generac) +6%** -- Relevant to the **AI/Data Center Power thesis.** CEO noted data center presence grew significantly and expects hyperscaler backlog additions. Validates the power infrastructure demand thesis alongside ETN, VRT, CEG.
+
+- **LSCC (Lattice Semi) +11%** -- Strong guidance suggests healthy demand in edge AI/industrial programmable logic. Positive read-through for semiconductor demand broadly.
+
+- **F (Ford) +1.5%** -- Relevant to **Energy Storage/EV thesis.** Strong FY26 EBIT guidance suggests the hybrid pivot is working. The company continues its strategic retreat from pure BEVs ($19.5B in prior special charges). Mixed signal for EV ecosystem.
+
+---
+
+## 5. Economic Calendar -- Wednesday, Feb 11, 2026
+
+| Time (ET) | Release | Actual | Consensus | Prior |
+|-----------|---------|--------|-----------|-------|
+| **8:30 AM** | **January Nonfarm Payrolls** | **+130,000** | **+55,000** | +48,000 (rev. down) |
+| **8:30 AM** | **Unemployment Rate** | **4.3%** | 4.4% | 4.4% |
+| 8:30 AM | Average Hourly Earnings | TBD | +0.3% MoM | +0.3% |
+| Released | China CPI (Jan) | +0.2% YoY | +0.4% | +0.8% |
+| Released | China PPI (Jan) | -1.4% YoY | -1.5% | -1.9% |
+
+### The January Jobs Report: A Massive Upside Surprise
+
+**Nonfarm payrolls surged +130,000** -- more than double the 55,000 Dow Jones consensus and far above the most optimistic estimates. December was revised slightly downward to +48,000.
+
+**Key details:**
+- **Health care and social assistance** drove the bulk of job gains
+- **Federal government** jobs fell by 34,000 as DOGE-related deferred resignations rolled off the payroll count
+- **Unemployment rate** ticked down to 4.3% vs. 4.4% expected
+- This was the first payrolls report of 2026, delayed by the government shutdown
+
+**Market implications:**
+- **Rate-cut expectations slashed:** Money markets now price the next Fed cut in **July** (previously June). The "three cuts in 2026" scenario has become significantly less likely.
+- **Equities reversed:** The S&P 500's initial surge to near all-time highs faded as yields surged and software stocks sold off hard (-3.5% sector ETF).
+- **"Good news is bad news":** A strong labor market reduces the urgency for Fed easing, which is negative for duration-sensitive growth stocks.
+
+---
+
+## 6. Fed Speakers
+
+| Speaker | Event | Key Focus |
+|---------|-------|-----------|
+| **Chair Jerome Powell** | **House Financial Services Committee testimony** (Humphrey-Hawkins Day 2) | Semiannual monetary policy report; will likely be asked about strong jobs data |
+| **Dallas Fed Pres. Logan** | Spoke Feb 10 | **Hawkish:** "No further rate cuts needed" if inflation stays on path |
+| Vice Chair Michelle Bowman | Scheduled today | Monetary policy |
+| Gov. Christopher Waller | GIC Dollar Summit | Economic outlook / dollar |
+| Vice Chair Philip Jefferson | Scheduled today | TBD |
+| Gov. Lisa Cook | Scheduled today | TBD |
+
+**Key context:** Powell's Senate testimony yesterday struck a **"no urgency to cut"** tone:
+- Inflation has moved closer to 2% target but remains "somewhat elevated" (PCE 2.6% YoY, core PCE 2.8%)
+- Fed has already cut 100 bps since September 2024, bringing funds rate to 4.25-4.50%
+- Powell described current rate as "appropriate"
+- Acknowledged uncertainty from tariffs, fiscal policy, and regulation
+- Signaled data-dependence, not a preset path
+
+**Today's strong jobs data reinforces the hold posture.** Expect Powell to be asked about the jobs surprise in his House testimony. Multiple governors speaking today will likely echo the "patient" message. The gap between market pricing and Fed rhetoric has narrowed after the jobs beat.
+
+---
+
+## 7. Key Rates & Yields
+
+Treasury yields surged across the curve on the stronger-than-expected jobs report:
+
+| Maturity | Yield | Change |
+|----------|-------|--------|
+| 2-Year | **3.518%** | **+6 bps** |
+| 10-Year | **4.182%** | **+3 bps** |
+| 30-Year | **4.81%** | **+2 bps** |
+
+**Direction:** Sharply higher post-jobs data. The 2-year moved most aggressively (+6 bps), reflecting reduced near-term rate-cut expectations. The 10Y had been trending lower toward 4.15% (its lowest since mid-January) before snapping back.
+
+**Yield curve:** The 2s/10s spread sits around **+66 bps**, maintaining its positive slope. The short end's outsized move slightly flattened the curve -- reflecting fewer expected near-term cuts.
+
+**Pre-jobs context:** Yields had been declining for two consecutive sessions on weak retail sales data and rising rate-cut bets. The strong payroll print has reversed that trend.
+
+**Implication for thesis sectors:** Higher-for-longer rates pressure duration-sensitive names (pre-revenue quantum plays like OKLO, SMR, IONQ; growth names like RKLB) but support the case that the economy is strong enough to sustain hyperscaler capex plans (positive for AI infrastructure thesis).
+
+---
+
+## 8. DXY (Dollar Index)
+
+| Metric | Value |
+|--------|-------|
+| DXY Level | **~96.68** |
+| Change | -0.12% (but firming post-jobs) |
+
+**Direction:** The dollar had been weakening into the jobs report, hitting its lowest level of the month at ~96.68. The strong payroll print has caused it to firm modestly, though it remains near session lows.
+
+**Drivers:**
+- Strong jobs data supports the dollar by reducing rate-cut expectations
+- Broader 2025-2026 downtrend reflects narrowing rate differentials as the Fed has already cut 100 bps
+- Reports of Chinese regulators advising financial institutions to limit US Treasury holdings are an ongoing headwind
+
+**Impact:** Dollar weakness broadly supports commodities (gold at $5,061, oil at $64-65 WTI). The post-jobs firming is modest and has not reversed the broader trend.
+
+---
+
+## 9. Oil
+
+| Contract | Level | Change |
+|----------|-------|--------|
+| WTI Crude | **~$64.41/bbl** | Flat to slightly up |
+| Brent Crude | **~$69.30/bbl** | +0.3% (3rd consecutive gain) |
+
+**Direction:** Modest gains, range-bound near $64-65 WTI.
+
+**Drivers:**
+- **Bullish:** US-Iran tensions persist despite signs of progress in nuclear talks; stronger jobs data supports demand outlook
+- **Bearish:** API reported massive +13.4M barrel US crude inventory build last week (largest since Nov 2023)
+- **Neutral:** OPEC+ production discipline continues but demand growth is tepid
+
+Oil remains stuck in a $60-70 WTI range. The massive inventory build is a headwind. For the energy thesis, low oil prices do not affect the data center power/nuclear/renewables thesis but reduce urgency around traditional energy plays.
+
+---
+
+## 10. Gold
+
+| Metric | Value |
+|--------|-------|
+| Spot Gold | **~$5,061/oz** |
+| Change | **+0.74%** |
+
+**Direction:** Higher, continuing its remarkable 2026 rally. Gold is up ~10% month-over-month and **+74% year-over-year**.
+
+**Drivers:**
+- Central bank buying remains strong globally
+- Geopolitical uncertainty (US-Iran, Ukraine, tariff policy)
+- Strong physical demand -- CME raised margin requirements from 6% to 8% after January record highs
+- Even the strong jobs report has not dented gold -- it serves as a hedge against both inflation and geopolitical risk simultaneously
+
+Gold above $5,000/oz is extraordinary. For the **critical minerals thesis**, gold strength benefits miners with gold exposure (PPTA -- Perpetua Resources, antimony + gold). For the **nuclear/uranium thesis**, general commodity strength is supportive.
+
+---
+
+## 11. Crypto
+
+| Asset | Level | Change |
+|-------|-------|--------|
+| Bitcoin (BTC) | **~$66,000** | **-3.0%** |
+| Ethereum (ETH) | **~$1,950** | **-3.5%** |
+| XRP | ~$1.37 | -2.0% |
+| Dogecoin | ~$0.09 | -3.0% |
+
+**Direction:** Sharply lower, extending a multi-week selloff. BTC has dropped below the critical 200-week EMA at $68,000. Third consecutive session of decline.
+
+**Drivers:**
+- Strong jobs report reduces rate-cut expectations, tightening financial conditions -- negative for risk assets
+- Bitcoin down significantly from October 2024 peak above $126,000 (now -47%)
+- Bitcoin ETF outflows: nearly $500M in a recent week
+- Broader risk-off sentiment in speculative assets
+
+**Quantum thesis note:** The ~$718B in Bitcoin held in quantum-vulnerable addresses (P2PK) identified in the quantum thesis remains a long-term structural risk. The current selloff is macro-driven, not quantum-related.
 
 ---
 
 ## Earnings Calendar Today
 
-| Company | Ticker | Time | EPS Est. | Rev Est. | Notes |
-|---------|--------|------|----------|----------|-------|
-| Becton Dickinson | BDX | Pre-market (reported) | $2.82 | $5.3B | **Beat** -- $2.91 EPS (+$0.09), revenue topped estimates. Reaffirmed FY2026 guidance. |
-| ON Semiconductor | ON | Today | $0.62 | $1.53B | Key semi name -- relevant to AI/EV thesis. Watch for auto/industrial demand commentary. |
-| Halliburton | HAL | Today | TBD | TBD | Energy services bellwether. |
-| Kyndryl | KD | Today | TBD | TBD | IT infrastructure spin-off from IBM. |
-| AECOM | ACM | Today | TBD | TBD | Infrastructure/engineering. |
+### Before Market Open (BMO):
 
-**Tomorrow (Wed Feb 11) Key:**
-- **McDonald's (MCD):** Q4 2025 before open. Consensus EPS $3.00-3.04 (vs $2.83 prior year). Revenue expected $6.81B. Options pricing ~3.13% move. Earnings call at 4:30 PM ET.
+| Company | Ticker | Watchlist Relevance |
+|---------|--------|-------------------|
+| **Vertiv Holdings** | **VRT** | **TIER 1 AI INFRA.** $9.5B backlog, 1.4x book-to-bill. Key: DC orders, margin, backlog, FY2026 guidance |
+| **GlobalFoundries** | **GFS** | Semiconductor foundry -- chip thesis adjacent |
+| McDonald's | MCD | Consumer bellwether |
+| T-Mobile US | TMUS | Telecom |
+| Shopify | SHOP | E-commerce/tech |
+| Humana | HUM | Healthcare (already reported: beat) |
+| Hilton | HLT | Consumer/travel |
+| Kraft Heinz | KHC | Consumer staples |
 
-*Source: [Benzinga Earnings](https://www.benzinga.com/markets/equities/26/02/50472561/becton-dickinson-on-semiconductor-and-3-stocks-to-watch-heading-into-monday), [Investing.com BDX](https://www.investing.com/news/earnings/becton-dickinson-earnings-beat-by-010-revenue-topped-estimates-4493195), [Yahoo Finance MCD](https://finance.yahoo.com/news/expect-mcdonalds-next-quarterly-earnings-123237702.html), [TipRanks MCD](https://www.tipranks.com/news/mcdonalds-is-about-to-report-q4-earnings-options-trades-are-bracing-for-a-3-13-move-in-mcd-stock)*
+### After Market Close (AMC):
+
+| Company | Ticker | Watchlist Relevance |
+|---------|--------|-------------------|
+| **Cisco Systems** | **CSCO** | Networking -- ANET competitor; DC switching read-through |
+| **AppLovin** | **APP** | Ad tech; bouncing after short-seller retraction |
+| Siemens Energy | SMNEY | Energy/power infrastructure |
+
+### Watchlist Cross-Reference:
+
+- **VRT (Vertiv) -- BMO** [Tier 1 AI Infrastructure]: Q4 2025 earnings. Watch backlog growth, book-to-bill ratio, data center order trends, margins, FY2026 guidance. A beat + raise would be bullish for the entire AI power/cooling supply chain (ETN, PWR).
+
+- **CSCO (Cisco) -- AMC**: Networking results provide read-through on data center switching demand -- directly relevant to ANET (Tier 1 AI watchlist).
+
+- **GFS (GlobalFoundries) -- BMO**: Mature-node foundry demand color matters for the semiconductor ecosystem.
 
 ---
 
-## Pre-Market Movers & Sector Watchlist Notes
+## Sector Watchlist Impact Summary
 
-### Notable Individual Moves
-- **Under Armour (UAA):** Tumbling pre-market after Citi downgraded to Sell from Neutral.
-- **SoftBank (9984.T / SFTBY):** +10.7% in Tokyo on upgraded forecasts -- positive read-through for AI and robotics thesis names.
-- **BDX:** Modestly positive after earnings beat.
+### Macro Impact from Today's Events:
 
-### Sector Watchlist Cross-Reference
+| Sector | Impact | Key Driver |
+|--------|--------|-----------|
+| **AI Infrastructure** | Mixed | Cloudflare +7% and Generac data center commentary are bullish; but higher-for-longer rates pressure high multiples. VRT earnings are the key event. |
+| **Nuclear** | Mixed | Strong economy supports hyperscaler capex (positive for CEG, VST PPA thesis); higher yields pressure utility valuations |
+| **Defense** | Insulated | Backlogs and budget cycle are the drivers, not macro. LMT, RTX, NOC unaffected by jobs data |
+| **Cybersecurity** | Positive | NET +7% validates cloud security spending. Software selloff (-3.5%) may create entry points in PANW, CRWD, ZS |
+| **Critical Minerals** | Positive | Gold $5,061 benefits PPTA and gold-exposed miners. Copper/lithium neutral. China CPI miss is mixed -- weak demand but stimulus expectations |
+| **Quantum** | Negative | Rate-sensitive pre-revenue names (IONQ, QBTS, RGTI) vulnerable to yields backing up |
+| **Robotics** | Modestly positive | LSCC +11% is positive for automation cycle recovery. Rockwell's recent Q1 beat already signaled recovery |
+| **Energy Storage** | Mixed | Ford FY26 guidance suggests hybrid pivot working; EV ecosystem mixed signals persist. Lithium prices stable |
+| **Space** | Neutral | No specific movers today. Artemis II (March 6) and SpaceX IPO (mid-2026) remain near-term catalysts |
 
-**From our 9 sector thesis files, here are the tickers and themes to watch today:**
+### Key Watchlist Tickers to Monitor Today:
 
-**AI Infrastructure:** NVDA, TSM, AVGO, VRT, ANET, MRVL, MU, ETN, PLTR, GLW, CRWV, AMD, INTC, PWR, CIEN, NOW -- SoftBank's subsidiary forecast upgrade is a positive datapoint for AI infra spending. ON Semiconductor earnings today may provide color on auto/industrial chip demand relevant to the AI/EV supply chain.
-
-**Critical Minerals:** MP, FCX, ALB, SQM, SCCO, UUUU, LAC, PPTA -- Gold above $5K and silver rebounding are positive sentiment for metals broadly. Copper at $5.91/lb supports the structural deficit thesis. Watch lithium prices (spot above $20K/tonne) for ALB/SQM read-through.
-
-**Cybersecurity:** PANW, CRWD, FTNT, ZS, NET, OKTA, LDOS, CACI -- Quiet day for the sector. Google/Wiz EU regulatory verdict was expected around Feb 10 per thesis -- worth monitoring for CNAPP implications.
-
-**Defense:** LMT, RTX, NOC, GD, LHX, PLTR, AVAV, RKLB, KTOS, HII -- European defense stocks remain bid as DAX outperforms. NATO rearmament theme intact. No specific defense catalysts today.
-
-**Energy Storage / Batteries:** ALB, SQM, TSLA, FLNC, EOSE, QS, RIVN, CHPT -- ON Semi earnings relevant (auto/EV chip demand). QuantumScape Eagle Line pilot inauguration expected this month (Feb 2026 per thesis).
-
-**Nuclear:** CEG, VST, CCJ, LEU, TLN, BWXT, NXE, UEC, UUUU, DNN, OKLO, SMR -- NexGen Energy (NXE) CNSC hearing started yesterday (Feb 9-13). This is a key near-term catalyst for uranium miners. Palisades restart also expected Feb-Mar 2026.
-
-**Quantum:** IONQ, QBTS, IBM, HON, NVDA, RGTI, PANW -- No specific catalyst today. Quantinuum IPO filing (S-1 filed Jan 2026) remains the key near-term event.
-
-**Robotics:** ISRG, SYK, SYM, GOOG, CGNX, AUR, HSAI, MBLY, GMED, TSLA, HYMTF, TER -- SoftBank's strong session in Tokyo is a positive for the ABB Robotics acquisition narrative. No specific US robotics catalysts today.
-
-**Space:** PL, RKLB, LUNR, LMT, NOC, LHX, BKSY, RDW -- Artemis II launch scheduled for March 6, 2026 (approaching). SpaceX IPO mid-2026 remains the sector-defining event.
+| Ticker | Sector | Today's Catalyst |
+|--------|--------|-----------------|
+| **VRT** | AI Infrastructure | **Earnings pre-market** -- Tier 1 watchlist name |
+| **NET** | Cybersecurity | **+7% pre-market** on Q4 beat + raised guide |
+| **GFS** | Semiconductors | **Earnings pre-market** |
+| **CSCO** | Data Center Networking | **Earnings after close** -- ANET read-through |
+| **NVDA** | AI / Semiconductors | Post-jobs sentiment; chip sector positioning |
+| **CEG/VST** | Nuclear | Rate-sensitive; yields backing up is a headwind |
+| **ALB/SQM** | Lithium | Dollar weakness supportive; China CPI miss mixed |
+| **PLTR** | Defense/AI | High-multiple name sensitive to rate expectations |
+| **RKLB** | Space/Defense | High-multiple growth; rate-sensitive |
+| **ETN** | AI Infrastructure | VRT earnings read-through for power equipment |
+| **ANET** | AI Infrastructure | CSCO earnings read-through for DC switching |
 
 ---
 
 ## Key Themes for Today
 
-1. **Holding pattern ahead of Wednesday's data dump** -- The delayed January jobs report and December retail sales, combined with MCD earnings, make Wednesday the week's real catalyst day. Today is positioning.
+1. **January jobs surprise reshapes rate expectations.** NFP of +130K (vs. +55K expected) was the session's dominant event. Rate-cut expectations have been pushed from June to July. The "good news is bad news" dynamic is back -- strong economy means fewer rate cuts, which pressures high-multiple growth stocks.
 
-2. **Dollar weakness persists** -- DXY at 97, EUR/USD at 1.19. The 10%+ annual decline in the dollar supports gold (above $5K), international earnings, and commodity prices but reflects deeper concerns about US growth trajectory under tariff regime.
+2. **Intraday equity reversal is the tell.** The S&P 500's initial surge to near all-time highs followed by a fade, with software stocks -3.5%, signals that the market is rate-sensitive at these valuations. Watch whether the reversal deepens or stabilizes.
 
-3. **Japan hits records** -- Nikkei and Topix at all-time highs on the Takaichi trade. SoftBank's AI-driven forecast upgrade is a positive signal for the global AI capex cycle.
+3. **Powell's House testimony (Humphrey-Hawkins Day 2).** The strong jobs print reinforces Powell's "no urgency to cut" stance. His real-time commentary on the data will be closely parsed. Expect him to emphasize data-dependence and patience.
 
-4. **Crypto carnage continues** -- BTC struggling at $69K after the worst selloff since FTX. Risk appetite indicator is flashing caution, though equity futures are ignoring it for now.
+4. **VRT earnings -- AI infrastructure pulse check.** Vertiv reporting pre-market is the most important single-stock event for the AI thesis today. The power/cooling supply chain has the highest revenue visibility in AI infrastructure.
 
-5. **NFIB slight miss** -- Small business optimism at 99.3 (vs 99.8 expected). Uncertainty sub-index rising to 91 reflects tariff and policy unpredictability weighing on small business confidence.
+5. **Gold above $5,000 while crypto crashes.** A striking divergence: gold at all-time highs ($5,061) while BTC is down 47% from October highs. Reflects rotation from speculative to traditional safe-haven assets.
 
-6. **NexGen CNSC hearing underway** -- Critical catalyst for our nuclear/uranium thesis. Feb 9-13 hearing for the Rook I project (largest development-stage uranium mine). Watch NXE, CCJ, UEC, UUUU for any headline impact.
+6. **China deflation persists.** CPI miss (+0.2% vs +0.4%) keeps pressure on Beijing for stimulus. Mixed for critical minerals thesis -- weak demand near-term but stimulus expectations provide a floor.
+
+7. **Dow at records, Nasdaq lagging.** The Dow above 50,000 while Nasdaq fell -0.6% Tuesday reflects tech-to-value rotation. Benefits defense primes (LMT, RTX, NOC) and power/industrial names (ETN, VRT) while pressuring high-multiple tech growth.
 
 ---
 
 ## Sources
 
-- [CNBC Pre-Markets](https://www.cnbc.com/pre-markets/)
-- [CNBC Asia Markets Feb 10](https://www.cnbc.com/2026/02/10/asia-markets-live-nikkei-topix-takaichi-kospi-hang-seng.html)
-- [India TV News Markets](https://www.indiatvnews.com/business/markets/stock-market-news-today-february-10-2026-gift-nifty-sensex-today-eternal-axis-bank-trent-ntpc-hcl-tech-infosys-tech-mahindra-in-focus-2026-02-10-1029587)
-- [Investing.com S&P 500 Futures](https://www.investing.com/indices/us-spx-500-futures)
-- [Investing.com Russell 2000 Futures](https://www.investing.com/indices/smallcap-2000-futures)
-- [US Treasury Daily Rates](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026)
-- [FRED 10Y Treasury](https://fred.stlouisfed.org/series/DGS10)
-- [Trading Economics DXY](https://tradingeconomics.com/united-states/currency)
-- [Trading Economics EUR/USD](https://tradingeconomics.com/euro-area/currency)
-- [Trading Economics Crude Oil](https://tradingeconomics.com/commodity/crude-oil)
-- [Trading Economics Brent](https://tradingeconomics.com/commodity/brent-crude-oil)
-- [Trading Economics Gold](https://tradingeconomics.com/commodity/gold)
-- [Trading Economics Silver](https://tradingeconomics.com/commodity/silver)
-- [Trading Economics Natural Gas](https://tradingeconomics.com/commodity/natural-gas)
-- [Trading Economics Copper](https://tradingeconomics.com/commodity/copper)
-- [FX Daily Report WTI Analysis](https://fxdailyreport.com/wti-crude-oil-price-analysis-for-february-10-2026/)
-- [Fortune Gold Price Feb 9](https://fortune.com/article/current-price-of-gold-02-09-2026/)
-- [Fortune Silver Price Feb 9](https://fortune.com/article/current-price-of-silver-2-9-2026/)
-- [JM Bullion Gold Charts](https://www.jmbullion.com/charts/gold-price/)
-- [CNBC Bitcoin](https://www.cnbc.com/2026/02/06/bitcoin-price-today-60000-in-focus.html)
-- [CoinMarketCap Ethereum](https://coinmarketcap.com/currencies/ethereum/)
-- [CoinDesk BTC Selloff](https://www.coindesk.com/markets/2026/02/05/bitcoin-drops-below-usd65-000-heading-to-worst-one-day-drawdown-since-ftx-blowup)
-- [InvestingLive NFIB](https://investinglive.com/news/us-january-nfib-small-business-optimism-index-993-vs-998-expected-20260210/)
-- [NFIB Monthly Report](https://www.nfib.com/news/monthly_report/sbet/)
-- [Trading Economics Calendar](https://tradingeconomics.com/united-states/calendar)
-- [Federal Reserve Calendar](https://www.federalreserve.gov/newsevents/calendar.htm)
-- [CNBC Powell/Scott](https://www.cnbc.com/2026/02/04/scott-trump-powell-fed-warsh-tillis-doj.html)
-- [Benzinga Earnings](https://www.benzinga.com/markets/equities/26/02/50472561/becton-dickinson-on-semiconductor-and-3-stocks-to-watch-heading-into-monday)
-- [Investing.com BDX Earnings](https://www.investing.com/news/earnings/becton-dickinson-earnings-beat-by-010-revenue-topped-estimates-4493195)
-- [Yahoo Finance MCD Earnings](https://finance.yahoo.com/news/expect-mcdonalds-next-quarterly-earnings-123237702.html)
-- [TipRanks MCD Options](https://www.tipranks.com/news/mcdonalds-is-about-to-report-q4-earnings-options-trades-are-bracing-for-a-3-13-move-in-mcd-stock)
-- [Daily Political MCD](https://www.dailypolitical.com/2026/02/09/mcdonalds-mcd-expected-to-announce-earnings-on-wednesday.html)
-- [StockMarketWatch Pre-Market Movers](https://stockmarketwatch.com/markets/pre-market/)
-- [Yahoo Finance Dow 50K](https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-rise-with-wall-street-looking-to-continue-dow-50000-rally-001401347.html)
-- [CNBC Feb 3 Market](https://www.cnbc.com/2026/02/02/stock-market-today-live-updates.html)
-- [Daily Forex EUR/USD](https://www.dailyforex.com/forex-technical-analysis/2026/02/eurusd-forecast-10-february-2026/240998)
-- [Yahoo Finance Copper Rally](https://finance.yahoo.com/news/copper-surges-in-unsustainable-rally-joining-silver-and-gold-in-2026-metals-frenzy-144259758.html)
+- [CNBC: Stocks making the biggest moves premarket -- Lyft, Moderna, Cloudflare, Ford, Zillow](https://www.cnbc.com/2026/02/11/stocks-making-the-biggest-moves-premarket-lyft-mrna-net-f-zg.html)
+- [CNBC: Treasury yields surge higher on stronger-than-expected January jobs report](https://www.cnbc.com/2026/02/11/us-treasury-yields-investors-await-delayed-january-jobs-report.html)
+- [CNBC: Jobs report January 2026](https://www.cnbc.com/2026/02/11/jobs-report-january-2026-.html)
+- [CNBC: S&P 500 retreats as investor enthusiasm for better-than-expected jobs data wanes](https://www.cnbc.com/2026/02/10/stock-market-today-live-updates.html)
+- [CNBC: Japan Nikkei 225 closes at record high](https://www.cnbc.com/2026/02/10/asia-markets-live-nikkei-topix-takaichi-kospi-hang-seng.html)
+- [24/7 Wall St: Stock Market Live February 11, 2026 -- S&P 500 rocketing on January jobs report](https://247wallst.com/investing/2026/02/11/stock-market-live-february-11-2026-sp-500-spy-rocketing-on-january-jobs-report/)
+- [Bloomberg: Stock Market Today -- Dow, S&P Live Updates for Feb 11](https://www.bloomberg.com/news/articles/2026-02-10/-stock-market-today-dow-s-p-live-updates)
+- [AInvest: Powell's Humphrey-Hawkins Testimony Preview](https://www.ainvest.com/news/powell-humphrey-hawkins-testimony-preview-key-themes-watch-2502/)
+- [FactSet: Total Nonfarm Payrolls for January 2026 Projected +75K](https://insight.factset.com/total-nonfarm-payrolls-for-january-2026-are-projected-to-rise-by-75000)
+- [IC Markets: Asian Markets Rise Feb 11](https://www.icmarkets.com/blog/tuesday-10th-february-2026-asian-markets-rise-on-wall-street-strength-and-japan-rally-ahead-of-key-u-s-data/)
+- [Investing.com: After-hours movers -- Robinhood, Ford, Lyft, Mattel, Cloudflare](https://www.investing.com/news/stock-market-news/afterhours-movers-robinhood-ford-lyft-mattel-cloudflare-upstart-432SI-4498145)
+- [Investing.com: Ford, Cloudflare gain premarket; Robinhood, Lyft slump](https://www.investing.com/news/stock-market-news/ford-cloudflare-gain-premarket-robinhood-lyft-slump-4499505)
+- [US Treasury: Daily Rates 2026](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026)
+- [FRED: 10-Year Treasury Yield (DGS10)](https://fred.stlouisfed.org/series/DGS10)
+- [FRED: 2-Year Treasury Yield (DGS2)](https://fred.stlouisfed.org/series/DGS2)
+- [Federal Reserve Board: Calendar February 2026](https://www.federalreserve.gov/newsevents/2026-february.htm)
+- [Dallas Fed: Logan speech Feb 10](https://www.dallasfed.org/news/speeches/logan/2026/lkl260210)
+- [Trading Economics: DXY Dollar Index](https://tradingeconomics.com/united-states/currency)
+- [Trading Economics: Crude Oil](https://tradingeconomics.com/commodity/crude-oil)
+- [Trading Economics: Brent Crude](https://tradingeconomics.com/commodity/brent-crude-oil)
+- [Trading Economics: Gold](https://tradingeconomics.com/commodity/gold)
+- [OilPrice API: WTI Crude Oil Price](https://www.oilpriceapi.com/live/wti-crude-oil-price)
+- [CFI Trade: Gold and Silver Forecast February 2026](https://cfi.trade/en/blog/commodities/gold-and-silver-forecast-february-2026-from-record-highs-to-historic-crush)
+- [Finance Magnates: Why Crypto Is Falling -- Bitcoin Tests $66K](https://www.financemagnates.com/trending/why-crypto-is-going-down-xrp-price-bitcoin-ethereum-and-dogecoin-moves-today-to-2026-lows/)
+- [CNBC: Bitcoin drops 15%, briefly breaking below $61,000](https://www.cnbc.com/2026/02/05/bitcoin-price-today-70000-in-focus.html)
+- [CoinDesk: BTC, ETH price news](https://www.coindesk.com/markets/2026/01/08/bitcoin-ether-ease-after-early-january-pop-as-markets-price-fed-cuts)
+- [Nasdaq: Pre-Market Earnings Feb 11](https://www.nasdaq.com/articles/pre-market-earnings-report-february-11-2026-mcd-tmus-shop-ntes-vrt-hlt-mlm-wab-khc-gfs-sw)
+- [TradingView: Cisco/Siemens Energy Feb 11](https://www.tradingview.com/news/tradingview:6d0ff0d8e5be0:0-key-facts-cisco-systems-to-report-earnings-february-11-2026-siemens-energy-results-due/)
+- [CaixaBank Research: Financial Markets Daily Feb 11](https://www.caixabankresearch.com/en/publications/financial-markets-daily-report/11-february-2026)
 
 ---
 
-*Research compiled pre-market Tuesday, February 10, 2026. All data sourced from publicly available financial news and data providers. Not investment advice.*
+*Research compiled Wednesday, February 11, 2026. All data sourced from publicly available financial news and data providers. Not investment advice.*

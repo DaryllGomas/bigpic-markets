@@ -1,5 +1,6 @@
-# Watchlist Research -- Morning Brief
-**Tuesday, February 10, 2026**
+# Watchlist Research -- Wednesday, February 11, 2026
+
+**Auto-calibrated depth: MEDIUM** (VRT blowout earnings + delayed NFP release = two notable data points for watchlist, no FOMC/CPI)
 
 ---
 
@@ -24,222 +25,243 @@ Complete Tier 1 tickers across all 9 sector theses:
 
 ---
 
-## Pre-Market Watchlist Activity
+## 1. Pre-Market Activity on Thesis Watchlist Tickers
 
-**Market Context:** S&P 500 futures +0.04%, Nasdaq 100 +0.11%, Dow -0.08%, Russell 2000 +0.05%. Tech sector modestly leading; markets positioning ahead of key economic data later this week.
+### Major Macro Context
 
-| Ticker | Sector | Last Close / Pre-Mkt | Change % | Note |
-|--------|--------|---------------------|----------|------|
-| **NVDA** | AI | ~$191.73 | +3.4% (prev session) | Resumed upward trend; key levels $180 support, $207 resistance. Earnings Feb 26 approaching. |
-| **TSM** | AI | ~$355.70 | +2.0% (prev session) | Strong momentum; AI chip demand tailwind. |
-| **AVGO** | AI | ~$336.74 | Range $308-$339 | Trading near recent highs; custom silicon thesis intact. |
-| **VRT** | AI | ~$203.51 | New ATH $208.43 intraday | **Reporting earnings Feb 11** -- potential catalyst. 52-week low was $53.60. |
-| **ANET** | AI | ~$131.84 | -4.3% recent decline | ~19% below 52-week high; data center capex anxiety. |
-| **MP** | Critical Minerals | Not available | -- | Monitor for DoD/magnet revenue update. |
-| **FCX** | Critical Minerals | ~$63.37 | Range $60.53-$64.17 | Near ATH ($65.13 on Jan 29). Copper deficit thesis intact. |
-| **ALB** | Minerals/Storage | ~$195 est. | -- | Analyst target $172.85; lithium price recovery above $20K/tonne supportive. |
-| **PANW** | Cyber/Quantum | ~$190.71 | -0.88% | Earnings Feb 17. CyberArk close pending. PQC solution with IBM launched Jan 2026. |
-| **CRWD** | Cyber | ~$415.36 | -0.26% | Steady; FY2027 guidance expected at next report. |
-| **FTNT** | Cyber | ~$81.12 | +0.5% | FortiGate refresh cycle driving steady growth. |
-| **ZS** | Cyber | ~$185.79 | +0.43% | Zero trust demand accelerating ahead of CNSA 2.0. |
-| **LDOS** | Cyber | ~$186.63 | -- | $46.2B backlog; defense cyber spending floor. |
-| **CACI** | Cyber | ~$490 est. | -- | 12.6% organic growth; cleanest defense cyber story. |
-| **LMT** | Defense/Space | ~$637.89 | +2.3% (from $623.58 close) | Strong day; PAC-3/THAAD ramp catalyst. $194B backlog. |
-| **RTX** | Defense | ~$196.19 | -1.24% | Five framework missile agreements just announced Feb 4. |
-| **NOC** | Defense | ~$709.11 | +1.8% | B-21 + Golden Dome + SDA contracts. |
-| **LHX** | Defense | ~$349.66 | +2.2% | Highest margin prime; Missile Solutions IPO H2 2026. |
-| **TSLA** | Storage/Robotics | ~$417.32 | +1.5% | Megapack 3/Megablock + Optimus production ramp. |
-| **FLNC** | Storage | ~$25.50 | -- | $5.5B backlog; FY2026 revenue guide $3.2-3.6B. |
-| **SQM** | Storage | -- | -- | Lowest-cost lithium producer; Codelco JV. |
-| **CEG** | Nuclear | ~$272.15 | Flat | Range $260.69-$272.92. 52-week range $161-$413. Palisades restart updates this week. |
-| **VST** | Nuclear | ~$50-55 est. | -- | Meta deal; 73-93% earnings growth guided for 2026. |
-| **CCJ** | Nuclear | ~$65-70 est. | -- | Uranium supply deficit 30-40M lbs/yr. NexGen hearing positive read-through. |
-| **LEU** | Nuclear | ~$263.47 | +139.6% 52-week | **Reporting earnings today (after close).** Consensus EPS $1.55. Implied move +/-14.9%. |
-| **IBM** | Quantum | ~$298.85 | Range $290-$300 | Quantum advantage demo targeted end of 2026. Kookaburra QEC processor. |
-| **HON** | Quantum | ~$145 est. | -- | Quantinuum IPO filing (S-1 Jan 2026); 53% stake at $20B+. |
-| **IONQ** | Quantum | ~$35.28 | Range $33.66-$35.64 | **Earnings Feb 25.** 900+ patents post-IDQ acquisition. Short seller pressure. |
-| **ISRG** | Robotics | ~$488.15 | Range $480-$492 | da Vinci 5 upgrade cycle; 11,106 installed systems. |
-| **SYK** | Robotics | ~$400 est. | -- | Mako expansion into spine/shoulder. |
-| **SYM** | Robotics | ~$62.65 | Range $58.50-$63.36 | $22.7B backlog; just turned profitable. |
-| **GOOG** | Robotics/Quantum | ~$207 est. | -- | Waymo 400K+ weekly rides. **Google-Wiz EU decision due TODAY (Feb 10).** |
-| **CGNX** | Robotics | ~$45 est. | -- | Machine vision leader; logistics expansion. |
-| **PL** | Space | ~$23.51 | Near ATH ($28.78 on Jan 16) | $734M backlog (+216%); defense EO inflection. |
-| **RKLB** | Space | ~$55-60 est. | -- | $1.3B+ SDA contracts; Neutron development. |
-| **LUNR** | Space | ~$19.40 | Range $17.30-$20.31 | FY2026E revenue $919M; EBITDA positive expected. |
+The delayed January Non-Farm Payrolls report released this morning at 8:30 AM ET came in well above expectations: **+130,000 jobs vs. 55,000 consensus** (and vs. December's revised +48,000). Unemployment ticked down to 4.3% (vs. 4.4% expected). This is the strongest month for job creation since December 2024, after a year in which job creation averaged just 15,000/month. Markets reacted positively -- S&P 500 +0.6%, Nasdaq +0.8%, Dow +0.4% (Dow touched all-time high). BLS also released final benchmark revisions showing March 2025 payrolls revised down by 898,000 -- a significant historical revision.
 
----
+Health care (+82K) and social assistance (+42K) drove nearly all the net job creation. Construction added 33K after a flat year.
 
-## Today's Earnings (February 10, 2026)
+### Watchlist Movers
 
-124 companies reporting today. Key names and watchlist cross-reference:
+**VRT (Vertiv) -- Tier 1 AI Infrastructure -- UP ~15-23%**
+The standout watchlist mover today. Vertiv reported Q4/FY2025 earnings before the open with a massive beat:
+- Organic orders surged **252% YoY**
+- Backlog now at **$15 billion** (up from $9.5B cited in thesis -- a $5.5B increase in a single quarter)
+- Revenue, gross margin, operating margin, and EPS all at or above high end of guidance
+- Multiple analysts raised price targets to the **$260-$280 range**
+- Stock trading near **$229**, up from ~$199 prior close
+- **Thesis validation:** This confirms the AI data center power/cooling infrastructure thesis. The backlog explosion from $9.5B to $15B signals hyperscaler capex acceleration is real and intensifying. VRT's 252% organic order growth dramatically outpaces the "DC orders +200% YoY" cited in the thesis -- the demand is accelerating, not decelerating.
 
-| Company | Ticker | Time | Consensus EPS | Consensus Rev | On Watchlist? | Sector |
-|---------|--------|------|--------------|---------------|---------------|--------|
-| **Centrus Energy** | **LEU** | After Close | $1.55 | ~$75M | **YES -- Tier 1 Nuclear** | Nuclear / HALEU |
-| Williams Companies | WMB | Before Open | $0.57 | $3.10B | No (data center power adjacent) | Energy/Nat Gas |
-| Becton Dickinson | BDX | Reported (Feb 9) | Beat ($2.91 vs $2.81) | $5.25B (beat) | No | MedTech |
-| ON Semiconductor | ON | Reported (Feb 9) | Missed ($0.45 vs $0.59) | $1.53B | No (but semi adjacent) | Semiconductors |
-| Kyndryl | KD | Reported (Feb 9) | Missed; -53% stock drop | -- | No | IT Services |
+**GFS (GlobalFoundries) -- Adjacent Semiconductor -- BEAT**
+- EPS $0.55 vs $0.44 est (+25% beat), Revenue $1.83B
+- FY2025 revenue $6.79B, net income $888M
+- Announced $500M buyback + acquisitions in AI, silicon photonics, and GaN
+- Relevant to the semiconductor thesis -- validates demand resilience outside NVDA/TSM
 
-### Watchlist Earnings This Week (Feb 10-14, 2026):
+**TSM (TSMC) -- Tier 1 AI Semiconductors -- UP ~1.8% pre-market (~$362)**
+Modest pre-market strength. Continues to benefit from AI chip demand narrative and structural foundry monopoly position. CoWoS capacity expansion remains the key supply-side metric.
 
-| Company | Ticker | Date | Significance |
-|---------|--------|------|-------------|
-| **Centrus Energy** | **LEU** | Tue Feb 10 (AMC) | **Tier 1 Nuclear.** Only Western HALEU producer. $900M DOE expansion. |
-| **Vertiv Holdings** | **VRT** | Wed Feb 11 (BMO) | **Tier 1 AI Infra.** Power/cooling picks-and-shovels. $9.5B backlog. |
-| Shopify | SHOP | Wed Feb 11 | Not on watchlist. 27.9% rev growth expected. |
-| Coca-Cola | KO | Thu Feb 12 | Not on watchlist. |
-| Cisco Systems | CSCO | Thu Feb 12 | Adjacent (networking). |
-| Coinbase | COIN | Thu Feb 12 | Not on watchlist. |
+**NVDA (NVIDIA) -- Tier 1 AI Semiconductors -- ~$190-191**
+Trading relatively flat around $190.91. No specific catalyst today. Rubin architecture updates remain the next major catalyst. Earnings Feb 26.
 
-**LEU is the critical watchlist earnings event today.** Consensus expects $1.55 EPS on ~$75M revenue. The market has priced in an implied move of +/-14.9% ($39.30). Key items to watch: HALEU production scale commentary, DOE commercial expansion timeline, and uranium enrichment capacity updates.
+**AVGO (Broadcom) -- Tier 1 AI Semiconductors -- DOWN ~1.0% (~$340)**
+Slight softness, no specific news. Custom silicon narrative intact.
 
-**VRT earnings tomorrow (Feb 11) is the second most important watchlist event this week.** Watch for backlog growth, book-to-bill ratio, and data center AI demand commentary.
+**PANW (Palo Alto Networks) -- Tier 1 Cybersecurity -- DOWN ~1.5% (~$387)**
+Weakness amid a broader software selloff -- an ETF tracking software giants tumbled 3.5% in early trading. No stock-specific news. Earnings Feb 17 with CyberArk integration update expected.
+
+**CRWD (CrowdStrike) -- Tier 1 Cybersecurity -- ~$405-416**
+Slight softness in sympathy with software sector weakness. No specific catalyst. FY2027 guidance at next report is the key event.
+
+**FTNT (Fortinet) -- Tier 1 Cybersecurity -- ~$84**
+Range-bound between $82-$86. FortiGate refresh cycle continues to drive.
+
+**TSLA (Tesla) -- Tier 2 Robotics/AV/Energy Storage -- DOWN ~0.9% (~$339)**
+Slight red amid mixed sentiment. Cybercab production start (April 2026) and Optimus production ramp remain key near-term catalysts. Megapack 3 shipments targeted H2 2026.
+
+**IONQ (IonQ) -- Tier 1 Quantum -- ~$35-38 range**
+Pulled back significantly from Jan 16 all-time high of $96.30, now down ~62% from peak. Q4 2025 earnings on Feb 25 is the next catalyst. Quantum sentiment has cooled broadly.
+
+**RKLB (Rocket Lab) -- Tier 2 Space/Defense -- ~$72**
+Down ~5% recently and ~25% from the Jan 16 ATH of $96.30. No specific catalyst; earnings Feb 26. Neutron development progress and SDA contract execution are key medium-term events.
+
+**LMT (Lockheed Martin) -- Tier 1 Defense -- ~$630**
+Trading near recent levels at $629.56. Defense sector continues to benefit from NATO rearmament and munitions supercycle. RTX framework agreements announced in recent weeks validate sustained demand.
+
+**RTX (RTX Corporation) -- Tier 1 Defense -- ~$195**
+Steady. Five landmark missile framework agreements (Tomahawk, AMRAAM, SM-6, SM-3) announced Feb 4 represent 2-4x production increases and provide multi-year revenue visibility.
+
+### Nuclear Sector
+- **CEG (Constellation Energy):** ~$308. Strong 2026 start on Meta nuclear deals and TMI restart progress. Palisades restart discussions ongoing.
+- **VST (Vistra):** ~$167. Meta 2,609 MW deal providing 20-year visibility.  73-93% earnings growth guided for 2026.
+- **OKLO:** ~$95. Pre-revenue but elevated on 1.2 GW Meta deal sentiment.
+
+### Tickers Not Moving Notably
+Most Tier 1 names across defense (NOC, LHX), cybersecurity (ZS, LDOS, CACI), critical minerals (MP, FCX), and other sectors are trading in-line with broad market moves on the jobs data, without stock-specific catalysts today.
 
 ---
 
-## Approaching Catalysts (Next 2 Weeks: Feb 10 -- Feb 24, 2026)
+## 2. Today's Earnings -- February 11, 2026
 
-| Date | Catalyst | Tickers Impacted | Significance | Sector |
-|------|----------|-----------------|-------------|--------|
-| **Feb 9-12** | NexGen CNSC Part 2 hearing (Rook I uranium mine) | NXE, CCJ, URA | Largest new uranium mine approval process; final regulatory step | Nuclear |
-| **Feb 10** | **Centrus Energy (LEU) Q4 earnings** | **LEU** | Only Western HALEU producer reports; $900M DOE expansion update | Nuclear |
-| **Feb 10** | **Google-Wiz EU antitrust decision deadline** | **GOOG, PANW, CRWD, ZS** | EU Commission Phase 1 verdict on $32B deal; validates CNAPP at 45-65x ARR | Cyber/Quantum |
-| **Feb 10** | Palisades restart NRC meetings this week | CEG, VST (sentiment) | NRC regulators meeting with Holtec engineers on steam generator repairs; restart targeted Feb/Mar 2026 | Nuclear |
-| **Feb 11** | **Vertiv (VRT) Q4 earnings** | **VRT, ETN** | AI data center power demand bellwether; $9.5B backlog update | AI Infra |
-| **Feb 4 (just occurred)** | RTX five framework missile agreements | **RTX, LMT** | Tomahawk >1,000/yr, AMRAAM >1,900/yr, SM-6 >500/yr -- 2-4x production increases | Defense |
-| **Feb 4 (just occurred)** | QuantumScape Eagle Line inaugurated | QS, SLDP | Solid-state battery pilot production launched; OEM partners attended | Energy Storage |
-| **Feb 17** | Palo Alto Networks Q2 FY2026 earnings | **PANW** | CyberArk integration update; NGS ARR growth; PQC solution traction | Cyber/Quantum |
-| **Feb 25** | IonQ Q4/FY2025 earnings | **IONQ** | Validates $106-110M FY2025 revenue; 2026 outlook; short seller pressure | Quantum |
-| **Late Feb** | TerraPower construction permit decision (expected Q1 2026) | Nuclear sector broadly | NRC completed safety review Dec 2025; CP expected early 2026 | Nuclear |
-| **Mar 6-11** | **Artemis II launch window** | **LUNR, RKLB, LMT, PL** | First crewed lunar mission since Apollo 17; liquid hydrogen leak resolved; backup windows April 1-6 | Space |
-| **Mar 27** | NRC Part 53 final rule | Nuclear sector broadly | Technology-inclusive licensing framework for advanced reactors | Nuclear |
-| Ongoing | CMMC Phase 1 enforcement (live since Nov 2025) | **LDOS, CACI, PANW, CRWD** | Level 2 C3PAO assessment demand ramping; 220K+ contractors impacted | Cyber/Defense |
-| Ongoing | Lithium price recovery above $20K/tonne | **ALB, SQM, LAC** | If sustained, triggers producer margin expansion and potential re-ratings | Critical Minerals/Storage |
+**157 earnings reports scheduled today.** Key reports affecting or adjacent to the watchlist:
 
----
+### Pre-Market Reports (Before Open)
 
-## Key Technical Levels -- Tier 1 Tickers
+| Ticker | Company | Watchlist? | Result | Notes |
+|--------|---------|-----------|--------|-------|
+| **VRT** | Vertiv Holdings | **Tier 1 AI Infra** | **BEAT** -- orders +252% YoY, $15B backlog, EPS at high end of guide | Stock +15-23%. Major thesis validation for AI power/cooling |
+| **GFS** | GlobalFoundries | Adjacent (semis) | **BEAT** -- EPS $0.55 vs $0.44 est (+25%), Rev $1.83B | $500M buyback; AI/SiPh/GaN acquisitions |
+| SHOP | Shopify | Not on watchlist | **BEAT** -- Rev $3.67B (+31% YoY); $2B buyback. Stock +12% | Shows AI-driven commerce strength |
+| MCD | McDonald's | Not on watchlist | Est. EPS $3.05, Rev $6.83B | Consumer spending proxy |
+| TMUS | T-Mobile | Not on watchlist | Reported; stock -4.3% | Telecom spending indicator |
+| NTES | NetEase | Not on watchlist | Reported pre-market | China tech proxy |
 
-| Ticker | Current | Key Support | Key Resistance | 52-Wk Low | 52-Wk High | Trend |
-|--------|---------|-------------|----------------|-----------|------------|-------|
-| **NVDA** | ~$191.73 | $180.64 / $172-174 | $207.03 | ~$131 | ~$207 | Uptrend, nearing resistance |
-| **TSM** | ~$355.70 | ~$320 | ~$370 | ~$165 | ~$370 | Strong uptrend |
-| **AVGO** | ~$336.74 | ~$308 | ~$340 | ~$180 | ~$340 | At resistance, testing highs |
-| **VRT** | ~$203.51 | ~$180 | $208.43 (ATH) | $53.60 | $208.43 | **New ATH** -- breakout watch pre-earnings |
-| **ANET** | ~$131.84 | ~$120 | ~$160 | ~$65 | ~$165 | Pullback, -19% from highs |
-| **PANW** | ~$190.71 | ~$180 | ~$200 | ~$160 | ~$210 | Consolidating mid-range |
-| **CRWD** | ~$415.36 | ~$380 | ~$450 | ~$250 | ~$450 | Steady uptrend |
-| **FTNT** | ~$81.12 | ~$75 | ~$90 | ~$56 | ~$92 | Mid-range consolidation |
-| **ZS** | ~$185.79 | ~$170 | ~$200 | ~$140 | ~$230 | Recovering from lows |
-| **LDOS** | ~$186.63 | ~$170 | ~$200 | ~$140 | ~$205 | Rangebound |
-| **CACI** | ~$490 | ~$450 | ~$530 | ~$360 | ~$530 | Near upper range |
-| **LMT** | ~$637.89 | ~$600 | ~$660 | ~$430 | ~$660 | Strong uptrend, approaching resistance |
-| **RTX** | ~$196.19 | ~$185 | ~$210 | ~$115 | ~$210 | Uptrend, mild pullback |
-| **NOC** | ~$709.11 | ~$670 | ~$750 | ~$450 | ~$750 | Strong uptrend |
-| **LHX** | ~$349.66 | ~$320 | ~$370 | ~$215 | ~$375 | Uptrend, nearing resistance |
-| **CEG** | ~$272.15 | $260.69 | ~$300 / $412.70 (52-wk high) | $161.35 | $412.70 | **Significant pullback from highs (-34%)** |
-| **VST** | ~$52 est. | ~$45 | ~$60 | ~$30 | ~$60 | Mid-range |
-| **CCJ** | ~$67 est. | ~$60 | ~$75 | ~$40 | ~$80 | Consolidating |
-| **LEU** | ~$263.47 | ~$220 | ~$300 | ~$110 | ~$300 | **+139.6% 52-week; reporting today** |
-| **IBM** | ~$298.85 | $290 | ~$310 | ~$200 | ~$310 | Near 52-wk highs |
-| **HON** | ~$145 est. | ~$135 | ~$155 | ~$115 | ~$155 | Consolidating; Quantinuum IPO catalyst |
-| **IONQ** | ~$35.28 | $33.66 | ~$40 | ~$18 | ~$50 | Pullback from highs ahead of earnings |
-| **ISRG** | ~$488.15 | $480 | ~$510 | ~$380 | ~$530 | Mid-range; high-quality compounder |
-| **SYK** | ~$400 est. | ~$380 | ~$420 | ~$320 | ~$420 | Steady uptrend |
-| **SYM** | ~$62.65 | $58.50 | ~$70 | ~$25 | ~$70 | Strong uptrend; +150% in 2025 |
-| **GOOG** | ~$207 est. | ~$195 | ~$215 | ~$160 | ~$215 | Near highs; Wiz decision today |
-| **CGNX** | ~$45 est. | ~$40 | ~$50 | ~$30 | ~$50 | Cyclical recovery play |
-| **PL** | ~$23.51 | $21.65 | $28.78 (ATH, Jan 16) | ~$3.50 | $28.78 | **Massive breakout year; backlog inflection** |
-| **RKLB** | ~$57 est. | ~$45 | ~$70 | ~$15 | ~$70 | Extreme 2025 gainer; valuation stretched |
-| **LUNR** | ~$19.40 | $17.30 | ~$25 | ~$5 | ~$25 | Revenue ramp story; volatile |
+### After-Close Reports (Today)
 
-**Notable setups:**
-- **VRT** at new all-time highs ahead of earnings tomorrow -- breakout or reversal pivotal
-- **CEG** -34% from 52-week highs -- potential value entry for nuclear conviction; Palisades news this week
-- **LEU** +140% in 52 weeks, reporting today with implied +/-15% move -- high-octane event
-- **PL** backlog-driven breakout; held support at ~$21.65; ATH was $28.78 on Jan 16
-- **ANET** -19% from highs -- potential entry if data center capex fears overdone
+| Ticker | Company | Watchlist? | Estimate | Notes |
+|--------|---------|-----------|----------|-------|
+| **ALB** | Albemarle | **Tier 1 Critical Minerals / Energy Storage** | EPS est. -$0.49 to -$0.62, Rev ~$1.35B | **Key lithium bellwether.** Watch Kings Mountain restart timeline + 2026 lithium price guidance |
+| **CSCO** | Cisco Systems | Adjacent (networking) | EPS est. $0.94-$1.02, Rev $15.0-15.2B guide | Networking spend indicator; ANET competitive read-through |
+| **APP** | AppLovin | Not on watchlist | EPS est. $2.93, Rev $1.61B | AI advertising/monetization proxy |
+
+**ALB is the most important after-close report for the watchlist.** As the world's largest lithium producer and a Tier 1 name in both critical minerals and energy storage theses, Albemarle's guidance on lithium prices, Kings Mountain restart, and cost restructuring will set sentiment for the entire lithium/EV battery chain (SQM, LAC, PLS.AX, FLNC, EOSE). Analysts expect a loss of -$0.49 to -$0.62 EPS on ~$1.35B revenue. The key question is whether lithium price recovery above $20K/tonne translates to improved forward guidance.
+
+**CSCO after-close** is relevant as a networking spend datapoint. Street expects $15.0-15.2B revenue; any commentary on data center networking spend could affect ANET (Tier 1 AI Infra) sentiment.
 
 ---
 
-## Unusual Options Activity
+## 3. Approaching Catalyst Timeline Items (Next 1-2 Weeks)
 
-**Watchlist-Relevant Activity (Feb 10, 2026):**
+### Imminent (This Week)
 
-| Ticker | Activity | Detail |
-|--------|----------|--------|
-| **FROG (JFrog)** | 6x daily average volume | Call buying focused on March 20th $60.00 strike. JFrog is Tier 2 Cybersecurity (supply chain security). Potential earnings or M&A speculation. |
-| **LEU (Centrus Energy)** | Elevated pre-earnings | Implied move +/-14.9% priced in for today's after-close report. Options market expects ~$39 move. |
-| **VRT (Vertiv)** | Elevated pre-earnings | Reporting tomorrow Feb 11; expect options activity to build intraday. |
+| Date | Catalyst | Tickers Affected | Significance |
+|------|----------|-----------------|--------------|
+| **Feb 9-13** | NexGen Energy (NXE) CNSC hearing for Rook I uranium mine | NXE, CCJ, UEC, UUUU, URA | Largest new uranium mine approval process; final regulatory step. Positive outcome validates uranium supply deficit thesis. |
+| **Feb 11** | VRT Q4 earnings (DONE -- massive beat) | **VRT, ETN** | Confirmed: AI infrastructure demand accelerating. Backlog to $15B. |
+| **Feb 11** | ALB Q4 earnings (after close) | **ALB, SQM, LAC, FLNC** | Lithium price recovery and Kings Mountain restart will set critical minerals sentiment. |
+| **Feb 11** | CSCO Q2 FY2026 earnings (after close) | ANET (read-through) | Data center networking spend indicator. |
+| **Feb 2026** | Palisades nuclear plant restart (target Feb-Mar) | CEG, VST | NRC working with Holtec on steam generator repairs. Would be first US plant reactivated from decommissioning. |
+| **Feb 2026** | QuantumScape Eagle Line pilot (inaugurated Feb 4) | QS, SLDP | Solid-state battery pilot production now underway; initial yield/cell data expected in coming weeks. |
 
-**Non-Watchlist but Notable:**
-- **IR (Ingersoll Rand):** ~100:1 call-to-put ratio; bullish Feb 20th $100 calls bought at ask. Industrial/automation adjacent.
-- **RVMD (Revolution Medicines):** ~30:1 put-to-call ratio; large bearish blocks on June 18th $80/$50 puts. Healthcare/biotech.
-- **RUM (Rumble):** 11x daily average; speculative call buying. Not on watchlist.
+### Next 1-2 Weeks
 
-**Options Activity Watch for This Week:**
-- **PANW** (Feb 17 earnings): Expect implied volatility to build this week
-- **IONQ** (Feb 25 earnings): Already facing short seller pressure; options activity may intensify
-- **VRT** (Feb 11 earnings): Data center power theme beta
-- Broader market positioning ahead of potential economic data releases
+| Date | Catalyst | Tickers Affected | Significance |
+|------|----------|-----------------|--------------|
+| **Feb 17** | Palo Alto Networks Q2 FY2026 earnings | **PANW** | CyberArk integration update; NGS ARR growth; PQC solution traction |
+| **Feb 25** | IonQ Q4/FY2025 earnings | **IONQ** | Validates $106-110M FY2025 revenue; 2026 outlook critical given 62% pullback from ATH |
+| **Feb 26** | Rocket Lab Q4 2025 earnings | **RKLB** | Revenue trajectory, SDA contract updates, Neutron development progress |
+| **Feb 26** | NVIDIA Q4 earnings | **NVDA** | AI capex bellwether; data center revenue growth rate deceleration watch |
+| **Late Feb** | TerraPower construction permit (expected Q1 2026) | Nuclear sector broadly | NRC completed safety review Dec 2025; CP expected early 2026 |
+
+### Near-Term (Next 2-4 Weeks)
+
+| Date | Catalyst | Tickers Affected | Significance |
+|------|----------|-----------------|--------------|
+| **Mar 6** | **Artemis II launch window** | **LUNR, RKLB, LMT, PL** | First crewed lunar mission since Apollo 17; major space sector sentiment catalyst |
+| **Mar 2026** | Next-Gen OPIR GEO-1 launch (no earlier than March) | LMT, NOC | Validates SBIRS replacement; Golden Dome read-through |
+| **Mar 2026** | Pilbara Minerals P2000 study results | PLS.AX, ALB | Potential doubling of capacity; hard-rock lithium sentiment |
+| **Mar 27** | NRC Part 53 final rule | SMR, OKLO, BWXT, CEG | Technology-inclusive licensing framework for advanced reactors |
+| **Q1 2026** | AMD MI400 launch | AMD, NVDA | Tests NVIDIA GPU competition; key for AI chip market structure |
+| **Q1 2026** | Denison Mines construction-ready | DNN | First Athabasca ISR mine; uranium supply expansion |
+
+### Key Takeaway
+The **NXE CNSC hearing (this week)** is the most significant near-term uranium catalyst -- favorable outcome greenlights the largest new uranium mine development. **PANW earnings Feb 17** is the next major cybersecurity event. The **NVDA earnings Feb 26** will be the most consequential single event for the AI infrastructure thesis. **Artemis II on March 6** is the highest-profile space catalyst.
 
 ---
 
-## Key Themes for Today
+## 4. Key Technical Levels for Tier 1 Tickers
 
-1. **LEU Earnings After Close** -- The only Tier 1 watchlist name reporting today. HALEU production scale and DOE expansion updates will set tone for nuclear fuel cycle names.
+| Ticker | Current Price | Key Support | Key Resistance | Trend Notes |
+|--------|--------------|-------------|----------------|-------------|
+| **NVDA** | ~$191 | $180 | $200-207 | Consolidating below $200 after pullback from highs. Earnings Feb 26 is the catalyst. |
+| **TSM** | ~$362 | $340 | $380 | Uptrending; testing upper range on AI chip demand. |
+| **AVGO** | ~$340 | $320 | $360 | Mid-range consolidation; custom silicon thesis intact. |
+| **VRT** | ~$229 | $200 (gap-fill) | $260-280 (new analyst targets) | **BREAKOUT** -- gap-up on massive volume. Prior resistance ~$200 becomes new support. |
+| **ANET** | Data not avail. | ~$120 | ~$160 | ~19% below 52-wk high; potential value entry if capex fears overdone. |
+| **PANW** | ~$387 | $375 | $410 | Slight weakness; software sector pressure. Earnings Feb 17. |
+| **CRWD** | ~$405-416 | $390 | $430 | Range-bound; FY2027 guidance at next report is key. |
+| **FTNT** | ~$84 | $82 | $90 | Consolidating; FortiGate refresh cycle supports. |
+| **ZS** | Data not avail. | ~$170 | ~$200 | De-rated from peak; pure-play zero trust leader. |
+| **LMT** | ~$630 | $600 | $650-660 | Steady uptrend on defense spending visibility. |
+| **RTX** | ~$195 | $185 | $210 | Uptrend; 5 missile framework deals support. |
+| **NOC** | Data not avail. | ~$670 | ~$750 | B-21 + Golden Dome + SDA catalysts. |
+| **LHX** | Data not avail. | ~$320 | ~$370 | Missile Solutions IPO H2 2026 catalyst. |
+| **CEG** | ~$308 | $280 | $340 | Significant pullback from $413 ATH; value entry if nuclear conviction high. |
+| **VST** | ~$167 | $150 | $180 | Meta deal visibility; 73-93% earnings growth. |
+| **CCJ** | Data not avail. | ~$60 | ~$75 | NXE hearing this week could move uranium names broadly. |
+| **LEU** | Data not avail. | ~$220 | ~$300 | +140% 52-week; reported yesterday (watch for results impact). |
+| **IONQ** | ~$35-38 | $30 | $45 | **-62% from ATH** ($96). Feb 25 earnings critical for sentiment. |
+| **ISRG** | Data not avail. | $480 | $510-530 | da Vinci 5 cycle; high-quality compounder. |
+| **SYM** | Data not avail. | $58.50 | $70 | $22.7B backlog; turned profitable. |
+| **TSLA** | ~$339 | $320 | $370 | Cybercab April start is binary catalyst. |
+| **RKLB** | ~$72 | $68 | $80 | **-25% from ATH** ($96). Neutron timeline key. Earnings Feb 26. |
 
-2. **Google-Wiz EU Decision** -- The European Commission's Phase 1 deadline on Google's $32B Wiz acquisition is today. Approval validates CNAPP at extreme multiples and benefits remaining cloud security players (PANW, CRWD, ZS). Escalation to Phase II would delay closing.
+**Notable Technical Setups:**
+- **VRT breakout** is the cleanest technical signal today. Gap-up on +252% order growth with heavy volume. First support test at $200-210 gap-fill zone. New analyst targets at $260-$280 provide next resistance.
+- **IONQ at -62% from ATH** -- oversold territory, but quantum sentiment cooling broadly. Feb 25 earnings is do-or-die for near-term direction.
+- **CEG -26% from ATH** at ~$308 -- potential value entry for nuclear conviction given Palisades restart + Meta deals.
+- **RKLB -25% from ATH** at ~$72 -- Neutron development timeline and Feb 26 earnings will determine whether pullback is a buying opportunity or start of further derating.
 
-3. **NexGen CNSC Hearing (Day 2 of 4)** -- Final regulatory hurdle for the largest new uranium mine. Indigenous community support has been strong. Positive outcome bullish for CCJ, URA, and uranium sector broadly.
+---
 
-4. **VRT Earnings Tomorrow** -- Vertiv at new all-time highs ahead of earnings. AI data center power demand narrative gets tested. Book-to-bill ratio and backlog growth are key metrics.
+## 5. Unusual Options Activity
 
-5. **RTX Framework Agreements (Feb 4)** -- Five landmark missile production deals just signed. Tomahawk >1,000/yr, AMRAAM >1,900/yr. Validates the defense munitions supercycle thesis across RTX and LMT.
+**Note:** Specific watchlist-level options flow data was limited in pre-market searches. Key observations:
 
-6. **QuantumScape Eagle Line Inaugurated (Feb 4)** -- Solid-state battery pilot production launched with OEM partners. Technology validation event for energy storage thesis.
+### Watchlist-Adjacent Activity Detected
 
-7. **Palisades Restart** -- NRC meetings with Holtec this week on steam generator repairs. If restart succeeds in Feb/Mar, it will be the first US nuclear plant reactivated from decommissioning.
+- **STMicroelectronics (STM):** 16,658 call options traded on Feb 10 -- a **308% increase** vs. typical volume. STM is adjacent to the semiconductor thesis (analog/mixed-signal for industrial/automotive). Bullish signal for semiconductor demand breadth.
+
+- **Lam Research (LRCX):** Large volume of **put options** detected on Feb 10. LRCX is semiconductor equipment; put activity could reflect hedging ahead of WFE capex guidance or sector rotation concerns.
+
+### Expected Activity Today
+
+- **VRT post-earnings:** Expect massive options volume today given the 15-23% move. Call activity likely surged on the breakout. Watch for whether institutional flow confirms the move or distributes into strength.
+
+- **ALB pre-earnings:** Options implied volatility likely elevated heading into tonight's report. The lithium sector has been in recovery mode, and 2026 guidance will be the swing factor.
+
+- **CSCO pre-earnings:** Options flow will reflect networking sector expectations; any read-through to ANET is notable.
+
+### Broader Institutional Positioning
+
+- Bank of America highlighted **NVDA, AVGO, LRCX, KLAC, ADI, and CDNS** as top semiconductor picks, forecasting the sector to surpass $1T in annual sales in 2026. Institutional positioning in AI semi names remains heavily long.
+
+- Defense stocks (RTX, LMT, NOC) continue to see steady institutional accumulation via block trades rather than unusual options spikes, consistent with long-duration thesis positioning.
+
+---
+
+## Summary: What Matters Most Today
+
+1. **VRT blowout earnings** (+252% order growth, $15B backlog) is the single most important watchlist data point. It validates the AI infrastructure power/cooling thesis and signals hyperscaler capex acceleration is real and intensifying. The backlog jump from $9.5B to $15B in one quarter is extraordinary.
+
+2. **ALB after-close earnings** will set direction for the lithium/critical minerals complex. Kings Mountain restart timeline and 2026 lithium price guidance are the two key items.
+
+3. **Jobs report surprise** (130K vs. 55K est.) is broadly positive for risk assets. Dow touched ATH. But the -898K benchmark revision adds complexity. Health care and social assistance drove nearly all gains.
+
+4. **NXE CNSC hearing** (running this week through Feb 13) is the most important near-term uranium catalyst. Positive outcome greenlights the largest new uranium mine.
+
+5. **Software sector weakness** -- an ETF tracking software giants fell 3.5% today, weighing on PANW (-1.5%), CRWD, and other cyber names. No stock-specific news; appears to be sector rotation out of software into cyclicals on the strong jobs data.
+
+6. **CSCO after-close** provides networking spend data relevant to ANET thesis.
+
+7. **Look-ahead:** PANW earnings Feb 17, IONQ Feb 25, RKLB Feb 26, NVDA Feb 26.
 
 ---
 
 ## Sources
 
-- [Earnings Whispers Calendar - Feb 10, 2026](https://www.earningswhispers.com/calendar)
-- [Stock Analysis - Pre-Market Data](https://stockanalysis.com/markets/premarket/)
-- [Benzinga - Pre-Market Movers](https://www.benzinga.com/premarket)
-- [NVDA Technical Analysis - Investing.com](https://www.investing.com/equities/nvidia-corp-technical)
-- [NVDA Technical Analysis - AltIndex](https://altindex.com/ticker/nvda/technical-analysis)
-- [CEG Stock Overview - StockAnalysis.com](https://stockanalysis.com/stocks/ceg/)
-- [LEU Earnings Preview - Benzinga](https://www.benzinga.com/insights/earnings/26/02/50489293/uncovering-potential-centrus-energys-earnings-preview)
-- [LEU Earnings - TipRanks](https://www.tipranks.com/stocks/leu/earnings)
-- [VRT Stock Data - Yahoo Finance](https://finance.yahoo.com/quote/VRT/)
-- [ANET Stock Forecast - MarketBeat](https://www.marketbeat.com/stocks/NYSE/ANET/forecast/)
-- [PANW Earnings Date - StockTitan](https://www.stocktitan.net/news/PANW/palo-alto-networks-to-announce-fiscal-second-quarter-2026-financial-v11iel2bo7yc.html)
-- [RTX Missile Framework Agreements - RTX.com](https://www.rtx.com/news/news-center/2026/02/04/rtxs-raytheon-partners-with-department-of-war-on-five-landmark-agreements-to-exp)
-- [RTX Missile Production - Breaking Defense](https://breakingdefense.com/2026/02/rtx-to-ramp-up-production-of-five-weapons-in-new-deal-with-pentagon/)
-- [NexGen CNSC Hearing - StockTitan](https://www.stocktitan.net/news/NXE/canadian-nuclear-safety-commission-cnsc-part-2-commission-hearing-bronf0n6lza8.html)
-- [NexGen CNSC Hearing - Canada.ca](https://www.canada.ca/en/nuclear-safety-commission/news/2026/02/public-hearing-on-rook-i-uranium-mine-and-mill-project-in-northern-saskatchewan.html)
-- [Palisades Restart Update - Michigan Public](https://www.michiganpublic.org/environment-climate-change/2026-02-09/regulators-asking-for-more-details-on-palisades-repairs-as-restart-timeline-stretches-on)
-- [Palisades Restart - Engineering News-Record](https://www.enr.com/articles/62386-tasks-delay-restart-of-palisades-nuclear-site-until-possibly-late-march)
-- [QuantumScape Eagle Line - IR Release](https://ir.quantumscape.com/news-releases/news-release-details/quantumscape-inaugurates-eagle-line-solid-state-battery-pilot)
-- [QuantumScape Eagle Line - Electrek](https://electrek.co/2026/02/05/quantumscape-inaugurates-eagle-line-pilot-solid-state-battery-production/)
-- [Google-Wiz EU Decision - SecurityWeek](https://www.securityweek.com/eu-sets-february-deadline-for-verdict-on-googles-32b-wiz-acquisition/)
-- [Google-Wiz DOJ Clearance - TechCrunch](https://techcrunch.com/2025/11/05/google-gets-the-us-governments-green-light-to-acquire-wiz-for-32b/)
-- [IonQ Earnings Date - IonQ IR](https://investors.ionq.com/news/news-details/2026/IonQ-to-Report-Fourth-Quarter-and-Full-Year-2025-Financial-Results-on-February-25-2026/default.aspx)
-- [Artemis II Launch - NASA](https://www.nasa.gov/blogs/missions/2026/02/03/nasa-conducts-artemis-ii-fuel-test-eyes-march-for-launch-opportunity/)
-- [Artemis II Launch - Scientific American](https://www.scientificamerican.com/article/nasa-reveals-new-artemis-ii-moon-mission-target-launch-dates-march/)
-- [TerraPower NRC Safety Review - ANS](https://www.ans.org/news/2025-12-03/article-7590/nrc-completes-safety-review-for-terrapowers-kemmerer-project/)
-- [FROG Options Activity - Charles Schwab](https://www.schwab.com/learn/story/todays-options-market-update)
-- [Unusual Options Activity - Barchart](https://www.barchart.com/options/unusual-activity)
-- [Options Volatility This Week - TipRanks](https://www.tipranks.com/news/options-volatility-and-implied-earnings-moves-this-week-february-10-february-13-2026)
-- [LMT Stock Data - Investing.com](https://www.investing.com/equities/lockheed-martin)
-- [FCX Stock Data - FinViz](https://finviz.com/quote.ashx?t=FCX)
-- [LUNR Stock Data - Investing.com](https://www.investing.com/equities/inflection-point-acquisition)
-- [PL Stock Data - Yahoo Finance](https://finance.yahoo.com/quote/PL/)
-- [SYM Earnings Data - StockTitan](https://www.stocktitan.net/news/SYM/symbotic-reports-first-quarter-fiscal-year-2026-e63836vczy0d.html)
+- [Nasdaq: Pre-Market Earnings Report for Feb 11, 2026](https://www.nasdaq.com/articles/pre-market-earnings-report-february-11-2026-mcd-tmus-shop-ntes-vrt-hlt-mlm-wab-khc-gfs-sw)
+- [FinTerra: Vertiv Holdings (VRT) Record 2026 Results Deep Dive](https://markets.financialcontent.com/stocks/article/finterra-2026-2-11-the-architecture-of-ai-a-deep-dive-into-vertiv-holdings-vrt-following-record-2026-results)
+- [GlobeNewsWire: GlobalFoundries Q4 2025 Results](https://www.globenewswire.com/news-release/2026/02/11/3236123/0/en/GlobalFoundries-Reports-Fourth-Quarter-2025-and-Fiscal-Year-2025-Financial-Results.html)
+- [Benzinga: Earnings Scheduled for Feb 11, 2026 (ALB, AEE)](https://www.benzinga.com/insights/earnings/26/02/50535044/earnings-scheduled-for-february-11-2026)
+- [FinTerra: Shopify Record Earnings Feb 11, 2026](https://markets.financialcontent.com/stocks/article/finterra-2026-2-11-shopify-deep-dive-ai-innovation-and-record-earnings-drive-shop-to-new-heights-in-2026)
+- [CNBC: Jobs Report January 2026 -- 130K vs 55K Estimate](https://www.cnbc.com/2026/02/11/jobs-report-january-2026-.html)
+- [FXStreet: Nonfarm Payrolls January 2026](https://www.fxstreet.com/news/us-nonfarm-payrolls-expected-to-rise-by-70k-in-january-202602110500)
+- [24/7 Wall St: S&P 500 Rocketing on January Jobs Report](https://247wallst.com/investing/2026/02/11/stock-market-live-february-11-2026-sp-500-spy-rocketing-on-january-jobs-report/)
+- [Invezz: Dow Jones Hits All-Time High Feb 11, 2026](https://invezz.com/news/2026/02/11/dow-jones-index-futures-today-hits-all-time-high-ahead-of-key-market-news/)
+- [Bloomberg: Stock Market Today Feb 11, 2026](https://www.bloomberg.com/news/articles/2026-02-10/-stock-market-today-dow-s-p-live-updates)
+- [Cisco Q2 FY2026 Earnings Scheduled](https://investor.cisco.com/news/news-details/2026/Cisco-Schedules-Conference-Call-for-Q2-Fiscal-Year-2026-Financial-Results/default.aspx)
+- [Nasdaq: Nuclear Stocks Rally -- CEG, VST, OKLO](https://www.nasdaq.com/articles/why-nuclear-stocks-constellation-energy-vistra-and-oklo-all-popped-morning)
+- [Defense World: Unusual Options Activity STM, LRCX](https://www.defenseworld.net/2026/02/10/traders-buy-large-volume-of-call-options-on-stmicroelectronics-nysestm.html)
+- [Yahoo Finance: BofA -- 6 Stocks to Lead $1T Chip Surge](https://finance.yahoo.com/news/these-6-stocks-will-lead-the-1-trillion-chip-surge-in-2026-bofa-says-130008431.html)
+- [Earnings Whispers: Earnings Calendar Feb 11, 2026](https://www.earningswhispers.com/calendar)
+- [NexGen Energy CNSC Hearing Dates](https://www.stocktitan.net/news/NXE/nex-gen-receives-cnsc-commission-hearing-dates-for-the-rook-i-jxl71593jpz4.html)
+- [StockAnalysis: RKLB Price History](https://stockanalysis.com/stocks/rklb/history/)
+- [Motley Fool: Nuclear Energy Stocks Feb 2026](https://www.fool.com/investing/2026/02/10/2-nuclear-energy-stocks-to-buy-in-february/)
+- [Seeking Alpha: Nuclear Stocks Strong Start to 2026](https://seekingalpha.com/article/4858834-powering-nuclear-stocks-see-strong-start-2026)
 
 ---
 
-*Research compiled pre-market Tuesday, February 10, 2026. Price data based on most recent available quotes (Feb 7-10). Not investment advice. Some pre-market prices may not be available for all tickers at time of compilation.*
+*Research compiled pre-market Wednesday, February 11, 2026. Price data based on most recent available quotes. Not investment advice.*
