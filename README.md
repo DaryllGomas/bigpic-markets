@@ -24,7 +24,6 @@ Thematic investment research covering high-conviction secular growth sectors, we
 ## Supplementary Research
 
 - [AI vs Dot-Com Bubble Analysis](research/supplementary/bubble-research/)
-- [GPU Price Hike Analysis](research/supplementary/GPU-Price-Hike.md)
 - [Macro Research](research/macro/) — Individual company deep dives (Intel, Tesla)
 
 ## View Online
