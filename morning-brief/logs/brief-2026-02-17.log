@@ -1,0 +1,83 @@
+[2026-02-17 05:00:01] === Morning Brief Started ===
+[2026-02-17 05:00:01] Date: Tuesday, 2026-02-17
+[2026-02-17 05:00:01] Output: morning-brief/2026-02/2026-02-17_Tue.md + 2026-02-17_Tue.html
+[2026-02-17 05:00:01] All dependencies verified
+[2026-02-17 05:00:01] Running data collection pipeline...
+2026-02-17 05:00:01,575 INFO === Market Data Collection — 2026-02-17 ===
+2026-02-17 05:00:01,580 INFO ── Step 1: RSS Feeds ──
+2026-02-17 05:00:19,572 INFO RSS feeds: 172 headlines stored, 307 older than 24h skipped
+2026-02-17 05:00:19,572 INFO Step 1 complete: 18.0s (headlines=172)
+2026-02-17 05:00:19,572 INFO ── Step 2: Opus Feed Analysis ──
+2026-02-17 05:00:19,573 INFO Opus analysis: sending 165 headlines to claude CLI...
+2026-02-17 05:01:04,026 INFO Opus analysis: 37 tickers, 12 movers, 10 themes from 165 headlines
+2026-02-17 05:01:04,026 INFO Step 2 complete: 44.5s (opus_tickers=37)
+2026-02-17 05:01:04,026 INFO ── Step 3: Schwab + External APIs ──
+2026-02-17 05:01:11,537 INFO Schwab quotes: 151 symbols
+2026-02-17 05:01:11,537 INFO Auto-detected movers (|change| > 3%): 6 symbols
+2026-02-17 05:01:11,537 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-02-17 05:05:34,325 INFO Schwab technicals: 127/132 symbols
+2026-02-17 05:07:08,673 INFO SMA200: 132/132 symbols
+2026-02-17 05:07:18,282 INFO Schwab market context: collected
+2026-02-17 05:10:00,287 INFO Schwab earnings: 64 entries
+2026-02-17 05:10:00,312 INFO Economic calendar: 6 events
+2026-02-17 05:10:00,405 INFO CoinGecko: 2 coins
+2026-02-17 05:10:04,136 INFO Stooq: 3/3 symbols
+2026-02-17 05:10:05,250 INFO FRED: 1/3 series
+2026-02-17 05:10:05,251 INFO Yahoo backup: 0 symbols
+2026-02-17 05:10:05,252 INFO Step 3 complete: 541.2s (quotes=151, tech=127, sma200=132, earnings=64, econ=6, crypto=2, stooq=3, fred=1, yahoo=0)
+2026-02-17 05:10:05,252 INFO ── Step 4: Validation + Retry ──
+2026-02-17 05:10:05,263 INFO Anomaly detection: 0 flagged
+2026-02-17 05:10:05,263 INFO Cross-validation: 0 discrepancies
+2026-02-17 05:10:05,263 INFO Retry check: 8 failed call(s) found, retrying...
+2026-02-17 05:10:05,263 INFO   Retrying technicals for SMR (original error: timed out)
+2026-02-17 05:10:07,344 INFO   ✓ SMR technicals recovered
+2026-02-17 05:10:07,344 INFO   Retrying technicals for NCLH (original error: timed out)
+2026-02-17 05:10:09,426 INFO   ✓ NCLH technicals recovered
+2026-02-17 05:10:09,426 INFO   Retrying technicals for ORCL (original error: timed out)
+2026-02-17 05:10:11,019 INFO   ✓ ORCL technicals recovered
+2026-02-17 05:10:11,019 INFO   Retrying technicals for SNAP (original error: timed out)
+2026-02-17 05:10:13,154 INFO   ✓ SNAP technicals recovered
+2026-02-17 05:10:13,154 INFO   Retrying technicals for ROK (original error: timed out)
+2026-02-17 05:10:14,945 INFO   ✓ ROK technicals recovered
+2026-02-17 05:10:14,945 INFO   Retrying earnings for NVDA (original error: timed out)
+2026-02-17 05:10:16,379 INFO   ✓ NVDA earnings recovered
+2026-02-17 05:10:16,379 INFO   Retrying earnings for MRVL (original error: timed out)
+2026-02-17 05:10:18,406 INFO   ✓ MRVL earnings recovered
+2026-02-17 05:10:18,406 INFO   Retrying earnings for NXE (original error: timed out)
+2026-02-17 05:10:20,211 INFO   ✓ NXE earnings recovered
+2026-02-17 05:10:20,213 INFO Retry complete: 7/8 recovered
+2026-02-17 05:10:20,215 INFO Step 4 complete: 15.0s (anomalies=0, cross_val=0, retried=7, completeness=100%)
+2026-02-17 05:10:20,216 INFO ── Step 5: Generate Briefing ──
+2026-02-17 05:10:20,258 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-02-17.md (28912 bytes)
+2026-02-17 05:10:20,270 INFO Cleanup complete
+2026-02-17 05:10:20,270 INFO === Collection complete: 618.6s total, completeness=100%, exit_code=0 ===
+[2026-02-17 05:10:20] Data collection complete — briefing file ready
+[2026-02-17 05:10:20] Found 9 sector thesis files
+[2026-02-17 05:10:20] Running Claude [report (attempt 1)] (timeout: 900s)...
+The BigPic Morning Brief for Tuesday, 2026-02-17 has been written to `/home/spicymeatball/projects/bigpic-markets/morning-brief/2026-02/2026-02-17_Tue.md`.
+
+**Key highlights of the report:**
+
+- **Event Load: HEAVY** — Three watchlist earnings (PANW, LDOS, CEG) before the open, Empire State Manufacturing, two FOMC speakers
+- **Bias: Bearish** — All futures red (Nasdaq -0.88% leading), VIX expanding +5% to 22.28, UBS formally downgrading US tech
+- **Major theme:** Rotation away from AI/tech leadership into value and hard assets (Morgan Stanley HALO trade)
+- **Earnings watch:** PANW (RSI 33, deeply oversold — binary event), LDOS (surging +4.75% pre-market), CEG (nuclear sentiment strong)
+- **Oversold opportunities:** ZS (RSI 26), ISRG (28), SQM (31), FLNC (32), PANW (33), IBM (34), IONQ (34)
+- **Overbought caution:** CGNX (RSI 89), HON (76), LMT (73), VRT (71)
+- **Top news-driven movers:** MASI +34% (Danaher deal), TSM considering $100B Arizona investment, VRT blowout Q4
+- **Catalyst pipeline:** 21 upcoming catalysts cross-referenced from thesis files through Nov 2026
+[2026-02-17 05:13:41] Claude [report (attempt 1)] finished successfully
+[2026-02-17 05:13:41] Report attempt 1 succeeded: 23484 bytes
+[2026-02-17 05:13:41] Running Schwab fact-check verification...
+=== Fact-Check: 2026-02-17_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 102 symbols...
+  Got quotes for 82 symbols
+
+--- Database cross-checks (market_date=2026-02-17) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-02-17 05:14:00] Running Claude [html-publish] (timeout: 900s)...
