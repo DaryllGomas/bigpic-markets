@@ -1,0 +1,60 @@
+2026-02-20 05:00:01,957 INFO === Market Data Collection — 2026-02-20 ===
+2026-02-20 05:00:01,962 INFO ── Step 1: RSS Feeds ──
+2026-02-20 05:00:21,139 INFO RSS feeds: 238 headlines stored, 241 older than 24h skipped
+2026-02-20 05:00:21,139 INFO Step 1 complete: 19.2s (headlines=238)
+2026-02-20 05:00:21,139 INFO ── Step 2: Opus Feed Analysis ──
+2026-02-20 05:00:21,141 INFO Opus analysis: sending 230 headlines to claude CLI...
+2026-02-20 05:01:48,977 INFO Opus analysis: 42 tickers, 13 movers, 11 themes from 230 headlines
+2026-02-20 05:01:48,977 INFO Step 2 complete: 87.8s (opus_tickers=42)
+2026-02-20 05:01:48,977 INFO ── Step 3: Schwab + External APIs ──
+2026-02-20 05:02:03,625 INFO Schwab quotes: 155 symbols
+2026-02-20 05:02:03,625 INFO Auto-detected movers (|change| > 3%): 4 symbols
+2026-02-20 05:02:03,625 INFO Technicals + SMA200 for 136 quoted symbols (sequential)
+2026-02-20 05:02:22,478 DEBUG Schwab technicals SPIR: timed out
+2026-02-20 05:05:28,039 INFO Schwab technicals: 135/136 symbols
+2026-02-20 05:07:12,484 INFO SMA200: 136/136 symbols
+2026-02-20 05:07:12,852 INFO Schwab market context: collected
+2026-02-20 05:08:47,841 INFO Schwab earnings: 71 entries
+2026-02-20 05:08:47,868 INFO Economic calendar: 13 events
+2026-02-20 05:08:47,990 INFO CoinGecko: 2 coins
+2026-02-20 05:08:52,072 INFO Stooq: 3/3 symbols
+2026-02-20 05:08:52,587 INFO FRED: 1/3 series
+2026-02-20 05:08:52,589 INFO Yahoo backup: 0 symbols
+2026-02-20 05:08:52,589 INFO Step 3 complete: 423.6s (quotes=155, tech=135, sma200=136, earnings=71, econ=13, crypto=2, stooq=3, fred=1, yahoo=0)
+2026-02-20 05:08:52,589 INFO ── Step 4: Validation + Retry ──
+2026-02-20 05:08:52,590 INFO ANOMALY: $FCHI price=8462.80 avg=8341.44 z=3.3
+2026-02-20 05:08:52,590 INFO ANOMALY: $HSI price=26413.35 avg=26665.85 z=-4.0
+2026-02-20 05:08:52,593 INFO ANOMALY: BBAI price=4.23 avg=4.07 z=3.2
+2026-02-20 05:08:52,593 INFO ANOMALY: BWXT price=209.22 avg=199.47 z=5.0
+2026-02-20 05:08:52,594 INFO ANOMALY: CHKP price=159.00 avg=168.17 z=-3.8
+2026-02-20 05:08:52,595 INFO ANOMALY: DNN price=4.10 avg=3.83 z=5.3
+2026-02-20 05:08:52,597 INFO ANOMALY: HII price=440.87 avg=414.69 z=4.1
+2026-02-20 05:08:52,598 INFO ANOMALY: IBM price=255.99 avg=260.33 z=-3.8
+2026-02-20 05:08:52,599 INFO ANOMALY: KTOS price=107.15 avg=90.70 z=3.7
+2026-02-20 05:08:52,602 INFO ANOMALY: OUST price=19.49 avg=18.53 z=3.8
+2026-02-20 05:08:52,603 INFO ANOMALY: PL price=25.26 avg=22.23 z=3.4
+2026-02-20 05:08:52,606 INFO ANOMALY: STEM price=11.64 avg=11.12 z=3.1
+2026-02-20 05:08:52,609 INFO Anomaly detection: 12 flagged
+2026-02-20 05:08:52,610 INFO Cross-validation: 0 discrepancies
+2026-02-20 05:08:52,610 INFO Retry check: 1 failed call(s) found, retrying...
+2026-02-20 05:08:52,610 INFO   Retrying technicals for SPIR (original error: timed out)
+2026-02-20 05:08:54,028 INFO   ✓ SPIR technicals recovered
+2026-02-20 05:08:54,029 INFO Retry complete: 1/1 recovered
+2026-02-20 05:08:54,031 INFO Step 4 complete: 1.4s (anomalies=12, cross_val=0, retried=1, completeness=100%)
+2026-02-20 05:08:54,031 DEBUG   us_indices: OK
+2026-02-20 05:08:54,031 DEBUG   futures: OK
+2026-02-20 05:08:54,031 DEBUG   vix: OK
+2026-02-20 05:08:54,031 DEBUG   treasuries: OK
+2026-02-20 05:08:54,031 DEBUG   commodities: OK
+2026-02-20 05:08:54,031 DEBUG   crypto: OK
+2026-02-20 05:08:54,031 DEBUG   international: OK
+2026-02-20 05:08:54,031 DEBUG   gap_fills: OK
+2026-02-20 05:08:54,031 DEBUG   econ_calendar: OK
+2026-02-20 05:08:54,032 DEBUG   market_context: OK
+2026-02-20 05:08:54,032 DEBUG   opus_analysis: OK
+2026-02-20 05:08:54,032 DEBUG   rss: OK
+2026-02-20 05:08:54,032 DEBUG   watchlist_t1: OK
+2026-02-20 05:08:54,032 INFO ── Step 5: Generate Briefing ──
+2026-02-20 05:08:54,080 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-02-20.md (36099 bytes)
+2026-02-20 05:08:54,098 INFO Cleanup complete
+2026-02-20 05:08:54,098 INFO === Collection complete: 532.1s total, completeness=100%, exit_code=0 ===
