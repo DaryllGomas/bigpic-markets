@@ -203,6 +203,7 @@ git push origin main   # GitHub Pages deploys automatically
 
 | Article | Directory | Date | Thumbnail |
 |---------|-----------|------|-----------|
+| Buy the Rumor, Sell the News | `Events-aapl-goog-nvda/` | Feb 23, 2026 | `events-thumb.jpg` |
 | Rocket Lab — Flight Profile | `RocketLab/` | Feb 22, 2026 | `rklb-thumb.jpg` |
 | NVDA Q4 FY2026 — Independent Analysis | `NVDA-q1-26/` | Feb 19, 2026 | `nvda-thumb.jpg` |
 | Bits-to-Atoms | `Bit-Atoms/` | Feb 15, 2026 | `thumb.jpg` |

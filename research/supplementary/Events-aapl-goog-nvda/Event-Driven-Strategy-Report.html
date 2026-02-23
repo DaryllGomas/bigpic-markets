@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event-Driven Trading Strategy | Buy the Rumor, Sell the News</title>
+<meta name="description" content="A backtested event-driven playbook for AAPL, NVDA & GOOG — 106 trades across 22 years proving the money is made before the event, not during or after.">
+<meta property="og:title" content="Buy the Rumor, Sell the News — Event-Driven Trading Strategy">
+<meta property="og:description" content="A backtested event-driven playbook for AAPL, NVDA & GOOG — 106 trades across 22 years proving the money is made before the event, not during or after.">
+<meta property="og:image" content="https://markets.bigpicsolutions.com/research/supplementary/Events-aapl-goog-nvda/events-thumb.jpg">
+<meta property="og:url" content="https://markets.bigpicsolutions.com/research/supplementary/Events-aapl-goog-nvda/Event-Driven-Strategy-Report.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BigPic Solutions Research">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Buy the Rumor, Sell the News — Event-Driven Trading Strategy">
+<meta name="twitter:description" content="A backtested event-driven playbook for AAPL, NVDA & GOOG — 106 trades across 22 years proving the money is made before the event, not during or after.">
+<meta name="twitter:image" content="https://markets.bigpicsolutions.com/research/supplementary/Events-aapl-goog-nvda/events-thumb.jpg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   CSS DESIGN SYSTEM — "Buy the Rumor, Sell the News"
+   Trade cycle colors: Blue (accumulate) → Amber (anticipate) → Green (profit)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg-deep: #070b14;
+  --bg-section: #0a0f1a;
+  --bg-card: rgba(10, 16, 28, 0.90);
+  --bg-card-hover: rgba(14, 22, 40, 0.94);
+  --bg-glass: rgba(255,255,255,0.025);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-card: rgba(255,255,255,0.08);
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a96ad;
+  --text-muted: #4b5568;
+  --rumor-blue: #1e6ed0;
+  --rumor-teal: #0ea5ad;
+  --rumor-cyan: #22d3ee;
+  --rumor-glow: rgba(30, 110, 208, 0.15);
+  --anticipation-amber: #f59e0b;
+  --anticipation-gold: #d4a017;
+  --anticipation-warm: #e8851e;
+  --anticipation-glow: rgba(245,158,11,0.15);
+  --profit-green: #10b981;
+  --profit-emerald: #34d399;
+  --profit-glow: rgba(16,185,129,0.15);
+  --danger-red: #ef4444;
+  --danger-rose: #f43f5e;
+  --accent-violet: #8b5cf6;
+  --cycle-gradient: linear-gradient(135deg, #1e6ed0 0%, #0ea5ad 25%, #f59e0b 55%, #10b981 85%, #34d399 100%);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--rumor-blue) var(--bg-deep); }
+body { font-family: var(--font-sans); background: var(--bg-deep); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--rumor-blue); border-radius: 4px; transition: background 0.3s; }
+a { color: var(--rumor-cyan); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--anticipation-amber); }
+
+/* Canvas background */
+#radar-sweep { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.07; }
+
+/* Navigation */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(7,11,20,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.nav.visible { transform: translateY(0); }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; height: 56px; gap: 8px; overflow-x: auto; }
+.nav-brand { font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; color: var(--text-primary); white-space: nowrap; margin-right: 16px; }
+.nav-link { font-size: 0.75rem; font-weight: 500; color: var(--text-muted); padding: 6px 12px; border-radius: 20px; white-space: nowrap; transition: all var(--transition); cursor: pointer; }
+.nav-link:hover { color: var(--text-secondary); background: var(--bg-glass); }
+.nav-link.active { color: var(--anticipation-amber); background: rgba(245,158,11,0.1); }
+.nav-progress { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--cycle-gradient); transition: width 0.15s linear; }
+
+/* Hero */
+.hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 24px; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 30px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: var(--profit-green); margin-bottom: 32px; opacity: 0; animation: fadeInUp 0.8s ease forwards 0.2s; }
+.hero-badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--profit-green); animation: pulse 2s ease-in-out infinite; }
+.hero-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; opacity: 0; animation: fadeInUp 0.8s ease forwards 0.4s; }
+.hero-title .line-rumor { background: linear-gradient(135deg, var(--rumor-blue) 0%, var(--rumor-teal) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; }
+.hero-title .line-news { background: linear-gradient(135deg, var(--anticipation-amber) 0%, var(--profit-green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; }
+.hero-divider { width: 200px; height: 3px; background: var(--cycle-gradient); border-radius: 2px; margin: 0 auto 24px; opacity: 0; animation: fadeInUp 0.8s ease forwards 0.5s; }
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 640px; margin: 0 auto 48px; opacity: 0; animation: fadeInUp 0.8s ease forwards 0.6s; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 700px; width: 100%; opacity: 0; animation: fadeInUp 0.8s ease forwards 0.8s; }
+.hero-stat { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-card); border-radius: var(--radius); padding: 24px 16px; text-align: center; }
+.hero-stat-value { font-family: var(--font-mono); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: var(--profit-green); }
+.hero-stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+.scroll-hint { margin-top: 48px; color: var(--text-muted); font-size: 0.8rem; opacity: 0; animation: fadeInUp 0.8s ease forwards 1s; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.scroll-hint .arrow { animation: bounce 2s ease-in-out infinite; font-size: 1.2rem; }
+
+/* Sections */
+.section { position: relative; z-index: 1; padding: 100px 24px; }
+.section:nth-child(even) { background: var(--bg-section); }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-phase { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.phase-bar { height: 3px; border-radius: 2px; background: var(--border-subtle); width: 120px; position: relative; overflow: hidden; }
+.phase-bar-fill { height: 100%; border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.phase-label { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; margin-bottom: 16px; }
+.section-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 720px; margin-bottom: 48px; line-height: 1.8; }
+.gradient-text { background: var(--cycle-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Cards */
+.card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(12px); transition: all var(--transition); }
+.card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-2px); }
+.card-accent { border-left: 3px solid; }
+.card-header { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.card-grid { display: grid; gap: 24px; }
+.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+thead th { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); white-space: nowrap; cursor: default; }
+thead th.sortable { cursor: pointer; }
+thead th.sortable:hover { color: var(--anticipation-amber); }
+tbody td { padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); font-family: var(--font-mono); font-size: 0.82rem; white-space: nowrap; }
+tbody tr { transition: background var(--transition); }
+tbody tr:hover { background: rgba(255,255,255,0.02); }
+.td-pos { color: var(--profit-green); }
+.td-neg { color: var(--danger-red); }
+.td-neutral { color: var(--text-secondary); }
+.td-highlight { font-weight: 700; }
+
+/* Grade badges */
+.grade { display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 20px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; }
+.grade-a { background: rgba(16,185,129,0.12); color: var(--profit-green); border: 1px solid rgba(16,185,129,0.25); }
+.grade-a-minus { background: rgba(14,165,173,0.12); color: var(--rumor-teal); border: 1px solid rgba(14,165,173,0.25); }
+.grade-b-plus { background: rgba(245,158,11,0.12); color: var(--anticipation-amber); border: 1px solid rgba(245,158,11,0.25); }
+.grade-avoid { background: rgba(239,68,68,0.12); color: var(--danger-red); border: 1px solid rgba(239,68,68,0.25); }
+
+/* T-Countdown Timeline */
+.t-timeline { position: relative; margin: 32px 0; padding: 24px 0; }
+.t-track { position: relative; height: 40px; background: rgba(255,255,255,0.03); border-radius: 4px; margin: 0 0 8px; overflow: visible; }
+.t-window { position: absolute; top: 4px; bottom: 4px; border-radius: 4px; transition: opacity var(--transition); }
+.t-event-marker { position: absolute; top: -8px; bottom: -8px; width: 2px; z-index: 2; }
+.t-event-marker::after { content: ''; position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; border-radius: 50%; transform: translate(-50%, -50%); animation: pulse 2s ease-in-out infinite; }
+.t-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); padding: 0 4px; }
+.t-label-event { color: var(--anticipation-amber); font-weight: 700; }
+
+/* Chart containers */
+.chart-container { position: relative; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0; }
+.chart-wrap { position: relative; width: 100%; height: 320px; }
+.chart-wrap-tall { height: 480px; }
+.chart-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; }
+.chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+/* Scorecard row accents */
+.sc-nvda { border-left-color: var(--profit-green) !important; }
+.sc-aapl-wwdc { border-left-color: var(--rumor-teal) !important; }
+.sc-aapl-sept { border-left-color: var(--anticipation-amber) !important; }
+.sc-aapl-iphone { border-left-color: var(--rumor-blue) !important; }
+.sc-aapl-earn { border-left-color: var(--anticipation-gold) !important; }
+.sc-goog { border-left-color: var(--rumor-cyan) !important; }
+.sc-avoid { opacity: 0.5; border-left-color: var(--danger-red) !important; }
+
+/* Toggle buttons */
+.toggle-btn { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border-card); background: transparent; color: var(--text-muted); cursor: pointer; transition: all var(--transition); }
+.toggle-btn:hover { color: var(--text-secondary); border-color: rgba(255,255,255,0.15); }
+.toggle-btn.active { color: var(--anticipation-amber); background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); }
+
+/* Risk cards */
+.risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.risk-card { padding: 24px; }
+.risk-icon { font-size: 1.5rem; margin-bottom: 12px; }
+.risk-title { font-weight: 700; margin-bottom: 8px; }
+.risk-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* Calendar Gantt */
+.gantt-container { position: relative; overflow-x: auto; }
+.gantt-month-labels { display: flex; gap: 0; margin-bottom: 8px; }
+.gantt-month { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); min-width: 70px; }
+.gantt-row { position: relative; height: 32px; margin-bottom: 4px; display: flex; align-items: center; }
+.gantt-label { width: 140px; flex-shrink: 0; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gantt-track { flex: 1; position: relative; height: 24px; background: rgba(255,255,255,0.02); border-radius: 4px; min-width: 840px; }
+.gantt-bar { position: absolute; top: 2px; bottom: 2px; border-radius: 4px; cursor: pointer; transition: all var(--transition); font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.8); display: flex; align-items: center; padding: 0 6px; overflow: hidden; white-space: nowrap; }
+.gantt-bar:hover { filter: brightness(1.3); transform: scaleY(1.2); z-index: 2; }
+.gantt-tooltip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(7,11,20,0.95); border: 1px solid var(--anticipation-amber); border-radius: 8px; padding: 12px 16px; font-family: var(--font-mono); font-size: 0.72rem; white-space: nowrap; z-index: 10; display: none; }
+
+/* Workflow steps */
+.workflow-steps { counter-reset: step; }
+.workflow-step { display: flex; gap: 20px; margin-bottom: 24px; }
+.workflow-num { counter-increment: step; width: 36px; height: 36px; border-radius: 50%; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; color: var(--profit-green); flex-shrink: 0; }
+.workflow-content { flex: 1; }
+.workflow-title { font-weight: 700; margin-bottom: 4px; }
+.workflow-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* Conviction list */
+.conviction-list { list-style: none; counter-reset: conv; }
+.conviction-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
+.conviction-rank { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 800; width: 32px; flex-shrink: 0; }
+
+/* Stop loss comparison */
+.stop-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: var(--radius); overflow: hidden; margin: 24px 0; }
+.stop-col { padding: 20px; background: var(--bg-card); }
+.stop-col-header { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+.stop-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.82rem; }
+.stop-label { color: var(--text-secondary); }
+.stop-value { font-family: var(--font-mono); font-weight: 600; }
+
+/* Reveal animations */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* Footer */
+.footer { position: relative; z-index: 1; padding: 60px 24px; border-top: 1px solid var(--border-subtle); text-align: center; }
+.footer p { font-size: 0.8rem; color: var(--text-muted); max-width: 640px; margin: 0 auto 8px; line-height: 1.6; }
+
+/* Keyframes */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(8px); } 60% { transform: translateY(4px); } }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section { padding: 60px 16px; }
+  .hero-stats { grid-template-columns: 1fr; max-width: 280px; }
+  .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+  .chart-pair { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .stop-compare { grid-template-columns: 1fr; }
+  .nav-inner { padding: 0 12px; }
+  .card { padding: 20px; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: 2rem; }
+  .section-title { font-size: 1.5rem; }
+}
+
+/* ═══════════════ SITE NAV ═══════════════ */
+.bigpic-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10000;
+  background: rgba(10, 15, 26, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232, 184, 125, 0.08);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+}
+.bigpic-nav a { text-decoration: none; }
+.bigpic-nav .nav-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #e2e8f0, var(--rumor-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-right: 32px;
+}
+.bigpic-nav .nav-links { display: flex; align-items: center; gap: 4px; }
+.bigpic-nav .nav-link {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+.bigpic-nav .nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.bigpic-nav .nav-dropdown { position: relative; }
+.bigpic-nav .nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(10, 15, 26, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 110, 208, 0.1);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+.bigpic-nav .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.bigpic-nav .nav-dropdown-menu a {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+.bigpic-nav .nav-dropdown-menu a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+/* ═══════════════ SHARE BUTTON ═══════════════ */
+.share-wrapper { position: fixed; top: 62px; right: 1.5rem; z-index: 9999; }
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: rgba(10, 15, 26, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 110, 208, 0.25);
+  border-radius: 6px;
+  color: var(--rumor-cyan);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.share-btn:hover { background: rgba(10, 15, 26, 0.95); border-color: rgba(30, 110, 208, 0.5); }
+.share-btn svg { width: 14px; height: 14px; fill: none; stroke: var(--rumor-cyan); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.share-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 200px;
+  background: rgba(10, 15, 26, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 110, 208, 0.2);
+  border-radius: 8px;
+  padding: 0.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.share-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+}
+.share-option:hover { background: rgba(30, 110, 208, 0.12); color: var(--rumor-cyan); }
+.share-option svg { width: 15px; height: 15px; flex-shrink: 0; }
+.share-option .x-logo { fill: var(--text-secondary); stroke: none; }
+.share-option:hover .x-logo { fill: var(--rumor-cyan); }
+.share-option .link-icon { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.share-option:hover .link-icon { stroke: var(--rumor-cyan); }
+.share-copied { font-size: 0.7rem; color: var(--profit-green); padding: 0; height: 0; overflow: hidden; opacity: 0; transition: all 0.2s ease; }
+.share-copied.show { padding: 0.3rem 0.75rem; height: auto; opacity: 1; }
+</style>
+</head>
+<body>
+
+<nav class="bigpic-nav">
+  <a href="../../../index.html" class="nav-brand">BigPic Solutions</a>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-link" href="#">Sectors &#9662;</a>
+      <div class="nav-dropdown-menu">
+        <a href="../../../research/ai/report.html">AI Infrastructure</a>
+        <a href="../../../research/nuclear/report.html">Nuclear Energy</a>
+        <a href="../../../research/space/report.html">Space</a>
+        <a href="../../../research/quantum/report.html">Quantum Computing</a>
+        <a href="../../../research/robotics/report.html">Robotics & Automation</a>
+        <a href="../../../research/cybersecurity/report.html">Cybersecurity</a>
+        <a href="../../../research/critical-minerals/report.html">Critical Minerals</a>
+        <a href="../../../research/defense/report.html">Defense & Aerospace</a>
+        <a href="../../../research/energy-storage/report.html">Energy Storage</a>
+      </div>
+    </div>
+    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
+  </div>
+</nav>
+
+<div class="share-wrapper">
+  <button class="share-btn" onclick="toggleShare()" aria-label="Share this article">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    SHARE
+  </button>
+  <div class="share-dropdown" id="shareDropdown">
+    <button class="share-option" onclick="copyLink()">
+      <svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+    <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener noreferrer" onclick="shareToX()">
+      <svg class="x-logo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <div class="share-copied" id="shareCopied">Link copied!</div>
+  </div>
+</div>
+
+<script>
+const SHARE_URL = 'https://markets.bigpicsolutions.com/research/supplementary/Events-aapl-goog-nvda/Event-Driven-Strategy-Report.html';
+const SHARE_TEXT = 'Buy the Rumor, Sell the News. A backtested event-driven playbook for AAPL, NVDA & GOOG — 106 trades across 22 years.';
+
+function toggleShare() {
+  document.getElementById('shareDropdown').classList.toggle('open');
+}
+function copyLink() {
+  navigator.clipboard.writeText(SHARE_URL).then(() => {
+    const el = document.getElementById('shareCopied');
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+  });
+}
+function shareToX() {
+  const url = 'https://x.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(SHARE_URL);
+  document.getElementById('shareX').href = url;
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.share-wrapper')) {
+    document.getElementById('shareDropdown').classList.remove('open');
+  }
+});
+</script>
+
+<!-- Radar sweep background canvas -->
+<canvas id="radar-sweep"></canvas>
+
+<!-- Sticky Navigation -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">BTRM/STN</span>
+    <a class="nav-link" data-section="core-insight">Insight</a>
+    <a class="nav-link" data-section="scorecard">Scorecard</a>
+    <a class="nav-link" data-section="strategy-wwdc">WWDC</a>
+    <a class="nav-link" data-section="strategy-iphone">iPhone</a>
+    <a class="nav-link" data-section="strategy-septopt">Sept-Oct</a>
+    <a class="nav-link" data-section="strategy-earnings">Earnings</a>
+    <a class="nav-link" data-section="strategy-iv">IV Capture</a>
+    <a class="nav-link" data-section="multi-ticker">NVDA/GOOG</a>
+    <a class="nav-link" data-section="regime">Regime</a>
+    <a class="nav-link" data-section="risk">Risk</a>
+    <a class="nav-link" data-section="calendar-2026">2026</a>
+    <a class="nav-link" data-section="workflow">Workflow</a>
+  </div>
+  <div class="nav-progress" id="nav-progress"></div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 1: HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<header class="hero" id="hero">
+  <div class="hero-badge"><span class="pulse"></span> BACKTESTED &amp; VERIFIED &nbsp;|&nbsp; 22 YEARS &nbsp;|&nbsp; 106 EVENTS</div>
+  <h1 class="hero-title">
+    <span class="line-rumor">Buy the Rumor,</span>
+    <span class="line-news">Sell the News.</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-subtitle">A backtested playbook for AAPL, NVDA &amp; GOOG.<br>The money is made <em>before</em> the event. Not during. Not after.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-value" data-count="78.3" data-suffix="%">0%</div>
+      <div class="hero-stat-label">WWDC Win Rate</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value" data-count="169" data-prefix="+" data-suffix="%">0%</div>
+      <div class="hero-stat-label">WWDC Total Return</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value" data-count="90.9" data-suffix="%">0%</div>
+      <div class="hero-stat-label">NVDA GTC Win Rate</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Explore the Edge <span class="arrow">&#8595;</span></div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 2: CORE INSIGHT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="core-insight">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--rumor-teal);" data-width="10%"></div></div>
+        <span class="phase-label" style="color:var(--rumor-teal);">Signal Detected</span>
+      </div>
+      <div class="section-label">The Framework</div>
+      <h2 class="section-title">The Core Insight</h2>
+      <p class="section-subtitle">Apple, NVIDIA, and Google follow predictable annual event cycles — product launches, developer conferences, quarterly earnings — that create recurring windows where the stock reliably moves in one direction.</p>
+    </div>
+
+    <div class="card-grid card-grid-3 reveal">
+      <div class="card">
+        <div class="card-header" style="color:var(--rumor-teal);">AAPL</div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Jan 2003 – Feb 2026</p>
+        <p><span style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;">5,821</span></p>
+        <p style="font-size:0.8rem;color:var(--text-muted);">trading days &middot; 106 events</p>
+      </div>
+      <div class="card">
+        <div class="card-header" style="color:var(--profit-green);">NVDA</div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Jan 2014 – Feb 2026</p>
+        <p><span style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;">39</span></p>
+        <p style="font-size:0.8rem;color:var(--text-muted);">events (GTC + earnings)</p>
+      </div>
+      <div class="card">
+        <div class="card-header" style="color:var(--rumor-cyan);">GOOG</div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Jan 2014 – Feb 2026</p>
+        <p><span style="font-family:var(--font-mono);font-size:1.8rem;font-weight:800;">48</span></p>
+        <p style="font-size:0.8rem;color:var(--text-muted);">events (earnings, I/O, Pixel)</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;">
+      <blockquote style="border-left:3px solid var(--anticipation-amber);padding:16px 24px;background:rgba(245,158,11,0.05);border-radius:0 var(--radius) var(--radius) 0;font-size:1.05rem;font-weight:600;color:var(--anticipation-amber);">
+        Exit before the event. Every time. No exceptions.
+      </blockquote>
+    </div>
+
+    <div class="reveal" style="margin-top:32px;">
+      <p style="color:var(--text-secondary);font-size:0.9rem;max-width:720px;line-height:1.8;">
+        <strong style="color:var(--text-primary);">Methodology:</strong> Returns are simple percentage change (entry to exit). Alpha = strategy return minus SPY over the same window. Win rate = trades with positive return / total. Total return = compounded across all trades. Sharpe = annualized excess return / std dev. Max drawdown = largest peak-to-trough in cumulative equity.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 3: STRATEGY SCORECARD
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="scorecard">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:linear-gradient(90deg,var(--rumor-teal),var(--rumor-blue));" data-width="20%"></div></div>
+        <span class="phase-label" style="color:var(--rumor-blue);">The Proof</span>
+      </div>
+      <div class="section-label">All Strategies</div>
+      <h2 class="section-title">Strategy Scorecard</h2>
+      <p class="section-subtitle">Nine strategies tested. Eight profitable. One anti-pattern to avoid.</p>
+    </div>
+
+    <div class="card reveal" style="padding:0;overflow:hidden;">
+      <div class="table-wrap">
+        <table id="scorecard-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" data-sort="strategy">Strategy</th>
+              <th class="sortable" data-sort="ticker">Ticker</th>
+              <th class="sortable" data-sort="trades" style="text-align:right;">Trades</th>
+              <th class="sortable" data-sort="wr" style="text-align:right;">Win Rate</th>
+              <th class="sortable" data-sort="avg" style="text-align:right;">Avg Return</th>
+              <th class="sortable" data-sort="alpha" style="text-align:right;">Alpha</th>
+              <th class="sortable" data-sort="sharpe" style="text-align:right;">Sharpe</th>
+              <th class="sortable" data-sort="total" style="text-align:right;">Total Return</th>
+            </tr>
+          </thead>
+          <tbody id="scorecard-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-pair reveal" style="margin-top:32px;">
+      <div class="chart-container">
+        <div class="chart-title">Win Rate &amp; Avg Return by Strategy (Dual Axis)</div>
+        <div class="chart-wrap"><canvas id="chart-scorecard-bars"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-title">Return vs Alpha — All Trades</div>
+        <div class="chart-wrap"><canvas id="chart-alpha-scatter"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 4: PRE-WWDC ACCUMULATION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="strategy-wwdc">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--rumor-teal);" data-width="30%"></div></div>
+        <span class="phase-label" style="color:var(--rumor-teal);">Accumulation</span>
+      </div>
+      <div class="section-label">Strategy 1</div>
+      <h2 class="section-title">Pre-WWDC Accumulation</h2>
+      <span class="grade grade-a">A &middot; 85% Confidence</span>
+    </div>
+
+    <p class="reveal" style="color:var(--text-secondary);margin:24px 0 32px;max-width:720px;line-height:1.8;">WWDC is Apple's annual developer conference. In the weeks before the keynote, developer and media hype builds anticipation. Extensive leaks mean the keynote itself rarely surprises. Between 2006 and 2017, AAPL had a 12-year consecutive losing streak on keynote day. <strong style="color:var(--text-primary);">The trade: buy the hype, sell before the event.</strong></p>
+
+    <!-- T-Countdown Timeline -->
+    <div class="t-timeline reveal" id="t-wwdc">
+      <div class="t-track">
+        <div class="t-window" style="left:0%;right:5%;background:linear-gradient(90deg,var(--rumor-blue),var(--rumor-teal));opacity:0.4;border-radius:4px;"></div>
+        <div class="t-event-marker" style="right:0%;background:var(--anticipation-amber);">
+          <div style="position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:var(--anticipation-amber);transform:translate(-50%,-50%);animation:pulse 2s ease-in-out infinite;"></div>
+        </div>
+      </div>
+      <div class="t-labels">
+        <span style="color:var(--rumor-blue);font-weight:600;">T-20 ENTER</span>
+        <span>T-15</span><span>T-10</span><span>T-5</span>
+        <span style="color:var(--profit-green);font-weight:600;">T-1 EXIT</span>
+        <span class="t-label-event">EVENT</span>
+      </div>
+    </div>
+
+    <!-- Rules + Results -->
+    <div class="card-grid card-grid-2 reveal">
+      <div class="card card-accent" style="border-left-color:var(--rumor-teal);">
+        <div class="card-header">Rules</div>
+        <div class="stop-row"><span class="stop-label">Entry</span><span class="stop-value">T-20 trading days before WWDC</span></div>
+        <div class="stop-row"><span class="stop-label">Exit</span><span class="stop-value">T-1 (day before keynote)</span></div>
+        <div class="stop-row"><span class="stop-label">Holding</span><span class="stop-value">~20 trading days (~4 weeks)</span></div>
+        <div class="stop-row"><span class="stop-label">Stop loss</span><span class="stop-value">1.5x ATR trailing</span></div>
+      </div>
+      <div class="card card-accent" style="border-left-color:var(--profit-green);">
+        <div class="card-header">Results (2003–2025)</div>
+        <div class="stop-row"><span class="stop-label">Total trades</span><span class="stop-value">23</span></div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">78.3%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+4.75%</span></div>
+        <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+3.74%</span></div>
+        <div class="stop-row"><span class="stop-label">Best / Worst</span><span class="stop-value"><span class="td-pos">+24.18%</span> / <span class="td-neg">-17.00%</span></span></div>
+        <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">2.39</span></div>
+        <div class="stop-row"><span class="stop-label">Max drawdown</span><span class="stop-value td-neg">-18.66%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+169.28%</span></div>
+      </div>
+    </div>
+
+    <!-- Stop Loss Comparison -->
+    <div class="stop-compare reveal">
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--text-muted);">Without Stop</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value">78.3%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value">+4.75%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value">+169.28%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-neg">-18.66%</span></div>
+      </div>
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--profit-green);">With 1.5x ATR Trailing</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">78.3%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+5.44%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+221.12%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-pos">-8.94%</span></div>
+        <div class="stop-row"><span class="stop-label">Stopped out</span><span class="stop-value">17%</span></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-pair reveal">
+      <div class="chart-container">
+        <div class="chart-title">Equity Curve — Pre-WWDC (Compounded)</div>
+        <div class="chart-wrap"><canvas id="chart-wwdc-equity"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-title">Return by Year</div>
+        <div class="chart-wrap"><canvas id="chart-wwdc-returns"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Year-by-Year Table -->
+    <div class="card reveal" style="margin-top:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="card-header" style="margin:0;">Year-by-Year Trade Data</div>
+        <button class="toggle-btn active" onclick="toggleEra(this,'wwdc')">Modern (2018+)</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>WWDC Date</th><th>Entry</th><th>Exit</th><th style="text-align:right;">Return</th><th style="text-align:right;">SPY</th><th style="text-align:right;">Alpha</th><th>Result</th></tr></thead>
+          <tbody id="table-wwdc"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 5: PRE-iPHONE RUN-UP
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="strategy-iphone">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:linear-gradient(90deg,var(--rumor-blue),var(--anticipation-amber));" data-width="42%"></div></div>
+        <span class="phase-label" style="color:var(--rumor-blue);">Momentum</span>
+      </div>
+      <div class="section-label">Strategy 2</div>
+      <h2 class="section-title">Pre-iPhone Run-Up</h2>
+      <span class="grade grade-a-minus">A- &middot; 75% Confidence</span>
+    </div>
+    <p class="reveal" style="color:var(--text-secondary);margin:24px 0 32px;max-width:720px;line-height:1.8;">The iPhone announcement is the most anticipated consumer electronics event on the calendar. The key finding: <strong style="color:var(--profit-green);">in the 2018+ era, exiting a full week before the event (T-7) produces a perfect 100% win rate over 8 trades.</strong></p>
+
+    <div class="t-timeline reveal">
+      <div class="t-track">
+        <div class="t-window" style="left:0%;right:5%;background:linear-gradient(90deg,var(--rumor-blue),var(--anticipation-amber));opacity:0.4;border-radius:4px;"></div>
+        <div class="t-event-marker" style="right:0%;background:var(--anticipation-amber);"><div style="position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:var(--anticipation-amber);transform:translate(-50%,-50%);animation:pulse 2s ease-in-out infinite;"></div></div>
+      </div>
+      <div class="t-labels">
+        <span style="color:var(--rumor-blue);font-weight:600;">T-30 ENTER</span><span>T-25</span><span>T-15</span><span>T-7</span>
+        <span style="color:var(--profit-green);font-weight:600;">T-1 EXIT</span><span class="t-label-event">EVENT</span>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-2 reveal">
+      <div class="card card-accent" style="border-left-color:var(--rumor-blue);">
+        <div class="card-header">Rules</div>
+        <div class="stop-row"><span class="stop-label">Entry (default)</span><span class="stop-value">T-30</span></div>
+        <div class="stop-row"><span class="stop-label">Exit (default)</span><span class="stop-value">T-1</span></div>
+        <div class="stop-row"><span class="stop-label">Optimized (2018+)</span><span class="stop-value" style="color:var(--profit-green);">T-25 / T-7 → 100% WR</span></div>
+        <div class="stop-row"><span class="stop-label">Stop loss</span><span class="stop-value">No stop (or use optimized window)</span></div>
+      </div>
+      <div class="card card-accent" style="border-left-color:var(--profit-green);">
+        <div class="card-header">Results (2007–2025)</div>
+        <div class="stop-row"><span class="stop-label">Total trades</span><span class="stop-value">16</span></div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">68.8%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+3.78%</span></div>
+        <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+3.50%</span></div>
+        <div class="stop-row"><span class="stop-label">Best / Worst</span><span class="stop-value"><span class="td-pos">+18.05%</span> / <span class="td-neg">-8.58%</span></span></div>
+        <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">1.74</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+73.30%</span></div>
+      </div>
+    </div>
+
+    <div class="chart-pair reveal">
+      <div class="chart-container"><div class="chart-title">Equity Curve — Pre-iPhone (Compounded)</div><div class="chart-wrap"><canvas id="chart-iphone-equity"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Return by Year</div><div class="chart-wrap"><canvas id="chart-iphone-returns"></canvas></div></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="card-header" style="margin:0;">Year-by-Year Trade Data</div>
+        <button class="toggle-btn active" onclick="toggleEra(this,'iphone')">Modern (2018+)</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Year</th><th>Event Date</th><th>Entry</th><th>Exit</th><th style="text-align:right;">Return</th><th style="text-align:right;">SPY</th><th style="text-align:right;">Alpha</th><th>Result</th></tr></thead><tbody id="table-iphone"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 6: SEPT DIP TO OCT RECOVERY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="strategy-septopt">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--anticipation-amber);" data-width="55%"></div></div>
+        <span class="phase-label" style="color:var(--anticipation-amber);">Recovery</span>
+      </div>
+      <div class="section-label">Strategy 3</div>
+      <h2 class="section-title">Sept Dip to Oct Recovery</h2>
+      <span class="grade grade-a-minus">A- &middot; 80% Confidence</span>
+    </div>
+    <p class="reveal" style="color:var(--text-secondary);margin:24px 0 32px;max-width:720px;line-height:1.8;">After the iPhone announcement, AAPL enters a predictable dip as sell-the-news pressure kicks in. The stock recovers through October driven by shipment reports, holiday anticipation, and buyback restoration. <strong style="color:var(--text-primary);">Highest average return of any AAPL strategy: +6.62% per trade.</strong></p>
+
+    <div class="t-timeline reveal">
+      <div class="t-track">
+        <div class="t-window" style="left:0%;right:5%;background:linear-gradient(90deg,var(--anticipation-warm),var(--anticipation-amber));opacity:0.4;border-radius:4px;"></div>
+        <div class="t-event-marker" style="left:0%;background:var(--danger-red);"><div style="position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:var(--danger-red);transform:translate(-50%,-50%);animation:pulse 2s ease-in-out infinite;"></div></div>
+      </div>
+      <div class="t-labels">
+        <span class="t-label-event" style="color:var(--danger-red);">iPHONE (SELL-OFF)</span><span>+1w</span><span>+2w</span><span>+3w</span><span>+4w</span>
+        <span style="color:var(--profit-green);font-weight:600;">~OCT 31 EXIT</span>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-2 reveal">
+      <div class="card card-accent" style="border-left-color:var(--anticipation-amber);">
+        <div class="card-header">Rules</div>
+        <div class="stop-row"><span class="stop-label">Entry</span><span class="stop-value">~Sept 8–18 (post-iPhone dip)</span></div>
+        <div class="stop-row"><span class="stop-label">Exit</span><span class="stop-value">Late October (~Oct 31)</span></div>
+        <div class="stop-row"><span class="stop-label">Holding</span><span class="stop-value">~35–45 trading days</span></div>
+        <div class="stop-row"><span class="stop-label">Stop loss</span><span class="stop-value">2.0x ATR trailing (wider for long hold)</span></div>
+      </div>
+      <div class="card card-accent" style="border-left-color:var(--profit-green);">
+        <div class="card-header">Results (2003–2025)</div>
+        <div class="stop-row"><span class="stop-label">Total trades</span><span class="stop-value">23</span></div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">73.9%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+6.62%</span></div>
+        <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+5.88%</span></div>
+        <div class="stop-row"><span class="stop-label">Best / Worst</span><span class="stop-value"><span class="td-pos">+44.15%</span> / <span class="td-neg">-31.87%</span></span></div>
+        <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">1.95</span></div>
+        <div class="stop-row"><span class="stop-label">Max drawdown</span><span class="stop-value td-neg">-31.87%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+248.31%</span></div>
+      </div>
+    </div>
+
+    <div class="stop-compare reveal">
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--text-muted);">Without Stop</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value">73.9%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value">+6.62%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value">+248.31%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-neg">-31.87%</span></div>
+      </div>
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--profit-green);">With 2.0x ATR Trailing</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">78.3%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+7.34%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+341.19%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-pos">-10.17%</span></div>
+        <div class="stop-row"><span class="stop-label">Stopped out</span><span class="stop-value">35%</span></div>
+      </div>
+    </div>
+
+    <div class="chart-pair reveal">
+      <div class="chart-container"><div class="chart-title">Equity Curve — Sept-Oct Recovery (Compounded)</div><div class="chart-wrap"><canvas id="chart-septopt-equity"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Return by Year</div><div class="chart-wrap"><canvas id="chart-septopt-returns"></canvas></div></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="card-header" style="margin:0;">Year-by-Year Trade Data</div>
+        <button class="toggle-btn active" onclick="toggleEra(this,'septopt')">Modern (2018+)</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Year</th><th>Entry</th><th>Exit</th><th style="text-align:right;">Return</th><th style="text-align:right;">SPY</th><th style="text-align:right;">Alpha</th><th>Result</th></tr></thead><tbody id="table-septopt"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 7: PRE-EARNINGS DRIFT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="strategy-earnings">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--anticipation-gold);" data-width="65%"></div></div>
+        <span class="phase-label" style="color:var(--anticipation-gold);">The Workhorse</span>
+      </div>
+      <div class="section-label">Strategy 4</div>
+      <h2 class="section-title">Pre-Earnings Drift</h2>
+      <span class="grade grade-b-plus">B+ &middot; 70% Confidence</span>
+    </div>
+    <p class="reveal" style="color:var(--text-secondary);margin:24px 0 32px;max-width:720px;line-height:1.8;">AAPL drifts upward in the 14 trading days before earnings as analysts raise estimates, buyback blackouts end, and institutions position ahead of the report. This fires <strong style="color:var(--text-primary);">four times per year</strong> — the workhorse strategy providing steady compounding.</p>
+
+    <div class="t-timeline reveal">
+      <div class="t-track">
+        <div class="t-window" style="left:0%;right:5%;background:linear-gradient(90deg,var(--anticipation-gold),var(--anticipation-amber));opacity:0.4;border-radius:4px;"></div>
+        <div class="t-event-marker" style="right:0%;background:var(--anticipation-amber);"><div style="position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:var(--anticipation-amber);transform:translate(-50%,-50%);animation:pulse 2s ease-in-out infinite;"></div></div>
+      </div>
+      <div class="t-labels">
+        <span style="color:var(--anticipation-gold);font-weight:600;">T-14 ENTER</span><span>T-10</span><span>T-7</span><span>T-3</span>
+        <span style="color:var(--profit-green);font-weight:600;">T-1 EXIT</span><span class="t-label-event">EARNINGS</span>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-2 reveal">
+      <div class="card card-accent" style="border-left-color:var(--anticipation-gold);">
+        <div class="card-header">Rules</div>
+        <div class="stop-row"><span class="stop-label">Entry</span><span class="stop-value">T-14 trading days before earnings</span></div>
+        <div class="stop-row"><span class="stop-label">Exit</span><span class="stop-value">T-1 (day before earnings report)</span></div>
+        <div class="stop-row"><span class="stop-label">Holding</span><span class="stop-value">~14 trading days (~3 weeks)</span></div>
+        <div class="stop-row"><span class="stop-label">Stop loss</span><span class="stop-value">1.5x ATR trailing</span></div>
+      </div>
+      <div class="card card-accent" style="border-left-color:var(--profit-green);">
+        <div class="card-header">Results (FY2015–FY2025)</div>
+        <div class="stop-row"><span class="stop-label">Total trades</span><span class="stop-value">44</span></div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">65.9%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+1.88%</span></div>
+        <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+0.89%</span></div>
+        <div class="stop-row"><span class="stop-label">Best / Worst</span><span class="stop-value"><span class="td-pos">+13.08%</span> / <span class="td-neg">-9.04%</span></span></div>
+        <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">1.36</span></div>
+        <div class="stop-row"><span class="stop-label">Max drawdown</span><span class="stop-value td-neg">-15.55%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+115.85%</span></div>
+      </div>
+    </div>
+
+    <div class="stop-compare reveal">
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--text-muted);">Without Stop</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value">65.9%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value">+1.88%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value">+115.85%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-neg">-15.55%</span></div>
+      </div>
+      <div class="stop-col">
+        <div class="stop-col-header" style="color:var(--profit-green);">With 1.5x ATR Trailing</div>
+        <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">70.5%</span></div>
+        <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+2.51%</span></div>
+        <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+187.30%</span></div>
+        <div class="stop-row"><span class="stop-label">Max DD</span><span class="stop-value td-pos">-8.31%</span></div>
+        <div class="stop-row"><span class="stop-label">Stopped out</span><span class="stop-value">27%</span></div>
+      </div>
+    </div>
+
+    <!-- Volume Filter insight -->
+    <div class="card reveal" style="margin-top:24px;border-left:3px solid var(--anticipation-amber);">
+      <div class="card-header">Volume Filter Insight</div>
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px;">High-volume entries hurt this strategy. Low-volume drift = healthy accumulation. High-volume = hedging/uncertainty.</p>
+      <div class="card-grid card-grid-2" style="gap:16px;">
+        <div style="padding:12px;background:rgba(239,68,68,0.05);border-radius:8px;border:1px solid rgba(239,68,68,0.15);">
+          <div style="font-family:var(--font-mono);font-weight:700;color:var(--danger-red);font-size:1.1rem;">42.9% WR</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">Volume confirmed (above avg) &middot; -0.26% avg</div>
+        </div>
+        <div style="padding:12px;background:rgba(16,185,129,0.05);border-radius:8px;border:1px solid rgba(16,185,129,0.15);">
+          <div style="font-family:var(--font-mono);font-weight:700;color:var(--profit-green);font-size:1.1rem;">87.0% WR</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">Low volume (below avg) &middot; +3.83% avg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-pair reveal">
+      <div class="chart-container"><div class="chart-title">Equity Curve — Pre-Earnings (Compounded)</div><div class="chart-wrap"><canvas id="chart-earnings-equity"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Return by Quarter</div><div class="chart-wrap"><canvas id="chart-earnings-returns"></canvas></div></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="card-header" style="margin:0;">Year-by-Year Trade Data</div>
+        <button class="toggle-btn active" onclick="toggleEra(this,'earnings')">Modern (2018+)</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Year</th><th>Earnings Date</th><th>Entry</th><th>Exit</th><th style="text-align:right;">Return</th><th style="text-align:right;">SPY</th><th style="text-align:right;">Alpha</th><th>Result</th></tr></thead><tbody id="table-earnings"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 8: IV CAPTURE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="strategy-iv">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--accent-violet);" data-width="72%"></div></div>
+        <span class="phase-label" style="color:var(--accent-violet);">Volatility</span>
+      </div>
+      <div class="section-label">Strategy 5</div>
+      <h2 class="section-title">Pre-Earnings IV Capture</h2>
+      <span class="grade grade-a">A &middot; Live via Schwab</span>
+    </div>
+    <p class="reveal" style="color:var(--text-secondary);margin:24px 0 32px;max-width:720px;line-height:1.8;">Implied volatility systematically rises 7–14 days before earnings. By entering options positions when IV is cheap and exiting when IV is elevated (T-1), you capture IV expansion without earnings gap risk. <strong style="color:var(--accent-violet);">This is a volatility trade, not a directional trade.</strong></p>
+
+    <div class="card-grid card-grid-2 reveal">
+      <div class="card card-accent" style="border-left-color:var(--accent-violet);">
+        <div class="card-header">Signal Logic</div>
+        <div class="stop-row"><span class="stop-label">IV percentile</span><span class="stop-value" style="color:var(--profit-green);">&#60; 30% → Entry signal</span></div>
+        <div class="stop-row"><span class="stop-label">Days to earnings</span><span class="stop-value">T-7 to T-21 window</span></div>
+        <div class="stop-row"><span class="stop-label">VIX regime</span><span class="stop-value">Contango + RISK_ON</span></div>
+        <div class="stop-row"><span class="stop-label">C/P ratio</span><span class="stop-value">&#62; 1.0 (bullish flow)</span></div>
+        <div class="stop-row"><span class="stop-label">Exit</span><span class="stop-value">T-1 to T-3 or IV &#62; 70th pctl</span></div>
+      </div>
+      <div class="card card-accent" style="border-left-color:var(--accent-violet);">
+        <div class="card-header">Vehicle Selection</div>
+        <div class="stop-row"><span class="stop-label">Bullish (C/P &#62; 1.5)</span><span class="stop-value">Long ATM/OTM calls</span></div>
+        <div class="stop-row"><span class="stop-label">Bearish (C/P &#60; 0.8)</span><span class="stop-value">Long ATM/OTM puts</span></div>
+        <div class="stop-row"><span class="stop-label">Neutral</span><span class="stop-value">Long ATM straddle</span></div>
+        <div class="stop-row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-subtle);"><span class="stop-label">Platform</span><span class="stop-value">Schwab Dashboard (port 8000)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 9: MULTI-TICKER (NVDA & GOOG)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="multi-ticker">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:linear-gradient(90deg,var(--profit-green),var(--rumor-cyan));" data-width="78%"></div></div>
+        <span class="phase-label" style="color:var(--profit-green);">Pattern Extends</span>
+      </div>
+      <div class="section-label">Multi-Ticker</div>
+      <h2 class="section-title">NVDA &amp; GOOG</h2>
+      <p class="section-subtitle">The event-driven framework extends beyond Apple. NVIDIA's GTC is the single highest-conviction trade in the entire system.</p>
+    </div>
+
+    <!-- NVDA -->
+    <div class="reveal" style="margin-bottom:48px;">
+      <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:24px;"><span style="color:var(--profit-green);font-family:var(--font-mono);">NVDA</span> — The AI Hype Machine</h3>
+
+      <div class="card-grid card-grid-2">
+        <div class="card card-accent sc-nvda">
+          <div class="card-header">Pre-GTC Run-Up (T-10 / T+3)</div>
+          <div class="stop-row"><span class="stop-label">Trades</span><span class="stop-value">11</span></div>
+          <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos td-highlight">90.9%</span></div>
+          <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos td-highlight">+12.65%</span></div>
+          <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+11.82%</span></div>
+          <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value td-highlight">3.44</span></div>
+          <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+249.58%</span></div>
+        </div>
+        <div class="card card-accent sc-nvda">
+          <div class="card-header">Pre-Earnings Drift (T-14 / T-1)</div>
+          <div class="stop-row"><span class="stop-label">Trades</span><span class="stop-value">27</span></div>
+          <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">74.1%</span></div>
+          <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+6.74%</span></div>
+          <div class="stop-row"><span class="stop-label">Alpha vs SPY</span><span class="stop-value td-pos">+4.98%</span></div>
+          <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">2.64</span></div>
+          <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos td-highlight">+389.04%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOG -->
+    <div class="reveal">
+      <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:24px;"><span style="color:var(--rumor-cyan);font-family:var(--font-mono);">GOOG</span> — Earnings Yes, Pixel No</h3>
+
+      <div class="card-grid card-grid-3">
+        <div class="card card-accent sc-goog">
+          <div class="card-header">Pre-Earnings (T-14 / T-1)</div>
+          <div class="stop-row"><span class="stop-label">Trades</span><span class="stop-value">28</span></div>
+          <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">75.0%</span></div>
+          <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+2.86%</span></div>
+          <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">2.33</span></div>
+          <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-pos">+112.40%</span></div>
+        </div>
+        <div class="card card-accent sc-goog">
+          <div class="card-header">Pre-I/O (T-10 / T+3)</div>
+          <div class="stop-row"><span class="stop-label">Trades</span><span class="stop-value">10</span></div>
+          <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-pos">70.0%</span></div>
+          <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-pos">+2.61%</span></div>
+          <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value">1.39</span></div>
+        </div>
+        <div class="card card-accent sc-avoid">
+          <div class="card-header"><span class="grade grade-avoid">AVOID</span> Pre-Pixel (T-20 / T-1)</div>
+          <div class="stop-row"><span class="stop-label">Trades</span><span class="stop-value">10</span></div>
+          <div class="stop-row"><span class="stop-label">Win rate</span><span class="stop-value td-neg">30.0%</span></div>
+          <div class="stop-row"><span class="stop-label">Avg return</span><span class="stop-value td-neg">-2.52%</span></div>
+          <div class="stop-row"><span class="stop-label">Sharpe</span><span class="stop-value td-neg">-1.50</span></div>
+          <div class="stop-row"><span class="stop-label">Total return</span><span class="stop-value td-neg">-23.74%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 10: REGIME EVOLUTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="regime">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:linear-gradient(90deg,var(--anticipation-amber),var(--anticipation-warm));" data-width="82%"></div></div>
+        <span class="phase-label" style="color:var(--anticipation-amber);">Adaptation</span>
+      </div>
+      <div class="section-label">Regime Analysis</div>
+      <h2 class="section-title">The Pattern Is Evolving</h2>
+      <p class="section-subtitle">All strategies show some degradation in the 2018+ era, consistent with patterns becoming more widely known and front-run. The pattern hasn't disappeared — it has shifted.</p>
+    </div>
+
+    <div class="chart-container reveal">
+      <div class="chart-title">Win Rate: Early Era vs 2018+</div>
+      <div class="chart-wrap"><canvas id="chart-regime"></canvas></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:32px;">
+      <div class="card-header">Optimized Windows for the Current Regime</div>
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px;">Parameter sweeps on the 2018+ regime reveal that shorter, later entry windows now perform better. Front-running has compressed the early portion of the trade.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Strategy</th><th>Default</th><th>Optimized</th><th style="text-align:right;">2018+ WR</th><th style="text-align:right;">2018+ Avg Return</th></tr></thead>
+          <tbody>
+            <tr><td>Pre-WWDC</td><td style="color:var(--text-muted);">T-20 / T-1</td><td style="color:var(--profit-green);font-weight:600;">T-10 / T+3</td><td style="text-align:right;" class="td-pos">87.5%</td><td style="text-align:right;" class="td-pos">+4.17%</td></tr>
+            <tr><td>Pre-iPhone</td><td style="color:var(--text-muted);">T-30 / T-1</td><td style="color:var(--profit-green);font-weight:600;">T-25 / T-7</td><td style="text-align:right;" class="td-pos">100.0%</td><td style="text-align:right;" class="td-pos">+6.17%</td></tr>
+            <tr><td>Pre-Earnings</td><td style="color:var(--text-muted);">T-14 / T-1</td><td style="color:var(--profit-green);font-weight:600;">T-14 / T+3</td><td style="text-align:right;" class="td-pos">71.9%</td><td style="text-align:right;" class="td-pos">+2.94%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 11: RISK MANAGEMENT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="risk">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--danger-red);" data-width="88%"></div></div>
+        <span class="phase-label" style="color:var(--danger-red);">Protecting the Edge</span>
+      </div>
+      <div class="section-label">Risk Management</div>
+      <h2 class="section-title">What Can Go Wrong</h2>
+    </div>
+
+    <div class="risk-grid reveal">
+      <div class="card risk-card">
+        <div class="risk-icon">&#9201;</div>
+        <div class="risk-title">Regime Shifts</div>
+        <div class="risk-desc">A prolonged bear market or macro crisis can overwhelm seasonal patterns. The 2022 WWDC trade lost -7.57% during the Fed hiking cycle. Stop losses catch these, but size should already be reduced in risk-off environments.</div>
+      </div>
+      <div class="card risk-card">
+        <div class="risk-icon">&#128101;</div>
+        <div class="risk-title">Pattern Crowding</div>
+        <div class="risk-desc">As more participants trade these windows, the edge compresses. Degradation data shows this is already happening for WWDC and Sept-Oct. Optimized windows partially compensate, but the trade will continue to evolve.</div>
+      </div>
+      <div class="card risk-card">
+        <div class="risk-icon">&#127919;</div>
+        <div class="risk-title">Single-Stock Concentration</div>
+        <div class="risk-desc">These are all single-name equity trades. A company-specific event can overwhelm any seasonal pattern. Diversifying across AAPL, NVDA, and GOOG partially mitigates this.</div>
+      </div>
+      <div class="card risk-card">
+        <div class="risk-icon">&#9888;&#65039;</div>
+        <div class="risk-title">Liquidity &amp; Execution</div>
+        <div class="risk-desc">Strategies assume fills at the close. In practice, slippage on entry and exit reduces net returns, especially during high-volatility windows.</div>
+      </div>
+    </div>
+
+    <!-- Position Sizing -->
+    <div class="card reveal" style="margin-top:32px;">
+      <div class="card-header">Half-Kelly Position Sizing</div>
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px;">Upper-bound position sizes based on historical win rates and win/loss ratios. Reduce further in risk-off regimes.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Strategy</th><th style="text-align:right;">Win Rate</th><th style="text-align:right;">Win/Loss Ratio</th><th style="text-align:right;">Half-Kelly</th><th style="text-align:right;">$100K Account</th></tr></thead>
+          <tbody>
+            <tr><td>Pre-WWDC</td><td style="text-align:right;">78.3%</td><td style="text-align:right;">1.25</td><td style="text-align:right;font-weight:700;">30.4%</td><td style="text-align:right;">~$30K</td></tr>
+            <tr><td>Sept-Oct Recovery</td><td style="text-align:right;">73.9%</td><td style="text-align:right;">1.35</td><td style="text-align:right;font-weight:700;">27.3%</td><td style="text-align:right;">~$27K</td></tr>
+            <tr><td>Pre-iPhone</td><td style="text-align:right;">68.8%</td><td style="text-align:right;">1.50</td><td style="text-align:right;font-weight:700;">24.0%</td><td style="text-align:right;">~$24K</td></tr>
+            <tr><td>Pre-Earnings</td><td style="text-align:right;">65.9%</td><td style="text-align:right;">1.31</td><td style="text-align:right;font-weight:700;">19.9%</td><td style="text-align:right;">~$20K</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ATR Stop Recommendations -->
+    <div class="card reveal" style="margin-top:24px;">
+      <div class="card-header">ATR Stop Loss Recommendations</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Strategy</th><th>Config</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>Pre-WWDC</td><td style="color:var(--profit-green);font-weight:600;">1.5x ATR trailing</td><td style="color:var(--text-secondary);">Short hold, tight control — cuts max DD in half</td></tr>
+            <tr><td>Pre-Earnings</td><td style="color:var(--profit-green);font-weight:600;">1.5x ATR trailing</td><td style="color:var(--text-secondary);">Catches macro shocks that overwhelm the gentle drift</td></tr>
+            <tr><td>Sept-Oct Recovery</td><td style="color:var(--profit-green);font-weight:600;">2.0x ATR trailing</td><td style="color:var(--text-secondary);">Longer hold needs wider stop — still cuts DD from -32% to -10%</td></tr>
+            <tr><td>Pre-iPhone</td><td style="color:var(--anticipation-amber);font-weight:600;">No stop (use T-25/T-7)</td><td style="color:var(--text-secondary);">Stops reduce WR to 50% — the drawdowns recover</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 12: 2026 TRADING CALENDAR
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="calendar-2026">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--profit-green);" data-width="92%"></div></div>
+        <span class="phase-label" style="color:var(--profit-green);">Next Cycle Begins</span>
+      </div>
+      <div class="section-label">Forward-Looking</div>
+      <h2 class="section-title">2026 Trading Calendar</h2>
+      <p class="section-subtitle">All AAPL, NVDA, and GOOG events mapped with entry/exit dates and expected win rates. Automated signals are active.</p>
+    </div>
+
+    <!-- Gantt chart -->
+    <div class="chart-container reveal" style="overflow-x:auto;">
+      <div class="chart-title">Trade Windows — 2026</div>
+      <div class="chart-wrap chart-wrap-tall"><canvas id="chart-gantt"></canvas></div>
+    </div>
+
+    <!-- AAPL Calendar Table -->
+    <div class="card reveal" style="margin-top:24px;">
+      <div class="card-header"><span style="color:var(--rumor-teal);font-family:var(--font-mono);">AAPL</span> 2026</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Entry</th><th>Event</th><th>Exit</th><th>Strategy</th><th style="text-align:right;">Expected WR</th></tr></thead>
+          <tbody>
+            <tr><td>Apr 10</td><td>Q2 FY26 Earnings (Apr 30)</td><td>May 5</td><td>Pre-Earnings</td><td style="text-align:right;">66%</td></tr>
+            <tr><td>May 25</td><td>WWDC 2026 (~Jun 8)</td><td>Jun 11</td><td>Pre-WWDC (optimized)</td><td style="text-align:right;color:var(--profit-green);font-weight:600;">88%</td></tr>
+            <tr><td>Jul 10</td><td>Q3 FY26 Earnings (Jul 30)</td><td>Aug 4</td><td>Pre-Earnings</td><td style="text-align:right;">66%</td></tr>
+            <tr><td>Aug 4</td><td>iPhone 18 (~Sep 8)</td><td>Aug 28</td><td>Pre-iPhone (optimized)</td><td style="text-align:right;color:var(--profit-green);font-weight:600;">100%</td></tr>
+            <tr><td>Sep 10</td><td>Sept Dip (post-iPhone)</td><td>Oct 30</td><td>Sept-Oct Recovery</td><td style="text-align:right;">74%</td></tr>
+            <tr><td>Oct 9</td><td>Q4 FY26 Earnings (Oct 29)</td><td>Nov 3</td><td>Pre-Earnings</td><td style="text-align:right;">66%</td></tr>
+            <tr><td>Jan 8</td><td>Q1 FY27 Earnings (Jan 28)</td><td>Feb 2</td><td>Pre-Earnings</td><td style="text-align:right;">66%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NVDA Calendar Table -->
+    <div class="card reveal" style="margin-top:24px;">
+      <div class="card-header"><span style="color:var(--profit-green);font-family:var(--font-mono);">NVDA</span> 2026</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Entry</th><th>Event</th><th>Exit</th><th>Strategy</th><th style="text-align:right;">Expected WR</th></tr></thead>
+          <tbody>
+            <tr><td>Mar 2</td><td>GTC 2026 (Mar 16)</td><td>Mar 19</td><td style="font-weight:700;">Pre-GTC</td><td style="text-align:right;color:var(--profit-green);font-weight:600;">91%</td></tr>
+            <tr><td>May 7</td><td>Q1 FY27 Earnings (May 27)</td><td>May 26</td><td>Pre-Earnings</td><td style="text-align:right;">74%</td></tr>
+            <tr><td>Aug 6</td><td>Q2 FY27 Earnings (Aug 26)</td><td>Aug 25</td><td>Pre-Earnings</td><td style="text-align:right;">74%</td></tr>
+            <tr><td>Oct 29</td><td>Q3 FY27 Earnings (Nov 18)</td><td>Nov 17</td><td>Pre-Earnings</td><td style="text-align:right;">74%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- GOOG Calendar Table -->
+    <div class="card reveal" style="margin-top:24px;">
+      <div class="card-header"><span style="color:var(--rumor-cyan);font-family:var(--font-mono);">GOOG</span> 2026</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Entry</th><th>Event</th><th>Exit</th><th>Strategy</th><th style="text-align:right;">Expected WR</th></tr></thead>
+          <tbody>
+            <tr><td>Apr 8</td><td>Q1 Earnings (Apr 28)</td><td>Apr 27</td><td>Pre-Earnings</td><td style="text-align:right;">75%</td></tr>
+            <tr><td>Apr 28</td><td>Google I/O 2026 (~May 12)</td><td>May 15</td><td>Pre-I/O</td><td style="text-align:right;">70%</td></tr>
+            <tr><td>Jul 8</td><td>Q2 Earnings (Jul 28)</td><td>Jul 27</td><td>Pre-Earnings</td><td style="text-align:right;">75%</td></tr>
+            <tr><td>Oct 7</td><td>Q3 Earnings (Oct 27)</td><td>Oct 26</td><td>Pre-Earnings</td><td style="text-align:right;">75%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;border-left:3px solid var(--anticipation-amber);">
+      <p style="color:var(--anticipation-amber);font-size:0.85rem;font-weight:600;">Calendar overlap to watch: NVDA GTC (mid-March) and GOOG Q1 Earnings / I/O (late April–mid May) create a dense signal cluster. Size accordingly to avoid over-concentration in mega-cap tech.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 13: WORKFLOW
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="workflow">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-phase">
+        <div class="phase-bar"><div class="phase-bar-fill" style="background:var(--profit-emerald);" data-width="96%"></div></div>
+        <span class="phase-label" style="color:var(--profit-emerald);">Execution</span>
+      </div>
+      <div class="section-label">How to Use</div>
+      <h2 class="section-title">Daily Workflow</h2>
+    </div>
+
+    <div class="workflow-steps reveal">
+      <div class="workflow-step">
+        <div class="workflow-num">1</div>
+        <div class="workflow-content">
+          <div class="workflow-title">Check Signals</div>
+          <div class="workflow-desc">Run <code style="font-family:var(--font-mono);color:var(--rumor-cyan);background:rgba(34,211,238,0.08);padding:2px 6px;border-radius:4px;">python3 src/live_signals.py --report</code> for current entry/exit signals across all events.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">2</div>
+        <div class="workflow-content">
+          <div class="workflow-title">Check IV</div>
+          <div class="workflow-desc">If within 7–21 days of earnings, run <code style="font-family:var(--font-mono);color:var(--accent-violet);background:rgba(139,92,246,0.08);padding:2px 6px;border-radius:4px;">python3 src/iv_capture.py</code> for IV percentile assessment.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">3</div>
+        <div class="workflow-content">
+          <div class="workflow-title">Size the Position</div>
+          <div class="workflow-desc">Use the Half-Kelly table as an upper bound. Reduce in risk-off regimes (VIX > 25, correlation spikes, macro events).</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">4</div>
+        <div class="workflow-content">
+          <div class="workflow-title">Set the Stop</div>
+          <div class="workflow-desc">Enter the ATR trailing stop at the recommended multiplier on day one. Adjust only upward (trail), never down.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">5</div>
+        <div class="workflow-content">
+          <div class="workflow-title">Exit on Schedule</div>
+          <div class="workflow-desc">The exit date is predetermined. <strong>Do not override it.</strong> The entire edge of this strategy is in the discipline of the exit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conviction Hierarchy -->
+    <div class="card reveal" style="margin-top:48px;">
+      <div class="card-header">Conviction Hierarchy</div>
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px;">When you have to choose which trades to take and which to skip:</p>
+      <ol class="conviction-list">
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--profit-green);">1.</span><div><strong>NVDA Pre-GTC</strong> — 91% WR, +12.65% avg, 3.44 Sharpe. Take this every year.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--rumor-teal);">2.</span><div><strong>AAPL Pre-WWDC (optimized)</strong> — 88% WR in 2018+. The flagship.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--rumor-blue);">3.</span><div><strong>AAPL Pre-iPhone (optimized)</strong> — 100% WR in 2018+ with T-25/T-7. Perfect record.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--profit-green);">4.</span><div><strong>NVDA Pre-Earnings</strong> — 74% WR, +6.74% avg. Strong and frequent.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--anticipation-amber);">5.</span><div><strong>AAPL Sept-Oct Recovery</strong> — 74% WR, highest avg return. Needs wider stop.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--rumor-cyan);">6.</span><div><strong>GOOG Pre-Earnings</strong> — 75% WR. Consistent compounder.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--anticipation-gold);">7.</span><div><strong>AAPL Pre-Earnings</strong> — 66% WR. Workhorse, smallest edge. Volume-filter helps.</div></li>
+        <li class="conviction-item"><span class="conviction-rank" style="color:var(--text-muted);">8.</span><div><strong>GOOG Pre-I/O</strong> — 70% WR. Decent but small sample.</div></li>
+      </ol>
+      <div style="margin-top:16px;padding:12px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15);border-radius:8px;">
+        <strong style="color:var(--danger-red);">Never trade:</strong> <span style="color:var(--text-secondary);">GOOG Pre-Pixel (30% WR, -2.52% avg).</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p><em>This research was produced by BigPic Capital with AI assistance. All strategies have been backtested against actual price data (2003–2025) and verified twice against source output. Event dates were cross-referenced with public records.</em></p>
+  <p><em>Educational research — not investment advice. Markets involve risk. Past performance does not guarantee future results.</em></p>
+  <p style="margin-top:24px;"><strong>BigPic Capital Research</strong> &middot; February 2026</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT — DATA + CHARTS + ANIMATIONS
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   1. DATA DEFINITIONS — All trade data embedded from verified CSVs
+   ═══════════════════════════════════════════════════════════════ */
+const WWDC_TRADES = [
+  {year:2003,event:'Jun 23',entry:'May 23',exit:'Jun 20',ret:4.80,spy:6.44,alpha:-1.64},
+  {year:2004,event:'Jun 28',entry:'May 27',exit:'Jun 25',ret:19.63,spy:1.23,alpha:18.40},
+  {year:2005,event:'Jun 6',entry:'May 6',exit:'Jun 3',ret:2.69,spy:2.61,alpha:0.07},
+  {year:2006,event:'Aug 7',entry:'Jul 10',exit:'Aug 4',ret:24.18,spy:1.06,alpha:23.12},
+  {year:2007,event:'Jun 11',entry:'May 11',exit:'Jun 8',ret:14.48,spy:0.12,alpha:14.36},
+  {year:2008,event:'Jun 9',entry:'May 9',exit:'Jun 6',ret:1.19,spy:-1.88,alpha:3.07},
+  {year:2009,event:'Jun 8',entry:'May 8',exit:'Jun 5',ret:11.98,spy:1.69,alpha:10.29},
+  {year:2010,event:'Jun 7',entry:'May 7',exit:'Jun 4',ret:8.52,spy:-3.99,alpha:12.51},
+  {year:2011,event:'Jun 6',entry:'May 6',exit:'Jun 3',ret:-0.93,spy:-2.82,alpha:1.89},
+  {year:2012,event:'Jun 11',entry:'May 11',exit:'Jun 8',ret:2.40,spy:-1.85,alpha:4.25},
+  {year:2013,event:'Jun 10',entry:'May 10',exit:'Jun 7',ret:-2.46,spy:0.85,alpha:-3.31},
+  {year:2014,event:'Jun 2',entry:'May 2',exit:'May 30',ret:7.42,spy:2.46,alpha:4.96},
+  {year:2015,event:'Jun 8',entry:'May 8',exit:'Jun 5',ret:0.81,spy:-0.87,alpha:1.68},
+  {year:2016,event:'Jun 13',entry:'May 13',exit:'Jun 10',ret:9.18,spy:2.59,alpha:6.59},
+  {year:2017,event:'Jun 5',entry:'May 5',exit:'Jun 2',ret:4.79,spy:1.86,alpha:2.92},
+  {year:2018,event:'Jun 4',entry:'May 4',exit:'Jun 1',ret:3.89,spy:2.85,alpha:1.04},
+  {year:2019,event:'Jun 3',entry:'May 3',exit:'May 31',ret:-17.00,spy:-6.38,alpha:-10.62},
+  {year:2020,event:'Jun 22',entry:'May 22',exit:'Jun 19',ret:9.67,spy:4.93,alpha:4.74},
+  {year:2021,event:'Jun 7',entry:'May 7',exit:'Jun 4',ret:-3.32,spy:0.11,alpha:-3.43},
+  {year:2022,event:'Jun 6',entry:'May 6',exit:'Jun 3',ret:-7.57,spy:-0.19,alpha:-7.37},
+  {year:2023,event:'Jun 5',entry:'May 5',exit:'Jun 2',ret:4.40,spy:3.71,alpha:0.69},
+  {year:2024,event:'Jun 10',entry:'May 10',exit:'Jun 7',ret:7.56,spy:2.53,alpha:5.03},
+  {year:2025,event:'Jun 9',entry:'May 9',exit:'Jun 6',ret:2.85,spy:6.17,alpha:-3.32}
+];
+
+const IPHONE_TRADES = [
+  {year:2007,event:'Jan 9',entry:'Nov 22',exit:'Jan 8',ret:-5.36,spy:0.75,alpha:-6.11},
+  {year:2011,event:'Oct 4',entry:'Aug 22',exit:'Oct 3',ret:5.09,spy:-1.98,alpha:7.07},
+  {year:2012,event:'Sep 12',entry:'Jul 31',exit:'Sep 11',ret:8.62,spy:4.50,alpha:4.12},
+  {year:2013,event:'Sep 10',entry:'Jul 29',exit:'Sep 9',ret:13.78,spy:-0.57,alpha:14.35},
+  {year:2014,event:'Sep 9',entry:'Jul 28',exit:'Sep 8',ret:-0.17,spy:1.41,alpha:-1.58},
+  {year:2015,event:'Sep 9',entry:'Jul 28',exit:'Sep 8',ret:-8.56,spy:-5.68,alpha:-2.88},
+  {year:2016,event:'Sep 7',entry:'Jul 26',exit:'Sep 6',ret:12.01,spy:1.05,alpha:10.96},
+  {year:2017,event:'Sep 12',entry:'Jul 31',exit:'Sep 11',ret:9.01,spy:0.99,alpha:8.02},
+  {year:2018,event:'Sep 12',entry:'Jul 31',exit:'Sep 11',ret:18.05,spy:2.74,alpha:15.30},
+  {year:2019,event:'Sep 10',entry:'Jul 29',exit:'Sep 9',ret:2.53,spy:-1.08,alpha:3.61},
+  {year:2020,event:'Oct 13',entry:'Aug 31',exit:'Oct 12',ret:-3.60,spy:1.30,alpha:-4.89},
+  {year:2021,event:'Sep 14',entry:'Aug 2',exit:'Sep 13',ret:2.92,spy:2.05,alpha:0.87},
+  {year:2022,event:'Sep 7',entry:'Jul 26',exit:'Sep 6',ret:2.07,spy:-0.03,alpha:2.11},
+  {year:2023,event:'Sep 12',entry:'Jul 31',exit:'Sep 11',ret:-8.58,spy:-2.04,alpha:-6.54},
+  {year:2024,event:'Sep 9',entry:'Jul 26',exit:'Sep 6',ret:1.43,spy:-0.75,alpha:2.18},
+  {year:2025,event:'Sep 9',entry:'Jul 28',exit:'Sep 8',ret:11.26,spy:1.87,alpha:9.39}
+];
+
+const SEPTOPT_TRADES = [
+  {year:2003,entry:'Sep 8',exit:'Oct 31',ret:0.66,spy:1.95,alpha:-1.29},
+  {year:2004,entry:'Sep 8',exit:'Oct 29',ret:44.15,spy:0.97,alpha:43.18},
+  {year:2005,entry:'Sep 8',exit:'Oct 31',ret:15.69,spy:-2.31,alpha:18.00},
+  {year:2006,entry:'Sep 8',exit:'Oct 31',ret:11.80,spy:6.23,alpha:5.57},
+  {year:2007,entry:'Sep 10',exit:'Oct 31',ret:38.94,spy:6.58,alpha:32.36},
+  {year:2008,entry:'Sep 8',exit:'Oct 31',ret:-31.87,spy:-23.31,alpha:-8.56},
+  {year:2009,entry:'Sep 8',exit:'Oct 30',ret:9.00,spy:1.08,alpha:7.92},
+  {year:2010,entry:'Sep 8',exit:'Oct 29',ret:14.48,spy:7.89,alpha:6.58},
+  {year:2011,entry:'Sep 8',exit:'Oct 31',ret:5.37,spy:5.97,alpha:-0.60},
+  {year:2012,entry:'Sep 10',exit:'Oct 31',ret:-10.17,spy:-0.98,alpha:-9.19},
+  {year:2013,entry:'Sep 9',exit:'Oct 31',ret:3.27,spy:5.38,alpha:-2.11},
+  {year:2014,entry:'Sep 8',exit:'Oct 31',ret:9.80,spy:1.00,alpha:8.80},
+  {year:2015,entry:'Sep 8',exit:'Oct 30',ret:6.40,spy:5.87,alpha:0.54},
+  {year:2016,entry:'Sep 8',exit:'Oct 31',ret:7.60,spy:-2.24,alpha:9.84},
+  {year:2017,entry:'Sep 8',exit:'Oct 31',ret:6.56,spy:4.80,alpha:1.76},
+  {year:2018,entry:'Sep 10',exit:'Oct 31',ret:0.24,spy:-5.64,alpha:5.88},
+  {year:2019,entry:'Sep 9',exit:'Oct 31',ret:16.15,spy:2.19,alpha:13.96},
+  {year:2020,entry:'Sep 8',exit:'Oct 30',ret:-3.51,spy:-1.61,alpha:-1.90},
+  {year:2021,entry:'Sep 8',exit:'Oct 29',ret:-3.42,spy:2.18,alpha:-5.60},
+  {year:2022,entry:'Sep 8',exit:'Oct 31',ret:-0.73,spy:-3.14,alpha:2.42},
+  {year:2023,entry:'Sep 8',exit:'Oct 31',ret:-4.16,spy:-5.80,alpha:1.64},
+  {year:2024,entry:'Sep 9',exit:'Oct 31',ret:2.26,spy:4.39,alpha:-2.12},
+  {year:2025,entry:'Sep 8',exit:'Oct 31',ret:13.66,spy:5.41,alpha:8.25}
+];
+
+const EARNINGS_TRADES = [
+  {year:'2015 Q1',event:'Jan 27',entry:'Jan 6',exit:'Jan 26',ret:6.44,spy:2.82,alpha:3.62},
+  {year:'2015 Q2',event:'Apr 27',entry:'Apr 7',exit:'Apr 24',ret:3.39,spy:2.11,alpha:1.28},
+  {year:'2015 Q3',event:'Jul 21',entry:'Jun 30',exit:'Jul 20',ret:5.29,spy:3.27,alpha:2.02},
+  {year:'2015 Q4',event:'Oct 27',entry:'Oct 7',exit:'Oct 26',ret:4.06,spy:3.81,alpha:0.26},
+  {year:'2016 Q1',event:'Jan 26',entry:'Jan 5',exit:'Jan 25',ret:-3.18,spy:-6.81,alpha:3.63},
+  {year:'2016 Q2',event:'Apr 26',entry:'Apr 6',exit:'Apr 25',ret:-5.30,spy:1.06,alpha:-6.36},
+  {year:'2016 Q3',event:'Jul 26',entry:'Jul 6',exit:'Jul 25',ret:1.89,spy:3.33,alpha:-1.44},
+  {year:'2016 Q4',event:'Oct 25',entry:'Oct 5',exit:'Oct 24',ret:4.07,spy:-0.34,alpha:4.41},
+  {year:'2017 Q1',event:'Jan 31',entry:'Jan 10',exit:'Jan 30',ret:2.12,spy:0.48,alpha:1.63},
+  {year:'2017 Q2',event:'May 2',entry:'Apr 11',exit:'May 1',ret:3.50,spy:1.54,alpha:1.95},
+  {year:'2017 Q3',event:'Aug 1',entry:'Jul 12',exit:'Jul 31',ret:2.05,spy:1.13,alpha:0.92},
+  {year:'2017 Q4',event:'Nov 2',entry:'Oct 13',exit:'Nov 1',ret:6.31,spy:1.00,alpha:5.31},
+  {year:'2018 Q1',event:'Feb 1',entry:'Jan 11',exit:'Jan 31',ret:-4.48,spy:2.09,alpha:-6.57},
+  {year:'2018 Q2',event:'May 1',entry:'Apr 11',exit:'Apr 30',ret:-4.16,spy:0.28,alpha:-4.45},
+  {year:'2018 Q3',event:'Jul 31',entry:'Jul 11',exit:'Jul 30',ret:1.08,spy:1.12,alpha:-0.04},
+  {year:'2018 Q4',event:'Nov 1',entry:'Oct 12',exit:'Oct 31',ret:-1.46,spy:-1.93,alpha:0.46},
+  {year:'2019 Q1',event:'Jan 29',entry:'Jan 8',exit:'Jan 28',ret:3.68,spy:2.72,alpha:0.96},
+  {year:'2019 Q2',event:'Apr 30',entry:'Apr 9',exit:'Apr 29',ret:2.56,spy:2.28,alpha:0.28},
+  {year:'2019 Q3',event:'Jul 30',entry:'Jul 10',exit:'Jul 29',ret:3.17,spy:0.95,alpha:2.22},
+  {year:'2019 Q4',event:'Oct 30',entry:'Oct 10',exit:'Oct 29',ret:5.74,spy:3.40,alpha:2.34},
+  {year:'2020 Q1',event:'Jan 28',entry:'Jan 7',exit:'Jan 27',ret:3.54,spy:0.24,alpha:3.30},
+  {year:'2020 Q2',event:'Apr 30',entry:'Apr 9',exit:'Apr 29',ret:7.37,spy:5.40,alpha:1.97},
+  {year:'2020 Q3',event:'Jul 30',entry:'Jul 10',exit:'Jul 29',ret:-0.92,spy:2.37,alpha:-3.29},
+  {year:'2020 Q4',event:'Oct 29',entry:'Oct 9',exit:'Oct 28',ret:-4.93,spy:-5.82,alpha:0.89},
+  {year:'2021 Q1',event:'Jan 27',entry:'Jan 6',exit:'Jan 26',ret:13.08,spy:2.74,alpha:10.34},
+  {year:'2021 Q2',event:'Apr 28',entry:'Apr 8',exit:'Apr 27',ret:3.09,spy:2.20,alpha:0.89},
+  {year:'2021 Q3',event:'Jul 27',entry:'Jul 7',exit:'Jul 26',ret:3.06,spy:1.51,alpha:1.55},
+  {year:'2021 Q4',event:'Oct 28',entry:'Oct 8',exit:'Oct 27',ret:4.16,spy:3.67,alpha:0.49},
+  {year:'2022 Q1',event:'Jan 27',entry:'Jan 6',exit:'Jan 26',ret:-7.16,spy:-7.39,alpha:0.23},
+  {year:'2022 Q2',event:'Apr 28',entry:'Apr 7',exit:'Apr 27',ret:-9.04,spy:-7.02,alpha:-2.03},
+  {year:'2022 Q3',event:'Jul 28',entry:'Jul 8',exit:'Jul 27',ret:6.63,spy:3.18,alpha:3.45},
+  {year:'2022 Q4',event:'Oct 27',entry:'Oct 7',exit:'Oct 26',ret:6.61,spy:5.30,alpha:1.31},
+  {year:'2023 Q1',event:'Feb 2',entry:'Jan 12',exit:'Feb 1',ret:9.01,spy:3.49,alpha:5.52},
+  {year:'2023 Q2',event:'May 4',entry:'Apr 14',exit:'May 3',ret:1.36,spy:-1.08,alpha:2.43},
+  {year:'2023 Q3',event:'Aug 3',entry:'Jul 14',exit:'Aug 2',ret:0.99,spy:0.19,alpha:0.80},
+  {year:'2023 Q4',event:'Nov 2',entry:'Oct 13',exit:'Nov 1',ret:-2.73,spy:-2.05,alpha:-0.68},
+  {year:'2024 Q1',event:'Feb 1',entry:'Jan 11',exit:'Jan 31',ret:-0.64,spy:1.37,alpha:-2.01},
+  {year:'2024 Q2',event:'May 2',entry:'Apr 12',exit:'May 1',ret:-4.11,spy:-2.06,alpha:-2.05},
+  {year:'2024 Q3',event:'Aug 1',entry:'Jul 12',exit:'Jul 31',ret:-3.67,spy:-1.64,alpha:-2.03},
+  {year:'2024 Q4',event:'Oct 31',entry:'Oct 11',exit:'Oct 30',ret:1.12,spy:0.07,alpha:1.05},
+  {year:'2025 Q1',event:'Jan 30',entry:'Jan 8',exit:'Jan 29',ret:-1.38,spy:2.09,alpha:-3.47},
+  {year:'2025 Q2',event:'May 1',entry:'Apr 10',exit:'Apr 30',ret:11.60,spy:5.71,alpha:5.88},
+  {year:'2025 Q3',event:'Jul 31',entry:'Jul 11',exit:'Jul 30',ret:-1.00,spy:1.74,alpha:-2.74},
+  {year:'2025 Q4',event:'Oct 30',entry:'Oct 10',exit:'Oct 29',ret:9.96,spy:5.26,alpha:4.70}
+];
+
+const SCORECARD = [
+  {rank:1,name:'Pre-GTC Run-Up',ticker:'NVDA',trades:11,wr:90.9,avg:12.65,alpha:11.82,sharpe:3.44,total:249.58,css:'sc-nvda'},
+  {rank:2,name:'Pre-WWDC Accumulation',ticker:'AAPL',trades:23,wr:78.3,avg:4.75,alpha:3.74,sharpe:2.39,total:169.28,css:'sc-aapl-wwdc'},
+  {rank:3,name:'NVDA Pre-Earnings Drift',ticker:'NVDA',trades:27,wr:74.1,avg:6.74,alpha:4.98,sharpe:2.64,total:389.04,css:'sc-nvda'},
+  {rank:4,name:'Sept Dip to Oct Recovery',ticker:'AAPL',trades:23,wr:73.9,avg:6.62,alpha:5.88,sharpe:1.95,total:248.31,css:'sc-aapl-sept'},
+  {rank:5,name:'GOOG Pre-Earnings Drift',ticker:'GOOG',trades:28,wr:75.0,avg:2.86,alpha:1.69,sharpe:2.33,total:112.40,css:'sc-goog'},
+  {rank:6,name:'Pre-iPhone Run-Up',ticker:'AAPL',trades:16,wr:68.8,avg:3.78,alpha:3.50,sharpe:1.74,total:73.30,css:'sc-aapl-iphone'},
+  {rank:7,name:'AAPL Pre-Earnings Drift',ticker:'AAPL',trades:44,wr:65.9,avg:1.88,alpha:0.89,sharpe:1.36,total:115.85,css:'sc-aapl-earn'},
+  {rank:8,name:'GOOG Pre-I/O',ticker:'GOOG',trades:10,wr:70.0,avg:2.61,alpha:1.58,sharpe:1.39,total:27.73,css:'sc-goog'},
+  {rank:0,name:'GOOG Pre-Pixel',ticker:'GOOG',trades:10,wr:30.0,avg:-2.52,alpha:-1.11,sharpe:-1.50,total:-23.74,css:'sc-avoid'}
+];
+
+const REGIME_DATA = {
+  labels: ['Pre-WWDC', 'Sept-Oct', 'Pre-iPhone', 'Pre-Earnings'],
+  early: [86.7, 86.7, 62.5, 83.3],
+  modern: [62.5, 50.0, 75.0, 59.4]
+};
+
+const GANTT_EVENTS = [
+  {label:'AAPL Pre-Earnings Q2',start:'2026-04-10',end:'2026-05-05',color:'#d4a017',wr:'66%'},
+  {label:'AAPL Pre-WWDC',start:'2026-05-25',end:'2026-06-11',color:'#0ea5ad',wr:'88%'},
+  {label:'AAPL Pre-Earnings Q3',start:'2026-07-10',end:'2026-08-04',color:'#d4a017',wr:'66%'},
+  {label:'AAPL Pre-iPhone',start:'2026-08-04',end:'2026-08-28',color:'#1e6ed0',wr:'100%'},
+  {label:'AAPL Sept-Oct',start:'2026-09-10',end:'2026-10-30',color:'#f59e0b',wr:'74%'},
+  {label:'AAPL Pre-Earnings Q4',start:'2026-10-09',end:'2026-11-03',color:'#d4a017',wr:'66%'},
+  {label:'NVDA Pre-GTC',start:'2026-03-02',end:'2026-03-19',color:'#10b981',wr:'91%'},
+  {label:'NVDA Pre-Earnings Q1',start:'2026-05-07',end:'2026-05-26',color:'#34d399',wr:'74%'},
+  {label:'NVDA Pre-Earnings Q2',start:'2026-08-06',end:'2026-08-25',color:'#34d399',wr:'74%'},
+  {label:'NVDA Pre-Earnings Q3',start:'2026-10-29',end:'2026-11-17',color:'#34d399',wr:'74%'},
+  {label:'GOOG Pre-Earnings Q1',start:'2026-04-08',end:'2026-04-27',color:'#22d3ee',wr:'75%'},
+  {label:'GOOG Pre-I/O',start:'2026-04-28',end:'2026-05-15',color:'#5eead4',wr:'70%'},
+  {label:'GOOG Pre-Earnings Q2',start:'2026-07-08',end:'2026-07-27',color:'#22d3ee',wr:'75%'},
+  {label:'GOOG Pre-Earnings Q3',start:'2026-10-07',end:'2026-10-26',color:'#22d3ee',wr:'75%'}
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   2. UTILITY FUNCTIONS
+   ═══════════════════════════════════════════════════════════════ */
+function computeEquityCurve(trades) {
+  let cum = 100;
+  return trades.map(t => { cum *= (1 + t.ret / 100); return +cum.toFixed(2); });
+}
+function fmtPct(v) { return (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; }
+function retClass(v) { return v >= 0 ? 'td-pos' : 'td-neg'; }
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. RADAR SWEEP CANVAS ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('radar-sweep');
+  const ctx = canvas.getContext('2d');
+  let w, h, angle = 0;
+  const dots = [];
+  for (let i = 0; i < 40; i++) dots.push({ x: Math.random(), y: Math.random(), r: Math.random() * 2 + 1, bright: 0 });
+
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, maxR = Math.max(w, h) * 0.6;
+
+    // Concentric circles
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 0.5;
+    for (let i = 1; i <= 4; i++) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, maxR * i / 4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Sweep line
+    const sweepX = cx + Math.cos(angle) * maxR;
+    const sweepY = cy + Math.sin(angle) * maxR;
+    const grad = ctx.createLinearGradient(cx, cy, sweepX, sweepY);
+    const phase = (angle % (Math.PI * 2)) / (Math.PI * 2);
+    if (phase < 0.33) { grad.addColorStop(0, 'rgba(30,110,208,0.3)'); grad.addColorStop(1, 'rgba(14,165,173,0.05)'); }
+    else if (phase < 0.66) { grad.addColorStop(0, 'rgba(245,158,11,0.3)'); grad.addColorStop(1, 'rgba(212,160,23,0.05)'); }
+    else { grad.addColorStop(0, 'rgba(16,185,129,0.3)'); grad.addColorStop(1, 'rgba(52,211,153,0.05)'); }
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(sweepX, sweepY);
+    ctx.stroke();
+
+    // Fade trail (behind sweep line)
+    if (ctx.createConicGradient) {
+      try {
+        const trailGrad = ctx.createConicGradient(angle - 0.4, cx, cy);
+        trailGrad.addColorStop(0, 'rgba(30,110,208,0)');
+        trailGrad.addColorStop(0.08, 'rgba(30,110,208,0.03)');
+        trailGrad.addColorStop(0.1, 'rgba(30,110,208,0)');
+        ctx.fillStyle = trailGrad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+        ctx.fill();
+      } catch(e) {}
+    }
+
+    // Dots
+    dots.forEach(d => {
+      const dx = d.x * w, dy = d.y * h;
+      const dotAngle = Math.atan2(dy - cy, dx - cx);
+      let diff = Math.abs(((dotAngle - angle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2));
+      if (diff < 0.15) d.bright = 1;
+      else d.bright *= 0.97;
+      if (d.bright > 0.05) {
+        ctx.fillStyle = `rgba(34,211,238,${d.bright * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(dx, dy, d.r + d.bright * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    angle += 0.008;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   4. COUNTER ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const decimals = String(target).includes('.') ? 1 : 0;
+    const duration = 2000;
+    const start = performance.now();
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = (target * eased).toFixed(decimals);
+      el.textContent = prefix + current + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+// Fire counters once hero is visible
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounters(); heroObserver.disconnect(); } });
+}, { threshold: 0.3 });
+heroObserver.observe(document.querySelector('.hero'));
+
+/* ═══════════════════════════════════════════════════════════════
+   5. SCROLL REVEAL (IntersectionObserver)
+   ═══════════════════════════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate phase bars
+      const bar = e.target.querySelector('.phase-bar-fill');
+      if (bar) bar.style.width = bar.dataset.width;
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left').forEach(el => revealObserver.observe(el));
+
+/* ═══════════════════════════════════════════════════════════════
+   6. NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+const navProgress = document.getElementById('nav-progress');
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPct = (scrollTop / docHeight) * 100;
+
+  // Show/hide nav
+  nav.classList.toggle('visible', scrollTop > window.innerHeight * 0.8);
+  navProgress.style.width = scrollPct + '%';
+
+  // Active section
+  let currentId = '';
+  sections.forEach(s => { if (s.offsetTop - 200 <= scrollTop) currentId = s.id; });
+  navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === currentId));
+
+  // Scrollbar color shift
+  const hue = scrollPct < 33 ? 210 : scrollPct < 66 ? 38 : 150;
+  document.documentElement.style.setProperty('scrollbar-color', `hsl(${hue},70%,45%) #070b14`);
+});
+
+navLinks.forEach(l => l.addEventListener('click', () => {
+  document.getElementById(l.dataset.section)?.scrollIntoView({ behavior: 'smooth' });
+}));
+
+/* ═══════════════════════════════════════════════════════════════
+   7. CHART.JS GLOBAL DEFAULTS
+   ═══════════════════════════════════════════════════════════════ */
+Chart.defaults.color = '#8a96ad';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(7,11,20,0.95)';
+Chart.defaults.plugins.tooltip.borderColor = 'rgba(245,158,11,0.3)';
+Chart.defaults.plugins.tooltip.borderWidth = 1;
+Chart.defaults.plugins.tooltip.cornerRadius = 8;
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.plugins.legend.display = false;
+Chart.defaults.scale.grid.color = 'rgba(255,255,255,0.04)';
+Chart.defaults.scale.grid.borderColor = 'rgba(255,255,255,0.08)';
+
+/* ═══════════════════════════════════════════════════════════════
+   8. SCORECARD TABLE
+   ═══════════════════════════════════════════════════════════════ */
+function renderScorecard(data) {
+  const body = document.getElementById('scorecard-body');
+  body.innerHTML = data.map(s => `
+    <tr class="card-accent ${s.css}" style="border-left:3px solid;">
+      <td>${s.rank || '—'}</td>
+      <td style="font-weight:600;">${s.name}</td>
+      <td style="font-weight:700;">${s.ticker}</td>
+      <td style="text-align:right;">${s.trades}</td>
+      <td style="text-align:right;" class="${s.wr >= 50 ? 'td-pos' : 'td-neg'}">${s.wr.toFixed(1)}%</td>
+      <td style="text-align:right;" class="${retClass(s.avg)}">${fmtPct(s.avg)}</td>
+      <td style="text-align:right;" class="${retClass(s.alpha)}">${fmtPct(s.alpha)}</td>
+      <td style="text-align:right;">${s.sharpe.toFixed(2)}</td>
+      <td style="text-align:right;" class="${retClass(s.total)}">${fmtPct(s.total)}</td>
+    </tr>`).join('');
+}
+renderScorecard(SCORECARD);
+
+/* ═══════════════════════════════════════════════════════════════
+   9. TRADE TABLES
+   ═══════════════════════════════════════════════════════════════ */
+const eraState = { wwdc: true, iphone: true, septopt: true, earnings: true };
+
+function renderTradeTable(id, trades, modernYear, cols) {
+  const body = document.getElementById('table-' + id);
+  const showModern = eraState[id];
+  const filtered = showModern ? trades.filter(t => {
+    const y = typeof t.year === 'number' ? t.year : parseInt(t.year);
+    return y >= modernYear;
+  }) : trades;
+
+  body.innerHTML = filtered.map(t => {
+    const cls = t.ret >= 0 ? 'td-pos' : 'td-neg';
+    const result = t.ret >= 0
+      ? '<span style="color:var(--profit-green);font-weight:700;">Win</span>'
+      : '<span style="color:var(--danger-red);font-weight:700;">Loss</span>';
+    return `<tr>
+      <td style="font-weight:600;">${t.year}</td>
+      ${cols.map(c => `<td>${t[c] || ''}</td>`).join('')}
+      <td style="text-align:right;" class="${cls}">${fmtPct(t.ret)}</td>
+      <td style="text-align:right;" class="${retClass(t.spy)}">${fmtPct(t.spy)}</td>
+      <td style="text-align:right;" class="${retClass(t.alpha)}">${fmtPct(t.alpha)}</td>
+      <td>${result}</td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleEra(btn, id) {
+  eraState[id] = !eraState[id];
+  btn.textContent = eraState[id] ? 'Modern (2018+)' : 'Full History';
+  btn.classList.toggle('active', eraState[id]);
+  renderAllTables();
+}
+
+function renderAllTables() {
+  renderTradeTable('wwdc', WWDC_TRADES, 2018, ['event', 'entry', 'exit']);
+  renderTradeTable('iphone', IPHONE_TRADES, 2018, ['event', 'entry', 'exit']);
+  renderTradeTable('septopt', SEPTOPT_TRADES, 2018, ['entry', 'exit']);
+  renderTradeTable('earnings', EARNINGS_TRADES, 2018, ['event', 'entry', 'exit']);
+}
+renderAllTables();
+
+/* ═══════════════════════════════════════════════════════════════
+   10. CHART.JS — STRATEGY EQUITY CURVES + RETURN BARS
+   ═══════════════════════════════════════════════════════════════ */
+function makeEquityChart(canvasId, trades, color) {
+  const labels = trades.map(t => String(t.year));
+  const data = computeEquityCurve(trades);
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        borderColor: color,
+        backgroundColor: hexToRgba(color, 0.08),
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        pointBackgroundColor: color,
+        pointBorderColor: 'transparent',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (c) => `Cumulative: $${c.parsed.y.toFixed(0)} (started $100)`,
+            afterLabel: (c) => `Trade return: ${fmtPct(trades[c.dataIndex].ret)}`
+          }
+        }
+      },
+      scales: {
+        y: { beginAtZero: false, ticks: { callback: v => '$' + v } },
+        x: { ticks: { maxRotation: 45 } }
+      }
+    }
+  });
+}
+
+function makeReturnBars(canvasId, trades) {
+  const labels = trades.map(t => String(t.year));
+  const data = trades.map(t => t.ret);
+  const colors = data.map(v => v >= 0 ? '#10b981' : '#ef4444');
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: colors,
+        borderColor: colors,
+        borderWidth: 1,
+        borderRadius: 3,
+        maxBarThickness: 24,
+        minBarLength: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 800 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (c) => `Return: ${fmtPct(c.parsed.y)}`,
+            afterLabel: (c) => `Alpha: ${fmtPct(trades[c.dataIndex].alpha)}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: { callback: v => v + '%', color: '#8a96ad' },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        x: { ticks: { maxRotation: 45, font: { size: 10 }, color: '#8a96ad' } }
+      }
+    }
+  });
+  chartInstances[canvasId] = chart;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. CHART.JS — SCORECARD BARS
+   ═══════════════════════════════════════════════════════════════ */
+function makeScorecardChart() {
+  const ctx = document.getElementById('chart-scorecard-bars');
+  if (!ctx) return;
+  const labels = SCORECARD.map(s => [s.ticker, s.name.split(' ').slice(0, 2).join(' ')]);
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Win Rate %',
+          data: SCORECARD.map(s => s.wr),
+          backgroundColor: 'rgba(30,110,208,0.7)',
+          borderRadius: 3,
+          maxBarThickness: 28,
+          yAxisID: 'y'
+        },
+        {
+          label: 'Avg Return %',
+          data: SCORECARD.map(s => s.avg),
+          backgroundColor: 'rgba(245,158,11,0.7)',
+          borderRadius: 3,
+          maxBarThickness: 28,
+          yAxisID: 'y1'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 800 },
+      plugins: { legend: { display: true, labels: { boxWidth: 12, color: '#8a96ad' } } },
+      scales: {
+        y: {
+          position: 'left',
+          beginAtZero: true,
+          max: 100,
+          ticks: { callback: v => v + '%', color: 'rgba(30,110,208,0.8)' },
+          title: { display: true, text: 'Win Rate', color: 'rgba(30,110,208,0.8)', font: { size: 10 } },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        y1: {
+          position: 'right',
+          beginAtZero: true,
+          ticks: { callback: v => v + '%', color: 'rgba(245,158,11,0.8)' },
+          title: { display: true, text: 'Avg Return', color: 'rgba(245,158,11,0.8)', font: { size: 10 } },
+          grid: { drawOnChartArea: false }
+        },
+        x: { ticks: { font: { size: 9 }, maxRotation: 45, color: '#8a96ad' } }
+      }
+    }
+  });
+  chartInstances['chart-scorecard-bars'] = chart;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   12. CHART.JS — ALPHA SCATTER
+   ═══════════════════════════════════════════════════════════════ */
+function makeAlphaScatter() {
+  const ctx = document.getElementById('chart-alpha-scatter');
+  if (!ctx) return;
+  const datasets = [
+    { label: 'WWDC', data: WWDC_TRADES.map(t => ({x: t.ret, y: t.alpha})), backgroundColor: 'rgba(14,165,173,0.6)', pointRadius: 5 },
+    { label: 'iPhone', data: IPHONE_TRADES.map(t => ({x: t.ret, y: t.alpha})), backgroundColor: 'rgba(30,110,208,0.6)', pointRadius: 5 },
+    { label: 'Sept-Oct', data: SEPTOPT_TRADES.map(t => ({x: t.ret, y: t.alpha})), backgroundColor: 'rgba(245,158,11,0.6)', pointRadius: 5 },
+    { label: 'Earnings', data: EARNINGS_TRADES.map(t => ({x: t.ret, y: t.alpha})), backgroundColor: 'rgba(212,160,23,0.6)', pointRadius: 4 }
+  ];
+  new Chart(ctx, {
+    type: 'scatter',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, labels: { boxWidth: 10 } },
+        tooltip: { callbacks: { label: (c) => `Return: ${fmtPct(c.parsed.x)} | Alpha: ${fmtPct(c.parsed.y)}` } }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Return %' }, ticks: { callback: v => v + '%' } },
+        y: { title: { display: true, text: 'Alpha %' }, ticks: { callback: v => v + '%' } }
+      }
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   13. CHART.JS — REGIME COMPARISON
+   ═══════════════════════════════════════════════════════════════ */
+function makeRegimeChart() {
+  const ctx = document.getElementById('chart-regime');
+  if (!ctx) return;
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: REGIME_DATA.labels,
+      datasets: [
+        { label: 'Early Era', data: REGIME_DATA.early, backgroundColor: 'rgba(30,110,208,0.7)', borderRadius: 3, maxBarThickness: 40 },
+        { label: '2018+', data: REGIME_DATA.modern, backgroundColor: 'rgba(245,158,11,0.7)', borderRadius: 3, maxBarThickness: 40 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 800 },
+      plugins: {
+        legend: { display: true, labels: { boxWidth: 12, color: '#8a96ad' } },
+        tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y + '% WR' } }
+      },
+      scales: {
+        y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', color: '#8a96ad' }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        x: { ticks: { color: '#8a96ad' } }
+      }
+    }
+  });
+  chartInstances['chart-regime'] = chart;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   14. CHART.JS — 2026 GANTT CALENDAR
+   ═══════════════════════════════════════════════════════════════ */
+function makeGanttChart() {
+  const ctx = document.getElementById('chart-gantt');
+  if (!ctx) return;
+
+  const yearStart = new Date(2026, 0, 1).getTime();
+  const yearEnd = new Date(2026, 11, 31).getTime();
+  const yearSpan = yearEnd - yearStart;
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const labels = GANTT_EVENTS.map(e => e.label);
+  const n = labels.length;
+
+  // Each event is its own dataset with one floating bar at its y-index
+  const datasets = GANTT_EVENTS.map((ev, i) => {
+    const s = (new Date(ev.start).getTime() - yearStart) / yearSpan * 12;
+    const e = (new Date(ev.end).getTime() - yearStart) / yearSpan * 12;
+    // Create array of nulls with one [start, end] tuple at index i
+    const data = new Array(n).fill(null);
+    data[i] = [s, e];
+    return {
+      label: ev.label,
+      data: data,
+      backgroundColor: ev.color,
+      borderRadius: 4,
+      borderSkipped: false,
+      barPercentage: 0.8,
+      categoryPercentage: 0.9
+    };
+  });
+
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 800 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: (items) => {
+              const idx = items[0].datasetIndex;
+              return GANTT_EVENTS[idx].label;
+            },
+            label: (c) => {
+              const ev = GANTT_EVENTS[c.datasetIndex];
+              return [`${ev.start}  →  ${ev.end}`, `Expected WR: ${ev.wr}`];
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0, max: 12,
+          stacked: true,
+          ticks: { callback: (v) => months[Math.floor(v)] || '', stepSize: 1, color: '#8a96ad' },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        y: {
+          stacked: true,
+          ticks: { font: { size: 9 }, color: '#8a96ad' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+  chartInstances['chart-gantt'] = chart;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   15. INITIALIZE ALL CHARTS (scroll-triggered)
+   ═══════════════════════════════════════════════════════════════ */
+const chartInits = {
+  'scorecard': () => { makeScorecardChart(); makeAlphaScatter(); },
+  'strategy-wwdc': () => { makeEquityChart('chart-wwdc-equity', WWDC_TRADES, '#0ea5ad'); makeReturnBars('chart-wwdc-returns', WWDC_TRADES); },
+  'strategy-iphone': () => { makeEquityChart('chart-iphone-equity', IPHONE_TRADES, '#1e6ed0'); makeReturnBars('chart-iphone-returns', IPHONE_TRADES); },
+  'strategy-septopt': () => { makeEquityChart('chart-septopt-equity', SEPTOPT_TRADES, '#f59e0b'); makeReturnBars('chart-septopt-returns', SEPTOPT_TRADES); },
+  'strategy-earnings': () => { makeEquityChart('chart-earnings-equity', EARNINGS_TRADES, '#d4a017'); makeReturnBars('chart-earnings-returns', EARNINGS_TRADES); },
+  'regime': () => { makeRegimeChart(); },
+  'calendar-2026': () => { makeGanttChart(); }
+};
+
+const chartFired = {};
+const chartInstances = {};
+const chartObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !chartFired[e.target.id]) {
+      chartFired[e.target.id] = true;
+      // Force all reveal children visible immediately so charts have proper dimensions
+      e.target.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+        el.classList.add('visible');
+      });
+      const init = chartInits[e.target.id];
+      // Wait 900ms for reveal transition (700ms) to fully complete before chart init
+      if (init) setTimeout(() => {
+        init();
+        // After init, force a resize on all new chart instances in this section
+        requestAnimationFrame(() => {
+          e.target.querySelectorAll('canvas').forEach(cvs => {
+            const ci = Chart.getChart(cvs);
+            if (ci) ci.resize();
+          });
+        });
+      }, 900);
+    }
+  });
+}, { threshold: 0.15 });
+
+Object.keys(chartInits).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) chartObserver.observe(el);
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   16. SCORECARD SORTING
+   ═══════════════════════════════════════════════════════════════ */
+let sortCol = null, sortAsc = true;
+document.querySelectorAll('#scorecard-table th.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    if (sortCol === col) sortAsc = !sortAsc;
+    else { sortCol = col; sortAsc = true; }
+
+    const keyMap = { strategy: 'name', ticker: 'ticker', trades: 'trades', wr: 'wr', avg: 'avg', alpha: 'alpha', sharpe: 'sharpe', total: 'total' };
+    const key = keyMap[col];
+    const sorted = [...SCORECARD].sort((a, b) => {
+      const va = typeof a[key] === 'string' ? a[key].toLowerCase() : a[key];
+      const vb = typeof b[key] === 'string' ? b[key].toLowerCase() : b[key];
+      return sortAsc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+    });
+    renderScorecard(sorted);
+
+    document.querySelectorAll('#scorecard-table th.sortable').forEach(h => h.style.color = '');
+    th.style.color = '#f59e0b';
+  });
+});
+</script>
+</body>
+</html>
