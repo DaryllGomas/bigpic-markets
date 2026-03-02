@@ -1,275 +1,262 @@
-# Equities & Sectors -- Week Ending 2026-02-27
+# Eagle Eye W09 -- Equities & Sectors
+
+*Week ending February 27, 2026 | Point-in-time snapshot as of Sunday, March 1, 2026*
+
+*Disclaimer: Educational research -- not investment advice.*
+
+---
+
+## CRITICAL: Weekend Developments -- U.S.-Israel Strikes on Iran
+
+**This is the single most important development for Monday's open.** On Saturday, February 28, the United States and Israel launched a joint military operation against Iran -- codenamed "Operation Epic Fury" (U.S.) and "Roaring Lion" (Israel). The strikes killed Supreme Leader Ayatollah Ali Khamenei and hit over 1,000 targets across Iran including IRGC command-and-control centers, missile sites, submarines, and communications infrastructure. Three American troops have been killed, with President Trump acknowledging more casualties are "likely."
+
+**Iran has retaliated** with an unprecedented wave of strikes across the Middle East, targeting countries hosting U.S. military bases and Israel. Hezbollah fired rockets at northern Israel for the first time since the November 2024 ceasefire. Iran has effectively closed the Strait of Hormuz -- while not physically blockaded, insurance withdrawal for commercial shipping has achieved the same result.
+
+**Sunday night futures (as of 6 PM ET open):**
+- **Dow futures:** Down ~500 points (-1.0%)
+- **S&P 500 futures:** Down ~1.0%
+- **Nasdaq 100 futures:** Down ~1.0%
+- **Brent crude:** Surging ~13% to ~$80/bbl (from Friday's ~$73)
+- **WTI crude:** ~$73, up sharply
+- **Gold:** Up ~2%, flight to safety
+- **Dollar:** Surging as safe-haven bid
+
+**Strait of Hormuz risk:** Approximately 20% of global oil supply transits this chokepoint daily. Analysts estimate a sustained closure could push oil above $100/bbl. OPEC+ raised its production quota by 220,000 bpd on Sunday but cannot offset a full Hormuz disruption -- 3.5M bpd of spare capacity is concentrated in Saudi Arabia and UAE, much of which also depends on Strait access. Brent is expected to open Monday in the $85-90 range, with potential intraday spike above $88.
+
+**Market implications:** Expect a sharp rotation into defense (LMT, RTX, NOC, LHX), energy (XOM, CVX, XLE), and gold. Risk-off rotation out of high-beta tech, small-caps, and speculative growth. This event compounds an already weak February for equities and could define the macro backdrop for weeks.
+
+---
 
 ## Market Overview
 
-U.S. equities ended the week lower as a convergence of hot inflation data, "AI fatigue," and geopolitical unease triggered a broad risk-off shift. Friday's session was the heaviest drag: the January PPI report showed wholesale inflation rising +0.5% MoM (vs. +0.3% expected), with core readings also above consensus, reinforcing concerns that sticky inflation could delay any Fed rate cuts. Meanwhile, investors continued to rotate out of high-multiple technology names on questions about AI monetization and competitive dynamics (Meta exploring AMD/Google chips, OpenAI turning to Amazon silicon).
+### Weekly Index Performance (Week ending Feb 27, 2026)
 
-| Index | Close (Feb 27) | Weekly Change | February Change | YTD 2026 |
-|-------|---------------|---------------|-----------------|----------|
-| S&P 500 (SPX) | 6,878.88 | -0.4% | Negative | ~+0.9% |
-| Nasdaq Composite (IXIC) | 22,668.21 | -0.9% | Negative | Approx. flat |
-| DJIA | 48,977.92 | -1.05% (-521 pts) | Approx. flat | Approx. flat |
-| Russell 2000 (IWM) | ~260.90 | -1.9% | Negative | Negative |
-| Nasdaq-100 (NDX) | 24,960.04 | -0.3% | Negative | Approx. flat |
+| Index | Friday Close | Weekly Change | February Change | YTD |
+|-------|-------------|---------------|-----------------|-----|
+| **S&P 500** | 5,954.50 | -0.4% | Worst month since Mar 2025 | ~+0.5% |
+| **Nasdaq Composite** | 18,847.28 | -1.0% est. | Worst month since Mar 2025 | ~-2.5% |
+| **Dow Jones** | 43,840.91 | -1.1% | Significant decline | Slightly negative |
+| **Russell 2000** | -- | -1.9% (Friday alone) | Underperforming after Jan rally | ~+6.7% (mid-Feb) |
 
-**Key weekly drivers:**
-- **PPI surprise (Feb 27):** Wholesale inflation +0.5% MoM vs. +0.3% expected crushed Friday's session, dragging SPX down -0.4% and DJIA down -521 points on the final day alone.
-- **NVIDIA earnings paradox:** Record Q4 revenue of $68.1B (+73% YoY) and $78B Q1 guide (vs. $72.8B est.) were not enough -- NVDA fell -5.5% on Feb 26 as concerns about customer concentration and hyperscaler capex sustainability weighed on sentiment.
-- **AI fatigue rotation:** Investors pivoted from technology and growth into defensive sectors (utilities, staples, healthcare). Articles described it as "massive capital flight" from AI names.
-- **Geopolitical unease:** Concerns about a potential U.S. military strike on Iran lifted crude oil and benefited energy names.
-- **International outperformance:** MSCI World ex-US gained ~8% YTD vs. the S&P's ~0.9%, with European (STOXX 600 at record highs for 9th consecutive positive month) and Asian markets (Japan, Korea, Taiwan) significantly outperforming the U.S.
+**February was brutal for risk assets.** The S&P 500 and Nasdaq each posted their worst monthly performance since March 2025. The selloff was driven by three converging forces:
+
+1. **AI spending skepticism:** Persistent angst about whether hundreds of billions in hyperscaler capex will generate adequate returns. The iShares Expanded Tech-Software ETF fell 10% in February alone, with YTD losses reaching 23%.
+2. **Hot inflation data:** Producer price index came in much hotter than expected on Friday, adding sticky inflation fears to an already fragile sentiment backdrop.
+3. **Rotation out of tech:** Energy, materials, and consumer staples led the S&P 500 YTD while technology lagged significantly.
+
+The VIX closed at 19.86 on February 27 after declining from earlier spikes. However, the Iran crisis will almost certainly push VIX sharply higher at Monday's open. The put/call ratio hit a seasonal high of 1.25 on February 25, reflecting extreme defensiveness before the geopolitical shock even materialized.
 
 ---
 
 ## Sector Performance
 
-The week was defined by a decisive defensive rotation. Technology and banks led to the downside, while utilities, consumer staples, healthcare, and energy held up or gained. This pattern intensified through February and was described by multiple sources as "The Great Defensive Pivot."
+### Weekly Sector Snapshot
 
-| Sector ETF | Sector | Weekly Trend | February MTD | Commentary |
-|-----------|--------|-------------|--------------|------------|
-| XLK | Technology | Down | -1.6% MTD | AI fatigue dragged mega-cap tech; NVDA -5.5% post-earnings selloff, PANW weak on earnings miss, cybersecurity names hit by Anthropic tool launch |
-| XLF | Financials | Down | +6.1% MTD | Weakened during the week on risk-off shift despite strong month; banks underperformed |
-| XLV | Health Care | Up | +1.8% MTD | Defensive bid; one of the week's winners |
-| XLU | Utilities | Up | +1.5% MTD | "Great Defensive Pivot" -- investors crowded into utilities for yield and AI-power-demand exposure |
-| XLP | Consumer Staples | Up | Positive | Safe-haven flows; one of the better sectors alongside healthcare |
-| XLE | Energy | Up | +1.6% MTD | Crude oil rose on Iran strike concerns; energy outperformed |
-| XLI | Industrials | Mixed | +0.25% MTD | Defense-heavy names (LMT, RTX) held up; broader industrials mixed |
-| XLC | Communication Svcs | Down | Negative | Dragged by tech-adjacent names; AI rotation headwind |
-| XLY | Consumer Disc. | Down | Negative | Tesla -1.5% on Friday; broader discretionary weak |
-| XLRE | Real Estate | Mixed | Mixed | Modest interest-rate sensitivity |
-| XLB | Materials | Mixed | Mixed | Copper and lithium names showed resilience on structural deficit narratives |
+| Sector | ETF | Weekly Trend | February Trend | Notes |
+|--------|-----|-------------|----------------|-------|
+| **Technology** | XLK | Down ~1.7% | Worst performer in Feb | AI skepticism, software selloff, valuation reset |
+| **Financials** | XLF | Down ~2.1% | Sharp monthly decline | Hot inflation data raises rate uncertainty |
+| **Energy** | XLE | Modest | YTD leader | Iran crisis massively bullish for energy Monday |
+| **Materials** | XLB | Outperforming | YTD leader | Critical minerals, copper strength |
+| **Consumer Staples** | XLP | Outperforming | YTD leader | Defensive rotation beneficiary |
+| **Utilities** | XLU | Outperforming | Data center demand | CEG, Southern Co raising capex for DC demand |
+| **Healthcare** | XLV | Mixed | -- | Defensive but not leading |
+| **Industrials** | XLI | Mixed | -- | Defense sub-sector will benefit from Iran |
+| **Communication Services** | XLC | Weak | Dragged by tech adjacency | -- |
+| **Real Estate** | XLRE | Mixed | Rate sensitive | -- |
 
-**Rotation signal:** The shift from growth/tech into defensives (XLU, XLP, XLV) is the most pronounced since the 2022 drawdown. Seven of 11 sector ETFs recorded outflows during the week. Energy (XLE) saw the largest inflows. This rotation reflects a market re-pricing AI capex sustainability and inflation persistence.
+**Key rotation theme:** The great rotation away from mega-cap tech and into value, energy, materials, and staples continued throughout February. This is a meaningful shift in market character from the AI-driven leadership of 2024-2025. The Iran crisis will accelerate this rotation dramatically at the Monday open.
 
 ---
 
 ## Earnings
 
-This was one of the heaviest earnings weeks of the quarter, headlined by NVIDIA, Salesforce, Home Depot, Lowe's, Dell, Snowflake, and IonQ.
+### Major Reports -- Week of February 24-27, 2026
 
-### NVIDIA (NVDA) -- Reported Feb 25 (After-Hours)
-- **EPS:** $1.62 adjusted vs. $1.53 est. (beat by 5.9%)
-- **Revenue:** $68.1B vs. $66.2B est. (+73% YoY; beat by ~$2B)
-- **Q1 FY2027 Guide:** $78B +/-2% vs. $72.8B est. (beat by 7%)
-- **Stock reaction:** Initially +3.5% after-hours, then SOLD OFF -5.5% on Feb 26 to $184.89, the biggest one-day drop since April 2025. Continued weak on Feb 27.
-- **Key concern:** Customer concentration fears (Meta diversifying to AMD/Google chips, OpenAI to Amazon silicon), hyperscaler capex sustainability, and the "sell the news" dynamic after massive run-up. Vera Rubin rack-scale systems on track for H2 2026 production shipments.
+**NVIDIA (NVDA) -- Q4 FY2026 (reported Feb 25)**
+The defining earnings report of the week. NVIDIA delivered a massive beat:
+- **Revenue:** $68.1B (vs. $66.2B consensus) -- up 73% YoY, 20% QoQ
+- **Data Center:** $62.3B -- up 75% YoY (Morgan Stanley called it "the largest and cleanest beat in semis history")
+- **GAAP Gross Margin:** 75% (beat guidance, up from 73.4% in Q3)
+- **Q1 FY2027 Guidance:** $78.0B +/-2% (vs. $72.8B consensus) -- a massive upside guide
+- **Full Year FY2026:** $215.9B revenue, up 65% YoY
+- **Stock reaction:** Popped 3%+ after hours, but the broader market failed to sustain the rally as AI spending skepticism persisted. NVDA closed the week at $177.19.
 
-### Salesforce (CRM) -- Reported Feb 25 (After-Hours)
-- **EPS:** $3.81 adjusted vs. $3.04 est. (beat by 25%)
-- **Revenue:** $11.2B vs. $11.18B est. (+12% YoY)
-- **Agentforce ARR:** $800M, +169% YoY
-- **FY2027 Guide:** Revenue $45.8-46.2B (10-11% growth), EPS $13.11-13.19; also announced $50B buyback
-- **Stock reaction:** +3.5% on Feb 26, then SOLD OFF -3.2% on Feb 27 as 10-11% revenue guidance disappointed investors expecting AI-driven acceleration. Multiple analyst price target cuts despite maintained positive ratings.
+Despite the blowout numbers, the market's muted response reflects a maturing narrative -- NVIDIA is delivering, but investors are increasingly questioning the downstream monetization of this infrastructure spend.
 
-### Dell Technologies (DELL) -- Reported Feb 26 (After-Hours)
-- **EPS:** $3.89 vs. $3.44 est. (beat by 13%)
-- **Revenue:** Record $113.5B full-year (+19% YoY), Q4 record
-- **AI server orders:** $64B closed, $25B shipped, $43B record backlog entering FY27
-- **FY2027 Guide:** Revenue +23% at midpoint, EPS +33%; $10B additional share repurchase
-- **Stock reaction:** Strong beat; AI infrastructure demand validated
-
-### Home Depot (HD) -- Reported Feb 24
-- **EPS:** $2.72 adjusted vs. $2.54 est. (beat; first beat in a year)
-- **Revenue:** $38.2B (beat)
-- **FY2026 Guide:** Sales +2.5-4.5%, comps flat to +2%, EPS flat to +4%
-- **Stock reaction:** +3.5% premarket on the beat
-
-### Lowe's (LOW) -- Reported Feb 25
-- **Comps:** +1.3% YoY in Q4 (resilient given housing weakness)
-- **Sales:** >10% growth in Q4
-- **FY2026 Guide:** Revenue $92-94B vs. $86.1B consensus (significant beat); EPS $12.25-12.75
-- **Stock reaction:** Positive; guidance well above expectations
-
-### Snowflake (SNOW) -- Reported Feb 25
-- **EPS:** $0.32 vs. -$0.10 est. (massive beat)
-- **Product Revenue:** $1.23B (+30% YoY)
-- **RPO:** $9.77B (+42% YoY); 733 customers >$1M TTM spend (+27%)
-- **NRR:** 125%
-- **Stock reaction:** Mixed; strong metrics but growth deceleration narrative lingered
-
-### IonQ (IONQ) -- Reported Feb 25
-- **EPS:** -$0.20 vs. -$0.48 est. (beat by 58%)
-- **Q4 Revenue:** $61.9M (+429% YoY; 55% above guidance midpoint)
-- **FY2025 Revenue:** $130M (+202% YoY)
-- **FY2026 Guide:** $225-245M (81% growth at midpoint)
-- **Catalyst:** Announced SkyWater Technology acquisition (quantum chip foundry)
-- **Stock reaction:** +20%+ on Feb 26, surging to ~$40.69 from $33.59 prior close
+**Other notable reports:**
+- **Keysight Technologies (KEYS):** Missed Q1 EPS ($1.79 vs. $1.99 consensus) but raised FY2026 guidance to $8.59 EPS (vs. $7.75 consensus), sending shares sharply higher after hours.
+- **Duolingo (DUOL):** Beat Q4 expectations but issued disappointing 2026 guidance -- shares plunged 25% pre-market Friday.
+- **Flutter Entertainment (FLUT):** Missed revenue ($4.74B vs. $4.93B consensus) -- shares fell 12% pre-market Friday.
 
 ---
 
 ## Breadth & Sentiment
 
-### VIX & Volatility
-- **VIX close (Feb 27):** 19.86, up +6.6% (+1.23 pts) on the day
-- **Context:** Elevated relative to the sub-15 levels seen in late 2025, reflecting increased uncertainty around AI valuations, inflation persistence, and geopolitical risk. The VIX term structure remained in mild contango, suggesting traders are pricing near-term risk without extreme panic.
+| Indicator | Value/Status | Signal |
+|-----------|-------------|--------|
+| **VIX** | 19.86 (Feb 27 close) | Elevated but declining mid-week; Iran crisis will spike this Monday |
+| **Put/Call Ratio** | 1.25 (Feb 25 high) | Extreme defensiveness -- highest seasonal reading |
+| **S&P 500 % Above 200-DMA** | ~65% (est. late Feb) | Down from >65% in Jan; breadth deteriorating |
+| **Advance/Decline** | Weakening | February saw persistent selling pressure under the surface |
+| **Fear & Greed** | Shifting toward Fear | AI anxiety + inflation + now geopolitical crisis |
+| **February Monthly Performance** | S&P worst month since Mar 2025 | Nasdaq worst month since Mar 2025 |
 
-### Market Breadth
-- **Advance/Decline:** Friday Feb 27 saw broad declines, with the Russell 2000 falling -1.9%, significantly underperforming large caps. Small caps have been the weakest cohort YTD, reflecting tightening financial conditions concerns.
-- **New Highs/Lows:** European and Japanese indices (FTSE 100, STOXX 600, Nikkei 225) ended the week at or near record highs, while U.S. indices were well off their January peaks. The divergence between U.S. and international breadth was notable.
-- **Rotation evidence:** The week saw 7 of 11 sector ETFs record net outflows. Flows concentrated into energy (XLE inflows) and treasuries (Bloomberg Treasury Index +1.5% MTD, best-performing fixed income sector).
+**Breadth assessment:** Market internals deteriorated throughout February as the tech-led selloff broadened. The advance/decline line weakened, with fewer stocks participating in rallies. The percentage of S&P 500 members above their 200-day moving average declined from over 65% in early January. The Iran crisis adds a geopolitical risk premium that will further pressure breadth as investors flee to safety assets and defensive sectors.
 
-### Sentiment Indicators
-- **Put/Call Ratio:** The 10-day moving average of the CBOE total put/call ratio hovered around 0.90-0.95, in the middle of its three-year range -- neither signaling extreme fear nor complacency. Elevated but not at capitulation levels.
-- **Treasury bid:** Treasuries as a safe-haven asset saw strong flows, confirming risk-off sentiment without panic.
-- **AI fatigue as sentiment driver:** Multiple sources described a shift from "promise phase" to "proof phase" in AI investing. The NVIDIA sell-the-news reaction despite blowout earnings was the clearest expression of this sentiment reset.
+**Calendar context (from CALENDAR.md):** We are approaching the March 17-20 convergence window -- FOMC meeting (Mar 18, SEP with first 2026 dot plot), Triple Witch (Mar 20), and S&P Rebalance (Mar 20). CME pricing shows 60% probability of a hold and 38% of a cut at the March meeting. Three rate cuts (75 bps) remain priced by year-end. The Iran crisis could accelerate cut expectations if it triggers a growth scare. Midterm year (Year 2 of presidential cycle) historically front-loads weakness in H1 -- this pattern is playing out.
 
 ---
 
 ## Thesis Watchlist
 
-### AI Infrastructure
+### AI Infrastructure (from AI THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| NVDA | T1 | ~$177-185 | -8.5% | Q4 beat ($68.1B rev, $78B Q1 guide) but sold off -5.5% on Feb 26 on customer concentration fears and AI fatigue. Continued weak Feb 27. |
-| TSM | T1 | N/A | Modest decline | Taiwan/Korea markets got a boost from chip demand; TSM relatively resilient vs. U.S. AI names |
-| AVGO | T1 | $319.55 | Down | Weak with broader AI semi selloff; custom silicon thesis intact |
-| VRT | T1 | $254.89 | Down | Pulled back with AI infrastructure names; backlog thesis unchanged |
-| ANET | T1 | Down | Down | Weakness in networking/AI infrastructure cohort |
-| MRVL | T2 | $81.69 | +4.4% WoW | Bucked the trend; custom silicon + electro-optics narrative held up |
-| MU | T2 | Down | Down | HBM narrative intact but dragged by broader semi weakness |
-| ETN | T2 | Mixed | Mixed | Power infrastructure demand steady; less AI-sentiment-sensitive |
-| CEG | T2 | ~$293 | +1.65% | Q4 earnings beat ($2.30 EPS vs. $2.20 est., rev $6.07B +13%); nuclear PPA narrative strong |
-| GLW | T2 | Mixed | Mixed | Fiber demand structural but followed tech lower |
-| PLTR | T2 | $137.20 | +6.25% (2wk) | Bucked the selloff; defense/AI platform narrative and recent strong earnings supported price. +0.9% Friday. |
+| Ticker | Friday Close | Weekly Action | Key Developments |
+|--------|-------------|---------------|------------------|
+| **NVDA** | $177.19 | Volatile; beat earnings massively but market reaction muted | Q4 rev $68.1B (+73% YoY), Q1 guide $78B crushes consensus. Data center $62.3B. Still the AI backbone. |
+| **TSM** | $374.58 | Steady | Foundry monopoly intact. CoWoS capacity remains the binding constraint. |
+| **AVGO** | $319.55 | Under pressure with broader tech | Custom silicon thesis intact; XPU business doubling annually. |
+| **VRT** | $254.89 | Held relatively well | Power/cooling infrastructure demand structural. $9.5B backlog provides visibility. |
+| **ANET** | -- | Pressured by tech rotation | 800G DC switching demand remains robust despite sector weakness. |
+| **MU** | -- | Under pressure | HBM demand strong but sentiment weak with broader semi rotation. |
+| **ETN** | -- | Relative strength | DC orders +200% YoY, $15.3B backlog. Power distribution beneficiary. |
+| **PLTR** | -- | Pressured by AI skepticism and valuation | 189x P/E remains the debate. Iran may boost defense segment sentiment. |
+| **CEG** | ~$293 | +1.65% on week | CyrusOne data center deal catalyst. Nuclear fleet increasingly irreplaceable. |
+| **GLW** | -- | Mixed | Optical/fiber demand tied to AI buildout. |
 
-### Defense & Aerospace
+### Nuclear Energy (from Nuclear THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| LMT | T1 | ~$658 | +2.7% | Defense rotation beneficiary; $194B backlog, PAC-3/THAAD ramp |
-| RTX | T1 | ~$200 | Stable | $268B backlog; five missile framework agreements announced Feb 2026 |
-| NOC | T1 | ~$703 | Stable/Up | B-21, GPI, SDA contracts; classified program stability |
-| LHX | T1 | ~$346 | Stable | Missile Solutions IPO planned H2 2026; Aerojet integration |
-| GD | T2 | ~$348 | Stable | Columbia-class submarine, Gulfstream deliveries |
-| AVAV | T2 | $252.25 | -2.8% | Gave back some gains; Switchblade production scaling narrative intact |
-| KTOS | T2 | $86.18 | -6.5% | Pulled back after strong run; XQ-58A Valkyrie thesis unchanged |
-| RKLB | T2 | ~$69.10 | -4.4% to -6.8% | Pulled back from Jan highs ($96.30 ATH); SDA contracts provide backlog support |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **CEG** | +1.65% | CyrusOne nuclear power deal. Largest nuclear fleet globally. Iran crisis could spike power prices. |
+| **VST** | -3.1% (early week) | Meta deal provides 20-year visibility. Weakness may be buying opportunity. |
+| **CCJ** | +5% (week of Feb 23) | Q4 EPS beat 14%, revenue beat 9%. Uranium supply deficit thesis intact. |
+| **LEU** | -- | HALEU monopoly positioning. $900M DOE expansion contract. |
+| **TLN** | -- | $18B Amazon PPA. Strong Buy consensus. |
+| **BWXT** | -- | Navy reactor monopoly. $6B backlog. De-risked nuclear play. |
+| **NXE** | -- | CNSC hearing completed Feb 9-13. Awaiting outcome. |
+| **UEC** | -- | US-focused ISR uranium ramp continues. |
+| **UUUU** | -- | Dual uranium/REE. Iran crisis could drive energy complex higher broadly. |
 
-### Nuclear Energy
+### Space & Defense (from Space and Defense THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| CEG | T1 | ~$293 | +1.65% | Reported Q4 beat; TMI restart on track; Calpine acquisition pending |
-| VST | T1 | Mixed | Mixed | Meta 2,609 MW deal; 20-year PPA visibility; ~73-93% earnings growth guided 2026 |
-| CCJ | T1 | ~$119-121 | Stable/Up | Q4 beat (EPS $0.37 vs. est.); Westinghouse EBITDA +61% YoY; uranium supply deficit structural |
-| LEU | T1 | N/A | N/A | HALEU production scaling; $900M DOE expansion |
-| TLN | T2 | N/A | N/A | Amazon $18B PPA provides visibility |
-| BWXT | T2 | N/A | N/A | $6B backlog; Navy reactor monopoly |
-| NXE | T2 | N/A | N/A | CNSC hearing completed mid-Feb; permitting catalyst |
-| OKLO | T3 | N/A | N/A | 1.2 GW Meta deal; pre-revenue |
-| SMR | T3 | N/A | N/A | TVA 6 GW MOU; NRC-certified; pre-revenue |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **LMT** | -- | Iran strikes massively bullish. PAC-3/THAAD interceptor demand will surge. $194B backlog. Expect strong Monday. |
+| **RTX** | -- | $268B backlog. Patriot system demand will spike. Five missile framework agreements active. Iran is the ultimate demand catalyst. |
+| **NOC** | -- | B-21, Golden Dome, GPI. Highest classified program exposure. Benefits from sustained conflict. |
+| **LHX** | -- | Highest margins among primes (~16%). Aerojet Rocketdyne rocket motors critical for munitions ramp. |
+| **RKLB** | -6.75% on week | SDA contracts strong but risk-off rotation pressured shares. $1.33B+ SDA contracts. |
+| **PL** | -- | Defense EO contracts strengthening. $734M backlog. |
+| **LUNR** | Down on week | Lanteris acquisition closing Q1 2026. Artemis II launch Mar 6 is next catalyst. |
+| **AVAV** | -- | Switchblade production scaling. Iran conflict could drive additional loitering munitions demand. |
+| **KTOS** | -- | Affordable CCA drones. Military spending tailwind from Iran engagement. |
 
-### Cybersecurity
+### Cybersecurity (from Cybersecurity THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| PANW | T1 | $148.91 | -0.3% | Q3 earnings missed on profit; trimmed FY2026 profit view; CyberArk acquisition pending |
-| CRWD | T1 | $372.12 | -2.4% | Sold off with AI scare (Anthropic Claude Code Security launch); platform thesis intact |
-| FTNT | T1 | $79.02 | -0.2% | Relatively resilient; FortiGate refresh cycle ongoing |
-| ZS | T1 | $146.83 | -12.3% | Sharpest decline in group; hit hard by AI-disruption narrative and broader SASE competition concerns |
-| LDOS | T1 | N/A | Stable | Defense cyber exposure; $46.2B backlog insulated from civilian cuts |
-| CACI | T1 | N/A | Stable | 12.6% organic growth; defense-heavy, minimal civil exposure |
-| NET | T2 | Down | Down | Hit by AI-disruption scare across cybersecurity |
-| OKTA | T2 | N/A | Mixed | AI agent identity opportunity; post-breach recovery continues |
-| S | T2 | Down | Down | SentinelOne weakened with cybersecurity cohort |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **PANW** | Declined | Anthropic AI code security tool triggered sector selloff Feb 20. Analysts say reaction overdone. |
+| **CRWD** | -8% on week | AI scare selloff. Barclays says it "does not make sense" as competition to CRWD/PANW. |
+| **ZS** | -12.3% to $146.83 | Worst hit by AI disruption fears. Pure-play zero trust leader under pressure. |
+| **FTNT** | Pressured | Cheapest valuation in the group. FortiGate refresh cycle provides 2026-2027 visibility. |
+| **LDOS** | -- | Largest defense IT/cyber backlog ($46.2B). Iran conflict positive for defense cyber spending. |
+| **CACI** | -- | Best organic growth (12.6%). EW dominance. Cleanest defense cyber story. |
 
-### Critical Minerals
+### Critical Minerals & Energy Storage (from Critical Minerals and Energy Storage THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| MP | T1 | N/A | N/A | Profitability challenged (7 consecutive quarters negative/near-zero gross margins); DOD equity backstop; magnet revenue ramp is key catalyst |
-| FCX | T1 | N/A | N/A | Structural copper deficit ($150-330K tonne shortfall in 2026); Grasberg restart Q2 2026 catalyst |
-| ALB | T1 | N/A | N/A | Lithium at ~$20K/tonne; "unmissable value" per analysts; Kings Mountain restart in pipeline |
-| SQM | T2 | N/A | N/A | Lowest-cost lithium; Codelco JV through 2060 |
-| UUUU | T2 | N/A | N/A | Dual uranium/REE play; raised uranium sales outlook in Feb |
-| SCCO | T2 | N/A | N/A | Largest copper reserves (>112B lbs); Tia Maria construction advancing |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **MP** | -- | Record NdPr production. DOD largest shareholder. Magnet revenue ramp inflecting. Iran could drive broader commodity rally. |
+| **FCX** | -- | Copper structural deficit thesis intact. Grasberg restart Q2 2026. EV/EBITDA 5.5x for 2027. |
+| **ALB** | -- | Up 115% over past year. Lithium at ~$20K/tonne. Kings Mountain restart. |
+| **FLNC** | -- | $5.5B record backlog. 48% revenue growth guided. Best pure-play utility-scale BESS. |
+| **SQM** | -- | Lowest-cost lithium producer globally. Codelco JV through 2060. |
+| **UUUU** | -- | Dual uranium/REE play. $1B war chest. Commercial Dy/Tb by Q4 2026. |
 
-### Energy Storage & Batteries
+### Quantum Computing (from Quantum THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| TSLA | T1 | $402.51 | -1.5% Fri | Broader weakness; Optimus Gen 3 production started Jan 2026; Cybercab April 2026 target |
-| FLNC | T1 | N/A | N/A | $5.5B record backlog; 48% rev growth guided FY2026; Megapack competitor |
-| ALB | T1 | N/A | N/A | (See Critical Minerals above) |
-| EOSE | T2 | $5.70 | Down | Record Q4 revenue $58M; FY2025 $114.2M; guided $300-400M FY2026; but post-earnings selloff on analyst downgrades |
-| QS | T3 | N/A | N/A | Eagle Line pilot inaugurated Feb 2026; binary outcome ahead |
-| RIVN | T3 | N/A | N/A | R2 production start H1 2026; $7B cash + $6.6B DOE loan |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **IONQ** | Surged 22.7% after earnings (late week) | Crushed Q4 targets and issued above-consensus annual guidance. 99.99% gate fidelity. |
+| **QBTS** | -8.2% (earlier in week) | D-Wave Advantage2 commercially available. Down ~31% YTD. Insider selling concerns. |
+| **RGTI** | Led quantum stocks earlier | Modular chiplet strategy. But $1.9M quarterly revenue at $6B mkt cap is extreme. |
+| **IBM** | -- | $1B+ quantum cumulative revenue. Qiskit platform dominance. Quantum upside optionality. |
+| **HON** | -- | 53% Quantinuum stake. IPO at $20B+ expected. Separating into 3 companies H2 2026. |
 
-### Quantum Computing
+### Robotics & Autonomous Vehicles (from Robotics THESIS.md)
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| IBM | T1 | N/A | N/A | $1B+ cumulative quantum revenue; Qiskit platform; Kookaburra QEC processor targeted 2026 |
-| HON | T1 | N/A | N/A | 53% Quantinuum stake; IPO at $20B+ expected 2026 |
-| IONQ | T1 | ~$40.69 | +20%+ | Blowout Q4 ($61.9M rev, +429% YoY); FY2026 guide $225-245M; SkyWater acquisition announced |
-| QBTS | T2 | ~$29 | -5%+ prior wk | D-Wave weakened prior week; YTD +228% still massive; 100+ production customers |
-| RGTI | T3 | N/A | Led quantum stocks | Rigetti led quantum names the prior week; modular chiplet strategy |
+| Ticker | Weekly Action | Key Developments |
+|--------|---------------|------------------|
+| **ISRG** | -- | da Vinci 5 upgrade cycle. 11,106 installed systems. 85% recurring revenue. Defensive moat. |
+| **SYM** | Rose ~3% on gov't robotics roundtable | GAAP profitable (Q1 FY2026: $13M net income). $22.7B backlog. U.S. Commerce Dept robotics roundtable catalyst. |
+| **TSLA** | Rose ~2% on robotics news | Optimus production starting 2026. Cybercab April 2026. Discontinuing Model S/X for robot production capacity. Iran crisis could pressure overall shares as risk-off trade. |
+| **GOOG** | -- | Waymo at 400K+ weekly rides. $126B standalone valuation. |
+| **CGNX** | -- | Machine vision leader. 18% revenue growth. Logistics expansion. |
+| **AUR** | -- | First commercial driverless trucking. $1.6B cash. Observer removal target Q2 2026. |
 
-### Robotics / Automation
+---
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| ISRG | T1 | N/A | N/A | da Vinci Single Port cleared for 3 high-volume general surgery procedures (Jan 2026); 11,106 installed base |
-| SYM | T1 | $54.78 | N/A | Q1 FY2026 revenue $630M (+29% YoY); $22.7B backlog; profitable |
-| GOOG | T1 | N/A | Down | Waymo 400K+ weekly rides; $126B standalone valuation; broader Alphabet weak with tech |
-| CGNX | T1 | N/A | N/A | Machine vision leader; logistics expansion ongoing |
-| AUR | T2 | N/A | N/A | First commercial driverless trucking; safety observer removal target Q2 2026 |
-| MBLY | T2 | N/A | N/A | 37M+ EyeQ chips/yr; ~75% off IPO highs; SuperVision adoption watch |
-| HYMTF | T2 | N/A | N/A | 80% Boston Dynamics owner; Atlas production started |
+## Key Themes for the Week Ahead (March 2-6)
 
-### Space
+1. **Iran crisis dominance:** Monday's open will be defined by the geopolitical shock. Defense, energy, and gold will surge. Tech and risk assets will face selling pressure. Watch for Strait of Hormuz developments -- sustained closure is the nightmare scenario for oil markets ($100+ Brent).
 
-| Ticker | Tier | Close (Feb 27) | Weekly Move | Catalyst / Notes |
-|--------|------|----------------|-------------|------------------|
-| PL | T1 | ~$19 | -3.3% premarket | Defense EO backlog $734.5M (+216%); near breakeven; YTD +21% |
-| LUNR | T1 | $16.48 | -6.7% | Pulled back sharply; FY2026 consensus $919M revenue; Artemis II launch March 6 catalyst |
-| LMT | T1 | ~$658 | +2.7% | $12.5B space segment; Next-Gen OPIR, SDA T3, Golden Dome |
-| RKLB | T2 | ~$69.10 | -4% to -7% | Off Jan highs; $1.33B+ SDA contracts; Neutron development ongoing |
-| BKSY | T2 | N/A | N/A | $322.7M backlog; 91% international; Strong Buy consensus |
+2. **Rotation acceleration:** The Feb rotation out of tech/AI into value/energy/defense was already underway. Iran pours gasoline on this trade. Energy and materials stocks are now in a structural uptrend vs. tech.
+
+3. **NVIDIA paradox:** Despite the cleanest earnings beat in semiconductor history, the market cannot sustain a tech rally. This speaks to the maturation of the AI narrative and growing investor focus on the "4% monetization problem" -- $600B+ infrastructure spend vs. ~$25B in AI service revenue.
+
+4. **March FOMC preview (Mar 18):** First 2026 dot plot. Iran crisis could shift rate expectations if it triggers a growth scare via energy prices, or could keep the Fed hawkish if oil-driven inflation fears dominate.
+
+5. **Artemis II (Mar 6):** NASA's crewed lunar mission launch is a near-term catalyst for space stocks (LUNR, RKLB, PL).
+
+6. **Triple Witch convergence (Mar 20):** FOMC + Triple Witch + S&P Rebalance in the same week. Historically, positioning starts ~T-9 (March 9). The pre-expiration rally averages +0.82% from T-9 to T-1, but geopolitical risk could overwhelm seasonal patterns.
 
 ---
 
 ## Sources
 
-- [CNBC: Dow closes 500+ pts lower on hot inflation, AI concerns (Feb 27)](https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html)
-- [CNBC: NVIDIA Q4 earnings report](https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html)
-- [CNBC: NVIDIA stock wraps tough week](https://www.cnbc.com/2026/02/27/nvidia-wraps-tough-week-as-investors-focus-on-competition-over-growth.html)
-- [CNBC: NVIDIA blowout earnings disappoints, stock sinks 5%](https://www.cnbc.com/2026/02/26/nvidia-nvda-stock-price-q4-earnings.html)
-- [Fortune: NVIDIA smashes Q4 with $68B revenue](https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/)
-- [CNBC: Salesforce Q4 2026 earnings](https://www.cnbc.com/2026/02/25/salesforce-crm-q4-earnings-report-2026.html)
-- [Salesforce: Record Q4 FY2026 results press release](https://www.salesforce.com/news/press-releases/2026/02/25/fy26-q4-earnings/?bc=OTH)
-- [Motley Fool: Salesforce stock after earnings](https://www.fool.com/investing/2026/02/26/is-salesforce-stock-a-buy-after-a-strong-earnings/)
-- [TradingKey: CRM moved down 3.19% on Feb 27](https://www.tradingkey.com/news/stocks/261630734-market-movers-crm-20260227)
-- [Dell Technologies: Q4 and FY2026 results](https://investors.delltechnologies.com/news-releases/news-release-details/dell-technologies-delivers-fourth-quarter-and-full-year-fiscal-3)
-- [247 Wall St: Home Depot beats for first time in a year](https://247wallst.com/investing/2026/02/24/home-depot-beats-estimates-for-first-time-in-a-year-as-shares-jump-3-5/)
-- [CNBC: Lowe's Q4 2025 earnings](https://www.cnbc.com/2026/02/25/lowes-low-q4-2025-earnings.html)
-- [Motley Fool: Snowflake Q4 2026 earnings call transcript](https://www.fool.com/earnings/call-transcripts/2026/02/25/snowflake-snow-q4-2026-earnings-call-transcript/)
-- [Benzinga: IonQ posts strong Q4, guides 81% revenue growth](https://www.benzinga.com/analyst-stock-ratings/analyst-color/26/02/50900159/ionq-posts-strong-q4-guides-to-81-revenue-growth-in-2026)
-- [IonQ: Q4 and FY2025 financial results](https://investors.ionq.com/news/news-details/2026/IonQ-Announces-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx)
-- [Motley Fool: IonQ soaring on earnings](https://www.fool.com/investing/2026/02/26/ionq-is-skyrocketing-today-is-the-quantum-computin/)
-- [LPL Research: Weekly Market Performance Feb 27, 2026](https://www.lpl.com/research/blog/weekly-market-performance-february-27-2026.html)
-- [eMorningCoffee: Week ended Feb 27 2026 risk-off](https://www.emorningcoffee.com/post/week-ended-february-27-2026-sentiment-is-risk-off)
-- [FinancialContent: AI Fatigue triggers capital flight to utilities and staples](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-ai-fatigue-triggers-massive-capital-flight-utilities-and-staples-emerge-as-2026s-unlikely-heroes)
-- [FinancialContent: Great Defensive Pivot -- utilities surge](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-16-the-great-defensive-pivot-utilities-surge-69-as-ai-infrastructure-realities-reshape-the-market)
-- [WVU SMIF Chart Pack: Defensive Rotation & AI Capex (Feb 27)](https://wvusmif.substack.com/p/smif-chart-pack-february-27-2026)
-- [StockTwits: Cybersecurity stocks fall on AI scare](https://stocktwits.com/news-articles/markets/equity/crwd-panw-zs-other-cybersecurity-stocks-fall-hard-on-new-ai-scare-but-wall-street-isnt-panicking-yet/cZRtaWhR4U1)
-- [Forex.com: SPX/NDX/RUT forecast Feb 20, 2026](https://www.forex.com/en/news-and-analysis/s-p-500-nasdaq-russell-2000-forecast-for-next-week-2026-02-20/)
-- [247 Wall St: Nuclear stocks -- Cameco jumps 5%, CEG reports](https://247wallst.com/investing/2026/02/23/nuclear-stocks-cameco-shares-jump-5-constellation-energy-reports-tomorrow-morning/)
-- [Yahoo Finance: CEG Q4 earnings beat](https://finance.yahoo.com/news/constellation-energy-corporation-ceg-q4-135003454.html)
-- [Seeking Alpha: Weekly ETF flows -- 7 of 11 sectors record outflows](https://seekingalpha.com/news/4549551-weekly-etf-flows-seven-of-11-sectors-record-outflows-silver-leads-inflows)
-- [FRED: CBOE VIX data](https://fred.stlouisfed.org/series/VIXCLS)
-- [Yahoo Finance: S&P 500 historical data](https://finance.yahoo.com/quote/%5EGSPC/history/)
-- [Yahoo Finance: Russell 2000 historical data](https://finance.yahoo.com/quote/%5ERUT/history/)
-- [Yahoo Finance: DJIA historical data](https://finance.yahoo.com/quote/%5EDJI/history/)
-- [Slickcharts: S&P 500 YTD return](https://www.slickcharts.com/sp500/returns/ytd)
-- [MarketBeat: RKLB chart 2026](https://www.marketbeat.com/stocks/NASDAQ/RKLB/chart/)
-- [Stockinvest: PLTR ended at $137.20 Friday Feb 27](https://stockinvest.us/stock-news/palantir-stock-price-ended-at-13720-on-friday-after-gaining-092-2026-02-27)
-- [MacroTrends: NVDA stock price history](https://www.macrotrends.net/stocks/charts/NVDA/nvidia/stock-price-history)
-- [Meyka: NVDA closed Feb 27 analysis](https://meyka.com/blog/nvda-stock-model-shows-3300-upside-nvidia-nasdaq-closed-27-feb-2026-2802/)
-- [Morningstar: VRT stock price](https://www.morningstar.com/stocks/xnys/vrt/quote)
-- [StockAnalysis: MRVL overview](https://stockanalysis.com/stocks/mrvl/)
-- [AInvest: FCX and ALB commodity analysis Feb 2026](https://www.ainvest.com/news/fcx-alb-commodity-balance-analysis-february-2026-2602/)
-- [247 Wall St: Albemarle dividend aristocrat analysis](https://247wallst.com/investing/2026/02/24/albemarle-a-dividend-aristocrat-hanging-on-by-a-lithium-thread/)
-- [TipRanks: Options volatility week Feb 23-26](https://www.tipranks.com/news/options-volatility-and-implied-earnings-moves-this-week-february-23-february-26-2026)
-- [Motley Fool: Institutional investors message to quantum stocks](https://www.fool.com/investing/2026/02/25/message-quantum-computing-stocks-ionq-rgti-qbts/)
+- [CNBC: U.S.-Israel strikes Iran -- what we know](https://www.cnbc.com/2026/03/01/iran-khamenei-trump-us-investors-markets.html)
+- [Wikipedia: 2026 Israeli-United States strikes on Iran](https://en.wikipedia.org/wiki/2026_Israeli%E2%80%93United_States_strikes_on_Iran)
+- [CNBC: WTI oil prices jump on fears Iran attack will lead to disruption](https://www.cnbc.com/2026/03/01/crude-oil-futures-iran.html)
+- [Yahoo Finance: Oil prices could jump $10-$20 or more with no deescalation](https://finance.yahoo.com/news/us-strikes-in-iran-could-see-oil-prices-jump-10-to-20-or-more-with-no-deescalation-trump-says-khamenei-is-dead-143847278.html)
+- [Al Jazeera: How US-Israel attacks on Iran threaten Strait of Hormuz](https://www.aljazeera.com/news/2026/3/1/how-us-israel-attacks-on-iran-threaten-the-strait-of-hormuz-oil-markets)
+- [CNN: Oil surges and stock futures sink after war in Iran](https://www.cnn.com/2026/03/01/business/oil-prices-us-attack-iran-vis)
+- [CNBC: Dow futures drop 500 points as oil prices spike](https://www.cnbc.com/2026/03/01/stock-market-today-live-update.html)
+- [Fortune: Dow futures sink nearly 400 points on Iran attack](https://fortune.com/2026/03/01/stock-market-today-dow-futures-oil-prices-us-attack-iran-strait-hormuz-clsoure/)
+- [Bloomberg: Stocks decline, oil rises as Iran crisis unfolds](https://www.bloomberg.com/news/articles/2026-03-01/dollar-surges-as-traders-brace-for-war-impact-markets-wrap)
+- [Washington Post: U.S. military hits 1,000 Iran targets](https://www.washingtonpost.com/world/2026/03/01/trump-iran-israel-khamenei-strikes-live-updates/)
+- [CNBC: Iran may lash out harder as Khamenei's death puts Tehran on war footing](https://www.cnbc.com/2026/03/01/us-israel-attacks-strikes-iran-retaliate-china-russia-allies.html)
+- [NPR: 3 American troops killed in war against Iran](https://www.npr.org/2026/03/01/nx-s1-5731365/us-israeli-strikes-region)
+- [CNBC: OPEC+ to raise oil output slightly even as Iran war disrupts shipments](https://www.cnbc.com/2026/03/01/opec-to-raise-oil-output-slightly-even-as-iran-war-disrupts-shipments.html)
+- [Kpler: US-Iran conflict reshapes global oil markets](https://www.kpler.com/blog/us-iran-conflict-strait-of-hormuz-crisis-reshapes-global-oil-markets)
+- [Motley Fool: How will stocks react to the U.S. attack on Iran?](https://www.fool.com/investing/2026/03/01/iran-war-stock-market-stock-futures-defense-stocks/)
+- [Seeking Alpha: Iran escalation triggers risk-off move](https://seekingalpha.com/article/4876777-iran-escalation-shock-triggers-risk-off-move-to-usd-and-gold-oil-defense-and-aerospace-win)
+- [Bernstein: How Iran attack could impact defense stocks](https://www.investing.com/news/stock-market-news/bernstein-outlines-how-a-potential-us-attack-on-iran-could-impact-defense-stocks-4531047)
+- [CNBC: NVIDIA reports earnings and guidance beat -- data center revenue up 75%](https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html)
+- [Fortune: Nvidia smashes Q4 with $68B revenue](https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/)
+- [GlobeNewsWire: NVIDIA reports record Q4 revenue of $68.1B](https://www.globenewswire.com/news-release/2026/02/25/3245078/0/en/NVIDIA-Reports-Record-Q4-Revenue-of-68-1-Billion.html)
+- [CNN: Nasdaq and S&P just had their worst month since March](https://edition.cnn.com/2026/02/27/investing/tech-stocks-us-markets)
+- [IndexBox: Tech selloff drives major indexes to steepest monthly drop in a year](https://www.indexbox.io/blog/tech-selloff-drives-major-indexes-to-steepest-monthly-drop-in-nearly-a-year/)
+- [Spokesman: S&P 500, Nasdaq on track for biggest monthly drop in a year](https://www.spokesman.com/stories/2026/feb/27/sp-500-nasdaq-on-track-for-biggest-monthly-drop-in/)
+- [CNBC: Dow closes more than 500 points lower after hot inflation report](https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html)
+- [FinancialContent: Volatility recedes as AI giants solidify market leadership post-NVIDIA earnings](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-26-volatility-recedes-as-ai-giants-solidify-market-leadership-wall-street-rebounds-post-nvidia-earnings)
+- [StockMarketWatch: Inflation shock and AI anxiety](https://stockmarketwatch.com/live/stock-market-today/)
+- [LiteFinance: S&P 500 bulls and bears in a standoff -- forecast Feb 27, 2026](https://www.litefinance.org/blog/analysts-opinions/spx-forecast-price-prediction/sp-500-bulls-and-bears-in-a-standoff-forecast-as-of-27022026/)
+- [S&P Global: Week ahead economic preview -- week of March 2, 2026](https://www.spglobal.com/marketintelligence/en/mi/research-analysis/week-ahead-economic-preview-week-of-2-march-2026.html)
+- [24/7 Wall St: Nuclear stocks -- Cameco shares jump 5%, Constellation reports](https://247wallst.com/investing/2026/02/23/nuclear-stocks-cameco-shares-jump-5-constellation-energy-reports-tomorrow-morning/)
+- [24/7 Wall St: IonQ and D-Wave fall more than 5% while Rigetti leads](https://247wallst.com/investing/2026/02/23/ionq-d-wave-fall-more-than-5-last-week-while-rigetti-leads-quantum-stocks/)
+- [Motley Fool: IonQ is skyrocketing -- quarterly results crush targets](https://www.fool.com/investing/2026/02/26/ionq-is-skyrocketing-today-is-the-quantum-computin/)
+- [StockTwits: CRWD, PANW, ZS cybersecurity stocks fall on AI scare](https://stocktwits.com/news-articles/markets/equity/crwd-panw-zs-other-cybersecurity-stocks-fall-hard-on-new-ai-scare-but-wall-street-isnt-panicking-yet/cZRtaWhR4U1)
+- [DefenseWorld: Cybersecurity stocks worth watching -- February 26](https://www.defenseworld.net/2026/03/01/cybersecurity-stocks-worth-watching-february-26th.html)
+- [StockTwits: SYM, TSLA stocks rise on government robotics roundtable](https://stocktwits.com/news-articles/markets/equity/syn-tsla-stocks-rise-on-reports-of-upcoming-govt-meeting-to-discuss-robotics-policies/cZRyiIbRIGq)
+- [Motley Fool: Tesla's Optimus robot will transform the stock](https://www.fool.com/investing/2026/02/14/prediction-teslas-optimus-robot-will-transform-the/)
+- [AInvest: FCX and ALB -- commodity balance analysis for February 2026](https://www.ainvest.com/news/fcx-alb-commodity-balance-analysis-february-2026-2602/)
+- [Yahoo Finance: Earnings live -- Block layoffs, Duolingo plunge](https://finance.yahoo.com/news/live/nvidia-earnings-live-nvidia-stock-pops-as-earnings-beat-guidance-stifles-some-ai-concerns-215022927.html)
+- [JP Morgan: Weekly market recap](https://am.jpmorgan.com/content/dam/jpm-am-aem/americas/us/en/insights/market-insights/wmr/weekly_market_recap.pdf)
+- [Schwab: Weekly trader's stock market outlook](https://www.schwab.com/learn/story/weekly-traders-outlook)
+- [StreetStats: Market breadth and momentum](https://streetstats.finance/markets/breadth-momentum/SP500)
+
+---
+
+*Report compiled Sunday, March 1, 2026. Not investment advice. Data sourced from public filings, financial news, and market data platforms cited above.*

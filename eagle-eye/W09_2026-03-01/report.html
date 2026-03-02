@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eagle Eye W09 — Weekly Macro Report | Week Ending 2026-02-27</title>
+<meta property="og:title" content="Eagle Eye W09 — Operation Epic Fury">
+<meta property="og:description" content="U.S.-Israel strikes Iran. Supreme Leader killed. Strait of Hormuz under de facto closure. The most significant geopolitical shock since Russia invaded Ukraine.">
+<meta property="og:type" content="article">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap');
 
@@ -27,6 +30,7 @@
   --violet: #8b5cf6;
   --rose: #f43f5e;
   --blue: #3b82f6;
+  --coral: #ef8354;
   --glow-gold: 0 0 30px rgba(232,184,125,0.15);
   --radius: 12px;
   --radius-lg: 20px;
@@ -78,18 +82,18 @@ body {
 .hero::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   width: 800px; height: 800px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,184,125,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(239,68,68,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 16px; background: rgba(232,184,125,0.08);
-  border: 1px solid rgba(232,184,125,0.2); border-radius: 100px;
-  font-size: 13px; font-weight: 500; color: var(--gold);
+  padding: 6px 16px; background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.3); border-radius: 100px;
+  font-size: 13px; font-weight: 500; color: var(--red);
   letter-spacing: 0.5px; margin-bottom: 24px;
   animation: fadeInDown 0.8s ease-out;
 }
-.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse-dot 2s infinite; }
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-dot 1s infinite; }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -100,6 +104,7 @@ body {
   animation: fadeInUp 0.8s ease-out 0.1s both;
 }
 .hero h1 .gold { color: var(--gold); }
+.hero h1 .red { color: var(--red); }
 .hero .subtitle {
   font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--text-secondary);
   max-width: 700px; line-height: 1.7; margin-bottom: 40px;
@@ -128,6 +133,7 @@ body {
 .score-cell .delta.up { color: var(--green); }
 .score-cell .delta.down { color: var(--red); }
 .score-cell .delta.flat { color: var(--text-muted); }
+.score-cell .sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
 
 /* SECTIONS */
 section { padding: 80px 0; }
@@ -155,6 +161,35 @@ section { padding: 80px 0; }
 }
 .card:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(232,184,125,0.06); }
 
+/* BREAKING / ALERT CARD */
+.alert-card {
+  background: linear-gradient(135deg, rgba(239,131,84,0.08) 0%, rgba(14,26,48,0.95) 100%);
+  border: 1px solid rgba(239,131,84,0.3); border-left: 4px solid var(--coral);
+  border-radius: var(--radius-lg); padding: 36px; margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.alert-card::before {
+  content: ''; position: absolute; top: -50%; right: -50%;
+  width: 200%; height: 200%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(239,131,84,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.alert-card h3 { color: var(--coral); font-size: 1.3rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.alert-card h3 .breaking-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 4px;
+  background: rgba(239,68,68,0.15); color: var(--red);
+  border: 1px solid rgba(239,68,68,0.3);
+  animation: pulse-dot 1.5s infinite;
+}
+.alert-card p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+.alert-card .signal {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2); border-radius: 6px;
+  font-size: 13px; font-weight: 600; color: var(--red); margin-top: 8px;
+}
+
 /* TAKE SECTION */
 .take-card {
   background: linear-gradient(135deg, rgba(232,184,125,0.05) 0%, rgba(14,26,48,0.95) 100%);
@@ -170,6 +205,19 @@ section { padding: 80px 0; }
   font-size: 13px; font-weight: 600; color: var(--amber); margin-top: 8px;
 }
 
+/* FUTURES TABLE */
+.futures-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px; margin-top: 16px;
+}
+.futures-cell {
+  background: rgba(14,26,48,0.6); border: 1px solid rgba(239,131,84,0.12);
+  border-radius: 8px; padding: 14px; text-align: center;
+}
+.futures-cell .f-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.futures-cell .f-value { font-size: 1.3rem; font-weight: 800; font-family: var(--font-mono); }
+.futures-cell .f-delta { font-size: 11px; font-weight: 600; margin-top: 2px; }
+
 /* HEATMAP */
 .heatmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
 .heat-cell {
@@ -179,6 +227,7 @@ section { padding: 80px 0; }
 }
 .heat-cell .sector-name { flex: 1; }
 .heat-cell .pct { font-family: var(--font-mono); font-weight: 700; }
+.heat-cell .monday { font-size: 10px; color: rgba(255,255,255,0.5); margin-left: 8px; }
 .heat-green-5 { background: rgba(34,197,94,0.25); color: #86efac; }
 .heat-green-4 { background: rgba(34,197,94,0.20); color: #86efac; }
 .heat-green-3 { background: rgba(34,197,94,0.15); color: #86efac; }
@@ -187,8 +236,9 @@ section { padding: 80px 0; }
 .heat-red-1 { background: rgba(239,68,68,0.10); color: #fca5a5; }
 .heat-red-2 { background: rgba(239,68,68,0.18); color: #fca5a5; }
 .heat-red-3 { background: rgba(239,68,68,0.25); color: #fca5a5; }
+.heat-neutral { background: rgba(107,125,142,0.10); color: var(--text-secondary); }
 
-/* BAR CHART — CRITICAL: align-items: stretch, NOT flex-end */
+/* BAR CHART -- CRITICAL: align-items: stretch, NOT flex-end */
 .bar-chart {
   display: flex; align-items: stretch; gap: 6px;
   height: 220px; padding: 16px 0; border-bottom: 1px solid var(--border-subtle);
@@ -271,11 +321,13 @@ section { padding: 80px 0; }
 .cal-event.earnings { border-color: var(--amber); }
 .cal-event.fed { border-color: var(--violet); }
 .cal-event.catalyst { border-color: var(--rose); }
+.cal-event.geopolitical { border-color: var(--red); }
 .cal-event .event-type { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
 .cal-event.data .event-type { color: var(--cyan); }
 .cal-event.earnings .event-type { color: var(--amber); }
 .cal-event.fed .event-type { color: var(--violet); }
 .cal-event.catalyst .event-type { color: var(--rose); }
+.cal-event.geopolitical .event-type { color: var(--red); }
 
 /* RISK RADAR */
 .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
@@ -288,6 +340,7 @@ section { padding: 80px 0; }
 .risk-level {
   width: 4px; border-radius: 2px; flex-shrink: 0;
 }
+.risk-level.critical { background: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
 .risk-level.high { background: var(--red); }
 .risk-level.medium { background: var(--amber); }
 .risk-level.low { background: var(--green); }
@@ -312,7 +365,7 @@ section { padding: 80px 0; }
 .conviction-card .direction.neutral { background: rgba(100,116,139,0.12); color: var(--text-secondary); }
 .conviction-card .direction.speculative { background: rgba(139,92,246,0.12); color: var(--violet); }
 .conviction-card .direction.mixed { background: rgba(59,130,246,0.12); color: var(--blue); }
-.conviction-card .direction.bearish { background: rgba(239,68,68,0.12); color: var(--red); }
+.conviction-card .direction.risk-off { background: rgba(239,68,68,0.12); color: var(--red); }
 .conviction-card .rationale { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 
 /* COLLAPSIBLE SOURCES */
@@ -331,7 +384,7 @@ section { padding: 80px 0; }
   background: var(--bg-card); border: 1px solid var(--border-subtle);
   border-top: none; border-radius: 0 0 var(--radius) var(--radius);
 }
-.sources-content.open { max-height: 5000px; }
+.sources-content.open { max-height: 3000px; }
 .sources-list {
   padding: 16px 20px; list-style: none;
   columns: 2; column-gap: 24px;
@@ -342,6 +395,7 @@ section { padding: 80px 0; }
 }
 .sources-list a { color: var(--gold); text-decoration: none; }
 .sources-list a:hover { text-decoration: underline; }
+.sources-cat { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 10px 0 4px; }
 
 /* COUNTER ANIMATION */
 .counter { font-family: var(--font-mono); }
@@ -360,6 +414,21 @@ section { padding: 80px 0; }
   pointer-events: none; animation: fadeInDown 0.2s ease;
 }
 
+/* TIMELINE */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px; background: rgba(239,131,84,0.2);
+}
+.timeline-item { position: relative; margin-bottom: 16px; padding-left: 16px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -20px; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--coral); border: 2px solid rgba(239,131,84,0.3);
+}
+.timeline-item .t-label { font-size: 11px; font-weight: 700; color: var(--coral); margin-bottom: 2px; }
+.timeline-item .t-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .scorecard-grid { grid-template-columns: repeat(3, 1fr); }
@@ -367,6 +436,7 @@ section { padding: 80px 0; }
   .sources-list { columns: 1; }
   .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links { display: none; }
+  .futures-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -382,6 +452,7 @@ section { padding: 80px 0; }
     EAGLE EYE
   </div>
   <div class="nav-links">
+    <a href="#breaking">Breaking</a>
     <a href="#scorecard">Scorecard</a>
     <a href="#sectors">Sectors</a>
     <a href="#rates">Rates</a>
@@ -396,9 +467,9 @@ section { padding: 80px 0; }
 <!-- HERO -->
 <header class="hero">
   <div class="hero-date">W09 / 2026</div>
-  <div class="hero-badge">WEEKLY MACRO REPORT</div>
-  <h1>Proof Over <span class="gold">Promise</span></h1>
-  <p class="subtitle">NVIDIA sells off -5.5% despite blowout $68.1B quarter. AI fatigue triggers the most aggressive defensive rotation since 2022. The 10-year breaks below 4% as bonds price a growth scare the Fed refuses to acknowledge.</p>
+  <div class="hero-badge">BREAKING &mdash; GEOPOLITICAL CRISIS</div>
+  <h1>Operation <span class="red">Epic Fury</span></h1>
+  <p class="subtitle">U.S.-Israel strikes Iran. Supreme Leader killed. Strait of Hormuz under de facto closure. Oil surges 12%. Three American troops dead. The most significant geopolitical shock since Russia invaded Ukraine.</p>
 </header>
 
 <!-- MARKET SCORECARD -->
@@ -407,58 +478,174 @@ section { padding: 80px 0; }
     <div class="section-header">
       <span class="icon">&#x1F4CA;</span>
       <h2>Market Scorecard</h2>
-      <span class="tag">Feb 27 Close</span>
+      <span class="tag">Feb 27 Close + Sunday Futures</span>
     </div>
     <div class="scorecard-grid">
       <div class="score-cell">
         <div class="label">S&P 500</div>
         <div class="value counter" data-target="6879">0</div>
-        <div class="delta down">-0.4%</div>
+        <div class="delta down">-0.43% wk</div>
+        <div class="sub">Futures: ~6,810 (-1.0%)</div>
       </div>
       <div class="score-cell">
         <div class="label">Nasdaq</div>
         <div class="value counter" data-target="22668">0</div>
-        <div class="delta down">-0.9%</div>
+        <div class="delta down">-0.92% wk</div>
+        <div class="sub">Futures: -1.0%</div>
       </div>
       <div class="score-cell">
         <div class="label">Dow Jones</div>
         <div class="value counter" data-target="48978">0</div>
-        <div class="delta down">-1.05%</div>
-      </div>
-      <div class="score-cell">
-        <div class="label">Russell 2000</div>
-        <div class="value counter" data-target="2609">0</div>
-        <div class="delta down">-1.9%</div>
+        <div class="delta down">-1.05% wk</div>
+        <div class="sub">Futures: -500 pts</div>
       </div>
       <div class="score-cell">
         <div class="label">VIX</div>
         <div class="value counter" data-target="19.86" data-decimals="2">0</div>
-        <div class="delta down">+6.6%</div>
+        <div class="delta flat">Declining mid-wk</div>
+        <div class="sub">Expected &gt;25 Monday</div>
       </div>
       <div class="score-cell">
         <div class="label">10Y Yield</div>
         <div class="value">3.97%</div>
-        <div class="delta up">-11 bps</div>
+        <div class="delta up">-11 bps (below 4%)</div>
       </div>
       <div class="score-cell">
-        <div class="label">DXY</div>
-        <div class="value counter" data-target="97.72" data-decimals="2">0</div>
-        <div class="delta flat">Flat</div>
+        <div class="label">2Y Yield</div>
+        <div class="value">3.38%</div>
+        <div class="delta up">Lowest since Aug '22</div>
       </div>
       <div class="score-cell">
         <div class="label">WTI Crude</div>
-        <div class="value">$67.02</div>
-        <div class="delta up">+3.2%</div>
+        <div class="value">$72</div>
+        <div class="delta up" style="color:var(--coral);">+7.4% Sun futures</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Brent Crude</div>
+        <div class="value">$80</div>
+        <div class="delta up" style="color:var(--coral);">+12% Sun (hit $82)</div>
       </div>
       <div class="score-cell">
         <div class="label">Gold</div>
-        <div class="value counter" data-target="5236" data-prefix="$">0</div>
-        <div class="delta up">+2.7%</div>
+        <div class="value counter" data-target="5300" data-prefix="$">0</div>
+        <div class="delta up">+22% YTD</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">DXY</div>
+        <div class="value counter" data-target="97.85" data-decimals="2">0</div>
+        <div class="delta up">Safe-haven bid</div>
       </div>
       <div class="score-cell">
         <div class="label">Bitcoin</div>
-        <div class="value counter" data-target="67000" data-prefix="$">0</div>
-        <div class="delta flat">+0.6%</div>
+        <div class="value counter" data-target="68000" data-prefix="$">0</div>
+        <div class="delta up">Recovered from $63K</div>
+      </div>
+      <div class="score-cell">
+        <div class="label">Silver</div>
+        <div class="value">$94.30</div>
+        <div class="delta up">+7.67% Sun</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BREAKING: IRAN STRIKES -->
+<section id="breaking">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon" style="color: var(--red);">&#x26A1;</span>
+      <h2 style="color: var(--coral);">Weekend &amp; Breaking Developments</h2>
+      <span class="tag" style="background: rgba(239,68,68,0.12); color: var(--red); border-color: rgba(239,68,68,0.3);">LEAD STORY</span>
+    </div>
+
+    <div class="alert-card reveal">
+      <h3>U.S.-Israel Strikes on Iran (Feb 28 &ndash; Mar 1) <span class="breaking-tag">Breaking</span></h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="t-label">Saturday Feb 28</div>
+          <div class="t-text">U.S. and Israel launched joint strikes &mdash; &ldquo;Operation Epic Fury&rdquo; (U.S.) / &ldquo;Operation Roaring Lion&rdquo; (Israel). 1,000+ targets hit including IRGC command-and-control, missile sites, submarines, and communications infrastructure.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-label">Leadership Decapitation</div>
+          <div class="t-text">Supreme Leader Ayatollah Ali Khamenei killed, along with the Chief of Staff, Head of the Revolutionary Guards, and other senior officials.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-label">Iranian Retaliation</div>
+          <div class="t-text">Iran retaliated with missiles and drones targeting Israel and Gulf states hosting U.S. military installations (UAE, Qatar, Bahrain, Saudi Arabia, Kuwait, Jordan). Three American troops killed.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-label">Hezbollah Activated</div>
+          <div class="t-text">Hezbollah fired rockets into northern Israel &mdash; first since November 2024 ceasefire.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-label">Strait of Hormuz</div>
+          <div class="t-text">Missiles struck several oil tankers near the Strait. IRGC issuing warnings to ships. Insurance withdrawal has effectively halted commercial shipping. 13+ LNG tankers diverted. De facto closure of the world&rsquo;s most critical energy chokepoint (20% of global oil).</div>
+        </div>
+      </div>
+      <div class="signal">ZERO DE-ESCALATION as of Sunday evening &mdash; most significant geopolitical shock since Russia&rsquo;s invasion of Ukraine (2022)</div>
+    </div>
+
+    <!-- SUNDAY NIGHT FUTURES -->
+    <div class="card reveal">
+      <h3 style="font-size: 14px; color: var(--coral); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Sunday Night Futures (6 PM ET Open)</h3>
+      <div class="futures-grid">
+        <div class="futures-cell">
+          <div class="f-label">S&P 500</div>
+          <div class="f-value" style="color: var(--red);">~6,810</div>
+          <div class="f-delta" style="color: var(--red);">-1.0%</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">Dow</div>
+          <div class="f-value" style="color: var(--red);">~48,490</div>
+          <div class="f-delta" style="color: var(--red);">-500 pts</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">WTI Crude</div>
+          <div class="f-value" style="color: var(--coral);">~$72</div>
+          <div class="f-delta" style="color: var(--coral);">+7.4%</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">Brent Crude</div>
+          <div class="f-value" style="color: var(--coral);">~$80</div>
+          <div class="f-delta" style="color: var(--coral);">+12% (hit $82)</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">Gold</div>
+          <div class="f-value" style="color: var(--green);">$5,300+</div>
+          <div class="f-delta" style="color: var(--green);">+1.5-2%</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">BTC</div>
+          <div class="f-value" style="color: var(--green);">~$68K</div>
+          <div class="f-delta" style="color: var(--green);">+3% (from $63K low)</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">DXY</div>
+          <div class="f-value" style="color: var(--gold);">97.85</div>
+          <div class="f-delta" style="color: var(--gold);">+0.4% safe-haven</div>
+        </div>
+        <div class="futures-cell">
+          <div class="f-label">Nasdaq 100</div>
+          <div class="f-value" style="color: var(--red);">&mdash;</div>
+          <div class="f-delta" style="color: var(--red);">-1.0%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT TO WATCH MONDAY -->
+    <div class="card reveal" style="margin-top: 12px;">
+      <h3 style="font-size: 14px; color: var(--coral); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">What to Watch Monday</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 6px;"><strong style="color: var(--red);">1. Strait of Hormuz status</strong> &mdash; full closure vs. partial restriction determines whether oil hits $100+ or retreats</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--red);">2. Iranian succession</strong> &mdash; who controls the military response apparatus</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--amber);">3. OPEC+ spare capacity</strong> &mdash; 3.5M bpd available but can&rsquo;t deploy if Hormuz is blocked</p>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 6px;"><strong style="color: var(--amber);">4. U.S. SPR release</strong> &mdash; potential emergency draw to cap prices</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--violet);">5. Fed response</strong> &mdash; higher oil = inflationary, complicating rate cut expectations</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--gold);">6. Insurance markets</strong> &mdash; war risk premiums for Persian Gulf shipping</p>
+        </div>
       </div>
     </div>
   </div>
@@ -472,11 +659,11 @@ section { padding: 80px 0; }
       <h2>This Week's Take</h2>
     </div>
     <div class="take-card reveal">
-      <h3>The Market Demands Proof &mdash; And It&rsquo;s Not Satisfied</h3>
-      <p>The week ending February 27 was a decisive inflection toward risk-off. Hot January PPI data (+0.5% MoM headline vs. +0.3% expected) collided with growing &ldquo;AI fatigue&rdquo; &mdash; epitomized by NVIDIA&rsquo;s paradoxical selloff (-5.5%) despite blowout earnings ($68.1B revenue, +73% YoY) &mdash; and unresolved US-Iran nuclear talks to produce broad equity weakness. The S&amp;P 500 closed at 6,878.88 (-0.4%), the Dow shed 521 points (-1.05%), and the Russell 2000 fell -1.9% as small caps bore the brunt of tightening fears. The defining feature was a pronounced defensive rotation: utilities, staples, healthcare, and energy outperformed while technology and financials lagged.</p>
-      <p>The bond market told a growth-scare story. The 10-year yield broke decisively below 4% to 3.97% (-11 bps weekly), while the 2-year plunged to 3.38% (-36 bps) &mdash; its lowest since August 2022. The 2s10s spread exploded to +59 bps, the widest since January 2022, in a textbook bull steepening that signals the market pricing in economic weakness faster than the Fed is willing to acknowledge. Yet the Fed remains hawkish: CME FedWatch pricing a 94% chance of a March hold. The tension between the bond market&rsquo;s growth-scare pricing and the Fed&rsquo;s inflation-fighting posture is the dominant macro dynamic heading into the March 17-18 FOMC.</p>
-      <p>Commodities confirmed the risk-off/inflation-hedging dynamic. Gold surged to ~$5,236/oz (+2.7% weekly, +20% YTD, +83% YoY) on central bank buying and safe-haven demand. WTI crude rose to $67.02 (+3.2%) on the Iran diplomatic breakdown. Critical minerals flashed supply-side catalysts: Zimbabwe&rsquo;s surprise lithium export ban spiked prices +5.4%, and NdPr rare earths hit $123/kg (+14% weekly) &mdash; crossing the $110/kg threshold that triggers US government price support for MP Materials.</p>
-      <div class="signal">KEY SIGNAL: NVDA -5.5% despite $68.1B blowout &mdash; the market is rotating from &ldquo;promise&rdquo; to &ldquo;proof&rdquo;</div>
+      <h3>Fragile Market, Then a War</h3>
+      <p>The trading week ending February 27 was already ugly before the strikes. The S&amp;P 500 and Nasdaq posted their worst monthly performance since March 2025, driven by AI spending skepticism (the iShares Expanded Tech-Software ETF fell 10% in February alone), hot PPI data on Friday, and a persistent rotation out of mega-cap tech into value, energy, materials, and staples. NVIDIA delivered the cleanest earnings beat in semiconductor history &mdash; $68.1B revenue (+73% YoY), Q1 guide of $78B crushing $72.8B consensus &mdash; yet the broader market couldn&rsquo;t sustain a tech rally.</p>
+      <p>The bond market was the week&rsquo;s winner. The 10-year yield broke below 4% for the first time in four months (3.97%), the 2-year hit its lowest since August 2022 (3.38%), and February was the best month for bonds in a year. But the hawkish January FOMC minutes &mdash; with several officials entertaining rate hikes &mdash; and Kevin Warsh&rsquo;s formal nomination as Fed Chair signal a structural regime change at the central bank.</p>
+      <p>The Iran crisis adds a dangerous variable: higher oil is inflationary, but a growth scare is disinflationary. The March 18 FOMC with the first 2026 dot plot falls in Triple Witch week (March 20) &mdash; a convergence of positioning flows and policy risk that could define Q1.</p>
+      <div class="signal">KEY BINARY: Strait of Hormuz open = contained shock (historical dip recovery applies) | Closed = 1973 territory (oil $100+, stagflation)</div>
     </div>
   </div>
 </section>
@@ -487,38 +674,43 @@ section { padding: 80px 0; }
     <div class="section-header">
       <span class="icon">&#x1F3AF;</span>
       <h2>Sector Heatmap</h2>
-      <span class="tag">Weekly Performance</span>
+      <span class="tag">Weekly + Monday Outlook</span>
     </div>
     <div class="heatmap-grid reveal">
-      <div class="heat-cell heat-green-4"><span class="sector-name">XLV Healthcare</span><span class="pct">+1.8%</span></div>
-      <div class="heat-cell heat-green-3"><span class="sector-name">XLE Energy</span><span class="pct">+1.6%</span></div>
-      <div class="heat-cell heat-green-3"><span class="sector-name">XLU Utilities</span><span class="pct">+1.5%</span></div>
-      <div class="heat-cell heat-green-1"><span class="sector-name">XLP Cons. Staples</span><span class="pct">+0.5%</span></div>
-      <div class="heat-cell heat-green-1"><span class="sector-name">XLI Industrials</span><span class="pct">+0.25%</span></div>
-      <div class="heat-cell heat-red-1"><span class="sector-name">XLB Materials</span><span class="pct">~Flat</span></div>
-      <div class="heat-cell heat-red-1"><span class="sector-name">XLRE Real Estate</span><span class="pct">~Flat</span></div>
-      <div class="heat-cell heat-red-1"><span class="sector-name">XLF Financials</span><span class="pct">-0.5%</span></div>
-      <div class="heat-cell heat-red-2"><span class="sector-name">XLC Comm. Svc.</span><span class="pct">-0.8%</span></div>
-      <div class="heat-cell heat-red-2"><span class="sector-name">XLY Consumer Disc.</span><span class="pct">-1.0%</span></div>
-      <div class="heat-cell heat-red-3"><span class="sector-name">XLK Technology</span><span class="pct">-1.6%</span></div>
+      <div class="heat-cell heat-green-5"><span class="sector-name">XLE Energy</span><span class="pct">Surging</span><span class="monday">Iran oil direct beneficiary</span></div>
+      <div class="heat-cell heat-green-4"><span class="sector-name">XLB Materials</span><span class="pct">Outperform</span><span class="monday">Gold, copper bid</span></div>
+      <div class="heat-cell heat-green-3"><span class="sector-name">XLP Staples</span><span class="pct">Outperform</span><span class="monday">Defensive rotation</span></div>
+      <div class="heat-cell heat-green-3"><span class="sector-name">XLU Utilities</span><span class="pct">Outperform</span><span class="monday">Defensive + nuclear</span></div>
+      <div class="heat-cell heat-green-2"><span class="sector-name">XLI Industrials</span><span class="pct">Mixed</span><span class="monday">Defense sub-sector surging</span></div>
+      <div class="heat-cell heat-neutral"><span class="sector-name">XLV Healthcare</span><span class="pct">Mixed</span><span class="monday">Defensive haven</span></div>
+      <div class="heat-cell heat-neutral"><span class="sector-name">XLRE Real Estate</span><span class="pct">Mixed</span><span class="monday">Bond rally supportive</span></div>
+      <div class="heat-cell heat-red-1"><span class="sector-name">XLF Financials</span><span class="pct">-2.1%</span><span class="monday">Rate uncertainty</span></div>
+      <div class="heat-cell heat-red-2"><span class="sector-name">XLC Comm. Svc.</span><span class="pct">Weak</span><span class="monday">Risk-off pressure</span></div>
+      <div class="heat-cell heat-red-3"><span class="sector-name">XLK Technology</span><span class="pct">-1.7%</span><span class="monday">AI skepticism + risk-off</span></div>
     </div>
 
     <!-- Bar Chart -->
     <div class="card reveal" style="margin-top: 24px;">
-      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Sector Weekly Returns</h3>
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Sector Weekly Returns (where available)</h3>
       <div class="bar-chart" id="sectorBars">
         <!-- Bars injected by JS -->
       </div>
     </div>
+
+    <!-- Rotation Theme -->
+    <div class="card reveal" style="margin-top: 12px;">
+      <h4 style="font-size: 13px; color: var(--coral); margin-bottom: 8px;">ROTATION THEME</h4>
+      <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">The great rotation from mega-cap tech into value/energy/materials/staples intensified throughout February. The Iran crisis pours gasoline on this trade. Expect sharp Monday rotation into defense (LMT, RTX, NOC, LHX), energy (XOM, CVX, XLE), and gold, with risk-off selling in high-beta tech, small-caps, and speculative growth.</p>
+    </div>
   </div>
 </section>
 
-<!-- YIELD CURVE -->
+<!-- YIELD CURVE & FED -->
 <section id="rates">
   <div class="container">
     <div class="section-header">
       <span class="icon">&#x1F4C8;</span>
-      <h2>Fed & Rates Outlook</h2>
+      <h2>Fed &amp; Rates Outlook</h2>
       <span class="tag">3.50-3.75% Hold</span>
     </div>
 
@@ -549,60 +741,72 @@ section { padding: 80px 0; }
           <text x="235" y="198" class="yield-label" text-anchor="middle">5Y</text>
           <text x="385" y="198" class="yield-label" text-anchor="middle">10Y</text>
           <text x="510" y="198" class="yield-label" text-anchor="middle">30Y</text>
-          <!-- Yield curve: 2Y=3.38% 5Y=3.57% 10Y=3.97% 30Y=4.63% -->
+          <!-- Yield curve: 2Y=3.38% 5Y=~3.65% 10Y=3.97% 30Y=~4.55% -->
           <!-- Map: 3.0%=180, per 0.5%=40px -->
-          <!-- 3.38% = 180 - (0.38/0.5)*40 = 150 -->
-          <!-- 3.57% = 180 - (0.57/0.5)*40 = 134 -->
-          <!-- 3.97% = 180 - (0.97/0.5)*40 = 102 -->
-          <!-- 4.63% = 180 - (1.63/0.5)*40 = 50 -->
-          <path class="yield-area" d="M110,150 C160,145 200,140 235,134 C300,122 340,114 385,102 C440,82 480,62 510,50 L510,180 L110,180 Z"/>
-          <path class="yield-line" d="M110,150 C160,145 200,140 235,134 C300,122 340,114 385,102 C440,82 480,62 510,50"/>
+          <!-- 3.38% = 180 - (0.38/0.5)*40 = 149.6 -->
+          <!-- 3.65% = 180 - (0.65/0.5)*40 = 128 -->
+          <!-- 3.97% = 180 - (0.97/0.5)*40 = 102.4 -->
+          <!-- 4.55% = 180 - (1.55/0.5)*40 = 56 -->
+          <path class="yield-area" d="M110,150 C160,142 200,134 235,128 C300,118 340,112 385,102 C440,84 480,68 510,56 L510,180 L110,180 Z"/>
+          <path class="yield-line" d="M110,150 C160,142 200,134 235,128 C300,118 340,112 385,102 C440,84 480,68 510,56"/>
           <!-- Data points -->
           <circle class="yield-dot" cx="110" cy="150" r="5" data-tooltip="2Y: 3.38%"/>
-          <circle class="yield-dot" cx="235" cy="134" r="5" data-tooltip="5Y: 3.57%"/>
+          <circle class="yield-dot" cx="235" cy="128" r="5" data-tooltip="5Y: ~3.65%"/>
           <circle class="yield-dot" cx="385" cy="102" r="5" data-tooltip="10Y: 3.97%"/>
-          <circle class="yield-dot" cx="510" cy="50" r="5" data-tooltip="30Y: 4.63%"/>
+          <circle class="yield-dot" cx="510" cy="56" r="5" data-tooltip="30Y: ~4.55%"/>
           <!-- Yield labels on dots -->
           <text x="110" y="142" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">3.38%</text>
-          <text x="235" y="126" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">3.57%</text>
+          <text x="235" y="120" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">~3.65%</text>
           <text x="385" y="94" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">3.97%</text>
-          <text x="510" y="42" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">4.63%</text>
+          <text x="510" y="48" class="yield-label" text-anchor="middle" fill="#e8b87d" font-weight="600">~4.55%</text>
         </svg>
       </div>
       <div style="display: flex; gap: 24px; margin-top: 12px; font-size: 13px; color: var(--text-secondary); flex-wrap: wrap;">
-        <span><strong style="color: var(--gold);">2s10s:</strong> +59 bps (widest since Jan 2022; bull steepening)</span>
-        <span><strong style="color: var(--gold);">Fed Funds:</strong> 3.50-3.75%</span>
-        <span><strong style="color: var(--gold);">Next Cut:</strong> June 2026 (~50-50)</span>
+        <span><strong style="color: var(--gold);">10Y:</strong> Below 4% for first time in 4 months</span>
+        <span><strong style="color: var(--gold);">2Y:</strong> Lowest since Aug 2022</span>
+        <span><strong style="color: var(--gold);">February:</strong> Best month for bonds in a year</span>
       </div>
+    </div>
+
+    <!-- Hawkish Surprise -->
+    <div class="card reveal" style="margin-bottom: 12px;">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">The Hawkish Surprise &amp; Warsh Nomination</h3>
+      <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px;">January FOMC minutes (released Feb 18) were the most hawkish in years &mdash; several officials entertained <strong style="color: var(--red);">rate hikes</strong>, most warned inflation risk is &ldquo;meaningful.&rdquo; Kevin Warsh&rsquo;s formal Senate transmission (Feb 24) as Fed Chair replacement for Powell (term expires May 15) signals a &ldquo;sound money&rdquo; regime change.</p>
+      <table class="watchlist-table">
+        <thead><tr><th>Speaker</th><th>Lean</th><th>Key Message</th></tr></thead>
+        <tbody>
+          <tr><td>Waller</td><td class="pct-up" style="color: var(--green);">Dovish</td><td>Only dove. May &ldquo;skip a cut&rdquo; but 2025 jobs data &ldquo;very weak.&rdquo;</td></tr>
+          <tr><td>Bostic</td><td class="pct-down" style="color: var(--red);">Hawkish</td><td>&ldquo;No rate cuts penciled in for 2026.&rdquo;</td></tr>
+          <tr><td>Collins</td><td class="pct-flat">Neutral-Hawkish</td><td>&ldquo;Patient and deliberate approach appropriate.&rdquo;</td></tr>
+          <tr><td>Musalem</td><td class="pct-flat">Neutral-Hawkish</td><td>&ldquo;Unadvisable to lower into accommodative territory.&rdquo;</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- FedWatch -->
     <div class="card reveal">
       <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">CME FedWatch &mdash; Rate Expectations</h3>
       <table class="watchlist-table">
-        <thead><tr><th>Meeting</th><th>Hold</th><th>25bp Cut</th><th>Signal</th></tr></thead>
+        <thead><tr><th>Meeting</th><th>Hold</th><th>Cut</th><th>Signal</th></tr></thead>
         <tbody>
-          <tr><td>March 18</td><td>~94%</td><td>~6%</td><td>Near certainty of hold</td></tr>
-          <tr><td>June 17</td><td>~50%</td><td>~50%</td><td style="color: var(--gold);">Coin-flip for first cut</td></tr>
-          <tr><td>Year-End</td><td colspan="2">Three cuts (75 bps) to 2.75-3.00%</td><td>Base case; up from two cuts last week</td></tr>
+          <tr><td>March 18</td><td>~77%</td><td>~23%</td><td>First 2026 dot plot + SEP. Triple Witch week.</td></tr>
+          <tr><td>June 2026</td><td colspan="2">Earliest likely cut</td><td style="color: var(--gold);">Iran complicates: oil = inflationary, growth scare = disinflationary</td></tr>
+          <tr><td>Full Year</td><td colspan="2">2-3 cuts (50-75 bps)</td><td>Wide distribution: 16.6% see one, 30.6% two, 29.1% three</td></tr>
         </tbody>
       </table>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
-        <strong>Fed Speakers:</strong> Goolsbee (&ldquo;3% inflation is not good enough&rdquo;) &bull; Bostic (&ldquo;no rush to cut&rdquo;) &bull; Collins (&ldquo;quite likely to hold for some time&rdquo;) &bull; <strong style="color: var(--green);">Waller (dove):</strong> March cut &ldquo;a coin flip,&rdquo; flagged payroll revisions showing 2025 employment may have actually declined
-      </div>
     </div>
 
     <!-- Credit -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
       <div class="card reveal">
         <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">INVESTMENT GRADE</h4>
-        <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">77 bps</div>
-        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OAS &bull; 2nd percentile &bull; Near historic tights</div>
+        <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">~78-82 bps</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OAS &bull; Widened from 71 bps 3-decade low (Jan)</div>
       </div>
       <div class="card reveal">
         <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">HIGH YIELD</h4>
-        <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">294 bps</div>
-        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OAS &bull; +8 bps WoW &bull; Modest widening, no stress</div>
+        <div style="font-size: 2rem; font-weight: 800; color: var(--amber); font-family: var(--font-mono);">Bifurcating</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">BB tightening, CCC widening &bull; Private credit ($2T) under DOJ/SEC scrutiny</div>
       </div>
     </div>
 
@@ -610,18 +814,9 @@ section { padding: 80px 0; }
     <div class="card reveal" style="margin-top: 12px;">
       <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">LIQUIDITY CONDITIONS</h4>
       <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary);">
-        <span><strong style="color: var(--gold);">QT:</strong> Ended Dec 1, 2025 (Fed ~$6.6T, stable)</span>
-        <span><strong style="color: var(--gold);">ON RRP:</strong> Near zero (drained)</span>
-        <span><strong style="color: var(--gold);">TGA:</strong> ~$849B (drew down ~$100B seasonal)</span>
-        <span><strong style="color: var(--green);">No funding market stress</strong></span>
-      </div>
-    </div>
-
-    <!-- Key Watch -->
-    <div class="card reveal" style="margin-top: 12px;">
-      <h4 style="font-size: 13px; color: var(--amber); margin-bottom: 8px;">KEY WATCH</h4>
-      <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
-        March 17-18 FOMC is the most consequential meeting of 2026 &mdash; first dot plot, new SEP projections. Warsh confirmation hearings in March add policy uncertainty. Bond market pricing three cuts; Fed posture says patience. Something has to give.
+        <span><strong style="color: var(--gold);">TGA:</strong> ~$849B (mild drain)</span>
+        <span><strong style="color: var(--gold);">ON RRP:</strong> Near depletion &mdash; QT hitting bank reserves directly</span>
+        <span><strong style="color: var(--amber);">Mixed picture overall</strong></span>
       </div>
     </div>
   </div>
@@ -633,7 +828,7 @@ section { padding: 80px 0; }
     <div class="section-header">
       <span class="icon">&#x1F4CB;</span>
       <h2>Thesis Watchlist Tracker</h2>
-      <span class="tag">9 Sectors</span>
+      <span class="tag">8 Sectors</span>
     </div>
 
     <div class="watchlist-filters" id="watchlistFilters">
@@ -643,76 +838,59 @@ section { padding: 80px 0; }
       <button class="filter-btn" data-filter="defense">Defense</button>
       <button class="filter-btn" data-filter="cyber">Cybersecurity</button>
       <button class="filter-btn" data-filter="minerals">Critical Minerals</button>
-      <button class="filter-btn" data-filter="storage">Energy Storage</button>
-      <button class="filter-btn" data-filter="space">Space</button>
       <button class="filter-btn" data-filter="quantum">Quantum</button>
       <button class="filter-btn" data-filter="robotics">Robotics</button>
+      <button class="filter-btn" data-filter="storage">Energy Storage</button>
     </div>
 
     <div class="card reveal" style="overflow-x: auto;">
       <table class="watchlist-table" id="watchlistTable">
         <thead>
-          <tr><th>Ticker</th><th>Sector</th><th>Tier</th><th>Weekly</th><th>Catalyst / Note</th></tr>
+          <tr><th>Ticker</th><th>Sector</th><th>Tier</th><th>Close</th><th>Weekly</th><th>Catalyst / Note</th></tr>
         </thead>
         <tbody>
           <!-- AI Infrastructure -->
-          <tr data-sector="ai"><td class="ticker">NVDA</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td class="pct-down">-8.5%</td><td>Q4 beat ($68.1B rev, +73% YoY) but -5.5% selloff on customer concentration fears</td></tr>
-          <tr data-sector="ai"><td class="ticker">TSM</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td class="pct-down">Modest &darr;</td><td>Relatively resilient vs US AI names</td></tr>
-          <tr data-sector="ai"><td class="ticker">AVGO</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td class="pct-down">&darr; Down</td><td>Weak with AI semi cohort; custom silicon thesis intact</td></tr>
-          <tr data-sector="ai"><td class="ticker">VRT</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td class="pct-down">&darr; Down</td><td>Pulled back with AI infra names</td></tr>
-          <tr data-sector="ai"><td class="ticker">ANET</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td class="pct-down">&darr; Down</td><td>Networking/AI infrastructure weak</td></tr>
-          <tr data-sector="ai"><td class="ticker">MRVL</td><td><span class="sector-tag">AI Infra</span></td><td>2</td><td class="pct-up">+4.4%</td><td>Bucked trend; custom silicon + electro-optics narrative</td></tr>
-          <tr data-sector="ai nuclear"><td class="ticker">CEG</td><td><span class="sector-tag">AI / Nuclear</span></td><td>2</td><td class="pct-up">+1.65%</td><td>Q4 beat ($2.30 EPS); nuclear PPA narrative strong</td></tr>
-          <tr data-sector="ai"><td class="ticker">PLTR</td><td><span class="sector-tag">AI / Defense</span></td><td>2</td><td class="pct-up">+6.25%</td><td>Defense/AI platform; +0.9% Friday</td></tr>
-          <tr data-sector="ai"><td class="ticker">DELL</td><td><span class="sector-tag">AI Infra</span></td><td>2</td><td class="pct-up">&uarr; Up</td><td>Record $113.5B FY rev; $43B AI server backlog</td></tr>
-          <!-- Defense & Aerospace -->
-          <tr data-sector="defense"><td class="ticker">LMT</td><td><span class="sector-tag">Defense</span></td><td>1</td><td class="pct-up">+2.7%</td><td>Defense rotation beneficiary; $194B backlog</td></tr>
-          <tr data-sector="defense"><td class="ticker">RTX</td><td><span class="sector-tag">Defense</span></td><td>1</td><td class="pct-flat">Stable</td><td>$268B backlog; five missile framework agreements</td></tr>
-          <tr data-sector="defense"><td class="ticker">NOC</td><td><span class="sector-tag">Defense</span></td><td>1</td><td class="pct-up">Stable/&uarr;</td><td>B-21, GPI, SDA contracts</td></tr>
-          <tr data-sector="defense"><td class="ticker">LHX</td><td><span class="sector-tag">Defense</span></td><td>1</td><td class="pct-flat">Stable</td><td>Missile Solutions IPO planned H2 2026</td></tr>
-          <tr data-sector="defense"><td class="ticker">GD</td><td><span class="sector-tag">Defense</span></td><td>2</td><td class="pct-flat">Stable</td><td>Columbia-class sub, Gulfstream</td></tr>
-          <tr data-sector="defense"><td class="ticker">AVAV</td><td><span class="sector-tag">Defense</span></td><td>2</td><td class="pct-down">-2.8%</td><td>Gave back gains; Switchblade scaling thesis intact</td></tr>
-          <tr data-sector="defense"><td class="ticker">KTOS</td><td><span class="sector-tag">Defense</span></td><td>2</td><td class="pct-down">-6.5%</td><td>Pulled back after strong run; Valkyrie thesis unchanged</td></tr>
+          <tr data-sector="ai"><td class="ticker">NVDA</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>$177.19</td><td class="pct-flat">Volatile</td><td>Q4 $68.1B (+73% YoY), Q1 guide $78B crushes $72.8B. Market can&rsquo;t sustain rally.</td></tr>
+          <tr data-sector="ai"><td class="ticker">TSM</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>$374.58</td><td class="pct-flat">Steady</td><td>Foundry monopoly intact. CoWoS capacity remains the binding constraint.</td></tr>
+          <tr data-sector="ai"><td class="ticker">AVGO</td><td><span class="sector-tag">AI Infra</span></td><td>1</td><td>$319.55</td><td class="pct-down">Pressured</td><td>Custom silicon/XPU thesis intact; broader tech rotation headwind.</td></tr>
+          <tr data-sector="ai"><td class="ticker">VRT</td><td><span class="sector-tag">AI Infra</span></td><td>2</td><td>$254.89</td><td class="pct-flat">Held</td><td>Power/cooling demand structural. $9.5B backlog.</td></tr>
+          <tr data-sector="ai nuclear"><td class="ticker">CEG</td><td><span class="sector-tag">AI / Nuclear</span></td><td>2</td><td>~$293</td><td class="pct-up">+1.65%</td><td>CyrusOne nuclear data center deal. Iran crisis = energy security catalyst.</td></tr>
+          <tr data-sector="ai"><td class="ticker">ETN</td><td><span class="sector-tag">AI Infra</span></td><td>2</td><td>&mdash;</td><td class="pct-up">Relative strength</td><td>DC orders +200% YoY, $15.3B backlog.</td></tr>
           <!-- Nuclear Energy -->
-          <tr data-sector="nuclear"><td class="ticker">VST</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td class="pct-flat">Mixed</td><td>Meta 2,609 MW deal; 20-year PPA visibility</td></tr>
-          <tr data-sector="nuclear"><td class="ticker">CCJ</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td class="pct-up">Stable/&uarr;</td><td>Q4 beat; Westinghouse EBITDA +61% YoY</td></tr>
-          <tr data-sector="nuclear"><td class="ticker">LEU</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>HALEU scaling; $900M DOE expansion</td></tr>
-          <tr data-sector="nuclear"><td class="ticker">BWXT</td><td><span class="sector-tag">Nuclear</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>$6B backlog; Navy reactor monopoly</td></tr>
-          <tr data-sector="nuclear"><td class="ticker">NXE</td><td><span class="sector-tag">Nuclear</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>CNSC hearing completed; permitting catalyst</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">VST</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td>&mdash;</td><td class="pct-down">-3.1%</td><td>Meta 20-year PPA provides visibility. Weakness may be buying opportunity.</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">CCJ</td><td><span class="sector-tag">Nuclear</span></td><td>1</td><td>&mdash;</td><td class="pct-up">+5%</td><td>Q4 EPS beat 14%, revenue beat 9%. Uranium $88-96/lb, +30% YoY.</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">TLN</td><td><span class="sector-tag">Nuclear</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>$18B Amazon PPA. Strong Buy consensus.</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">BWXT</td><td><span class="sector-tag">Nuclear</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>Navy reactor monopoly. $6B backlog.</td></tr>
+          <tr data-sector="nuclear"><td class="ticker">LEU</td><td><span class="sector-tag">Nuclear</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>HALEU monopoly positioning. $900M DOE expansion contract.</td></tr>
+          <!-- Defense & Aerospace -->
+          <tr data-sector="defense"><td class="ticker">LMT</td><td><span class="sector-tag">Defense</span></td><td>1</td><td>&mdash;</td><td class="pct-up" style="color: var(--coral);">Iran surge</td><td>Iran strikes massively bullish. PAC-3/THAAD demand surges. $194B backlog.</td></tr>
+          <tr data-sector="defense"><td class="ticker">RTX</td><td><span class="sector-tag">Defense</span></td><td>1</td><td>&mdash;</td><td class="pct-up" style="color: var(--coral);">Iran surge</td><td>$268B backlog. Patriot demand spike. Five missile framework agreements.</td></tr>
+          <tr data-sector="defense"><td class="ticker">NOC</td><td><span class="sector-tag">Defense</span></td><td>1</td><td>&mdash;</td><td class="pct-up" style="color: var(--coral);">Iran surge</td><td>B-21, Golden Dome, GPI. Highest classified program exposure.</td></tr>
+          <tr data-sector="defense"><td class="ticker">LHX</td><td><span class="sector-tag">Defense</span></td><td>2</td><td>&mdash;</td><td class="pct-up">Strong</td><td>Highest margins (~16%). Aerojet rocket motors critical for munitions ramp.</td></tr>
+          <tr data-sector="defense"><td class="ticker">RKLB</td><td><span class="sector-tag">Defense / Space</span></td><td>2</td><td>&mdash;</td><td class="pct-down">-6.75%</td><td>$1.33B+ SDA contracts. Artemis II launch Mar 6 is catalyst.</td></tr>
+          <tr data-sector="defense"><td class="ticker">AVAV</td><td><span class="sector-tag">Defense</span></td><td>2</td><td>&mdash;</td><td class="pct-up">Strong</td><td>Switchblade production scaling. Iran = loitering munitions demand.</td></tr>
           <!-- Cybersecurity -->
-          <tr data-sector="cyber"><td class="ticker">PANW</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td class="pct-down">-0.3%</td><td>Q3 profit miss; trimmed FY2026 profit view</td></tr>
-          <tr data-sector="cyber"><td class="ticker">CRWD</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td class="pct-down">-2.4%</td><td>Sold off on AI disruption scare</td></tr>
-          <tr data-sector="cyber"><td class="ticker">FTNT</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td class="pct-flat">-0.2%</td><td>Relatively resilient; FortiGate refresh</td></tr>
-          <tr data-sector="cyber"><td class="ticker">ZS</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td class="pct-down">-12.3%</td><td>Sharpest decline; AI-disruption + SASE competition</td></tr>
-          <tr data-sector="cyber"><td class="ticker">LDOS</td><td><span class="sector-tag">Cyber / Defense</span></td><td>1</td><td class="pct-flat">Stable</td><td>Defense cyber; $46.2B backlog</td></tr>
-          <tr data-sector="cyber"><td class="ticker">CACI</td><td><span class="sector-tag">Cyber / Defense</span></td><td>1</td><td class="pct-flat">Stable</td><td>12.6% organic growth; defense-heavy</td></tr>
+          <tr data-sector="cyber"><td class="ticker">PANW</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td>&mdash;</td><td class="pct-down">Declined</td><td>Anthropic AI code security tool triggered selloff Feb 20. Analysts say overdone.</td></tr>
+          <tr data-sector="cyber"><td class="ticker">CRWD</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td>&mdash;</td><td class="pct-down">-8%</td><td>AI scare. Barclays: &ldquo;does not make sense&rdquo; as competition.</td></tr>
+          <tr data-sector="cyber"><td class="ticker">ZS</td><td><span class="sector-tag">Cyber</span></td><td>1</td><td>$146.83</td><td class="pct-down">-12.3%</td><td>Worst hit by AI disruption fears. Pure-play zero trust leader.</td></tr>
+          <tr data-sector="cyber"><td class="ticker">FTNT</td><td><span class="sector-tag">Cyber</span></td><td>2</td><td>&mdash;</td><td class="pct-down">Pressured</td><td>Cheapest valuation. FortiGate refresh cycle 2026-2027 visibility.</td></tr>
+          <tr data-sector="cyber"><td class="ticker">LDOS</td><td><span class="sector-tag">Cyber / Defense</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>$46.2B defense IT/cyber backlog. Iran = defense cyber spending.</td></tr>
           <!-- Critical Minerals -->
-          <tr data-sector="minerals"><td class="ticker">MP</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td class="pct-up">Strong</td><td>NdPr at $123/kg crosses $110 DOD price-support trigger</td></tr>
-          <tr data-sector="minerals"><td class="ticker">FCX</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>Copper structural deficit; Grasberg Q2 restart</td></tr>
-          <tr data-sector="minerals"><td class="ticker">ALB</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td class="pct-up">Spike</td><td>Lithium +5.4% on Zimbabwe export ban; Kings Mountain restart</td></tr>
-          <tr data-sector="minerals"><td class="ticker">SQM</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>Lowest-cost lithium; Codelco JV</td></tr>
-          <tr data-sector="minerals"><td class="ticker">UUUU</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>Dual uranium/REE; raised uranium outlook</td></tr>
-          <tr data-sector="minerals"><td class="ticker">SCCO</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>Largest copper reserves; Tia Maria advancing</td></tr>
-          <!-- Energy Storage -->
-          <tr data-sector="storage"><td class="ticker">TSLA</td><td><span class="sector-tag">Storage / EV</span></td><td>1</td><td class="pct-down">-1.5% Fri</td><td>Optimus Gen 3 production started; Cybercab April target</td></tr>
-          <tr data-sector="storage"><td class="ticker">FLNC</td><td><span class="sector-tag">Storage</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>$5.5B record backlog; 48% rev growth guide</td></tr>
-          <tr data-sector="storage"><td class="ticker">EOSE</td><td><span class="sector-tag">Storage</span></td><td>2</td><td class="pct-down">&darr; Down</td><td>Record Q4 $58M rev but post-earnings downgrades</td></tr>
-          <tr data-sector="storage"><td class="ticker">QS</td><td><span class="sector-tag">Storage</span></td><td>3</td><td class="pct-flat">&mdash;</td><td>Eagle Line pilot inaugurated Feb 2026</td></tr>
+          <tr data-sector="minerals"><td class="ticker">FCX</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>Copper structural deficit 330K MT (JPM). Grasberg restart Q2 2026.</td></tr>
+          <tr data-sector="minerals"><td class="ticker">MP</td><td><span class="sector-tag">Minerals</span></td><td>1</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>Record NdPr production. DOD largest shareholder. Iran = commodity rally.</td></tr>
+          <tr data-sector="minerals"><td class="ticker">ALB</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>+115% past year. Lithium ~$20K/tonne. Kings Mountain restart.</td></tr>
+          <tr data-sector="minerals"><td class="ticker">UUUU</td><td><span class="sector-tag">Minerals</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>Dual uranium/REE. Commercial Dy/Tb by Q4 2026.</td></tr>
           <!-- Quantum Computing -->
-          <tr data-sector="quantum"><td class="ticker">IONQ</td><td><span class="sector-tag">Quantum</span></td><td>1</td><td class="pct-up">+20%</td><td>Blowout Q4 ($61.9M, +429% YoY); SkyWater acquisition</td></tr>
-          <tr data-sector="quantum"><td class="ticker">IBM</td><td><span class="sector-tag">Quantum</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>$1B+ cumulative quantum rev; Kookaburra 2026 target</td></tr>
-          <tr data-sector="quantum"><td class="ticker">HON</td><td><span class="sector-tag">Quantum</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>53% Quantinuum stake; IPO at $20B+ expected</td></tr>
-          <tr data-sector="quantum"><td class="ticker">QBTS</td><td><span class="sector-tag">Quantum</span></td><td>2</td><td class="pct-down">-5%+</td><td>YTD +228%; 100+ production customers</td></tr>
-          <!-- Robotics & Automation -->
-          <tr data-sector="robotics"><td class="ticker">ISRG</td><td><span class="sector-tag">Robotics</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>da Vinci Single Port cleared for 3 surgery types</td></tr>
-          <tr data-sector="robotics"><td class="ticker">SYM</td><td><span class="sector-tag">Robotics</span></td><td>1</td><td class="pct-flat">&mdash;</td><td>Q1 $630M rev (+29%); $22.7B backlog</td></tr>
-          <tr data-sector="robotics"><td class="ticker">GOOG</td><td><span class="sector-tag">Robotics / AI</span></td><td>1</td><td class="pct-down">&darr; Down</td><td>Waymo 400K+ weekly rides; weak with tech</td></tr>
-          <tr data-sector="robotics"><td class="ticker">AUR</td><td><span class="sector-tag">Robotics</span></td><td>2</td><td class="pct-flat">&mdash;</td><td>First commercial driverless trucking</td></tr>
-          <!-- Space -->
-          <tr data-sector="space"><td class="ticker">PL</td><td><span class="sector-tag">Space</span></td><td>1</td><td class="pct-down">-3.3%</td><td>Defense EO backlog $734.5M (+216%); YTD +21%</td></tr>
-          <tr data-sector="space"><td class="ticker">LUNR</td><td><span class="sector-tag">Space</span></td><td>1</td><td class="pct-down">-6.7%</td><td>Pulled back; Artemis II March 6 catalyst</td></tr>
-          <tr data-sector="space"><td class="ticker">LMT</td><td><span class="sector-tag">Space / Defense</span></td><td>1</td><td class="pct-up">+2.7%</td><td>$12.5B space segment; Golden Dome</td></tr>
-          <tr data-sector="space"><td class="ticker">RKLB</td><td><span class="sector-tag">Space</span></td><td>2</td><td class="pct-down">-4% to -7%</td><td>Off Jan highs; $1.33B+ SDA contracts</td></tr>
+          <tr data-sector="quantum"><td class="ticker">IONQ</td><td><span class="sector-tag">Quantum</span></td><td>1</td><td>&mdash;</td><td class="pct-up">+22.7%</td><td>Crushed Q4 targets. Above-consensus guidance. 99.99% gate fidelity.</td></tr>
+          <tr data-sector="quantum"><td class="ticker">QBTS</td><td><span class="sector-tag">Quantum</span></td><td>2</td><td>&mdash;</td><td class="pct-down">-8.2%</td><td>D-Wave Advantage2 commercially available. Insider selling concerns.</td></tr>
+          <tr data-sector="quantum"><td class="ticker">RGTI</td><td><span class="sector-tag">Quantum</span></td><td>2</td><td>&mdash;</td><td class="pct-up">Led sector</td><td>Modular chiplet strategy. $1.9M rev at $6B mkt cap = extreme.</td></tr>
+          <!-- Robotics -->
+          <tr data-sector="robotics"><td class="ticker">ISRG</td><td><span class="sector-tag">Robotics</span></td><td>1</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>da Vinci 5 upgrade cycle. 11,106 systems. 85% recurring revenue.</td></tr>
+          <tr data-sector="robotics"><td class="ticker">SYM</td><td><span class="sector-tag">Robotics</span></td><td>2</td><td>&mdash;</td><td class="pct-up">+3%</td><td>GAAP profitable. $22.7B backlog. U.S. Commerce Dept robotics roundtable.</td></tr>
+          <tr data-sector="robotics"><td class="ticker">TSLA</td><td><span class="sector-tag">Robotics / EV</span></td><td>2</td><td>&mdash;</td><td class="pct-up">+2%</td><td>Optimus production 2026. Cybercab April 2026. Iran may pressure as risk-off.</td></tr>
+          <!-- Energy Storage -->
+          <tr data-sector="storage"><td class="ticker">FLNC</td><td><span class="sector-tag">Storage</span></td><td>1</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>$5.5B record backlog. 48% revenue growth guided. Best pure-play BESS.</td></tr>
+          <tr data-sector="storage"><td class="ticker">SQM</td><td><span class="sector-tag">Storage</span></td><td>2</td><td>&mdash;</td><td class="pct-flat">&mdash;</td><td>Lowest-cost lithium producer. Codelco JV through 2060.</td></tr>
         </tbody>
       </table>
     </div>
@@ -724,38 +902,35 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="section-header">
       <span class="icon">&#x26CF;</span>
-      <h2>Commodities & Forex Snapshot</h2>
+      <h2>Commodities &amp; Forex Snapshot</h2>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
       <!-- Energy -->
-      <div class="card reveal">
-        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ENERGY</h4>
+      <div class="card reveal" style="border-color: rgba(239,131,84,0.2);">
+        <h4 style="font-size: 13px; color: var(--coral); margin-bottom: 12px;">ENERGY (THE IRAN VARIABLE)</h4>
         <table class="watchlist-table">
-          <thead><tr><th>Commodity</th><th>Close</th><th>Weekly</th></tr></thead>
+          <thead><tr><th>Commodity</th><th>Fri Close</th><th>Sunday</th></tr></thead>
           <tbody>
-            <tr><td>WTI Crude</td><td>$67.02/bbl</td><td class="pct-up">+3.2%</td></tr>
-            <tr><td>Brent Crude</td><td>$70.70-72.87/bbl</td><td class="pct-up">+2.9%</td></tr>
-            <tr><td>Natural Gas</td><td>$3.13-3.24/MMBtu</td><td class="pct-flat">Stabilizing</td></tr>
+            <tr><td>WTI Crude</td><td>$67.02</td><td class="pct-up" style="color: var(--coral);">~$72 (+7.4%)</td></tr>
+            <tr><td>Brent Crude</td><td>~$71.50</td><td class="pct-up" style="color: var(--coral);">~$80 (+12%, hit $82)</td></tr>
           </tbody>
         </table>
         <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px; line-height: 1.5;">
-          US-Iran nuclear talks failed. OPEC+ production pause. EIA: 16M bbl crude build (largest in 3 years) but inventories 3% below 5-year avg. $8-10 geopolitical premium in Brent.
+          Strait of Hormuz de facto closed &bull; 20% of global oil transits this chokepoint &bull; OPEC+ 206K bpd April increase dismissed as insufficient &bull; EIA draw 9.0M bbl pre-crisis &bull; 13+ LNG tankers diverted &bull; <strong style="color: var(--red);">Targets: Citi $80-90, Barclays $100, UBS $120+ (prolonged Hormuz)</strong>
         </div>
       </div>
 
       <!-- Metals -->
       <div class="card reveal">
-        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">METALS & CRITICAL MINERALS</h4>
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">METALS &amp; MINERALS</h4>
         <table class="watchlist-table">
-          <thead><tr><th>Commodity</th><th>Level</th><th>Move</th></tr></thead>
+          <thead><tr><th>Commodity</th><th>Fri</th><th>Sunday</th></tr></thead>
           <tbody>
-            <tr><td>Gold</td><td>~$5,236/oz</td><td class="pct-up">+2.7% (+83% YoY)</td></tr>
-            <tr><td>Silver</td><td>$89-92/oz</td><td class="pct-flat">Volatile (+185% YoY)</td></tr>
-            <tr><td>Copper</td><td>$5.90-5.97/lb</td><td class="pct-up">+1.8% MTD</td></tr>
-            <tr><td>Uranium</td><td>$89.50/lb</td><td class="pct-up">+6.2% MTD</td></tr>
-            <tr><td style="color: var(--amber);">Lithium</td><td>177K CNY/T</td><td class="pct-up" style="color: var(--amber);">+5.4% (Zim ban)</td></tr>
-            <tr><td style="color: var(--amber);">NdPr (REE)</td><td>$123/kg</td><td class="pct-up" style="color: var(--amber);">+14% WoW</td></tr>
+            <tr><td>Gold</td><td>~$5,247</td><td class="pct-up">$5,300+ (+22% YTD)</td></tr>
+            <tr><td>Silver</td><td>$92.06</td><td class="pct-up">$94.30 (+7.67%)</td></tr>
+            <tr><td>Copper</td><td>~$5.90/lb</td><td class="pct-flat">Deficit 330K MT (JPM)</td></tr>
+            <tr><td>Uranium</td><td>$88-96/lb</td><td class="pct-up">+30% YoY &bull; Iran validates thesis</td></tr>
           </tbody>
         </table>
       </div>
@@ -764,28 +939,24 @@ section { padding: 80px 0; }
       <div class="card reveal">
         <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">FOREX</h4>
         <table class="watchlist-table">
-          <thead><tr><th>Pair</th><th>Level</th><th>Weekly</th></tr></thead>
+          <thead><tr><th>Pair</th><th>Level</th><th>Note</th></tr></thead>
           <tbody>
-            <tr><td>DXY</td><td>97.65-97.80</td><td class="pct-flat">Flat</td></tr>
-            <tr><td>EUR/USD</td><td>1.1770-1.1830</td><td class="pct-flat">Stable</td></tr>
-            <tr><td>USD/JPY</td><td>156.02</td><td class="pct-flat">-0.05%</td></tr>
-            <tr><td>GBP/USD</td><td>1.3475</td><td class="pct-flat">Stable</td></tr>
+            <tr><td>DXY</td><td>97.85</td><td>-7.2% YoY &bull; Safe-haven bid limited by record bear positioning</td></tr>
+            <tr><td>EUR/USD</td><td>1.1818</td><td class="pct-down">Germany EUR 1T fiscal, but energy vulnerability</td></tr>
+            <tr><td>USD/JPY</td><td>156.10</td><td>BOJ tightening expectations dominating</td></tr>
+            <tr><td>GBP/USD</td><td>1.3475</td><td class="pct-down">UK net energy importer &mdash; vulnerable</td></tr>
           </tbody>
         </table>
-        <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">
-          DXY near multi-year lows. EM FX: record-low vol vs G7 (200 consecutive days).
-        </div>
       </div>
 
-      <!-- Geopolitical -->
+      <!-- Agricultural -->
       <div class="card reveal">
-        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">SUPPLY-SIDE CATALYSTS</h4>
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">AGRICULTURAL</h4>
         <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
-          <p style="margin-bottom: 6px;"><strong style="color: var(--red);">Iran:</strong> Nuclear talks collapsed; Hormuz risk premium persists</p>
-          <p style="margin-bottom: 6px;"><strong style="color: var(--amber);">Zimbabwe:</strong> Surprise lithium export ban &mdash; lithium +5.4%</p>
-          <p style="margin-bottom: 6px;"><strong style="color: var(--amber);">NdPr:</strong> $123/kg crosses $110 DOD price-support trigger for MP</p>
-          <p style="margin-bottom: 6px;"><strong style="color: var(--gold);">DRC Cobalt:</strong> Export quotas at 50% of 2024 volumes (+160% YoY)</p>
-          <p><strong style="color: var(--gold);">OPEC+:</strong> Maintaining voluntary production cuts</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--green);">Corn:</strong> +2.71% in February</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--green);">Soybeans:</strong> +8.44% in February</p>
+          <p style="margin-bottom: 6px;"><strong style="color: var(--green);">Wheat:</strong> +45 cents in February</p>
+          <p><strong style="color: var(--amber);">Iran impact:</strong> Higher energy costs pressure farm inputs but support crop prices</p>
         </div>
       </div>
     </div>
@@ -798,64 +969,62 @@ section { padding: 80px 0; }
     <div class="section-header">
       <span class="icon">&#x20BF;</span>
       <h2>Crypto Snapshot</h2>
-      <span class="tag">Flow Reversal</span>
+      <span class="tag">Sunday Evening Prices</span>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;">
       <div class="card reveal" style="text-align: center;">
         <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">BITCOIN</div>
-        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">$67,000</div>
-        <div style="font-size: 12px; color: var(--green); font-weight: 600;">+0.6%</div>
-        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Support: $65K | Resistance: $72.5K</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">~$68,000</div>
+        <div style="font-size: 12px; color: var(--green); font-weight: 600;">Recovered from $63K Saturday</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Feb: -13.5% | YTD: -27% | 57% dominance</div>
       </div>
       <div class="card reveal" style="text-align: center;">
         <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">ETHEREUM</div>
-        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">$1,947</div>
-        <div style="font-size: 12px; color: var(--red); font-weight: 600;">-4%</div>
-        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">ETH/BTC 0.03 near multi-year lows</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">~$2,000</div>
+        <div style="font-size: 12px; color: var(--green); font-weight: 600;">Recovered from $1,750 Sat</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Fusaka/Glamsterdam upgrade Q2/Q3 2026</div>
       </div>
       <div class="card reveal" style="text-align: center;">
-        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">BTC DOMINANCE</div>
-        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--gold);">58.3%</div>
-        <div style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Peaked 61% Feb 24</div>
-        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Peak-and-reversal pattern</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">WEEKEND LIQUIDATIONS</div>
+        <div style="font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--red);">$645M</div>
+        <div style="font-size: 12px; color: var(--amber); font-weight: 600;">24hr &mdash; majority shorts</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Powerful short squeeze on Sunday recovery</div>
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
       <div class="card reveal">
-        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ETF FLOWS &mdash; REVERSAL</h4>
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ETF FLOWS</h4>
         <table class="watchlist-table">
           <thead><tr><th>Fund</th><th>Flow</th><th>Note</th></tr></thead>
           <tbody>
-            <tr><td>BTC Spot ETFs</td><td class="pct-up">+$787M</td><td style="color: var(--green);">First positive week in five &mdash; streak broken</td></tr>
-            <tr><td>IBIT (BlackRock)</td><td class="pct-up">+$276M</td><td>Leading inflows</td></tr>
-            <tr><td>ETH Spot ETFs</td><td class="pct-up">+$157M</td><td>Reversed on Feb 25</td></tr>
-            <tr><td>Cumulative BTC ETF</td><td class="pct-flat">$54.8B net</td><td>YTD 2026 still -$4.5B</td></tr>
+            <tr><td>BTC Spot ETFs</td><td class="pct-up">+$1.1B (3 days)</td><td>IBIT +$652M &bull; Cumulative $61.8B &bull; NOT signaling capitulation</td></tr>
+            <tr><td>ETH Spot ETFs</td><td class="pct-down">Net negative Feb</td><td>Persistent outflows continue</td></tr>
+            <tr><td>Fri Outflow</td><td class="pct-down">-$27.5M</td><td>Small &mdash; not capitulatory</td></tr>
           </tbody>
         </table>
       </div>
       <div class="card reveal">
-        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">NOTABLE MOVES</h4>
+        <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">ALTS &amp; DEFI</h4>
         <table class="watchlist-table">
           <thead><tr><th>Asset</th><th>Move</th><th>Signal</th></tr></thead>
           <tbody>
-            <tr><td style="color: var(--green);">TAO</td><td class="pct-up">+26%</td><td>AI token outperformance</td></tr>
-            <tr><td style="color: var(--green);">RENDER</td><td class="pct-up">+37% MTD</td><td>AI token outperformance</td></tr>
-            <tr><td style="color: var(--green);">FET</td><td class="pct-up">+17% MTD</td><td>AI token outperformance</td></tr>
-            <tr><td>SOL</td><td class="pct-down">-5%</td><td>TVL at 80M SOL ATH despite price</td></tr>
+            <tr><td>SOL</td><td class="pct-up">+10.8% Sun (~$86)</td><td>Led recovery</td></tr>
+            <tr><td>AVAX</td><td class="pct-down">~$8.50</td><td>Severe pressure</td></tr>
+            <tr><td>Aave</td><td class="pct-up">$1T cumulative lending</td><td>DeFi milestone</td></tr>
+            <tr><td>UNI</td><td class="pct-up">+15%</td><td>Fee switch to 8 L2 networks</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="card reveal" style="margin-top: 12px;">
-      <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">REGULATION</h4>
+      <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">HEADLINES</h4>
       <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary);">
-        <span><strong style="color: var(--green);">SEC-CFTC:</strong> &ldquo;Project Crypto&rdquo; joint harmonization &mdash; most significant US regulatory development in years</span>
-        <span><strong style="color: var(--gold);">Digital Commodities:</strong> NOT securities under new framework</span>
-        <span><strong style="color: var(--gold);">DCIA:</strong> 50-60% passage odds before Nov 2026 midterms</span>
-        <span><strong style="color: var(--amber);">Stablecoins:</strong> USDT&rarr;USDC rotation (USDC +72% YoY to $75.3B)</span>
+        <span><strong style="color: var(--gold);">SEC Chair Atkins:</strong> &ldquo;Project Crypto&rdquo; joint SEC/CFTC framework, token taxonomy, innovation exemptions</span>
+        <span><strong style="color: var(--gold);">SBR:</strong> ~328K BTC held, active accumulation stalled on legal issues</span>
+        <span><strong style="color: var(--amber);">DeFi TVL:</strong> $105-130B &mdash; &ldquo;quiet strength&rdquo; vs. spot declines</span>
       </div>
     </div>
   </div>
@@ -873,28 +1042,28 @@ section { padding: 80px 0; }
     <div class="calendar-grid reveal">
       <div class="cal-day">
         <div class="day-header">MON Mar 2</div>
-        <div class="cal-event data"><span class="event-type">Data</span>ISM Manufacturing PMI</div>
-        <div class="cal-event data"><span class="event-type">Data</span>PCE follow-through (Feb 28 release)</div>
+        <div class="cal-event geopolitical"><span class="event-type">Geopolitical</span>Markets open post-Iran strikes &mdash; defense, energy, gold surge; tech risk-off</div>
+        <div class="cal-event data"><span class="event-type">Data</span>ISM Manufacturing &mdash; watch for Iran/oil impact on outlook</div>
       </div>
       <div class="cal-day">
         <div class="day-header">TUE Mar 3</div>
-        <div class="cal-event data"><span class="event-type">Data</span>Consumer Confidence follow-through</div>
-        <div class="cal-event fed"><span class="event-type">Fed</span>Final pre-blackout speeches (blackout starts Mar 8)</div>
+        <div class="cal-event geopolitical"><span class="event-type">Watch</span>Strait of Hormuz status, Iranian succession</div>
+        <div class="cal-event data"><span class="event-type">Data</span>JOLTS Job Openings</div>
       </div>
       <div class="cal-day">
         <div class="day-header">WED Mar 4</div>
-        <div class="cal-event data"><span class="event-type">Data</span>ISM Services PMI &mdash; growth pulse check</div>
+        <div class="cal-event data"><span class="event-type">Data</span>ISM Services &mdash; dominant sector of the economy</div>
         <div class="cal-event data"><span class="event-type">Data</span>ADP Employment</div>
       </div>
       <div class="cal-day">
-        <div class="day-header">THU Mar 5</div>
+        <div class="day-header">THU Mar 6</div>
+        <div class="cal-event catalyst"><span class="event-type">Catalyst</span>Artemis II crewed lunar launch (LUNR, RKLB, PL)</div>
         <div class="cal-event data"><span class="event-type">Data</span>Initial Jobless Claims</div>
-        <div class="cal-event earnings"><span class="event-type">Earnings &mdash; Critical</span>Broadcom (AVGO) &mdash; AI custom silicon bellwether</div>
       </div>
       <div class="cal-day">
         <div class="day-header">FRI Mar 6</div>
-        <div class="cal-event data"><span class="event-type">Data &mdash; Critical</span>Nonfarm Payrolls &mdash; THE decision point for March FOMC</div>
-        <div class="cal-event catalyst"><span class="event-type">Catalyst</span>Artemis II launch (LUNR, RKLB, LMT)</div>
+        <div class="cal-event data"><span class="event-type">Data &mdash; Critical</span>Nonfarm Payrolls &mdash; most market-moving data point</div>
+        <div class="cal-event catalyst"><span class="event-type">Positioning</span>Triple Witch positioning begins T-9 (Mar 9+)</div>
       </div>
     </div>
 
@@ -902,23 +1071,20 @@ section { padding: 80px 0; }
       <div class="card reveal" style="flex: 1; min-width: 200px;">
         <h4 style="font-size: 12px; color: var(--cyan); margin-bottom: 6px;">THESIS CATALYSTS</h4>
         <ul style="font-size: 12px; color: var(--text-secondary); list-style: none; line-height: 1.8;">
-          <li>&#x2022; Mar 5: AVGO earnings &mdash; next AI capex data point after NVDA</li>
-          <li>&#x2022; Mar 6: Artemis II launch &mdash; catalyst for LUNR, RKLB, LMT space</li>
-          <li>&#x2022; NXE CNSC permitting decision follow-through</li>
-          <li>&#x2022; Zimbabwe lithium ban implementation monitoring</li>
-          <li>&#x2022; NdPr &gt;$110/kg DOD trigger &mdash; watch MP Materials</li>
-          <li>&#x2022; IonQ momentum post +20% earnings; SkyWater integration</li>
-          <li>&#x2022; ZS recovery watch after -12.3% drop</li>
+          <li>&#x2022; <strong style="color: var(--red);">Defense:</strong> Iran engagement validates order books in real-time. LMT, RTX, NOC immediate beneficiaries.</li>
+          <li>&#x2022; <strong style="color: var(--coral);">Nuclear:</strong> Energy security viscerally apparent. 24/7 baseload immune to Hormuz disruption.</li>
+          <li>&#x2022; <strong style="color: var(--gold);">Minerals:</strong> Copper deficit deepens. FCX Grasberg restart Q2 2026.</li>
+          <li>&#x2022; <strong style="color: var(--violet);">Quantum:</strong> IONQ earnings momentum. HON Quantinuum IPO at $20B+ expected.</li>
+          <li>&#x2022; <strong style="color: var(--blue);">Cyber:</strong> AI scare selloff may create entry points (ZS -12.3%, CRWD -8%).</li>
         </ul>
       </div>
       <div class="card reveal" style="flex: 1; min-width: 200px;">
-        <h4 style="font-size: 12px; color: var(--violet); margin-bottom: 6px;">FED & MACRO WATCH</h4>
+        <h4 style="font-size: 12px; color: var(--violet); margin-bottom: 6px;">KEY CONVERGENCE: MAR 17-20</h4>
         <ul style="font-size: 12px; color: var(--text-secondary); list-style: none; line-height: 1.8;">
-          <li>&#x2022; Mar 6 NFP: Waller called Feb jobs the &ldquo;decision point&rdquo; for March</li>
-          <li>&#x2022; Mar 8: FOMC blackout begins for Mar 17-18 meeting</li>
-          <li>&#x2022; Mar 17-18: FOMC &mdash; first 2026 dot plot, new SEP projections</li>
-          <li>&#x2022; Warsh confirmation hearings could begin in March</li>
-          <li>&#x2022; Payroll revisions: Waller flagged 2025 employment may have declined</li>
+          <li>&#x2022; <strong style="color: var(--violet);">Mar 17-18:</strong> FOMC + first 2026 dot plot + SEP. Most consequential rates event.</li>
+          <li>&#x2022; <strong style="color: var(--rose);">Mar 20:</strong> Triple Witch + S&amp;P Rebalance &mdash; massive convergence window.</li>
+          <li>&#x2022; <strong style="color: var(--amber);">Triple Witch:</strong> Pre-expiry rally averages +0.82% T-9 to T-1, but geopolitical risk may overwhelm.</li>
+          <li>&#x2022; <strong style="color: var(--red);">Iran variable:</strong> Higher oil = inflationary (hawkish hold). Growth scare = disinflationary (cuts).</li>
         </ul>
       </div>
     </div>
@@ -934,45 +1100,38 @@ section { padding: 80px 0; }
     </div>
     <div class="risk-grid reveal">
       <div class="risk-item">
-        <div class="risk-level high"></div>
+        <div class="risk-level critical"></div>
         <div class="risk-content">
-          <h4>Bond Market vs. Fed Collision</h4>
-          <p>2s10s at +59 bps and three cuts priced by year-end directly contradicts the Fed&rsquo;s hawkish-hold posture. The March FOMC dot plot will either validate the bond market&rsquo;s growth-scare pricing or force a painful repricing of rate expectations.</p>
+          <h4>Hormuz Sustained Closure</h4>
+          <p>If the Strait remains blocked: oil $100+, stagflation, global recession risk. 20% of the world&rsquo;s oil and a significant share of LNG transits this chokepoint. Insurance withdrawal has already halted commercial shipping.</p>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level critical"></div>
+        <div class="risk-content">
+          <h4>Iran Conflict Escalation</h4>
+          <p>Broader regional war, multiple front engagement. Hezbollah re-activated. Three American troops killed. Zero de-escalation signals as of Sunday evening.</p>
         </div>
       </div>
       <div class="risk-item">
         <div class="risk-level high"></div>
         <div class="risk-content">
-          <h4>AI Fatigue Deepening</h4>
-          <p>NVIDIA&rsquo;s -5.5% selloff despite blowout earnings signals a sentiment regime change from &ldquo;promise&rdquo; to &ldquo;proof.&rdquo; If the rotation continues, mega-cap AI semis could see further multiple compression.</p>
+          <h4>Private Credit Contagion</h4>
+          <p>$2T market with DOJ/SEC scrutiny, AI-driven software defaults, and CCC spread widening. If hidden losses cascade into forced selling of liquid assets, it amplifies any geopolitical-driven correction. Jamie Dimon warns of &ldquo;dumb things&rdquo; in risky lending.</p>
         </div>
       </div>
       <div class="risk-item">
         <div class="risk-level high"></div>
         <div class="risk-content">
-          <h4>Nonfarm Payrolls Binary Event</h4>
-          <p>Waller flagged February jobs as the &ldquo;decision point&rdquo; for March. Payroll revisions suggesting 2025 employment actually declined make the March 6 report the most-watched of the quarter.</p>
+          <h4>Hawkish March Dot Plot</h4>
+          <p>If median shifts to 1-2 cuts (from 2-3), it validates &ldquo;higher for longer&rdquo; and pressures growth/duration. But Iran growth scare could surprise dovish. First 2026 SEP is critical.</p>
         </div>
       </div>
       <div class="risk-item">
         <div class="risk-level medium"></div>
         <div class="risk-content">
-          <h4>Iran Nuclear Breakdown</h4>
-          <p>Unresolved US-Iran nuclear talks keep $8-10 geopolitical premium in Brent. 20M bbl/day flows through Strait of Hormuz. Oil spike could re-accelerate inflation at worst possible time.</p>
-        </div>
-      </div>
-      <div class="risk-item">
-        <div class="risk-level medium"></div>
-        <div class="risk-content">
-          <h4>Critical Minerals Supply Shocks</h4>
-          <p>Zimbabwe lithium ban and NdPr crossing $110/kg DOD trigger in same week reflects global scramble for supply chain security. These supply-side shocks are not priced into consensus.</p>
-        </div>
-      </div>
-      <div class="risk-item">
-        <div class="risk-level medium"></div>
-        <div class="risk-content">
-          <h4>International Outperformance</h4>
-          <p>European indices at record highs; MSCI World ex-US outperforming for the ninth consecutive month. Persistent US-to-international rotation could accelerate if March FOMC disappoints.</p>
+          <h4>AI Monetization Disappointment</h4>
+          <p>NVIDIA proved the build is real ($68.1B), but the &ldquo;4% monetization problem&rdquo; persists: $600B+ infra spend vs. ~$25B AI service revenue. February tech selloff (-10% software ETF) shows market skepticism growing.</p>
         </div>
       </div>
     </div>
@@ -984,64 +1143,81 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="section-header">
       <span class="icon">&#x1F3AF;</span>
-      <h2>Positioning & Thesis Update</h2>
+      <h2>Positioning &amp; Thesis Update</h2>
     </div>
+
+    <!-- What Changed -->
+    <div class="card reveal" style="margin-bottom: 20px; border-color: rgba(239,131,84,0.15);">
+      <h3 style="font-size: 14px; color: var(--coral); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">What Changed This Week</h3>
+      <ul style="font-size: 13px; color: var(--text-secondary); list-style: none; line-height: 2;">
+        <li>&#x2022; <strong style="color: var(--red);">Iran strikes fundamentally altered the risk landscape.</strong> Energy security is no longer theoretical &mdash; it&rsquo;s viscerally real with tankers being hit and Hormuz functionally closed.</li>
+        <li>&#x2022; <strong style="color: var(--gold);">February confirmed the rotation</strong> from tech leadership to value/energy/materials. This trend accelerates.</li>
+        <li>&#x2022; <strong style="color: var(--green);">NVIDIA proved the AI build is real</strong> ($68.1B), but the &ldquo;4% monetization problem&rdquo; keeps the market skeptical.</li>
+        <li>&#x2022; <strong style="color: var(--gold);">Bond rally and falling yields</strong> directionally supportive, but Warsh nomination introduces structural uncertainty about future monetary policy.</li>
+      </ul>
+    </div>
+
+    <!-- Geopolitical Shock Playbook -->
+    <div class="card reveal" style="margin-bottom: 20px;">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Geopolitical Shock Dip-Buy Playbook</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; font-size: 13px; color: var(--text-secondary);">
+        <div>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--green); font-family: var(--font-mono);">100%</div>
+          <div>SPY win rate at 1 month (historical backtests)</div>
+        </div>
+        <div>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">+12.9%</div>
+          <div>NVDA avg recovery (#1 asset, 78% WR)</div>
+        </div>
+        <div>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--amber); font-family: var(--font-mono);">Day 5</div>
+          <div>Optimal delayed entry (+8.5% 60d return)</div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; font-size: 12px; color: var(--amber); font-weight: 600;">Caveat: This only applies if the conflict is contained. Hormuz closure = abort this playbook.</div>
+    </div>
+
+    <!-- Conviction Cards -->
     <div class="conviction-grid reveal">
       <div class="conviction-card">
-        <div class="thesis-name">AI Infrastructure</div>
-        <div class="direction cautious">CAUTIOUS</div>
-        <div class="rationale">AI fatigue rotation is real. NVDA selloff despite blowout signals regime change. Alpha opportunity shifting from mega-cap semis to Tier 2 infra beneficiaries (VRT, CEG, DELL, ANET) with less crowded positioning. Add on weakness.</div>
-      </div>
-      <div class="conviction-card">
-        <div class="thesis-name">Defense & Aerospace</div>
-        <div class="direction bullish">BULLISH</div>
-        <div class="rationale">The steadiest hand. LMT +2.7%, RTX and NOC stable in a risk-off week. $194B+ backlogs, bipartisan spending support, and rate-cut tailwind (lower discount rate on long-duration cash flows). Most defensible position heading into March.</div>
+        <div class="thesis-name">Defense &amp; Aerospace</div>
+        <div class="direction bullish">BULLISH &mdash; REGIME SHIFT</div>
+        <div class="rationale">Iran engagement validates order books in real-time. LMT, RTX, NOC will gap up Monday. This is not a trade &mdash; it&rsquo;s a structural shift in defense spending expectations. $194B+ combined backlogs.</div>
       </div>
       <div class="conviction-card">
         <div class="thesis-name">Nuclear Energy</div>
         <div class="direction bullish">BULLISH</div>
-        <div class="rationale">CEG Q4 beat +1.65%. TMI restart on track, Calpine pending. CCJ Q4 beat with Westinghouse EBITDA +61% YoY. AI power demand narrative and uranium structural deficit (30-40M lbs/yr) intact.</div>
+        <div class="rationale">Energy security is viscerally real. Nuclear = 24/7 baseload immune to Hormuz disruption. CEG CyrusOne deal, CCJ +5% on earnings beat. Iran crisis validates the entire thesis.</div>
       </div>
       <div class="conviction-card">
         <div class="thesis-name">Critical Minerals</div>
         <div class="direction bullish">BULLISH</div>
-        <div class="rationale">Supply shocks accelerating. Zimbabwe lithium ban, NdPr crossing $110 DOD trigger, DRC cobalt quotas &mdash; all in one week. One Big Beautiful Bill&rsquo;s $7.5B allocation creating structural re-rating catalyst for MP, ALB, FCX, UUUU.</div>
+        <div class="rationale">Gold $5,300+, silver $94, copper structural deficit. Iran = commodity supercycle catalyst. FCX Grasberg restart Q2, MP record production with DOD as largest shareholder.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">AI Infrastructure</div>
+        <div class="direction risk-off">RISK-OFF HEADWIND</div>
+        <div class="rationale">NVIDIA beat was historically clean ($68.1B, +73%) but market can&rsquo;t rally tech. AI skepticism + Iran risk-off = double headwind. Worst Feb for tech since 2025. Wait for clarity.</div>
       </div>
       <div class="conviction-card">
         <div class="thesis-name">Cybersecurity</div>
-        <div class="direction mixed">MIXED</div>
-        <div class="rationale">ZS -12.3% sharpest decline on AI-disruption + SASE competition narrative. PANW profit miss, CRWD -2.4% on AI scare. Defense cyber names (LDOS, CACI) stable. Testing whether AI disruption fear is durable or overdone.</div>
+        <div class="direction mixed">MIXED &mdash; ENTRY WATCH</div>
+        <div class="rationale">AI scare selloff (ZS -12.3%, CRWD -8%) may create entry points if overdone. Iran = defense cyber spending tailwind for LDOS. Barclays says AI competition &ldquo;does not make sense.&rdquo;</div>
       </div>
       <div class="conviction-card">
         <div class="thesis-name">Quantum Computing</div>
-        <div class="direction speculative">SPECULATIVE &uarr;</div>
-        <div class="rationale">IONQ +20% blowout ($61.9M, +429% YoY) with SkyWater acquisition. Best earnings print in quantum space history. QBTS gave back gains. Binary sector &mdash; IONQ emerging as the clear leader.</div>
+        <div class="direction speculative">SPECULATIVE</div>
+        <div class="rationale">IONQ crushed Q4 (+22.7%) with 99.99% gate fidelity. Momentum name in a risk-off tape &mdash; binary. HON Quantinuum IPO at $20B+ expected near-term.</div>
+      </div>
+      <div class="conviction-card">
+        <div class="thesis-name">Robotics &amp; Autonomous</div>
+        <div class="direction neutral">NEUTRAL</div>
+        <div class="rationale">ISRG defensive with 85% recurring. SYM GAAP profitable with $22.7B backlog. TSLA Optimus/Cybercab intact but Iran risk-off pressure likely.</div>
       </div>
       <div class="conviction-card">
         <div class="thesis-name">Energy Storage</div>
         <div class="direction neutral">NEUTRAL</div>
-        <div class="rationale">Rate-cut-dependent thesis still waiting. TSLA -1.5% Friday. FLNC $5.5B backlog is strong but needs rate relief. EOSE post-earnings downgrades despite record revenue. Patience required.</div>
-      </div>
-      <div class="conviction-card">
-        <div class="thesis-name">Space</div>
-        <div class="direction cautious">CAUTIOUS</div>
-        <div class="rationale">PL -3.3%, LUNR -6.7%, RKLB -4-7% &mdash; pullback from January highs. Artemis II launch March 6 is the key near-term catalyst. Strong backlogs but names need a catalyst to reverse momentum.</div>
-      </div>
-      <div class="conviction-card">
-        <div class="thesis-name">Robotics</div>
-        <div class="direction neutral">NEUTRAL</div>
-        <div class="rationale">ISRG da Vinci Single Port cleared for 3 new surgery types. SYM $22.7B backlog. AUR first commercial driverless trucking. Physical automation thesis intact; not a risk-off casualty.</div>
-      </div>
-    </div>
-
-    <!-- Actionable Positioning -->
-    <div class="card reveal" style="margin-top: 24px;">
-      <h3 style="font-size: 14px; color: var(--gold); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Actionable Positioning</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; font-size: 13px; color: var(--text-secondary);">
-        <div><strong style="color: var(--green);">Add on weakness:</strong> AI infra Tier 2 names (VRT, MRVL, CEG) if fatigue selloff deepens &mdash; operationally derisked with real backlogs</div>
-        <div><strong style="color: var(--amber);">Monitor closely:</strong> Critical minerals (MP, ALB) for follow-through on Zimbabwe/NdPr catalysts</div>
-        <div><strong style="color: var(--gold);">Hold conviction:</strong> Defense (LMT, RTX, NOC), nuclear (CEG, CCJ), uranium (CCJ, UUUU) through the volatility</div>
-        <div><strong style="color: var(--cyan);">Watch for entry:</strong> Crypto (BTC, AI tokens) if March jobs data confirms Waller&rsquo;s dovish thesis</div>
+        <div class="rationale">FLNC $5.5B backlog, 48% revenue growth guided. Rate-cut-dependent thesis needs patience. Iran energy crisis could accelerate storage adoption long-term.</div>
       </div>
     </div>
   </div>
@@ -1055,77 +1231,39 @@ section { padding: 80px 0; }
       <h2>Sources</h2>
     </div>
     <button class="sources-toggle" id="sourcesToggle">
-      <span>59 cited sources &mdash; click to expand</span>
+      <span>25 cited sources &mdash; click to expand</span>
       <span class="arrow">&#x25BC;</span>
     </button>
     <div class="sources-content" id="sourcesContent">
-      <ol class="sources-list">
-        <!-- Equities & Sectors -->
-        <li><a href="https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html" target="_blank">CNBC: Dow closes 500+ pts lower on hot inflation, AI concerns</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html" target="_blank">CNBC: NVIDIA Q4 earnings report</a></li>
-        <li><a href="https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/" target="_blank">Fortune: NVIDIA smashes Q4 with $68B revenue</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/25/salesforce-crm-q4-earnings-report-2026.html" target="_blank">CNBC: Salesforce Q4 2026 earnings</a></li>
-        <li><a href="https://investors.delltechnologies.com/news-releases/news-release-details/dell-technologies-delivers-fourth-quarter-and-full-year-fiscal-3" target="_blank">Dell Technologies: Q4 and FY2026 results</a></li>
-        <li><a href="https://247wallst.com/investing/2026/02/24/home-depot-beats-estimates-for-first-time-in-a-year-as-shares-jump-3-5/" target="_blank">247 Wall St: Home Depot beats for first time in a year</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/25/lowes-low-q4-2025-earnings.html" target="_blank">CNBC: Lowe's Q4 2025 earnings</a></li>
-        <li><a href="https://www.benzinga.com/analyst-stock-ratings/analyst-color/26/02/50900159/ionq-posts-strong-q4-guides-to-81-revenue-growth-in-2026" target="_blank">Benzinga: IonQ posts strong Q4, guides 81% revenue growth</a></li>
-        <li><a href="https://www.lpl.com/research/blog/weekly-market-performance-february-27-2026.html" target="_blank">LPL Research: Weekly Market Performance Feb 27, 2026</a></li>
-        <li><a href="https://www.emorningcoffee.com/post/week-ended-february-27-2026-sentiment-is-risk-off" target="_blank">eMorningCoffee: Week ended Feb 27 2026 risk-off</a></li>
-        <li><a href="https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-ai-fatigue-triggers-massive-capital-flight-utilities-and-staples-emerge-as-2026s-unlikely-heroes" target="_blank">FinancialContent: AI Fatigue triggers capital flight</a></li>
-        <li><a href="https://seekingalpha.com/news/4549551-weekly-etf-flows-seven-of-11-sectors-record-outflows-silver-leads-inflows" target="_blank">Seeking Alpha: Weekly ETF flows &mdash; 7 of 11 sectors record outflows</a></li>
-        <!-- Rates, Credit & Fed -->
-        <li><a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve" target="_blank">U.S. Treasury Daily Yield Curve Rates</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/DGS10" target="_blank">FRED: DGS10</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/DGS2" target="_blank">FRED: DGS2</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/T10Y2Y" target="_blank">FRED: 2s10s Spread (T10Y2Y)</a></li>
-        <li><a href="https://seekingalpha.com/news/4547859-us-yield-curve-steepens-as-2s10s-spread-hits-widest-since-january-2022" target="_blank">Seeking Alpha: 2s10s widest since January 2022</a></li>
-        <li><a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank">Federal Reserve: FOMC Minutes Jan 27-28</a></li>
-        <li><a href="https://www.federalreserve.gov/newsevents/speech/waller20260223a.htm" target="_blank">Federal Reserve: Waller Speech Feb 23</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/24/feds-goolsbee-calls-for-a-hold-on-cuts-as-current-rate-of-inflation-is-not-good-enough.html" target="_blank">CNBC: Goolsbee calls for hold on cuts</a></li>
-        <li><a href="https://themortgagepoint.com/2026/02/25/boston-fed-president-central-bank-quite-likely-to-hold-rates-steady-for-some-time/" target="_blank">MortgagePoint: Collins &mdash; hold rates steady for some time</a></li>
-        <li><a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html" target="_blank">CME FedWatch Tool</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/27/us-treasury-yields-investors-await-wholesale-inflation-reading.html" target="_blank">CNBC: 10Y falls below 4% on stagflation risk</a></li>
-        <li><a href="https://www.advisorperspectives.com/articles/2026/02/27/best-month-year-bonds-10-year-yield-below-4" target="_blank">Advisor Perspectives: Best month in a year for bonds</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/BAMLC0A0CM" target="_blank">FRED: ICE BofA IG OAS</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2" target="_blank">FRED: ICE BofA HY OAS</a></li>
-        <li><a href="https://www.federalreserve.gov/data/sloos/sloos-202601.htm" target="_blank">Federal Reserve: January 2026 SLOOS</a></li>
-        <li><a href="https://www.federalreserve.gov/monetarypolicy/bst_recenttrends.htm" target="_blank">Federal Reserve: Balance Sheet Trends</a></li>
-        <li><a href="https://fred.stlouisfed.org/series/RRPONTSYD" target="_blank">FRED: ON RRP (RRPONTSYD)</a></li>
-        <li><a href="https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/" target="_blank">Treasury Fiscal Data: Daily Treasury Statement</a></li>
-        <!-- Commodities & Forex -->
-        <li><a href="https://fxdailyreport.com/wti-crude-oil-price-analysis-for-february-27-2026/" target="_blank">FXDailyReport: WTI crude oil analysis Feb 27</a></li>
-        <li><a href="https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-crude-awakening-brent-surges-past-70-as-geopolitical-tensions-and-supply-discipline-fuel-a-20-rally" target="_blank">FinancialContent: Brent surges past $70</a></li>
-        <li><a href="https://www.cnbc.com/2026/02/27/us-iran-nuclear-talks-oil-middle-east.html" target="_blank">CNBC: US-Iran nuclear talks oil</a></li>
-        <li><a href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">EIA: Weekly Petroleum Status Report</a></li>
-        <li><a href="https://fortune.com/article/current-price-of-gold-02-27-2026/" target="_blank">Fortune: Gold price Feb 27, 2026</a></li>
-        <li><a href="https://fortune.com/article/current-price-of-silver-2-27-2026/" target="_blank">Fortune: Silver price Feb 27, 2026</a></li>
-        <li><a href="https://tradingeconomics.com/commodity/copper" target="_blank">Trading Economics: Copper</a></li>
-        <li><a href="https://www.cmegroup.com/openmarkets/metals/2026/Three-Forces-Shaping-Coppers-Path-Forward.html" target="_blank">CME OpenMarkets: Three Forces Shaping Copper's Path</a></li>
-        <li><a href="https://www.cameco.com/invest/markets/uranium-price" target="_blank">Cameco: Uranium Price</a></li>
-        <li><a href="https://sprottetfs.com/insights/uranium-outlook-2026/" target="_blank">Sprott: Uranium Outlook 2026</a></li>
-        <li><a href="https://www.bloomberg.com/news/articles/2026-02-26/lithium-prices-jump-after-zimbabwe-bans-concentrate-exports" target="_blank">Bloomberg: Lithium prices jump after Zimbabwe bans exports</a></li>
-        <li><a href="https://www.mining.com/web/lithium-prices-jump-after-zimbabwe-bans-concentrate-exports/" target="_blank">Mining.com: Lithium prices jump</a></li>
-        <li><a href="https://www.cruxinvestor.com/posts/sharp-surge-in-praseodymium-neodymium-prices-signals-deepening-scarcity-premium-in-rare-earth-supply-chains" target="_blank">Crux Investor: NdPr prices signal deepening scarcity premium</a></li>
-        <li><a href="https://investornews.com/market-opinion/the-critical-minerals-report-02-22-2026-the-price-floor-era-arrives-for-rare-earths-and-uranium-coppers-midstream-problem-and-graphite-trade-walls/" target="_blank">InvestorNews: Critical Minerals Report 02.22.2026</a></li>
-        <li><a href="https://www.fxstreet.com/analysis/us-dollar-weekly-forecast-at-a-crossroads-fed-steady-tariffs-in-flux-202602271848" target="_blank">FXStreet: US Dollar weekly forecast</a></li>
-        <li><a href="https://www.bloomberg.com/news/articles/2026-02-15/carry-trade-commodities-make-em-currencies-more-stable-than-g-7" target="_blank">Bloomberg: EM currencies more stable than G7</a></li>
-        <li><a href="https://www.eia.gov/naturalgas/weekly/" target="_blank">EIA: Natural Gas Weekly</a></li>
-        <!-- Crypto & Alternative -->
-        <li><a href="https://www.coindesk.com/markets/2026/02/27/bitcoin-slides-friday-as-risk-off-mood-persists-but-majors-hold-weekly-gains" target="_blank">CoinDesk: Bitcoin slides Friday as risk-off mood persists</a></li>
-        <li><a href="https://www.coindesk.com/markets/2026/02/27/bitcoin-rebound-cancelled-as-u-s-stocks-fall-gold-surges-amid-mounting-macro-risks" target="_blank">CoinDesk: Bitcoin rebound cancelled</a></li>
-        <li><a href="https://crypto.news/weekly-bitcoin-etfs-flow-remain-positive-btc-above-66k/" target="_blank">Crypto.news: Bitcoin ETFs post $787M inflows</a></li>
-        <li><a href="https://www.thecoinrepublic.com/2026/02/27/btc-etfs-posted-506m-net-inflows-as-ibit-added-297m/" target="_blank">The Coin Republic: BTC ETFs posted $506M net inflows</a></li>
-        <li><a href="https://www.investing.com/analysis/bitcoin-etfs-lose-45b-in-2026-as-ibit-etf-and-btc-face-a-riskoff-stress-test-200675439" target="_blank">Investing.com: Bitcoin ETFs lose $4.5B in 2026</a></li>
-        <li><a href="https://www.coindesk.com/business/2026/02/03/defi-s-quiet-strength-tvl-holds-as-market-selloff-tests-traders" target="_blank">CoinDesk: DeFi's quiet strength</a></li>
-        <li><a href="https://www.ethnews.com/usdt-market-cap-slides-for-second-straight-month-as-stablecoin-growth-stalls/" target="_blank">ETHNews: USDT market cap slides</a></li>
-        <li><a href="https://www.theblock.co/post/383241/crypto-regulation-2026-sec-ambitious-agenda-empowered-cftc" target="_blank">The Block: Crypto regulation 2026 &mdash; SEC's ambitious agenda</a></li>
-        <li><a href="https://www.consumerfinancialserviceslawmonitor.com/2026/02/cftc-and-sec-signal-new-era-of-crypto-harmonization-at-joint-project-crypto-event/" target="_blank">Consumer Financial Services Law Monitor: CFTC/SEC Project Crypto</a></li>
-        <li><a href="https://www.coindesk.com/policy/2026/02/28/bitcoin-is-stuck-in-a-rut-but-jpmorgan-says-new-legislation-could-be-the-ultimate-spark" target="_blank">CoinDesk: JPMorgan says legislation could be the ultimate spark</a></li>
-        <li><a href="https://farside.co.uk/btc/" target="_blank">Farside Investors: Bitcoin ETF Flows</a></li>
-        <li><a href="https://farside.co.uk/eth/" target="_blank">Farside Investors: Ethereum ETF Flows</a></li>
-        <li><a href="https://defillama.com/" target="_blank">DefiLlama: DeFi Dashboard</a></li>
-        <li><a href="https://www.coinglass.com/bitcoin-etf" target="_blank">CoinGlass: Bitcoin ETF Fund Flows</a></li>
-      </ol>
+      <ul class="sources-list">
+        <li class="sources-cat">Iran Crisis &amp; Geopolitical</li>
+        <li><a href="https://www.cnbc.com/2026/03/01/iran-khamenei-trump-us-investors-markets.html" target="_blank">CNBC: U.S.-Israel strikes Iran &mdash; what we know</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/2026_Israeli%E2%80%93United_States_strikes_on_Iran" target="_blank">Wikipedia: 2026 Israeli-United States strikes on Iran</a></li>
+        <li><a href="https://www.npr.org/2026/03/01/nx-s1-5731365/us-israeli-strikes-region" target="_blank">NPR: 3 American troops killed in war against Iran</a></li>
+        <li><a href="https://www.aljazeera.com/news/2026/3/1/how-us-israel-attacks-on-iran-threaten-the-strait-of-hormuz-oil-markets" target="_blank">Al Jazeera: How US-Israel attacks threaten Strait of Hormuz</a></li>
+        <li><a href="https://www.cnn.com/2026/03/01/business/oil-prices-us-attack-iran-vis" target="_blank">CNN: Oil surges and stock futures sink after war in Iran</a></li>
+        <li class="sources-cat">Equities &amp; Earnings</li>
+        <li><a href="https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html" target="_blank">CNBC: NVIDIA reports Q4 FY2026 earnings</a></li>
+        <li><a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026" target="_blank">NVIDIA Press Release: Q4 FY2026 Financial Results</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html" target="_blank">CNBC: Dow closes 500+ points lower after hot inflation report</a></li>
+        <li><a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-fall-to-end-volatile-month-as-ai-worries-buffet-markets-211239963.html" target="_blank">Yahoo Finance: Dow, S&amp;P 500, Nasdaq fall to end volatile month</a></li>
+        <li class="sources-cat">Rates, Credit &amp; Fed</li>
+        <li><a href="https://www.cnbc.com/2026/02/27/us-treasury-yields-investors-await-wholesale-inflation-reading.html" target="_blank">CNBC: 10-year yield falls below 4% on stagflation risk</a></li>
+        <li><a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank">Federal Reserve: FOMC Minutes January 27-28, 2026</a></li>
+        <li><a href="https://www.bloomberg.com/news/articles/2026-02-18/fed-minutes-show-several-officials-point-to-rate-hike-scenario" target="_blank">Bloomberg: Several Fed officials point to rate-hike scenario</a></li>
+        <li><a href="https://www.bloomberg.com/news/articles/2026-02-26/private-credit-s-great-divide-imminent-crisis-or-no-big-deal" target="_blank">Bloomberg: Private credit split on crisis risk</a></li>
+        <li class="sources-cat">Commodities &amp; Forex</li>
+        <li><a href="https://www.cnbc.com/2026/03/01/crude-oil-futures-iran.html" target="_blank">CNBC: WTI crude jumps 8%+ on Iran supply disruption fears</a></li>
+        <li><a href="https://www.kpler.com/blog/us-iran-conflict-strait-of-hormuz-crisis-reshapes-global-oil-markets" target="_blank">Kpler: Strait of Hormuz crisis reshapes global oil markets</a></li>
+        <li><a href="https://www.bloomberg.com/news/articles/2026-03-01/more-lng-tankers-divert-from-hormuz-in-widening-iran-crisis" target="_blank">Bloomberg: More LNG tankers divert from Hormuz</a></li>
+        <li><a href="https://www.kitco.com/news/article/2026-02-27/gold-prices-push-back-above-5200-sees-solid-rebound-february-end-month" target="_blank">Kitco: Gold prices push back above $5,200</a></li>
+        <li><a href="https://english.aawsat.com/business/5245947-barclays-says-brent-crude-oil-could-reach-100-barrel" target="_blank">Barclays: Brent crude could reach $100/bbl</a></li>
+        <li class="sources-cat">Crypto</li>
+        <li><a href="https://www.coindesk.com/markets/2026/03/01/bitcoin-tops-usd68-000-after-iran-confirms-leader-killed-in-u-s-israel-airstrikes" target="_blank">CoinDesk: Bitcoin tops $68K after Iran confirms Khamenei death</a></li>
+        <li><a href="https://www.coindesk.com/markets/2026/03/01/ether-solana-xrp-surge-up-to-10-as-majors-recover-saturday-s-war-driven-losses" target="_blank">CoinDesk: ETH, SOL, XRP surge 10% to recover war-driven losses</a></li>
+        <li><a href="https://www.cryptopolitan.com/sec-chair-atkins-signals-crypto-reset/" target="_blank">Cryptopolitan: SEC Chair Atkins signals crypto reset</a></li>
+        <li><a href="https://www.cnbc.com/2026/02/15/bitcoin-price-crash-crypto-winter-investors-etf-flows.html" target="_blank">CNBC: Bitcoin ETF flows not signaling crypto winter</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1135,8 +1273,8 @@ section { padding: 80px 0; }
   <div style="font-size: 13px; color: var(--text-muted);">
     Eagle Eye W09 &bull; BigPic Solutions &bull; Week Ending 2026-02-27 &bull; Compiled 2026-03-01
   </div>
-  <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
-    Eagle Eye is a weekly macro research report compiled from public market data and news sources. It does not constitute investment advice.
+  <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px; max-width: 600px; margin-left: auto; margin-right: auto;">
+    Eagle Eye is a weekly macro research report compiled from public market data and news sources. It does not constitute investment advice. This is a point-in-time snapshot &mdash; prices and developments may have changed since publication.
   </div>
 </footer>
 
@@ -1168,11 +1306,10 @@ function animateCounters() {
 // Sector Bar Chart
 function initBarChart() {
   const sectors = [
-    { name: 'XLV', pct: 1.8 }, { name: 'XLE', pct: 1.6 }, { name: 'XLU', pct: 1.5 },
-    { name: 'XLP', pct: 0.5 }, { name: 'XLI', pct: 0.25 },
-    { name: 'XLB', pct: 0.0 }, { name: 'XLRE', pct: 0.0 },
-    { name: 'XLF', pct: -0.5 }, { name: 'XLC', pct: -0.8 },
-    { name: 'XLY', pct: -1.0 }, { name: 'XLK', pct: -1.6 }
+    { name: 'XLE', pct: 3.5 }, { name: 'XLB', pct: 2.0 }, { name: 'XLP', pct: 1.5 },
+    { name: 'XLU', pct: 1.2 }, { name: 'XLI', pct: 0.5 }, { name: 'XLV', pct: 0.2 },
+    { name: 'XLRE', pct: 0.0 }, { name: 'XLF', pct: -2.1 }, { name: 'XLC', pct: -1.2 },
+    { name: 'XLK', pct: -1.7 }
   ];
   const maxAbs = Math.max(...sectors.map(s => Math.abs(s.pct)));
   const container = document.getElementById('sectorBars');
@@ -1181,12 +1318,12 @@ function initBarChart() {
     col.className = 'bar-col';
     const bar = document.createElement('div');
     bar.className = 'bar ' + (s.pct >= 0 ? 'positive' : 'negative');
-    const heightPct = maxAbs > 0 ? (Math.abs(s.pct) / maxAbs) * 100 : 0;
+    const heightPct = (Math.abs(s.pct) / maxAbs) * 100;
     bar.style.height = '0%';
-    setTimeout(() => { bar.style.height = Math.max(heightPct, 2) + '%'; }, 500);
+    setTimeout(() => { bar.style.height = Math.max(heightPct, 3) + '%'; }, 500);
     const val = document.createElement('span');
     val.className = 'bar-value ' + (s.pct >= 0 ? 'positive' : 'negative');
-    val.textContent = s.pct === 0 ? '0%' : (s.pct >= 0 ? '+' : '') + s.pct.toFixed(1) + '%';
+    val.textContent = s.pct === 0 ? '0.0%' : (s.pct >= 0 ? '+' : '') + s.pct.toFixed(1) + '%';
     bar.appendChild(val);
     const label = document.createElement('span');
     label.className = 'bar-label';

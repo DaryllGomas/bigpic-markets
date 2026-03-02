@@ -1,203 +1,228 @@
-# Rates, Credit & Fed -- Week Ending 2026-02-27
+# Rates, Credit & Fed
 
-## Summary
+*Week ending February 27, 2026 | Eagle Eye W09*
 
-Treasuries posted their best month in a year as a decisive risk-off rotation drove the 10-year yield below 4% for the first time since November 2025. The week's narrative was dominated by growing stagflation fears -- a hot January PPI reading (core +0.8% vs. +0.3% expected) collided with deteriorating growth signals, a 500+ point Dow selloff, and deepening concerns about AI-driven economic disruption. Safe-haven demand overwhelmed any residual hawkish repricing from the prior week's FOMC minutes, sending the 10-year down 11 bps on the week to 3.97% and the 2-year down 36 bps to 3.38% -- its lowest level since August 2022. The Bloomberg Treasury Index returned +1.5% for February, with long-duration bonds gaining 4%.
-
-The Fed speaker calendar was busy: Governor Waller (Feb 23) called a March rate cut "a coin flip" contingent on February labor data, revealing that revised 2025 payroll data may show employment actually *fell* over the year -- an extraordinary revision. Chicago Fed President Goolsbee pushed back on cuts, saying 3% inflation "is not good enough." Boston Fed President Collins advocated patience, stating the Fed is "quite likely" to hold rates steady "for some time." Richmond's Barkin and St. Louis's Musalem both called current policy "well positioned." The net tone was moderately hawkish on the rate path, even as the bond market was aggressively pricing in economic weakness.
-
-CME FedWatch continues to show 94% probability of a hold at the March 18 meeting. However, the market is increasingly pricing cuts further out: roughly 50-50 for June, ~71% for July, and three cuts (75 bps) by year-end. The tension between the Fed's cautious inflation-fighting posture and the bond market's growth-scare pricing is the defining dynamic heading into the March SEP meeting with its updated dot plot.
-
-For our thesis watchlist, the rally in Treasuries is a tailwind for the rate-sensitive names in our energy storage (FLNC, EOSE), space (RKLB, LUNR), and nuclear (CEG, VST) verticals -- lower long-term rates improve project economics for capital-intensive infrastructure. It is also constructive for defense primes (LMT, RTX, NOC), which benefit from a lower discount rate on their multi-year backlog streams. Credit spreads at near-historic tights remain a background risk if the growth scare deepens into something more fundamental.
+---
 
 ## Treasury Yields
 
-| Maturity | Close Feb 27 | Close Feb 20 | Weekly Change (bps) | Monthly Change (Feb) | Note |
-|----------|-------------|-------------|---------------------|---------------------|------|
-| 2-Year   | 3.38%       | 3.74%       | -36 bps             | ~-25 bps            | Lowest since August 2022; massive bull flattening |
-| 5-Year   | 3.57%       | 3.69%       | -12 bps             | ~-20 bps            | Belly of the curve followed long end lower |
-| 10-Year  | 3.97%       | 4.08%       | -11 bps             | ~-25 bps            | Broke below 4% for first time since November; 4-month low |
-| 30-Year  | 4.63%       | 4.72%       | -9 bps              | ~-15 bps            | Long end rallied least -- bear steepening risk in the wings |
+Treasuries staged their best monthly rally in a year during February, with safe-haven demand accelerating into month-end as investors fled a stock market selloff, AI disruption fears, geopolitical tensions in the Middle East, and mounting private credit concerns. The 10-year yield broke below 4% for the first time in four months.
 
-*Source: [U.S. Treasury Daily Yield Curve Rates](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve) [1], [FRED DGS10](https://fred.stlouisfed.org/series/DGS10) [2], [FRED DGS2](https://fred.stlouisfed.org/series/DGS2) [3], [Federal Reserve H.15 Release](https://www.federalreserve.gov/releases/h15/) [4]*
+| Maturity | Feb 27 Close | Feb 20 Close | Weekly Change | Month-End Context |
+|----------|-------------|-------------|---------------|-------------------|
+| **2-Year** | 3.38% | 3.48% | **-10 bps** | Lowest since August 2022 |
+| **5-Year** | ~3.60% (est.) | ~3.72% (est.) | **~-12 bps** | Tracking broader rally |
+| **10-Year** | 3.97% | 4.08% | **-11 bps** | Broke below 4% intraday; lowest in 4 months |
+| **30-Year** | 4.63% | 4.72% | **-9 bps** | Lagging the rally, curve steepening at long end |
 
-**Intra-week dynamics:** Monday (Feb 23) saw the 10-year hovering near 4.09% as new Trump tariff threats on Canada and Mexico weighed on sentiment and Waller's "coin flip" speech introduced ambiguity on March. Tuesday (Feb 24) brought a renewed bid for Treasuries amid deteriorating consumer confidence and equity weakness, with the 10-year testing 4.05%. Wednesday (Feb 25) saw further buying as Musalem's "balanced risk" comments did nothing to halt the safety trade. Thursday (Feb 26) the 10-year traded right around 4.00% as risk-off sentiment intensified. Friday (Feb 27) was the inflection -- the 10-year decisively broke below 4% to settle at 3.97% on a combination of hot PPI data (paradoxically fueling stagflation fears rather than hawkish repricing), a sharp equity selloff (Dow -500+), and AI disruption concerns. The 2-year's 36 bp weekly plunge was the standout -- a dramatic bull-flattening move driven by growing conviction that labor market weakness will force the Fed's hand.
+**February recap:** The 10-year yield fell approximately 25 bps across the month (from ~4.22% at end of January), its strongest monthly performance in a year. The front end moved even more aggressively, with the 2-year dropping from ~3.60% at end of January. The rally gathered steam on (1) cooling CPI (2.4% YoY in January, down from 2.7% in December), (2) safe-haven flows amid equity selloff, and (3) growing recession anxieties despite resilient headline data.
 
-**Monthly context:** February saw the 10-year fall ~25 bps from its January peak of 4.26%, while the 2-year dropped even more aggressively. The Bloomberg Treasury Index gained +1.5% for the month -- the best monthly return in a year -- with long-duration Treasuries gaining approximately 4%. About $16.3 billion flowed into Treasury funds during the first two months of 2026, per EPFR.
+**The "yield curve twist":** A notable structural development in late February was T-bills (1-month to 12-month) climbing toward 3.7% while longer-dated yields fell. This inversion at the very front end reflects the market pricing Fed on hold through mid-year while long-end rallies on growth fears -- a classic late-cycle pattern.
+
+---
 
 ## Yield Curve
 
-| Spread        | Feb 27 Level | Feb 20 Level | Weekly Change | Status |
-|---------------|-------------|-------------|---------------|--------|
-| 2s10s Spread  | +59 bps     | +34 bps     | +25 bps       | Sharp bull-steepening; widest since early 2022 |
-| 3m10y Spread  | +31 bps     | ~+40 bps    | -9 bps        | Still positive but narrowing |
+### 2s10s Spread
 
-*Sources: [FRED 2s10s Spread (T10Y2Y)](https://fred.stlouisfed.org/series/T10Y2Y) [5], [FRED 3m10y Spread (T10Y3M)](https://fred.stlouisfed.org/series/T10Y3M) [6], [Seeking Alpha: 2s10s Widest Since January 2022](https://seekingalpha.com/news/4547859-us-yield-curve-steepens-as-2s10s-spread-hits-widest-since-january-2022) [7]*
+The 2s10s spread ended the week at approximately **+59 bps** (3.97% minus 3.38%), having narrowed from roughly +60 bps the prior week. After reaching +74 bps earlier in 2026, the curve has been bull-flattening as longer-dated yields fell faster than the front end on safe-haven demand. The spread has swung back and forth near the boundary of positive and narrowing territory in recent sessions.
 
-The yield curve underwent a dramatic **bull steepening** this week. The 2-year plunged 36 bps as markets priced in a more aggressive easing trajectory, while the 10-year fell a more modest 11 bps. The result was a 2s10s spread explosion from +34 bps to approximately +59 bps -- the widest since January 2022 and a stark departure from the 2022-2024 deep inversion regime.
+**Context:** The curve un-inverted in late 2024 and has been positively sloped since mid-December 2024. The current +59 bps spread is well within normal range, but the recent flattening trend bears watching -- it suggests the market is rotating from "reflation" toward "growth scare."
 
-The 3m10y spread narrowed slightly to approximately +31 bps from +40 bps as T-bill rates remained anchored near 3.7% (close to the fed funds midpoint of 3.625%) while the 10-year fell below 4%. Notably, the 3m10y has been swinging between positive and negative territory in late February, reflecting the tug-of-war between the Fed's hold stance and the market's growth scare.
+### 3-Month / 10-Year Spread
 
-**Interpretation:** The bull steepening is a classic growth-scare signal -- the front end is moving aggressively to price in future rate cuts while the long end declines more slowly due to residual inflation concerns and term premium. This is the mirror image of the prior week's modest bear steepening. The speed of the 2s10s widening -- 25 bps in a single week -- underscores how quickly market expectations can shift. The February article from FinancialContent describing the "2026 Yield Curve Twist" captures the dynamic well: short-term rates elevated by hawkish Fed rhetoric while long-term rates sink on safe-haven demand and growth concerns.
+The 3m10y spread has been oscillating around zero since late February, with the spread swinging back and forth from positive to negative territory since February 26. With 3-month T-bills near 3.70% and the 10-year at 3.97%, the spread sits at roughly **+27 bps** -- but dangerously close to inversion territory.
+
+**Recession signal:** The 3m10y spread was inverted from October 2022 through December 2024. The NY Fed's recession probability model, which uses this spread as its primary input, still shows elevated recession probability given the prolonged prior inversion. Historical lead time from inversion to recession ranges from 34-69 weeks (average ~48 weeks). If this spread re-inverts, it would reignite recession watch in earnest.
+
+### Fed Funds Futures Pricing
+
+| Meeting | Date | Hold Probability | Cut Probability |
+|---------|------|-----------------|-----------------|
+| **March** | Mar 18 | ~77% | ~23% (25 bps cut) |
+| **May** | Apr 29 | ~65% | ~35% cumulative |
+| **June** | Jun 17 | ~45% | ~55% (at least one cut) |
+| **Year-end** | Dec 9 | -- | 2-3 cuts (50-75 bps) priced |
+
+The March cut probability collapsed from nearly 50% a month ago to just ~6% immediately after the hawkish FOMC minutes release (Feb 18), then recovered to ~23% by week-end as the bond rally and equity selloff shifted the calculus. Markets are pricing June as the earliest likely cut date, with 2-3 total cuts (50-75 bps) by year-end. The distribution is wide: 16.6% see just one cut, 30.6% see two, and 29.1% see three.
+
+---
 
 ## Fed Watch
 
-### Current Rate: 3.50%-3.75% (held January 28, 2026; 10-2 vote, Waller dissented for a cut)
+### FOMC Minutes (Jan 27-28 meeting, released Feb 18)
 
-No FOMC meeting occurred during this reporting week. The next meeting is **March 17-18** -- a critical SEP meeting with updated dot plot, economic projections, and a press conference. This will be the first 2026 dot plot and will provide essential guidance on the committee's rate path expectations.
+The January minutes were the most hawkish development of the week -- arguably of 2026 so far. Key revelations:
 
-### FOMC Minutes Recap (Released Feb 18 -- Prior Week, Still Reverberating)
+- **Rate hike on the table:** Several officials "entertained the notion that rate hikes could be on the table" and wanted the statement to reflect "a two-sided description of the Committee's future interest rate decisions." This was a shock to markets still pricing in cuts.
 
-The January 27-28 meeting minutes, released the prior week, continued to shape market dynamics. Key themes that reverberated this week:
+- **Inflation caution dominant:** "Most participants cautioned that progress toward the Committee's 2 percent objective might be slower and more uneven than generally expected and judged that the risk of inflation running persistently above the Committee's objective was meaningful."
 
-- **Rate-hike option remains on the table.** Several officials wanted post-meeting language to reflect "a two-sided description of future interest rate decisions." Fortune headlined the minutes as "a headache already brewing for Kevin Warsh."
-- **Inflation is the binding constraint.** Most participants judged the risk of inflation running persistently above 2% as "meaningful," and cautioned progress may be "slower and more uneven than generally expected."
-- **Tariff impact viewed as transitory but uncertain.** Officials expected tariff-driven price increases to wane as the year progresses, but acknowledged significant uncertainty around timing and magnitude.
-- **Economic expansion acknowledged as solid.** Members agreed indicators suggested the economy was expanding at a "solid pace."
+- **Deep division:** The Committee is split between hawks worried about entrenched inflation and doves focused on labor market softening. Two members dissented at the January meeting (voting to cut rather than hold), creating a 10-2 split.
 
-*Sources: [Federal Reserve: FOMC Minutes Jan 27-28](https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm) [8], [CNBC: Fed Minutes January 2026](https://www.cnbc.com/2026/02/18/fed-minutes-january-2026.html) [9], [Fortune: Headache Brewing for Warsh](https://fortune.com/2026/02/19/warsh-hawkish-fed-powell-cuts-hike-policy-meeting-notes/) [10]*
+- **"Hawkish pause" framing:** After three consecutive cuts in late 2025 (totaling 75 bps), the hold at 3.50-3.75% was widely characterized as a hawkish pause, not a neutral one.
 
-### Kevin Warsh Nomination -- Key Backdrop
+### Kevin Warsh Nomination (Formally transmitted Feb 24)
 
-The nomination of Kevin Warsh as Fed Chair (announced January 30) remained a significant backdrop to this week's rate action. Warsh, who faces confirmation hearings in March, is widely viewed as more hawkish than Chair Powell and potentially favoring a more aggressive balance sheet normalization. The "Warsh Shock" narrative -- which FinancialContent described as signaling "a radical shift to sound money" -- is contributing to uncertainty around the Fed leadership transition (Powell's term expires May 2026). Markets are parsing every data point through the lens of how a Warsh-led Fed might react differently.
+The biggest structural story in rates this week was the formal Senate transmission of Kevin Warsh's nomination to replace Jerome Powell as Fed Chair (Powell's term expires May 15, 2026). This is a generational shift:
 
-*Sources: [White House: Warsh Nomination](https://www.whitehouse.gov/articles/2026/01/wide-acclaim-for-president-trumps-nomination-of-kevin-warsh-as-fed-chair/) [11], [FinancialContent: The Warsh Shock](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-the-warsh-shock-kevin-warsh-nominated-as-fed-chair-signaling-a-radical-shift-to-sound-money) [12], [Invesco: Warsh Nominated Fed Chair](https://www.invesco.com/us/en/insights/kevin-warsh-nominated-fed-chair.html) [13]*
+- **"Sound money" doctrine:** Warsh is a known inflation hawk from his time as the youngest-ever Fed Governor (2006-2011) and vocal critic of QE from the Hoover Institution. His nomination signals a "definitive end to the Powell Era."
 
-### Fed Speakers This Week
+- **Balance sheet pivot:** Markets are pricing in aggressive quantitative tightening alongside potential front-loaded rate cuts -- a "tapering plus rate cuts" strategy that would rebuild Fed credibility through active balance sheet reduction.
 
-| Speaker | Date | Lean | Key Points |
-|---------|------|------|------------|
-| **Gov. Christopher Waller** | Feb 23 | Dovish-leaning | March cut is "a coin flip" depending on Feb jobs data; 2025 payroll revisions suggest employment may have actually *fallen* -- weakest year outside recession since 1945; Q4 2025 GDP at 1.4% but smoothing for shutdown effects implies ~2%+ growth; dissented in January for a 25 bp cut [14][15] |
-| **Austan Goolsbee** (Chicago) | Feb 24 | Hawkish-hold | "Front-loading too many rate cuts is not prudent"; 3% inflation "is not good enough -- and it's not what we promised"; Supreme Court tariff ruling adds uncertainty; multiple cuts possible if inflation cooperates [16][17] |
-| **Raphael Bostic** (Atlanta) | Feb 25 | Hawkish-hold | Economy "remarkably resilient"; inflation at ~3% is "a long way from the 2% target"; "no rush" to cut rates; prioritizes price stability over employment risks [18] |
-| **Tom Barkin** (Richmond) | Feb 24 | Neutral-hold | Monetary policy is "well positioned" and "appropriately aligned to address potential risks"; does not expect AI to cause "abrupt shifts" in the economy; labor market less tight but not alarming [19] |
-| **Albert Musalem** (St. Louis) | Feb 25-26 | Neutral-hold | Policy rate "near neutral" and "appropriately balancing risks"; expects economy to grow "at or above potential" (~2%); half of excess inflation comes from tariffs and should fade; manufacturing "surprisingly doing well" [20][21] |
-| **Susan Collins** (Boston) | Feb 25 | Hawkish-hold | "Patient and deliberate approach is appropriate"; after 175 bps of easing, policy is "mildly restrictive, perhaps quite close to neutral already"; "quite likely" to hold rates steady "for some time" [22] |
+- **Bear steepening:** The initial market reaction was a dramatic bear steepening of the yield curve as investors repriced the long end for a more hawkish long-term regime while expecting near-term cuts to continue.
 
-**Assessment:** The dominant tone was hawkish-hold, with Goolsbee, Bostic, and Collins all emphasizing patience and the inadequacy of current inflation levels. Waller was the notable outlier -- his "coin flip" framing on March and his alarming labor market revision data suggest he remains the committee's leading dove and could dissent again in March. The contrast between Waller's labor market concerns (2025 payrolls may show a net decline) and Bostic's characterization of a "remarkably resilient" economy illustrates the deep divisions within the committee heading into the March SEP.
+- **Confirmation uncertainty:** The Senate process is expected to be contentious. Warsh must thread the needle between Trump's desire for lower rates and his own hawkish instincts.
 
-*Sources: [Fed: Waller Speech Feb 23](https://www.federalreserve.gov/newsevents/speech/waller20260223a.htm) [14], [The Street: Waller March Cut Coin Flip](https://www.thestreet.com/fed/feds-waller-calls-march-interest-rate-cut-a-coin-flip) [15], [CNBC: Goolsbee Hold on Cuts](https://www.cnbc.com/2026/02/24/feds-goolsbee-calls-for-a-hold-on-cuts-as-current-rate-of-inflation-is-not-good-enough.html) [16], [Bloomberg: Goolsbee Tariff Ruling](https://www.bloomberg.com/news/articles/2026-02-24/fed-s-goolsbee-says-tariff-ruling-could-help-cool-inflation) [17], [Atlanta Fed: Bostic Discusses FOMC Decision](https://www.atlantafed.org/what-we-study/regional-economy/2026/02/02/bostic-discusses-recent-fomc-decision-to-hold-rate-steady) [18], [FXStreet: Barkin Monetary Policy Well Positioned](https://www.fxstreet.com/news/feds-barkin-monetary-policy-is-currently-well-positioned-for-risks-202602242333) [19], [Bloomberg: Musalem Fed Rate Near Neutral](https://www.bloomberg.com/news/videos/2026-02-25/musalem-says-fed-rate-is-near-neutral-risks-balanced-video) [20], [St. Louis Magazine: Musalem Economy View](https://www.stlmag.com/business/st-louis-fed-president-albert-musalem-2026-economy-view/) [21], [MortgagePoint: Collins Hold Rates Steady](https://themortgagepoint.com/2026/02/25/boston-fed-president-central-bank-quite-likely-to-hold-rates-steady-for-some-time/) [22]*
+### Fed Speaker Highlights (Week of Feb 24-28)
 
-### Rate Expectations -- CME FedWatch
+| Speaker | Role | Lean | Key Quote |
+|---------|------|------|-----------|
+| **Christopher Waller** | Governor | Dovish | Voted to cut in January (minority). Said solid January jobs could mean "skip a rate cut at the next meeting" but maintained that 2025 jobs data was "very weak." |
+| **Raphael Bostic** | Atlanta Fed President | Hawkish | "No rate cuts penciled in for 2026." Neutral is "one or two cuts away" but economy's current strength raises inflation persistence risk. |
+| **Susan Collins** | Boston Fed President | Neutral-Hawkish | "A patient and deliberate approach is appropriate at this stage... we're at a mildly restrictive, perhaps quite close to neutral policy already." |
+| **Alberto Musalem** | St. Louis Fed President | Neutral-Hawkish | Sees "a good year" for the economy, growth "at or above potential." Warned it would be "unadvisable to lower the rate into accommodative territory" unless labor market weakens. |
 
-As of Feb 27 close:
+**Net lean:** The Fedspeak this week was decidedly hawkish. Three of four speakers either pushed back on near-term cuts or explicitly flagged inflation risks. Only Waller maintained a dovish posture, and even he acknowledged the case for holding in March. The gap between market pricing (2-3 cuts by year-end) and Fed rhetoric (0-1 cuts) remains wide.
 
-| Meeting | Hold | 25 bps Cut | 50+ bps Cut | Shift vs. Prior Week |
-|---------|------|------------|-------------|---------------------|
-| March 18, 2026 | ~94% | ~6% | <1% | Essentially unchanged; hold is near-certainty |
-| April 29, 2026 | ~55% | ~45% | <1% | Cut odds have risen meaningfully to near coin-flip |
-| June 17, 2026 | ~50% | ~45% | ~5% | ~50-50 for a cut; June remains earliest plausible date |
-| July 29, 2026 | ~29% | ~71% | N/A | ~71% probability of at least one cut by July |
-| Dec 9, 2026 | ~15% | ~30% | ~55% | Three cuts (75 bps) by year-end is the market base case |
-
-*Source: [CME FedWatch Tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html) [23], [Morningstar: What's Next for the US Fed in 2026](https://global.morningstar.com/en-gb/markets/whats-next-us-fed-2026) [24]*
-
-**Full-year 2026 expectations:** The market has re-broadened its easing expectations after the prior week's hawkish repricing. While the March hold is locked in, the bond market's aggressive rally this week signals growing conviction that the labor market is weakening faster than the Fed acknowledges. The three-cut base case by year-end (down to 2.75-3.00%) has re-emerged as the market consensus, up from the two-cut consensus established after the minutes release. The key variable is the February employment report (due the first Friday of March), which Waller explicitly flagged as the decision point for March.
-
-### March 18 FOMC Preview
-
-The March 17-18 meeting will be the most consequential of 2026 so far:
-
-- **First 2026 dot plot:** Will reveal whether the median FOMC projection has shifted from the December 2025 SEP (which implied 2-3 cuts in 2026).
-- **Inflation projections vs. labor data:** If February jobs disappoint as Waller's revised data suggests, the committee may be forced to confront a genuine dual-mandate tension -- elevated inflation with a softening labor market.
-- **Warsh confirmation watch:** Any developments in Warsh's Senate confirmation hearings could influence the committee's forward guidance framing.
+---
 
 ## Credit Markets
 
-| Metric | Feb 27 Level | Feb 20 Level | Weekly Change | Note |
-|--------|-------------|-------------|---------------|------|
-| IG OAS (ICE BofA) | ~77 bps | ~77 bps | Flat | 2nd percentile over 20-year lookback; near historic tights |
-| HY OAS (ICE BofA) | ~294 bps | ~286 bps | +8 bps | Modest widening on risk-off; still well below historical average |
-| BB OAS | ~210 bps (est.) | ~205 bps (est.) | +5 bps (est.) | Higher-quality HY held better |
-| CCC & Lower OAS | ~700+ bps (est.) | ~680 bps (est.) | +20 bps (est.) | Weakest credits showing most stress |
+### Investment Grade
 
-*Sources: [FRED: ICE BofA IG OAS (BAMLC0A0CM)](https://fred.stlouisfed.org/series/BAMLC0A0CM) [25], [FRED: ICE BofA HY OAS (BAMLH0A0HYM2)](https://fred.stlouisfed.org/series/BAMLH0A0HYM2) [26], [Trading Economics: HY OAS](https://tradingeconomics.com/united-states/bofa-merrill-lynch-us-high-yield-option-adjusted-spread-fed-data.html) [27]*
+IG spreads reached a three-decade low of approximately **71 bps** OAS in January 2026 -- the tightest since 1998. During the week ending Feb 27, spreads widened modestly but remain historically compressed:
 
-**Investment grade** spreads held firm at ~77 bps despite the risk-off tone, demonstrating the resilience of IG credit in a flight-to-quality environment. IG bonds benefit from the same safety bid as Treasuries, and strong corporate fundamentals continue to support tight spreads. The 77 bp level sits in the 2nd percentile over a 20-year lookback, meaning spreads have been tighter only ~2% of the time in the past two decades. Charles Schwab's 2026 outlook maintains an "up-in-quality" recommendation given these historically tight levels.
+- **Current IG OAS:** ~78-82 bps (up ~7-11 bps from the January trough)
+- **Context:** IG yields remain attractive in absolute terms, near the upper end of their 15-year range, even as spreads are at the lower end
 
-**High yield** spreads widened modestly to ~294 bps from ~286 bps as the equity selloff and risk-off positioning spilled into lower-quality credit. The 8 bp widening is notable but not alarming -- HY OAS remains well below the historical average of ~450-500 bps and far from the 600+ bps stress levels seen during true credit events. CCC-rated bonds showed the most stress, consistent with the pattern during risk-off weeks where the weakest credits bear disproportionate pressure.
+### High Yield
 
-**Issuance:** Corporate bond issuance slowed into February relative to January's pace. YTD 2026 IG issuance through January was $239.4B (+2.5% YoY). HY issuance YTD hit $50B (+28% YoY), reflecting strong demand for yield in a rate-cutting environment. Full-year 2026 gross IG supply is expected to reach a record near $2 trillion, driven in part by AI-related infrastructure financing and increased M&A activity. Marketplace reported on the "trillion-dollar bond sell-off funding data centers," highlighting how hyperscaler capex is creating significant new corporate bond supply.
+HY spreads tightened to 2007-era levels earlier in 2026 but showed signs of stress in the final week of February:
 
-**Stress signals:** No material stress signals in credit markets. Default rates remain low, and the January 2026 Senior Loan Officer Survey showed banks expecting lending standards to remain basically unchanged across most loan categories in 2026, with demand expected to strengthen for C&I loans and commercial real estate. Banks did flag potential quality deterioration in C&I loans to small firms and consumer loan categories -- worth monitoring as a leading indicator.
+- **Current HY OAS:** ~290-310 bps (estimated, having widened from ~270 bps trough)
+- **Quality bifurcation:** BB-rated bonds continue to tighten while CCC and lower-rated credits have widened -- a classic risk-off divergence pattern
+- Global credit spreads widened the most in four months during the week, per Bloomberg
 
-*Sources: [Schwab: 2026 Corporate Credit Outlook](https://www.schwab.com/learn/story/corporate-bond-outlook) [28], [SIFMA: US Corporate Bond Statistics](https://www.sifma.org/research/statistics/us-corporate-bonds-statistics) [29], [FI-DESK: Corporate Bond Issuance Slows](https://www.fi-desk.com/corporate-bond-issuance-slows-into-february-reducing-trading-desk-pressure/) [30], [Marketplace: Trillion-Dollar Bond Sell-Off](https://www.marketplace.org/story/2026/02/25/the-trilliondollar-bond-selloff-funding-data-centers-could-have-side-effects) [31], [Federal Reserve: January 2026 SLOOS](https://www.federalreserve.gov/data/sloos/sloos-202601.htm) [32]*
+### Private Credit: The Emerging Fault Line
+
+The most concerning credit story of the week was escalating private credit fears:
+
+- **Market size:** ~$2 trillion globally, having grown fivefold since 2008
+- **DOJ warning:** The Department of Justice publicly warned about "creative" marks and divergent valuation practices in private portfolios
+- **SEC inquiry:** A high-profile SEC inquiry into Egan-Jones Ratings placed private credit ratings integrity under scrutiny
+- **Jamie Dimon's warning:** Financial firms are "doing dumb things" in risky lending; Mohamed El-Erian drew parallels with the 2008 run-up
+- **AI-driven defaults:** AI disruption is pressuring software firms that comprise a significant portion of private credit portfolios, with defaults rising
+- **Bloomberg assessment:** The market is split between those seeing an "imminent crisis" and those dismissing concerns as overblown -- a pattern that typically precedes actual stress
+
+This matters for public markets because hidden losses in private credit could cascade into forced selling of liquid assets, tighter lending standards, and broader risk aversion.
+
+### Bank Lending Conditions
+
+The January 2026 Senior Loan Officer Opinion Survey (SLOOS) showed:
+
+- **C&I loans:** Modest net tightening for firms of all sizes in Q4 2025
+- **CRE:** Slight easing for multifamily; unchanged for construction and commercial
+- **2026 outlook:** Most banks expect standards to "remain basically unchanged" -- with exceptions for tightening on construction/land development and easing on auto loans
+- **Tightening rationale:** Less favorable economic outlook, expected deterioration in collateral values, reduced risk tolerance
+- **Net read:** Lending conditions are not yet restrictive, but the tightening bias on commercial loans bears watching in the context of the broader growth scare narrative
+
+---
 
 ## Liquidity
 
-| Metric | Latest Level | Prior Week | Change | Note |
-|--------|-------------|------------|--------|------|
-| TGA Balance | ~$849B | ~$949B | -$100B | Drawdown from February high; seasonal tax dynamics |
-| ON RRP Facility Usage | Near zero | Near zero | Flat | Effectively drained; no longer a meaningful liquidity buffer |
-| Fed Total Assets | ~$6.6T | ~$6.6T | Flat | QT ended Dec 1, 2025; balance sheet stable |
-| Bank Reserves | ~$3.2-3.3T (est.) | ~$3.2-3.3T (est.) | Flat | At "ample" level per FOMC assessment |
+### Treasury General Account (TGA)
 
-*Sources: [Treasury Fiscal Data: Daily Treasury Statement](https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/) [33], [YCharts: TGA Closing Balance](https://ycharts.com/indicators/treasury_general_account_closing_balance) [34], [FRED: ON RRP (RRPONTSYD)](https://fred.stlouisfed.org/series/RRPONTSYD) [35], [Federal Reserve: Balance Sheet Trends](https://www.federalreserve.gov/monetarypolicy/bst_recenttrends.htm) [36], [Fed: H.4.1 Release Feb 26, 2026](https://www.federalreserve.gov/releases/h41/current/) [37]*
+- **Current balance:** ~$849.4 billion (as of Feb 26)
+- **Context:** A high TGA balance drains reserves from the banking system. At ~$850B, the TGA is elevated, which acts as a mild liquidity headwind. However, tax season (April) typically causes a temporary surge followed by a drawdown, which would be liquidity-positive for markets in Q2.
 
-### QT Status -- Concluded
+### Overnight Reverse Repo (ON RRP)
 
-The Federal Reserve officially ceased balance sheet runoff (QT2) on December 1, 2025, having reduced total securities holdings by over $2.2 trillion since June 2022 (~$1.6T in Treasuries, ~$600B in agency MBS). The Fed's total assets have stabilized at approximately $6.6 trillion as of mid-February 2026. Going forward, the Fed intends to buy and sell Treasuries to match trend growth in demand for bank reserves, effectively maintaining the balance sheet at current levels.
+- **Current status:** The ON RRP facility has been draining steadily throughout 2024-2025 as money market funds shifted into T-bills. Usage has fallen dramatically from its peak of ~$2.5 trillion (2022) toward minimal levels
+- **Significance:** The near-depletion of ON RRP means the next phase of QT will drain bank reserves directly rather than excess cash parked at the Fed. This is when liquidity tightening becomes more binding -- a key risk factor the Fed is monitoring as it debates the pace of balance sheet reduction
 
-The Cleveland Fed's February 2026 Economic Commentary noted that "given this sizable reduction in the balance sheet and money market conditions suggesting that reserve levels were approaching the ample level, the Committee judged it appropriate to conclude balance sheet runoff." This is significant context for the Warsh nomination -- Warsh is widely expected to favor more aggressive balance sheet normalization if confirmed, potentially reopening the QT question in H2 2026.
+### Net Liquidity Assessment
 
-### ON RRP Facility
+The liquidity picture is mixed:
+- **Positive:** Bond rally providing capital gains to fixed-income portfolios; credit conditions not yet restrictive; T-bill issuance providing absorption capacity
+- **Negative:** Elevated TGA draining reserves; ON RRP near depletion means QT bites harder; private credit opacity creating hidden liquidity risk; Warsh nomination signals more aggressive future balance sheet reduction
 
-The ON RRP facility has been effectively drained to near-zero usage, down from its peak of over $2.5 trillion in late 2022. This reflects the normalization of money market conditions as the excess liquidity injected during the pandemic has been absorbed. The facility's near-zero usage means it is no longer acting as a meaningful buffer for excess liquidity in the financial system. Year-end 2025 saw a brief spike in the Standing Repo Facility (SRF) to $75 billion, but this dissolved by early January.
+---
 
-### TGA Dynamics
+## Weekend Developments
 
-The Treasury General Account balance declined to approximately $849 billion from ~$949B the prior week, a drawdown of roughly $100 billion. This is consistent with seasonal spending patterns and the resumption of normal Treasury operations. The TGA drawdown injects reserves into the banking system, which is modestly supportive of liquidity conditions. Watch for TGA rebuilding around April's tax season, which could temporarily tighten reserves.
+### Warsh Nomination Aftermath (Feb 27-Mar 1)
 
-### Funding Market Conditions
+The Warsh nomination, formally transmitted on February 24, continued to dominate weekend commentary. Market participants are processing the implications of a "sound money" Fed chair who has advocated for aggressive balance sheet reduction. The Senate confirmation timeline is uncertain but the market is already pricing a regime change -- the immediate effect has been a steeper yield curve as the long end prices in a more hawkish structural posture.
 
-No significant stress signals in overnight funding markets. The SOFR rate remains well-behaved near the fed funds midpoint. The year-end liquidity turmoil (SRF spike to $75B) resolved quickly, and no similar pressures have emerged in early 2026. The January 2026 SLOOS survey confirmed banks expect demand to strengthen across most loan categories, with standards remaining broadly unchanged -- consistent with adequate liquidity conditions.
+### Middle East Tensions
+
+Geopolitical tensions in the Middle East escalated through the week and into the weekend, contributing to safe-haven Treasury demand. This was cited as a key driver of Friday's bond rally alongside AI disruption fears and private credit concerns. No single catalytic event, but the accumulation of risk factors is keeping the bid under Treasuries.
+
+### March FOMC Preview (Mar 17-18)
+
+The upcoming March 17-18 FOMC meeting is the first of 2026 to include the Summary of Economic Projections (SEP) and dot plot. This is the most consequential near-term event for rates:
+
+- **Dot plot:** Will the median dot shift hawkish from the December 2025 projection of 2-3 cuts in 2026? Given the minutes' hawkish tone and speaker commentary, a reduction to 1-2 cuts would be the base case
+- **Growth projections:** Any downgrade to GDP growth would validate the recession-scare narrative and support the bond rally
+- **Inflation projections:** Core PCE forecasts above 2.5% for year-end 2026 would reinforce the "higher for longer" message
+- **Market structure:** This FOMC falls within Triple Witch week (Mar 20), creating a powerful convergence of positioning flows and policy risk
+
+### Key Data in the Week Ahead
+
+- **ISM Manufacturing (Mon Mar 2):** Leading indicator for industrial activity
+- **ISM Services (Wed Mar 4):** The dominant sector of the economy
+- **Nonfarm Payrolls (Fri Mar 6):** The most market-moving data point; a weak print could accelerate the bond rally and reprice June cut odds higher
+
+---
+
+## Sector Thesis Implications
+
+**For AI Infrastructure:** The bond rally and falling yields are directionally supportive of growth/duration assets (NVDA, AVGO, PLTR). However, the AI disruption narrative that contributed to the equity selloff could create a paradox -- falling rates support valuations but AI skepticism pressures earnings multiples. The "4% monetization problem" identified in the AI thesis remains the key tension.
+
+**For Nuclear/Energy:** Lower rates ease financing costs for capital-intensive nuclear builds (CEG, VST). The 20-year PPA model for hyperscaler nuclear deals becomes more attractive as the discount rate falls. Uranium miners (CCJ, UEC) benefit from the broader risk-off rotation into real assets.
+
+**For Defense:** Defense spending (LMT, RTX, NOC) is non-discretionary and budget-driven, making it relatively insensitive to rate movements. However, the growth scare narrative could redirect investor flows toward defensive sectors -- a tailwind for the defense primes.
+
+**For Critical Minerals:** Lower rates support capital-intensive mining projects (FCX, ALB, MP). The copper structural deficit thesis strengthens if lower rates stimulate infrastructure spending while mining supply remains constrained.
+
+---
 
 ## Sources
 
-1. [U.S. Treasury Daily Yield Curve Rates](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve)
-2. [FRED: Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity (DGS10)](https://fred.stlouisfed.org/series/DGS10)
-3. [FRED: Market Yield on U.S. Treasury Securities at 2-Year Constant Maturity (DGS2)](https://fred.stlouisfed.org/series/DGS2)
-4. [Federal Reserve Board: H.15 Selected Interest Rates -- February 27, 2026](https://www.federalreserve.gov/releases/h15/)
-5. [FRED: 10-Year Treasury Minus 2-Year Treasury (T10Y2Y)](https://fred.stlouisfed.org/series/T10Y2Y)
-6. [FRED: 10-Year Treasury Minus 3-Month Treasury (T10Y3M)](https://fred.stlouisfed.org/series/T10Y3M)
-7. [Seeking Alpha: U.S. Yield Curve Steepens as 2s10s Spread Hits Widest Since January 2022](https://seekingalpha.com/news/4547859-us-yield-curve-steepens-as-2s10s-spread-hits-widest-since-january-2022)
-8. [Federal Reserve: FOMC Minutes January 27-28, 2026](https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm)
-9. [CNBC: Fed Minutes January 2026](https://www.cnbc.com/2026/02/18/fed-minutes-january-2026.html)
-10. [Fortune: A Headache Is Already Brewing for Kevin Warsh at the Fed](https://fortune.com/2026/02/19/warsh-hawkish-fed-powell-cuts-hike-policy-meeting-notes/)
-11. [White House: Wide Acclaim for Warsh Nomination](https://www.whitehouse.gov/articles/2026/01/wide-acclaim-for-president-trumps-nomination-of-kevin-warsh-as-fed-chair/)
-12. [FinancialContent: The Warsh Shock -- Kevin Warsh Nominated as Fed Chair](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-the-warsh-shock-kevin-warsh-nominated-as-fed-chair-signaling-a-radical-shift-to-sound-money)
-13. [Invesco: Kevin Warsh Nominated to Serve as Next Fed Chair](https://www.invesco.com/us/en/insights/kevin-warsh-nominated-fed-chair.html)
-14. [Federal Reserve: Governor Waller Speech on the Economic Outlook, February 23, 2026](https://www.federalreserve.gov/newsevents/speech/waller20260223a.htm)
-15. [The Street: Fed's Waller Calls March Interest-Rate Cut a Coin Flip](https://www.thestreet.com/fed/feds-waller-calls-march-interest-rate-cut-a-coin-flip)
-16. [CNBC: Fed's Goolsbee Calls for a Hold on Cuts as Current Rate of Inflation Is Not Good Enough](https://www.cnbc.com/2026/02/24/feds-goolsbee-calls-for-a-hold-on-cuts-as-current-rate-of-inflation-is-not-good-enough.html)
-17. [Bloomberg: Fed's Goolsbee Says Supreme Court Tariff Ruling May Ease Inflation Pressures](https://www.bloomberg.com/news/articles/2026-02-24/fed-s-goolsbee-says-tariff-ruling-could-help-cool-inflation)
-18. [Atlanta Fed: President Bostic Discusses Recent FOMC Decision to Hold Rate Steady](https://www.atlantafed.org/what-we-study/regional-economy/2026/02/02/bostic-discusses-recent-fomc-decision-to-hold-rate-steady)
-19. [FXStreet: Fed's Barkin Says Monetary Policy Is Currently Well-Positioned for Risks](https://www.fxstreet.com/news/feds-barkin-monetary-policy-is-currently-well-positioned-for-risks-202602242333)
-20. [Bloomberg: Musalem Says Fed Rate Is Near Neutral, Risks Balanced (Video)](https://www.bloomberg.com/news/videos/2026-02-25/musalem-says-fed-rate-is-near-neutral-risks-balanced-video)
-21. [St. Louis Magazine: St. Louis Fed President Predicts a Good Year for the Economy](https://www.stlmag.com/business/st-louis-fed-president-albert-musalem-2026-economy-view/)
-22. [MortgagePoint: Boston Fed President -- Central Bank Quite Likely to Hold Rates Steady for Some Time](https://themortgagepoint.com/2026/02/25/boston-fed-president-central-bank-quite-likely-to-hold-rates-steady-for-some-time/)
-23. [CME FedWatch Tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
-24. [Morningstar: What's Next for the US Fed in 2026?](https://global.morningstar.com/en-gb/markets/whats-next-us-fed-2026)
-25. [FRED: ICE BofA US Corporate Index Option-Adjusted Spread (BAMLC0A0CM)](https://fred.stlouisfed.org/series/BAMLC0A0CM)
-26. [FRED: ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)](https://fred.stlouisfed.org/series/BAMLH0A0HYM2)
-27. [Trading Economics: US High Yield OAS](https://tradingeconomics.com/united-states/bofa-merrill-lynch-us-high-yield-option-adjusted-spread-fed-data.html)
-28. [Charles Schwab: 2026 Corporate Credit Outlook](https://www.schwab.com/learn/story/corporate-bond-outlook)
-29. [SIFMA: US Corporate Bonds Statistics](https://www.sifma.org/research/statistics/us-corporate-bonds-statistics)
-30. [FI-DESK: Corporate Bond Issuance Slows Into February](https://www.fi-desk.com/corporate-bond-issuance-slows-into-february-reducing-trading-desk-pressure/)
-31. [Marketplace: The Trillion-Dollar Bond Sell-Off Funding Data Centers](https://www.marketplace.org/story/2026/02/25/the-trilliondollar-bond-selloff-funding-data-centers-could-have-side-effects)
-32. [Federal Reserve: January 2026 Senior Loan Officer Opinion Survey (SLOOS)](https://www.federalreserve.gov/data/sloos/sloos-202601.htm)
-33. [Treasury Fiscal Data: Daily Treasury Statement](https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/)
-34. [YCharts: Treasury General Account Closing Balance](https://ycharts.com/indicators/treasury_general_account_closing_balance)
-35. [FRED: Overnight Reverse Repurchase Agreements (RRPONTSYD)](https://fred.stlouisfed.org/series/RRPONTSYD)
-36. [Federal Reserve: Recent Balance Sheet Trends](https://www.federalreserve.gov/monetarypolicy/bst_recenttrends.htm)
-37. [Federal Reserve: H.4.1 Statistical Release -- February 26, 2026](https://www.federalreserve.gov/releases/h41/current/)
-38. [Cleveland Fed: QT, Ample Reserves, and the Changing Fed Balance Sheet](https://www.clevelandfed.org/publications/economic-commentary/2025/ec-202505-qt-ample-reserves-changing-fed-balance-sheet)
-39. [SVB/First Citizens: The Federal Reserve Ends QT -- Key Market Liquidity Insights](https://www.svb.com/market-insights/us-treasuries/the-federal-reserve-ends-qt-key-market-liquidity-insights/)
-40. [Wolf Street: Fed's Standing Repo Facility Drops to Zero](https://wolfstreet.com/2026/01/05/feds-standing-repo-facility-srf-drops-to-zero-from-75-billion-on-the-last-balance-sheet-as-yearend-liquidity-turmoil-dissolves/)
-41. [Advisor Perspectives: Best Month in a Year for Bonds Sends 10-Year Yield Below 4%](https://www.advisorperspectives.com/articles/2026/02/27/best-month-year-bonds-10-year-yield-below-4)
-42. [eMorningCoffee: Week Ended February 27, 2026 -- Sentiment Is Risk Off](https://www.emorningcoffee.com/post/week-ended-february-27-2026-sentiment-is-risk-off)
-43. [FinancialContent: The Great 2026 Twist -- US Treasury Yields Diverge](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-the-great-2026-twist-us-treasury-yields-diverge-as-geopolitical-unrest-and-fed-transitions-roil-markets)
-44. [CNBC: 10-Year Yield Falls Below 4% on Stagflation Risk](https://www.cnbc.com/2026/02/27/us-treasury-yields-investors-await-wholesale-inflation-reading.html)
-45. [FinancialContent: The 2026 Yield Curve Twist](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-24-the-2026-yield-curve-twist-why-short-term-rates-are-rising-while-long-term-yields-fall)
-46. [MarketPulse: Who Are the Fed Speakers to Watch in 2026?](https://www.marketpulse.com/markets/who-are-the-fed-speakers-to-watch-in-2026-new-front-runner-for-the-fed-chair/)
-47. [Breckinridge: Q1 2026 Corporate Bond Market Outlook](https://www.breckinridge.com/insights/details/q1-2026-corporate-bond-market-outlook/)
+- [Treasury Yields Snapshot: February 27, 2026 - Advisor Perspectives](https://www.advisorperspectives.com/dshort/updates/2026/02/27/treasury-yields-snapshot-february-27-2026)
+- [Treasury Yields Snapshot: February 20, 2026 - Advisor Perspectives](https://www.advisorperspectives.com/dshort/updates/2026/02/20/treasury-yields-snapshot-february-20-2026)
+- [10-year yield falls below 4% on stagflation risk - CNBC](https://www.cnbc.com/2026/02/27/us-treasury-yields-investors-await-wholesale-inflation-reading.html)
+- [Bonds Cap February Rally With Yields at Lowest Since 2022 - Bloomberg/Yahoo Finance](https://finance.yahoo.com/news/treasuries-regain-edge-safety-play-100000753.html)
+- [Fed Minutes January 2026 - CNBC](https://www.cnbc.com/2026/02/18/fed-minutes-january-2026.html)
+- [Fed Divided: FOMC Minutes Reveal Hawkish Pause - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-19-fed-divided-fomc-minutes-reveal-hawkish-pause-as-inflation-remains-sticky)
+- [FOMC Minutes, January 27-28, 2026 - Federal Reserve](https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm)
+- [Several Fed Officials Point to Rate-Hike Scenario - Bloomberg](https://www.bloomberg.com/news/articles/2026-02-18/fed-minutes-show-several-officials-point-to-rate-hike-scenario)
+- [A headache is already brewing for Kevin Warsh at the Fed - Fortune](https://fortune.com/2026/02/19/warsh-hawkish-fed-powell-cuts-hike-policy-meeting-notes/)
+- [Kevin Warsh Nominated as Fed Chair - White House](https://www.whitehouse.gov/articles/2026/01/wide-acclaim-for-president-trumps-nomination-of-kevin-warsh-as-fed-chair/)
+- [The Warsh Shock: Nomination Signals Shift to Sound Money - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-the-warsh-shock-kevin-warsh-nominated-as-fed-chair-signaling-a-radical-shift-to-sound-money)
+- [What Kevin Warsh's Fed Chair Nomination Means for Markets - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-25-the-warsh-pivot-what-kevin-warshs-fed-chair-nomination-means-for-markets-in-2026)
+- [St. Louis Fed President Predicts a Good Year for the Economy - The MortgagePoint](https://themortgagepoint.com/2026/02/26/st-louis-fed-president-predicts-a-good-year-for-the-economy/)
+- [Fed Hawks and Doves: What US Central Bankers Are Saying - Yahoo Finance](https://finance.yahoo.com/news/fed-hawks-doves-us-central-191743504.html)
+- [CME FedWatch Tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
+- [Global Credit Spreads Widen Most in Four Months - Bloomberg](https://www.bloomberg.com/news/articles/2026-02-27/global-credit-spreads-widen-most-in-four-months-as-strains-mount)
+- [US High-Grade Corporate Bond Spreads Hit Three Decade Low - Bloomberg](https://www.bloomberg.com/news/articles/2026-01-22/us-high-grade-corporate-bond-spreads-hit-fresh-three-decade-low)
+- [2026 Corporate Credit Outlook - Charles Schwab](https://www.schwab.com/learn/story/corporate-bond-outlook)
+- [Private Credit Market Split on Crisis Risk - Bloomberg](https://www.bloomberg.com/news/articles/2026-02-26/private-credit-s-great-divide-imminent-crisis-or-no-big-deal)
+- [Why Concerns Are Growing Over the Private Credit Market - Marketplace](https://www.marketplace.org/story/2026/02/26/why-concerns-are-growing-over-the-private-credit-market)
+- [Private Credit Worries Resurface as AI Pressures Software Firms - CNBC](https://www.cnbc.com/2026/02/09/private-credit-software-firms-fall-ai-fears.html)
+- [Wall Street Braced for Private Credit Meltdown - CNBC](https://www.cnbc.com/2026/01/23/wall-street-private-credit-risk-rising.html)
+- [January 2026 Senior Loan Officer Opinion Survey - Federal Reserve](https://www.federalreserve.gov/data/sloos/sloos-202601.htm)
+- [Daily Treasury Statement - U.S. Treasury Fiscal Data](https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/)
+- [ON RRP Data - FRED](https://fred.stlouisfed.org/series/RRPONTSYD)
+- [Yield Curve Twist: Short-Term Rates Rising While Long-Term Yields Fall - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-24-the-2026-yield-curve-twist-why-short-term-rates-are-rising-while-long-term-yields-fall)
+- [U.S. 2s10s Curve Steepening Stalls in February - Cable FX Macro](https://www.cablefxm.co.uk/post/u-s-2s10s-curve-steepening-stalls-in-february-cable-fx-macro)
+- [10-Year Minus 3-Month Treasury Spread - FRED](https://fred.stlouisfed.org/series/T10Y3M)
+- [Flight to Safety: 10-Year Yields Drift to 4.09% - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-23-flight-to-safety-10-year-treasury-yields-drift-to-409-as-inflation-cools-and-geopolitical-tensions-rise)
+- [Rising Tensions in the Middle East - FinancialContent](https://markets.financialcontent.com/stocks/article/marketminute-2026-2-27-rising-tensions-in-the-middle-east-geopolitical-risks-vs-corporate-fundamentals-in-february-2026)
+- [Safe-Haven Concerns as Treasuries Face Twin Recession and Inflation Risks - Reuters/Investing.com](https://www.investing.com/news/economy-news/safe-haven-concerns-mount-as-us-treasuries-face-twin-recession-and-inflation-risks--reuters-poll-4041618)
+- [Bonds Are Telling Us Something Bad Is Happening - Bloomberg](https://www.bloomberg.com/news/newsletters/2026-02-27/bonds-are-telling-us-something-bad-is-happening)
+
+---
+
+*Disclaimer: This report is educational research and does not constitute investment advice. Data sourced from Federal Reserve, U.S. Treasury, CME Group, Bloomberg, CNBC, and other public sources as cited above.*
