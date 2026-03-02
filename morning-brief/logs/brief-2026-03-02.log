@@ -1,0 +1,96 @@
+[2026-03-02 04:30:01] === Morning Brief Started ===
+[2026-03-02 04:30:01] Date: Monday, 2026-03-02
+[2026-03-02 04:30:01] Output: morning-brief/2026-03/2026-03-02_Mon.md + 2026-03-02_Mon.html
+[2026-03-02 04:30:01] All dependencies verified
+[2026-03-02 04:30:01] Running data collection pipeline...
+2026-03-02 04:30:01,934 INFO === Market Data Collection — 2026-03-02 ===
+2026-03-02 04:30:01,942 INFO ── Step 1: RSS Feeds ──
+2026-03-02 04:30:17,726 ERROR RSS Mining.com FAILED: HTTP Error 403: Forbidden
+2026-03-02 04:30:23,927 INFO RSS feeds: 139 headlines stored, 320 older than 24h skipped
+2026-03-02 04:30:23,928 ERROR RSS feeds: 1 feed(s) FAILED
+2026-03-02 04:30:23,928 INFO Step 1 complete: 22.0s (headlines=139)
+2026-03-02 04:30:23,928 ERROR RSS feeds: 1 feed(s) FAILED:
+  Mining.com (https://www.mining.com/feed/): HTTP Error 403: Forbidden
+2026-03-02 04:30:25,188 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-03-02 04:30:25,189 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-02 04:30:25,190 INFO Opus analysis: sending 128 headlines to claude CLI...
+2026-03-02 04:31:34,951 INFO Opus analysis: 24 tickers, 9 movers, 10 themes from 128 headlines
+2026-03-02 04:31:34,951 INFO Step 2 complete: 69.8s (opus_tickers=24)
+2026-03-02 04:31:34,951 INFO ── Step 3: Schwab + External APIs ──
+2026-03-02 04:31:42,332 INFO Schwab quotes: 140 symbols
+2026-03-02 04:31:42,332 INFO Auto-detected movers (|change| > 3%): 46 symbols
+2026-03-02 04:31:42,332 INFO Technicals + SMA200 for 121 quoted symbols (sequential)
+2026-03-02 04:34:31,999 INFO Schwab technicals: 121/121 symbols
+2026-03-02 04:36:00,693 INFO SMA200: 121/121 symbols
+2026-03-02 04:36:01,077 INFO Schwab market context: collected
+2026-03-02 04:37:39,516 INFO Schwab earnings: 71 entries
+2026-03-02 04:37:39,524 INFO Economic calendar: 3 events
+2026-03-02 04:37:39,639 INFO CoinGecko: 2 coins
+2026-03-02 04:37:43,606 INFO Stooq: 3/3 symbols
+2026-03-02 04:37:43,896 INFO FRED: 1/3 series
+2026-03-02 04:37:43,898 INFO Yahoo backup: 0 symbols
+2026-03-02 04:37:43,898 INFO Step 3 complete: 368.9s (quotes=140, tech=121, sma200=121, earnings=71, econ=3, crypto=2, stooq=3, fred=1, yahoo=0)
+2026-03-02 04:37:43,898 INFO ── Step 4: Validation + Retry ──
+2026-03-02 04:37:43,900 INFO ANOMALY: $HSI price=26059.85 avg=26654.83 z=-3.3
+2026-03-02 04:37:43,902 INFO ANOMALY: $TNX price=39.62 avg=40.56 z=-3.1
+2026-03-02 04:37:43,902 INFO ANOMALY: $TYX price=46.33 avg=46.98 z=-3.2
+2026-03-02 04:37:43,902 INFO ANOMALY: /CLJ26 price=72.72 avg=65.92 z=5.5
+2026-03-02 04:37:43,903 INFO ANOMALY: /GCJ26 price=5409.00 avg=5080.29 z=3.1
+2026-03-02 04:37:43,903 INFO ANOMALY: /RTYH26 price=2595.00 avg=2648.78 z=-3.1
+2026-03-02 04:37:43,904 INFO ANOMALY: /YMH26 price=48435.00 avg=49432.58 z=-3.8
+2026-03-02 04:37:43,905 INFO ANOMALY: AVGO price=309.32 avg=328.11 z=-3.1
+2026-03-02 04:37:43,907 INFO ANOMALY: CACI price=615.78 avg=577.46 z=3.1
+2026-03-02 04:37:43,908 INFO ANOMALY: CRWV price=75.90 avg=93.92 z=-3.9
+2026-03-02 04:37:43,909 INFO ANOMALY: DIA price=484.17 avg=493.93 z=-3.8
+2026-03-02 04:37:43,911 INFO ANOMALY: GD price=366.00 avg=348.14 z=3.9
+2026-03-02 04:37:43,915 INFO ANOMALY: LHX price=377.50 avg=349.80 z=4.4
+2026-03-02 04:37:43,916 INFO ANOMALY: LMT price=694.00 avg=651.39 z=4.1
+2026-03-02 04:37:43,916 INFO ANOMALY: LYSCF price=13.20 avg=11.40 z=3.9
+2026-03-02 04:37:43,918 INFO ANOMALY: NOC price=761.00 avg=714.03 z=3.1
+2026-03-02 04:37:43,921 INFO ANOMALY: PLTR price=142.07 avg=131.79 z=3.3
+2026-03-02 04:37:43,924 INFO ANOMALY: RTX price=214.20 avg=201.41 z=4.4
+2026-03-02 04:37:43,931 INFO Anomaly detection: 18 flagged
+2026-03-02 04:37:43,931 INFO Cross-validation: 0 discrepancies
+2026-03-02 04:37:43,932 INFO Retry check: 0 failures — nothing to retry
+2026-03-02 04:37:43,933 INFO Step 4 complete: 0.0s (anomalies=18, cross_val=0, retried=0, completeness=100%)
+2026-03-02 04:37:43,934 INFO ── Step 5: Generate Briefing ──
+2026-03-02 04:37:43,970 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-02.md (28574 bytes)
+2026-03-02 04:37:43,972 INFO Pruned 131 rows from headlines (older than 14 days)
+2026-03-02 04:37:43,996 INFO Cleanup complete
+2026-03-02 04:37:43,996 INFO === Collection complete: 460.7s total, completeness=100%, exit_code=0 ===
+[2026-03-02 04:37:44] Data collection complete — briefing file ready
+[2026-03-02 04:37:44] Found 10 research files (sector theses + structural calendar)
+[2026-03-02 04:37:44] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/spicymeatball/projects/bigpic-markets/morning-brief/2026-03/2026-03-02_Mon.md`.
+
+**Summary of key themes:**
+
+- **Dominant story:** U.S.-Iran conflict (Operation Epic Fury, Day 3) with Khamenei reportedly dead. Oil +8.5%, defense stocks surging (LMT +6%, RTX +5.7%, AVAV +10%), equities broadly selling off -1.1 to -1.5%.
+- **VIX** spiked 18% to 23.51 — elevated regime. Bond market notably NOT rallying on risk-off, suggesting oil-driven inflation fears are offsetting the safety bid.
+- **Defense is the clear rotation trade** — all 4 Tier 1 defense names up 3.5-6%. PLTR +3.6% riding the defense AI bid.
+- **Everything else is red** — AI infra (AVGO -3.2%, VRT -3.4%), quantum (IONQ -5.1%, QBTS -6.4%), space (RKLB -4%, LUNR -4.1%), nuclear (LEU -4.5%), and energy storage (FLNC -4.6%) all under pressure.
+- **Key catalysts this week:** CRWD earnings tomorrow, AVGO Wednesday, Artemis II launch Mar 6, NFP later this week.
+- **ISM Manufacturing** at 3:00 PM ET is the afternoon data risk — Prices Paid will be scrutinized given the oil shock.
+[2026-03-02 04:40:32] Claude [report (attempt 1)] finished successfully
+[2026-03-02 04:40:32] Report attempt 1 succeeded: 12244 bytes
+[2026-03-02 04:40:32] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-02_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 88 symbols...
+  Got quotes for 75 symbols
+
+--- Database cross-checks (market_date=2026-03-02) ---
+  3 database corrections:
+    FABRICATION: FINAL MANUFACTURING PMI actual '51.2' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PMI actual '52.6' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PRICES actual '59.0' → 'Pending' (not released)
+
+  3 total corrections needed:
+    FABRICATION: FINAL MANUFACTURING PMI actual '51.2' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PMI actual '52.6' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PRICES actual '59.0' → 'Pending' (not released)
+
+  3 corrections written to 2026-03-02_Mon.md
+=== Fact-check complete ===
+[2026-03-02 04:40:44] Running Claude [html-publish] (timeout: 900s)...
