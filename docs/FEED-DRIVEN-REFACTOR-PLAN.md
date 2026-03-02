@@ -2,7 +2,7 @@
 
 ## Implementation Status
 
-**Last updated:** 2026-02-13 (session 4 — Northern Miner verified, end-to-end test pass)
+**Last updated:** 2026-02-27 (RSS failures non-fatal, Northern Miner → Mining.com swap)
 **Script:** `~/projects/bigpic-markets/scripts/collect-market-data.py`
 
 ### Changes — ALL 11 IMPLEMENTED
@@ -30,7 +30,7 @@
 - **Split API delays:** `CHUNK_DELAY = 0.5s` for light endpoints (quotes, SMA200, earnings), `TECH_DELAY = 1.0s` for heavy endpoint (technicals). Tested: 0.5s caused timeouts on technicals (3/145), 1.0s works clean.
 - **Added `retry_failed_calls()`:** Step 4 now queries `source_health` for errors, retries each failed Schwab call with 2x timeout before completeness check and briefing generation. Handles technicals, SMA200, and earnings endpoints. Tested: recovered IBM technicals + RTX earnings (2/2).
 - **Added `send_failure_email()` + fail-fast in `main()`:** Any pipeline failure = email to `daryll@bigpicsolutions.com` via msmtp + stop. Checks: zero headlines, Opus failure, Schwab unreachable, zero quotes, data gaps after retry, completeness < 100%. Uncaught exceptions also trigger email. No more silent degradation.
-- **Mining.com → Northern Miner:** Mining.com started returning 403 (blocked automated access). Replaced with Northern Miner (`northernminer.com/feed/`) — founded 1915, "the mining industry's bible," publishes daily, 20 items per fetch.
+- **Mining.com → Northern Miner → Mining.com:** Mining.com initially 403'd, replaced with Northern Miner. Northern Miner then 403'd (CloudFront WAF, 2026-02-27). Mining.com feed working again with `BigPic-Markets/1.0` UA, swapped back. 36 items/feed, multiple articles/day.
 - **RSS failures now non-fatal (2026-02-27):** Individual feed failures send a `[WARNING]` email (via `send_warning_email()`) and the pipeline continues with available headlines. Only zero total headlines = hard abort. Previously any single feed failure was fatal — caused a full pipeline abort on 2026-02-27 when Northern Miner returned 403.
 
 ### Verification Progress
@@ -57,8 +57,7 @@
 - [x] Email delivery test — **PASSED**: test email sent and received at daryll@bigpicsolutions.com via msmtp
 - [x] Completeness threshold — changed from 70% to 100%. Anything less = fail + email.
 - [x] RSS graceful degradation — individual feed failures send `[WARNING]` email + continue (was fail-fast, changed 2026-02-27 after Northern Miner 403 killed the whole pipeline)
-- [x] Mining.com → Northern Miner — feed swap, tested, VERIFIED-SOURCES.md updated, Mining.com added to blocked list
-- [x] Full pipeline run with Northern Miner swap — **PASSED**: 247 headlines, 26/26 feeds, 53 tickers, 13 movers, 14 themes, 156 quotes, 137/137 technicals (135+2 retried: IEV, BA), 137/137 SMA200, 64+3 earnings (ANET, CGNX, ROK retried), 0 anomalies, 100% completeness, 36.7KB briefing, 526s (~8.8min). 7 failures, 7/7 recovered.
+- [x] Mining feed swaps — Mining.com → Northern Miner (Mining.com 403'd) → Mining.com (Northern Miner 403'd, CloudFront WAF, 2026-02-27). Mining.com working again with `BigPic-Markets/1.0` UA.
 - [x] End-to-end test — collect (already done) → verify (passed, 1 correction: SPX futures) → HTML build (58KB, all sections) → archive index updated → git push. **Confirmed working.**
 - [ ] FRED log cosmetic — shows "1/3 series" but only 1 series configured (minor)
 
