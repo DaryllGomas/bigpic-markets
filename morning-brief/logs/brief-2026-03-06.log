@@ -1,0 +1,81 @@
+[2026-03-06 04:30:01] === Morning Brief Started ===
+[2026-03-06 04:30:01] Date: Friday, 2026-03-06
+[2026-03-06 04:30:01] Output: morning-brief/2026-03/2026-03-06_Fri.md + 2026-03-06_Fri.html
+[2026-03-06 04:30:01] All dependencies verified
+[2026-03-06 04:30:01] Running data collection pipeline...
+2026-03-06 04:30:01,566 INFO === Market Data Collection — 2026-03-06 ===
+2026-03-06 04:30:01,573 INFO ── Step 1: RSS Feeds ──
+2026-03-06 04:30:17,003 ERROR RSS Mining.com FAILED: HTTP Error 403: Forbidden
+2026-03-06 04:30:23,369 INFO RSS feeds: 239 headlines stored, 210 older than 24h skipped
+2026-03-06 04:30:23,369 ERROR RSS feeds: 1 feed(s) FAILED
+2026-03-06 04:30:23,369 INFO Step 1 complete: 21.8s (headlines=239)
+2026-03-06 04:30:23,369 ERROR RSS feeds: 1 feed(s) FAILED:
+  Mining.com (https://www.mining.com/feed/): HTTP Error 403: Forbidden
+2026-03-06 04:30:25,416 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-03-06 04:30:25,416 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-06 04:30:25,418 INFO Opus analysis: sending 226 headlines to claude CLI...
+2026-03-06 04:31:57,234 INFO Opus analysis: 37 tickers, 16 movers, 12 themes from 226 headlines
+2026-03-06 04:31:57,234 INFO Step 2 complete: 91.8s (opus_tickers=37)
+2026-03-06 04:31:57,234 INFO ── Step 3: Schwab + External APIs ──
+2026-03-06 04:32:04,799 INFO Schwab quotes: 149 symbols
+2026-03-06 04:32:04,799 INFO Auto-detected movers (|change| > 3%): 6 symbols
+2026-03-06 04:32:04,800 INFO Technicals + SMA200 for 130 quoted symbols (sequential)
+2026-03-06 04:35:06,137 INFO Schwab technicals: 130/130 symbols
+2026-03-06 04:36:42,400 INFO SMA200: 130/130 symbols
+2026-03-06 04:36:42,785 INFO Schwab market context: collected
+2026-03-06 04:38:19,208 INFO Schwab earnings: 71 entries
+2026-03-06 04:38:19,220 INFO Economic calendar: 11 events
+2026-03-06 04:38:19,367 INFO CoinGecko: 2 coins
+2026-03-06 04:38:23,756 INFO Stooq: 3/3 symbols
+2026-03-06 04:38:24,048 INFO FRED: 1/3 series
+2026-03-06 04:38:24,049 INFO Yahoo backup: 0 symbols
+2026-03-06 04:38:24,049 INFO Step 3 complete: 386.8s (quotes=149, tech=130, sma200=130, earnings=71, econ=11, crypto=2, stooq=3, fred=1, yahoo=0)
+2026-03-06 04:38:24,050 INFO ── Step 4: Validation + Retry ──
+2026-03-06 04:38:24,051 INFO ANOMALY: $DJI price=47954.74 avg=49262.88 z=-3.6
+2026-03-06 04:38:24,054 INFO ANOMALY: /CLJ26 price=85.99 avg=69.00 z=3.6
+2026-03-06 04:38:24,055 INFO ANOMALY: /RTYH26 price=2561.80 avg=2638.73 z=-3.1
+2026-03-06 04:38:24,057 INFO ANOMALY: AMZN price=216.30 avg=206.46 z=4.3
+2026-03-06 04:38:24,071 INFO ANOMALY: IWM price=254.44 avg=261.54 z=-3.2
+2026-03-06 04:38:24,074 INFO ANOMALY: MRVL price=84.22 avg=78.80 z=5.6
+2026-03-06 04:38:24,076 INFO ANOMALY: NOW price=119.93 avg=106.17 z=3.6
+2026-03-06 04:38:24,093 INFO ANOMALY: UEC price=13.48 avg=15.48 z=-3.7
+2026-03-06 04:38:24,098 INFO Anomaly detection: 8 flagged
+2026-03-06 04:38:24,098 INFO Cross-validation: 0 discrepancies
+2026-03-06 04:38:24,098 INFO Retry check: 0 failures — nothing to retry
+2026-03-06 04:38:24,100 INFO Step 4 complete: 0.1s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-03-06 04:38:24,100 INFO ── Step 5: Generate Briefing ──
+2026-03-06 04:38:24,146 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-06.md (35215 bytes)
+2026-03-06 04:38:24,150 INFO Pruned 229 rows from headlines (older than 14 days)
+2026-03-06 04:38:24,182 INFO Cleanup complete
+2026-03-06 04:38:24,182 INFO === Collection complete: 500.5s total, completeness=100%, exit_code=0 ===
+[2026-03-06 04:38:24] Data collection complete — briefing file ready
+[2026-03-06 04:38:24] Found 10 research files (sector theses + structural calendar)
+[2026-03-06 04:38:24] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/spicymeatball/projects/bigpic-markets/morning-brief/2026-03/2026-03-06_Fri.md`.
+
+**Summary of key calls:**
+
+- **Event Load: HEAVY** — Jobs Report (NFP consensus 59K), Retail Sales, 3 FOMC speakers, all into an Iran conflict oil shock
+- **Oil is the dominant variable** — WTI +6.15% to $85.99, largest weekly gain in 4 years. Qatar warning of $150
+- **VIX elevated at 25.80** (+8.6%), bearish SPY trend, multiple statistical anomalies flagged
+- **MRVL +11.28%** post-earnings is the standout mover, validating AI custom silicon thesis
+- **Defense outperforming** — LMT, RTX, NOC all green while everything else bleeds
+- **NXE** (Nuclear Tier 2) — Rook I final federal approval is a major catalyst
+- **ASML -3.27%** on sweeping US export control fears for AI hardware
+- **Structural calendar note:** Triple Witch positioning starts Monday Mar 9; FOMC SEP + Triple Witch convergence week of Mar 16-20
+- **Bias: Neutral-to-bearish** with high two-way risk around NFP. Weekend Iran escalation risk is unhedgeable
+[2026-03-06 04:41:16] Claude [report (attempt 1)] finished successfully
+[2026-03-06 04:41:16] Report attempt 1 succeeded: 16243 bytes
+[2026-03-06 04:41:16] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-06_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 64 symbols...
+  Got quotes for 52 symbols
+
+--- Database cross-checks (market_date=2026-03-06) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-03-06 04:41:25] Running Claude [html-publish] (timeout: 900s)...
