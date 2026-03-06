@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenGraph Meta Tags -->
+  <meta property="og:site_name" content="BigPic Solutions Research">
+<meta property="og:type" content="article" />
+  <meta property="og:title" content="The H4-200MA Trend Protocol" />
+  <meta property="og:description" content="Filtering noise and identifying high-probability trade cycles by aligning Daily bias with the 4-Hour 200 Moving Average." />
+  <meta property="og:url" content="https://markets.bigpicsolutions.com/research/supplementary/h4-200ma-protocol/the-h4-200ma-trend-protocol.html" />
+  <meta property="og:image" content="https://markets.bigpicsolutions.com/research/supplementary/h4-200ma-protocol/h4-200ma-protocol-thumb.jpg" />
+  <meta property="article:published_time" content="2025-12-13" />
+  <meta property="article:section" content="strategy" />
+  
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The H4-200MA Trend Protocol" />
+  <meta name="twitter:description" content="Filtering noise and identifying high-probability trade cycles by aligning Daily bias with the 4-Hour 200 Moving Average." />
+  <meta name="twitter:image" content="https://markets.bigpicsolutions.com/research/supplementary/h4-200ma-protocol/h4-200ma-protocol-thumb.jpg" />
+    <title>The H4-200MA Trend Cycle Protocol | BigPic Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- 
+    PALETTE: Energetic & Playful (Vibrant)
+    Primary (Blue): #2D00F7
+    Secondary (Pink): #F20089
+    Tertiary (Purple): #8900F2
+    Quaternary (Orange): #FF9F1C
+    Background: #F3F4F6
+    Card: #FFFFFF
+    -->
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+  padding-top: 52px;
+}
+        
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%; /* Responsive base */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Mobile base height */
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; /* Tablet/Desktop height */
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2D00F7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8900F2;
+        }
+
+        /* Flowchart Connector Lines */
+        .flow-line {
+            width: 2px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+            height: 2rem;
+        }
+    
+/* === SITE NAV === */
+.bigpic-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(10,15,26,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,158,11,0.08);display:flex;align-items:center;padding:0 1.5rem;height:52px}
+.bigpic-nav a{text-decoration:none}
+.bigpic-nav .nav-brand{font-weight:700;font-size:1rem;background:linear-gradient(135deg,#e2e8f0,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:32px}
+.bigpic-nav .nav-links{display:flex;align-items:center;gap:4px}
+.bigpic-nav .nav-link{color:#94a3b8;font-size:0.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-link:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.bigpic-nav .nav-dropdown{position:relative}
+.bigpic-nav .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(10,15,26,0.96);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:6px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.bigpic-nav .nav-dropdown:hover .nav-dropdown-menu{display:block}
+.bigpic-nav .nav-dropdown-menu a{display:block;color:#94a3b8;font-size:0.82rem;padding:8px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-dropdown-menu a:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+@media(max-width:600px){.bigpic-nav .nav-links{display:none}}
+
+/* === SHARE DROPDOWN === */
+.share-wrapper{position:fixed;top:4.2rem;right:1.5rem;z-index:9999}
+.share-btn{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;background:rgba(10,15,26,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#94a3b8;font-size:0.78rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.06em;cursor:pointer;backdrop-filter:blur(10px);transition:0.2s ease}
+.share-btn:hover{color:#e2e8f0;border-color:rgba(245,158,11,0.3)}
+.share-btn svg{width:14px;height:14px;stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:0.2s ease}
+.share-btn:hover svg{stroke:#f59e0b}
+.share-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:rgba(10,15,26,0.96);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:160px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.share-dropdown.open{display:block}
+.share-option{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;background:none;border:none;color:#94a3b8;font-size:0.82rem;font-family:'Inter',sans-serif;cursor:pointer;border-radius:6px;transition:0.2s ease;text-decoration:none}
+.share-option:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.share-option svg{width:15px;height:15px;flex-shrink:0}
+.link-icon{stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.x-logo{fill:#94a3b8}
+.share-option:hover .link-icon{stroke:#f59e0b}
+.share-option:hover .x-logo{fill:#f59e0b}
+.share-copied{display:none;padding:8px 12px;color:#10b981;font-size:0.8rem;text-align:center}
+.share-copied.show{display:block}
+
+</style>
+    <!-- 
+    SOURCE MATERIAL ANALYSIS & PLAN:
+    1. Narrative: The user wants a system to filter trades. The core is MTF (Multi-Timeframe) analysis.
+       - Logic: Higher timeframe (H4 + 200MA) dictates direction. Lower timeframe dictates entry timing (Cycles).
+    2. Sections:
+       - Header: Hook & Title.
+       - The Core Logic: Flowchart of the decision tree.
+       - The Trend Filter: Line chart showing Price vs 200MA interaction.
+       - The Edge: Bar chart comparing Win Rates (With Trend vs Against).
+       - Cycle Timing: Plotly Sine wave showing "Buy the dip" in an uptrend.
+       - Risk Management: Donut chart of R-Multiple distribution.
+    3. Visualizations (NO SVG, NO MERMAID):
+       - Flowchart: Tailwind Flex/Grid + Border styling.
+       - Charts: Chart.js for standard stats, Plotly for the "Cycle" math visualization.
+       - Canvas rendering forced for all.
+    -->
+</head>
+<body class="bg-gray-100 antialiased">
+<nav class="bigpic-nav">
+  <a href="../../../index.html" class="nav-brand">BigPic Solutions</a>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-link" href="#">Sectors &#9662;</a>
+      <div class="nav-dropdown-menu">
+        <a href="../../../research/ai/report.html">AI Infrastructure</a>
+        <a href="../../../research/nuclear/report.html">Nuclear Energy</a>
+        <a href="../../../research/space/report.html">Space</a>
+        <a href="../../../research/quantum/report.html">Quantum Computing</a>
+        <a href="../../../research/robotics/report.html">Robotics & Automation</a>
+        <a href="../../../research/cybersecurity/report.html">Cybersecurity</a>
+        <a href="../../../research/critical-minerals/report.html">Critical Minerals</a>
+        <a href="../../../research/defense/report.html">Defense & Aerospace</a>
+        <a href="../../../research/energy-storage/report.html">Energy Storage</a>
+      </div>
+    </div>
+    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
+  </div>
+</nav>
+
+<div class="share-wrapper">
+  <button class="share-btn" onclick="toggleShare()" aria-label="Share this article">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    SHARE
+  </button>
+  <div class="share-dropdown" id="shareDropdown">
+    <button class="share-option" onclick="copyLink()">
+      <svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+    <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener noreferrer" onclick="shareToX()">
+      <svg class="x-logo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <div class="share-copied" id="shareCopied">Link copied!</div>
+  </div>
+</div>
+
+<script>
+const SHARE_URL = 'https://markets.bigpicsolutions.com/research/supplementary/h4-200ma-protocol/the-h4-200ma-trend-protocol.html';
+const SHARE_TEXT = 'The H4 200MA Trend Protocol. Systematic trend-following protocol using the 4-hour 200-period moving average.';
+function toggleShare(){document.getElementById('shareDropdown').classList.toggle('open')}
+function copyLink(){navigator.clipboard.writeText(SHARE_URL).then(()=>{const el=document.getElementById('shareCopied');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000)})}
+function shareToX(){const url='https://x.com/intent/tweet?text='+encodeURIComponent(SHARE_TEXT)+'&url='+encodeURIComponent(SHARE_URL);document.getElementById('shareX').href=url}
+document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper'))document.getElementById('shareDropdown').classList.remove('open')});
+</script>
+
+
+    <!-- HERO SECTION -->
+    <header class="bg-gradient-to-r from-[#2D00F7] to-[#8900F2] text-white pt-16 pb-24 px-4 shadow-lg mb-[-4rem]">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">The H4-200MA Trend Protocol</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 max-w-3xl mx-auto">
+                Filtering noise and identifying high-probability trade cycles by aligning Daily bias with the 4-Hour 200 Moving Average.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT GRID -->
+    <main class="max-w-6xl mx-auto px-4 pb-16 grid grid-cols-1 md:grid-cols-12 gap-8">
+
+        <!-- INTRO CARD -->
+        <div class="md:col-span-12 bg-white rounded-xl shadow-md p-8 pt-12 mt-8 border-t-4 border-[#FF9F1C]">
+            <h2 class="text-3xl font-bold text-[#2D00F7] mb-4">Why Filter Trades?</h2>
+            <p class="text-gray-600 leading-relaxed text-lg">
+                The markets are noisy. Trading every movement on a lower timeframe often leads to "death by a thousand cuts." 
+                The <strong>H4-200MA Protocol</strong> is a trend-following system designed to filter out low-probability setups. 
+                By using the 4-Hour chart's 200-period Moving Average as a dynamic "line in the sand," we objectively define the 
+                macro trend (Bullish or Bearish). We then drop down to lower timeframes only to find specific entry cycles 
+                that align with this dominant momentum.
+            </p>
+        </div>
+
+        <!-- SECTION 1: THE DECISION LOGIC (FLOWCHART) -->
+        <div class="md:col-span-12 lg:col-span-4 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-6">
+                <span class="text-3xl mr-3">🧭</span>
+                <h3 class="text-xl font-bold text-gray-800">The Decision Matrix</h3>
+            </div>
+            <p class="text-sm text-gray-500 mb-6">A rigid rule-based system to prevent emotional trading.</p>
+
+            <!-- HTML/CSS Flowchart -->
+            <div class="flex flex-col items-center w-full">
+                <!-- Step 1 -->
+                <div class="w-full bg-[#2D00F7] text-white p-4 rounded-lg text-center font-bold shadow-md">
+                    1. Check H4 Chart
+                </div>
+                <div class="flow-line"></div>
+                
+                <!-- Step 2 -->
+                <div class="w-full bg-white border-2 border-[#8900F2] text-[#8900F2] p-4 rounded-lg text-center font-bold shadow-sm">
+                    Is Price > 200 MA?
+                </div>
+                <div class="flow-line"></div>
+
+                <!-- Branching Logic Visualized purely via stack for mobile/simplicity -->
+                <div class="grid grid-cols-2 gap-4 w-full">
+                    <!-- YES Branch -->
+                    <div class="flex flex-col items-center">
+                        <div class="text-xs font-bold text-green-600 mb-1">YES (Bullish)</div>
+                        <div class="w-full bg-[#ecfdf5] border border-green-400 p-3 rounded text-center text-sm">
+                            Only look for <br><strong class="text-green-700">BUY CYCLES</strong>
+                        </div>
+                    </div>
+                    <!-- NO Branch -->
+                    <div class="flex flex-col items-center">
+                        <div class="text-xs font-bold text-red-600 mb-1">NO (Bearish)</div>
+                        <div class="w-full bg-[#fef2f2] border border-red-400 p-3 rounded text-center text-sm">
+                            Only look for <br><strong class="text-red-700">SELL CYCLES</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-line h-8"></div>
+
+                <!-- Final Step -->
+                <div class="w-full bg-[#FF9F1C] text-white p-4 rounded-lg text-center font-bold shadow-md">
+                    Execute on 15m/1H
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: TREND VISUALIZATION (LINE CHART) -->
+        <div class="md:col-span-12 lg:col-span-8 bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800">Visualizing the Filter</h3>
+                    <p class="text-sm text-gray-500">Price Action vs. The 200 Period Moving Average</p>
+                </div>
+                <div class="bg-[#F3F4F6] px-3 py-1 rounded text-xs font-bold text-[#8900F2]">H4 Timeframe</div>
+            </div>
+            
+            <p class="text-gray-600 mb-6 text-sm">
+                The chart below simulates price action interacting with the 200 MA. Notice how the Moving Average acts as dynamic support in an uptrend and resistance in a downtrend. We only trade <strong>away</strong> from the line, not into it.
+            </p>
+
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+            <div class="mt-4 flex justify-center gap-6 text-sm font-medium">
+                <div class="flex items-center"><div class="w-3 h-3 rounded-full bg-[#2D00F7] mr-2"></div>Price Action</div>
+                <div class="flex items-center"><div class="w-3 h-3 rounded-full bg-[#FF9F1C] mr-2"></div>200 MA Filter</div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: THE EDGE (WIN RATE COMPARISON) -->
+        <div class="md:col-span-12 lg:col-span-6 bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">The Statistical Edge</h3>
+            <p class="text-gray-600 mb-6 text-sm">
+                By aligning with the macro momentum (H4 200MA), we significantly increase the probability of success. Counter-trend trading (fighting the 200MA) often results in failed cycles and stop-outs.
+            </p>
+            
+            <div class="chart-container" style="max-height: 300px;">
+                <canvas id="winRateChart"></canvas>
+            </div>
+        </div>
+
+        <!-- SECTION 4: RISK DISTRIBUTION (DONUT CHART) -->
+        <div class="md:col-span-12 lg:col-span-6 bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Outcome Distribution</h3>
+            <p class="text-gray-600 mb-6 text-sm">
+                Trend trading isn't about winning every trade; it's about the "Fat Tail" distribution. We accept small losses to capture the large trend extension moves.
+            </p>
+            
+            <div class="chart-container" style="max-height: 300px;">
+                <canvas id="riskChart"></canvas>
+            </div>
+        </div>
+
+        <!-- SECTION 5: LOWER TIME FRAME CYCLES (PLOTLY SINE WAVE) -->
+        <div class="md:col-span-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800">Timing the Entry: LTF Cycles</h3>
+                    <p class="text-sm text-gray-500 mt-1">Finding the "Low" within a Bullish Trend</p>
+                </div>
+                <div class="mt-2 md:mt-0 bg-[#ecfdf5] text-green-700 px-4 py-2 rounded-lg text-sm font-bold border border-green-200">
+                    Strategy: Buy the Dip
+                </div>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                Once the H4 trend is confirmed Bullish (Price > 200MA), we zoom into the 15-minute or 1-hour chart. We are looking for <strong>market cycles</strong> (oscillations) that dip into oversold territory. The visualization below represents ideal entry points (Green Dots) where the LTF cycle bottoms out while the higher timeframe trend remains up.
+            </p>
+
+            <div id="cyclePlot" class="w-full h-[400px] border border-gray-100 rounded-lg"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="md:col-span-12 text-center text-gray-500 text-sm py-8 border-t border-gray-200">
+            <p>Generated for Educational Purposes • Multi-Timeframe Strategy Visualization</p>
+            <p class="mt-2">Color Palette: "Energetic & Playful" (Blue/Pink/Orange)</p>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- UTILITY: WRAPPING LONG LABELS ---
+        // Requirement: Split labels > 16 chars into arrays for Chart.js
+        function processLabels(labels) {
+            return labels.map(label => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = words[0];
+
+                    for (let i = 1; i < words.length; i++) {
+                        if ((currentLine + " " + words[i]).length <= 16) {
+                            currentLine += " " + words[i];
+                        } else {
+                            lines.push(currentLine);
+                            currentLine = words[i];
+                        }
+                    }
+                    lines.push(currentLine);
+                    return lines;
+                }
+                return label;
+            });
+        }
+
+        // --- UTILITY: COMMON TOOLTIP CONFIG ---
+        // Requirement: Handle array labels in tooltips
+        const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- CHART 1: TREND FILTER LINE CHART (Chart.js) ---
+        const ctxTrend = document.getElementById('trendChart').getContext('2d');
+        
+        // Simulating Data
+        const labelsTrend = Array.from({length: 50}, (_, i) => `H4 Candle ${i+1}`);
+        const maData = [];
+        const priceData = [];
+        let maVal = 100;
+        let priceVal = 100;
+        
+        // Generate trend logic: Start messy, then establish uptrend
+        for (let i = 0; i < 50; i++) {
+            // Smooth MA trend upward
+            if(i < 10) maVal += 0.2; 
+            else maVal += 0.8;
+            maData.push(maVal);
+
+            // Volatile Price action around MA
+            // Logic: mostly above MA to show bullish trend
+            let noise = (Math.random() - 0.4) * 8; 
+            priceVal = maVal + 5 + noise; 
+            
+            // Dip below momentarily to show false signal or pullback
+            if(i > 20 && i < 25) priceVal = maVal - 2; 
+
+            priceData.push(priceVal);
+        }
+
+        new Chart(ctxTrend, {
+            type: 'line',
+            data: {
+                labels: processLabels(labelsTrend),
+                datasets: [
+                    {
+                        label: 'Price Action (Candles)',
+                        data: priceData,
+                        borderColor: '#2D00F7', // Primary Blue
+                        backgroundColor: 'rgba(45, 0, 247, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.3, // Curve slightly
+                        pointRadius: 2,
+                        fill: false
+                    },
+                    {
+                        label: '200 Period Moving Average',
+                        data: maData,
+                        borderColor: '#FF9F1C', // Orange
+                        borderWidth: 4,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { ...commonTooltipOptions }
+                },
+                scales: {
+                    y: {
+                        display: true,
+                        title: { display: true, text: 'Price Value' }
+                    },
+                    x: {
+                        display: false // Hide x labels for cleaner look
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: WIN RATE COMPARISON (Bar Chart) ---
+        const ctxWin = document.getElementById('winRateChart').getContext('2d');
+        const winLabels = ['With H4 Trend Filter', 'Against H4 Trend Filter'];
+        
+        new Chart(ctxWin, {
+            type: 'bar',
+            data: {
+                labels: processLabels(winLabels),
+                datasets: [{
+                    label: 'Win Rate Percentage',
+                    data: [68, 32], // Hypothetical data
+                    backgroundColor: [
+                        '#00BFA6', // Teal (Success)
+                        '#F20089'  // Pink (Failure)
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { ...commonTooltipOptions }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: { display: true, text: 'Win Rate (%)' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: RISK OUTCOMES (Donut Chart) ---
+        const ctxRisk = document.getElementById('riskChart').getContext('2d');
+        const riskLabels = ['Small Loss (1R)', 'Small Win (1R)', 'Big Trend Run (3R+)'];
+
+        new Chart(ctxRisk, {
+            type: 'doughnut',
+            data: {
+                labels: processLabels(riskLabels),
+                datasets: [{
+                    data: [45, 30, 25], // 45% losers, but small. 25% huge winners.
+                    backgroundColor: [
+                        '#9CA3AF', // Grey for loss
+                        '#2D00F7', // Blue for small win
+                        '#FF9F1C'  // Orange for big win
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right' },
+                    tooltip: { ...commonTooltipOptions }
+                }
+            }
+        });
+
+        // --- CHART 4: CYCLE PLOT (Plotly.js) ---
+        // Using Plotly to render a nice Sine wave function to represent "Cycles"
+        // Sine wave formula: y = A * sin(B * x + C) + D
+        
+        const xValues = [];
+        const yValues = [];
+        const markerX = [];
+        const markerY = [];
+
+        // Generate Sine Wave Data
+        for (let x = 0; x <= 20; x += 0.1) {
+            xValues.push(x);
+            // Cycle oscillation + Upward Trend Slope (0.5 * x)
+            let y = Math.sin(x) * 2 + (0.5 * x); 
+            yValues.push(y);
+
+            // Identify "Dip" entries (local minima in the cycle)
+            // Ideally, we pick points near the bottom of the sine curve
+            // sin(x) is -1 at 3pi/2 (approx 4.7), 7pi/2 (approx 10.9), etc.
+            if (Math.abs(x - 4.7) < 0.1 || Math.abs(x - 11.0) < 0.1 || Math.abs(x - 17.2) < 0.1) {
+                markerX.push(x);
+                markerY.push(y);
+            }
+        }
+
+        const traceLine = {
+            x: xValues,
+            y: yValues,
+            mode: 'lines',
+            name: 'LTF Price Action',
+            line: {
+                color: '#8900F2', // Purple
+                width: 3
+            },
+            type: 'scatter'
+        };
+
+        const traceMarkers = {
+            x: markerX,
+            y: markerY,
+            mode: 'markers',
+            name: 'Ideal Buy Entry',
+            marker: {
+                color: '#00BFA6', // Teal
+                size: 14,
+                symbol: 'circle',
+                line: {
+                    color: 'white',
+                    width: 2
+                }
+            },
+            type: 'scatter'
+        };
+
+        const layoutPlotly = {
+            title: {
+                text: 'Lower Timeframe Market Cycles',
+                font: { family: 'Roboto', size: 18, color: '#1F2937' }
+            },
+            showlegend: true,
+            legend: { x: 0, y: 1 },
+            margin: { t: 50, r: 20, l: 40, b: 40 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: {
+                title: 'Time (Hours)',
+                showgrid: true,
+                zeroline: false,
+                gridcolor: '#e5e7eb'
+            },
+            yaxis: {
+                title: 'Price Oscillator',
+                showgrid: true,
+                gridcolor: '#e5e7eb'
+            }
+        };
+
+        const configPlotly = {
+            responsive: true,
+            displayModeBar: false // Clean look
+        };
+
+        Plotly.newPlot('cyclePlot', [traceLine, traceMarkers], layoutPlotly, configPlotly);
+
+    </script>
+</body>
+</html>

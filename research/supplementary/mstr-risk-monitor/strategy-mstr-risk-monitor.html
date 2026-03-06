@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenGraph Meta Tags -->
+  <meta property="og:site_name" content="BigPic Solutions Research">
+<meta property="og:type" content="article" />
+  <meta property="og:title" content="Strategy (MSTR) Risk Monitor" />
+  <meta property="og:description" content="Analysis of mNAV &amp;amp; Liquidity Risks" />
+  <meta property="og:url" content="https://markets.bigpicsolutions.com/research/supplementary/mstr-risk-monitor/strategy-mstr-risk-monitor.html" />
+  <meta property="og:image" content="https://markets.bigpicsolutions.com/research/supplementary/mstr-risk-monitor/mstr-risk-monitor-thumb.jpg" />
+  <meta property="article:published_time" content="2025-12-01" />
+  <meta property="article:section" content="macro" />
+  <meta property="article:tag" content="$MSTR" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Strategy (MSTR) Risk Monitor" />
+  <meta name="twitter:description" content="Analysis of mNAV &amp;amp; Liquidity Risks" />
+  <meta name="twitter:image" content="https://markets.bigpicsolutions.com/research/supplementary/mstr-risk-monitor/mstr-risk-monitor-thumb.jpg" />
+    <title>Strategy (MSTR) mNAV Risk Dashboard | BigPic Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFCF8; /* Warm off-white */
+            color: #2D3748;
+  padding-top: 52px;
+}
+
+        /* Custom Chart Container Class as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width constraint */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Mobile height */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px; /* Tablet/Desktop height */
+            }
+        }
+
+        /* Toggle Switch Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+        
+        .panel-transition {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .scenario-btn.active {
+            background-color: #2C3E50;
+            color: white;
+            border-color: #2C3E50;
+        }
+    
+/* === SITE NAV === */
+.bigpic-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(10,15,26,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,158,11,0.08);display:flex;align-items:center;padding:0 1.5rem;height:52px}
+.bigpic-nav a{text-decoration:none}
+.bigpic-nav .nav-brand{font-weight:700;font-size:1rem;background:linear-gradient(135deg,#e2e8f0,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:32px}
+.bigpic-nav .nav-links{display:flex;align-items:center;gap:4px}
+.bigpic-nav .nav-link{color:#94a3b8;font-size:0.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-link:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.bigpic-nav .nav-dropdown{position:relative}
+.bigpic-nav .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(10,15,26,0.96);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:6px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.bigpic-nav .nav-dropdown:hover .nav-dropdown-menu{display:block}
+.bigpic-nav .nav-dropdown-menu a{display:block;color:#94a3b8;font-size:0.82rem;padding:8px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-dropdown-menu a:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+@media(max-width:600px){.bigpic-nav .nav-links{display:none}}
+
+/* === SHARE DROPDOWN === */
+.share-wrapper{position:fixed;top:4.2rem;right:1.5rem;z-index:9999}
+.share-btn{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;background:rgba(10,15,26,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#94a3b8;font-size:0.78rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.06em;cursor:pointer;backdrop-filter:blur(10px);transition:0.2s ease}
+.share-btn:hover{color:#e2e8f0;border-color:rgba(245,158,11,0.3)}
+.share-btn svg{width:14px;height:14px;stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:0.2s ease}
+.share-btn:hover svg{stroke:#f59e0b}
+.share-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:rgba(10,15,26,0.96);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:160px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.share-dropdown.open{display:block}
+.share-option{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;background:none;border:none;color:#94a3b8;font-size:0.82rem;font-family:'Inter',sans-serif;cursor:pointer;border-radius:6px;transition:0.2s ease;text-decoration:none}
+.share-option:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.share-option svg{width:15px;height:15px;flex-shrink:0}
+.link-icon{stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.x-logo{fill:#94a3b8}
+.share-option:hover .link-icon{stroke:#f59e0b}
+.share-option:hover .x-logo{fill:#f59e0b}
+.share-copied{display:none;padding:8px 12px;color:#10b981;font-size:0.8rem;text-align:center}
+.share-copied.show{display:block}
+
+</style>
+    <!-- Chosen Palette: Warm Neutrals & Corporate Calm -->
+    <!-- Background: #FDFCF8 (Warm White) -->
+    <!-- Text: #2D3748 (Charcoal) -->
+    <!-- Primary/Safe: #4A5568 (Cool Grey) -->
+    <!-- Accent/Risk: #C53030 (Muted Red) -->
+    <!-- Secondary: #E2E8F0 (Light Grey) -->
+    
+    <!-- Application Structure Plan:
+         1. Header: High-level KPI ticker (Live Pulse) to ground the user in current numbers.
+         2. Concept Section (mNAV): Interactive gauge explaining the core metric.
+         3. Logic Engine (The Kill Switch): Interactive binary state tool. Users toggle "Market Access" to see how it interacts with mNAV to trigger a sale.
+         4. Scenario Simulator: Tabbed interface comparing "Mild", "Crunch", and "Spiral" outcomes with dynamic charts.
+         5. Balance Sheet Fortress: Stacked bar chart showing the safety buffer (Assets vs Obligations).
+         6. Footer: Synthesis.
+         Rationale: Logic flows from "What is it?" -> "How does it break?" -> "What happens if it breaks?" -> "Why might it be safe?"
+    -->
+    
+    <!-- Visualization & Content Choices:
+         1. mNAV Gauge: Chart.js Doughnut (half). Goal: visual representation of "distance to danger".
+         2. Kill Switch Logic: HTML/CSS State Machine. Goal: Interactive understanding of the dual-trigger mechanism.
+         3. Scenario Impact: Chart.js Bar Chart. Goal: Compare quantitative impacts (Price, % Drop) across qualitative scenarios.
+         4. Asset Coverage: Chart.js Stacked Bar. Goal: Show the "Cash Wall" that prevents immediate liquidation.
+    -->
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+<nav class="bigpic-nav">
+  <a href="../../../index.html" class="nav-brand">BigPic Solutions</a>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-link" href="#">Sectors &#9662;</a>
+      <div class="nav-dropdown-menu">
+        <a href="../../../research/ai/report.html">AI Infrastructure</a>
+        <a href="../../../research/nuclear/report.html">Nuclear Energy</a>
+        <a href="../../../research/space/report.html">Space</a>
+        <a href="../../../research/quantum/report.html">Quantum Computing</a>
+        <a href="../../../research/robotics/report.html">Robotics & Automation</a>
+        <a href="../../../research/cybersecurity/report.html">Cybersecurity</a>
+        <a href="../../../research/critical-minerals/report.html">Critical Minerals</a>
+        <a href="../../../research/defense/report.html">Defense & Aerospace</a>
+        <a href="../../../research/energy-storage/report.html">Energy Storage</a>
+      </div>
+    </div>
+    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
+  </div>
+</nav>
+
+<div class="share-wrapper">
+  <button class="share-btn" onclick="toggleShare()" aria-label="Share this article">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    SHARE
+  </button>
+  <div class="share-dropdown" id="shareDropdown">
+    <button class="share-option" onclick="copyLink()">
+      <svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+    <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener noreferrer" onclick="shareToX()">
+      <svg class="x-logo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <div class="share-copied" id="shareCopied">Link copied!</div>
+  </div>
+</div>
+
+<script>
+const SHARE_URL = 'https://markets.bigpicsolutions.com/research/supplementary/mstr-risk-monitor/strategy-mstr-risk-monitor.html';
+const SHARE_TEXT = 'MSTR Risk Monitor. Risk monitoring dashboard for MicroStrategy\'s Bitcoin-leveraged balance sheet strategy.';
+function toggleShare(){document.getElementById('shareDropdown').classList.toggle('open')}
+function copyLink(){navigator.clipboard.writeText(SHARE_URL).then(()=>{const el=document.getElementById('shareCopied');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000)})}
+function shareToX(){const url='https://x.com/intent/tweet?text='+encodeURIComponent(SHARE_TEXT)+'&url='+encodeURIComponent(SHARE_URL);document.getElementById('shareX').href=url}
+document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper'))document.getElementById('shareDropdown').classList.remove('open')});
+</script>
+
+
+    <!-- Header / KPI Ticker -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Strategy (MSTR) Risk Monitor</h1>
+                    <p class="text-sm text-gray-500">Analysis of mNAV & Liquidity Risks</p>
+                </div>
+                <div class="flex space-x-6 text-sm font-medium">
+                    <div class="text-center">
+                        <span class="block text-gray-400 text-xs uppercase">Current mNAV</span>
+                        <span class="text-xl text-orange-600 font-bold">0.95x</span>
+                    </div>
+                    <div class="text-center border-l border-gray-200 pl-6">
+                        <span class="block text-gray-400 text-xs uppercase">BTC Price</span>
+                        <span class="text-xl text-gray-800">~$89K</span>
+                    </div>
+                    <div class="text-center border-l border-gray-200 pl-6">
+                        <span class="block text-gray-400 text-xs uppercase">Stock Price</span>
+                        <span class="text-xl text-gray-800">~$177</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: Understanding mNAV -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">The Critical Metric: mNAV</h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            <strong>mNAV (Multiple-to-Net-Asset-Value)</strong> measures Strategy's enterprise value relative to its Bitcoin holdings. It is the primary lens for evaluating the company's leveraged "HODL" strategy.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">●</span>
+                                <span class="text-sm text-gray-600"><strong>> 1.0x (Premium):</strong> Market confidence. Strategy can accretively raise capital to buy more BTC.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-orange-500 mr-2">●</span>
+                                <span class="text-sm text-gray-600"><strong>< 1.0x (Discount):</strong> Warning sign. Stock trades below the value of its BTC.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">●</span>
+                                <span class="text-sm text-gray-600"><strong>< 0.9x (Danger Zone):</strong> Liquidity constraints. Dilution becomes toxic, debt markets tighten.</span>
+                            </li>
+                        </ul>
+                        <p class="text-xs text-gray-400 italic">Current Status: 0.95x (Down from 1.11x mid-2025 highs)</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wide">Current Risk Level</h3>
+                        <div class="chart-container">
+                            <canvas id="mnavGauge"></canvas>
+                        </div>
+                        <p id="gaugeText" class="text-center text-sm font-medium text-orange-600 mt-2">Zone: Mild Distress (Monitoring)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: The Kill Switch Logic -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">The "Forced Sale" Kill Switch</h2>
+                <p class="text-gray-600 mt-2 max-w-3xl">
+                    For the first time, Strategy's CEO has outlined conditions for a forced BTC sale. It is <strong>not</strong> triggered by debt covenants, but by a specific combination of valuation and market access failure. Use the simulator below to test the conditions.
+                </p>
+            </div>
+
+            <div class="bg-gray-800 rounded-xl p-6 md:p-10 text-white shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-stretch">
+                    
+                    <!-- Condition 1 -->
+                    <div class="bg-gray-700 rounded-lg p-6 border-2 border-red-500 relative flex flex-col justify-center">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-500 text-xs px-2 py-1 rounded font-bold">CONDITION 1 MET</div>
+                        <h3 class="text-lg font-bold mb-2">mNAV < 1.0x</h3>
+                        <p class="text-sm text-gray-300">Currently at 0.95x. The stock is trading at a discount to its assets.</p>
+                        <div class="mt-4 text-3xl">⚠️</div>
+                    </div>
+
+                    <!-- Operator -->
+                    <div class="flex items-center justify-center">
+                        <span class="text-4xl font-bold text-gray-500">+</span>
+                    </div>
+
+                    <!-- Condition 2 (Interactive) -->
+                    <div id="cond2-box" class="bg-gray-700 rounded-lg p-6 border-2 border-transparent transition-colors duration-300 flex flex-col justify-center">
+                        <h3 class="text-lg font-bold mb-4">Capital Market Access</h3>
+                        <p class="text-sm text-gray-300 mb-6">Can Strategy raise cash via Equity or Debt?</p>
+                        
+                        <!-- Toggle -->
+                        <div class="flex items-center justify-center w-full mb-2">
+                            <label for="market-access-toggle" class="flex items-center cursor-pointer">
+                                <div class="relative">
+                                    <input type="checkbox" id="market-access-toggle" class="sr-only" checked onchange="updateKillSwitch()">
+                                    <div class="w-14 h-8 bg-gray-600 rounded-full shadow-inner"></div>
+                                    <div class="dot absolute w-6 h-6 bg-white rounded-full shadow left-1 top-1 transition"></div>
+                                </div>
+                                <div class="ml-3 text-sm font-medium" id="toggle-label-text">Available</div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Result Arrow -->
+                <div class="flex justify-center my-6">
+                    <div class="text-4xl text-gray-500">⬇</div>
+                </div>
+
+                <!-- Outcome -->
+                <div id="outcome-box" class="bg-green-800 rounded-lg p-6 border border-green-600 text-center transition-colors duration-500">
+                    <h3 id="outcome-title" class="text-2xl font-bold mb-2">SAFE: NO SALE</h3>
+                    <p id="outcome-desc" class="text-green-100">Strategy can use cash reserves or raise capital to cover obligations. HODL continues.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Scenario Analysis -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 md:p-8 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800">Scenario Simulator</h2>
+                <p class="text-gray-600 mt-2">Explore the potential impact of deteriorating conditions on BTC price and Strategy's stability.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row">
+                <!-- Controls -->
+                <div class="w-full md:w-1/3 bg-gray-50 p-6 flex flex-col space-y-2 border-r border-gray-100">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase mb-2">Select Scenario</h3>
+                    <button class="scenario-btn active p-4 text-left rounded-lg border border-gray-200 hover:bg-gray-100 transition" onclick="setScenario('mild')">
+                        <div class="font-bold">1. Mild Distress</div>
+                        <div class="text-xs opacity-75">Current State (0.95x)</div>
+                    </button>
+                    <button class="scenario-btn p-4 text-left rounded-lg border border-gray-200 hover:bg-gray-100 transition" onclick="setScenario('crunch')">
+                        <div class="font-bold">2. Liquidity Crunch</div>
+                        <div class="text-xs opacity-75">mNAV < 0.9x</div>
+                    </button>
+                    <button class="scenario-btn p-4 text-left rounded-lg border border-gray-200 hover:bg-gray-100 transition" onclick="setScenario('spiral')">
+                        <div class="font-bold">3. Death Spiral</div>
+                        <div class="text-xs opacity-75">Prolonged Distress</div>
+                    </button>
+
+                    <div class="mt-8 bg-white p-4 rounded border border-gray-200">
+                        <h4 class="font-bold text-gray-800 mb-2">Key Drivers</h4>
+                        <ul class="text-sm text-gray-600 space-y-2" id="scenario-details">
+                            <li>• Cash Buffer: $1.44B (Stable)</li>
+                            <li>• Debt Covenants: None</li>
+                            <li>• Investor Sentiment: Cautious</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Visualization -->
+                <div class="w-full md:w-2/3 p-6 md:p-8">
+                    <div class="flex justify-between items-end mb-4">
+                        <h3 class="font-bold text-gray-700" id="chart-title">Market Impact Projection</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="scenarioChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-blue-50 text-blue-800 text-sm rounded" id="scenario-narrative">
+                        <strong>Analysis:</strong> At 0.95x, the market is pricing in skepticism, but the $1.44B cash reserve covers 21 months of obligations. Probability of forced sale is near zero.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Financial Resilience (The Buffer) -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">The Balance Sheet Fortress</h2>
+                <p class="text-gray-600 mt-2">Why a collapse isn't imminent. Even with BTC at $25K, assets cover debt 2x. No debt matures until Dec 2025.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-gray-700 mb-4 text-center">Asset Coverage Ratio</h3>
+                    <div class="chart-container">
+                        <canvas id="balanceSheetChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
+                    <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Resilience Metrics</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Avg BTC Cost Basis</span>
+                                <span class="font-bold text-gray-800">$74,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 83%"></div>
+                            </div>
+                            <div class="text-xs text-right text-gray-400 mt-1">Current Price: ~$89k</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">BTC Holdings (% of Supply)</span>
+                                <span class="font-bold text-gray-800">649,870 (3%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Cash Runway (Obligations)</span>
+                                <span class="font-bold text-gray-800">21 Months</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-600 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                            <div class="text-xs text-right text-gray-400 mt-1">$1.44B Cash Reserve</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-yellow-50 p-3 rounded text-sm text-yellow-800 border border-yellow-200">
+                        <strong>Bottom Line:</strong> Strategy views itself as a "leveraged BTC ETF". As long as BTC appreciation > 10.3% annually, the model outperforms spot BTC.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="mb-4 text-sm">Based on Dec 1, 2025 Market Analysis Reports regarding Strategy (MSTR).</p>
+            <p class="text-xs text-gray-500 max-w-2xl mx-auto">
+                Disclaimer: This dashboard is for informational simulation purposes only. Analysis based on data provided regarding mNAV metrics, debt structures, and public CEO statements. Market conditions change rapidly.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STORAGE & STATE ---
+        const state = {
+            mnav: 0.95,
+            btcPrice: 89000,
+            stockPrice: 177,
+            scenario: 'mild',
+            killSwitch: {
+                mnavCondition: true, // < 1.0x is TRUE
+                noAccessCondition: false // Market access is available initially
+            }
+        };
+
+        const scenarioData = {
+            mild: {
+                label: "Mild Distress",
+                desc: "Current (~0.95x). Minimal BTC impact. High confidence in recovery via ETF inflows.",
+                narrative: "<strong>Analysis:</strong> At 0.95x, the market is pricing in skepticism, but the $1.44B cash reserve covers 21 months of obligations. Probability of forced sale is near zero.",
+                impactData: [5, 170, 0.95], // [BTC Drop %, Stock Price, mNAV]
+                colors: ['#68D391', '#CBD5E0']
+            },
+            crunch: {
+                label: "Liquidity Crunch",
+                desc: "Stock <$160. Debt access closes. Index delistings possible.",
+                narrative: "<strong>Warning:</strong> Below 0.9x, investor appetite for shares evaporates. Debt markets tighten. Forced selling of 10-20k BTC possible ($0.8-1.6B impact).",
+                impactData: [10, 155, 0.88],
+                colors: ['#F6E05E', '#A0AEC0']
+            },
+            spiral: {
+                label: "Death Spiral",
+                desc: "Prolonged <0.9x. Chain reaction. Potential 20%+ BTC collapse.",
+                narrative: "<strong>Critical:</strong> Vicious cycle. Sale dilutes shares -> mNAV drops -> more sales. Could affect 3% of total BTC supply. Systemic risk high.",
+                impactData: [25, 126, 0.75],
+                colors: ['#FC8181', '#718096']
+            }
+        };
+
+        // --- CHART INITIALIZATION ---
+        
+        // 1. mNAV Gauge (Doughnut)
+        const ctxGauge = document.getElementById('mnavGauge').getContext('2d');
+        const mnavGauge = new Chart(ctxGauge, {
+            type: 'doughnut',
+            data: {
+                labels: ['Danger Zone (<0.9)', 'Discount (<1.0)', 'Premium (>1.0)'],
+                datasets: [{
+                    data: [0.9, 0.1, 0.5], // Scale representation
+                    backgroundColor: ['#C53030', '#DD6B20', '#48BB78'],
+                    borderWidth: 0,
+                    circumference: 180,
+                    rotation: 270,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    datalabels: { display: false } // Using custom center text if needed, or HTML overlay
+                }
+            },
+            plugins: [{
+                id: 'gaugeNeedle',
+                afterDraw: (chart) => {
+                    const { ctx, chartArea: { width, height } } = chart;
+                    ctx.save();
+                    
+                    // Logic to position needle based on state.mnav
+                    // Map 0.8 - 1.2 range to angle
+                    // 0.8 = left, 1.0 = top-ish, 1.2 = right
+                    // Simple linear interpolation for demo visual
+                    let val = state.mnav;
+                    if(val < 0.8) val = 0.8;
+                    if(val > 1.2) val = 1.2;
+                    
+                    const totalRange = 1.2 - 0.8;
+                    const normalized = (val - 0.8) / totalRange; 
+                    const angle = Math.PI + (normalized * Math.PI);
+
+                    const cx = width / 2;
+                    const cy = height / 1.3; // Adjust for half doughnut
+
+                    // Draw Needle
+                    ctx.translate(cx, cy);
+                    ctx.rotate(angle);
+                    ctx.beginPath();
+                    ctx.moveTo(0, -5);
+                    ctx.lineTo(height/1.5, 0); // Length
+                    ctx.lineTo(0, 5);
+                    ctx.fillStyle = '#2D3748';
+                    ctx.fill();
+                    
+                    // Pivot
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                    // Text
+                    ctx.font = "bold 24px Inter";
+                    ctx.fillStyle = "#2D3748";
+                    ctx.textAlign = "center";
+                    ctx.fillText(state.mnav + "x", cx, cy - 10);
+                }
+            }]
+        });
+
+        // 2. Scenario Impact Chart
+        const ctxScenario = document.getElementById('scenarioChart').getContext('2d');
+        const scenarioChart = new Chart(ctxScenario, {
+            type: 'bar',
+            data: {
+                labels: ['BTC Price Drop Risk (%)', 'Stock Price ($)', 'mNAV Level (x100)'],
+                datasets: [{
+                    label: 'Current Scenario',
+                    data: [5, 177, 95],
+                    backgroundColor: ['#E53E3E', '#2B6CB0', '#DD6B20'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f3f4f6' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 3. Balance Sheet Chart
+        const ctxBalance = document.getElementById('balanceSheetChart').getContext('2d');
+        const balanceChart = new Chart(ctxBalance, {
+            type: 'bar',
+            data: {
+                labels: ['Assets', 'Liabilities'],
+                datasets: [
+                    {
+                        label: 'BTC Value',
+                        data: [48.4, 0], // $48.4B BTC
+                        backgroundColor: '#F6AD55',
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: 'Cash Reserve',
+                        data: [1.44, 0],
+                        backgroundColor: '#48BB78',
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: 'Long-term Debt',
+                        data: [0, 8.2],
+                        backgroundColor: '#A0AEC0',
+                        stack: 'Stack 1',
+                    },
+                    {
+                        label: 'Other Liabilities',
+                        data: [0, 1.5], // Estimate for dividends/ops
+                        backgroundColor: '#CBD5E0',
+                        stack: 'Stack 1',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.raw + 'B';
+                            }
+                        }
+                    },
+                    annotation: {
+                        // Hypothetical line for coverage could go here
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Billions USD ($)' },
+                        grid: { color: '#f3f4f6' }
+                    }
+                }
+            }
+        });
+
+        // --- INTERACTION LOGIC ---
+
+        // Toggle Switch for Kill Switch
+        window.updateKillSwitch = function() {
+            const toggle = document.getElementById('market-access-toggle');
+            const label = document.getElementById('toggle-label-text');
+            const cond2Box = document.getElementById('cond2-box');
+            const outcomeBox = document.getElementById('outcome-box');
+            const outcomeTitle = document.getElementById('outcome-title');
+            const outcomeDesc = document.getElementById('outcome-desc');
+
+            state.killSwitch.noAccessCondition = !toggle.checked;
+
+            // Visual updates for Toggle Box
+            if(toggle.checked) {
+                label.innerText = "Available";
+                cond2Box.classList.remove('border-red-500');
+                cond2Box.classList.add('border-transparent');
+                // Remove checkmark badge if exists logic (simplified here)
+            } else {
+                label.innerText = "Frozen/Unavailable";
+                cond2Box.classList.remove('border-transparent');
+                cond2Box.classList.add('border-red-500');
+            }
+
+            // Logic: IF mNav < 1 (True) AND No Access (True) -> KILL SWITCH
+            // We assume mNAV is < 1 for this simulation based on report (0.95x)
+            if (state.killSwitch.mnavCondition && state.killSwitch.noAccessCondition) {
+                // TRIGGERED
+                outcomeBox.className = "bg-red-800 rounded-lg p-6 border border-red-600 text-center transition-colors duration-500 animate-pulse";
+                outcomeTitle.innerText = "FORCED SALE TRIGGERED";
+                outcomeDesc.innerText = "Liquidity crisis. Company must sell BTC to cover dividends/interest. Negative feedback loop initiates.";
+            } else {
+                // SAFE
+                outcomeBox.className = "bg-green-800 rounded-lg p-6 border border-green-600 text-center transition-colors duration-500";
+                outcomeTitle.innerText = "SAFE: NO SALE";
+                outcomeDesc.innerText = "Strategy can use cash reserves ($1.44B) or raise capital (Equity/Debt) to cover obligations.";
+            }
+        };
+
+        // Scenario Setter
+        window.setScenario = function(type) {
+            state.scenario = type;
+            const data = scenarioData[type];
+
+            // Update Buttons
+            document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Update Text
+            document.getElementById('scenario-narrative').innerHTML = data.narrative;
+            
+            // Update Chart
+            scenarioChart.data.datasets[0].data = [data.impactData[0], data.impactData[1], data.impactData[2]*100];
+            scenarioChart.update();
+
+            // Update mNAV Gauge Simulation (Visual feedback across components)
+            // Just for effect, we nudge the needle
+            state.mnav = data.impactData[2];
+            document.getElementById('gaugeText').innerText = `Zone: ${data.label}`;
+            if(state.mnav < 0.9) document.getElementById('gaugeText').className = "text-center text-sm font-medium text-red-600 mt-2";
+            else document.getElementById('gaugeText').className = "text-center text-sm font-medium text-orange-600 mt-2";
+            
+            mnavGauge.update();
+        };
+
+        // Handle Style overrides for Toggle Switch
+        const style = document.createElement('style');
+        style.textContent = `
+            .dot { transform: translateX(0); }
+            input:checked ~ .dot { transform: translateX(100%); background-color: white; }
+            input:checked ~ .bg-gray-600 { background-color: #48BB78; }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>

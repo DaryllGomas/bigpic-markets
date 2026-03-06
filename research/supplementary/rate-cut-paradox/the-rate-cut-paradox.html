@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenGraph Meta Tags -->
+  <meta property="og:site_name" content="BigPic Solutions Research">
+<meta property="og:type" content="article" />
+  <meta property="og:title" content="The Rate Cut Paradox" />
+  <meta property="og:description" content="Front-End Easing, Long-End Repricing" />
+  <meta property="og:url" content="https://markets.bigpicsolutions.com/research/supplementary/rate-cut-paradox/the-rate-cut-paradox.html" />
+  <meta property="og:image" content="https://markets.bigpicsolutions.com/research/supplementary/rate-cut-paradox/rate-cut-paradox-thumb.jpg" />
+  <meta property="article:published_time" content="2025-12-12" />
+  <meta property="article:section" content="macro" />
+  <meta property="article:tag" content="$SPY, $QQQ" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Rate Cut Paradox" />
+  <meta name="twitter:description" content="Front-End Easing, Long-End Repricing" />
+  <meta name="twitter:image" content="https://markets.bigpicsolutions.com/research/supplementary/rate-cut-paradox/rate-cut-paradox-thumb.jpg" />
+    <title>MarketAlpha Insights - FOMC Analysis | BigPic Solutions</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617; /* slate-950 */
+            color: #e2e8f0; /* slate-200 */
+  padding-top: 52px;
+}
+        .backdrop-blur-md {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    
+/* === SITE NAV === */
+.bigpic-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(10,15,26,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,158,11,0.08);display:flex;align-items:center;padding:0 1.5rem;height:52px}
+.bigpic-nav a{text-decoration:none}
+.bigpic-nav .nav-brand{font-weight:700;font-size:1rem;background:linear-gradient(135deg,#e2e8f0,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:32px}
+.bigpic-nav .nav-links{display:flex;align-items:center;gap:4px}
+.bigpic-nav .nav-link{color:#94a3b8;font-size:0.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-link:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.bigpic-nav .nav-dropdown{position:relative}
+.bigpic-nav .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(10,15,26,0.96);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:6px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.bigpic-nav .nav-dropdown:hover .nav-dropdown-menu{display:block}
+.bigpic-nav .nav-dropdown-menu a{display:block;color:#94a3b8;font-size:0.82rem;padding:8px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-dropdown-menu a:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+@media(max-width:600px){.bigpic-nav .nav-links{display:none}}
+
+/* === SHARE DROPDOWN === */
+.share-wrapper{position:fixed;top:4.2rem;right:1.5rem;z-index:9999}
+.share-btn{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;background:rgba(10,15,26,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#94a3b8;font-size:0.78rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.06em;cursor:pointer;backdrop-filter:blur(10px);transition:0.2s ease}
+.share-btn:hover{color:#e2e8f0;border-color:rgba(245,158,11,0.3)}
+.share-btn svg{width:14px;height:14px;stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:0.2s ease}
+.share-btn:hover svg{stroke:#f59e0b}
+.share-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:rgba(10,15,26,0.96);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:160px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.share-dropdown.open{display:block}
+.share-option{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;background:none;border:none;color:#94a3b8;font-size:0.82rem;font-family:'Inter',sans-serif;cursor:pointer;border-radius:6px;transition:0.2s ease;text-decoration:none}
+.share-option:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.share-option svg{width:15px;height:15px;flex-shrink:0}
+.link-icon{stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.x-logo{fill:#94a3b8}
+.share-option:hover .link-icon{stroke:#f59e0b}
+.share-option:hover .x-logo{fill:#f59e0b}
+.share-copied{display:none;padding:8px 12px;color:#10b981;font-size:0.8rem;text-align:center}
+.share-copied.show{display:block}
+
+</style>
+</head>
+<body class="font-sans selection:bg-blue-500/30">
+<nav class="bigpic-nav">
+  <a href="../../../index.html" class="nav-brand">BigPic Solutions</a>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-link" href="#">Sectors &#9662;</a>
+      <div class="nav-dropdown-menu">
+        <a href="../../../research/ai/report.html">AI Infrastructure</a>
+        <a href="../../../research/nuclear/report.html">Nuclear Energy</a>
+        <a href="../../../research/space/report.html">Space</a>
+        <a href="../../../research/quantum/report.html">Quantum Computing</a>
+        <a href="../../../research/robotics/report.html">Robotics & Automation</a>
+        <a href="../../../research/cybersecurity/report.html">Cybersecurity</a>
+        <a href="../../../research/critical-minerals/report.html">Critical Minerals</a>
+        <a href="../../../research/defense/report.html">Defense & Aerospace</a>
+        <a href="../../../research/energy-storage/report.html">Energy Storage</a>
+      </div>
+    </div>
+    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
+  </div>
+</nav>
+
+<div class="share-wrapper">
+  <button class="share-btn" onclick="toggleShare()" aria-label="Share this article">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    SHARE
+  </button>
+  <div class="share-dropdown" id="shareDropdown">
+    <button class="share-option" onclick="copyLink()">
+      <svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+    <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener noreferrer" onclick="shareToX()">
+      <svg class="x-logo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <div class="share-copied" id="shareCopied">Link copied!</div>
+  </div>
+</div>
+
+<script>
+const SHARE_URL = 'https://markets.bigpicsolutions.com/research/supplementary/rate-cut-paradox/the-rate-cut-paradox.html';
+const SHARE_TEXT = 'The Rate Cut Paradox. Why rate cuts aren\'t always bullish — examining the paradox of monetary easing in late-cycle markets.';
+function toggleShare(){document.getElementById('shareDropdown').classList.toggle('open')}
+function copyLink(){navigator.clipboard.writeText(SHARE_URL).then(()=>{const el=document.getElementById('shareCopied');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000)})}
+function shareToX(){const url='https://x.com/intent/tweet?text='+encodeURIComponent(SHARE_TEXT)+'&url='+encodeURIComponent(SHARE_URL);document.getElementById('shareX').href=url}
+document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper'))document.getElementById('shareDropdown').classList.remove('open')});
+</script>
+
+
+    <!-- Navigation / Header -->
+    <nav class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="bar-chart-2" class="w-6 h-6 text-blue-500"></i>
+                <span class="text-lg font-bold tracking-tight text-white">Market<span class="text-blue-500">Alpha</span> Insights</span>
+            </div>
+            <div class="text-xs font-mono text-slate-500">
+                REPORT DATE: DEC 10, 2025
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-slate-950 z-0"></div>
+        <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest mb-6 border border-blue-500/20">
+                    FOMC DECISION ANALYSIS
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    The Rate Cut Paradox: <br />
+                    <span class="text-slate-400 font-light">Front-End Easing, Long-End Repricing</span>
+                </h1>
+                <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                    Despite a 25bps cut to 3.50%–3.75%, markets reacted with a TLT selloff and DXY stabilization. 
+                    Stronger economic projections are driving term premiums higher.
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+                
+                <!-- Stat 1 -->
+                <div class="flex items-center space-x-4 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                    <div class="p-3 bg-blue-500/10 rounded-full text-blue-400">
+                        <i data-lucide="trending-down"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-400 font-medium uppercase tracking-wider">New Fed Funds Rate</p>
+                        <p class="text-xl md:text-2xl font-bold text-white">3.50% – 3.75%</p>
+                        <p class="text-xs text-slate-500 mt-1">25 basis point reduction</p>
+                    </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="flex items-center space-x-4 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                    <div class="p-3 bg-blue-500/10 rounded-full text-blue-400">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-400 font-medium uppercase tracking-wider">Market Reaction</p>
+                        <p class="text-xl md:text-2xl font-bold text-white">TLT Selloff</p>
+                        <p class="text-xs text-slate-500 mt-1">Rising Term Premium</p>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="flex items-center space-x-4 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                    <div class="p-3 bg-blue-500/10 rounded-full text-blue-400">
+                        <i data-lucide="scale"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-400 font-medium uppercase tracking-wider">DXY Response</p>
+                        <p class="text-xl md:text-2xl font-bold text-white">98.66</p>
+                        <p class="text-xs text-slate-500 mt-1">Stabilized after 0.6% dip</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+        <!-- Section 1: The Core Dynamic -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-light text-white mb-8 border-l-4 border-blue-500 pl-4">The Mechanism</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Text Card -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 backdrop-blur-sm">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-amber-500 mr-2"></i>
+                        The Hawk in Dove's Clothing
+                    </h3>
+                    <p class="text-slate-400 mb-4 leading-relaxed">
+                        The Federal Reserve cut rates, but the accompanying statement was hawkish. They emphasized that 
+                        <span class="text-white font-medium"> "inflation moved up and remains somewhat elevated."</span>
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        This triggered a classic "front-end easing / long-end repricing." The market is looking past the immediate cut, 
+                        pricing in higher long-term yields due to persistent inflation risks.
+                    </p>
+                </div>
+                
+                <!-- Visual Logic Flow -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-6 border border-slate-700 flex flex-col justify-center">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                            <span class="text-slate-400">Fed Action</span>
+                            <div class="flex items-center text-emerald-400">
+                                <span class="mr-2">Lowers Short Term Rate</span>
+                                <i data-lucide="trending-down" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                            <span class="text-slate-400">Projected Growth</span>
+                            <div class="flex items-center text-blue-400">
+                                <span class="mr-2">Increases (SEP)</span>
+                                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-100 font-semibold">Result</span>
+                            <div class="text-right">
+                                <span class="block text-red-400 font-bold">Long-Term Yields Rise</span>
+                                <span class="text-xs text-slate-500">Term Premium Expansion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: SEP Projections (Chart) -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-light text-white mb-8 border-l-4 border-blue-500 pl-4">Summary of Economic Projections (SEP)</h2>
+            <div class="grid lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-1">
+                    <p class="text-slate-300 text-lg mb-6">
+                        The December SEP revealed a notably stronger economic outlook compared to September.
+                    </p>
+                    <div class="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                        <p class="text-red-200 text-sm italic">
+                            "Basically poison for TLT."
+                        </p>
+                        <p class="text-slate-400 text-sm mt-2">
+                            Higher expected growth + inflation not fully tamed = Rationale for higher yields.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-slate-800/50 p-6 rounded-lg border border-slate-700 h-80 flex flex-col">
+                    <h4 class="text-white text-sm font-semibold mb-2 uppercase tracking-wider text-center">GDP Forecast Revision (2026)</h4>
+                    <div class="flex-grow relative">
+                         <canvas id="gdpChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: DXY Analysis -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-light text-white mb-8 border-l-4 border-blue-500 pl-4">Why the Dollar Held Ground</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 backdrop-blur-sm hover:border-blue-500/50 transition-colors duration-300 group">
+                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
+                        <span class="text-white font-bold">1</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Rising Long-End Yields</h4>
+                    <p class="text-sm text-slate-400">Attractive rate differentials and real yield support relative to other currencies.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 backdrop-blur-sm hover:border-blue-500/50 transition-colors duration-300 group">
+                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
+                        <span class="text-white font-bold">2</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Risk-Off Sentiment</h4>
+                    <p class="text-sm text-slate-400">Investors seeking safety in the USD amidst volatility, bidding up value.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 backdrop-blur-sm hover:border-blue-500/50 transition-colors duration-300 group">
+                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
+                        <span class="text-white font-bold">3</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Targeted Fed Liquidity</h4>
+                    <p class="text-sm text-slate-400">Purchases of short-term Treasuries support liquidity without suppressing long-end yields.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Indicators Dashboard -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-light text-white mb-8 border-l-4 border-blue-500 pl-4">Key Indicators Monitor</h2>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+                <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800">
+                    
+                    <!-- Indicator 1 -->
+                    <div class="p-6 hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-white font-semibold">US10Y & Real Yield</h4>
+                            <i data-lucide="trending-up" class="w-5 h-5 text-red-400"></i>
+                        </div>
+                        <div class="mb-2">
+                            <span class="inline-block px-2 py-1 bg-slate-700 rounded text-xs text-slate-300 font-mono">
+                                Signal: Rising
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-400">Primary driver of TLT weakness.</p>
+                    </div>
+
+                    <!-- Indicator 2 -->
+                    <div class="p-6 hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-white font-semibold">2s10s Curve</h4>
+                            <i data-lucide="activity" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="mb-2">
+                            <span class="inline-block px-2 py-1 bg-slate-700 rounded text-xs text-slate-300 font-mono">
+                                Signal: Widening
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-400">Bear Steepening confirmation.</p>
+                    </div>
+
+                    <!-- Indicator 3 -->
+                    <div class="p-6 hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-white font-semibold">DXY Level</h4>
+                            <i data-lucide="dollar-sign" class="w-5 h-5 text-emerald-400"></i>
+                        </div>
+                        <div class="mb-2">
+                            <span class="inline-block px-2 py-1 bg-slate-700 rounded text-xs text-slate-300 font-mono">
+                                Signal: Stabilizing
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-400">Critical Support Zone: 98.3–98.4</p>
+                    </div>
+
+                </div>
+                <div class="bg-slate-800/30 p-4 border-t border-slate-800">
+                    <p class="text-xs text-slate-500 text-center">
+                        <span class="font-semibold text-slate-400">Synthesis:</span> If DXY holds >98.3 while 10Y yields rise, the "front-end easing / long-end repricing" thesis is validated.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-slate-600 text-sm mb-4">
+                Analysis based on FOMC Meeting Data, December 10, 2025.
+            </p>
+            <div class="flex justify-center space-x-6 text-slate-700 text-xs">
+                <span>Federal Funds Rate: 3.50%–3.75%</span>
+                <span>•</span>
+                <span>GDP 2026 Proj: 2.3%</span>
+                <span>•</span>
+                <span>Report Generated via MarketAlpha</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('gdpChart').getContext('2d');
+        const gdpChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Sept Forecast', 'Dec Forecast'],
+                datasets: [{
+                    label: 'GDP Growth %',
+                    data: [1.8, 2.3],
+                    backgroundColor: [
+                        'rgba(100, 116, 139, 0.8)', // Slate (Sept)
+                        'rgba(59, 130, 246, 0.9)'   // Blue (Dec)
+                    ],
+                    borderColor: [
+                        'rgba(100, 116, 139, 1)',
+                        'rgba(59, 130, 246, 1)'
+                    ],
+                    borderWidth: 1,
+                    barPercentage: 0.5,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal bar chart
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleColor: '#f8fafc',
+                        bodyColor: '#f8fafc',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        padding: 10,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: '#334155',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        min: 0,
+                        max: 3
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#e2e8f0',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
