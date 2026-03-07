@@ -277,6 +277,48 @@ git push origin main   # GitHub Pages deploys automatically
 
 ---
 
+---
+
+## Hot Takes
+
+Hot Takes are quick-hit teardowns and contrarian calls. Same publish pipeline as Supplementary Research with two differences:
+
+1. **Repo path:** `research/hot-takes/{SLUG}/` instead of `research/supplementary/{SLUG}/`
+2. **No internal report nav:** Hot Takes reports do NOT include the decorative internal `<nav>` (Big Pic Solutions logo + Home/Technology/Markets/About Me links). The site nav bar is sufficient.
+
+### Quick Reference — Hot Takes Sequence
+
+```bash
+# 1. Create directory
+mkdir -p research/hot-takes/{SLUG}
+
+# 2. Copy HTML (omit or remove internal nav block if present)
+cp "SOURCE_PATH/{article}.html" research/hot-takes/{SLUG}/{article}.html
+
+# 3. Generate thumbnail
+ffmpeg -y -i "SOURCE_PATH/{SOURCE}.png" -vf "scale=1200:675" -q:v 5 research/hot-takes/{SLUG}/{name}-thumb.jpg
+
+# 4. Add OG meta tags, nav CSS, site nav bar, share dropdown (same as Supplementary — see above)
+#    Nav paths: ../../../index.html (3 levels up)
+
+# 5. Add card to index.html — Hot Takes section (badge: "Teardown" or "Hot Take")
+
+# 6. Commit and deploy
+git add research/hot-takes/{SLUG}/{article}.html \
+       research/hot-takes/{SLUG}/{name}-thumb.jpg \
+       index.html
+git commit -m "Publish Hot Take: {Title}"
+git push origin main
+```
+
+### Published Hot Takes
+
+| Article | Directory | Date | Thumbnail |
+|---------|-----------|------|-----------|
+| Short IGV, Long PLTR: Teardown | `Short-IGV-Long-PLTR/` | 2026-03-07 | `trade-thesis-teardown-thumb.jpg` |
+
+---
+
 ## Published Articles
 
 | Article | Directory | Date | Thumbnail |
