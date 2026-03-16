@@ -1,0 +1,91 @@
+[2026-03-16 04:30:01] === Morning Brief Started ===
+[2026-03-16 04:30:01] Date: Monday, 2026-03-16
+[2026-03-16 04:30:01] Output: morning-brief/2026-03/2026-03-16_Mon.md + 2026-03-16_Mon.html
+[2026-03-16 04:30:01] All dependencies verified
+[2026-03-16 04:30:01] Running data collection pipeline...
+2026-03-16 04:30:01,274 INFO === Market Data Collection — 2026-03-16 ===
+2026-03-16 04:30:01,282 INFO ── Step 1: RSS Feeds ──
+2026-03-16 04:30:23,202 INFO RSS feeds: 147 headlines stored, 337 older than 24h skipped
+2026-03-16 04:30:23,202 INFO Step 1 complete: 21.9s (headlines=147)
+2026-03-16 04:30:23,202 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-16 04:30:23,203 INFO Opus analysis: sending 145 headlines to claude CLI...
+2026-03-16 04:31:32,301 INFO Opus analysis: 25 tickers, 6 movers, 10 themes from 145 headlines
+2026-03-16 04:31:32,301 INFO Step 2 complete: 69.1s (opus_tickers=25)
+2026-03-16 04:31:32,301 INFO ── Step 3: Schwab + External APIs ──
+2026-03-16 04:31:39,289 INFO Schwab quotes: 140 symbols
+2026-03-16 04:31:39,289 INFO Auto-detected movers (|change| > 3%): 8 symbols
+2026-03-16 04:31:39,290 INFO Technicals + SMA200 for 121 quoted symbols (sequential)
+2026-03-16 04:34:37,453 INFO Schwab technicals: 121/121 symbols
+2026-03-16 04:36:11,960 INFO SMA200: 121/121 symbols
+2026-03-16 04:36:12,389 INFO Schwab market context: collected
+2026-03-16 04:37:45,587 INFO Schwab earnings: 71 entries
+2026-03-16 04:37:45,596 INFO Economic calendar: 6 events
+2026-03-16 04:37:45,663 INFO CoinGecko: 2 coins
+2026-03-16 04:37:50,598 INFO Stooq: 3/3 symbols
+2026-03-16 04:38:38,838 WARNING FRED failed: The read operation timed out
+2026-03-16 04:38:40,926 INFO Yahoo backup: 1 symbols
+2026-03-16 04:38:40,926 INFO Step 3 complete: 428.6s (quotes=140, tech=121, sma200=121, earnings=71, econ=6, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-16 04:38:40,926 INFO ── Step 4: Validation + Retry ──
+2026-03-16 04:38:40,929 INFO ANOMALY: $COMPX price=22105.36 avg=22690.73 z=-3.1
+2026-03-16 04:38:40,931 INFO ANOMALY: $SPX price=6632.19 avg=6839.72 z=-3.2
+2026-03-16 04:38:40,932 INFO ANOMALY: $TYX price=49.08 avg=47.22 z=3.1
+2026-03-16 04:38:40,942 INFO ANOMALY: CW price=660.00 avg=697.73 z=-3.2
+2026-03-16 04:38:40,949 INFO ANOMALY: ISRG price=473.06 avg=493.84 z=-3.0
+2026-03-16 04:38:40,958 INFO ANOMALY: PSN price=55.20 avg=63.90 z=-3.2
+2026-03-16 04:38:40,968 INFO ANOMALY: TLS price=4.83 avg=4.16 z=3.5
+2026-03-16 04:38:40,973 INFO Anomaly detection: 7 flagged
+2026-03-16 04:38:40,973 INFO Cross-validation: 0 discrepancies
+2026-03-16 04:38:40,974 INFO Retry check: 0 failures — nothing to retry
+2026-03-16 04:38:40,976 INFO Step 4 complete: 0.0s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-03-16 04:38:40,976 INFO ── Step 5: Generate Briefing ──
+2026-03-16 04:38:41,028 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-16.md (27502 bytes)
+2026-03-16 04:38:41,031 INFO Pruned 198 rows from headlines (older than 14 days)
+2026-03-16 04:38:41,032 INFO Pruned 257 rows from levels (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 76 rows from opus_tickers (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 23 rows from opus_movers (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 23 rows from opus_themes (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-03-16 04:38:41,032 INFO Pruned 2 rows from opus_sentiment (older than 30 days)
+2026-03-16 04:38:41,063 INFO Cleanup complete
+2026-03-16 04:38:41,063 INFO === Collection complete: 519.7s total, completeness=100%, exit_code=0 ===
+[2026-03-16 04:38:41] Data collection complete — briefing file ready
+[2026-03-16 04:38:41] Found 9 research files (sector theses + structural calendar)
+[2026-03-16 04:38:41] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/spicymeatball/projects/bigpic-markets/morning-brief/2026-03/2026-03-16_Mon.md`.
+
+Key highlights for the week:
+
+- **Massive convergence week:** FOMC SEP (Wed Mar 18, first 2026 dot plot) + Triple Witch (Fri Mar 20) + S&P Rebalance + NVIDIA GTC
+- **Bias: Cautiously bullish Mon-Thu** — calendar research shows +0.82% avg in this window; avoid Friday (14% win rate)
+- **Strait of Hormuz dominates macro** — Brent $103, WTI $97.51; shipping stalled; drug supply chain at risk
+- **Crypto decoupling** — BTC $73.5K (+2.6%), ETH $2,269 (+7.2%), best BTC week since Sep 2025
+- **Watchlist signals:** SYK RSI 27 (deeply oversold), ISRG RSI 35, MU +4.69% on Taiwan doubling, TLS +12.85%
+- **Fed is the week's dominant risk** — 60% hold / 38% cut with $100 oil complicating any dovish pivot
+[2026-03-16 04:41:43] Claude [report (attempt 1)] finished successfully
+[2026-03-16 04:41:43] Report attempt 1 succeeded: 14283 bytes
+[2026-03-16 04:41:43] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-16_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 62 symbols...
+  Got quotes for 53 symbols
+
+--- Database cross-checks (market_date=2026-03-16) ---
+  5 database corrections:
+    FABRICATION: INDUSTRIAL PRODUCTION actual 'Scheduled 08:30' → 'Pending' (not released)
+    FABRICATION: EMPIRE STATE MANUFACTURING actual 'Scheduled 12:30' → 'Pending' (not released)
+    FABRICATION: CAPACITY UTILIZATION RATE actual 'Scheduled 13:15' → 'Pending' (not released)
+    FABRICATION: INDUSTRIAL PRODUCTION M/M actual 'Scheduled 13:15' → 'Pending' (not released)
+    FABRICATION: NAHB HOUSING MARKET INDEX actual 'Scheduled 14:00' → 'Pending' (not released)
+
+  5 total corrections needed:
+    FABRICATION: INDUSTRIAL PRODUCTION actual 'Scheduled 08:30' → 'Pending' (not released)
+    FABRICATION: EMPIRE STATE MANUFACTURING actual 'Scheduled 12:30' → 'Pending' (not released)
+    FABRICATION: CAPACITY UTILIZATION RATE actual 'Scheduled 13:15' → 'Pending' (not released)
+    FABRICATION: INDUSTRIAL PRODUCTION M/M actual 'Scheduled 13:15' → 'Pending' (not released)
+    FABRICATION: NAHB HOUSING MARKET INDEX actual 'Scheduled 14:00' → 'Pending' (not released)
+
+  5 corrections written to 2026-03-16_Mon.md
+=== Fact-check complete ===
+[2026-03-16 04:41:52] Running Claude [html-publish] (timeout: 900s)...
