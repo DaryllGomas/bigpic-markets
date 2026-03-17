@@ -1,0 +1,91 @@
+[2026-03-17 04:30:01] === Morning Brief Started ===
+[2026-03-17 04:30:01] Date: Tuesday, 2026-03-17
+[2026-03-17 04:30:01] Output: morning-brief/2026-03/2026-03-17_Tue.md + 2026-03-17_Tue.html
+[2026-03-17 04:30:01] All dependencies verified
+[2026-03-17 04:30:01] Running data collection pipeline...
+2026-03-17 04:30:01,504 INFO === Market Data Collection — 2026-03-17 ===
+2026-03-17 04:30:01,514 INFO ── Step 1: RSS Feeds ──
+2026-03-17 04:30:21,709 INFO RSS feeds: 250 headlines stored, 224 older than 24h skipped
+2026-03-17 04:30:21,710 INFO Step 1 complete: 20.2s (headlines=250)
+2026-03-17 04:30:21,710 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-17 04:30:21,710 INFO Opus analysis: sending 237 headlines to claude CLI...
+2026-03-17 04:32:21,845 WARNING Opus analysis: claude CLI timed out after 120s
+2026-03-17 04:32:21,845 INFO Step 2 complete: 120.1s (opus_tickers=0)
+2026-03-17 04:32:21,845 ERROR PIPELINE FAILED at Step 2 (Opus): Opus feed analysis returned empty — claude CLI may be down or timed out
+2026-03-17 04:32:23,037 INFO Failure email sent to daryll@bigpicsolutions.com
+[2026-03-17 04:32:23] ERROR: Data collection FAILED (critical data missing)
+[2026-03-17 04:32:24] ERROR: Script exited with code 1
+[2026-03-17 04:32:24] Post-mortem written to /home/spicymeatball/projects/bigpic-markets/morning-brief/logs/postmortem-2026-03-17.md
+[2026-03-17 09:06:00] === Morning Brief Started ===
+[2026-03-17 09:06:00] Date: Tuesday, 2026-03-17
+[2026-03-17 09:06:00] Output: morning-brief/2026-03/2026-03-17_Tue.md + 2026-03-17_Tue.html
+[2026-03-17 09:06:00] All dependencies verified
+[2026-03-17 09:06:00] Running data collection pipeline...
+2026-03-17 09:06:00,586 INFO === Market Data Collection — 2026-03-17 ===
+2026-03-17 09:06:00,597 INFO ── Step 1: RSS Feeds ──
+2026-03-17 09:06:27,531 INFO RSS feeds: 249 headlines stored, 225 older than 24h skipped
+2026-03-17 09:06:27,531 INFO Step 1 complete: 26.9s (headlines=249)
+2026-03-17 09:06:27,531 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-17 09:06:27,533 INFO Opus analysis: sending 248 headlines to claude CLI...
+2026-03-17 09:08:02,729 INFO Opus analysis: 42 tickers, 17 movers, 10 themes from 248 headlines
+2026-03-17 09:08:02,729 INFO Step 2 complete: 95.2s (opus_tickers=42)
+2026-03-17 09:08:02,729 INFO ── Step 3: Schwab + External APIs ──
+2026-03-17 09:08:21,105 INFO Schwab quotes: 154 symbols
+2026-03-17 09:08:21,106 INFO Auto-detected movers (|change| > 3%): 19 symbols
+2026-03-17 09:08:21,106 INFO Technicals + SMA200 for 135 quoted symbols (sequential)
+2026-03-17 09:12:03,560 INFO Schwab technicals: 135/135 symbols
+2026-03-17 09:16:06,790 INFO SMA200: 134/135 symbols
+2026-03-17 09:16:10,585 INFO Schwab market context: collected
+2026-03-17 09:19:16,479 INFO Schwab earnings: 70 entries
+2026-03-17 09:19:16,487 INFO Economic calendar: 4 events
+2026-03-17 09:19:16,631 INFO CoinGecko: 2 coins
+2026-03-17 09:19:20,562 INFO Stooq: 3/3 symbols
+2026-03-17 09:20:09,073 WARNING FRED failed: The read operation timed out
+2026-03-17 09:20:11,169 INFO Yahoo backup: 1 symbols
+2026-03-17 09:20:11,170 INFO Step 3 complete: 728.4s (quotes=154, tech=135, sma200=134, earnings=70, econ=4, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-17 09:20:11,170 INFO ── Step 4: Validation + Retry ──
+2026-03-17 09:20:11,212 INFO ANOMALY: HON price=229.29 avg=240.41 z=-3.3
+2026-03-17 09:20:11,225 INFO ANOMALY: MSTR price=148.56 avg=131.39 z=4.1
+2026-03-17 09:20:11,233 INFO ANOMALY: PSN price=53.27 avg=63.44 z=-3.1
+2026-03-17 09:20:11,246 INFO Anomaly detection: 3 flagged
+2026-03-17 09:20:11,246 INFO Cross-validation: 0 discrepancies
+2026-03-17 09:20:11,247 INFO Retry check: 1 failed call(s) found, retrying...
+2026-03-17 09:20:11,247 INFO   Retrying earnings for ANET (original error: timed out)
+2026-03-17 09:20:12,424 INFO   ✓ ANET earnings recovered
+2026-03-17 09:20:12,425 INFO Retry complete: 1/1 recovered
+2026-03-17 09:20:12,430 INFO Step 4 complete: 1.3s (anomalies=3, cross_val=0, retried=1, completeness=100%)
+2026-03-17 09:20:12,431 INFO ── Step 5: Generate Briefing ──
+2026-03-17 09:20:12,511 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-17.md (34746 bytes)
+2026-03-17 09:20:12,514 INFO Pruned 128 rows from headlines (older than 14 days)
+2026-03-17 09:20:12,547 INFO Cleanup complete
+2026-03-17 09:20:12,547 INFO === Collection complete: 851.8s total, completeness=100%, exit_code=0 ===
+[2026-03-17 09:20:12] Data collection complete — briefing file ready
+[2026-03-17 09:20:12] Found 9 research files (sector theses + structural calendar)
+[2026-03-17 09:20:12] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `morning-brief/2026-03/2026-03-17_Tue.md`. 
+
+Key highlights in today's LIGHT-day brief:
+- **FOMC Day 1** — Meeting begins today, decision + first 2026 dot plot tomorrow. 60% hold / 38% cut with $102 oil complicating any dovish pivot.
+- **GTC dominance** — NVIDIA's $1T order pipeline, Vera Rubin, HBM4 from Micron, space computing module rippling across the entire watchlist.
+- **Space is the standout sector** — RKLB +6.6%, PL +5.89%, IRDM +3.98% on dual catalysts: NVIDIA space module + Hormuz-driven satellite intelligence demand.
+- **Triple Witch T-3 window** — Historically strongest edge of the quarter (+0.47% avg). Avoid Friday.
+- **Oil back above $103** — Primary risk factor as allies remain unable to escort Hormuz tankers. Chip supply chain threat escalating.
+- **Bias: Cautiously bullish** for today specifically, with FOMC tomorrow as the dominant risk.
+[2026-03-17 09:22:46] Claude [report (attempt 1)] finished successfully
+[2026-03-17 09:22:46] Report attempt 1 succeeded: 14272 bytes
+[2026-03-17 09:22:46] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-17_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 83 symbols...
+  Got quotes for 68 symbols
+
+--- Database cross-checks (market_date=2026-03-17) ---
+  No database discrepancies found
+
+  1 total corrections needed:
+    WTI Crude: $95.76 → 95.12 (0.7% off)
+
+  1 corrections written to 2026-03-17_Tue.md
+=== Fact-check complete ===
+[2026-03-17 09:23:06] Running Claude [html-publish] (timeout: 900s)...

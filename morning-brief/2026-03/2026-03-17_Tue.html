@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Brief — Tuesday, March 17, 2026 | BigPic Solutions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap');
+
+:root {
+  --bg-deep: #0a0f1a;
+  --bg-card: rgba(18, 26, 46, 0.88);
+  --bg-card-hover: rgba(26, 39, 68, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(232,184,125,0.08);
+  --border-glow: rgba(232,184,125,0.18);
+  --text-primary: #fdf6ec;
+  --text-secondary: #c9d6df;
+  --text-muted: #6b7d8e;
+  --gold: #e8b87d;
+  --gold-light: #f4a261;
+  --gold-dark: #ef8354;
+  --green: #22c55e;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --rose: #f43f5e;
+  --blue: #3b82f6;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Newsreader', Georgia, serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-left { display: flex; align-items: center; gap: 8px; }
+.nav-left a.back {
+  color: var(--text-secondary); text-decoration: none;
+  display: flex; align-items: center; transition: var(--transition);
+}
+.nav-left a.back:hover { color: var(--gold); }
+.nav-brand { font-weight: 700; font-size: 16px; color: var(--gold-light); letter-spacing: 1px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500;
+  padding: 6px 12px; border-radius: 6px; transition: var(--transition);
+}
+.nav-links a:hover { color: var(--gold); background: rgba(232,184,125,0.08); }
+
+/* HERO */
+.hero {
+  padding: 100px 24px 40px; text-align: center;
+}
+.hero-date { font-family: var(--font-mono); font-size: 14px; color: var(--gold-dark); letter-spacing: 1px; margin-bottom: 12px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px;
+}
+.hero-badge.light { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: var(--green); }
+.hero-badge.light::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-green 2s infinite; }
+@keyframes pulse-green { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero .subtitle {
+  font-family: var(--font-mono); font-size: 1rem; color: var(--text-secondary);
+  max-width: 700px; margin: 0 auto; line-height: 1.7;
+}
+
+/* SECTIONS */
+section { padding: 60px 0; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-header h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+.section-header .icon { font-size: 20px; }
+.section-header .tag {
+  margin-left: auto; font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(232,184,125,0.1); color: var(--gold);
+  border: 1px solid rgba(232,184,125,0.15);
+}
+
+/* CARDS */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 20px;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.card:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(232,184,125,0.06); }
+
+/* SNAPSHOT GRID */
+.snapshot-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px; background: var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden;
+}
+.snap-cell {
+  background: var(--bg-card); padding: 16px; text-align: center;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.snap-cell:hover { background: var(--bg-card-hover); }
+.snap-cell .label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.snap-cell .value { font-size: 1.3rem; font-weight: 800; font-family: var(--font-mono); color: var(--text-primary); }
+.snap-cell .overnight { font-size: 11px; font-weight: 600; margin-top: 2px; }
+.snap-cell .direction { font-size: 10px; color: var(--text-muted); margin-top: 2px; line-height: 1.3; }
+.up { color: var(--green); }
+.down { color: var(--red); }
+.flat { color: var(--text-muted); }
+.mixed { color: var(--amber); }
+
+/* OVERNIGHT CARDS */
+.overnight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.overnight-card { padding: 20px; }
+.overnight-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--gold); }
+.overnight-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+/* TABLES */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  text-align: left; padding: 10px 12px; font-size: 10px;
+  font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px; border-bottom: 1px solid var(--border-subtle);
+}
+.data-table td {
+  padding: 10px 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.data-table tr { transition: var(--transition); }
+.data-table tbody tr:hover { background: rgba(232,184,125,0.04); }
+.data-table .ticker { font-family: var(--font-mono); font-weight: 700; color: var(--gold); }
+.data-table .sector-tag {
+  font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: rgba(232,184,125,0.08); color: var(--gold-light); font-weight: 600;
+}
+
+/* PRIORITY TAGS */
+.priority { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.priority.critical { background: rgba(239,68,68,0.12); color: var(--red); }
+.priority.high { background: rgba(244,162,97,0.12); color: var(--gold-light); }
+.priority.medium { background: rgba(245,158,11,0.12); color: var(--amber); }
+.priority.low { background: rgba(100,116,139,0.12); color: var(--text-muted); }
+
+/* CATALYST TIMELINE */
+.catalyst-timeline { position: relative; padding-left: 28px; }
+.catalyst-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border-subtle); }
+.catalyst-item {
+  position: relative; margin-bottom: 16px; padding: 16px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); transition: var(--transition); backdrop-filter: blur(20px);
+}
+.catalyst-item:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(232,184,125,0.06); }
+.catalyst-item::before {
+  content: ''; position: absolute; left: -24px; top: 20px;
+  width: 10px; height: 10px; border-radius: 50%; border: 2px solid;
+}
+.catalyst-item.critical::before { border-color: var(--red); background: rgba(239,68,68,0.3); }
+.catalyst-item.high::before { border-color: var(--gold-light); background: rgba(244,162,97,0.3); }
+.catalyst-item.medium::before { border-color: var(--amber); background: rgba(245,158,11,0.3); }
+.catalyst-item .catalyst-date { font-size: 11px; font-weight: 700; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.catalyst-item .catalyst-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.catalyst-item .catalyst-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* PLAYBOOK */
+.playbook-card {
+  background: linear-gradient(135deg, rgba(232,184,125,0.05) 0%, rgba(18,26,46,0.95) 100%);
+  border: 1px solid rgba(232,184,125,0.15); border-radius: var(--radius-lg);
+  padding: 28px;
+}
+.playbook-card .bias { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+.playbook-card h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.playbook-card ul { list-style: none; padding: 0; }
+.playbook-card li {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+  padding: 4px 0 4px 16px; position: relative;
+}
+.playbook-card li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; }
+.playbook-card .watch li::before { background: var(--cyan); }
+.playbook-card .risk li::before { background: var(--amber); }
+.playbook-card .levels li::before { background: var(--gold); }
+
+/* SECTOR IMPACT */
+.sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 16px; }
+.sector-pill {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 8px; font-size: 12px; transition: var(--transition);
+}
+.sector-pill:hover { border-color: var(--border-glow); }
+.sector-pill .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sector-pill .name { font-weight: 600; color: var(--text-primary); }
+.sector-pill .impact { color: var(--text-muted); font-size: 11px; }
+
+/* COLLAPSIBLE SOURCES */
+.sources-toggle {
+  width: 100%; padding: 14px 20px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  color: var(--text-primary); font-size: 14px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-sans); transition: var(--transition);
+}
+.sources-toggle:hover { border-color: var(--border-glow); }
+.sources-toggle .arrow { transition: transform 0.3s; }
+.sources-toggle.open .arrow { transform: rotate(180deg); }
+.sources-content {
+  max-height: 0; overflow: hidden; transition: max-height 0.5s ease;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+}
+.sources-content.open { max-height: 3000px; }
+.sources-list {
+  padding: 16px 20px; list-style: none; columns: 2; column-gap: 24px;
+}
+.sources-list li { font-size: 12px; color: var(--text-secondary); padding: 4px 0; break-inside: avoid; }
+.sources-list a { color: var(--gold); text-decoration: none; }
+.sources-list a:hover { text-decoration: underline; }
+.sources-cat { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin: 12px 0 4px; column-span: all; }
+
+/* ANOMALY BAR */
+.anomaly-bar {
+  margin-top: 12px; padding: 12px 16px;
+  background: rgba(244,162,97,0.06); border: 1px solid rgba(244,162,97,0.15);
+  border-radius: 8px; font-size: 12px; color: var(--text-secondary);
+}
+.anomaly-bar strong { color: var(--gold-light); }
+
+/* SCROLL ANIMATION */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 40px 24px; color: var(--text-muted);
+  font-size: 0.8rem; border-top: 1px solid var(--border-subtle); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+  .overnight-grid { grid-template-columns: 1fr; }
+  .sources-list { columns: 1; }
+  .nav-links { display: none; }
+  .sector-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="../../morning-brief/index.html" class="back" title="Back to Morning Brief Archive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <span class="nav-brand">MORNING BRIEF</span>
+  </div>
+  <div class="nav-links">
+    <a href="#snapshot">Snapshot</a>
+    <a href="#overnight">Global</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#watchlist">Watchlist</a>
+    <a href="#catalysts">Catalysts</a>
+    <a href="#playbook">Playbook</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-date">Tuesday, March 17, 2026</div>
+  <div class="hero-badge light">LIGHT EVENT LOAD</div>
+  <h1>Morning <span class="accent">Brief</span></h1>
+  <p class="subtitle">St. Patrick&rsquo;s Day and the calendar is quiet, but the macro backdrop is anything but. FOMC Day 1 begins behind closed doors &mdash; dot plot drops tomorrow at 2:00 PM ET. NVIDIA GTC continues: $1T order pipeline, Vera Rubin unveiled, HBM4 from Micron. Brent holds above $103 as Hormuz enters week three. We&rsquo;re in the T&minus;3 pre&ndash;Triple Witch window &mdash; historically the strongest edge of the entire quarterly cycle.</p>
+</header>
+
+<!-- PRE-MARKET SNAPSHOT -->
+<section id="snapshot">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4CA;</span>
+      <h2>Pre-Market Snapshot</h2>
+      <span class="tag">3 Anomalies Flagged</span>
+    </div>
+    <div class="snapshot-grid">
+      <div class="snap-cell">
+        <div class="label">S&amp;P 500 Futures</div>
+        <div class="value">6,769</div>
+        <div class="overnight up">+0.20%</div>
+        <div class="direction">Modest green</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Nasdaq 100 Futures</div>
+        <div class="value">24,968</div>
+        <div class="overnight up">+0.31%</div>
+        <div class="direction">GTC afterglow</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Dow Futures</div>
+        <div class="value">47,350</div>
+        <div class="overnight up">+0.13%</div>
+        <div class="direction">Steady</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Russell 2000</div>
+        <div class="value">2,529</div>
+        <div class="overnight up">+0.31%</div>
+        <div class="direction">Small-caps bid</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">VIX</div>
+        <div class="value">23.07</div>
+        <div class="overnight up" style="font-weight:800">&minus;1.87%</div>
+        <div class="direction">Retreat continues</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">10Y Yield</div>
+        <div class="value">4.202%</div>
+        <div class="overnight down">&minus;0.43%</div>
+        <div class="direction">Pre-FOMC easing</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">2Y Yield</div>
+        <div class="value">3.374%</div>
+        <div class="overnight flat">&mdash;</div>
+        <div class="direction">Prior close (FRED)</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">2s/10s Spread</div>
+        <div class="value">+82.8 bps</div>
+        <div class="overnight flat">&mdash;</div>
+        <div class="direction">Steepening</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">DXY</div>
+        <div class="value">99.39</div>
+        <div class="overnight down">&minus;0.26%</div>
+        <div class="direction">Below 100 &mdash; risk-on</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">WTI Crude</div>
+        <div class="value">$95.12</div>
+        <div class="overnight up" style="font-weight:800">+2.42%</div>
+        <div class="direction">Hormuz surge</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Brent Crude</div>
+        <div class="value">$103</div>
+        <div class="overnight up" style="font-weight:800">+2.61%</div>
+        <div class="direction">Back above $103</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Gold</div>
+        <div class="value">$4,998</div>
+        <div class="overnight down">&minus;0.09%</div>
+        <div class="direction">Holding below $5K</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Bitcoin</div>
+        <div class="value">$74,116</div>
+        <div class="overnight up">+0.93%</div>
+        <div class="direction">Above $74K</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Ethereum</div>
+        <div class="value">$2,323</div>
+        <div class="overnight up">+1.68%</div>
+        <div class="direction">Catching bid</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;text-align:center;font-family:var(--font-mono)">Quiet green across equity futures &mdash; modest gains led by <strong class="up">Nasdaq +0.31% on GTC afterglow</strong>. VIX continues its retreat, <strong class="up">down 1.87% to 23.07</strong>. Dollar slipping further below 100 (DXY 99.39), supporting risk. <strong style="color:var(--gold-light)">Oil is the standout:</strong> <strong class="up">WTI +2.4% to $95.12, Brent +2.6% to $103</strong> &mdash; Hormuz standoff not resolving. Gold just below $5K. The 10Y easing to 4.20% reflects pre-FOMC positioning for a dovish surprise, though $100+ oil makes that difficult for Powell. <strong class="up">BTC above $74K</strong> as institutional adoption headlines pile up.</p>
+    <div class="anomaly-bar">
+      <strong>3 Price Anomalies:</strong> HON (z: &minus;3.3), MSTR (z: +4.1), PSN (z: &minus;3.1). FRED timed out; 2Y yield is prior close. Verify before trading.
+    </div>
+  </div>
+</section>
+
+<!-- OVERNIGHT / GLOBAL -->
+<section id="overnight" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F30F;</span>
+      <h2>Overnight / Global</h2>
+      <span class="tag">Asia Divergent &mdash; Europe Green</span>
+    </div>
+    <div class="overnight-grid">
+      <div class="card overnight-card">
+        <h4>Asia Session</h4>
+        <p><strong class="mixed">Divergent.</strong> Kospi was the notable laggard at <strong class="down">&minus;1.15%</strong> &mdash; likely semiconductor supply chain concern as the Hormuz blockade threatens chip supply via Taiwan. Nikkei flat at <strong class="flat">&minus;0.09%</strong>. Hang Seng <strong class="up">+0.13%</strong>, holding Monday&rsquo;s gains.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Europe Session</h4>
+        <p><strong class="up">Solidly green.</strong> FTSE led at <strong class="up">+0.83%</strong> &mdash; energy and mining weights benefiting from $103 Brent and commodity strength. DAX <strong class="up">+0.75%</strong> and CAC <strong class="up">+0.65%</strong> reflect broad European risk appetite. Defense names continue to benefit from the NATO spending backdrop.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Key Read</h4>
+        <p><strong style="color:var(--green)">Europe absorbing oil stress well.</strong> FTSE +0.83% is notable strength given $103 Brent &mdash; energy/mining weight is offsetting. Kospi &minus;1.15% is the warning sign: semiconductor supply chain concern from Hormuz is real and specific to Asia chipmakers reliant on Middle East shipping routes.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px;overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Market</th><th>Level</th><th>Change</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nikkei 225</td><td>53,700</td><td class="flat">&minus;0.09%</td></tr>
+          <tr><td>Hang Seng</td><td>25,869</td><td class="up">+0.13%</td></tr>
+          <tr style="background:rgba(34,197,94,0.06)"><td><strong style="color:var(--green)">DAX</strong></td><td>23,741</td><td class="up" style="font-weight:700">+0.75%</td></tr>
+          <tr><td>CAC 40</td><td>7,987</td><td class="up">+0.65%</td></tr>
+          <tr style="background:rgba(34,197,94,0.06)"><td><strong style="color:var(--green)">FTSE 100</strong></td><td>10,410</td><td class="up" style="font-weight:700">+0.83%</td></tr>
+          <tr style="background:rgba(239,68,68,0.06)"><td><strong style="color:var(--red)">Kospi</strong></td><td>5,640</td><td class="down" style="font-weight:700">&minus;1.15%</td></tr>
+          <tr><td>STOXX 50 (FEZ)</td><td>63.10</td><td class="up">+0.35%</td></tr>
+          <tr><td>Australia (EWA)</td><td>28.72</td><td class="up">+0.14%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY'S CALENDAR -->
+<section id="calendar" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4C5;</span>
+      <h2>Today&rsquo;s Calendar</h2>
+      <span class="tag">Light &mdash; FOMC Tomorrow</span>
+    </div>
+    <div class="card" style="overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Time (ET)</th><th>Release</th><th>Consensus</th><th>Prior</th><th>Significance</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="white-space:nowrap">12:15</td>
+            <td>ADP Weekly Employment Change</td>
+            <td>&mdash;</td>
+            <td>15.5K</td>
+            <td><span class="priority low">Low</span></td>
+          </tr>
+          <tr style="background:rgba(244,162,97,0.06)">
+            <td style="white-space:nowrap">14:00</td>
+            <td><strong style="color:var(--text-primary)">Pending Home Sales m/m</strong></td>
+            <td>&minus;0.6%</td>
+            <td>&minus;0.8%</td>
+            <td><span class="priority medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap">14:00</td>
+            <td>CB Leading Index m/m</td>
+            <td>&mdash;</td>
+            <td>&minus;0.2%</td>
+            <td><span class="priority low">Low</span></td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap">20:30</td>
+            <td>API Weekly Statistical Bulletin</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td><span class="priority low">Low</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;text-align:center;font-family:var(--font-mono)">LIGHT calendar day. Pending Home Sales (consensus &minus;0.6% vs prior &minus;0.8%) is the only medium-impact release. The real event is the <strong style="color:var(--gold-light)">FOMC meeting beginning behind closed doors</strong> &mdash; rate decision and dot plot arrive <strong style="color:var(--gold-light)">tomorrow at 2:00 PM ET</strong>. With oil above $100, the question is whether the dot plot still signals 3 cuts or walks it back. CME: 60% hold / 38% cut.</p>
+    </div>
+    <div style="margin-top:16px;padding:16px;background:rgba(244,162,97,0.06);border:1px solid rgba(244,162,97,0.15);border-radius:8px">
+      <strong style="color:var(--gold-light)">Tomorrow&rsquo;s main event:</strong>
+      <ul style="list-style:none;padding:8px 0 0 0;font-size:13px;color:var(--text-secondary)">
+        <li style="padding:4px 0"><strong style="color:var(--text-primary)">FOMC Decision &mdash; Wed Mar 18 at 2:00 PM ET</strong> &mdash; SEP meeting with first 2026 dot plot. CME pricing: 60% hold at 3.50&ndash;3.75%, 38% cut. Brent above $100 and inflation expectations edging higher complicate any dovish messaging.</li>
+        <li style="padding:4px 0"><strong style="color:var(--text-primary)">Triple Witching + S&amp;P Rebalance &mdash; Fri Mar 20</strong> &mdash; $5&ndash;6.5T notional. Today is T&minus;3 (strongest historical edge). Avoid Friday (14% win rate).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- THESIS WATCHLIST -->
+<section id="watchlist" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4CB;</span>
+      <h2>Thesis Watchlist</h2>
+      <span class="tag">RKLB +6.6% &bull; Space Surges</span>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text-muted)">Earnings Reporting Today</h3>
+    <div class="card" style="margin-bottom:20px;padding:16px">
+      <p style="font-size:13px;color:var(--text-secondary)">No watchlist tickers reporting today.</p>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--green)">Pre-Market Movers &mdash; Upside</h3>
+    <div class="card" style="margin-bottom:20px;overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Ticker</th><th>Price</th><th>Move</th><th>Catalyst</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(34,197,94,0.06)"><td class="ticker" style="color:var(--green)">RKLB</td><td>$76.02</td><td class="up" style="font-family:var(--font-mono);font-weight:700">+6.60%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Space T1</span> NVIDIA space module + Hormuz geospatial demand dual tailwind. Reclaiming SMA50 ($77.13)</td></tr>
+          <tr style="background:rgba(34,197,94,0.06)"><td class="ticker" style="color:var(--green)">PL</td><td>$26.05</td><td class="up" style="font-family:var(--font-mono);font-weight:700">+5.89%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Space T1</span> Kayrros sale signals rising satellite intelligence demand. $734M backlog</td></tr>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">SEDG</td><td>$42.49</td><td class="up" style="font-family:var(--font-mono);font-weight:700">+4.37%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Energy T2</span> Solar bounce</td></tr>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">ESTC</td><td>$55.58</td><td class="up" style="font-family:var(--font-mono);font-weight:700">+4.00%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Cyber T2</span> AI agent security CISO priority driving demand</td></tr>
+          <tr><td class="ticker" style="color:var(--green)">IRDM</td><td>$25.98</td><td class="up" style="font-family:var(--font-mono)">+3.98%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Space T2</span> Hormuz-driven satellite comms demand</td></tr>
+          <tr><td class="ticker" style="color:var(--green)">AZTA</td><td>$21.61</td><td class="up" style="font-family:var(--font-mono)">+3.37%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Robotics T2</span> Humanoid ecosystem forming at GTC</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--red)">Pre-Market Movers &mdash; Downside</h3>
+    <div class="card" style="margin-bottom:20px;overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Ticker</th><th>Price</th><th>Move</th><th>Catalyst</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">ENPH</td><td>$43.98</td><td class="down" style="font-family:var(--font-mono);font-weight:700">&minus;4.16%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Energy T2</span> Solar split &mdash; SEDG up but ENPH down</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">LYSCF</td><td>$14.31</td><td class="down" style="font-family:var(--font-mono);font-weight:700">&minus;3.59%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Minerals T1</span> Profit-taking after rally. RSI 65, still above SMA20 ($12.71)</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">MNTS</td><td>$4.22</td><td class="down" style="font-family:var(--font-mono);">&minus;3.95%</td><td style="font-size:12px;color:var(--text-secondary)"><span class="sector-tag">Space T3</span> Giving back recent gains</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">INTC</td><td>$43.99</td><td class="down" style="font-family:var(--font-mono);">&minus;3.87%</td><td style="font-size:12px;color:var(--text-secondary)">Won DGX Rubin socket but market treating as consolation prize. Above SMA200 ($33.69)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">News-Driven Movers</h3>
+    <div class="card" style="margin-bottom:20px;overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Ticker</th><th>Direction</th><th>Catalyst</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">NVDA</td><td class="up" style="font-family:var(--font-mono)">&minus;0.72%</td><td style="font-size:12px;color:var(--text-secondary)">Profit-taking despite GTC dominance: $1T pipeline, Vera Rubin, DLSS 5, AI space module, HBM4 from MU. Sector-defining announcements rippling through supply chain</td></tr>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">NMG</td><td class="up" style="font-family:var(--font-mono)">+5.91%</td><td style="font-size:12px;color:var(--text-secondary)">Secured $335M project debt financing for graphite ops. Validates critical minerals supply chain buildout thesis</td></tr>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">MA</td><td class="up" style="font-family:var(--font-mono)">Acquiring</td><td style="font-size:12px;color:var(--text-secondary)">Buying stablecoin platform BVNK for up to $1.8B &mdash; major institutional crypto payments bet</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">Notable Tier 1 Moves &amp; Key Levels</h3>
+    <div class="card" style="margin-bottom:20px;overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr><th>Ticker</th><th>Price</th><th>vs SMA200</th><th>RSI</th><th>Signal</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(34,197,94,0.06)"><td class="ticker" style="color:var(--green)">RKLB</td><td>$76.02</td><td class="up">+6.6%</td><td>49</td><td style="font-size:12px;color:var(--text-secondary)"><strong style="color:var(--green)">Biggest T1 mover.</strong> Approaching SMA50 at $77.13. NVIDIA space module + Hormuz dual tailwind. Neutron first flight is key 2026 catalyst.</td></tr>
+          <tr style="background:rgba(34,197,94,0.04)"><td class="ticker" style="color:var(--green)">PL</td><td>$26.05</td><td class="up">+89%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Well above all SMAs (SMA20 $24.82, SMA50 $24.53, SMA200 $13.76). Defense EO pipeline converting; Hormuz accelerating demand.</td></tr>
+          <tr><td class="ticker">NVDA</td><td>$182</td><td class="up">+2.2%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Holding above SMA200 ($178). Key support intact despite profit-taking on GTC news.</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">AVGO</td><td>$318</td><td class="down">&minus;1.9%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Below SMA200 ($324). Under pressure from analyst downgrade.</td></tr>
+          <tr><td class="ticker">TSLA</td><td>$396</td><td class="flat">+0.5%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Sitting right on SMA200 ($394). Tight range at the 200-day line.</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">CEG</td><td>$307</td><td class="down">&minus;7.0%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Below SMA200 ($330). Needs FOMC clarity. Nuclear thesis intact.</td></tr>
+          <tr><td class="ticker">MP</td><td>$59.05</td><td class="flat">+0.0%</td><td>&mdash;</td><td style="font-size:12px;color:var(--text-secondary)">Exactly on SMA200 ($59.05). Inflection point for critical minerals thesis.</td></tr>
+          <tr style="background:rgba(239,68,68,0.04)"><td class="ticker" style="color:var(--red)">LYSCF</td><td>$14.31</td><td class="up">+52%</td><td>65</td><td style="font-size:12px;color:var(--text-secondary)">Profit-taking after rally. RSI 65 was running hot. Still well above SMA20 ($12.71) and SMA200 ($9.41).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACHING CATALYSTS -->
+<section id="catalysts" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4A5;</span>
+      <h2>Approaching Catalysts</h2>
+      <span class="tag">FOMC Tomorrow + Triple Witch Fri</span>
+    </div>
+    <div class="catalyst-timeline">
+      <div class="catalyst-item critical">
+        <div class="catalyst-date">Tomorrow &mdash; Wed Mar 18 at 2:00 PM ET</div>
+        <div class="catalyst-title">FOMC SEP Meeting &mdash; First 2026 Dot Plot</div>
+        <div class="catalyst-detail">Rate decision + dot plot. CME pricing: 60% hold at 3.50&ndash;3.75%, 38% cut. Stagflation risk is the new wildcard with $102 oil meeting slowing growth signals. A hawkish dot plot (fewer than 3 cuts) would hit risk assets hard.</div>
+      </div>
+      <div class="catalyst-item critical">
+        <div class="catalyst-date">Fri Mar 20 &mdash; 3 days</div>
+        <div class="catalyst-title">Triple Witching + S&amp;P 500 Rebalance</div>
+        <div class="catalyst-detail">$5&ndash;6.5T notional value. Today is T&minus;3 &mdash; the strongest historical edge window (+0.47% avg, 134.59% annualized). Avoid Friday itself (14% win rate).</div>
+      </div>
+      <div class="catalyst-item critical">
+        <div class="catalyst-date">Ongoing</div>
+        <div class="catalyst-title">NVIDIA GTC 2026</div>
+        <div class="catalyst-detail">Vera Rubin GPU/CPU unveiled, $1T order pipeline through &rsquo;27, HBM4 from Micron, DLSS 5, AI space module (25x H100), quantum NVQLink partnerships. Moves NVDA, AVGO, TSM, MU, VRT, ANET, IONQ.</div>
+      </div>
+      <div class="catalyst-item medium">
+        <div class="catalyst-date">Mar 27</div>
+        <div class="catalyst-title">NRC Part 53 Final Rule (Nuclear)</div>
+        <div class="catalyst-detail">Technology-inclusive licensing framework for advanced reactors. Supports nuclear thesis: CEG, VST, OKLO, SMR.</div>
+      </div>
+      <div class="catalyst-item medium">
+        <div class="catalyst-date">~Mar 26</div>
+        <div class="catalyst-title">AAPL Buyback Blackout</div>
+        <div class="catalyst-detail">Corporate bid removal approaching in ~9 days. Historically creates structural weakness for AAPL.</div>
+      </div>
+      <div class="catalyst-item medium">
+        <div class="catalyst-date">Mar 2026</div>
+        <div class="catalyst-title">Pilbara Minerals P2000 Study</div>
+        <div class="catalyst-detail">Potential doubling of lithium capacity outlook. Critical minerals thesis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTOR SNAPSHOT -->
+<section id="sectors" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F3ED;</span>
+      <h2>Sector Snapshot</h2>
+    </div>
+    <div class="sector-grid">
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><span class="name">AI Infrastructure</span><br><span class="impact">GTC afterglow. NVDA &minus;0.72% profit-taking but $1T pipeline is sector-defining. MU +2.86% on HBM4. AVGO &minus;2.11% on downgrade.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--green)"></div>
+        <div><span class="name">Space</span><br><span class="impact">Standout sector. RKLB +6.6%, PL +5.89%, IRDM +3.98%, RDW +3.09%. NVIDIA space module + Hormuz satellite demand dual catalyst.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><span class="name">Defense</span><br><span class="impact">Mixed. OLN +4.37% on munitions demand. LMT &minus;1.29%, NOC &minus;1.40% profit-taking despite Golden Dome +$10B and Anduril $20B.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--green)"></div>
+        <div><span class="name">Cybersecurity</span><br><span class="impact">Green. ESTC +4.00%, CRWD +1.57%, PANW +1.10%. AI agent security top CISO priority. TLS &minus;3.16% giving back Monday&rsquo;s +12.85%.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><span class="name">Critical Minerals</span><br><span class="impact">Divergent. NMG +5.91% on $335M financing. LYSCF &minus;3.59% profit-taking. BHP targeting $5B Escondida upgrade.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><span class="name">Nuclear Energy</span><br><span class="impact">Quiet. CEG +0.33%, VST +0.72%. FOMC outcome tomorrow directly impacts power sector valuations.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><span class="name">Energy Storage</span><br><span class="impact">Split. SEDG +4.37%, BE +2.54%, but ENPH &minus;4.16%, STEM &minus;2.11%. Samsung SDI $1B ESS deal.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--green)"></div>
+        <div><span class="name">Quantum</span><br><span class="impact">GTC-fueled NVIDIA integration wave. IONQ +0.39% on KISTI/NVQLink. UK pledges &pound;2B. IQM, PsiQuantum, ORCA partnerships.</span></div>
+      </div>
+      <div class="sector-pill">
+        <div class="dot" style="background:var(--green)"></div>
+        <div><span class="name">Robotics</span><br><span class="impact">Modestly green. AZTA +3.37% (T2 standout). Humanoid ecosystem forming at GTC. Universal Robots + Scale AI imitation learning.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYBOOK -->
+<section id="playbook" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F3AF;</span>
+      <h2>Today&rsquo;s Playbook</h2>
+    </div>
+    <div class="playbook-card">
+      <div class="bias"><span class="up">Cautiously bullish</span> <span style="color:var(--text-secondary);font-size:0.9rem">for Tuesday specifically. VIX: 23.07 (&minus;1.87%). SPY trend: bearish. Pre&ndash;Triple Witch T&minus;3 seasonal edge active (+0.47% avg).</span></div>
+
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px">Pre&ndash;Triple Witch seasonal edge (T&minus;3 window), VIX declining, GTC AI narrative lifting sentiment, dollar weakness supporting risk assets, and futures are green. But Brent is back above $103 (+2.6%), FOMC uncertainty looms tomorrow, stagflation fears are escalating, and SPY remains in a bearish trend. LIGHT calendar means no data catalysts to disrupt &mdash; market likely holds its bid into tomorrow&rsquo;s FOMC unless oil spikes further.</p>
+
+      <h4>Key Levels</h4>
+      <ul class="levels">
+        <li><strong style="color:var(--text-primary)">S&amp;P 500 Futures 6,769</strong> &mdash; Yesterday&rsquo;s close of 6,714 is the floor. Holding above it confirms Monday&rsquo;s stabilization.</li>
+        <li><strong style="color:var(--text-primary)">VIX 23.07</strong> &mdash; Break below 22 would signal meaningful de-escalation. Back above 25 = renewed stress.</li>
+        <li><strong style="color:var(--text-primary)">Brent $103</strong> &mdash; Today&rsquo;s 2.6% surge is the primary risk factor. Move toward $110 could overwhelm seasonal tailwinds.</li>
+        <li><strong style="color:var(--text-primary)">10Y at 4.20%</strong> &mdash; Easing is supportive, but a hawkish dot plot tomorrow reverses this.</li>
+      </ul>
+
+      <h4>Watch For</h4>
+      <ul class="watch">
+        <li><strong style="color:var(--text-primary)">FOMC positioning</strong> &mdash; Day 1 behind closed doors. Bond market movements will telegraph expectations before tomorrow&rsquo;s 2:00 PM decision.</li>
+        <li><strong style="color:var(--text-primary)">Space sector momentum</strong> &mdash; RKLB +6.6%, PL +5.89% &mdash; NVIDIA space module and Hormuz geospatial demand are a dual catalyst worth monitoring for follow-through.</li>
+        <li><strong style="color:var(--text-primary)">Pending Home Sales at 2:00 PM</strong> &mdash; Consensus &minus;0.6% vs prior &minus;0.8%. Only medium-impact release today.</li>
+        <li><strong style="color:var(--text-primary)">Oil trajectory</strong> &mdash; WTI +2.4%, Brent +2.6%. Hormuz standoff not resolving; allies &ldquo;not ready&rdquo; to escort tankers. Further escalation would pressure the entire outlook.</li>
+      </ul>
+
+      <h4>Risk Factors</h4>
+      <ul class="risk">
+        <li><strong style="color:var(--text-primary)">FOMC tomorrow</strong> &mdash; A hawkish dot plot (fewer than 3 cuts projected) would hit risk assets, especially with oil providing cover for &ldquo;higher for longer.&rdquo;</li>
+        <li><strong style="color:var(--text-primary)">Hormuz escalation</strong> &mdash; Oil +2.6% today. Allies &ldquo;not ready&rdquo; to escort tankers. Chip supply chain threatened within days per Tom&rsquo;s Hardware reporting.</li>
+        <li><strong style="color:var(--text-primary)">GTC exhaustion</strong> &mdash; AI names have absorbed a massive information dump. Risk of &ldquo;sell the news&rdquo; as GTC winds down.</li>
+        <li><strong style="color:var(--text-primary)">Triple Witch positioning</strong> &mdash; Dealer gamma exposure shifting ahead of Friday&rsquo;s $5&ndash;6.5T expiration.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS HIGHLIGHTS -->
+<section id="news" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="icon">&#x1F4F0;</span>
+      <h2>News Highlights</h2>
+    </div>
+    <div class="overnight-grid">
+      <div class="card overnight-card">
+        <h4>Markets &amp; Macro</h4>
+        <p>Oil prices top $102 as U.S. allies reluctant to escort Hormuz tankers. NVIDIA GTC: Jensen Huang sees $1 trillion in orders through &rsquo;27. Global chip supply chain under threat from Hormuz blockade. Airlines raise revenue guidance despite rising fuel costs. Mastercard acquiring stablecoin platform BVNK for $1.8B.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Defense &amp; Space</h4>
+        <p>Pentagon ups Golden Dome spending by $10 billion. Army awards Anduril counter-drone task order in $20B contract vehicle. AeroVironment acquiring ESAero for $200M. Lockheed completes first PrSM Inc 2 anti-ship missile flight test. NVIDIA unveils AI computing module for space-based data centers.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Crypto &amp; Fintech</h4>
+        <p>PayPal expands stablecoin into 70 markets. U.S. regional banks building tokenized deposit network on ZKsync. Sam Altman&rsquo;s World teams up with Coinbase for AI transaction verification. Mastercard&ndash;BVNK acquisition signals institutional crypto momentum.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Cybersecurity</h4>
+        <p>AI agent security emerges as top CISO priority. New font-rendering trick hides malicious commands from AI tools. LeakNet ransomware uses ClickFix and Deno runtime in stealthy attacks. CISA flags actively exploited Wing FTP vulnerability.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Critical Minerals</h4>
+        <p>Nouveau Monde Graphite secures $335M project debt financing. BHP targets $5B Escondida upgrade to fight grade decline. Sangdong tungsten mine in South Korea returns to production after 30 years.</p>
+      </div>
+      <div class="card overnight-card">
+        <h4>Quantum &amp; Robotics</h4>
+        <p>NVIDIA GTC driving quantum integration wave: IONQ KISTI alliance with NVQLink, IQM/PsiQuantum/ORCA/Quantum Machines partnerships. UK pledges &pound;2B for quantum. Humanoid robotics ecosystem forming around NVIDIA. Universal Robots + Scale AI launch imitation learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="reveal">
+  <div class="container">
+    <button class="sources-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      Sources &amp; Data
+      <span class="arrow">&#x25BC;</span>
+    </button>
+    <div class="sources-content">
+      <ul class="sources-list">
+        <li class="sources-cat">Markets &amp; Macro</li>
+        <li>Oil prices top $102 as allies reluctant to escort Hormuz tankers (CNBC)</li>
+        <li>NVIDIA GTC: Jensen Huang sees $1T in orders for Blackwell and Vera Rubin (CNBC)</li>
+        <li>Global chip supply chain under threat from Hormuz blockade (Tom&rsquo;s Hardware)</li>
+        <li>Mastercard to buy stablecoin platform BVNK for up to $1.8B (CNBC)</li>
+        <li>Airlines raise revenue guidance despite rising fuel costs (CNBC)</li>
+
+        <li class="sources-cat">Defense &amp; Space</li>
+        <li>Pentagon ups Golden Dome spending plan by $10B (Breaking Defense)</li>
+        <li>Army awards Anduril counter-drone task order, $20B contract vehicle (Breaking Defense)</li>
+        <li>AeroVironment to acquire ESAero in $200M deal (Breaking Defense)</li>
+        <li>Lockheed completes PrSM Inc 2 anti-ship missile first flight test (Breaking Defense)</li>
+        <li>NVIDIA unveils AI computing module for space data centers (SpaceNews)</li>
+
+        <li class="sources-cat">Crypto &amp; Fintech</li>
+        <li>PayPal expands stablecoin into 70 markets (CoinDesk)</li>
+        <li>U.S. regional banks building tokenized deposit network on ZKsync (CoinDesk)</li>
+        <li>Sam Altman&rsquo;s World + Coinbase AI transaction verification (CoinDesk)</li>
+
+        <li class="sources-cat">Cybersecurity</li>
+        <li>AI agent security emerges as top CISO priority (BleepingComputer)</li>
+        <li>Font-rendering trick hides malicious commands from AI tools (BleepingComputer)</li>
+        <li>LeakNet ransomware uses ClickFix and Deno runtime (The Hacker News)</li>
+        <li>CISA flags actively exploited Wing FTP vulnerability (The Hacker News)</li>
+
+        <li class="sources-cat">Critical Minerals</li>
+        <li>NMG secures $335M project debt financing (Mining.com)</li>
+        <li>BHP targets $5B Escondida upgrade (Mining.com)</li>
+        <li>Sangdong tungsten mine returns after 30 years (Mining.com)</li>
+
+        <li class="sources-cat">Data Sources</li>
+        <li>Schwab API (pre-market quotes, futures, yields, commodities)</li>
+        <li>CoinGecko (BTC, ETH pricing)</li>
+        <li>Stooq (DXY, Kospi, FTSE 100, global indices)</li>
+        <li>FRED (2Y yield, prev close &mdash; timed out)</li>
+        <li>RSS feeds (all healthy)</li>
+        <li>66/66 data points collected &mdash; 100% completeness. 3 anomalies flagged: HON (z: &minus;3.3), MSTR (z: +4.1), PSN (z: &minus;3.1).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Morning Brief &mdash; Tuesday, March 17, 2026 &middot; BigPic Solutions &middot; Compiled 2026-03-17 05:20 PT via automated pipeline (66/66 data points, 100% completeness, 3 anomalies).
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
