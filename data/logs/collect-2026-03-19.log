@@ -1,0 +1,59 @@
+2026-03-19 04:30:01,840 INFO === Market Data Collection — 2026-03-19 ===
+2026-03-19 04:30:01,846 INFO ── Step 1: RSS Feeds ──
+2026-03-19 04:30:18,102 ERROR RSS Mining.com FAILED: HTTP Error 403: Forbidden
+2026-03-19 04:30:24,203 INFO RSS feeds: 250 headlines stored, 209 older than 24h skipped
+2026-03-19 04:30:24,203 ERROR RSS feeds: 1 feed(s) FAILED
+2026-03-19 04:30:24,203 INFO Step 1 complete: 22.4s (headlines=250)
+2026-03-19 04:30:24,203 ERROR RSS feeds: 1 feed(s) FAILED:
+  Mining.com (https://www.mining.com/feed/): HTTP Error 403: Forbidden
+2026-03-19 04:30:25,545 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-03-19 04:30:25,546 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-19 04:30:25,547 INFO Opus analysis: sending 234 headlines to claude CLI...
+2026-03-19 04:32:17,566 INFO Opus analysis: 26 tickers, 9 movers, 10 themes from 234 headlines
+2026-03-19 04:32:17,566 INFO Step 2 complete: 112.0s (opus_tickers=26)
+2026-03-19 04:32:17,566 INFO ── Step 3: Schwab + External APIs ──
+2026-03-19 04:32:24,445 INFO Schwab quotes: 142 symbols
+2026-03-19 04:32:24,445 INFO Auto-detected movers (|change| > 3%): 13 symbols
+2026-03-19 04:32:24,446 INFO Technicals + SMA200 for 123 quoted symbols (sequential)
+2026-03-19 04:35:13,457 INFO Schwab technicals: 123/123 symbols
+2026-03-19 04:36:42,291 INFO SMA200: 123/123 symbols
+2026-03-19 04:36:42,781 INFO Schwab market context: collected
+2026-03-19 04:38:18,533 INFO Schwab earnings: 71 entries
+2026-03-19 04:38:18,542 INFO Economic calendar: 6 events
+2026-03-19 04:38:18,655 INFO CoinGecko: 2 coins
+2026-03-19 04:38:22,862 INFO Stooq: 3/3 symbols
+2026-03-19 04:39:11,121 WARNING FRED failed: The read operation timed out
+2026-03-19 04:39:13,287 INFO Yahoo backup: 1 symbols
+2026-03-19 04:39:13,287 INFO Step 3 complete: 415.7s (quotes=142, tech=123, sma200=123, earnings=71, econ=6, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-19 04:39:13,287 INFO ── Step 4: Validation + Retry ──
+2026-03-19 04:39:13,297 INFO ANOMALY: /GCJ26 price=4696.00 avg=5142.24 z=-4.3
+2026-03-19 04:39:13,338 INFO ANOMALY: NXE price=11.51 avg=12.48 z=-3.2
+2026-03-19 04:39:13,356 INFO Anomaly detection: 2 flagged
+2026-03-19 04:39:13,356 INFO Cross-validation: 0 discrepancies
+2026-03-19 04:39:13,358 INFO Retry check: 0 failures — nothing to retry
+2026-03-19 04:39:13,360 INFO Step 4 complete: 0.1s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-03-19 04:39:13,360 DEBUG   us_indices: OK
+2026-03-19 04:39:13,360 DEBUG   futures: OK
+2026-03-19 04:39:13,360 DEBUG   vix: OK
+2026-03-19 04:39:13,360 DEBUG   treasuries: OK
+2026-03-19 04:39:13,360 DEBUG   commodities: OK
+2026-03-19 04:39:13,360 DEBUG   crypto: OK
+2026-03-19 04:39:13,360 DEBUG   international: OK
+2026-03-19 04:39:13,361 DEBUG   gap_fills: OK
+2026-03-19 04:39:13,361 DEBUG   econ_calendar: OK
+2026-03-19 04:39:13,361 DEBUG   market_context: OK
+2026-03-19 04:39:13,361 DEBUG   opus_analysis: OK
+2026-03-19 04:39:13,361 DEBUG   rss: OK
+2026-03-19 04:39:13,361 DEBUG   watchlist_t1: OK
+2026-03-19 04:39:13,361 INFO ── Step 5: Generate Briefing ──
+2026-03-19 04:39:13,416 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-19.md (34096 bytes)
+2026-03-19 04:39:13,419 INFO Pruned 213 rows from headlines (older than 14 days)
+2026-03-19 04:39:13,419 INFO Pruned 123 rows from levels (older than 30 days)
+2026-03-19 04:39:13,419 INFO Pruned 32 rows from opus_tickers (older than 30 days)
+2026-03-19 04:39:13,420 INFO Pruned 15 rows from opus_movers (older than 30 days)
+2026-03-19 04:39:13,420 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-03-19 04:39:13,420 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-03-19 04:39:13,420 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-03-19 04:39:13,420 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-03-19 04:39:13,457 INFO Cleanup complete
+2026-03-19 04:39:13,457 INFO === Collection complete: 550.2s total, completeness=100%, exit_code=0 ===
