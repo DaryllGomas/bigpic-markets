@@ -1,0 +1,98 @@
+2026-03-26 04:30:02,026 INFO === Market Data Collection — 2026-03-26 ===
+2026-03-26 04:30:02,036 INFO ── Step 1: RSS Feeds ──
+2026-03-26 04:30:24,663 INFO RSS feeds: 260 headlines stored, 219 older than 24h skipped
+2026-03-26 04:30:24,663 INFO Step 1 complete: 22.6s (headlines=260)
+2026-03-26 04:30:24,664 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-26 04:30:24,665 INFO Opus analysis: sending 246 headlines to claude CLI...
+2026-03-26 04:32:31,623 INFO Opus analysis: 28 tickers, 10 movers, 11 themes from 246 headlines
+2026-03-26 04:32:31,623 INFO Step 2 complete: 127.0s (opus_tickers=28)
+2026-03-26 04:32:31,623 INFO ── Step 3: Schwab + External APIs ──
+2026-03-26 04:32:49,380 INFO Schwab quotes: 142 symbols
+2026-03-26 04:32:49,380 INFO Auto-detected movers (|change| > 3%): 7 symbols
+2026-03-26 04:32:49,381 INFO Technicals + SMA200 for 123 quoted symbols (sequential)
+2026-03-26 04:33:38,907 DEBUG Schwab technicals CACI: timed out
+2026-03-26 04:33:44,913 DEBUG Schwab technicals SPIR: timed out
+2026-03-26 04:33:50,918 DEBUG Schwab technicals CW: timed out
+2026-03-26 04:34:34,428 DEBUG Schwab technicals ANET: timed out
+2026-03-26 04:34:40,435 DEBUG Schwab technicals CCJ: timed out
+2026-03-26 04:36:03,353 DEBUG Schwab technicals MU: timed out
+2026-03-26 04:36:09,359 DEBUG Schwab technicals OLN: timed out
+2026-03-26 04:36:15,365 DEBUG Schwab technicals RDW: timed out
+2026-03-26 04:36:23,005 INFO Schwab technicals: 115/123 symbols
+2026-03-26 04:37:36,450 DEBUG SMA200 LEU: timed out
+2026-03-26 04:38:08,453 INFO SMA200: 122/123 symbols
+2026-03-26 04:38:08,791 INFO Schwab market context: collected
+2026-03-26 04:38:53,362 DEBUG Schwab earnings LHX: timed out
+2026-03-26 04:38:58,868 DEBUG Schwab earnings GD: timed out
+2026-03-26 04:39:04,374 DEBUG Schwab earnings AVAV: timed out
+2026-03-26 04:39:39,524 DEBUG Schwab earnings HON: timed out
+2026-03-26 04:40:10,510 INFO Schwab earnings: 67 entries
+2026-03-26 04:40:10,520 INFO Economic calendar: 6 events
+2026-03-26 04:40:10,610 INFO CoinGecko: 2 coins
+2026-03-26 04:40:14,798 INFO Stooq: 3/3 symbols
+2026-03-26 04:41:03,052 WARNING FRED failed: The read operation timed out
+2026-03-26 04:41:05,190 INFO Yahoo backup: 1 symbols
+2026-03-26 04:41:05,190 INFO Step 3 complete: 513.6s (quotes=142, tech=115, sma200=122, earnings=67, econ=6, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-26 04:41:05,190 INFO ── Step 4: Validation + Retry ──
+2026-03-26 04:41:05,202 INFO ANOMALY: AMD price=216.50 avg=199.42 z=3.1
+2026-03-26 04:41:05,223 INFO ANOMALY: GOOG price=286.69 avg=303.07 z=-3.3
+2026-03-26 04:41:05,223 INFO ANOMALY: GOOGL price=288.01 avg=306.11 z=-3.1
+2026-03-26 04:41:05,227 INFO ANOMALY: IRDM price=29.22 avg=24.81 z=3.7
+2026-03-26 04:41:05,246 INFO ANOMALY: RPD price=5.56 avg=6.51 z=-3.1
+2026-03-26 04:41:05,251 INFO ANOMALY: TENB price=18.03 avg=20.07 z=-3.1
+2026-03-26 04:41:05,257 INFO Anomaly detection: 6 flagged
+2026-03-26 04:41:05,257 INFO Cross-validation: 0 discrepancies
+2026-03-26 04:41:05,258 INFO Retry check: 13 failed call(s) found, retrying...
+2026-03-26 04:41:05,258 INFO   Retrying technicals for CACI (original error: timed out)
+2026-03-26 04:41:06,632 INFO   ✓ CACI technicals recovered
+2026-03-26 04:41:06,632 INFO   Retrying technicals for SPIR (original error: timed out)
+2026-03-26 04:41:08,073 INFO   ✓ SPIR technicals recovered
+2026-03-26 04:41:08,073 INFO   Retrying technicals for CW (original error: timed out)
+2026-03-26 04:41:09,470 INFO   ✓ CW technicals recovered
+2026-03-26 04:41:09,470 INFO   Retrying technicals for ANET (original error: timed out)
+2026-03-26 04:41:10,871 INFO   ✓ ANET technicals recovered
+2026-03-26 04:41:10,871 INFO   Retrying technicals for CCJ (original error: timed out)
+2026-03-26 04:41:12,242 INFO   ✓ CCJ technicals recovered
+2026-03-26 04:41:12,242 INFO   Retrying technicals for MU (original error: timed out)
+2026-03-26 04:41:13,613 INFO   ✓ MU technicals recovered
+2026-03-26 04:41:13,613 INFO   Retrying technicals for OLN (original error: timed out)
+2026-03-26 04:41:14,983 INFO   ✓ OLN technicals recovered
+2026-03-26 04:41:14,983 INFO   Retrying technicals for RDW (original error: timed out)
+2026-03-26 04:41:16,398 INFO   ✓ RDW technicals recovered
+2026-03-26 04:41:16,398 INFO   Retrying sma200 for LEU (original error: timed out)
+2026-03-26 04:41:17,809 INFO   ✓ LEU sma200 recovered
+2026-03-26 04:41:17,809 INFO   Retrying earnings for LHX (original error: timed out)
+2026-03-26 04:41:19,156 INFO   ✓ LHX earnings recovered
+2026-03-26 04:41:19,156 INFO   Retrying earnings for GD (original error: timed out)
+2026-03-26 04:41:20,314 INFO   ✓ GD earnings recovered
+2026-03-26 04:41:20,314 INFO   Retrying earnings for AVAV (original error: timed out)
+2026-03-26 04:41:21,548 INFO   ✓ AVAV earnings recovered
+2026-03-26 04:41:21,548 INFO   Retrying earnings for HON (original error: timed out)
+2026-03-26 04:41:23,222 INFO   ✓ HON earnings recovered
+2026-03-26 04:41:23,224 INFO Retry complete: 13/13 recovered
+2026-03-26 04:41:23,230 INFO Step 4 complete: 18.0s (anomalies=6, cross_val=0, retried=13, completeness=100%)
+2026-03-26 04:41:23,230 DEBUG   us_indices: OK
+2026-03-26 04:41:23,230 DEBUG   futures: OK
+2026-03-26 04:41:23,230 DEBUG   vix: OK
+2026-03-26 04:41:23,230 DEBUG   treasuries: OK
+2026-03-26 04:41:23,230 DEBUG   commodities: OK
+2026-03-26 04:41:23,230 DEBUG   crypto: OK
+2026-03-26 04:41:23,230 DEBUG   international: OK
+2026-03-26 04:41:23,230 DEBUG   gap_fills: OK
+2026-03-26 04:41:23,230 DEBUG   econ_calendar: OK
+2026-03-26 04:41:23,230 DEBUG   market_context: OK
+2026-03-26 04:41:23,230 DEBUG   opus_analysis: OK
+2026-03-26 04:41:23,231 DEBUG   rss: OK
+2026-03-26 04:41:23,231 DEBUG   watchlist_t1: OK
+2026-03-26 04:41:23,231 INFO ── Step 5: Generate Briefing ──
+2026-03-26 04:41:23,313 INFO Briefing file written: /home/spicymeatball/projects/bigpic-markets/data/briefing-2026-03-26.md (33067 bytes)
+2026-03-26 04:41:23,316 INFO Pruned 237 rows from headlines (older than 14 days)
+2026-03-26 04:41:23,317 INFO Pruned 131 rows from levels (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 36 rows from opus_tickers (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 11 rows from opus_themes (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-03-26 04:41:23,317 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-03-26 04:41:23,355 INFO Cleanup complete
+2026-03-26 04:41:23,356 INFO === Collection complete: 681.2s total, completeness=100%, exit_code=0 ===
