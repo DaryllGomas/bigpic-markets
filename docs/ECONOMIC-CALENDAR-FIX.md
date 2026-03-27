@@ -33,17 +33,68 @@
 | `scripts/verify-eagle-eye-calendar.py` | **NEW** | Deterministic post-check of Week Ahead vs calendar |
 | `scripts/run-eagle-eye.sh` | **MODIFIED** | Calendar collection, prompt injection, verification |
 
-### Data flow (after fix)
+### Data flow — BEFORE (broken)
 
 ```
-Intel API (FRED per-release + Forex Factory)
+Intel API (/api/calendar/today)
+    │   fredCalendar.ts: bulk FRED endpoint, stale dates, manual-only, wrong PCE ID
     │
-    ├── /api/calendar/today → collect-market-data.py → market.db → Morning Brief
-    │
-    └── /api/calendar/upcoming?days=7 → collect-weekly-calendar.py
-            → next_week_calendar.md → Eagle Eye research prompt
-            → verify-eagle-eye-calendar.py → VERIFICATION.md
+    └── collect-market-data.py → market.db → Morning Brief
+            └── Shows phantom GDP/PCE on wrong days
+
+Eagle Eye (run-eagle-eye.sh)
+    └── 4 Claude agents use WebSearch
+            └── Hallucinate "Week Ahead" dates (no calendar data source)
+                    └── PCE on Friday, GDP on Thursday, miss Michigan entirely
 ```
+
+### Data flow — AFTER (fixed)
+
+```
+Intel API (192.168.10.60:3000)
+    │   scraperFRED.ts: 16 per-release FRED queries, 6-month lookahead, every cycle
+    │   Forex Factory: current week detail (Fed speakers, UoM, weekly data)
+    │
+    ├── GET /api/calendar/today
+    │       └── collect-market-data.py (daily 5:20 AM)
+    │               └── market.db → Morning Brief ✓
+    │
+    └── GET /api/calendar/upcoming?days=7
+            └── collect-weekly-calendar.py (Sunday 4 PM, before Eagle Eye)
+                    └── $WEEK_DIR/next_week_calendar.md
+                            │   ├── Day-by-day events table (date, time, impact)
+                            │   └── NOTABLE ABSENCES (PCE, GDP, CPI, etc. NOT this week)
+                            │
+                            ├── Eagle Eye research prompt (MANDATORY: use exact dates)
+                            │       └── EAGLE_EYE.md "Week Ahead" section
+                            │
+                            ├── STEP 2 verification (LLM cross-check)
+                            │       └── VERIFICATION.md "Week Ahead Calendar Check"
+                            │
+                            └── verify-eagle-eye-calendar.py (deterministic post-check)
+                                    └── Flags: wrong dates, phantom events, missing events
+```
+
+### FRED releases tracked (16)
+
+| Release | FRED ID | Example: Next Date |
+|---------|---------|-------------------|
+| NFP (Employment Situation) | 50 | Apr 3 |
+| CPI | 10 | Apr 10 |
+| GDP | 53 | Apr 9 |
+| PCE (Personal Income & Outlays) | 54 | Apr 9 |
+| PPI | 46 | Apr 14 |
+| Retail Sales | 9 | Apr 1 |
+| Industrial Production | 13 | — |
+| Housing Starts | 27 | — |
+| Existing Home Sales | 291 | — |
+| Durable Goods | 97 | — |
+| ADP Employment | 194 | Apr 1 |
+| Employment Cost Index | 11 | — |
+| Import/Export Prices | 188 | — |
+| Construction Spending | 229 | — |
+| Jobless Claims | 180 | Apr 2, Apr 9 |
+| Retail Trade | 63 | — |
 
 ---
 
