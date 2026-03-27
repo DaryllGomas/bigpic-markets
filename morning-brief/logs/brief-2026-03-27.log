@@ -1,0 +1,75 @@
+[2026-03-27 11:30:01] === Morning Brief Started ===
+[2026-03-27 11:30:01] Date: Friday, 2026-03-27
+[2026-03-27 11:30:01] Output: morning-brief/2026-03/2026-03-27_Fri.md + 2026-03-27_Fri.html
+[2026-03-27 11:30:01] All dependencies verified
+[2026-03-27 11:30:01] Running data collection pipeline...
+2026-03-27 11:30:01,944 INFO === Market Data Collection — 2026-03-27 ===
+2026-03-27 11:30:01,971 INFO ── Step 1: RSS Feeds ──
+2026-03-27 11:30:24,153 INFO RSS feeds: 261 headlines stored, 218 older than 24h skipped
+2026-03-27 11:30:24,154 INFO Step 1 complete: 22.2s (headlines=261)
+2026-03-27 11:30:24,154 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-27 11:30:24,156 INFO Opus analysis: sending 121 headlines to claude CLI...
+2026-03-27 11:31:47,642 INFO Opus analysis: 18 tickers, 5 movers, 9 themes from 121 headlines
+2026-03-27 11:31:47,642 INFO Step 2 complete: 83.5s (opus_tickers=18)
+2026-03-27 11:31:47,642 INFO ── Step 3: Schwab + External APIs ──
+2026-03-27 11:31:54,485 INFO Schwab quotes: 135 symbols
+2026-03-27 11:31:54,485 INFO Auto-detected movers (|change| > 3%): 3 symbols
+2026-03-27 11:31:54,486 INFO Technicals + SMA200 for 116 quoted symbols (sequential)
+2026-03-27 11:34:36,537 INFO Schwab technicals: 116/116 symbols
+2026-03-27 11:36:02,521 INFO SMA200: 116/116 symbols
+2026-03-27 11:36:03,036 INFO Schwab market context: collected
+2026-03-27 11:37:37,494 INFO Schwab earnings: 71 entries
+2026-03-27 11:37:37,509 INFO Economic calendar: 6 events
+2026-03-27 11:37:37,656 INFO CoinGecko: 2 coins
+2026-03-27 11:37:41,952 INFO Stooq: 3/3 symbols
+2026-03-27 11:38:30,230 WARNING FRED failed: The read operation timed out
+2026-03-27 11:38:32,419 INFO Yahoo backup: 1 symbols
+2026-03-27 11:38:32,420 INFO Step 3 complete: 404.8s (quotes=135, tech=116, sma200=116, earnings=71, econ=6, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-27 11:38:32,420 INFO ── Step 4: Validation + Retry ──
+2026-03-27 11:38:32,501 INFO ANOMALY: GOOG price=278.19 avg=301.57 z=-3.6
+2026-03-27 11:38:32,527 INFO ANOMALY: META price=543.81 avg=628.32 z=-3.1
+2026-03-27 11:38:32,572 INFO ANOMALY: QQQ price=570.72 avg=598.06 z=-3.1
+2026-03-27 11:38:32,621 INFO Anomaly detection: 3 flagged
+2026-03-27 11:38:32,622 INFO Cross-validation: 0 discrepancies
+2026-03-27 11:38:32,627 INFO Retry check: 0 failures — nothing to retry
+2026-03-27 11:38:32,637 INFO Step 4 complete: 0.2s (anomalies=3, cross_val=0, retried=0, completeness=100%)
+2026-03-27 11:38:32,639 INFO ── Step 5: Generate Briefing ──
+2026-03-27 11:38:32,858 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-03-27.md (25668 bytes)
+2026-03-27 11:38:32,872 INFO Pruned 225 rows from headlines (older than 14 days)
+2026-03-27 11:38:32,873 INFO Pruned 123 rows from levels (older than 30 days)
+2026-03-27 11:38:32,874 INFO Pruned 31 rows from opus_tickers (older than 30 days)
+2026-03-27 11:38:32,874 INFO Pruned 12 rows from opus_movers (older than 30 days)
+2026-03-27 11:38:32,875 INFO Pruned 12 rows from opus_themes (older than 30 days)
+2026-03-27 11:38:32,875 INFO Pruned 1 rows from opus_fed_signals (older than 30 days)
+2026-03-27 11:38:32,876 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-03-27 11:38:32,990 INFO Cleanup complete
+2026-03-27 11:38:32,991 INFO === Collection complete: 510.7s total, completeness=100%, exit_code=0 ===
+[2026-03-27 11:38:33] Data collection complete — briefing file ready
+[2026-03-27 11:38:33] Found 9 research files (sector theses + structural calendar)
+[2026-03-27 11:38:33] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-03/2026-03-27_Fri.md`.
+
+Key highlights:
+- **HEAVY** event load — GDP report at 8:30 AM is the marquee, plus three Fed speakers and UoM sentiment revision
+- VIX at 29.51 threatening the 30-handle crisis threshold; WTI grinding toward $100
+- **NRC Part 53 final rule today** — structural nuclear catalyst (SMR, OKLO, BWXT)
+- Final day of post-Triple Witch bearish window; AAPL buyback blackout opened yesterday
+- Multiple watchlist names approaching oversold: LDOS (RSI 30), ZS (34), ISRG (35), IONQ (35), SYK (34)
+- Form Energy 12GWh iron-air battery deal for AI data centers — positive LDES thesis validation
+- RGTI $100M UK quantum investment — only positive watchlist news-driven mover
+- Bias: **Bearish** — stagflation risk, geopolitical escalation, technical damage across the board
+[2026-03-27 11:42:06] Claude [report (attempt 1)] finished successfully
+[2026-03-27 11:42:06] Report attempt 1 succeeded: 16342 bytes
+[2026-03-27 11:42:06] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-27_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 76 symbols...
+  Got quotes for 65 symbols
+
+--- Database cross-checks (market_date=2026-03-27) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-03-27 11:42:17] Running Claude [html-publish] (timeout: 900s)...
