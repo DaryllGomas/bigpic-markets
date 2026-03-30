@@ -1,0 +1,82 @@
+[2026-03-30 11:30:01] === Morning Brief Started ===
+[2026-03-30 11:30:01] Date: Monday, 2026-03-30
+[2026-03-30 11:30:01] Output: morning-brief/2026-03/2026-03-30_Mon.md + 2026-03-30_Mon.html
+[2026-03-30 11:30:01] All dependencies verified
+[2026-03-30 11:30:01] Running data collection pipeline...
+2026-03-30 11:30:01,959 INFO === Market Data Collection — 2026-03-30 ===
+2026-03-30 11:30:01,992 INFO ── Step 1: RSS Feeds ──
+2026-03-30 11:30:21,635 INFO RSS feeds: 156 headlines stored, 323 older than 24h skipped
+2026-03-30 11:30:21,635 INFO Step 1 complete: 19.6s (headlines=156)
+2026-03-30 11:30:21,635 INFO ── Step 2: Opus Feed Analysis ──
+2026-03-30 11:30:21,637 INFO Opus analysis: sending 145 headlines to claude CLI...
+2026-03-30 11:32:32,037 INFO Opus analysis: 25 tickers, 8 movers, 10 themes from 145 headlines
+2026-03-30 11:32:32,037 INFO Step 2 complete: 130.4s (opus_tickers=25)
+2026-03-30 11:32:32,037 INFO ── Step 3: Schwab + External APIs ──
+2026-03-30 11:32:38,933 INFO Schwab quotes: 142 symbols
+2026-03-30 11:32:38,934 INFO Auto-detected movers (|change| > 3%): 3 symbols
+2026-03-30 11:32:38,935 INFO Technicals + SMA200 for 123 quoted symbols (sequential)
+2026-03-30 11:35:28,213 INFO Schwab technicals: 123/123 symbols
+2026-03-30 11:36:59,858 INFO SMA200: 123/123 symbols
+2026-03-30 11:37:00,198 INFO Schwab market context: collected
+2026-03-30 11:38:31,994 INFO Schwab earnings: 71 entries
+2026-03-30 11:38:32,009 INFO Economic calendar: 2 events
+2026-03-30 11:38:32,114 INFO CoinGecko: 2 coins
+2026-03-30 11:38:36,762 INFO Stooq: 3/3 symbols
+2026-03-30 11:39:25,155 WARNING FRED failed: The read operation timed out
+2026-03-30 11:39:27,604 INFO Yahoo backup: 1 symbols
+2026-03-30 11:39:27,605 INFO Step 3 complete: 415.6s (quotes=142, tech=123, sma200=123, earnings=71, econ=2, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-03-30 11:39:27,605 INFO ── Step 4: Validation + Retry ──
+2026-03-30 11:39:27,688 INFO ANOMALY: GOOG price=273.76 avg=300.25 z=-3.2
+2026-03-30 11:39:27,690 INFO ANOMALY: GOOGL price=274.34 avg=306.11 z=-5.4
+2026-03-30 11:39:27,701 INFO ANOMALY: ISRG price=455.05 avg=484.60 z=-3.2
+2026-03-30 11:39:27,722 INFO ANOMALY: MSFT price=356.77 avg=397.35 z=-4.2
+2026-03-30 11:39:27,754 INFO ANOMALY: QLYS price=85.63 avg=95.69 z=-3.9
+2026-03-30 11:39:27,760 INFO ANOMALY: RGTI price=13.43 avg=16.13 z=-3.0
+2026-03-30 11:39:27,766 INFO ANOMALY: RPD price=5.23 avg=6.45 z=-3.1
+2026-03-30 11:39:27,773 INFO ANOMALY: SMR price=10.39 avg=11.96 z=-3.1
+2026-03-30 11:39:27,782 INFO ANOMALY: TENB price=16.60 avg=20.01 z=-4.3
+2026-03-30 11:39:27,804 INFO Anomaly detection: 9 flagged
+2026-03-30 11:39:27,805 INFO Cross-validation: 0 discrepancies
+2026-03-30 11:39:27,810 INFO Retry check: 0 failures — nothing to retry
+2026-03-30 11:39:27,820 INFO Step 4 complete: 0.2s (anomalies=9, cross_val=0, retried=0, completeness=100%)
+2026-03-30 11:39:27,822 INFO ── Step 5: Generate Briefing ──
+2026-03-30 11:39:28,060 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-03-30.md (27474 bytes)
+2026-03-30 11:39:28,073 INFO Pruned 232 rows from headlines (older than 14 days)
+2026-03-30 11:39:28,075 INFO Pruned 387 rows from levels (older than 30 days)
+2026-03-30 11:39:28,076 INFO Pruned 101 rows from opus_tickers (older than 30 days)
+2026-03-30 11:39:28,076 INFO Pruned 37 rows from opus_movers (older than 30 days)
+2026-03-30 11:39:28,077 INFO Pruned 31 rows from opus_themes (older than 30 days)
+2026-03-30 11:39:28,078 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-03-30 11:39:28,078 INFO Pruned 5 rows from opus_fed_signals (older than 30 days)
+2026-03-30 11:39:28,079 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-03-30 11:39:28,202 INFO Cleanup complete
+2026-03-30 11:39:28,204 INFO === Collection complete: 565.8s total, completeness=100%, exit_code=0 ===
+[2026-03-30 11:39:28] Data collection complete — briefing file ready
+[2026-03-30 11:39:28] Found 9 research files (sector theses + structural calendar)
+[2026-03-30 11:39:28] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-03/2026-03-30_Mon.md`.
+
+Key highlights for today:
+- **Event Load: HEAVY** — Powell at 2:30 PM is the make-or-break event
+- **Relief bounce** — futures +0.6% after a brutal week, but VIX still above 30 in fear regime
+- **Oil above $100** on both benchmarks as Iran war enters week 5 with Houthi escalation
+- **Turn-of-month seasonal tailwind** active today through Apr 2
+- **USAR earnings pre-market** — first look at CHIPS Act rare earth execution
+- **Deeply oversold Tier 1 names** — ZS (RSI 29), ISRG (RSI 28), IONQ (RSI 30), PANW (RSI 33), CRWD bouncing +3.08%
+- **Defense earnings wave** Apr 21-30 is the next major catalyst cluster
+- **Bias: Cautiously bullish intraday, bearish medium-term** — bounce is tradeable but the trend is down
+[2026-03-30 11:42:42] Claude [report (attempt 1)] finished successfully
+[2026-03-30 11:42:42] Report attempt 1 succeeded: 16433 bytes
+[2026-03-30 11:42:42] Running Schwab fact-check verification...
+=== Fact-Check: 2026-03-30_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 74 symbols...
+  Got quotes for 64 symbols
+
+--- Database cross-checks (market_date=2026-03-30) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-03-30 11:42:53] Running Claude [html-publish] (timeout: 900s)...
