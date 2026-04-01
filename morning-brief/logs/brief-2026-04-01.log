@@ -1,0 +1,70 @@
+[2026-04-01 11:30:01] === Morning Brief Started ===
+[2026-04-01 11:30:01] Date: Wednesday, 2026-04-01
+[2026-04-01 11:30:01] Output: morning-brief/2026-04/2026-04-01_Wed.md + 2026-04-01_Wed.html
+[2026-04-01 11:30:01] All dependencies verified
+[2026-04-01 11:30:01] Running data collection pipeline...
+2026-04-01 11:30:02,246 INFO === Market Data Collection — 2026-04-01 ===
+2026-04-01 11:30:02,275 INFO ── Step 1: RSS Feeds ──
+2026-04-01 11:30:24,634 INFO RSS feeds: 266 headlines stored, 213 older than 24h skipped
+2026-04-01 11:30:24,635 INFO Step 1 complete: 22.4s (headlines=266)
+2026-04-01 11:30:24,635 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-01 11:30:24,638 INFO Opus analysis: sending 263 headlines to claude CLI...
+2026-04-01 11:31:59,229 INFO Opus analysis: 24 tickers, 7 movers, 11 themes from 263 headlines
+2026-04-01 11:31:59,230 INFO Step 2 complete: 94.6s (opus_tickers=24)
+2026-04-01 11:31:59,230 INFO ── Step 3: Schwab + External APIs ──
+2026-04-01 11:32:06,041 INFO Schwab quotes: 142 symbols
+2026-04-01 11:32:06,042 INFO Auto-detected movers (|change| > 3%): 13 symbols
+2026-04-01 11:32:06,043 INFO Technicals + SMA200 for 123 quoted symbols (sequential)
+2026-04-01 11:34:55,658 INFO Schwab technicals: 123/123 symbols
+2026-04-01 11:36:24,721 INFO SMA200: 123/123 symbols
+2026-04-01 11:36:25,069 INFO Schwab market context: collected
+2026-04-01 11:37:57,134 INFO Schwab earnings: 71 entries
+2026-04-01 11:37:57,151 INFO Economic calendar: 13 events
+2026-04-01 11:37:57,290 INFO CoinGecko: 2 coins
+2026-04-01 11:38:01,496 INFO Stooq: 3/3 symbols
+2026-04-01 11:38:49,782 WARNING FRED failed: The read operation timed out
+2026-04-01 11:38:51,916 INFO Yahoo backup: 1 symbols
+2026-04-01 11:38:51,916 INFO Step 3 complete: 412.7s (quotes=142, tech=123, sma200=123, earnings=71, econ=13, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-01 11:38:51,916 INFO ── Step 4: Validation + Retry ──
+2026-04-01 11:38:52,109 INFO Anomaly detection: 0 flagged
+2026-04-01 11:38:52,109 INFO Cross-validation: 0 discrepancies
+2026-04-01 11:38:52,114 INFO Retry check: 0 failures — nothing to retry
+2026-04-01 11:38:52,125 INFO Step 4 complete: 0.2s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-04-01 11:38:52,126 INFO ── Step 5: Generate Briefing ──
+2026-04-01 11:38:52,363 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-01.md (32243 bytes)
+2026-04-01 11:38:52,378 INFO Pruned 248 rows from headlines (older than 14 days)
+2026-04-01 11:38:52,500 INFO Cleanup complete
+2026-04-01 11:38:52,501 INFO === Collection complete: 529.8s total, completeness=100%, exit_code=0 ===
+[2026-04-01 11:38:52] Data collection complete — briefing file ready
+[2026-04-01 11:38:52] Found 9 research files (sector theses + structural calendar)
+[2026-04-01 11:38:52] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-01_Wed.md`.
+
+**HEAVY event load** -- here's the quick summary:
+
+- **Dominant theme:** Iran peace hopes driving a global relief rally (Nikkei +5.2%, all US futures +0.8-1.0%), but conviction is fragile with VIX still at 24+
+- **Three releases that matter today:** ADP Employment (8:15 ET, consensus 41K), Retail Sales (8:30 ET, +0.5%), ISM Manufacturing PMI (10:00 ET, 52.3) -- especially ISM Prices Paid at 74.0 consensus given oil-driven input costs
+- **Watchlist movers:** IONQ +3.9% (quantum threat timeline accelerating), PL +3.5% (defense EO demand), CIEN +3.5% (optical networking), MRVL getting $2B NVIDIA investment
+- **Oversold names flagged:** LDOS RSI 30, CACI 32, SYK 33, LEU 35, ISRG 36, FLNC 36, ZS 37
+- **Key risk:** This is a headline-driven tape -- Trump addressing the nation on Iran could reverse the rally instantly
+[2026-04-01 11:41:40] Claude [report (attempt 1)] finished successfully
+[2026-04-01 11:41:40] Report attempt 1 succeeded: 15064 bytes
+[2026-04-01 11:41:40] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-01_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 107 symbols...
+  Got quotes for 84 symbols
+
+--- Database cross-checks (market_date=2026-04-01) ---
+  2 database corrections:
+    FABRICATION: FOMC MEMBER MUSALEM SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER BARR SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  2 total corrections needed:
+    FABRICATION: FOMC MEMBER MUSALEM SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER BARR SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  2 corrections written to 2026-04-01_Wed.md
+=== Fact-check complete ===
+[2026-04-01 11:41:57] Running Claude [html-publish] (timeout: 900s)...
