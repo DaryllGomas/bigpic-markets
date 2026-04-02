@@ -1,0 +1,52 @@
+2026-04-02 11:30:01,500 INFO === Market Data Collection — 2026-04-02 ===
+2026-04-02 11:30:01,550 INFO ── Step 1: RSS Feeds ──
+2026-04-02 11:30:23,717 INFO RSS feeds: 234 headlines stored, 245 older than 24h skipped
+2026-04-02 11:30:23,717 INFO Step 1 complete: 22.2s (headlines=234)
+2026-04-02 11:30:23,717 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-02 11:30:23,720 INFO Opus analysis: sending 219 headlines to claude CLI...
+2026-04-02 11:31:49,271 INFO Opus analysis: 46 tickers, 20 movers, 11 themes from 219 headlines
+2026-04-02 11:31:49,272 INFO Step 2 complete: 85.6s (opus_tickers=46)
+2026-04-02 11:31:49,272 INFO ── Step 3: Schwab + External APIs ──
+2026-04-02 11:31:56,724 INFO Schwab quotes: 158 symbols
+2026-04-02 11:31:56,725 INFO Auto-detected movers (|change| > 3%): 60 symbols
+2026-04-02 11:31:56,726 INFO Technicals + SMA200 for 139 quoted symbols (sequential)
+2026-04-02 11:35:10,562 INFO Schwab technicals: 139/139 symbols
+2026-04-02 11:36:51,480 INFO SMA200: 139/139 symbols
+2026-04-02 11:36:51,871 INFO Schwab market context: collected
+2026-04-02 11:38:27,811 INFO Schwab earnings: 71 entries
+2026-04-02 11:38:27,828 INFO Economic calendar: 8 events
+2026-04-02 11:38:27,927 INFO CoinGecko: 2 coins
+2026-04-02 11:38:31,881 INFO Stooq: 3/3 symbols
+2026-04-02 11:39:20,160 WARNING FRED failed: The read operation timed out
+2026-04-02 11:39:22,296 INFO Yahoo backup: 1 symbols
+2026-04-02 11:39:22,296 INFO Step 3 complete: 453.0s (quotes=158, tech=139, sma200=139, earnings=71, econ=8, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-02 11:39:22,296 INFO ── Step 4: Validation + Retry ──
+2026-04-02 11:39:22,444 INFO ANOMALY: FLNC price=12.31 avg=15.67 z=-3.1
+2026-04-02 11:39:22,578 INFO Anomaly detection: 1 flagged
+2026-04-02 11:39:22,578 INFO Cross-validation: 0 discrepancies
+2026-04-02 11:39:22,587 INFO Retry check: 0 failures — nothing to retry
+2026-04-02 11:39:22,597 INFO Step 4 complete: 0.3s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-04-02 11:39:22,598 DEBUG   us_indices: OK
+2026-04-02 11:39:22,598 DEBUG   futures: OK
+2026-04-02 11:39:22,598 DEBUG   vix: OK
+2026-04-02 11:39:22,598 DEBUG   treasuries: OK
+2026-04-02 11:39:22,598 DEBUG   commodities: OK
+2026-04-02 11:39:22,598 DEBUG   crypto: OK
+2026-04-02 11:39:22,599 DEBUG   international: OK
+2026-04-02 11:39:22,599 DEBUG   gap_fills: OK
+2026-04-02 11:39:22,599 DEBUG   econ_calendar: OK
+2026-04-02 11:39:22,599 DEBUG   market_context: OK
+2026-04-02 11:39:22,599 DEBUG   opus_analysis: OK
+2026-04-02 11:39:22,599 DEBUG   rss: OK
+2026-04-02 11:39:22,599 DEBUG   watchlist_t1: OK
+2026-04-02 11:39:22,599 INFO ── Step 5: Generate Briefing ──
+2026-04-02 11:39:22,866 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-02.md (36697 bytes)
+2026-04-02 11:39:22,887 INFO Pruned 194 rows from headlines (older than 14 days)
+2026-04-02 11:39:22,888 INFO Pruned 121 rows from levels (older than 30 days)
+2026-04-02 11:39:22,889 INFO Pruned 24 rows from opus_tickers (older than 30 days)
+2026-04-02 11:39:22,889 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-04-02 11:39:22,890 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-04-02 11:39:22,890 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-04-02 11:39:22,891 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-02 11:39:23,010 INFO Cleanup complete
+2026-04-02 11:39:23,011 INFO === Collection complete: 561.0s total, completeness=100%, exit_code=0 ===

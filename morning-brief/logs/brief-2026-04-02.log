@@ -1,0 +1,78 @@
+[2026-04-02 11:30:01] === Morning Brief Started ===
+[2026-04-02 11:30:01] Date: Thursday, 2026-04-02
+[2026-04-02 11:30:01] Output: morning-brief/2026-04/2026-04-02_Thu.md + 2026-04-02_Thu.html
+[2026-04-02 11:30:01] All dependencies verified
+[2026-04-02 11:30:01] Running data collection pipeline...
+2026-04-02 11:30:01,500 INFO === Market Data Collection — 2026-04-02 ===
+2026-04-02 11:30:01,550 INFO ── Step 1: RSS Feeds ──
+2026-04-02 11:30:23,717 INFO RSS feeds: 234 headlines stored, 245 older than 24h skipped
+2026-04-02 11:30:23,717 INFO Step 1 complete: 22.2s (headlines=234)
+2026-04-02 11:30:23,717 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-02 11:30:23,720 INFO Opus analysis: sending 219 headlines to claude CLI...
+2026-04-02 11:31:49,271 INFO Opus analysis: 46 tickers, 20 movers, 11 themes from 219 headlines
+2026-04-02 11:31:49,272 INFO Step 2 complete: 85.6s (opus_tickers=46)
+2026-04-02 11:31:49,272 INFO ── Step 3: Schwab + External APIs ──
+2026-04-02 11:31:56,724 INFO Schwab quotes: 158 symbols
+2026-04-02 11:31:56,725 INFO Auto-detected movers (|change| > 3%): 60 symbols
+2026-04-02 11:31:56,726 INFO Technicals + SMA200 for 139 quoted symbols (sequential)
+2026-04-02 11:35:10,562 INFO Schwab technicals: 139/139 symbols
+2026-04-02 11:36:51,480 INFO SMA200: 139/139 symbols
+2026-04-02 11:36:51,871 INFO Schwab market context: collected
+2026-04-02 11:38:27,811 INFO Schwab earnings: 71 entries
+2026-04-02 11:38:27,828 INFO Economic calendar: 8 events
+2026-04-02 11:38:27,927 INFO CoinGecko: 2 coins
+2026-04-02 11:38:31,881 INFO Stooq: 3/3 symbols
+2026-04-02 11:39:20,160 WARNING FRED failed: The read operation timed out
+2026-04-02 11:39:22,296 INFO Yahoo backup: 1 symbols
+2026-04-02 11:39:22,296 INFO Step 3 complete: 453.0s (quotes=158, tech=139, sma200=139, earnings=71, econ=8, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-02 11:39:22,296 INFO ── Step 4: Validation + Retry ──
+2026-04-02 11:39:22,444 INFO ANOMALY: FLNC price=12.31 avg=15.67 z=-3.1
+2026-04-02 11:39:22,578 INFO Anomaly detection: 1 flagged
+2026-04-02 11:39:22,578 INFO Cross-validation: 0 discrepancies
+2026-04-02 11:39:22,587 INFO Retry check: 0 failures — nothing to retry
+2026-04-02 11:39:22,597 INFO Step 4 complete: 0.3s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-04-02 11:39:22,599 INFO ── Step 5: Generate Briefing ──
+2026-04-02 11:39:22,866 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-02.md (36697 bytes)
+2026-04-02 11:39:22,887 INFO Pruned 194 rows from headlines (older than 14 days)
+2026-04-02 11:39:22,888 INFO Pruned 121 rows from levels (older than 30 days)
+2026-04-02 11:39:22,889 INFO Pruned 24 rows from opus_tickers (older than 30 days)
+2026-04-02 11:39:22,889 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-04-02 11:39:22,890 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-04-02 11:39:22,890 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-04-02 11:39:22,891 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-02 11:39:23,010 INFO Cleanup complete
+2026-04-02 11:39:23,011 INFO === Collection complete: 561.0s total, completeness=100%, exit_code=0 ===
+[2026-04-02 11:39:23] Data collection complete — briefing file ready
+[2026-04-02 11:39:23] Found 9 research files (sector theses + structural calendar)
+[2026-04-02 11:39:23] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-02_Thu.md`.
+
+**Key themes today:**
+- **HEAVY event load** -- geopolitics dominating everything. Trump's Iran war speech reversed yesterday's entire relief rally.
+- **Oil shock**: WTI $109 (+9%), Brent $110 (+8.3%) on Strait of Hormuz fears
+- **VIX 27.41** (+11.7%) -- elevated regime, approaching panic threshold
+- **All assets selling off together** (equities, gold, crypto) -- suggests forced liquidation/margin calls
+- **Kospi -5.72%** is the standout global move, signaling sustained disruption pricing
+- **Defense is the only green sector** -- RTX +0.40% on $6.6B F-35 deal, LMT flat
+- **Two major space catalysts buried by macro**: Artemis II launched + SpaceX IPO filing
+- **FLNC anomaly** flagged at z-score -3.1, RSI 34, approaching oversold
+- **Bias: Bearish** -- Trump's 9 PM speech is the only potential catalyst for reversal
+[2026-04-02 11:42:31] Claude [report (attempt 1)] finished successfully
+[2026-04-02 11:42:31] Report attempt 1 succeeded: 17636 bytes
+[2026-04-02 11:42:31] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-02_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 87 symbols...
+  Got quotes for 72 symbols
+
+--- Database cross-checks (market_date=2026-04-02) ---
+  1 database corrections:
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  1 corrections written to 2026-04-02_Thu.md
+=== Fact-check complete ===
+[2026-04-02 11:42:44] Running Claude [html-publish] (timeout: 900s)...
