@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know Your Predators — Algo Market Structure | BigPic Capital</title>
+<meta name="description" content="The equity market is an ecosystem. Six species of algorithm compete for your order flow. Here's who they are, what they want, and how to profit from knowing.">
+<meta property="og:title" content="Know Your Predators — Algo Market Structure">
+<meta property="og:description" content="The equity market is an ecosystem. Six species of algorithm compete for your order flow. Here's who they are, what they want, and how to profit from knowing.">
+<meta property="og:image" content="https://markets.bigpicsolutions.com/research/supplementary/Algos/algos-thumb.jpg">
+<meta property="og:url" content="https://markets.bigpicsolutions.com/research/supplementary/Algos/algo_edge_report.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BigPic Solutions Research">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Know Your Predators — Algo Market Structure">
+<meta name="twitter:description" content="The equity market is an ecosystem. Six species of algorithm compete for your order flow. Here's who they are, what they want, and how to profit from knowing.">
+<meta name="twitter:image" content="https://markets.bigpicsolutions.com/research/supplementary/Algos/algos-thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════
+   WRAPPER — FOOD CHAIN ECOSYSTEM
+   ════════════════════════════════════════ */
+:root {
+  --bg:       #020c18;
+  --bg-2:     #061624;
+  --bg-card:  rgba(6,22,36,0.85);
+  --cyan:     #06b6d4;
+  --cyan-dim: rgba(6,182,212,0.1);
+  --amber:    #f59e0b;
+  --red:      #ef4444;
+  --green:    #10b981;
+  --violet:   #8b5cf6;
+  --slate:    #94a3b8;
+  --text:     #cdd9e5;
+  --dim:      #4d6478;
+  --line:     rgba(6,182,212,0.08);
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'Inter', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ocean depth radial — animated */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(6,182,212,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 15% 55%,  rgba(6,182,212,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 35%,  rgba(245,158,11,0.03) 0%, transparent 60%);
+  animation: ocean-drift 18s ease-in-out infinite alternate;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 30% 20% at 70% 80%, rgba(6,182,212,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 20% 30% at 30% 20%, rgba(139,92,246,0.02) 0%, transparent 60%);
+  animation: ocean-drift-b 24s ease-in-out infinite alternate;
+}
+@keyframes ocean-drift {
+  0%   { opacity: 1; transform: scale(1)   translate(0px, 0px); }
+  33%  { opacity: 0.8; transform: scale(1.06) translate(-12px, 8px); }
+  66%  { opacity: 1.0; transform: scale(0.97) translate(10px, -6px); }
+  100% { opacity: 0.85; transform: scale(1.04) translate(-6px, 12px); }
+}
+@keyframes ocean-drift-b {
+  0%   { transform: scale(1)    translate(0px, 0px);   opacity: 0.6; }
+  50%  { transform: scale(1.1)  translate(16px, -10px); opacity: 1; }
+  100% { transform: scale(0.95) translate(-8px, 14px);  opacity: 0.7; }
+}
+
+/* ── NAV ── */
+.w-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(2,12,24,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.w-brand { font-family: var(--mono); font-size: 12px; color: var(--cyan); letter-spacing: 0.15em; font-weight: 700; }
+.w-brand span { color: var(--dim); font-weight: 400; }
+.w-nav-links { display: flex; gap: 28px; }
+.w-nav-links a {
+  font-family: var(--mono); font-size: 10px; color: var(--dim);
+  text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.w-nav-links a:hover { color: var(--cyan); }
+.w-nav-tag {
+  font-family: var(--mono); font-size: 10px; color: var(--dim);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.w-hero {
+  position: relative; z-index: 1;
+  min-height: 100vh; padding: 120px 60px 80px;
+  display: grid; grid-template-columns: 1fr 300px;
+  gap: 60px; align-items: center;
+  max-width: 1080px; margin: 0 auto;
+}
+.w-hero-tag {
+  font-family: var(--mono); font-size: 10px; color: var(--cyan);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.w-pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan); flex-shrink: 0;
+  animation: w-blink 2s ease-in-out infinite;
+}
+@keyframes w-blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.w-hero h1 {
+  font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.025em;
+  color: var(--text); margin-bottom: 18px;
+}
+.w-hero h1 em { font-style: normal; color: var(--cyan); }
+.w-hero-body {
+  font-size: 16px; font-weight: 300; color: #8fa8bc;
+  line-height: 1.85; max-width: 480px; margin-bottom: 36px;
+}
+.w-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+.w-stat { display: flex; flex-direction: column; gap: 3px; }
+.w-stat-val {
+  font-family: var(--mono); font-size: 1.8rem;
+  font-weight: 700; color: var(--cyan); line-height: 1;
+}
+.w-stat-label {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* ── FOOD CHAIN SIDEBAR ── */
+.w-chain { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.w-chain-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-radius: 7px;
+  border: 1px solid transparent;
+  transition: all 0.2s; cursor: default;
+}
+.w-chain-item:hover { border-color: rgba(6,182,212,0.15); background: var(--bg-2); }
+.w-chain-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.w-chain-info { flex: 1; }
+.w-chain-name { font-size: 12px; font-weight: 500; line-height: 1.2; }
+.w-chain-speed { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.08em; margin-top: 1px; }
+.w-chain-pct { font-family: var(--mono); font-size: 11px; font-weight: 700; }
+.w-chain-arrow {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--dim); text-align: center; padding: 0 8px;
+  letter-spacing: 0.05em;
+}
+
+/* ── ARTICLE SECTIONS ── */
+.w-section {
+  position: relative; z-index: 1;
+  max-width: 1080px; margin: 0 auto;
+  padding: 60px 60px;
+}
+.w-section + .w-section { padding-top: 0; }
+.w-rule { height: 1px; background: var(--line); margin: 0 60px; }
+
+.w-section-label {
+  font-family: var(--mono); font-size: 10px; color: var(--cyan);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 16px;
+}
+.w-section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+.w-section h2 {
+  font-size: 1.65rem; font-weight: 600; color: var(--text);
+  line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.015em;
+}
+.w-lead {
+  font-size: 16px; color: #8fa8bc; line-height: 1.85;
+  max-width: 660px; margin-bottom: 14px; font-weight: 300;
+}
+.w-p {
+  font-size: 14px; color: #6b8599; line-height: 1.85;
+  max-width: 660px; margin-bottom: 12px;
+}
+.w-p strong { color: var(--text); font-weight: 500; }
+
+/* ── INSIGHT CALLOUT ── */
+.w-callout {
+  background: var(--bg-card); border: 1px solid var(--cyan-dim);
+  border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0;
+  padding: 16px 20px; margin: 20px 0;
+  max-width: 660px; backdrop-filter: blur(8px);
+}
+.w-callout-label {
+  font-family: var(--mono); font-size: 9px; color: var(--cyan);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;
+}
+.w-callout p { font-size: 13px; color: var(--text); line-height: 1.7; margin: 0; }
+.w-callout strong { color: var(--cyan); font-weight: 500; }
+
+/* ── GUIDE FRAME ── */
+.w-guide-frame {
+  position: relative; z-index: 1;
+  margin: 0 40px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden;
+}
+.w-guide-header {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.w-guide-dots { display: flex; gap: 7px; }
+.w-guide-dot { width: 10px; height: 10px; border-radius: 50%; }
+.w-guide-title {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--dim); letter-spacing: 0.1em;
+}
+.w-guide-tag {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+/* ── THREE PLAYS ── */
+.w-plays { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+.w-play {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 24px;
+  backdrop-filter: blur(8px); transition: all 0.2s;
+  position: relative; overflow: hidden;
+}
+.w-play:hover { border-color: rgba(6,182,212,0.2); transform: translateY(-2px); }
+.w-play::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--pc, var(--cyan));
+}
+.w-play-num {
+  font-family: var(--mono); font-size: 9px; color: var(--pc, var(--cyan));
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+}
+.w-play h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.w-play p { font-size: 13px; color: #6b8599; line-height: 1.7; margin-bottom: 12px; }
+.w-play-edge {
+  font-family: var(--mono); font-size: 11px; color: var(--pc, var(--cyan));
+  background: color-mix(in srgb, var(--pc, var(--cyan)) 8%, transparent);
+  padding: 8px 12px; border-radius: 4px; line-height: 1.5;
+}
+
+/* ── DISCLAIMER ── */
+.w-disclaimer {
+  position: relative; z-index: 1;
+  max-width: 1080px; margin: 0 auto;
+  padding: 40px 60px 60px;
+  border-top: 1px solid var(--line);
+}
+.w-disclaimer p {
+  font-family: var(--mono); font-size: 11px; color: var(--dim);
+  line-height: 1.7; letter-spacing: 0.02em;
+}
+
+/* ── PAGE CONTAINER ── */
+.w-page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .w-hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+  .w-chain { display: none; }
+  .w-section { padding: 40px 24px; }
+  .w-rule { margin: 0 24px; }
+  .w-guide-frame { margin: 0 16px; }
+  .w-plays { grid-template-columns: 1fr; }
+  .w-nav-links { display: none; }
+  .w-disclaimer { padding: 40px 24px; }
+}
+
+
+/* ════════════════════════════════════════
+   FIELD GUIDE — SCOPED UNDER #fg
+   (original styles, prefixed to isolate)
+   ════════════════════════════════════════ */
+#fg {
+  --fg-bg-primary:    #080e17;
+  --fg-bg-secondary:  #0c1520;
+  --fg-text-primary:  #cdd9e5;
+  --fg-text-secondary:#4d6478;
+  --fg-border-3:      rgba(6,182,212,0.07);
+  --fg-border-2:      rgba(6,182,212,0.13);
+  --fg-border-1:      rgba(6,182,212,0.22);
+  --fg-radius-md:     8px;
+  --fg-radius-lg:     12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--fg-bg-primary);
+  color: var(--fg-text-primary);
+  padding: 2rem 1.5rem;
+}
+#fg .fg-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+#fg .fg-tab {
+  padding: 6px 14px; border-radius: var(--fg-radius-md);
+  border: 0.5px solid var(--fg-border-2); font-size: 13px; cursor: pointer;
+  background: transparent; color: var(--fg-text-secondary);
+  transition: all .15s; white-space: nowrap; font-family: system-ui, -apple-system, sans-serif;
+}
+#fg .fg-tab:hover { background: var(--fg-bg-secondary); }
+#fg .fg-tab.active {
+  background: var(--fg-bg-secondary); color: var(--fg-text-primary);
+  border-color: var(--fg-border-1); font-weight: 500;
+}
+#fg .fg-tab-dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; margin-right: 6px; vertical-align: middle;
+}
+#fg .fg-panel { display: none; }
+#fg .fg-panel.active { display: block; }
+#fg .fg-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+#fg .fg-grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media (max-width: 600px) { #fg .fg-grid2, #fg .fg-grid3 { grid-template-columns: 1fr; } }
+#fg .fg-card {
+  background: var(--fg-bg-secondary); border-radius: var(--fg-radius-lg);
+  padding: 14px 16px; border: 0.5px solid var(--fg-border-3);
+}
+#fg .fg-card-accent {
+  border-left: 3px solid var(--accent, #888);
+  border-radius: 0 var(--fg-radius-lg) var(--fg-radius-lg) 0; padding-left: 13px;
+}
+#fg .fg-card h3 {
+  font-size: 13px; font-weight: 500; color: var(--fg-text-secondary);
+  margin-bottom: 8px; text-transform: uppercase; letter-spacing: .04em;
+}
+#fg .fg-card p, #fg .fg-card li { font-size: 14px; color: var(--fg-text-primary); line-height: 1.6; }
+#fg .fg-card ul { padding-left: 1rem; }
+#fg .fg-card li { margin-bottom: 3px; }
+#fg .fg-hero {
+  border-radius: var(--fg-radius-lg); padding: 16px 18px; margin-bottom: 12px;
+  border: 0.5px solid var(--fg-border-3);
+}
+#fg .fg-hero h2 { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+#fg .fg-hero p { font-size: 14px; color: var(--fg-text-secondary); line-height: 1.6; }
+#fg .fg-signal-row {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
+  border-bottom: 0.5px solid var(--fg-border-3);
+}
+#fg .fg-signal-row:last-child { border-bottom: none; }
+#fg .fg-signal-icon { font-size: 16px; min-width: 20px; margin-top: 1px; }
+#fg .fg-signal-text { font-size: 13px; color: var(--fg-text-primary); line-height: 1.5; }
+#fg .fg-signal-label {
+  font-size: 11px; font-weight: 500; color: var(--fg-text-secondary);
+  text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: 2px;
+}
+#fg .fg-eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+@media (max-width: 600px) { #fg .fg-eco-grid { grid-template-columns: 1fr; } }
+#fg .fg-eco-card {
+  border-radius: var(--fg-radius-md); padding: 12px 14px;
+  border: 0.5px solid var(--fg-border-3); background: var(--fg-bg-secondary);
+  cursor: pointer; transition: all .15s;
+}
+#fg .fg-eco-card:hover { background: var(--fg-bg-primary); border-color: var(--fg-border-1); }
+#fg .fg-eco-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+#fg .fg-eco-card p { font-size: 12px; color: var(--fg-text-secondary); line-height: 1.5; }
+#fg .fg-badge {
+  display: inline-block; font-size: 11px; padding: 2px 7px;
+  border-radius: 4px; margin-left: 6px; vertical-align: middle;
+  /* override any inline light backgrounds */
+  background: rgba(6,182,212,0.12) !important;
+  color: #06b6d4 !important;
+}
+#fg .fg-ms-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+#fg .fg-ms-table th {
+  font-size: 11px; font-weight: 500; color: var(--fg-text-secondary);
+  text-transform: uppercase; letter-spacing: .04em; padding: 6px 8px;
+  border-bottom: 0.5px solid var(--fg-border-2); text-align: left;
+}
+#fg .fg-ms-table td {
+  padding: 8px; border-bottom: 0.5px solid var(--fg-border-3);
+  color: var(--fg-text-primary); vertical-align: top;
+}
+#fg .fg-ms-table tr:last-child td { border-bottom: none; }
+#fg .fg-progress-bar {
+  height: 6px; border-radius: 3px; background: var(--fg-border-3);
+  margin-top: 6px; overflow: hidden;
+}
+#fg .fg-progress-fill { height: 100%; border-radius: 3px; }
+#fg footer {
+  margin-top: 2rem; padding-top: 1rem;
+  border-top: 0.5px solid var(--fg-border-3);
+  font-size: 12px; color: var(--fg-text-secondary);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+
+/* === SITE NAV === */
+.bigpic-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(2,12,24,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(6,182,212,0.08);display:flex;align-items:center;padding:0 1.5rem;height:52px}
+.bigpic-nav a{text-decoration:none}
+.bigpic-nav .nav-brand{font-weight:700;font-size:1rem;background:linear-gradient(135deg,#e2e8f0,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:32px}
+.bigpic-nav .nav-links{display:flex;align-items:center;gap:4px}
+.bigpic-nav .nav-link{color:#94a3b8;font-size:0.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-link:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.bigpic-nav .nav-dropdown{position:relative}
+.bigpic-nav .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(2,12,24,0.96);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:6px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.bigpic-nav .nav-dropdown:hover .nav-dropdown-menu{display:block}
+.bigpic-nav .nav-dropdown-menu a{display:block;color:#94a3b8;font-size:0.82rem;padding:8px 12px;border-radius:6px;transition:0.2s ease}
+.bigpic-nav .nav-dropdown-menu a:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+@media(max-width:600px){.bigpic-nav .nav-links{display:none}}
+
+/* === SHARE DROPDOWN === */
+.share-wrapper{position:fixed;top:4.2rem;right:1.5rem;z-index:9999}
+.share-btn{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;background:rgba(2,12,24,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#94a3b8;font-size:0.78rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.06em;cursor:pointer;backdrop-filter:blur(10px);transition:0.2s ease}
+.share-btn:hover{color:#e2e8f0;border-color:rgba(6,182,212,0.3)}
+.share-btn svg{width:14px;height:14px;stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:0.2s ease}
+.share-btn:hover svg{stroke:#06b6d4}
+.share-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:rgba(2,12,24,0.96);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:160px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.share-dropdown.open{display:block}
+.share-option{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;background:none;border:none;color:#94a3b8;font-size:0.82rem;font-family:'Inter',sans-serif;cursor:pointer;border-radius:6px;transition:0.2s ease;text-decoration:none}
+.share-option:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
+.share-option svg{width:15px;height:15px;flex-shrink:0}
+.link-icon{stroke:#94a3b8;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.x-logo{fill:#94a3b8}
+.share-option:hover .link-icon{stroke:#06b6d4}
+.share-option:hover .x-logo{fill:#06b6d4}
+.share-copied{display:none;padding:8px 12px;color:#10b981;font-size:0.8rem;text-align:center}
+.share-copied.show{display:block}
+</style>
+</head>
+<body>
+
+<nav class="bigpic-nav">
+  <a href="../../../index.html" class="nav-brand">BigPic Solutions</a>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-link" href="#">Sectors &#9662;</a>
+      <div class="nav-dropdown-menu">
+        <a href="../../../research/ai/report.html">AI Infrastructure</a>
+        <a href="../../../research/nuclear/report.html">Nuclear Energy</a>
+        <a href="../../../research/space/report.html">Space</a>
+        <a href="../../../research/quantum/report.html">Quantum Computing</a>
+        <a href="../../../research/robotics/report.html">Robotics & Automation</a>
+        <a href="../../../research/cybersecurity/report.html">Cybersecurity</a>
+        <a href="../../../research/critical-minerals/report.html">Critical Minerals</a>
+        <a href="../../../research/defense/report.html">Defense & Aerospace</a>
+        <a href="../../../research/energy-storage/report.html">Energy Storage</a>
+      </div>
+    </div>
+    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
+  </div>
+</nav>
+
+<div class="share-wrapper">
+  <button class="share-btn" onclick="toggleShare()" aria-label="Share this article">
+    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    SHARE
+  </button>
+  <div class="share-dropdown" id="shareDropdown">
+    <button class="share-option" onclick="copyLink()">
+      <svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+    <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener noreferrer" onclick="shareToX()">
+      <svg class="x-logo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <div class="share-copied" id="shareCopied">Link copied!</div>
+  </div>
+</div>
+
+<script>
+const SHARE_URL = 'https://markets.bigpicsolutions.com/research/supplementary/Algos/algo_edge_report.html';
+const SHARE_TEXT = 'Know Your Predators — Algo Market Structure. Six species of algorithm compete for your order flow. Here\'s who they are, what they want, and how to profit from knowing.';
+
+function toggleShare() {
+  document.getElementById('shareDropdown').classList.toggle('open');
+}
+function copyLink() {
+  navigator.clipboard.writeText(SHARE_URL).then(() => {
+    const el = document.getElementById('shareCopied');
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+  });
+}
+function shareToX() {
+  const url = 'https://x.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(SHARE_URL);
+  document.getElementById('shareX').href = url;
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.share-wrapper')) {
+    document.getElementById('shareDropdown').classList.remove('open');
+  }
+});
+</script>
+
+<!-- ═══ NAV ═══ -->
+<nav class="w-nav">
+  <div class="w-brand">BIGPIC<span>/</span>CAPITAL</div>
+  <div class="w-nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#field-guide">Field Guide</a>
+    <a href="#edge">Your Edge</a>
+  </div>
+  <div class="w-nav-tag">Market Structure · Research</div>
+</nav>
+
+<div class="w-page">
+
+<!-- ═══ HERO ═══ -->
+<section class="w-hero">
+  <div>
+    <div class="w-hero-tag"><div class="w-pulse"></div>BigPic Capital · Market Structure</div>
+    <h1>Know Your<br><em>Predators.</em><br>Become One.</h1>
+    <p class="w-hero-body">
+      The equity market is an ecosystem. Six species of algorithm compete for the same resource — your order flow. Most traders never learn who these systems are or what drives them. That ignorance is expensive.
+    </p>
+    <div class="w-stats">
+      <div class="w-stat">
+        <span class="w-stat-val">70%</span>
+        <span class="w-stat-label">of equity volume · algo</span>
+      </div>
+      <div class="w-stat">
+        <span class="w-stat-val">6</span>
+        <span class="w-stat-label">species · in your flow</span>
+      </div>
+      <div class="w-stat">
+        <span class="w-stat-val">&lt;1ms</span>
+        <span class="w-stat-label">HFT reaction · vs yours</span>
+      </div>
+    </div>
+    <div style="margin-top:40px;padding-top:28px;border-top:1px solid var(--line);max-width:480px">
+      <p style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:0.1em;line-height:1.8">
+        COVERS · HFT &amp; Market Making · Trend / CTA Momentum · Stat Arb &amp; Mean Reversion · News / NLP Algos · Options &amp; Gamma Exposure · Execution Algos (VWAP / TWAP)
+      </p>
+    </div>
+  </div>
+
+  <!-- Food chain -->
+  <div class="w-chain">
+    <div class="w-chain-item" style="background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.15)">
+      <div class="w-chain-dot" style="background:#ef4444"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#ef4444">HFT / Market Makers</div>
+        <div class="w-chain-speed">APEX · &lt;1ms</div>
+      </div>
+      <div class="w-chain-pct" style="color:#ef4444">50%</div>
+    </div>
+    <div class="w-chain-arrow">go flat on news → spike has no liquidity ↓</div>
+    <div class="w-chain-item" style="background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.12)">
+      <div class="w-chain-dot" style="background:#f59e0b"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#f59e0b">News / NLP Algos</div>
+        <div class="w-chain-speed">REACTIVE · milliseconds</div>
+      </div>
+      <div class="w-chain-pct" style="color:#f59e0b">10%</div>
+    </div>
+    <div class="w-chain-arrow">overshoot → stat arb corrects ↓</div>
+    <div class="w-chain-item" style="background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.12)">
+      <div class="w-chain-dot" style="background:#10b981"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#10b981">Stat Arb / Mean Rev</div>
+        <div class="w-chain-speed">ENFORCER · minutes–hours</div>
+      </div>
+      <div class="w-chain-pct" style="color:#10b981">15%</div>
+    </div>
+    <div class="w-chain-arrow">sustained move → CTAs pile in ↓</div>
+    <div class="w-chain-item" style="background:rgba(6,182,212,0.06);border-color:rgba(6,182,212,0.12)">
+      <div class="w-chain-dot" style="background:#06b6d4"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#06b6d4">Trend / CTA Momentum</div>
+        <div class="w-chain-speed">FOLLOWER · days–weeks</div>
+      </div>
+      <div class="w-chain-pct" style="color:#06b6d4">20%</div>
+    </div>
+    <div class="w-chain-arrow">price at strikes → dealers hedge ↓</div>
+    <div class="w-chain-item" style="background:rgba(139,92,246,0.06);border-color:rgba(139,92,246,0.12)">
+      <div class="w-chain-dot" style="background:#8b5cf6"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#8b5cf6">Options / Gamma</div>
+        <div class="w-chain-speed">GRAVITY · intraday</div>
+      </div>
+      <div class="w-chain-pct" style="color:#8b5cf6">12%</div>
+    </div>
+    <div class="w-chain-arrow">all flow absorbed by ↓</div>
+    <div class="w-chain-item" style="background:rgba(148,163,184,0.04);border-color:rgba(148,163,184,0.1)">
+      <div class="w-chain-dot" style="background:#94a3b8"></div>
+      <div class="w-chain-info">
+        <div class="w-chain-name" style="color:#94a3b8">Execution (VWAP/TWAP)</div>
+        <div class="w-chain-speed">SCHEDULER · all day</div>
+      </div>
+      <div class="w-chain-pct" style="color:#94a3b8">25%</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 1: OVERVIEW ═══ -->
+<div class="w-rule"></div>
+<section class="w-section" id="overview">
+  <div class="w-section-label">01 · Why This Matters</div>
+  <h2>You're not trading against other humans</h2>
+  <p class="w-lead">When you hit buy, the other side of your trade is almost certainly an algorithm — not a person making a decision, but a system executing a strategy at machine speed.</p>
+  <p class="w-p">Most retail traders know this in theory but have never mapped out <em>who</em> these systems are, what they're optimizing for, or where their behavior creates patterns you can exploit. That gap is the edge. The six species below have different speeds, different prey, and different weaknesses. Once you know the ecosystem, you stop being food and start making deliberate decisions about where to position.</p>
+  <p class="w-p">This isn't academic. Every concept in the field guide below connects to a real trade decision: whether to fade or follow a gap, when mean reversion has institutional backing, where the gamma wall sits before OpEx, and exactly when to watch the NYSE imbalance feed. The goal is to walk away with a different mental model of what's happening inside every move you trade.</p>
+
+  <div class="w-callout">
+    <div class="w-callout-label">How to use this guide</div>
+    <p>The interactive field guide below has a tab for each algo type. <strong>Start with Ecosystem</strong> for the full picture, then go deep on whichever species lives in your strategy. At the bottom, four specific plays show exactly how this translates to trades you can run this week.</p>
+  </div>
+</section>
+
+
+<!-- ═══ FIELD GUIDE ═══ -->
+<div class="w-rule"></div>
+<section class="w-section" id="field-guide" style="padding-bottom:32px">
+  <div class="w-section-label">02 · Interactive Field Guide</div>
+  <h2>The six species — profiles, detection, and playbooks</h2>
+  <p class="w-lead">Each tab below is a complete profile: how the algo makes money, its detectable fingerprints in price and volume, and specific plays to trade against it or alongside it.</p>
+</section>
+
+<div class="w-guide-frame">
+  <div class="w-guide-header">
+    <div class="w-guide-dots">
+      <div class="w-guide-dot" style="background:#f43f5e"></div>
+      <div class="w-guide-dot" style="background:#f59e0b"></div>
+      <div class="w-guide-dot" style="background:#10b981"></div>
+    </div>
+    <span class="w-guide-title">market_algo_field_guide · interactive reference</span>
+    <span class="w-guide-tag">6 algo types</span>
+  </div>
+
+  <!-- ═══ ORIGINAL FIELD GUIDE — embedded inline ═══ -->
+  <div id="fg">
+
+    <div class="fg-tabs" id="fg-tabs">
+      <button class="fg-tab active" data-tab="eco"><span class="fg-tab-dot" style="background:#94a3b8"></span>Ecosystem</button>
+      <button class="fg-tab" data-tab="hft"><span class="fg-tab-dot" style="background:#3b82f6"></span>HFT / Market making</button>
+      <button class="fg-tab" data-tab="trend"><span class="fg-tab-dot" style="background:#f59e0b"></span>Trend / Momentum</button>
+      <button class="fg-tab" data-tab="mr"><span class="fg-tab-dot" style="background:#10b981"></span>Mean reversion</button>
+      <button class="fg-tab" data-tab="news"><span class="fg-tab-dot" style="background:#f97316"></span>News / Sentiment</button>
+      <button class="fg-tab" data-tab="gamma"><span class="fg-tab-dot" style="background:#8b5cf6"></span>Options / Gamma</button>
+      <button class="fg-tab" data-tab="exec"><span class="fg-tab-dot" style="background:#94a3b8"></span>Execution algos</button>
+    </div>
+
+    <!-- ECOSYSTEM -->
+    <div class="fg-panel active" id="fg-tab-eco">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary)">
+        <h2>Who's actually in your order flow</h2>
+        <p>Every trade you place interacts with one of these actor types. Knowing which algo is on the other side — or setting the price — is the core skill of microstructure-aware trading. Click any category to go deep.</p>
+      </div>
+      <div class="fg-eco-grid">
+        <div class="fg-eco-card" onclick="fgSwitch('hft')">
+          <h4 style="color:#3b82f6">HFT / Market makers</h4>
+          <p>Always quoting. Collect the spread. Hate adverse selection. Dominate NBBO. ~40-50% of equity volume.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:50%;background:#3b82f6"></div></div>
+        </div>
+        <div class="fg-eco-card" onclick="fgSwitch('trend')">
+          <h4 style="color:#f59e0b">Trend / Momentum CTAs</h4>
+          <p>Follow price signals over days-weeks. Amplify moves. Create self-reinforcing breakouts. ~15-20% of volume.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:20%;background:#f59e0b"></div></div>
+        </div>
+        <div class="fg-eco-card" onclick="fgSwitch('mr')">
+          <h4 style="color:#10b981">Stat arb / Mean reversion</h4>
+          <p>Trade pairs, ETF-vs-basket, sector spreads. Cap intraday deviations. ~10-15% of volume.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:15%;background:#10b981"></div></div>
+        </div>
+        <div class="fg-eco-card" onclick="fgSwitch('news')">
+          <h4 style="color:#f97316">News / NLP algos</h4>
+          <p>Parse earnings, headlines, SEC filings in milliseconds. React before humans can read. ~5-10%.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:8%;background:#f97316"></div></div>
+        </div>
+        <div class="fg-eco-card" onclick="fgSwitch('gamma')">
+          <h4 style="color:#8b5cf6">Options / Gamma dealers</h4>
+          <p>Hedge delta constantly. Create pinning near strikes. Drive Vol-of-Vol. ~10-15% of equity moves.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:12%;background:#8b5cf6"></div></div>
+        </div>
+        <div class="fg-eco-card" onclick="fgSwitch('exec')">
+          <h4 style="color:#94a3b8">Execution algos (TWAP/VWAP)</h4>
+          <p>Institutional order slicing. Predictable volume patterns. Exploitable schedules. ~20-25% of volume.</p>
+          <div class="fg-progress-bar"><div class="fg-progress-fill" style="width:25%;background:#94a3b8"></div></div>
+        </div>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card">
+          <h3>The microstructure stack</h3>
+          <table class="fg-ms-table">
+            <thead><tr><th>Layer</th><th>What happens</th><th>Who drives it</th></tr></thead>
+            <tbody>
+              <tr><td>Tick / Level 1</td><td>Bid/ask quote updates</td><td>HFT market makers</td></tr>
+              <tr><td>Prints / T&amp;S</td><td>Actual trades execute</td><td>Aggressors hit quotes</td></tr>
+              <tr><td>Imbalance</td><td>Buy/sell pressure skew</td><td>VWAP/execution algos</td></tr>
+              <tr><td>Sweep</td><td>Multiple levels cleared fast</td><td>Momentum + news algos</td></tr>
+              <tr><td>Block / Dark</td><td>Large hidden prints</td><td>Institutions avoiding impact</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fg-card">
+          <h3>Your edge as a discretionary-systematic trader</h3>
+          <div class="fg-signal-row">
+            <div class="fg-signal-icon">→</div>
+            <div class="fg-signal-text"><span class="fg-signal-label">Pattern recognition</span>You can recognize algo behavior signatures they can't hide — schedule, volume, reversion depth</div>
+          </div>
+          <div class="fg-signal-row">
+            <div class="fg-signal-icon">→</div>
+            <div class="fg-signal-text"><span class="fg-signal-label">Time horizon</span>Algos optimized for ms-to-hours; you can hold days-weeks and absorb their noise</div>
+          </div>
+          <div class="fg-signal-row">
+            <div class="fg-signal-icon">→</div>
+            <div class="fg-signal-text"><span class="fg-signal-label">Regime awareness</span>Know which algos are dominant in current vol regime — they behave differently in trending vs mean-reverting markets</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HFT -->
+    <div class="fg-panel" id="fg-tab-hft">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #3b82f6">
+        <h2>HFT / Market making <span class="fg-badge" style="background:#E6F1FB;color:#0C447C">Liquidity provider</span></h2>
+        <p>Market makers quote both sides simultaneously and profit on the bid-ask spread. They use co-location, predictive models, and inventory management. Their primary risk is being on the wrong side of an informed order — they go flat fast when they detect directional flow.</p>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card fg-card-accent" style="--accent:#3b82f6">
+          <h3>How they make money</h3>
+          <ul>
+            <li>Post bid + offer simultaneously — earn the spread</li>
+            <li>Adjust quotes faster than you can react (sub-ms)</li>
+            <li>Use queue position at NBBO as a key asset</li>
+            <li>Cancel/replace thousands of quotes per second</li>
+            <li>Net: thousands of tiny profits, few big losses</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#3b82f6">
+          <h3>Their weak points</h3>
+          <ul>
+            <li>Adverse selection: forced to buy into falling markets</li>
+            <li>Go flat when they smell informed flow (stop quoting)</li>
+            <li>Predictable during open/close auction participation</li>
+            <li>Quote stuffing patterns leave detectable fingerprints in L2</li>
+            <li>Struggle in low-liquidity, wide-spread environments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>How to detect them</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">L2 flickering</span>Bids/asks appearing and vanishing in &lt;100ms with no prints — classic quote stuffing signature.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Spread widening on news</span>When news hits, HFTs pull quotes instantly — spread jumps 3-10x before any print.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Size-at-bid vs prints</span>Large bid size that disappears the moment a sell market order approaches — layering detection.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Time-of-day patterns</span>Market makers dominate midday low-volume. Very different behavior 9:30-10:00 vs 11:30-2:00.</div>
+        </div>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card">
+          <h3>Trade against them</h3>
+          <ul>
+            <li>On earnings: trade the spread expansion, not the direction — first 30 seconds they're flat</li>
+            <li>Use limit orders to be on their side of the trade (you become the liquidity)</li>
+            <li>Fade the mirage: large bid/offer that keeps moving away = fade the direction</li>
+            <li>Trade when they're flat (gap opens, catalyst moments) — no competition for your fill</li>
+          </ul>
+        </div>
+        <div class="fg-card">
+          <h3>Trade with them</h3>
+          <ul>
+            <li>Post limits near NBBO to collect spread on low-vol, range-bound names</li>
+            <li>In your gap fade strategy: you're doing market-making logic at open</li>
+            <li>Use their quote behavior as a volatility signal: when spreads compress → mean reversion favored</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TREND -->
+    <div class="fg-panel" id="fg-tab-trend">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #f59e0b">
+        <h2>Trend following / Momentum algos <span class="fg-badge" style="background:#FAEEDA;color:#633806">Directional</span></h2>
+        <p>These algos buy strength and sell weakness. They include CTA trend programs (weekly-monthly signals), medium-frequency momentum funds (daily signals), and short-term momentum desks (intraday). They create self-reinforcing moves — and predictable exhaustion when they run out of fuel.</p>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card fg-card-accent" style="--accent:#f59e0b">
+          <h3>Signal types they use</h3>
+          <ul>
+            <li>Price momentum: 1mo, 3mo, 12mo returns (classic Jegadeesh-Titman)</li>
+            <li>Moving average crossovers: 50/200 day — massive AUM follows these</li>
+            <li>52-week high breakouts: systematic buy signal for many quant funds</li>
+            <li>Relative strength vs sector / vs SPY</li>
+            <li>Volume-confirmed breakouts (ATR expansion + volume surge)</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#f59e0b">
+          <h3>Behavior patterns</h3>
+          <ul>
+            <li>Acceleration near round numbers / prior highs (crowded signals)</li>
+            <li>Trend-following CTAs all trigger around same MA levels — creates cascades</li>
+            <li>Carry momentum to exhaustion then sharp reversal (blow-off top dynamics)</li>
+            <li>Underperform in choppy, mean-reverting regimes</li>
+            <li>Rebalance monthly — creates end-of-month flows in their large positions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>Detection + exploitation signals</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">52-week high cluster</span>When many names in a sector break to 52w highs simultaneously — CTA trigger confirmed. First 1-3 days: ride with them. Day 4-5+: watch for exhaustion as late momentum buyers run out.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">RSI divergence at extremes</span>Price making new highs while RSI &lt; prior high peak = momentum algo buying is thinning. Strong fade setup aligning with your mean reversion strategy.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Volume deceleration on trend</span>Strong trend but declining volume = fewer momentum algos entering. Distribution phase.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Gap-and-go pattern</span>Large gap up on high volume = momentum algos piling in at open. Your gap fade is the counter-trade — enter only when gap is overextended (&gt;2 ATR) with volume fading after first 15 min.</div>
+        </div>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card">
+          <h3>Trade against them (gap fade edge)</h3>
+          <ul>
+            <li>Fade overextended gap-ups after momentum algo exhaustion — first 15-30 min flush</li>
+            <li>Short blow-off tops: parabolic price + RSI &gt;80 + volume spike = crowded momentum long</li>
+            <li>Identify CTA trigger levels (20/50/200 MAs) and trade the reversal when price returns with momentum fading</li>
+          </ul>
+        </div>
+        <div class="fg-card">
+          <h3>Trade with them</h3>
+          <ul>
+            <li>Early-cycle breakout entry: buy before the CTA trigger level, sell to the momentum buying wave</li>
+            <li>Sector rotation: when CTAs start entering a sector (volume + RS signals), ride 2-4 weeks</li>
+            <li>Use 52w high scan as entry filter — confirms systematic buying pressure coming</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEAN REVERSION -->
+    <div class="fg-panel" id="fg-tab-mr">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #10b981">
+        <h2>Mean reversion / Stat arb <span class="fg-badge" style="background:#E1F5EE;color:#085041">Convergence</span></h2>
+        <p>Stat arb algos exploit temporary deviations from equilibrium — between pairs, ETF vs basket, sector spreads. They enforce price relationships constantly and are your closest algorithmic relatives. Understanding their mechanics directly improves your Z-score + RSI mean reversion strategy.</p>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card fg-card-accent" style="--accent:#10b981">
+          <h3>Core mechanisms</h3>
+          <ul>
+            <li>Pairs trading: two correlated stocks diverge → long the laggard, short the leader</li>
+            <li>ETF arbitrage: SPY vs basket of S&amp;P 500 components — kept razor-tight by HFT stat arb</li>
+            <li>Index rebalancing arb: trade anticipated index adds/deletes before they execute</li>
+            <li>Vol surface arb: options implied vol vs realized vol, across strikes/expirations</li>
+            <li>Cross-sectional momentum reversal: fade yesterday's winners, buy yesterday's losers</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#10b981">
+          <h3>Their edge and limits</h3>
+          <ul>
+            <li>Works best in low-vol, liquid, highly correlated environments</li>
+            <li>Gets crushed in trend regimes — correlations break down</li>
+            <li>Mean-reversion half-life varies: intraday (minutes) to multi-day</li>
+            <li>Crowding risk: many funds running similar signals → amplified drawdowns when all exit</li>
+            <li>The "crowded trade unwind" is a real risk — 2007 quant meltdown is the case study</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>How this maps to your Z-score + RSI strategy</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Z-score as deviation measure</span>You're measuring the same thing stat arb algos measure — standard deviations from mean. Your entry at Z &gt; 2.0 or RSI &lt; 30 aligns with institutional stat arb trigger zones.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">ETF creation/redemption pressure</span>When an ETF component sells off hard, ETF arb algos immediately buy the component and sell the ETF. This creates the reversion force that makes your mean reversion actually work.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Half-life calibration</span>Each stock has an empirical mean-reversion half-life. Fit an Ornstein-Uhlenbeck process to price returns. If half-life &lt; 7 days, your strategy is aligned with stat arb algos. If &gt; 15 days, you're fighting a trend — filter it out.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Cointegration check</span>Pairs that are cointegrated have a stable long-run relationship enforced by stat arb desks. Augmented Dickey-Fuller test in Python validates this.</div>
+        </div>
+      </div>
+      <div class="fg-card">
+        <h3>Practical edge: what stat arb algos tell you about your universe</h3>
+        <ul style="padding-left:1rem;line-height:2">
+          <li>High ETF AUM in your target sector = strong arb enforcement = higher mean-reversion reliability</li>
+          <li>Filter your universe to names in major indices (S&amp;P 500, Russell 1000) — more arb bots = faster reversion</li>
+          <li>Avoid small/mid caps with no ETF representation — reversion may not come</li>
+          <li>Sector spread blow-out on no fundamental news = stat arb opportunity window</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="fg-panel" id="fg-tab-news">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #f97316">
+        <h2>News / NLP / Sentiment algos <span class="fg-badge" style="background:#FAECE7;color:#4A1B0C">Reactive</span></h2>
+        <p>These algos parse earnings calls, press releases, SEC filings, Fed statements, Twitter/X, and news wires in milliseconds. They create the initial spike on any news event — and frequently overshoot, creating the fade opportunity your mean reversion strategy can exploit.</p>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card fg-card-accent" style="--accent:#f97316">
+          <h3>What they parse</h3>
+          <ul>
+            <li>Earnings: EPS beat/miss, revenue, guidance — keyword scoring in seconds</li>
+            <li>SEC filings: 8-K material events, insider buy/sell, 13F holdings changes</li>
+            <li>Fed communications: FOMC statements, Powell tone analysis</li>
+            <li>Press releases: M&amp;A, buybacks, executive changes, contracts</li>
+            <li>Social/alternative: Reddit WSB, StockTwits flow, dark web forums</li>
+            <li>Satellite/alt data: foot traffic, credit card spend, shipping data</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#f97316">
+          <h3>The overshoot problem</h3>
+          <ul>
+            <li>NLP algos react fast but have no sense of magnitude — they move size on any signal</li>
+            <li>First-mover advantage means they bid up/down before humans process meaning</li>
+            <li>Results in 3-8% intraday moves on news that warrants 1-2%</li>
+            <li>The overshoot resolves: 30-60 min post-news is the fade window</li>
+            <li>Exception: fundamentally significant news (acquisition, bankruptcy) — don't fade</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>Detecting and exploiting news algo activity</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Speed of initial move</span>If price moves &gt;2% in &lt;10 seconds on a print = news algo triggered. First 1-3 minutes is their trade. The fade starts at minute 5-15 as humans re-read the actual news.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Volume-vs-move ratio</span>Large price move on thin volume = news algo with no follow-through. Fragile move. Volume spike with continuation = institutional conviction joining — don't fade.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Pre-market gap from after-hours news</span>Earnings released after hours: news algos set the tone in thin AH market, often overshoot. At open, market makers and stat arb algos recalibrate — the first 15 min move is the correction. Your gap fade strategy is exactly this.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Sector sympathy moves</span>When one company in a sector gets hit on news, NLP algos often short the entire sector. If fundamentals don't warrant it, sector-wide selling = sector reversion opportunity within 1-2 days.</div>
+        </div>
+      </div>
+      <div class="fg-card">
+        <h3>Building a news algo counter-strategy</h3>
+        <ul style="padding-left:1rem;line-height:2">
+          <li>Calendar discipline: know earnings dates, FOMC dates, economic releases — pre-position or avoid</li>
+          <li>Quality filter: only fade moves where news is ambiguous or mixed (not clear beat/miss)</li>
+          <li>Time filter: wait 15-30 min after news before entering fade — let the first algo wave exhaust</li>
+          <li>Stop placement: above/below the news-algo spike high/low — if it keeps going, they were right</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- OPTIONS / GAMMA -->
+    <div class="fg-panel" id="fg-tab-gamma">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #534AB7">
+        <h2>Options flow / Gamma exposure <span class="fg-badge" style="background:#EEEDFE;color:#26215C">Options-driven</span></h2>
+        <p>Options market makers must delta-hedge their positions in the underlying stock. When large options positions expire or are rolled, the forced hedging creates predictable, powerful price movements. Understanding Gamma Exposure (GEX) lets you see forces on the stock that aren't visible in the equity tape alone.</p>
+      </div>
+      <div class="fg-grid2">
+        <div class="fg-card fg-card-accent" style="--accent:#534AB7">
+          <h3>Core concepts</h3>
+          <ul>
+            <li>Delta hedging: MM who sold a call must buy stock as price rises (amplifies moves)</li>
+            <li>Gamma: rate of delta change — high gamma near expiry means massive hedging flows</li>
+            <li>GEX (Gamma Exposure): net gamma of all open interest × 100 shares × price</li>
+            <li>Positive GEX: dealers are long gamma → they sell rallies, buy dips → price pinned</li>
+            <li>Negative GEX: dealers are short gamma → they buy rallies, sell dips → amplifies moves</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#534AB7">
+          <h3>Strike pinning &amp; gravity</h3>
+          <ul>
+            <li>Max gamma strike = price magnet near expiry (dealers hedging keeps price near it)</li>
+            <li>SPY/QQQ expiry dates: massive open interest creates pinning at key strikes</li>
+            <li>0DTE options (daily expirations) have created new intraday volatility patterns</li>
+            <li>Large call wall above price = resistance (dealers will sell stock as price rises to hedge)</li>
+            <li>Large put wall below price = support (dealers will buy stock as price falls to hedge)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>Actionable signals from options flow</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Unusual options activity (UOA)</span>Call sweep at ask 10x normal volume, far OTM, expiring in 2 weeks = directional bet by informed trader. Track via Unusual Whales, Market Chameleon, or Flow Algo.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">GEX flip level</span>The price where aggregate gamma flips from positive to negative is the vol expansion trigger. Below this level, expect larger intraday moves. Free data via SpotGamma or Squeeze Metrics.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">OpEx dynamics</span>Week of monthly OpEx: significant pinning as gamma dealers reduce hedges. Post-OpEx Monday: positions reset, often directional vol expansion. A recurring calendar edge.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Put/call ratio extremes</span>Equity P/C ratio &gt;1.2 = extreme fear, contrarian long signal. &lt;0.6 = complacency. Works best combined with price at technical support/resistance and VIX elevated.</div>
+        </div>
+      </div>
+      <div class="fg-card">
+        <h3>Practical integration for equity trading</h3>
+        <ul style="padding-left:1rem;line-height:2">
+          <li>Use max pain level as price target on mean-reversion trades near OpEx</li>
+          <li>Identify call walls as resistance zones — don't chase breakouts into them without UOA confirmation</li>
+          <li>Negative GEX environment = wider stops, faster targets, more aggressive trend following</li>
+          <li>Positive GEX environment = tighter ranges, favor mean reversion entries at extremes</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXECUTION -->
+    <div class="fg-panel" id="fg-tab-exec">
+      <div class="fg-hero" style="background:var(--fg-bg-secondary);border-left:3px solid #94a3b8">
+        <h2>Execution algos: VWAP, TWAP, IS <span class="fg-badge" style="background:#F1EFE8;color:#2C2C2A">Institutional</span></h2>
+        <p>When Goldman Sachs or Fidelity needs to buy 2 million shares of AAPL, they don't just hit the market. They use execution algos to minimize market impact. These algos are predictable and schedule-driven — their volume patterns create exploitable intraday structure.</p>
+      </div>
+      <div class="fg-grid3">
+        <div class="fg-card fg-card-accent" style="--accent:#94a3b8">
+          <h3>VWAP</h3>
+          <p style="font-size:13px;color:var(--fg-text-secondary);margin-bottom:6px">Volume-weighted average price</p>
+          <ul>
+            <li>Slices order proportional to historical volume curve</li>
+            <li>Heavy buying 9:30-10am, lunch lull, ramp into close</li>
+            <li>Benchmark: "did I beat VWAP?"</li>
+            <li>~40% of all institutional equity executions</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#94a3b8">
+          <h3>TWAP</h3>
+          <p style="font-size:13px;color:var(--fg-text-secondary);margin-bottom:6px">Time-weighted average price</p>
+          <ul>
+            <li>Equal order slices across time intervals</li>
+            <li>Creates very uniform, predictable volume bursts</li>
+            <li>Used for less liquid names where VWAP tracking is hard</li>
+            <li>Easiest execution algo to detect and front-run</li>
+          </ul>
+        </div>
+        <div class="fg-card fg-card-accent" style="--accent:#94a3b8">
+          <h3>Implementation shortfall</h3>
+          <p style="font-size:13px;color:var(--fg-text-secondary);margin-bottom:6px">Arrival price minimization</p>
+          <ul>
+            <li>Trades aggressively early (urgency), slows later</li>
+            <li>Adapts to intraday volatility dynamically</li>
+            <li>Most sophisticated — harder to predict</li>
+            <li>Used for high-alpha, time-sensitive trades</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fg-card" style="margin-bottom:12px">
+        <h3>How to exploit predictable execution algo flows</h3>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">VWAP volume curve front-running</span>Institutional VWAP buying concentrates 9:30-10:00am and 3:30-4:00pm. Stocks with known institutional accumulation tend to drift toward VWAP during these windows. Buy before the wave, exit into it.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Lunch volume drought</span>11:30am-1:30pm: VWAP algos slow down, HFT spreads widen, volume drops 40-60%. Mean reversion setups work better here — less directional pressure.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">MOC imbalance front-running</span>At 3:45pm, NYSE publishes Market-on-Close imbalance data. If a stock shows large buy imbalance, VWAP algos and momentum traders will push it up into 4pm. Tradeable 15-minute momentum setup with defined time exit.</div>
+        </div>
+        <div class="fg-signal-row">
+          <div class="fg-signal-icon">◎</div>
+          <div class="fg-signal-text"><span class="fg-signal-label">Consistent daily drift pattern</span>A stock that shows persistent intraday drift in one direction for 3+ days = institutional VWAP accumulation in progress. The trend has institutional backing — trade with it until it stops.</div>
+        </div>
+      </div>
+      <div class="fg-card">
+        <h3>Build your own VWAP-aware execution</h3>
+        <ul style="padding-left:1rem;line-height:2">
+          <li>Your IBKR ib_insync setup can submit orders with VWAP algo type natively — use it for your own larger entries</li>
+          <li>Compare your entry vs VWAP as a post-trade quality metric — this is what the pros use</li>
+          <li>Use NYSE MOC imbalance feed (free from NYSE at 3:45pm) as daily directional signal</li>
+          <li>Time your mean-reversion entries against VWAP — entry below VWAP on an oversold stock has institutional buying tailwind</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      <span>BigPic Capital — bigpicsolutions.com</span>
+      <span>Market Algo Field Guide — for educational and research purposes only</span>
+    </footer>
+
+  </div><!-- /#fg -->
+</div><!-- /.w-guide-frame -->
+
+
+<!-- ═══ SECTION 3: THREE PLAYS ═══ -->
+<div class="w-rule" style="margin-top:60px"></div>
+<section class="w-section" id="edge">
+  <div class="w-section-label">03 · Apply It</div>
+  <h2>Four plays to run this week</h2>
+  <p class="w-lead">The field guide gives you the theory. Here's how it connects to actual trades — four specific edges that emerge directly from understanding the ecosystem.</p>
+
+  <div class="w-plays">
+    <div class="w-play" style="--pc:#f59e0b">
+      <div class="w-play-num">Play 01 · News + Stat Arb</div>
+      <h4>The Gap Fade Dual Exploit</h4>
+      <p>When you fade an earnings gap, you're not making one bet — you're exploiting two algo types simultaneously. News algos create the overshoot. Stat arb and ETF arb forces enforce the reversion. You're not fighting the market. You're letting two algo systems do the work.</p>
+      <div class="w-play-edge">Wait 15–30 min post-open · Entry only when volume fades · Stop above the spike high</div>
+    </div>
+    <div class="w-play" style="--pc:#8b5cf6">
+      <div class="w-play-num">Play 02 · Options / Gamma</div>
+      <h4>Close the GEX Blind Spot</h4>
+      <p>Most traders manage OpEx week without knowing where the gamma walls are. The call wall above price is real dealer-driven resistance. The put wall below is real support. These aren't technical levels — they're mechanical forces from delta hedging. Integrate GEX before every OpEx trade.</p>
+      <div class="w-play-edge">Free data: SpotGamma · Check GEX flip level before entry · Use max pain as target near expiry</div>
+    </div>
+    <div class="w-play" style="--pc:#10b981">
+      <div class="w-play-num">Play 03 · Stat Arb Filter</div>
+      <h4>The Ornstein-Uhlenbeck Half-Life Test</h4>
+      <p>Before adding any name to your mean-reversion universe, fit an O-U process to its price returns and calculate the half-life. If the half-life is over 15 days, stat arb algos aren't active in that name — your reversion bet has no institutional enforcement behind it. Filter to under 7 days.</p>
+      <div class="w-play-edge">Python: statsmodels OU fit · half_life = -log(2)/theta · Under 7 days = aligned with stat arb</div>
+    </div>
+    <div class="w-play" style="--pc:#06b6d4">
+      <div class="w-play-num">Play 04 · Execution Algos</div>
+      <h4>The 3:45pm MOC Signal</h4>
+      <p>NYSE publishes Market-on-Close imbalance data at 3:45pm every day — free, public, and almost nobody uses it systematically. A large buy imbalance means VWAP algos and institutions are still buying into the close. That's a 15-minute momentum trade with a hard time exit at 4pm.</p>
+      <div class="w-play-edge">NYSE MOC feed · published 3:45pm ET · Exit by 4:00pm · Defined risk, defined time</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CLOSING ═══ -->
+<div class="w-rule"></div>
+<section class="w-section">
+  <div class="w-section-label">04 · Where to Go From Here</div>
+  <h2>The map is yours. Now use it.</h2>
+  <p class="w-lead">Understanding the ecosystem is the first step. The next is watching for these signatures in real trades — and over time, making it automatic.</p>
+  <p class="w-p">A few tools worth having in your setup: <strong>SpotGamma</strong> (free tier) for GEX levels before OpEx. <strong>NYSE MOC imbalance data</strong> — published daily at 3:45pm ET, no subscription needed. <strong>Unusual Whales or Market Chameleon</strong> for options flow. And for the builders: <strong>statsmodels</strong> in Python for O-U half-life fits, <strong>ib_insync</strong> for IBKR VWAP execution.</p>
+  <p class="w-p">The algos aren't going away. They're getting smarter, faster, and more numerous. But that's fine — because none of them have judgment. They can't read context, recognize regime shifts, or decide when the rules have changed. That's still you. The edge isn't beating them at their own game. It's knowing which game each one is playing — and positioning yourself accordingly.</p>
+</section>
+
+<!-- ═══ DISCLAIMER ═══ -->
+<div class="w-rule"></div>
+<footer class="w-disclaimer">
+  <p><strong>Educational disclaimer:</strong> All content on this page is for educational and research purposes only. Nothing here constitutes investment advice, a solicitation, or a recommendation to buy or sell any security. Markets involve substantial risk. Past performance does not guarantee future results. BigPic Capital is an independent research operation — not a registered investment adviser. Always do your own research and consult a licensed professional before making investment decisions.</p>
+  <p style="margin-top:8px">© 2026 BigPic Capital · bigpicsolutions.com · Published 2026-04-04</p>
+</footer>
+
+
+</div><!-- /.w-page -->
+
+<script>
+// Field guide tab switching (scoped to #fg)
+function fgSwitch(id) {
+  document.querySelectorAll('#fg .fg-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+  document.querySelectorAll('#fg .fg-panel').forEach(p => p.classList.toggle('active', p.id === 'fg-tab-' + id));
+}
+document.querySelectorAll('#fg .fg-tab').forEach(t => {
+  t.addEventListener('click', () => fgSwitch(t.dataset.tab));
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.w-play, .w-callout').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
