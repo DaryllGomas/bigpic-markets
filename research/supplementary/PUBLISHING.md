@@ -323,6 +323,7 @@ git push origin main
 
 | Article | Directory | Date | Thumbnail |
 |---------|-----------|------|-----------|
+| Know Your Predators — Algo Market Structure | `Algos/` | Apr 4, 2026 | `algos-thumb.jpg` |
 | The SaaSpocalypse Is Overdone | `SaaSpocalypse/` | Feb 26, 2026 | `saaspocalypse-thumb.jpg` |
 | The Crash, the Transition, and the Golden Age | `Citrini/` | Feb 23, 2026 | `citrini-thumb.jpg` |
 | Buy the Rumor, Sell the News | `Events-aapl-goog-nvda/` | Feb 23, 2026 | `events-thumb.jpg` |
