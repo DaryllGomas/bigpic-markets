@@ -1,0 +1,60 @@
+2026-04-03 11:30:02,110 INFO === Market Data Collection — 2026-04-03 ===
+2026-04-03 11:30:02,141 INFO ── Step 1: RSS Feeds ──
+2026-04-03 11:30:24,118 INFO RSS feeds: 222 headlines stored, 257 older than 24h skipped
+2026-04-03 11:30:24,119 INFO Step 1 complete: 22.0s (headlines=222)
+2026-04-03 11:30:24,119 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-03 11:30:24,122 INFO Opus analysis: sending 208 headlines to claude CLI...
+2026-04-03 11:31:46,744 INFO Opus analysis: 33 tickers, 15 movers, 11 themes from 208 headlines
+2026-04-03 11:31:46,745 INFO Step 2 complete: 82.6s (opus_tickers=33)
+2026-04-03 11:31:46,745 INFO ── Step 3: Schwab + External APIs ──
+2026-04-03 11:31:53,524 INFO Schwab quotes: 149 symbols
+2026-04-03 11:31:53,524 INFO Auto-detected movers (|change| > 3%): 30 symbols
+2026-04-03 11:31:53,526 INFO Technicals + SMA200 for 130 quoted symbols (sequential)
+2026-04-03 11:34:56,946 INFO Schwab technicals: 130/130 symbols
+2026-04-03 11:36:29,836 INFO SMA200: 130/130 symbols
+2026-04-03 11:36:30,273 INFO Schwab market context: collected
+2026-04-03 11:38:08,199 INFO Schwab earnings: 71 entries
+2026-04-03 11:38:08,218 INFO Economic calendar: 5 events
+2026-04-03 11:38:08,323 INFO CoinGecko: 2 coins
+2026-04-03 11:38:12,249 INFO Stooq: 3/3 symbols
+2026-04-03 11:39:00,605 WARNING FRED failed: The read operation timed out
+2026-04-03 11:39:02,708 INFO Yahoo backup: 1 symbols
+2026-04-03 11:39:02,708 INFO Step 3 complete: 436.0s (quotes=149, tech=130, sma200=130, earnings=71, econ=5, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-03 11:39:02,709 INFO ── Step 4: Validation + Retry ──
+2026-04-03 11:39:02,743 INFO ANOMALY: AMD price=217.14 avg=201.09 z=3.3
+2026-04-03 11:39:02,754 INFO ANOMALY: BAH price=83.20 avg=78.86 z=3.0
+2026-04-03 11:39:02,803 INFO ANOMALY: INTC price=50.25 avg=44.97 z=3.7
+2026-04-03 11:39:02,806 INFO ANOMALY: IRDM price=33.10 avg=26.15 z=4.2
+2026-04-03 11:39:02,819 INFO ANOMALY: LUNR price=23.92 avg=18.30 z=7.0
+2026-04-03 11:39:02,821 INFO ANOMALY: MNTS price=3.29 avg=4.12 z=-3.3
+2026-04-03 11:39:02,824 INFO ANOMALY: MRVL price=107.00 avg=91.98 z=3.1
+2026-04-03 11:39:02,882 INFO ANOMALY: SPIR price=15.67 avg=11.62 z=3.3
+2026-04-03 11:39:02,917 INFO Anomaly detection: 8 flagged
+2026-04-03 11:39:02,918 INFO Cross-validation: 0 discrepancies
+2026-04-03 11:39:02,923 INFO Retry check: 0 failures — nothing to retry
+2026-04-03 11:39:02,934 INFO Step 4 complete: 0.2s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-04-03 11:39:02,934 DEBUG   us_indices: OK
+2026-04-03 11:39:02,934 DEBUG   futures: OK
+2026-04-03 11:39:02,934 DEBUG   vix: OK
+2026-04-03 11:39:02,935 DEBUG   treasuries: OK
+2026-04-03 11:39:02,935 DEBUG   commodities: OK
+2026-04-03 11:39:02,935 DEBUG   crypto: OK
+2026-04-03 11:39:02,935 DEBUG   international: OK
+2026-04-03 11:39:02,935 DEBUG   gap_fills: OK
+2026-04-03 11:39:02,935 DEBUG   econ_calendar: OK
+2026-04-03 11:39:02,935 DEBUG   market_context: OK
+2026-04-03 11:39:02,935 DEBUG   opus_analysis: OK
+2026-04-03 11:39:02,936 DEBUG   rss: OK
+2026-04-03 11:39:02,936 DEBUG   watchlist_t1: OK
+2026-04-03 11:39:02,936 INFO ── Step 5: Generate Briefing ──
+2026-04-03 11:39:03,189 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-03.md (35457 bytes)
+2026-04-03 11:39:03,207 INFO Pruned 234 rows from headlines (older than 14 days)
+2026-04-03 11:39:03,209 INFO Pruned 117 rows from levels (older than 30 days)
+2026-04-03 11:39:03,209 INFO Pruned 20 rows from opus_tickers (older than 30 days)
+2026-04-03 11:39:03,209 INFO Pruned 10 rows from opus_movers (older than 30 days)
+2026-04-03 11:39:03,210 INFO Pruned 12 rows from opus_themes (older than 30 days)
+2026-04-03 11:39:03,210 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-04-03 11:39:03,211 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-04-03 11:39:03,211 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-03 11:39:03,333 INFO Cleanup complete
+2026-04-03 11:39:03,334 INFO === Collection complete: 540.8s total, completeness=100%, exit_code=0 ===
