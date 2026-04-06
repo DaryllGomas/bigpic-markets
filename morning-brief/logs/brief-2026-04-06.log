@@ -1,0 +1,77 @@
+[2026-04-06 11:30:01] === Morning Brief Started ===
+[2026-04-06 11:30:01] Date: Monday, 2026-04-06
+[2026-04-06 11:30:01] Output: morning-brief/2026-04/2026-04-06_Mon.md + 2026-04-06_Mon.html
+[2026-04-06 11:30:01] All dependencies verified
+[2026-04-06 11:30:01] Running data collection pipeline...
+2026-04-06 11:30:01,427 INFO === Market Data Collection — 2026-04-06 ===
+2026-04-06 11:30:01,460 INFO ── Step 1: RSS Feeds ──
+2026-04-06 11:30:26,949 INFO RSS feeds: 137 headlines stored, 317 older than 24h skipped
+2026-04-06 11:30:26,949 INFO Step 1 complete: 25.5s (headlines=137)
+2026-04-06 11:30:26,949 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-06 11:30:26,952 INFO Opus analysis: sending 125 headlines to claude CLI...
+2026-04-06 11:31:40,953 INFO Opus analysis: 27 tickers, 12 movers, 10 themes from 125 headlines
+2026-04-06 11:31:40,953 INFO Step 2 complete: 74.0s (opus_tickers=27)
+2026-04-06 11:31:40,953 INFO ── Step 3: Schwab + External APIs ──
+2026-04-06 11:31:47,782 INFO Schwab quotes: 144 symbols
+2026-04-06 11:31:47,783 INFO Auto-detected movers (|change| > 3%): 5 symbols
+2026-04-06 11:31:47,784 INFO Technicals + SMA200 for 125 quoted symbols (sequential)
+2026-04-06 11:34:38,568 INFO Schwab technicals: 125/125 symbols
+2026-04-06 11:36:21,777 INFO SMA200: 125/125 symbols
+2026-04-06 11:36:22,195 INFO Schwab market context: collected
+2026-04-06 11:38:05,255 INFO Schwab earnings: 71 entries
+2026-04-06 11:38:05,269 INFO Economic calendar: 1 events
+2026-04-06 11:38:05,366 INFO CoinGecko: 2 coins
+2026-04-06 11:38:09,463 INFO Stooq: 3/3 symbols
+2026-04-06 11:38:57,760 WARNING FRED failed: The read operation timed out
+2026-04-06 11:38:59,883 INFO Yahoo backup: 1 symbols
+2026-04-06 11:38:59,883 INFO Step 3 complete: 438.9s (quotes=144, tech=125, sma200=125, earnings=71, econ=1, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-06 11:38:59,884 INFO ── Step 4: Validation + Retry ──
+2026-04-06 11:38:59,983 INFO ANOMALY: INTC price=51.11 avg=45.24 z=3.2
+2026-04-06 11:38:59,998 INFO ANOMALY: LUNR price=24.09 avg=18.63 z=3.7
+2026-04-06 11:39:00,095 INFO Anomaly detection: 2 flagged
+2026-04-06 11:39:00,095 INFO Cross-validation: 0 discrepancies
+2026-04-06 11:39:00,101 INFO Retry check: 0 failures — nothing to retry
+2026-04-06 11:39:00,112 INFO Step 4 complete: 0.2s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-04-06 11:39:00,114 INFO ── Step 5: Generate Briefing ──
+2026-04-06 11:39:00,362 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-06.md (26892 bytes)
+2026-04-06 11:39:00,378 INFO Pruned 232 rows from headlines (older than 14 days)
+2026-04-06 11:39:00,380 INFO Pruned 379 rows from levels (older than 30 days)
+2026-04-06 11:39:00,381 INFO Pruned 103 rows from opus_tickers (older than 30 days)
+2026-04-06 11:39:00,382 INFO Pruned 46 rows from opus_movers (older than 30 days)
+2026-04-06 11:39:00,382 INFO Pruned 34 rows from opus_themes (older than 30 days)
+2026-04-06 11:39:00,383 INFO Pruned 8 rows from opus_econ_events (older than 30 days)
+2026-04-06 11:39:00,383 INFO Pruned 8 rows from opus_fed_signals (older than 30 days)
+2026-04-06 11:39:00,384 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-04-06 11:39:00,509 INFO Cleanup complete
+2026-04-06 11:39:00,510 INFO === Collection complete: 538.7s total, completeness=100%, exit_code=0 ===
+[2026-04-06 11:39:00] Data collection complete — briefing file ready
+[2026-04-06 11:39:00] Found 9 research files (sector theses + structural calendar)
+[2026-04-06 11:39:00] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-06_Mon.md`.
+
+**Summary of key themes:**
+- **Cautiously risk-on** open driven by Iran ceasefire talks and cooler economic data, but VIX at 25+ and gold at $4,714 signal persistent hedging
+- **ISM Services PMI at 10:00 AM ET** is the sole high-impact release (consensus 54.8 vs prior 56.1)
+- **Watchlist movers:** MU +3.33% (Tier 2), KTOS +4.26% (Tier 2), ANET rating upgrade (Tier 1), LUNR anomalous z-score 3.7
+- **Oversold opportunities:** CEG (RSI 37, -16% from SMA200), ISRG (RSI 33), ZS (RSI 37, -45% from SMA200), LEU (RSI 41, -26% from SMA200), FLNC (RSI 36)
+- **Catalysts ahead:** TSM earnings Apr 16, defense earnings week of Apr 21, FOMC Apr 29, Artemis II imminent
+- **Risk watch:** Iran escalation, CPI later this week, WMT consumer warning, oil at $110
+[2026-04-06 11:41:37] Claude [report (attempt 1)] finished successfully
+[2026-04-06 11:41:37] Report attempt 1 succeeded: 13346 bytes
+[2026-04-06 11:41:37] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-06_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 91 symbols...
+  Got quotes for 78 symbols
+
+--- Database cross-checks (market_date=2026-04-06) ---
+  1 database corrections:
+    FABRICATION: ISM SERVICES PMI actual 'Pending — Scheduled for 10:00 AM ET' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: ISM SERVICES PMI actual 'Pending — Scheduled for 10:00 AM ET' → 'Pending' (not released)
+
+  WARNING: corrections identified but could not be applied
+=== Fact-check complete ===
+[2026-04-06 11:41:50] Running Claude [html-publish] (timeout: 900s)...
