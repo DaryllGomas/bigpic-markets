@@ -1,0 +1,82 @@
+[2026-04-07 11:30:01] === Morning Brief Started ===
+[2026-04-07 11:30:01] Date: Tuesday, 2026-04-07
+[2026-04-07 11:30:01] Output: morning-brief/2026-04/2026-04-07_Tue.md + 2026-04-07_Tue.html
+[2026-04-07 11:30:01] All dependencies verified
+[2026-04-07 11:30:01] Running data collection pipeline...
+2026-04-07 11:30:02,065 INFO === Market Data Collection — 2026-04-07 ===
+2026-04-07 11:30:02,097 INFO ── Step 1: RSS Feeds ──
+2026-04-07 11:30:29,505 INFO RSS feeds: 213 headlines stored, 256 older than 24h skipped
+2026-04-07 11:30:29,505 INFO Step 1 complete: 27.4s (headlines=213)
+2026-04-07 11:30:29,505 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-07 11:30:29,508 INFO Opus analysis: sending 207 headlines to claude CLI...
+2026-04-07 11:32:09,470 INFO Opus analysis: 37 tickers, 11 movers, 10 themes from 207 headlines
+2026-04-07 11:32:09,471 INFO Step 2 complete: 100.0s (opus_tickers=37)
+2026-04-07 11:32:09,471 INFO ── Step 3: Schwab + External APIs ──
+2026-04-07 11:32:16,074 INFO Schwab quotes: 147 symbols
+2026-04-07 11:32:16,075 INFO Auto-detected movers (|change| > 3%): 6 symbols
+2026-04-07 11:32:16,076 INFO Technicals + SMA200 for 128 quoted symbols (sequential)
+2026-04-07 11:35:13,971 INFO Schwab technicals: 128/128 symbols
+2026-04-07 11:37:00,007 INFO SMA200: 128/128 symbols
+2026-04-07 11:37:00,321 INFO Schwab market context: collected
+2026-04-07 11:39:16,199 INFO Schwab earnings: 71 entries
+2026-04-07 11:39:16,216 INFO Economic calendar: 9 events
+2026-04-07 11:39:16,379 INFO CoinGecko: 2 coins
+2026-04-07 11:39:20,318 INFO Stooq: 3/3 symbols
+2026-04-07 11:40:08,646 WARNING FRED failed: The read operation timed out
+2026-04-07 11:40:10,808 INFO Yahoo backup: 1 symbols
+2026-04-07 11:40:10,808 INFO Step 3 complete: 481.3s (quotes=147, tech=128, sma200=128, earnings=71, econ=9, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-07 11:40:10,808 INFO ── Step 4: Validation + Retry ──
+2026-04-07 11:40:11,014 INFO Anomaly detection: 0 flagged
+2026-04-07 11:40:11,015 INFO Cross-validation: 0 discrepancies
+2026-04-07 11:40:11,020 INFO Retry check: 0 failures — nothing to retry
+2026-04-07 11:40:11,033 INFO Step 4 complete: 0.2s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-04-07 11:40:11,035 INFO ── Step 5: Generate Briefing ──
+2026-04-07 11:40:11,280 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-07.md (31532 bytes)
+2026-04-07 11:40:11,295 INFO Pruned 148 rows from headlines (older than 14 days)
+2026-04-07 11:40:11,422 INFO Cleanup complete
+2026-04-07 11:40:11,423 INFO === Collection complete: 608.9s total, completeness=100%, exit_code=0 ===
+[2026-04-07 11:40:11] Data collection complete — briefing file ready
+[2026-04-07 11:40:11] Found 9 research files (sector theses + structural calendar)
+[2026-04-07 11:40:11] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-07_Tue.md`.
+
+**Key highlights:**
+- **HEAVY** event load — Trump's Hormuz Strait deadline tonight is the dominant binary risk event
+- **AVGO +3.35%** is the standout watchlist move on the Anthropic/Google TPU deal (3.5 GW, Anthropic ARR past $30B)
+- **VIX surging to 25.53** (+5.63%) — elevated and accelerating
+- **WTI crude at $115** (+$5 from yesterday) — Hormuz risk pricing in
+- **Artemis II** is live — crew eclipsed farthest human spaceflight record
+- **Deeply oversold Tier 1 names:** ISRG (RSI 33), FLNC (RSI 35), CEG (RSI 38), ZS (RSI 38, -44% from SMA200)
+- **Bias: Bearish-to-neutral** with three-scenario playbook for the Hormuz deadline
+- Included full sector snapshot, catalyst calendar, and cybersecurity threat intel
+[2026-04-07 11:44:00] Claude [report (attempt 1)] finished successfully
+[2026-04-07 11:44:00] Report attempt 1 succeeded: 19472 bytes
+[2026-04-07 11:44:00] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-07_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 102 symbols...
+  Got quotes for 72 symbols
+
+--- Database cross-checks (market_date=2026-04-07) ---
+  7 database corrections:
+    FABRICATION: GOOG: CLOUD NEXT 2026 actual 'In progress — Watch for AI infrastructure announcements; AVGO/Anthropic deal context' → 'Pending' (not released)
+    FABRICATION: CORE DURABLE GOODS ORDERS M/M actual 'Pending — Slight improvement expected' → 'Pending' (not released)
+    FABRICATION: DURABLE GOODS ORDERS M/M actual 'Pending — Headline expected negative on Boeing/defense orders' → 'Pending' (not released)
+    FABRICATION: RCM/TIPP ECONOMIC OPTIMISM actual 'Pending — Below 50 = pessimism territory' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER GOOLSBEE SPEAKS actual 'Scheduled — Watch for Iran war/inflation commentary' → 'Pending' (not released)
+    FABRICATION: API WEEKLY STATISTICAL BULLETIN actual 'Pending — Key for oil direction given Hormuz deadline' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER JEFFERSON SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  7 total corrections needed:
+    FABRICATION: GOOG: CLOUD NEXT 2026 actual 'In progress — Watch for AI infrastructure announcements; AVGO/Anthropic deal context' → 'Pending' (not released)
+    FABRICATION: CORE DURABLE GOODS ORDERS M/M actual 'Pending — Slight improvement expected' → 'Pending' (not released)
+    FABRICATION: DURABLE GOODS ORDERS M/M actual 'Pending — Headline expected negative on Boeing/defense orders' → 'Pending' (not released)
+    FABRICATION: RCM/TIPP ECONOMIC OPTIMISM actual 'Pending — Below 50 = pessimism territory' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER GOOLSBEE SPEAKS actual 'Scheduled — Watch for Iran war/inflation commentary' → 'Pending' (not released)
+    FABRICATION: API WEEKLY STATISTICAL BULLETIN actual 'Pending — Key for oil direction given Hormuz deadline' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER JEFFERSON SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  1 corrections written to 2026-04-07_Tue.md
+=== Fact-check complete ===
+[2026-04-07 11:44:15] Running Claude [html-publish] (timeout: 900s)...
