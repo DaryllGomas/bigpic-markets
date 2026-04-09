@@ -1,0 +1,90 @@
+[2026-04-09 11:30:01] === Morning Brief Started ===
+[2026-04-09 11:30:01] Date: Thursday, 2026-04-09
+[2026-04-09 11:30:01] Output: morning-brief/2026-04/2026-04-09_Thu.md + 2026-04-09_Thu.html
+[2026-04-09 11:30:01] All dependencies verified
+[2026-04-09 11:30:01] Running data collection pipeline...
+2026-04-09 11:30:02,074 INFO === Market Data Collection — 2026-04-09 ===
+2026-04-09 11:30:02,108 INFO ── Step 1: RSS Feeds ──
+2026-04-09 11:30:25,368 INFO RSS feeds: 247 headlines stored, 232 older than 24h skipped
+2026-04-09 11:30:25,368 INFO Step 1 complete: 23.3s (headlines=247)
+2026-04-09 11:30:25,369 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-09 11:30:25,371 INFO Opus analysis: sending 231 headlines to claude CLI...
+2026-04-09 11:32:45,297 INFO Opus analysis: 30 tickers, 11 movers, 12 themes from 231 headlines
+2026-04-09 11:32:45,297 INFO Step 2 complete: 139.9s (opus_tickers=30)
+2026-04-09 11:32:45,297 INFO ── Step 3: Schwab + External APIs ──
+2026-04-09 11:32:51,881 INFO Schwab quotes: 145 symbols
+2026-04-09 11:32:51,882 INFO Auto-detected movers (|change| > 3%): 4 symbols
+2026-04-09 11:32:51,883 INFO Technicals + SMA200 for 126 quoted symbols (sequential)
+2026-04-09 11:35:48,067 INFO Schwab technicals: 126/126 symbols
+2026-04-09 11:37:17,376 INFO SMA200: 125/126 symbols
+2026-04-09 11:37:17,747 INFO Schwab market context: collected
+2026-04-09 11:39:30,497 INFO Schwab earnings: 71 entries
+2026-04-09 11:39:30,512 INFO Economic calendar: 12 events
+2026-04-09 11:39:30,611 INFO CoinGecko: 2 coins
+2026-04-09 11:39:34,456 INFO Stooq: 3/3 symbols
+2026-04-09 11:40:22,780 WARNING FRED failed: The read operation timed out
+2026-04-09 11:40:24,969 INFO Yahoo backup: 1 symbols
+2026-04-09 11:40:24,970 INFO Step 3 complete: 459.7s (quotes=145, tech=126, sma200=125, earnings=71, econ=12, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-09 11:40:24,970 INFO ── Step 4: Validation + Retry ──
+2026-04-09 11:40:24,983 INFO ANOMALY: $RUT price=2620.46 avg=2498.00 z=3.5
+2026-04-09 11:40:25,020 INFO ANOMALY: BWXT price=230.26 avg=206.75 z=3.3
+2026-04-09 11:40:25,034 INFO ANOMALY: CRWV price=95.35 avg=81.18 z=3.2
+2026-04-09 11:40:25,056 INFO ANOMALY: GLW price=165.60 avg=136.54 z=3.6
+2026-04-09 11:40:25,069 INFO ANOMALY: INTC price=57.80 avg=46.19 z=3.5
+2026-04-09 11:40:25,133 INFO ANOMALY: ROK price=385.84 avg=359.66 z=3.3
+2026-04-09 11:40:25,147 INFO ANOMALY: SPIR price=20.58 avg=12.79 z=4.3
+2026-04-09 11:40:25,162 INFO ANOMALY: TER price=355.03 avg=302.52 z=3.7
+2026-04-09 11:40:25,189 INFO Anomaly detection: 8 flagged
+2026-04-09 11:40:25,189 INFO Cross-validation: 0 discrepancies
+2026-04-09 11:40:25,195 INFO Retry check: 0 failures — nothing to retry
+2026-04-09 11:40:25,207 INFO Step 4 complete: 0.2s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-04-09 11:40:25,210 INFO ── Step 5: Generate Briefing ──
+2026-04-09 11:40:25,466 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-09.md (34747 bytes)
+2026-04-09 11:40:25,480 INFO Pruned 241 rows from headlines (older than 14 days)
+2026-04-09 11:40:25,482 INFO Pruned 118 rows from levels (older than 30 days)
+2026-04-09 11:40:25,482 INFO Pruned 18 rows from opus_tickers (older than 30 days)
+2026-04-09 11:40:25,483 INFO Pruned 7 rows from opus_movers (older than 30 days)
+2026-04-09 11:40:25,483 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-04-09 11:40:25,484 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-04-09 11:40:25,484 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-09 11:40:25,619 INFO Cleanup complete
+2026-04-09 11:40:25,620 INFO === Collection complete: 623.1s total, completeness=100%, exit_code=0 ===
+[2026-04-09 11:40:25] Data collection complete — briefing file ready
+[2026-04-09 11:40:25] Found 9 research files (sector theses + structural calendar)
+[2026-04-09 11:40:25] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-09_Thu.md`.
+
+**Summary of today's HEAVY load:**
+- **Main event:** 8:30 ET data dump — Core PCE (0.4% consensus), Final GDP (0.7%), Jobless Claims (210K). Binary setup: soft = relief bid resumes; hot = stagflation fear spike.
+- **Oil is the story.** WTI +5.3% back to $99.42 as ceasefire frays within 48 hours. Hormuz normalization timeline indefinite. Goldman warning $115 by year-end.
+- **Watchlist flags:** CRWV +7.26% (Meta $21B), UEC Burke Hollow production start, LMT $105M GPS contract. ZS/TSLA/FLNC approaching oversold. No Tier 1 names >3%.
+- **Bias:** Cautious/data-dependent. VIX elevated at 21.5, risk appetite fading. Earnings season approaching — TSM Apr 16, defense names Apr 21-23.
+[2026-04-09 11:43:11] Claude [report (attempt 1)] finished successfully
+[2026-04-09 11:43:11] Report attempt 1 succeeded: 15056 bytes
+[2026-04-09 11:43:11] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-09_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 104 symbols...
+  Got quotes for 76 symbols
+
+--- Database cross-checks (market_date=2026-04-09) ---
+  6 database corrections:
+    FABRICATION: CORE PCE PRICE INDEX M/M actual 'Pending — Key inflation gauge; hot print would spike stagflation fears with oil near $100' → 'Pending' (not released)
+    FABRICATION: FINAL GDP Q/Q actual 'Pending — Revision risk; confirms slowdown narrative' → 'Pending' (not released)
+    FABRICATION: FINAL GDP PRICE INDEX Q/Q actual 'Pending — GDP deflator adds to inflation picture' → 'Pending' (not released)
+    FABRICATION: UNEMPLOYMENT CLAIMS actual 'Pending — Consensus expects slight uptick; labor market resilience test' → 'Pending' (not released)
+    FABRICATION: PERSONAL INCOME M/M actual 'Pending — Income growth slowing' → 'Pending' (not released)
+    FABRICATION: PERSONAL SPENDING M/M actual 'Pending — Consumer spending expected to accelerate' → 'Pending' (not released)
+
+  6 total corrections needed:
+    FABRICATION: CORE PCE PRICE INDEX M/M actual 'Pending — Key inflation gauge; hot print would spike stagflation fears with oil near $100' → 'Pending' (not released)
+    FABRICATION: FINAL GDP Q/Q actual 'Pending — Revision risk; confirms slowdown narrative' → 'Pending' (not released)
+    FABRICATION: FINAL GDP PRICE INDEX Q/Q actual 'Pending — GDP deflator adds to inflation picture' → 'Pending' (not released)
+    FABRICATION: UNEMPLOYMENT CLAIMS actual 'Pending — Consensus expects slight uptick; labor market resilience test' → 'Pending' (not released)
+    FABRICATION: PERSONAL INCOME M/M actual 'Pending — Income growth slowing' → 'Pending' (not released)
+    FABRICATION: PERSONAL SPENDING M/M actual 'Pending — Consumer spending expected to accelerate' → 'Pending' (not released)
+
+  WARNING: corrections identified but could not be applied
+=== Fact-check complete ===
+[2026-04-09 11:43:26] Running Claude [html-publish] (timeout: 900s)...
