@@ -1,0 +1,72 @@
+[2026-04-12 23:00:01] === Eagle Eye W15 Started ===
+[2026-04-12 23:00:01] Week ending: 2026-04-10
+[2026-04-12 23:00:01] Output: eagle-eye/W15_2026-04-12/
+[2026-04-12 23:00:01] All dependencies verified
+[2026-04-12 23:00:01] Found 9 research files (sector theses + structural calendar)
+[2026-04-12 23:00:01] Collecting economic calendar for 2026-04-13 to 2026-04-17...
+23:00:01 [INFO] Collecting economic calendar: 2026-04-13 to 2026-04-17
+23:00:01 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:01 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:01 [INFO]   API returned 35 upcoming events
+23:00:01 [INFO]   Filtered to 35 events in range
+23:00:01 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W15_2026-04-12/next_week_calendar.md (35 events, 5 absences, confidence=high)
+[2026-04-12 23:00:01] Calendar collected (full confidence)
+[2026-04-12 23:00:01] Running Claude [research] (timeout: 3600s)...
+Eagle Eye W15 complete. All files written to `/home/bigpic/projects/bigpic-markets/eagle-eye/W15_2026-04-12/`:
+
+| File | Description |
+|------|-------------|
+| `01_equities_sectors.md` | Indices, sectors, earnings, breadth, thesis watchlist |
+| `02_rates_credit_fed.md` | Treasuries, curve, FOMC minutes, credit spreads, liquidity |
+| `03_commodities_forex.md` | Oil, metals, uranium, DXY, major pairs, EM FX |
+| `04_crypto_alternative.md` | BTC/ETH current prices, ETF flows, regulation, MSTR |
+| `VERIFICATION.md` | Cross-check results — 1 correction (FedWatch), 3 minor flags |
+| `EAGLE_EYE.md` | Final compiled report |
+| `next_week_calendar.md` | Economic calendar (pre-existing, for stamp-calendar.py) |
+
+**Key verification correction incorporated**: Report 3 erroneously stated "3 cuts (75bp) priced by year-end" — corrected to Report 2's authoritative FedWatch data showing ~65% probability of one cut, with hike scenarios at ~13%.
+
+**The lede**: Hormuz blockade dominates everything. The ceasefire rally (+3.6% SPX) is dead. Monday opens risk-off with oil back toward $102, S&P futures -1%, and the "transitory energy shock" narrative demolished. FOMC hawkish pivot + sustained $100+ oil = rate cuts nearly impossible, hike talk intensifying.
+[2026-04-12 23:15:15] Claude [research] finished successfully
+[2026-04-12 23:15:15] EAGLE_EYE.md generated: 27549 bytes
+[2026-04-12 23:15:15] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 5 absences injected into Week Ahead
+[2026-04-12 23:15:15] Calendar stamp complete
+[2026-04-12 23:15:15] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-04-12 23:15:15] Running Claude [html-build-1] (timeout: 900s)...
+Part 1 of the W15 Eagle Eye report is built at `/home/bigpic/projects/bigpic-markets/eagle-eye/W15_2026-04-12/report.html`.
+
+**What's included:**
+
+1. **Full page structure** — `<!DOCTYPE html>`, `<head>` with all CSS (matching BigPic theme exactly), all JS (counters, bar chart, filters, sources, scroll reveal, yield tooltips)
+2. **Fixed nav** — back-arrow linking to `../index.html`, section jump links for all 10 sections
+3. **Hero** — "Ceasefire Dead, Blockade On" with crisis badge, red radial glow, subtitle summary
+4. **Market Scorecard** — 15 animated counter cells (S&P, Nasdaq, Dow, R2K, VIX, yields, oil, gold, silver, DXY, BTC, ETH) + full detailed table with Friday close vs. Sunday proxy columns
+5. **Weekend & Breaking Developments** — Hormuz blockade alert card with timeline visualization, 6-cell futures proxy grid, Easter Monday liquidity warning
+6. **This Week's Take** — Three take cards: ceasefire collapse, hawkish Fed pivot (with FedWatch signal), earnings sideshow
+7. **Sector Heatmap** — Animated bar chart (10 sectors) + interactive heatmap grid with Monday impact indicators and tooltips + reshuffling outlook card
+8. **Fed & Rates Outlook** — SVG yield curve (2Y/5Y/10Y/30Y plotted), rate expectations grid (FedWatch, minutes, CPI, liquidity), yield changes table, credit spread cards (IG/HY/Monday risk), liquidity conditions
+9. **`<!-- CONTINUE HERE -->`** marker on its own line after rates
+10. **Footer** + closing `</body></html>` after the marker
+
+Key styling details: `align-items: stretch` on `.bar-chart`, all CSS vars match spec, Space Grotesk + Newsreader fonts loaded. Ready for Part 2 to fill in watchlist, commodities, crypto, week ahead, positioning, and sources.
+[2026-04-12 23:22:40] Claude [html-build-1] finished successfully
+[2026-04-12 23:22:40] report.html after Part 1: 59776 bytes
+[2026-04-12 23:22:40] Running Claude [html-build-2] (timeout: 900s)...
+Done. The `<!-- CONTINUE HERE -->` marker has been replaced with all 6 remaining sections:
+
+1. **Thesis Watchlist Tracker** — 9 thesis groups (AI, Nuclear, Space/Defense, Cyber, Minerals, Storage, Quantum, Robotics) as filterable card-tables with tier badges and weekly deltas. Filter buttons wire into the existing `initFilters()` JS via `data-thesis` attributes.
+
+2. **Commodities & Forex Snapshot** — Energy alert card with futures grid (Brent, WTI, NatGas, OPEC+), metals cards (Gold, Silver, Copper, Uranium), and FX table with Monday reversal risk callout.
+
+3. **Crypto Snapshot** — BTC/ETH/Total/Stablecoin price cards, ETF flow cards, regulation + institutional detail cards, and weekend selloff alert.
+
+4. **The Week Ahead** — 5-column calendar grid (Mon-Fri) with color-coded events (data/cyan, earnings/amber, fed/violet, catalyst/rose, geopolitical/red), day-by-day commentary cards, earnings-to-watch + notable absences grid.
+
+5. **Positioning & Thesis Update** — Risk radar (6 items with critical/high/medium levels), beneficiaries conviction grid (Nuclear, Defense, Energy, Cyber, Gold), headwinds conviction grid (Storage, Quantum, Consumer, Pre-revenue), and 5 numbered actionable takeaways.
+
+6. **Sources** — Collapsible toggle wired to existing `initSources()` JS via `#sourcesToggle`/`#sourcesContent` IDs. All 40+ sources organized by category (Equities, Rates, Commodities, Crypto).
+[2026-04-12 23:28:41] Claude [html-build-2] finished successfully
+[2026-04-12 23:28:41] report.html after Part 2: 116732 bytes
+[2026-04-12 23:28:41] Running Claude [html-publish] (timeout: 300s)...
