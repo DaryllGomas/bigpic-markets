@@ -1,0 +1,74 @@
+[2026-04-14 11:30:01] === Morning Brief Started ===
+[2026-04-14 11:30:01] Date: Tuesday, 2026-04-14
+[2026-04-14 11:30:01] Output: morning-brief/2026-04/2026-04-14_Tue.md + 2026-04-14_Tue.html
+[2026-04-14 11:30:01] All dependencies verified
+[2026-04-14 11:30:01] Running data collection pipeline...
+2026-04-14 11:30:01,824 INFO === Market Data Collection — 2026-04-14 ===
+2026-04-14 11:30:01,854 INFO ── Step 1: RSS Feeds ──
+2026-04-14 11:30:25,740 INFO RSS feeds: 257 headlines stored, 222 older than 24h skipped
+2026-04-14 11:30:25,740 INFO Step 1 complete: 23.9s (headlines=257)
+2026-04-14 11:30:25,740 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-14 11:30:25,742 INFO Opus analysis: sending 243 headlines to claude CLI...
+2026-04-14 11:32:10,653 INFO Opus analysis: 30 tickers, 14 movers, 13 themes from 243 headlines
+2026-04-14 11:32:10,654 INFO Step 2 complete: 104.9s (opus_tickers=30)
+2026-04-14 11:32:10,654 INFO ── Step 3: Schwab + External APIs ──
+2026-04-14 11:32:17,134 INFO Schwab quotes: 146 symbols
+2026-04-14 11:32:17,135 INFO Auto-detected movers (|change| > 3%): 20 symbols
+2026-04-14 11:32:17,136 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-04-14 11:35:12,141 INFO Schwab technicals: 127/127 symbols
+2026-04-14 11:36:56,738 INFO SMA200: 126/127 symbols
+2026-04-14 11:36:57,145 INFO Schwab market context: collected
+2026-04-14 11:38:33,133 INFO Schwab earnings: 70 entries
+2026-04-14 11:38:33,148 INFO Economic calendar: 11 events
+2026-04-14 11:38:33,253 INFO CoinGecko: 2 coins
+2026-04-14 11:38:37,158 INFO Stooq: 3/3 symbols
+2026-04-14 11:39:25,481 WARNING FRED failed: The read operation timed out
+2026-04-14 11:39:27,653 INFO Yahoo backup: 1 symbols
+2026-04-14 11:39:27,653 INFO Step 3 complete: 437.0s (quotes=146, tech=127, sma200=126, earnings=70, econ=11, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-14 11:39:27,654 INFO ── Step 4: Validation + Retry ──
+2026-04-14 11:39:27,690 INFO ANOMALY: ASML price=1528.24 avg=1357.90 z=3.1
+2026-04-14 11:39:27,693 INFO ANOMALY: AVGO price=379.58 avg=322.06 z=3.0
+2026-04-14 11:39:27,699 INFO ANOMALY: BE price=202.51 avg=144.71 z=4.2
+2026-04-14 11:39:27,720 INFO ANOMALY: CRWV price=115.65 avg=83.63 z=4.1
+2026-04-14 11:39:27,772 INFO ANOMALY: MNTS price=5.70 avg=3.89 z=4.4
+2026-04-14 11:39:27,817 INFO ANOMALY: ROK price=408.78 avg=363.73 z=3.2
+2026-04-14 11:39:27,850 INFO ANOMALY: UUP price=27.27 avg=27.72 z=-3.0
+2026-04-14 11:39:27,853 INFO ANOMALY: VRT price=309.50 avg=263.62 z=3.1
+2026-04-14 11:39:27,867 INFO Anomaly detection: 8 flagged
+2026-04-14 11:39:27,867 INFO Cross-validation: 0 discrepancies
+2026-04-14 11:39:27,873 INFO Retry check: 0 failures — nothing to retry
+2026-04-14 11:39:27,886 INFO Step 4 complete: 0.2s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-04-14 11:39:27,888 INFO ── Step 5: Generate Briefing ──
+2026-04-14 11:39:28,136 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-14.md (35353 bytes)
+2026-04-14 11:39:28,150 INFO Pruned 145 rows from headlines (older than 14 days)
+2026-04-14 11:39:28,292 INFO Cleanup complete
+2026-04-14 11:39:28,293 INFO === Collection complete: 566.0s total, completeness=100%, exit_code=0 ===
+[2026-04-14 11:39:28] Data collection complete — briefing file ready
+[2026-04-14 11:39:28] Found 9 research files (sector theses + structural calendar)
+[2026-04-14 11:39:28] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-14_Tue.md`.
+
+Key highlights:
+- **HEAVY** event load — PPI at 8:30 ET is the main event (consensus Core +0.4% m/m), followed by five Fed speakers
+- **Cautiously bullish** bias: bank earnings beating (JPM, GS, BLK), VIX unwinding from 21 to 18, Russell leading, Iran peace talk hopes
+- **Watchlist movers**: BE +14.63% (Oracle deal), OKLO +9.01% (DOD microreactors), LUNR +5.00%, RKLB +3.20%, VRT +3.18%, IONQ +3.09%
+- **Catalysts approaching**: TSM earnings in 2 days, April OpEx in 3 days, defense earnings cluster next week, FOMC in 14 days
+- **Risk**: PPI upside surprise could snap the relief rally; China rare earth +45% hike is a structural catalyst not yet priced
+[2026-04-14 11:43:32] Claude [report (attempt 1)] finished successfully
+[2026-04-14 11:43:32] Report attempt 1 succeeded: 19593 bytes
+[2026-04-14 11:43:32] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-14_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 92 symbols...
+  Got quotes for 79 symbols
+
+--- Database cross-checks (market_date=2026-04-14) ---
+  No database discrepancies found
+
+  1 total corrections needed:
+    WTI Crude: $97.80 → 97.28 (0.5% off)
+
+  1 corrections written to 2026-04-14_Tue.md
+=== Fact-check complete ===
+[2026-04-14 11:43:45] Running Claude [html-publish] (timeout: 900s)...
