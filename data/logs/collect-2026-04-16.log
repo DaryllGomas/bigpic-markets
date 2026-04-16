@@ -1,0 +1,61 @@
+2026-04-16 11:30:02,020 INFO === Market Data Collection — 2026-04-16 ===
+2026-04-16 11:30:02,049 INFO ── Step 1: RSS Feeds ──
+2026-04-16 11:30:25,428 INFO RSS feeds: 264 headlines stored, 215 older than 24h skipped
+2026-04-16 11:30:25,428 INFO Step 1 complete: 23.4s (headlines=264)
+2026-04-16 11:30:25,429 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-16 11:30:25,432 INFO Opus analysis: sending 251 headlines to claude CLI...
+2026-04-16 11:31:07,480 INFO Opus analysis: 28 tickers, 14 movers, 9 themes from 251 headlines
+2026-04-16 11:31:07,480 INFO Step 2 complete: 42.1s (opus_tickers=28)
+2026-04-16 11:31:07,481 INFO ── Step 3: Schwab + External APIs ──
+2026-04-16 11:31:13,904 INFO Schwab quotes: 140 symbols
+2026-04-16 11:31:13,905 INFO Auto-detected movers (|change| > 3%): 14 symbols
+2026-04-16 11:31:13,905 INFO Technicals + SMA200 for 121 quoted symbols (sequential)
+2026-04-16 11:33:58,236 INFO Schwab technicals: 121/121 symbols
+2026-04-16 11:35:28,009 INFO SMA200: 121/121 symbols
+2026-04-16 11:35:28,357 INFO Schwab market context: collected
+2026-04-16 11:37:17,777 INFO Schwab earnings: 71 entries
+2026-04-16 11:37:17,792 INFO Economic calendar: 9 events
+2026-04-16 11:37:17,951 INFO CoinGecko: 2 coins
+2026-04-16 11:37:21,977 INFO Stooq: 3/3 symbols
+2026-04-16 11:38:10,288 WARNING FRED failed: The read operation timed out
+2026-04-16 11:38:12,478 INFO Yahoo backup: 1 symbols
+2026-04-16 11:38:12,479 INFO Step 3 complete: 425.0s (quotes=140, tech=121, sma200=121, earnings=71, econ=9, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-16 11:38:12,479 INFO ── Step 4: Validation + Retry ──
+2026-04-16 11:38:12,577 INFO ANOMALY: IONQ price=46.23 avg=30.26 z=6.3
+2026-04-16 11:38:12,593 INFO ANOMALY: MNTS price=6.54 avg=3.99 z=4.1
+2026-04-16 11:38:12,610 INFO ANOMALY: OKLO price=67.81 avg=51.89 z=3.7
+2026-04-16 11:38:12,626 INFO ANOMALY: QBTS price=22.39 avg=14.92 z=5.9
+2026-04-16 11:38:12,630 INFO ANOMALY: QS price=7.62 avg=6.50 z=3.9
+2026-04-16 11:38:12,631 INFO ANOMALY: QUBT price=10.01 avg=7.06 z=6.6
+2026-04-16 11:38:12,634 INFO ANOMALY: RGTI price=20.41 avg=14.65 z=5.4
+2026-04-16 11:38:12,665 INFO ANOMALY: UEC price=15.14 avg=13.35 z=3.2
+2026-04-16 11:38:12,670 INFO ANOMALY: UUUU price=21.56 avg=18.08 z=4.3
+2026-04-16 11:38:12,684 INFO Anomaly detection: 9 flagged
+2026-04-16 11:38:12,684 INFO Cross-validation: 0 discrepancies
+2026-04-16 11:38:12,691 INFO Retry check: 0 failures — nothing to retry
+2026-04-16 11:38:12,705 INFO Step 4 complete: 0.2s (anomalies=9, cross_val=0, retried=0, completeness=100%)
+2026-04-16 11:38:12,705 DEBUG   us_indices: OK
+2026-04-16 11:38:12,705 DEBUG   futures: OK
+2026-04-16 11:38:12,705 DEBUG   vix: OK
+2026-04-16 11:38:12,706 DEBUG   treasuries: OK
+2026-04-16 11:38:12,706 DEBUG   commodities: OK
+2026-04-16 11:38:12,706 DEBUG   crypto: OK
+2026-04-16 11:38:12,706 DEBUG   international: OK
+2026-04-16 11:38:12,706 DEBUG   gap_fills: OK
+2026-04-16 11:38:12,706 DEBUG   econ_calendar: OK
+2026-04-16 11:38:12,706 DEBUG   market_context: OK
+2026-04-16 11:38:12,706 DEBUG   opus_analysis: OK
+2026-04-16 11:38:12,707 DEBUG   rss: OK
+2026-04-16 11:38:12,707 DEBUG   watchlist_t1: OK
+2026-04-16 11:38:12,707 INFO ── Step 5: Generate Briefing ──
+2026-04-16 11:38:12,962 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-16.md (32633 bytes)
+2026-04-16 11:38:12,977 INFO Pruned 263 rows from headlines (older than 14 days)
+2026-04-16 11:38:12,979 INFO Pruned 121 rows from levels (older than 30 days)
+2026-04-16 11:38:12,979 INFO Pruned 25 rows from opus_tickers (older than 30 days)
+2026-04-16 11:38:12,980 INFO Pruned 6 rows from opus_movers (older than 30 days)
+2026-04-16 11:38:12,980 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-04-16 11:38:12,981 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-04-16 11:38:12,981 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-04-16 11:38:12,981 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-16 11:38:13,124 INFO Cleanup complete
+2026-04-16 11:38:13,125 INFO === Collection complete: 490.7s total, completeness=100%, exit_code=0 ===
