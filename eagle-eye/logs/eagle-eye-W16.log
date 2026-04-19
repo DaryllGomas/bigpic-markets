@@ -1,0 +1,59 @@
+[2026-04-19 23:00:01] === Eagle Eye W16 Started ===
+[2026-04-19 23:00:01] Week ending: 2026-04-17
+[2026-04-19 23:00:01] Output: eagle-eye/W16_2026-04-19/
+[2026-04-19 23:00:01] All dependencies verified
+[2026-04-19 23:00:01] Found 9 research files (sector theses + structural calendar)
+[2026-04-19 23:00:01] Collecting economic calendar for 2026-04-20 to 2026-04-24...
+23:00:01 [INFO] Collecting economic calendar: 2026-04-20 to 2026-04-24
+23:00:01 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:01 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:01 [INFO]   API returned 31 upcoming events
+23:00:01 [INFO]   Filtered to 31 events in range
+23:00:01 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W16_2026-04-19/next_week_calendar.md (31 events, 4 absences, confidence=high)
+[2026-04-19 23:00:01] Calendar collected (full confidence)
+[2026-04-19 23:00:01] Running Claude [research] (timeout: 3600s)...
+Eagle Eye W16 report complete. All 7 files written to `/home/bigpic/projects/bigpic-markets/eagle-eye/W16_2026-04-19/`.
+
+**The Lede:** The trading week (Mon-Fri) was a historic risk-on rip — SPX +4.54%, Nasdaq's 13-day winning streak (longest since 1992), Russell 2000 to a fresh ATH, oil down 16% on Iran's "Hormuz open" Friday declaration. **Then the weekend turned.** Saturday Iran reclosed Hormuz; Sunday the USS Spruance fired on and seized the Iranian-flagged tanker *Touska*. Weekend electronic crude back to ~$86-90 WTI / >$90 Brent. Bitcoin pulled from $78K to $75K, partially compounded by the **Kelp DAO $292M LayerZero exploit Saturday night** (largest DeFi hack of 2026; Aave TVL -$6.6B, AAVE -16-20%).
+
+**Verification:** Pass with one correction. The Rates report had stale Friday oil prices ($98 Brent / $93 WTI) — corrected to the actual Friday close (~$87 / ~$80) confirmed via Euronews. Waller speech, BTC/ETH Sunday prices, Kelp hack details, and key index levels all verified against primary sources.
+
+**Three crisis vectors live for Monday open:** Hormuz reversal repricing, Kelp/Aave DeFi contagion, Trump–Powell escalation (Warsh hearing Tue Apr 21 + ceasefire expiration same day).
+[2026-04-19 23:16:37] Claude [research] finished successfully
+[2026-04-19 23:16:37] EAGLE_EYE.md generated: 42083 bytes
+[2026-04-19 23:16:37] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 4 absences injected into Week Ahead
+[2026-04-19 23:16:37] Calendar stamp complete
+[2026-04-19 23:16:37] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-04-19 23:16:38] Running Claude [html-build-1] (timeout: 900s)...
+Part 1 written to `/home/bigpic/projects/bigpic-markets/eagle-eye/W16_2026-04-19/report.html` (1,121 lines).
+
+Structure verified:
+- Full CSS with `align-items: stretch` on `.bar-chart` (line 245)
+- Fixed nav with back-arrow to `../index.html`
+- Hero: "The Friday Rip That Unraveled Over The Weekend"
+- Section 1 Scorecard (animated counters + full table w/ weekend proxies)
+- Section 2 Breaking (three coral/violet/amber alert-cards: Hormuz+Touska, Kelp/Aave, Trump-Powell)
+- Section 3 This Week's Take (three take-cards)
+- Section 4 Sector Heatmap (bar chart + 11-sector heatmap grid)
+- Section 5 Fed & Rates (yield curve SVG with 3.78/3.91/4.32/4.93, credit spreads, liquidity)
+- `<!-- CONTINUE HERE -->` marker (line 981) sits between rates section close and footer
+- Footer + closing tags + full JS (counters, bar chart, filters, sources toggle, reveal, yield tooltips)
+[2026-04-19 23:23:25] Claude [html-build-1] finished successfully
+[2026-04-19 23:23:25] report.html after Part 1: 69469 bytes
+[2026-04-19 23:23:25] Running Claude [html-build-2] (timeout: 900s)...
+Part 2 complete. The `<!-- CONTINUE HERE -->` marker at line 981 has been replaced with the six remaining sections (764 lines added). 
+
+Sections added:
+1. **Thesis Watchlist Tracker** — filterable cards (All / AI / Minerals / Cyber / Storage / Nuclear / Quantum / Robotics / Space) with tier badges and weekly deltas; wires into existing `initFilters()` via `data-thesis`
+2. **Commodities & Forex Snapshot** — energy alert card, metals grid, FX table, Baltic Dry shipping card
+3. **Crypto Snapshot** — majors grid, ETF flows alert card, institutional/stablecoin cards, SEC regulation card, Kelp/Aave contagion alert
+4. **The Week Ahead** — 5-column calendar grid (Mon–Fri) with event-type color coding, day-by-day commentary, earnings table, notable absences
+5. **Positioning & Thesis Update** — tactical takeaways, risk radar (critical/high/medium), per-thesis read-throughs
+6. **Sources** — collapsible button wired to `initSources()`, 2-column list with category headers
+
+Footer and script are untouched. HTML validation errors are pre-existing SVG void-element false positives from the yield curve; no new imbalance introduced.
+[2026-04-19 23:30:30] Claude [html-build-2] finished successfully
+[2026-04-19 23:30:30] report.html after Part 2: 142127 bytes
+[2026-04-19 23:30:30] Running Claude [html-publish] (timeout: 300s)...
