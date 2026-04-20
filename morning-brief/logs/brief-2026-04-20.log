@@ -1,0 +1,90 @@
+[2026-04-20 11:30:01] === Morning Brief Started ===
+[2026-04-20 11:30:01] Date: Monday, 2026-04-20
+[2026-04-20 11:30:01] Output: morning-brief/2026-04/2026-04-20_Mon.md + 2026-04-20_Mon.html
+[2026-04-20 11:30:01] All dependencies verified
+[2026-04-20 11:30:01] Running data collection pipeline...
+2026-04-20 11:30:01,865 INFO === Market Data Collection — 2026-04-20 ===
+2026-04-20 11:30:01,947 INFO ── Step 1: RSS Feeds ──
+2026-04-20 11:30:22,174 ERROR RSS The Robot Report FAILED: HTTP Error 403: Forbidden
+2026-04-20 11:30:27,145 INFO RSS feeds: 160 headlines stored, 294 older than 24h skipped
+2026-04-20 11:30:27,145 ERROR RSS feeds: 1 feed(s) FAILED
+2026-04-20 11:30:27,146 INFO Step 1 complete: 25.2s (headlines=160)
+2026-04-20 11:30:27,146 ERROR RSS feeds: 1 feed(s) FAILED:
+  The Robot Report (https://www.therobotreport.com/feed): HTTP Error 403: Forbidden
+2026-04-20 11:30:30,789 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-04-20 11:30:30,789 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-20 11:30:30,792 INFO Opus analysis: sending 147 headlines to claude CLI...
+2026-04-20 11:31:08,292 INFO Opus analysis: 26 tickers, 7 movers, 9 themes from 147 headlines
+2026-04-20 11:31:08,292 INFO Step 2 complete: 37.5s (opus_tickers=26)
+2026-04-20 11:31:08,292 INFO ── Step 3: Schwab + External APIs ──
+2026-04-20 11:31:14,987 INFO Schwab quotes: 140 symbols
+2026-04-20 11:31:14,988 INFO Auto-detected movers (|change| > 3%): 14 symbols
+2026-04-20 11:31:14,989 INFO Technicals + SMA200 for 121 quoted symbols (sequential)
+2026-04-20 11:34:03,927 INFO Schwab technicals: 121/121 symbols
+2026-04-20 11:35:38,287 INFO SMA200: 121/121 symbols
+2026-04-20 11:35:38,645 INFO Schwab market context: collected
+2026-04-20 11:37:32,801 INFO Schwab earnings: 70 entries
+2026-04-20 11:37:32,817 INFO Economic calendar: 7 events
+2026-04-20 11:37:32,981 INFO CoinGecko: 2 coins
+2026-04-20 11:37:36,959 INFO Stooq: 3/3 symbols
+2026-04-20 11:38:25,205 WARNING FRED failed: The read operation timed out
+2026-04-20 11:38:27,404 INFO Yahoo backup: 1 symbols
+2026-04-20 11:38:27,404 INFO Step 3 complete: 439.1s (quotes=140, tech=121, sma200=121, earnings=70, econ=7, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-20 11:38:27,404 INFO ── Step 4: Validation + Retry ──
+2026-04-20 11:38:27,447 INFO ANOMALY: AMZN price=248.01 avg=212.32 z=3.3
+2026-04-20 11:38:27,597 INFO ANOMALY: USAR price=20.51 avg=16.37 z=3.4
+2026-04-20 11:38:27,614 INFO Anomaly detection: 2 flagged
+2026-04-20 11:38:27,614 INFO Cross-validation: 0 discrepancies
+2026-04-20 11:38:27,630 INFO Retry check: 1 failed call(s) found, retrying...
+2026-04-20 11:38:27,630 INFO   Retrying earnings for CACI (original error: timed out)
+2026-04-20 11:38:28,848 INFO   ✓ CACI earnings recovered
+2026-04-20 11:38:28,855 INFO Retry complete: 1/1 recovered
+2026-04-20 11:38:28,869 INFO Step 4 complete: 1.5s (anomalies=2, cross_val=0, retried=1, completeness=100%)
+2026-04-20 11:38:28,871 INFO ── Step 5: Generate Briefing ──
+2026-04-20 11:38:29,124 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-20.md (26633 bytes)
+2026-04-20 11:38:29,139 INFO Pruned 208 rows from headlines (older than 14 days)
+2026-04-20 11:38:29,141 INFO Pruned 369 rows from levels (older than 30 days)
+2026-04-20 11:38:29,141 INFO Pruned 81 rows from opus_tickers (older than 30 days)
+2026-04-20 11:38:29,142 INFO Pruned 29 rows from opus_movers (older than 30 days)
+2026-04-20 11:38:29,142 INFO Pruned 30 rows from opus_themes (older than 30 days)
+2026-04-20 11:38:29,143 INFO Pruned 12 rows from opus_econ_events (older than 30 days)
+2026-04-20 11:38:29,143 INFO Pruned 11 rows from opus_fed_signals (older than 30 days)
+2026-04-20 11:38:29,143 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-04-20 11:38:29,295 INFO Cleanup complete
+2026-04-20 11:38:29,296 INFO === Collection complete: 503.3s total, completeness=100%, exit_code=0 ===
+[2026-04-20 11:38:29] Data collection complete — briefing file ready
+[2026-04-20 11:38:29] Found 9 research files (sector theses + structural calendar)
+[2026-04-20 11:38:29] Running Claude [report (attempt 1)] (timeout: 900s)...
+Brief written to `morning-brief/2026-04/2026-04-20_Mon.md` — ~2,750 words, HEAVY depth calibrated to the Iran-ceasefire-breakdown / oil-spike / DeFi-wipeout regime.
+
+Key signals surfaced:
+- Oil +5-6%, VIX +11.78% to 19.54 (still below 20 regime line), but gold -1.47% and 10Y flat — concentrated geopolitical premium, not broad flight-to-quality
+- Quantum clean-sweep lower (IONQ at SMA200 $46.49 key level); Tier-1 nukes holding while Tier-3 SMRs hammered
+- MRVL +5.95% the sole upside watchlist mover (optics thesis)
+- Defense disconnect flagged — LMT/NOC/CACI oversold (RSI 34-37) ahead of NOC/RTX earnings tomorrow
+- Data anomalies (AMZN z=3.3, USAR z=3.4) called out up top per briefing flags
+[2026-04-20 11:42:10] Claude [report (attempt 1)] finished successfully
+[2026-04-20 11:42:10] Report attempt 1 succeeded: 21070 bytes
+[2026-04-20 11:42:10] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-20_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 46 symbols...
+  Got quotes for 36 symbols
+
+--- Database cross-checks (market_date=2026-04-20) ---
+  4 database corrections:
+    FABRICATION: ECB PRESIDENT LAGARDE SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: NZ CPI Q/Q actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CHINA 1-Y LOAN PRIME RATE actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CHINA 5-Y LOAN PRIME RATE actual 'Scheduled' → 'Pending' (not released)
+
+  4 total corrections needed:
+    FABRICATION: ECB PRESIDENT LAGARDE SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: NZ CPI Q/Q actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CHINA 1-Y LOAN PRIME RATE actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CHINA 5-Y LOAN PRIME RATE actual 'Scheduled' → 'Pending' (not released)
+
+  4 corrections written to 2026-04-20_Mon.md
+=== Fact-check complete ===
+[2026-04-20 11:42:17] Running Claude [html-publish] (timeout: 900s)...
