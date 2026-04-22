@@ -1,0 +1,69 @@
+[2026-04-22 11:30:01] === Morning Brief Started ===
+[2026-04-22 11:30:01] Date: Wednesday, 2026-04-22
+[2026-04-22 11:30:01] Output: morning-brief/2026-04/2026-04-22_Wed.md + 2026-04-22_Wed.html
+[2026-04-22 11:30:01] All dependencies verified
+[2026-04-22 11:30:01] Running data collection pipeline...
+2026-04-22 11:30:01,499 INFO === Market Data Collection — 2026-04-22 ===
+2026-04-22 11:30:01,532 INFO ── Step 1: RSS Feeds ──
+2026-04-22 11:30:24,173 INFO RSS feeds: 258 headlines stored, 221 older than 24h skipped
+2026-04-22 11:30:24,173 INFO Step 1 complete: 22.6s (headlines=258)
+2026-04-22 11:30:24,174 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-22 11:30:24,177 INFO Opus analysis: sending 245 headlines to claude CLI...
+2026-04-22 11:31:02,025 INFO Opus analysis: 29 tickers, 12 movers, 9 themes from 245 headlines
+2026-04-22 11:31:02,026 INFO Step 2 complete: 37.9s (opus_tickers=29)
+2026-04-22 11:31:02,026 INFO ── Step 3: Schwab + External APIs ──
+2026-04-22 11:31:08,828 INFO Schwab quotes: 146 symbols
+2026-04-22 11:31:08,829 INFO Auto-detected movers (|change| > 3%): 17 symbols
+2026-04-22 11:31:08,830 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-04-22 11:33:59,569 INFO Schwab technicals: 127/127 symbols
+2026-04-22 11:35:40,689 INFO SMA200: 127/127 symbols
+2026-04-22 11:35:41,026 INFO Schwab market context: collected
+2026-04-22 11:37:27,845 INFO Schwab earnings: 71 entries
+2026-04-22 11:37:27,871 INFO Economic calendar: 3 events
+2026-04-22 11:37:28,039 INFO CoinGecko: 2 coins
+2026-04-22 11:37:32,202 INFO Stooq: 3/3 symbols
+2026-04-22 11:38:20,698 WARNING FRED failed: The read operation timed out
+2026-04-22 11:38:22,857 INFO Yahoo backup: 1 symbols
+2026-04-22 11:38:22,858 INFO Step 3 complete: 440.8s (quotes=146, tech=127, sma200=127, earnings=71, econ=3, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-22 11:38:22,858 INFO ── Step 4: Validation + Retry ──
+2026-04-22 11:38:22,902 INFO ANOMALY: AVAV price=217.45 avg=190.53 z=3.2
+2026-04-22 11:38:22,975 INFO ANOMALY: LMT price=573.39 avg=615.21 z=-3.4
+2026-04-22 11:38:22,988 INFO ANOMALY: MSTR price=173.90 avg=131.83 z=6.9
+2026-04-22 11:38:22,992 INFO ANOMALY: NOC price=615.99 avg=683.25 z=-5.1
+2026-04-22 11:38:23,026 INFO ANOMALY: RPD price=6.44 avg=5.57 z=3.2
+2026-04-22 11:38:23,067 INFO ANOMALY: USAR price=23.89 avg=16.85 z=3.4
+2026-04-22 11:38:23,082 INFO Anomaly detection: 6 flagged
+2026-04-22 11:38:23,083 INFO Cross-validation: 0 discrepancies
+2026-04-22 11:38:23,089 INFO Retry check: 0 failures — nothing to retry
+2026-04-22 11:38:23,104 INFO Step 4 complete: 0.2s (anomalies=6, cross_val=0, retried=0, completeness=100%)
+2026-04-22 11:38:23,106 INFO ── Step 5: Generate Briefing ──
+2026-04-22 11:38:23,360 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-22.md (31865 bytes)
+2026-04-22 11:38:23,373 INFO Pruned 207 rows from headlines (older than 14 days)
+2026-04-22 11:38:23,494 INFO Cleanup complete
+2026-04-22 11:38:23,494 INFO === Collection complete: 501.6s total, completeness=100%, exit_code=0 ===
+[2026-04-22 11:38:23] Data collection complete — briefing file ready
+[2026-04-22 11:38:23] Found 9 research files (sector theses + structural calendar)
+[2026-04-22 11:38:23] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief for Wednesday, April 22 written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-22_Wed.md` at HEAVY depth (~2,600 words).
+
+**Key framing choices:**
+- **Lead story:** Iran ceasefire extension (and immediate Hormuz ship seizures as the counter-signal) driving risk-on, with Brent flirting $100 and Russell leading the tape.
+- **Priority earnings flags:** VRT already -4.62% pre-open (same capex-digestion pattern as TEL -6.25%); TSLA/IBM/CACI/QS also before open.
+- **Data-integrity warnings** on the z-score anomalies (LMT, NOC, MSTR, AVAV, RPD, USAR) called out with instruction to verify before acting — especially on LMT (reports tomorrow) and NOC (bullish news flow conflicts with price).
+- **CPI calendar entry:** Treated as Pending per rules (Actual = "—" in feed), even though the news headlines suggest UK CPI already printed at 3.3%.
+- **FOMC setup:** Flagged Apr 29 decision as next-week's anchor.
+[2026-04-22 11:41:49] Claude [report (attempt 1)] finished successfully
+[2026-04-22 11:41:49] Report attempt 1 succeeded: 19477 bytes
+[2026-04-22 11:41:49] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-22_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 59 symbols...
+  Got quotes for 52 symbols
+
+--- Database cross-checks (market_date=2026-04-22) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-04-22 11:41:58] Running Claude [html-publish] (timeout: 900s)...
