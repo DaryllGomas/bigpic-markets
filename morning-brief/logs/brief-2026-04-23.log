@@ -1,0 +1,72 @@
+[2026-04-23 11:30:01] === Morning Brief Started ===
+[2026-04-23 11:30:01] Date: Thursday, 2026-04-23
+[2026-04-23 11:30:01] Output: morning-brief/2026-04/2026-04-23_Thu.md + 2026-04-23_Thu.html
+[2026-04-23 11:30:01] All dependencies verified
+[2026-04-23 11:30:01] Running data collection pipeline...
+2026-04-23 11:30:01,921 INFO === Market Data Collection — 2026-04-23 ===
+2026-04-23 11:30:01,934 INFO ── Step 1: RSS Feeds ──
+2026-04-23 11:30:29,814 INFO RSS feeds: 244 headlines stored, 235 older than 24h skipped
+2026-04-23 11:30:29,814 INFO Step 1 complete: 27.9s (headlines=244)
+2026-04-23 11:30:29,815 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-23 11:30:29,818 INFO Opus analysis: sending 231 headlines to claude CLI...
+2026-04-23 11:31:10,571 INFO Opus analysis: 52 tickers, 14 movers, 8 themes from 231 headlines
+2026-04-23 11:31:10,571 INFO Step 2 complete: 40.8s (opus_tickers=52)
+2026-04-23 11:31:10,571 INFO ── Step 3: Schwab + External APIs ──
+2026-04-23 11:31:18,186 INFO Schwab quotes: 162 symbols
+2026-04-23 11:31:18,187 INFO Auto-detected movers (|change| > 3%): 13 symbols
+2026-04-23 11:31:18,188 INFO Technicals + SMA200 for 143 quoted symbols (sequential)
+2026-04-23 11:34:35,245 INFO Schwab technicals: 143/143 symbols
+2026-04-23 11:36:36,364 INFO SMA200: 143/143 symbols
+2026-04-23 11:36:37,912 INFO Schwab market context: collected
+2026-04-23 11:38:29,188 INFO Schwab earnings: 71 entries
+2026-04-23 11:38:29,205 INFO Economic calendar: 5 events
+2026-04-23 11:38:29,306 INFO CoinGecko: 2 coins
+2026-04-23 11:38:33,296 INFO Stooq: 3/3 symbols
+2026-04-23 11:39:21,567 WARNING FRED failed: The read operation timed out
+2026-04-23 11:39:23,684 INFO Yahoo backup: 1 symbols
+2026-04-23 11:39:23,685 INFO Step 3 complete: 493.1s (quotes=162, tech=143, sma200=143, earnings=71, econ=5, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-23 11:39:23,685 INFO ── Step 4: Validation + Retry ──
+2026-04-23 11:39:23,800 INFO ANOMALY: HON price=204.72 avg=229.31 z=-6.5
+2026-04-23 11:39:23,808 INFO ANOMALY: ISRG price=482.52 avg=461.24 z=3.1
+2026-04-23 11:39:23,816 INFO ANOMALY: LHX price=331.58 avg=352.34 z=-3.6
+2026-04-23 11:39:23,818 INFO ANOMALY: LMT price=539.00 avg=613.28 z=-4.8
+2026-04-23 11:39:23,839 INFO ANOMALY: MSTR price=175.40 avg=134.17 z=3.6
+2026-04-23 11:39:23,845 INFO ANOMALY: NOC price=587.70 avg=679.95 z=-4.6
+2026-04-23 11:39:23,870 INFO ANOMALY: QS price=9.13 avg=6.60 z=5.7
+2026-04-23 11:39:23,883 INFO ANOMALY: RTX price=179.88 avg=196.77 z=-3.7
+2026-04-23 11:39:23,935 INFO Anomaly detection: 8 flagged
+2026-04-23 11:39:23,935 INFO Cross-validation: 0 discrepancies
+2026-04-23 11:39:23,942 INFO Retry check: 0 failures — nothing to retry
+2026-04-23 11:39:23,956 INFO Step 4 complete: 0.3s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-04-23 11:39:23,958 INFO ── Step 5: Generate Briefing ──
+2026-04-23 11:39:24,220 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-23.md (32304 bytes)
+2026-04-23 11:39:24,233 INFO Pruned 233 rows from headlines (older than 14 days)
+2026-04-23 11:39:24,234 INFO Pruned 133 rows from levels (older than 30 days)
+2026-04-23 11:39:24,234 INFO Pruned 35 rows from opus_tickers (older than 30 days)
+2026-04-23 11:39:24,235 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-04-23 11:39:24,235 INFO Pruned 8 rows from opus_themes (older than 30 days)
+2026-04-23 11:39:24,236 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-04-23 11:39:24,236 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-23 11:39:24,361 INFO Cleanup complete
+2026-04-23 11:39:24,361 INFO === Collection complete: 562.0s total, completeness=100%, exit_code=0 ===
+[2026-04-23 11:39:24] Data collection complete — briefing file ready
+[2026-04-23 11:39:24] Found 9 research files (sector theses + structural calendar)
+[2026-04-23 11:39:24] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief for Thursday, April 23, 2026 written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-23_Thu.md`.
+
+Calibrated to MEDIUM depth (~1,900 words). Key threads: Iran-driven oil bid ($94 WTI, $103 Brent) weighing on risk, yesterday's earnings carnage (TSLA, IBM, NOW, HON all red into open), a coordinated Tier 1 defense oversold cluster (LMT RSI 26, NOC RSI 20, RTX RSI 29, LHX RSI 34) with LMT reporting pre-open today alongside FCX, HON, SCCO, IRDM, and QS's +24.9% outlier. FOMC is now 6 sessions out. No actuals fabricated — all unreleased earnings and econ data marked "Pending."
+[2026-04-23 11:41:46] Claude [report (attempt 1)] finished successfully
+[2026-04-23 11:41:46] Report attempt 1 succeeded: 13423 bytes
+[2026-04-23 11:41:46] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-23_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 43 symbols...
+  Got quotes for 38 symbols
+
+--- Database cross-checks (market_date=2026-04-23) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-04-23 11:41:53] Running Claude [html-publish] (timeout: 900s)...
