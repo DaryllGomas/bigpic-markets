@@ -1,0 +1,67 @@
+2026-04-27 11:30:01,651 INFO === Market Data Collection — 2026-04-27 ===
+2026-04-27 11:30:01,684 INFO ── Step 1: RSS Feeds ──
+2026-04-27 11:30:25,695 INFO RSS feeds: 135 headlines stored, 344 older than 24h skipped
+2026-04-27 11:30:25,695 INFO Step 1 complete: 24.0s (headlines=135)
+2026-04-27 11:30:25,695 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-27 11:30:25,696 INFO Opus analysis: sending 125 headlines to claude CLI...
+2026-04-27 11:30:32,479 WARNING Opus analysis: claude CLI exited 1: 
+2026-04-27 11:30:32,480 INFO Step 2 complete: 6.8s (opus_tickers=0)
+2026-04-27 11:30:32,480 ERROR PIPELINE FAILED at Step 2 (Opus): Opus feed analysis returned empty — claude CLI may be down or timed out
+2026-04-27 11:30:33,655 INFO Failure email sent to daryll@bigpicsolutions.com
+2026-04-27 11:44:26,791 INFO === Market Data Collection — 2026-04-27 ===
+2026-04-27 11:44:26,830 INFO ── Step 1: RSS Feeds ──
+2026-04-27 11:44:45,545 INFO RSS feeds: 138 headlines stored, 341 older than 24h skipped
+2026-04-27 11:44:45,545 INFO Step 1 complete: 18.7s (headlines=138)
+2026-04-27 11:44:45,546 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-27 11:44:45,548 INFO Opus analysis: sending 128 headlines to claude CLI...
+2026-04-27 11:45:31,600 INFO Opus analysis: 31 tickers, 15 movers, 10 themes from 128 headlines
+2026-04-27 11:45:31,601 INFO Step 2 complete: 46.1s (opus_tickers=31)
+2026-04-27 11:45:31,601 INFO ── Step 3: Schwab + External APIs ──
+2026-04-27 11:45:38,198 INFO Schwab quotes: 147 symbols
+2026-04-27 11:45:38,198 INFO Auto-detected movers (|change| > 3%): 8 symbols
+2026-04-27 11:45:38,199 INFO Technicals + SMA200 for 128 quoted symbols (sequential)
+2026-04-27 11:48:31,049 INFO Schwab technicals: 128/128 symbols
+2026-04-27 11:50:03,002 INFO SMA200: 128/128 symbols
+2026-04-27 11:50:03,403 INFO Schwab market context: collected
+2026-04-27 11:51:43,310 INFO Schwab earnings: 71 entries
+2026-04-27 11:51:43,318 INFO Economic calendar: 0 events
+2026-04-27 11:51:43,424 INFO CoinGecko: 2 coins
+2026-04-27 11:51:47,260 INFO Stooq: 3/3 symbols
+2026-04-27 11:52:35,570 WARNING FRED failed: The read operation timed out
+2026-04-27 11:52:37,717 INFO Yahoo backup: 1 symbols
+2026-04-27 11:52:37,717 INFO Step 3 complete: 426.1s (quotes=147, tech=128, sma200=128, earnings=71, econ=0, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-27 11:52:37,717 INFO ── Step 4: Validation + Retry ──
+2026-04-27 11:52:37,740 INFO ANOMALY: CEG price=315.55 avg=286.72 z=3.1
+2026-04-27 11:52:37,762 INFO ANOMALY: LDOS price=146.06 avg=156.47 z=-3.2
+2026-04-27 11:52:37,764 INFO ANOMALY: LHX price=317.51 avg=350.63 z=-3.8
+2026-04-27 11:52:37,764 INFO ANOMALY: LMT price=513.22 avg=604.06 z=-3.2
+2026-04-27 11:52:37,788 INFO ANOMALY: RTX price=174.20 avg=195.50 z=-3.1
+2026-04-27 11:52:37,810 INFO Anomaly detection: 5 flagged
+2026-04-27 11:52:37,810 INFO Cross-validation: 0 discrepancies
+2026-04-27 11:52:37,814 INFO Retry check: 0 failures — nothing to retry
+2026-04-27 11:52:37,821 INFO Step 4 complete: 0.1s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-04-27 11:52:37,821 DEBUG   us_indices: OK
+2026-04-27 11:52:37,822 DEBUG   futures: OK
+2026-04-27 11:52:37,822 DEBUG   vix: OK
+2026-04-27 11:52:37,822 DEBUG   treasuries: OK
+2026-04-27 11:52:37,822 DEBUG   commodities: OK
+2026-04-27 11:52:37,822 DEBUG   crypto: OK
+2026-04-27 11:52:37,822 DEBUG   international: OK
+2026-04-27 11:52:37,822 DEBUG   gap_fills: OK
+2026-04-27 11:52:37,822 DEBUG   econ_calendar: OK
+2026-04-27 11:52:37,822 DEBUG   market_context: OK
+2026-04-27 11:52:37,822 DEBUG   opus_analysis: OK
+2026-04-27 11:52:37,822 DEBUG   rss: OK
+2026-04-27 11:52:37,822 DEBUG   watchlist_t1: OK
+2026-04-27 11:52:37,822 INFO ── Step 5: Generate Briefing ──
+2026-04-27 11:52:37,931 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-27.md (26793 bytes)
+2026-04-27 11:52:37,941 INFO Pruned 233 rows from headlines (older than 14 days)
+2026-04-27 11:52:37,942 INFO Pruned 387 rows from levels (older than 30 days)
+2026-04-27 11:52:37,942 INFO Pruned 97 rows from opus_tickers (older than 30 days)
+2026-04-27 11:52:37,942 INFO Pruned 47 rows from opus_movers (older than 30 days)
+2026-04-27 11:52:37,942 INFO Pruned 33 rows from opus_themes (older than 30 days)
+2026-04-27 11:52:37,942 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-04-27 11:52:37,943 INFO Pruned 11 rows from opus_fed_signals (older than 30 days)
+2026-04-27 11:52:37,943 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-04-27 11:52:38,020 INFO Cleanup complete
+2026-04-27 11:52:38,020 INFO === Collection complete: 491.0s total, completeness=100%, exit_code=0 ===
