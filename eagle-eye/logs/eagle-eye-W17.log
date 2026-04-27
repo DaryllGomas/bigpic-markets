@@ -1,0 +1,48 @@
+[2026-04-26 23:00:01] === Eagle Eye W17 Started ===
+[2026-04-26 23:00:01] Week ending: 2026-04-24
+[2026-04-26 23:00:01] Output: eagle-eye/W17_2026-04-26/
+[2026-04-26 23:00:01] All dependencies verified
+[2026-04-26 23:00:01] Found 9 research files (sector theses + structural calendar)
+[2026-04-26 23:00:01] Collecting economic calendar for 2026-04-27 to 2026-05-01...
+23:00:02 [INFO] Collecting economic calendar: 2026-04-27 to 2026-05-01
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 38 upcoming events
+23:00:02 [INFO]   Filtered to 37 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W17_2026-04-26/next_week_calendar.md (37 events, 4 absences, confidence=high)
+[2026-04-26 23:00:02] Calendar collected (full confidence)
+[2026-04-26 23:00:02] Running Claude [research] (timeout: 3600s)...
+You've hit your limit · resets 1:20am (UTC)
+[2026-04-26 23:13:38] ERROR: Claude [research] exited with code 1
+[2026-04-26 23:13:39] ERROR: Script exited with code 1
+[2026-04-27 05:30:39] === Eagle Eye W17 RESUME ===
+[2026-04-27 05:30:39] Output: /home/bigpic/projects/bigpic-markets/eagle-eye/W17_2026-04-26
+[2026-04-27 05:30:39] Running Claude [html-build-1] (timeout: 900s)...
+Part 1 of the Eagle Eye W17 report is built. The file is 1,118 lines with the `<!-- CONTINUE HERE -->` marker on line 970, after the rates section and before the footer.
+
+Sections included:
+1. Full HTML head with all CSS (Space Grotesk + Newsreader, BigPic palette, `align-items:stretch` on `.bar-chart`)
+2. Fixed nav with back-arrow → `../index.html`
+3. Hero — "Friday's Record, The Weekend's Rewrite" with coral badge
+4. **Market Scorecard** — 15 animated counters + full data table
+5. **Weekend & Breaking** — three coral/violet/amber alert cards (Iran/Hormuz, Powell-Warsh, EU sanctions+crypto) with timeline + futures grid
+6. **This Week's Take** — three thesis cards (gold/violet/red)
+7. **Sector Heatmap** — bar chart (12 sectors anchored to SMH +5.10% and IGV -5%) + interactive heatmap grid + software-cratering alert
+8. **Fed & Rates** — yield curve SVG (2Y 3.78% / 5Y ~4.05% / 10Y 4.31% / 30Y 4.91%), FOMC pricing grid, Waller pre-blackout, weak auction table, IG/HY/EU-HY OAS cards, liquidity strip
+
+Footer + full script block (counters, bar chart, filters, sources, reveal, yield tooltips) and closing tags follow the marker. Filter and sources script handlers no-op safely until Part 2 adds those elements.
+[2026-04-27 05:38:23] Claude [html-build-1] finished successfully
+[2026-04-27 05:38:23] report.html after Part 1: 70619 bytes
+[2026-04-27 05:38:23] Running Claude [html-build-2] (timeout: 900s)...
+All 11 sections are in place. The marker has been replaced and the file grew from 1,118 to 1,986 lines.
+
+Six new sections inserted at the marker:
+- **Watchlist Tracker** (filter buttons + 23 conviction cards with tier badges, weekly deltas, and `data-thesis` attributes wired to existing `initFilters()`)
+- **Commodities & Forex** (Energy alert card with 6 futures cells + IEA/EIA prose; Metals & Forex two-column tables)
+- **Crypto Snapshot** (BTC range take-card with 6 futures cells + key levels; Structural / Altcoin two-column; KelpDAO alert; ETF / Stablecoin / Corporate three-column)
+- **Week Ahead** (5-day calendar grid with color-coded `cal-event` types — Wed FOMC and Thu triple-header highlighted with violet/cyan tint; full per-day tables with all calendar rows + commentary verbatim from EAGLE_EYE.md; Earnings + Notable Absences two-column)
+- **Positioning & Thesis** (Tactical 5-item, Structural 6-item, Risk Radar grid with critical/high/medium levels, Actionable Takeaways gold alert)
+- **Sources** (collapsible toggle wired to existing `initSources()` — 60+ links across 5 categories)
+[2026-04-27 05:46:36] Claude [html-build-2] finished successfully
+[2026-04-27 05:46:36] report.html after Part 2: 146504 bytes
+[2026-04-27 05:46:36] Running Claude [html-publish] (timeout: 300s)...
