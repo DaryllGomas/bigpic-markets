@@ -1,0 +1,70 @@
+[2026-04-28 11:30:01] === Morning Brief Started ===
+[2026-04-28 11:30:01] Date: Tuesday, 2026-04-28
+[2026-04-28 11:30:01] Output: morning-brief/2026-04/2026-04-28_Tue.md + 2026-04-28_Tue.html
+[2026-04-28 11:30:01] All dependencies verified
+[2026-04-28 11:30:01] Running data collection pipeline...
+2026-04-28 11:30:02,037 INFO === Market Data Collection — 2026-04-28 ===
+2026-04-28 11:30:02,068 INFO ── Step 1: RSS Feeds ──
+2026-04-28 11:30:28,075 INFO RSS feeds: 246 headlines stored, 233 older than 24h skipped
+2026-04-28 11:30:28,076 INFO Step 1 complete: 26.0s (headlines=246)
+2026-04-28 11:30:28,076 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-28 11:30:28,077 INFO Opus analysis: sending 228 headlines to claude CLI...
+2026-04-28 11:31:28,301 INFO Opus analysis: 46 tickers, 16 movers, 12 themes from 228 headlines
+2026-04-28 11:31:28,301 INFO Step 2 complete: 60.2s (opus_tickers=46)
+2026-04-28 11:31:28,301 INFO ── Step 3: Schwab + External APIs ──
+2026-04-28 11:31:35,626 INFO Schwab quotes: 154 symbols
+2026-04-28 11:31:35,627 INFO Auto-detected movers (|change| > 3%): 40 symbols
+2026-04-28 11:31:35,627 INFO Technicals + SMA200 for 135 quoted symbols (sequential)
+2026-04-28 11:34:39,844 INFO Schwab technicals: 135/135 symbols
+2026-04-28 11:36:36,360 INFO SMA200: 135/135 symbols
+2026-04-28 11:36:36,668 INFO Schwab market context: collected
+2026-04-28 11:38:24,632 INFO Schwab earnings: 71 entries
+2026-04-28 11:38:24,646 INFO Economic calendar: 8 events
+2026-04-28 11:38:24,778 INFO CoinGecko: 2 coins
+2026-04-28 11:38:29,089 INFO Stooq: 3/3 symbols
+2026-04-28 11:39:17,370 WARNING FRED failed: The read operation timed out
+2026-04-28 11:39:19,537 INFO Yahoo backup: 1 symbols
+2026-04-28 11:39:19,537 INFO Step 3 complete: 471.2s (quotes=154, tech=135, sma200=135, earnings=71, econ=8, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-28 11:39:19,537 INFO ── Step 4: Validation + Retry ──
+2026-04-28 11:39:19,639 INFO Anomaly detection: 0 flagged
+2026-04-28 11:39:19,639 INFO Cross-validation: 0 discrepancies
+2026-04-28 11:39:19,642 INFO Retry check: 0 failures — nothing to retry
+2026-04-28 11:39:19,649 INFO Step 4 complete: 0.1s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-04-28 11:39:19,650 INFO ── Step 5: Generate Briefing ──
+2026-04-28 11:39:19,759 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-28.md (34168 bytes)
+2026-04-28 11:39:19,766 INFO Pruned 133 rows from headlines (older than 14 days)
+2026-04-28 11:39:19,834 INFO Cleanup complete
+2026-04-28 11:39:19,835 INFO === Collection complete: 557.6s total, completeness=100%, exit_code=0 ===
+[2026-04-28 11:39:19] Data collection complete — briefing file ready
+[2026-04-28 11:39:19] Found 9 research files (sector theses + structural calendar)
+[2026-04-28 11:39:19] Running Claude [report (attempt 1)] (timeout: 900s)...
+Wrote the Tuesday Apr 28 Morning Brief to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-04/2026-04-28_Tue.md` — MEDIUM event load, ~2,100 words.
+
+Key framing: risk-off morning driven by SoftBank/OpenAI "missed goals" report cratering AI complex (AVGO -4.55%, TSM -3.38%, AMD -5.65%, GLW -9.71% pre-print) plus Iran/Hormuz pushing WTI through $100. Defense complex (NOC RSI 18, LMT RSI 19, RTX RSI 24) notably *not* participating in selling. Today's pivots: 10:00 ET Consumer Confidence (cons 89.0 vs prior 91.8) and GOOG Q1 AMC. FOMC Day 1 today, decision Wednesday 2 PM ET. Three watchlist names report BMO: GLW, TER, ENPH.
+[2026-04-28 11:42:22] Claude [report (attempt 1)] finished successfully
+[2026-04-28 11:42:22] Report attempt 1 succeeded: 16467 bytes
+[2026-04-28 11:42:22] Running Schwab fact-check verification...
+=== Fact-Check: 2026-04-28_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 55 symbols...
+  Got quotes for 48 symbols
+
+--- Database cross-checks (market_date=2026-04-28) ---
+  5 database corrections:
+    FABRICATION: ADP WEEKLY EMPLOYMENT CHANGE actual '54.8K' → 'Pending' (not released)
+    FABRICATION: HPI M/M actual '0.1%' → 'Pending' (not released)
+    FABRICATION: S&P/CS COMPOSITE-20 HPI Y/Y actual '1.2%' → 'Pending' (not released)
+    FABRICATION: CB CONSUMER CONFIDENCE actual '91.8' → 'Pending' (not released)
+    FABRICATION: RICHMOND MANUFACTURING INDEX actual '0' → 'Pending' (not released)
+
+  5 total corrections needed:
+    FABRICATION: ADP WEEKLY EMPLOYMENT CHANGE actual '54.8K' → 'Pending' (not released)
+    FABRICATION: HPI M/M actual '0.1%' → 'Pending' (not released)
+    FABRICATION: S&P/CS COMPOSITE-20 HPI Y/Y actual '1.2%' → 'Pending' (not released)
+    FABRICATION: CB CONSUMER CONFIDENCE actual '91.8' → 'Pending' (not released)
+    FABRICATION: RICHMOND MANUFACTURING INDEX actual '0' → 'Pending' (not released)
+
+  5 corrections written to 2026-04-28_Tue.md
+=== Fact-check complete ===
+[2026-04-28 11:42:30] Running Claude [html-publish] (timeout: 900s)...
