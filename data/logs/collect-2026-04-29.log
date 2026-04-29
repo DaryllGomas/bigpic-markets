@@ -1,0 +1,53 @@
+2026-04-29 11:30:01,527 INFO === Market Data Collection — 2026-04-29 ===
+2026-04-29 11:30:01,570 INFO ── Step 1: RSS Feeds ──
+2026-04-29 11:30:24,458 INFO RSS feeds: 259 headlines stored, 210 older than 24h skipped
+2026-04-29 11:30:24,459 INFO Step 1 complete: 22.9s (headlines=259)
+2026-04-29 11:30:24,459 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-29 11:30:24,462 INFO Opus analysis: sending 245 headlines to claude CLI...
+2026-04-29 11:31:10,637 INFO Opus analysis: 30 tickers, 13 movers, 10 themes from 245 headlines
+2026-04-29 11:31:10,638 INFO Step 2 complete: 46.2s (opus_tickers=30)
+2026-04-29 11:31:10,638 INFO ── Step 3: Schwab + External APIs ──
+2026-04-29 11:31:23,556 INFO Schwab quotes: 146 symbols
+2026-04-29 11:31:23,557 INFO Auto-detected movers (|change| > 3%): 17 symbols
+2026-04-29 11:31:23,558 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-04-29 11:34:16,848 DEBUG Schwab technicals MP: timed out
+2026-04-29 11:34:23,146 INFO Schwab technicals: 126/127 symbols
+2026-04-29 11:34:38,129 DEBUG SMA200 GOLD: only 101 candles (need 200)
+2026-04-29 11:36:05,986 INFO SMA200: 126/127 symbols
+2026-04-29 11:36:06,290 INFO Schwab market context: collected
+2026-04-29 11:37:17,635 DEBUG Schwab earnings FCX: timed out
+2026-04-29 11:37:59,039 INFO Schwab earnings: 70 entries
+2026-04-29 11:37:59,046 INFO Economic calendar: 10 events
+2026-04-29 11:37:59,134 INFO CoinGecko: 2 coins
+2026-04-29 11:38:03,002 INFO Stooq: 3/3 symbols
+2026-04-29 11:38:51,329 WARNING FRED failed: The read operation timed out
+2026-04-29 11:38:53,472 INFO Yahoo backup: 1 symbols
+2026-04-29 11:38:53,473 INFO Step 3 complete: 462.8s (quotes=146, tech=126, sma200=126, earnings=70, econ=10, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-29 11:38:53,473 INFO ── Step 4: Validation + Retry ──
+2026-04-29 11:38:53,567 INFO Anomaly detection: 0 flagged
+2026-04-29 11:38:53,568 INFO Cross-validation: 0 discrepancies
+2026-04-29 11:38:53,571 INFO Retry check: 2 failed call(s) found, retrying...
+2026-04-29 11:38:53,571 INFO   Retrying technicals for MP (original error: timed out)
+2026-04-29 11:38:54,909 INFO   ✓ MP technicals recovered
+2026-04-29 11:38:54,909 INFO   Retrying earnings for FCX (original error: timed out)
+2026-04-29 11:38:56,180 INFO   ✓ FCX earnings recovered
+2026-04-29 11:38:56,188 INFO Retry complete: 2/2 recovered
+2026-04-29 11:38:56,202 INFO Step 4 complete: 2.7s (anomalies=0, cross_val=0, retried=2, completeness=100%)
+2026-04-29 11:38:56,202 DEBUG   us_indices: OK
+2026-04-29 11:38:56,202 DEBUG   futures: OK
+2026-04-29 11:38:56,202 DEBUG   vix: OK
+2026-04-29 11:38:56,202 DEBUG   treasuries: OK
+2026-04-29 11:38:56,203 DEBUG   commodities: OK
+2026-04-29 11:38:56,203 DEBUG   crypto: OK
+2026-04-29 11:38:56,203 DEBUG   international: OK
+2026-04-29 11:38:56,203 DEBUG   gap_fills: OK
+2026-04-29 11:38:56,203 DEBUG   econ_calendar: OK
+2026-04-29 11:38:56,203 DEBUG   market_context: OK
+2026-04-29 11:38:56,203 DEBUG   opus_analysis: OK
+2026-04-29 11:38:56,203 DEBUG   rss: OK
+2026-04-29 11:38:56,203 DEBUG   watchlist_t1: OK
+2026-04-29 11:38:56,203 INFO ── Step 5: Generate Briefing ──
+2026-04-29 11:38:56,436 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-29.md (33845 bytes)
+2026-04-29 11:38:56,449 INFO Pruned 243 rows from headlines (older than 14 days)
+2026-04-29 11:38:56,581 INFO Cleanup complete
+2026-04-29 11:38:56,582 INFO === Collection complete: 534.6s total, completeness=100%, exit_code=0 ===
