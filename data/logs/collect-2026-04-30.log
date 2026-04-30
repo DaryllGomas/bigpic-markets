@@ -1,0 +1,82 @@
+2026-04-30 11:30:01,881 INFO === Market Data Collection — 2026-04-30 ===
+2026-04-30 11:30:01,915 INFO ── Step 1: RSS Feeds ──
+2026-04-30 11:30:24,462 INFO RSS feeds: 259 headlines stored, 220 older than 24h skipped
+2026-04-30 11:30:24,463 INFO Step 1 complete: 22.5s (headlines=259)
+2026-04-30 11:30:24,463 INFO ── Step 2: Opus Feed Analysis ──
+2026-04-30 11:30:24,465 INFO Opus analysis: sending 243 headlines to claude CLI...
+2026-04-30 11:31:26,000 INFO Opus analysis: 37 tickers, 18 movers, 12 themes from 243 headlines
+2026-04-30 11:31:26,000 INFO Step 2 complete: 61.5s (opus_tickers=37)
+2026-04-30 11:31:26,000 INFO ── Step 3: Schwab + External APIs ──
+2026-04-30 11:31:33,169 INFO Schwab quotes: 151 symbols
+2026-04-30 11:31:33,170 INFO Auto-detected movers (|change| > 3%): 14 symbols
+2026-04-30 11:31:33,171 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-04-30 11:31:35,998 DEBUG Schwab technicals KGAUF: HTTP Error 400: Bad Request
+2026-04-30 11:32:04,896 DEBUG Schwab technicals PWR: timed out
+2026-04-30 11:32:55,510 DEBUG Schwab technicals SSNLF: HTTP Error 400: Bad Request
+2026-04-30 11:33:53,376 DEBUG Schwab technicals ALMOF: HTTP Error 400: Bad Request
+2026-04-30 11:34:43,335 INFO Schwab technicals: 128/132 symbols
+2026-04-30 11:34:44,994 DEBUG SMA200 KGAUF: only 9 candles (need 200)
+2026-04-30 11:35:37,199 DEBUG SMA200 SSNLF: only 2 candles (need 200)
+2026-04-30 11:36:14,221 DEBUG SMA200 ALMOF: only 0 candles (need 200)
+2026-04-30 11:36:40,848 INFO SMA200: 129/132 symbols
+2026-04-30 11:36:41,159 INFO Schwab market context: collected
+2026-04-30 11:37:15,682 DEBUG Schwab earnings S: timed out
+2026-04-30 11:38:05,236 DEBUG Schwab earnings NXE: timed out
+2026-04-30 11:38:50,531 INFO Schwab earnings: 69 entries
+2026-04-30 11:38:50,559 INFO Economic calendar: 15 events
+2026-04-30 11:38:50,652 INFO CoinGecko: 2 coins
+2026-04-30 11:38:54,702 INFO Stooq: 3/3 symbols
+2026-04-30 11:39:43,033 WARNING FRED failed: The read operation timed out
+2026-04-30 11:39:45,194 INFO Yahoo backup: 1 symbols
+2026-04-30 11:39:45,194 INFO Step 3 complete: 499.2s (quotes=151, tech=128, sma200=129, earnings=69, econ=15, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-04-30 11:39:45,194 INFO ── Step 4: Validation + Retry ──
+2026-04-30 11:39:45,201 INFO ANOMALY: $TNX price=44.18 avg=43.04 z=3.9
+2026-04-30 11:39:45,202 INFO ANOMALY: $TYX price=49.87 avg=49.03 z=4.2
+2026-04-30 11:39:45,221 INFO ANOMALY: CHKP price=122.93 avg=140.93 z=-3.6
+2026-04-30 11:39:45,237 INFO ANOMALY: GOOGL price=377.30 avg=310.46 z=3.9
+2026-04-30 11:39:45,241 INFO ANOMALY: INTC price=97.42 avg=57.81 z=3.1
+2026-04-30 11:39:45,265 INFO ANOMALY: PYPL price=50.50 avg=46.25 z=5.9
+2026-04-30 11:39:45,267 INFO ANOMALY: QCOM price=173.09 avg=137.34 z=5.0
+2026-04-30 11:39:45,296 INFO Anomaly detection: 7 flagged
+2026-04-30 11:39:45,297 INFO Cross-validation: 0 discrepancies
+2026-04-30 11:39:45,301 INFO Retry check: 6 failed call(s) found, retrying...
+2026-04-30 11:39:45,301 INFO   Retrying technicals for KGAUF (original error: HTTP Error 400: Bad Request)
+2026-04-30 11:39:46,468 INFO   ✗ KGAUF technicals retry failed: HTTP Error 400: Bad Request
+2026-04-30 11:39:46,469 INFO   Retrying technicals for PWR (original error: timed out)
+2026-04-30 11:39:47,810 INFO   ✓ PWR technicals recovered
+2026-04-30 11:39:47,811 INFO   Retrying technicals for SSNLF (original error: HTTP Error 400: Bad Request)
+2026-04-30 11:39:49,017 INFO   ✗ SSNLF technicals retry failed: HTTP Error 400: Bad Request
+2026-04-30 11:39:49,017 INFO   Retrying technicals for ALMOF (original error: HTTP Error 400: Bad Request)
+2026-04-30 11:39:50,209 INFO   ✗ ALMOF technicals retry failed: HTTP Error 400: Bad Request
+2026-04-30 11:39:50,210 INFO   Retrying earnings for S (original error: timed out)
+2026-04-30 11:39:51,911 INFO   ✓ S earnings recovered
+2026-04-30 11:39:51,911 INFO   Retrying earnings for NXE (original error: timed out)
+2026-04-30 11:39:53,411 INFO   ✓ NXE earnings recovered
+2026-04-30 11:39:53,415 INFO Retry complete: 3/6 recovered
+2026-04-30 11:39:53,425 WARNING Excluding 3 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): ALMOF, KGAUF, SSNLF
+2026-04-30 11:39:53,436 INFO Step 4 complete: 8.2s (anomalies=7, cross_val=0, retried=3, completeness=100%)
+2026-04-30 11:39:53,436 DEBUG   us_indices: OK
+2026-04-30 11:39:53,437 DEBUG   futures: OK
+2026-04-30 11:39:53,437 DEBUG   vix: OK
+2026-04-30 11:39:53,437 DEBUG   treasuries: OK
+2026-04-30 11:39:53,437 DEBUG   commodities: OK
+2026-04-30 11:39:53,437 DEBUG   crypto: OK
+2026-04-30 11:39:53,437 DEBUG   international: OK
+2026-04-30 11:39:53,437 DEBUG   gap_fills: OK
+2026-04-30 11:39:53,437 DEBUG   econ_calendar: OK
+2026-04-30 11:39:53,437 DEBUG   market_context: OK
+2026-04-30 11:39:53,437 DEBUG   opus_analysis: OK
+2026-04-30 11:39:53,437 DEBUG   rss: OK
+2026-04-30 11:39:53,437 DEBUG   watchlist_t1: OK
+2026-04-30 11:39:53,437 INFO ── Step 5: Generate Briefing ──
+2026-04-30 11:39:53,584 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-04-30.md (35049 bytes)
+2026-04-30 11:39:53,602 INFO Pruned 277 rows from headlines (older than 14 days)
+2026-04-30 11:39:53,603 INFO Pruned 123 rows from levels (older than 30 days)
+2026-04-30 11:39:53,603 INFO Pruned 25 rows from opus_tickers (older than 30 days)
+2026-04-30 11:39:53,603 INFO Pruned 8 rows from opus_movers (older than 30 days)
+2026-04-30 11:39:53,604 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-04-30 11:39:53,604 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-04-30 11:39:53,604 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-04-30 11:39:53,604 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-04-30 11:39:53,704 INFO Cleanup complete
+2026-04-30 11:39:53,705 INFO === Collection complete: 591.5s total, completeness=100%, exit_code=0 ===
