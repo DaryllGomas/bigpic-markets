@@ -1,0 +1,160 @@
+#!/bin/bash
+# morning-brief - Run the daily pre-market Morning Brief
+# Part of BigPic Markets (markets.bigpicsolutions.com)
+#
+# Usage:
+#   morning-brief              # Auto-detects today (or next trading day)
+#   morning-brief 2026-02-11   # Override date
+#
+# Creates the month folder if needed and launches Claude Code
+# with the full Morning Brief prompt. Produces both .md and .html.
+
+set -e
+
+REPO_DIR="$HOME/projects/bigpic-markets"
+BRIEF_DIR="$REPO_DIR/morning-brief"
+PROJECT_DIR="$HOME/projects/bigpic-markets"
+
+# Auto-discover sector thesis files
+THESIS_FILES=$(find "$REPO_DIR/research" -maxdepth 2 -name "THESIS.md" -type f | sort)
+THESIS_COUNT=$(echo "$THESIS_FILES" | wc -l)
+THESIS_LIST=$(echo "$THESIS_FILES" | sed 's/^/- /')
+
+# Date calculation
+if [ -n "$1" ]; then
+    # User provided a date
+    TARGET_DATE="$1"
+else
+    # Auto-detect: use today if weekday, otherwise next Monday
+    DOW=$(date +%u)  # 1=Mon ... 5=Fri, 6=Sat, 7=Sun
+    if [ "$DOW" -le 5 ]; then
+        TARGET_DATE=$(date +%Y-%m-%d)
+    elif [ "$DOW" -eq 6 ]; then
+        TARGET_DATE=$(date -d "+2 days" +%Y-%m-%d)
+    else
+        TARGET_DATE=$(date -d "+1 day" +%Y-%m-%d)
+    fi
+fi
+
+# Day name
+DAY_NAME=$(date -d "$TARGET_DATE" +%a)  # Mon, Tue, Wed, Thu, Fri
+DAY_FULL=$(date -d "$TARGET_DATE" +%A)  # Monday, Tuesday, etc.
+
+# Month folder
+MONTH=$(date -d "$TARGET_DATE" +%Y-%m)
+MONTH_DIR="$BRIEF_DIR/$MONTH"
+
+# Output filenames
+OUTPUT_MD="${TARGET_DATE}_${DAY_NAME}.md"
+OUTPUT_HTML="${TARGET_DATE}_${DAY_NAME}.html"
+
+echo "================================================"
+echo "  Morning Brief — Pre-Market Analysis"
+echo "================================================"
+echo "  Date:    $DAY_FULL, $TARGET_DATE"
+echo "  Output:  morning-brief/$MONTH/$OUTPUT_MD"
+echo "           morning-brief/$MONTH/$OUTPUT_HTML"
+echo "================================================"
+
+# Create month folder
+mkdir -p "$MONTH_DIR"
+
+# Check if brief already exists
+if [ -f "$MONTH_DIR/$OUTPUT_MD" ]; then
+    echo ""
+    echo "WARNING: $OUTPUT_MD already exists in $MONTH/"
+    read -p "Overwrite? (y/N) " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 0
+    fi
+fi
+
+# Build the prompt
+PROMPT=$(cat <<PROMPT_EOF
+Run the Morning Brief for $DAY_FULL, $TARGET_DATE. Store in
+$MONTH_DIR/
+
+PHASE 1 — RESEARCH: Create a team using TeamCreate (team_name: "morning-brief-${TARGET_DATE}").
+Then create 2 tasks using TaskCreate and spawn 2 teammates using the Task tool
+(with team_name and name parameters, subagent_type: "general-purpose"):
+1. "markets-researcher" — overnight futures, Asia/Europe recap, pre-market movers, economic
+   calendar for today, Fed speakers, yields, DXY, oil, gold, crypto
+2. "watchlist-researcher" — pre-market activity on thesis watchlist tickers, today's earnings
+   (highlight watchlist names), approaching catalyst timeline items, key technical levels
+   for Tier 1 tickers, unusual options activity
+
+Each teammate must read ALL $THESIS_COUNT sector thesis files for watchlist integration:
+$THESIS_LIST
+
+Auto-calibrate depth: LIGHT (no major data = ~1 page), MEDIUM (~2 pages),
+HEAVY (FOMC/NFP/CPI/major earnings = ~3-4 pages with scenario analysis).
+Every file must include a ## Sources section with linked URLs.
+
+PHASE 2 — COMPILE + VERIFY: Read both research files. Cross-check any overlapping
+data for consistency (futures, yields, prices). Resolve discrepancies using source URLs.
+Compile into $MONTH_DIR/$OUTPUT_MD: Event Load rating, Pre-Market Snapshot table,
+Overnight/Global, Today's Calendar, Thesis Watchlist Pre-Market Activity (movers + key
+levels + earnings + catalysts), Today's Playbook, Sources.
+
+PHASE 3 — HTML BUILD: Generate $MONTH_DIR/$OUTPUT_HTML from the compiled markdown.
+Match the BigPic Solutions site theme exactly:
+- Background: #0a0f1a (deep navy), cards: rgba(18, 26, 46, 0.88)
+- Accent gold: #e8b87d, amber: #f4a261, coral: #ef8354
+- Text: #fdf6ec (primary), #c9d6df (secondary), #6b7d8e (muted)
+- Borders: rgba(232,184,125,0.08) subtle, rgba(232,184,125,0.18) glow
+- Fonts: Space Grotesk (sans), Newsreader (serif/accent)
+- Green #22c55e for positive, Red #ef4444 for negative
+- Radius: 12px cards, 20px large sections
+Sections to include:
+- Fixed nav bar with back-arrow link to ../../morning-brief/index.html (Morning Brief archive) and section anchors
+- Hero: date, event load badge (green LIGHT / amber MEDIUM / red HEAVY), brief title
+- Pre-market snapshot: color-coded grid (green up, red down)
+- Overnight/Global: compact card layout
+- Today's calendar: table with time, release, consensus, prior, significance
+- Thesis watchlist: earnings table, key levels, pre-market movers (color-coded deltas)
+- Approaching catalysts: timeline with priority color-coding
+- Scenario analysis: only if HEAVY day — tabbed or card layout per scenario
+- Today's playbook: bias card with watch-for and risk bullet points
+- Collapsible sources section
+- Footer with date and compilation note
+Use scroll-reveal animations, hover effects on cards, and backdrop-filter: blur(20px).
+Keep it lightweight — the daily brief should load fast and be scannable.
+
+PHASE 4 — HTML VERIFY: Start a local HTTP server (python3 -m http.server 8282 in $REPO_DIR).
+Open http://localhost:8282/morning-brief/$MONTH/$OUTPUT_HTML in Chrome.
+Screenshot the top (hero + snapshot), middle (calendar + watchlist), and bottom (playbook + sources).
+Check for console errors. Verify back-arrow links to index. Write HTML_QA.md with pass/fail.
+Fix any issues and re-verify until PASS. Stop the HTTP server when done.
+
+PHASE 5 — PUBLISH: Add a new entry to $BRIEF_DIR/index.html for this brief.
+The archive page has entries between <!-- ARCHIVE_ENTRIES_START --> and <!-- ARCHIVE_ENTRIES_END -->.
+Entries are grouped by month (class="month-group"). If the current month group already exists,
+add the new entry at the top of that group. Otherwise create a new month-group div before
+existing groups. Move the "Latest" badge from any previous entry to the new one.
+Use this HTML format for the entry:
+<a href="$MONTH/$OUTPUT_HTML" class="report-entry">
+  <div class="info">
+    <span class="day">$DAY_FULL, $(date -d "$TARGET_DATE" +"%B %-d")</span>
+    <span class="meta">[1-line summary from the brief's event load / key events]</span>
+  </div>
+  <span class="load [heavy|medium|light]">[Heavy|Medium|Light]</span>
+  <span class="badge">Latest</span>
+  <span class="arrow">&rarr;</span>
+</a>
+Then commit and push:
+cd $REPO_DIR && git add -A && git commit -m "Morning Brief — $DAY_FULL $TARGET_DATE" && git push
+
+PHASE 6 — CLEANUP: Send shutdown_request to all teammates via SendMessage.
+After all teammates confirm shutdown, call TeamDelete to clean up the team.
+PROMPT_EOF
+)
+
+echo ""
+echo "Launching Claude Code..."
+echo ""
+
+# Launch claude in the project directory with the prompt
+cd "$PROJECT_DIR"
+exec claude --dangerously-skip-permissions "$PROMPT"

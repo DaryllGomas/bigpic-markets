@@ -1,0 +1,143 @@
+#!/bin/bash
+# eagle-eye - Run the weekly Eagle Eye macro report
+# Part of BigPic Markets (markets.bigpicsolutions.com)
+#
+# Usage:
+#   eagle-eye            # Auto-detects current week
+#   eagle-eye 2026-02-16 # Override Sunday date
+#
+# Calculates ISO week number, creates the folder, and launches
+# Claude Code with the full Eagle Eye prompt.
+
+set -e
+
+REPO_DIR="$HOME/projects/bigpic-markets"
+EAGLE_DIR="$REPO_DIR/eagle-eye"
+PROJECT_DIR="$HOME/projects/bigpic-markets"
+
+# Auto-discover sector thesis files
+THESIS_FILES=$(find "$REPO_DIR/research" -maxdepth 2 -name "THESIS.md" -type f | sort)
+THESIS_COUNT=$(echo "$THESIS_FILES" | wc -l)
+THESIS_LIST=$(echo "$THESIS_FILES" | sed 's/^/- /')
+
+# Date calculation
+if [ -n "$1" ]; then
+    # User provided a Sunday date
+    SUNDAY_DATE="$1"
+    WEEK_NUM=$(date -d "$SUNDAY_DATE" +%V)
+else
+    # Auto-detect: find the upcoming Sunday (or today if Sunday)
+    DOW=$(date +%u)  # 1=Mon, 7=Sun
+    if [ "$DOW" -eq 7 ]; then
+        SUNDAY_DATE=$(date +%Y-%m-%d)
+    else
+        DAYS_UNTIL_SUNDAY=$((7 - DOW))
+        SUNDAY_DATE=$(date -d "+${DAYS_UNTIL_SUNDAY} days" +%Y-%m-%d)
+    fi
+    WEEK_NUM=$(date -d "$SUNDAY_DATE" +%V)
+fi
+
+# Week folder name
+WEEK_FOLDER="W${WEEK_NUM}_${SUNDAY_DATE}"
+WEEK_DIR="$EAGLE_DIR/$WEEK_FOLDER"
+
+# Friday date (end of trading week)
+FRIDAY_DATE=$(date -d "$SUNDAY_DATE -2 days" +%Y-%m-%d)
+
+echo "================================================"
+echo "  Eagle Eye — Weekly Macro Report"
+echo "================================================"
+echo "  Week:    W${WEEK_NUM} (ending $FRIDAY_DATE)"
+echo "  Folder:  eagle-eye/$WEEK_FOLDER/"
+echo "  Sunday:  $SUNDAY_DATE"
+echo "  Sectors: $THESIS_COUNT thesis files discovered"
+echo "================================================"
+
+# Create folder
+mkdir -p "$WEEK_DIR"
+echo "Created: $WEEK_DIR"
+
+# Build the prompt
+PROMPT=$(cat <<PROMPT_EOF
+Run the Eagle Eye weekly macro report for the week ending $FRIDAY_DATE. Store in
+$WEEK_DIR/
+
+PHASE 1 — RESEARCH: Create a team using TeamCreate (team_name: "eagle-eye-w${WEEK_NUM}").
+Then create 4 tasks using TaskCreate (one per research area) and spawn 4 teammates
+using the Task tool with team_name and name parameters (subagent_type: "general-purpose").
+Assign one task to each teammate:
+1. "equities-researcher" — indices, sector rotation, earnings, breadth, VIX, thesis watchlist
+   → writes 01_equities_sectors.md
+2. "rates-researcher" — treasury curve, Fed speakers/minutes, credit spreads, lending
+   → writes 02_rates_credit_fed.md
+3. "commodities-researcher" — oil, gold, copper, uranium, DXY, major pairs, supply chains
+   → writes 03_commodities_forex.md
+4. "crypto-researcher" — BTC/ETH, alts, DeFi TVL, stablecoin flows, ETF flows, regulation
+   → writes 04_crypto_alternative.md
+
+Each teammate must read ALL $THESIS_COUNT sector thesis files for watchlist tickers:
+$THESIS_LIST
+Every report must include a ## Sources section with linked URLs.
+Teammates report completion via SendMessage. Wait for all 4 to finish before Phase 2.
+
+PHASE 2 — DATA VERIFY: Spawn a 5th teammate "data-verifier" (subagent_type:
+"general-purpose") to:
+- Read all 4 completed research reports from disk
+- Cross-check ticker prices/percentages across reports for consistency
+- Spot-check 5-10 key data points against their cited source URLs
+- Sanity-check percentage moves (flag outliers)
+- Write VERIFICATION.md with pass/fail status and corrections
+Wait for verifier to complete before Phase 3.
+
+PHASE 3 — COMPILE: Read all 4 reports + VERIFICATION.md. Incorporate corrections.
+Write EAGLE_EYE.md with: This Week's Take, Market Scorecard, Sector Heatmap,
+Thesis Watchlist Tracker (by thesis with tier + weekly delta), Fed & Rates Outlook,
+Commodities & Forex Snapshot, Crypto Snapshot, The Week Ahead (data + earnings +
+Fed speakers + thesis catalysts), Positioning & Thesis Update, Sources.
+
+PHASE 4 — HTML BUILD: Generate report.html matching the BigPic Solutions site theme:
+- Background: #0a0f1a (deep navy), cards: rgba(18, 26, 46, 0.88)
+- Accent gold: #e8b87d, amber: #f4a261, coral: #ef8354
+- Text: #fdf6ec (primary), #c9d6df (secondary), #6b7d8e (muted)
+- Borders: rgba(232,184,125,0.08) subtle, rgba(232,184,125,0.18) glow
+- Fonts: Space Grotesk (sans), Newsreader (serif/accent)
+- Green #22c55e for positive, Red #ef4444 for negative
+- Fixed nav with back-arrow link to ../index.html (Eagle Eye archive page)
+- Animated counters, sector heatmap, yield curve viz, filterable watchlist cards
+- Week-ahead calendar, risk radar, collapsible sources
+- CRITICAL: Use align-items:stretch on .bar-chart (not flex-end) to prevent bar height bug
+- Use completed sector HTML reports as quality reference
+
+PHASE 5 — HTML VERIFY: Open the HTML in Chrome and verify:
+- All sections render (screenshot each), bar charts have real height
+- Filter buttons work, hover tooltips appear, scroll animations trigger
+- No JavaScript console errors
+- Write HTML_QA.md with pass/fail. Fix any issues and re-verify until PASS.
+
+PHASE 6 — PUBLISH: Add a new entry to $EAGLE_DIR/index.html for this week's report.
+The archive page has entries between <!-- ARCHIVE_ENTRIES_START --> and <!-- ARCHIVE_ENTRIES_END -->.
+Add a new entry BEFORE existing entries (latest first). Move the "Latest" badge from any
+previous entry to the new one. Use this HTML format for the entry:
+<a href="$WEEK_FOLDER/report.html" class="report-entry">
+  <div class="info">
+    <span class="week">Week ${WEEK_NUM} — [TITLE FROM EAGLE_EYE.md]</span>
+    <span class="date">Week ending $FRIDAY_DATE</span>
+  </div>
+  <span class="badge">Latest</span>
+  <span class="arrow">&rarr;</span>
+</a>
+Then commit and push:
+cd $REPO_DIR && git add -A && git commit -m "Eagle Eye W${WEEK_NUM} — week ending $FRIDAY_DATE" && git push
+
+PHASE 7 — CLEANUP: Send shutdown_request to all teammates via SendMessage.
+After all teammates confirm shutdown, call TeamDelete to clean up the team.
+PROMPT_EOF
+)
+
+echo ""
+echo "Launching Claude Code..."
+echo ""
+
+# Launch claude in the project directory with the prompt
+cd "$PROJECT_DIR"
+exec claude --dangerously-skip-permissions "$PROMPT"
