@@ -238,12 +238,14 @@ With FY25 deficit-to-GDP at 5.9% and Bessent targeting "3% by end of administrat
 The April 28 – May 1 calendar is exceptionally heavy: the FOMC decision (Wed), advance Q1 GDP (Thu), the Fed's preferred inflation measure (Core PCE, Thu), AAPL Q2 earnings (Thu AC), and ISM Manufacturing (Fri) — all packed into 72 hours. GOOG kicks it off Tuesday after-close. The Iran/Hormuz tape and Powell's lame-duck press conference are the pivots.
 
 
-### Monday, April 28
+
+### Monday, April 27
+
 No major economic releases scheduled.
 
 A quiet macro tape ahead of the storm. The day will be dominated by the Sunday futures gap-down on Iran weekend escalation — watch for risk-off rotation that mirrors Thursday's IBM/ServiceNow drawdown. Brent at $107+ pressures airlines/transports; refiners/E&P names benefit. Volt/Salt Typhoon cyber narratives may catch a bid if Iran retaliation rhetoric escalates. Treasuries should see continued bull-steepening on the Warsh succession path.
 
-### Tuesday, April 29 (FOMC Day 1; GOOG Earnings AC)
+### Tuesday, April 28 (FOMC Day 1; GOOG Earnings AC)
 | Time (ET) | Event | Impact |
 |-----------|-------|--------|
 | — | **GOOG: Q1 2026 Earnings** | **High** |
@@ -257,7 +259,7 @@ A quiet macro tape ahead of the storm. The day will be dominated by the Sunday f
 
 **Tuesday is overshadowed by the Wednesday Fed decision but carries its own catalysts.** CB Consumer Confidence at 10:00 AM ET will be parsed against Friday's record-low U-Mich Sentiment 49.8 — if Confidence prints similarly weak, the soft-landing narrative takes more damage. Richmond Fed Manufacturing helps gauge regional industrial momentum into ISM Friday. **Alphabet (GOOG/GOOGL) reports after the close**: consensus EPS $2.68 on revenue ~$106.88B; the key watch is Cloud growth rate and 2026 capex guide ($175-185B vs $91.4B in 2025) — sets the tone for the megacap AI capex narrative ahead of AAPL Thursday.
 
-### Wednesday, April 30 (FOMC Decision Day)
+### Wednesday, April 29 (FOMC Decision Day)
 | Time (ET) | Event | Impact |
 |-----------|-------|--------|
 | 4:30 | **Housing Starts** | **Medium** |
@@ -273,7 +275,7 @@ A quiet macro tape ahead of the storm. The day will be dominated by the Sunday f
 
 **THE event of the week.** Fed funds rate decision at 2:00 PM ET (97.9% hold priced); FOMC statement same time; Powell press conference 2:30 PM ET. With the decision functionally priced, every word of Powell's tone is the trade. He must defend a wait-and-see stance with Iran-driven inflation in his face, his successor (Warsh) confirmed, and the DOJ probe just closed. Risk skews dovish-disappointment: any "still patient" language could disappoint a market now pricing 38% year-end cut. Housing Starts (4:30 AM ET) and Durable Goods Orders (8:30 AM ET) provide pre-market context but will be macro noise relative to the FOMC.
 
-### Thursday, May 1 (Earnings + Inflation + Growth Triple-Header)
+### Thursday, April 30 (Earnings + Inflation + Growth Triple-Header)
 | Time (ET) | Event | Impact |
 |-----------|-------|--------|
 | — | **AAPL: Q2 FY26 Earnings** | **High** |
@@ -294,7 +296,7 @@ A quiet macro tape ahead of the storm. The day will be dominated by the Sunday f
 
 **Three stacked headline risks.** Advance Q1 GDP at 8:30 AM ET (Waller's pre-blackout track was ~2.4% annualized) — print materially below 2% pressures cyclicals; above 2.5% complicates the cut narrative. **Core PCE m/m at 8:30 AM ET** is the Fed's preferred measure and arrives 18 hours after Powell's presser — a hot print would immediately unwind any dovish Powell tone; a cool print confirms the Warsh-cut-path. Employment Cost Index q/q is the wage-pressure tell. **Apple (AAPL) Q2 FY26 earnings after-close** — the iPhone cycle tape and any China commentary will move the megacap complex into Friday.
 
-### Friday, May 2
+### Friday, May 1
 | Time (ET) | Event | Impact |
 |-----------|-------|--------|
 | 9:45 | Final Manufacturing PMI | Low |
@@ -309,6 +311,7 @@ A quiet macro tape ahead of the storm. The day will be dominated by the Sunday f
 - **Tuesday 4/29 AC: GOOG/GOOGL** — Q1 2026 earnings; consensus EPS $2.68 / revenue ~$106.88B. Cloud growth rate + 2026 capex guide ($175-185B vs $91.4B in 2025) is the read.
 - **Thursday 5/1 AC: AAPL** — Q2 FY26; iPhone cycle, services growth, China revenue, AI-feature attach rates.
 - Continuing earnings season heavy week — ~25% of S&P 500 has already reported with ~80% beat rate; remaining 75% reports through May.
+
 
 
 ### Notable Absences
