@@ -440,17 +440,22 @@ Match the BigPic Solutions site theme exactly:
 - Fonts: Space Grotesk (sans), Newsreader (serif/accent)
 - Green #22c55e for positive, Red #ef4444 for negative
 - Radius: 12px cards, 20px large sections
-Sections to include:
-- Fixed nav bar with back-arrow link to ../../morning-brief/index.html (Morning Brief archive) and section anchors
-- Hero: date, event load badge (green LIGHT / amber MEDIUM / red HEAVY), brief title
-- Pre-market snapshot: color-coded grid (green up, red down)
-- Overnight/Global: compact card layout
-- Today's calendar: table with time, release, consensus, prior, significance
-- Thesis watchlist: earnings table, key levels, pre-market movers (color-coded deltas)
-- Approaching catalysts: timeline with priority color-coding
-- Scenario analysis: only if HEAVY day — tabbed or card layout per scenario
-- Today's playbook: bias card with watch-for and risk bullet points
-- Collapsible sources section
+Sections — include EVERY section below in this exact order, using the specified id= attribute:
+- Fixed nav bar: back-arrow to ../../morning-brief/index.html, brand label, and nav links:
+  href="#snapshot" href="#overnight" href="#calendar" href="#movers"
+  href="#watchlist" href="#catalysts" href="#sectors" href="#news" href="#playbook"
+- Hero: date, event load badge (green LIGHT / amber MEDIUM / red HEAVY), day's theme as title
+- Pre-market snapshot (id="snapshot"): color-coded grid (green up, red down)
+- Overnight & Global (id="overnight"): compact card layout — Asia card, Europe card, takeaway card
+- Today's calendar (id="calendar"): table with time, release, consensus, prior, significance
+- Pre-market movers (id="movers"): gainers table, decliners table, watchlist tag-ins
+- Thesis watchlist (id="watchlist"): oversold cluster table, notable Tier 1 moves, key levels
+- Approaching catalysts (id="catalysts"): timeline with priority color-coding
+- Sector snapshot (id="sectors"): ALWAYS present — sector pill grid, one line per sector max, dot colored green/amber/red
+- Scenario analysis (id="scenarios"): ONLY if HEAVY event load — bull/base/bear card layout. OMIT entirely on LIGHT or MEDIUM days.
+- News highlights (id="news"): ALWAYS present — category card grid (Markets & Macro, Earnings, Defense, Cyber, Crypto, Energy, etc.), top 3-5 items per card
+- Today's playbook (id="playbook"): bias card with bull/bear watch-fors and ranked risk factors
+- Collapsible sources (id="sources")
 - Footer with date and compilation note
 Use scroll-reveal animations, hover effects on cards, and backdrop-filter: blur(20px).
 Keep it lightweight — the daily brief should load fast and be scannable.
