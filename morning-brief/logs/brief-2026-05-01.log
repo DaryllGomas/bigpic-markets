@@ -1,0 +1,76 @@
+[2026-05-01 11:30:01] === Morning Brief Started ===
+[2026-05-01 11:30:01] Date: Friday, 2026-05-01
+[2026-05-01 11:30:01] Output: morning-brief/2026-05/2026-05-01_Fri.md + 2026-05-01_Fri.html
+[2026-05-01 11:30:01] All dependencies verified
+[2026-05-01 11:30:01] Running data collection pipeline...
+2026-05-01 11:30:02,001 INFO === Market Data Collection — 2026-05-01 ===
+2026-05-01 11:30:02,033 INFO ── Step 1: RSS Feeds ──
+2026-05-01 11:30:19,792 INFO RSS feeds: 239 headlines stored, 230 older than 24h skipped
+2026-05-01 11:30:19,792 INFO Step 1 complete: 17.8s (headlines=239)
+2026-05-01 11:30:19,792 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-01 11:30:19,795 INFO Opus analysis: sending 227 headlines to claude CLI...
+2026-05-01 11:31:04,369 INFO Opus analysis: 31 tickers, 17 movers, 9 themes from 227 headlines
+2026-05-01 11:31:04,369 INFO Step 2 complete: 44.6s (opus_tickers=31)
+2026-05-01 11:31:04,370 INFO ── Step 3: Schwab + External APIs ──
+2026-05-01 11:31:11,082 INFO Schwab quotes: 149 symbols
+2026-05-01 11:31:11,083 INFO Auto-detected movers (|change| > 3%): 11 symbols
+2026-05-01 11:31:11,084 INFO Technicals + SMA200 for 130 quoted symbols (sequential)
+2026-05-01 11:34:13,243 INFO Schwab technicals: 130/130 symbols
+2026-05-01 11:35:56,458 INFO SMA200: 130/130 symbols
+2026-05-01 11:35:56,841 INFO Schwab market context: collected
+2026-05-01 11:37:39,400 INFO Schwab earnings: 71 entries
+2026-05-01 11:37:39,414 INFO Economic calendar: 4 events
+2026-05-01 11:37:39,516 INFO CoinGecko: 2 coins
+2026-05-01 11:37:43,760 INFO Stooq: 3/3 symbols
+2026-05-01 11:38:32,153 WARNING FRED failed: The read operation timed out
+2026-05-01 11:38:34,329 INFO Yahoo backup: 1 symbols
+2026-05-01 11:38:34,330 INFO Step 3 complete: 450.0s (quotes=149, tech=130, sma200=130, earnings=71, econ=4, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-01 11:38:34,330 INFO ── Step 4: Validation + Retry ──
+2026-05-01 11:38:34,361 INFO ANOMALY: AAPL price=281.35 avg=258.36 z=3.2
+2026-05-01 11:38:34,392 INFO ANOMALY: CHKP price=114.50 avg=139.83 z=-4.0
+2026-05-01 11:38:34,426 INFO ANOMALY: GOOGL price=383.89 avg=313.80 z=3.1
+2026-05-01 11:38:34,481 INFO ANOMALY: PWR price=732.80 avg=600.50 z=4.3
+2026-05-01 11:38:34,543 INFO ANOMALY: WDC price=396.99 avg=278.64 z=6.3
+2026-05-01 11:38:34,556 INFO Anomaly detection: 5 flagged
+2026-05-01 11:38:34,556 INFO Cross-validation: 0 discrepancies
+2026-05-01 11:38:34,564 INFO Retry check: 0 failures — nothing to retry
+2026-05-01 11:38:34,580 INFO Step 4 complete: 0.2s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-05-01 11:38:34,582 INFO ── Step 5: Generate Briefing ──
+2026-05-01 11:38:34,869 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-01.md (31785 bytes)
+2026-05-01 11:38:34,886 INFO Pruned 251 rows from headlines (older than 14 days)
+2026-05-01 11:38:34,887 INFO Pruned 129 rows from levels (older than 30 days)
+2026-05-01 11:38:34,888 INFO Pruned 35 rows from opus_tickers (older than 30 days)
+2026-05-01 11:38:34,888 INFO Pruned 14 rows from opus_movers (older than 30 days)
+2026-05-01 11:38:34,889 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-05-01 11:38:34,889 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-01 11:38:34,889 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-05-01 11:38:34,890 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-05-01 11:38:35,052 INFO Cleanup complete
+2026-05-01 11:38:35,053 INFO === Collection complete: 512.5s total, completeness=100%, exit_code=0 ===
+[2026-05-01 11:38:35] Data collection complete — briefing file ready
+[2026-05-01 11:38:35] Found 9 research files (sector theses + structural calendar)
+[2026-05-01 11:38:35] Running Claude [report (attempt 1)] (timeout: 900s)...
+Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-01_Fri.md` (~1,150 words, calibrated to LIGHT day).
+
+Highlights of what shaped the writeup:
+- **Index quiet, names violent**: TWLO +18.5%, WDC -9%, AAPL +3.7% — framed as a dispersion/single-name day, not an index trade.
+- **ISM Prices flagged** as the only macro risk vector on a thin Friday tape.
+- **Defense oversold cluster** called out (LMT RSI 24, NOC RSI 23) against the $1.5T Pentagon budget tailwind into 7/21 earnings.
+- **Memory-trade rollover** flagged via SNDK/WDC fading on beats — Korean indices confirm sympathy.
+- **Next-week earnings cluster** mapped: ANET/CCJ/LDOS/LEU on 5/5, FTNT 5/6, RKLB/VST/MP 5/7.
+- All Actuals shown as Pending; data anomalies (AAPL/WDC/PWR/GOOGL) noted as real moves rather than bad ticks per the briefing context.
+[2026-05-01 11:40:45] Claude [report (attempt 1)] finished successfully
+[2026-05-01 11:40:45] Report attempt 1 succeeded: 10536 bytes
+[2026-05-01 11:40:45] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-01_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 37 symbols...
+  Got quotes for 32 symbols
+
+--- Database cross-checks (market_date=2026-05-01) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-01 11:40:50] Running Claude [html-publish] (timeout: 900s)...
