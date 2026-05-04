@@ -1,0 +1,60 @@
+2026-05-04 11:30:02,213 INFO === Market Data Collection — 2026-05-04 ===
+2026-05-04 11:30:02,278 INFO ── Step 1: RSS Feeds ──
+2026-05-04 11:30:29,467 INFO RSS feeds: 145 headlines stored, 334 older than 24h skipped
+2026-05-04 11:30:29,467 INFO Step 1 complete: 27.2s (headlines=145)
+2026-05-04 11:30:29,468 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-04 11:30:29,470 INFO Opus analysis: sending 136 headlines to claude CLI...
+2026-05-04 11:31:12,384 INFO Opus analysis: 20 tickers, 10 movers, 10 themes from 136 headlines
+2026-05-04 11:31:12,384 INFO Step 2 complete: 42.9s (opus_tickers=20)
+2026-05-04 11:31:12,385 INFO ── Step 3: Schwab + External APIs ──
+2026-05-04 11:31:19,026 INFO Schwab quotes: 138 symbols
+2026-05-04 11:31:19,027 INFO Auto-detected movers (|change| > 3%): 7 symbols
+2026-05-04 11:31:19,028 INFO Technicals + SMA200 for 119 quoted symbols (sequential)
+2026-05-04 11:32:31,935 DEBUG Schwab technicals AYAAY: HTTP Error 400: Bad Request
+2026-05-04 11:34:00,368 INFO Schwab technicals: 118/119 symbols
+2026-05-04 11:34:37,973 DEBUG SMA200 AYAAY: only 11 candles (need 200)
+2026-05-04 11:35:28,056 INFO SMA200: 118/119 symbols
+2026-05-04 11:35:28,412 INFO Schwab market context: collected
+2026-05-04 11:37:08,177 INFO Schwab earnings: 71 entries
+2026-05-04 11:37:08,193 INFO Economic calendar: 3 events
+2026-05-04 11:37:08,301 INFO CoinGecko: 2 coins
+2026-05-04 11:37:12,346 INFO Stooq: 3/3 symbols
+2026-05-04 11:38:00,711 WARNING FRED failed: The read operation timed out
+2026-05-04 11:38:02,906 INFO Yahoo backup: 1 symbols
+2026-05-04 11:38:02,906 INFO Step 3 complete: 410.5s (quotes=138, tech=118, sma200=118, earnings=71, econ=3, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-04 11:38:02,906 INFO ── Step 4: Validation + Retry ──
+2026-05-04 11:38:03,062 INFO ANOMALY: PWR price=752.30 avg=609.00 z=3.5
+2026-05-04 11:38:03,090 INFO ANOMALY: SYK price=295.94 avg=332.68 z=-4.0
+2026-05-04 11:38:03,122 INFO Anomaly detection: 2 flagged
+2026-05-04 11:38:03,122 INFO Cross-validation: 0 discrepancies
+2026-05-04 11:38:03,193 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-04 11:38:03,194 INFO   Retrying technicals for AYAAY (original error: HTTP Error 400: Bad Request)
+2026-05-04 11:38:04,445 INFO   ✗ AYAAY technicals retry failed: HTTP Error 400: Bad Request
+2026-05-04 11:38:04,453 INFO Retry complete: 0/1 recovered
+2026-05-04 11:38:04,467 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): AYAAY
+2026-05-04 11:38:04,481 INFO Step 4 complete: 1.6s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-05-04 11:38:04,482 DEBUG   us_indices: OK
+2026-05-04 11:38:04,482 DEBUG   futures: OK
+2026-05-04 11:38:04,482 DEBUG   vix: OK
+2026-05-04 11:38:04,482 DEBUG   treasuries: OK
+2026-05-04 11:38:04,482 DEBUG   commodities: OK
+2026-05-04 11:38:04,482 DEBUG   crypto: OK
+2026-05-04 11:38:04,482 DEBUG   international: OK
+2026-05-04 11:38:04,483 DEBUG   gap_fills: OK
+2026-05-04 11:38:04,483 DEBUG   econ_calendar: OK
+2026-05-04 11:38:04,483 DEBUG   market_context: OK
+2026-05-04 11:38:04,483 DEBUG   opus_analysis: OK
+2026-05-04 11:38:04,483 DEBUG   rss: OK
+2026-05-04 11:38:04,483 DEBUG   watchlist_t1: OK
+2026-05-04 11:38:04,483 INFO ── Step 5: Generate Briefing ──
+2026-05-04 11:38:04,756 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-04.md (26606 bytes)
+2026-05-04 11:38:04,775 INFO Pruned 236 rows from headlines (older than 14 days)
+2026-05-04 11:38:04,777 INFO Pruned 392 rows from levels (older than 30 days)
+2026-05-04 11:38:04,778 INFO Pruned 103 rows from opus_tickers (older than 30 days)
+2026-05-04 11:38:04,779 INFO Pruned 42 rows from opus_movers (older than 30 days)
+2026-05-04 11:38:04,779 INFO Pruned 33 rows from opus_themes (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 4 rows from opus_fed_signals (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-04 11:38:04,941 INFO Cleanup complete
+2026-05-04 11:38:04,942 INFO === Collection complete: 482.2s total, completeness=100%, exit_code=0 ===

@@ -1,0 +1,87 @@
+[2026-05-04 11:30:01] === Morning Brief Started ===
+[2026-05-04 11:30:01] Date: Monday, 2026-05-04
+[2026-05-04 11:30:01] Output: morning-brief/2026-05/2026-05-04_Mon.md + 2026-05-04_Mon.html
+[2026-05-04 11:30:01] All dependencies verified
+[2026-05-04 11:30:01] Running data collection pipeline...
+2026-05-04 11:30:02,213 INFO === Market Data Collection — 2026-05-04 ===
+2026-05-04 11:30:02,278 INFO ── Step 1: RSS Feeds ──
+2026-05-04 11:30:29,467 INFO RSS feeds: 145 headlines stored, 334 older than 24h skipped
+2026-05-04 11:30:29,467 INFO Step 1 complete: 27.2s (headlines=145)
+2026-05-04 11:30:29,468 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-04 11:30:29,470 INFO Opus analysis: sending 136 headlines to claude CLI...
+2026-05-04 11:31:12,384 INFO Opus analysis: 20 tickers, 10 movers, 10 themes from 136 headlines
+2026-05-04 11:31:12,384 INFO Step 2 complete: 42.9s (opus_tickers=20)
+2026-05-04 11:31:12,385 INFO ── Step 3: Schwab + External APIs ──
+2026-05-04 11:31:19,026 INFO Schwab quotes: 138 symbols
+2026-05-04 11:31:19,027 INFO Auto-detected movers (|change| > 3%): 7 symbols
+2026-05-04 11:31:19,028 INFO Technicals + SMA200 for 119 quoted symbols (sequential)
+2026-05-04 11:34:00,368 INFO Schwab technicals: 118/119 symbols
+2026-05-04 11:35:28,056 INFO SMA200: 118/119 symbols
+2026-05-04 11:35:28,412 INFO Schwab market context: collected
+2026-05-04 11:37:08,177 INFO Schwab earnings: 71 entries
+2026-05-04 11:37:08,193 INFO Economic calendar: 3 events
+2026-05-04 11:37:08,301 INFO CoinGecko: 2 coins
+2026-05-04 11:37:12,346 INFO Stooq: 3/3 symbols
+2026-05-04 11:38:00,711 WARNING FRED failed: The read operation timed out
+2026-05-04 11:38:02,906 INFO Yahoo backup: 1 symbols
+2026-05-04 11:38:02,906 INFO Step 3 complete: 410.5s (quotes=138, tech=118, sma200=118, earnings=71, econ=3, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-04 11:38:02,906 INFO ── Step 4: Validation + Retry ──
+2026-05-04 11:38:03,062 INFO ANOMALY: PWR price=752.30 avg=609.00 z=3.5
+2026-05-04 11:38:03,090 INFO ANOMALY: SYK price=295.94 avg=332.68 z=-4.0
+2026-05-04 11:38:03,122 INFO Anomaly detection: 2 flagged
+2026-05-04 11:38:03,122 INFO Cross-validation: 0 discrepancies
+2026-05-04 11:38:03,193 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-04 11:38:03,194 INFO   Retrying technicals for AYAAY (original error: HTTP Error 400: Bad Request)
+2026-05-04 11:38:04,445 INFO   ✗ AYAAY technicals retry failed: HTTP Error 400: Bad Request
+2026-05-04 11:38:04,453 INFO Retry complete: 0/1 recovered
+2026-05-04 11:38:04,467 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): AYAAY
+2026-05-04 11:38:04,481 INFO Step 4 complete: 1.6s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-05-04 11:38:04,483 INFO ── Step 5: Generate Briefing ──
+2026-05-04 11:38:04,756 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-04.md (26606 bytes)
+2026-05-04 11:38:04,775 INFO Pruned 236 rows from headlines (older than 14 days)
+2026-05-04 11:38:04,777 INFO Pruned 392 rows from levels (older than 30 days)
+2026-05-04 11:38:04,778 INFO Pruned 103 rows from opus_tickers (older than 30 days)
+2026-05-04 11:38:04,779 INFO Pruned 42 rows from opus_movers (older than 30 days)
+2026-05-04 11:38:04,779 INFO Pruned 33 rows from opus_themes (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 4 rows from opus_fed_signals (older than 30 days)
+2026-05-04 11:38:04,780 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-04 11:38:04,941 INFO Cleanup complete
+2026-05-04 11:38:04,942 INFO === Collection complete: 482.2s total, completeness=100%, exit_code=0 ===
+[2026-05-04 11:38:04] Data collection complete — briefing file ready
+[2026-05-04 11:38:05] Found 9 research files (sector theses + structural calendar)
+[2026-05-04 11:38:05] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-04_Mon.md` (~2,650 words, HEAVY depth).
+
+**Key takeaways:**
+- Risk-off open: VIX +6.24% to 18.05, oil +3% on disputed Iran/Hormuz warship strike report, dollar bid, gold paradoxically off 1.57% (supply-shock + dollar-haven combo, not systemic risk)
+- Light macro calendar (Factory Orders 10:00, Williams 12:50, Senior Loan Officer Survey 14:03) — tape will be driven by Hormuz headlines and the **PLTR + BWXT** earnings prints
+- Defense complex deeply oversold: NOC RSI 21, LMT 23, SYK 21, LHX 29, RTX 31 — positioning unwind, no near-term catalyst
+- Heavy week ahead: ANET/CCJ/LDOS/LEU 5/5, FTNT 5/6, RKLB/VST/MP 5/7
+- Watchlist movers: **OUST +7.83%** (clean 200-SMA breakout), **BAH +3.18%** (recovery bounce, still below 200-SMA), **MP +2.28%** (T1 breakout)
+
+**Data quality flags surfaced in the brief:**
+- Bitcoin Schwab feed showing $34.89 — clearly a proxy/ETF mislabel; news confirms spot BTC reclaimed $80K
+- PWR $752 (z 3.5) and SYK $296 (z -4.0) anomalies confirmed as real price levels, not bad ticks
+- FRED timeout (non-critical, 2Y carried as prev close)
+[2026-05-04 11:41:40] Claude [report (attempt 1)] finished successfully
+[2026-05-04 11:41:40] Report attempt 1 succeeded: 20494 bytes
+[2026-05-04 11:41:40] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-04_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 37 symbols...
+  Got quotes for 31 symbols
+
+--- Database cross-checks (market_date=2026-05-04) ---
+  2 database corrections:
+    FABRICATION: FOMC MEMBER WILLIAMS SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: SENIOR LOAN OFFICER SURVEY actual 'Scheduled' → 'Pending' (not released)
+
+  2 total corrections needed:
+    FABRICATION: FOMC MEMBER WILLIAMS SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: SENIOR LOAN OFFICER SURVEY actual 'Scheduled' → 'Pending' (not released)
+
+  2 corrections written to 2026-05-04_Mon.md
+=== Fact-check complete ===
+[2026-05-04 11:41:45] Running Claude [html-publish] (timeout: 900s)...
