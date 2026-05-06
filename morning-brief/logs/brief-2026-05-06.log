@@ -1,0 +1,111 @@
+[2026-05-06 11:30:01] === Morning Brief Started ===
+[2026-05-06 11:30:01] Date: Wednesday, 2026-05-06
+[2026-05-06 11:30:01] Output: morning-brief/2026-05/2026-05-06_Wed.md + 2026-05-06_Wed.html
+[2026-05-06 11:30:01] All dependencies verified
+[2026-05-06 11:30:01] Running data collection pipeline...
+2026-05-06 11:30:02,284 INFO === Market Data Collection — 2026-05-06 ===
+2026-05-06 11:30:02,315 INFO ── Step 1: RSS Feeds ──
+2026-05-06 11:30:29,682 INFO RSS feeds: 269 headlines stored, 210 older than 24h skipped
+2026-05-06 11:30:29,683 INFO Step 1 complete: 27.4s (headlines=269)
+2026-05-06 11:30:29,683 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-06 11:30:29,686 INFO Opus analysis: sending 256 headlines to claude CLI...
+2026-05-06 11:30:36,808 WARNING Opus analysis: claude CLI exited 1: 
+2026-05-06 11:30:36,809 INFO Step 2 complete: 7.1s (opus_tickers=0)
+2026-05-06 11:30:36,809 ERROR PIPELINE FAILED at Step 2 (Opus auth): claude CLI exited 1 with empty output — credentials likely expired. Run `claude /login` on the host.
+2026-05-06 11:30:38,213 INFO Failure email sent to daryll@bigpicsolutions.com
+[2026-05-06 11:30:38] ERROR: Data collection FAILED — claude CLI auth expired (run `claude /login` on host)
+[2026-05-06 11:30:39] ERROR: Script exited with code 1
+[2026-05-06 11:30:39] Post-mortem written to /home/bigpic/projects/bigpic-markets/morning-brief/logs/postmortem-2026-05-06.md
+[2026-05-06 12:22:02] === Morning Brief Started ===
+[2026-05-06 12:22:02] Date: Wednesday, 2026-05-06
+[2026-05-06 12:22:02] Output: morning-brief/2026-05/2026-05-06_Wed.md + 2026-05-06_Wed.html
+[2026-05-06 12:22:02] All dependencies verified
+[2026-05-06 12:22:02] Running data collection pipeline...
+2026-05-06 12:22:03,346 INFO === Market Data Collection — 2026-05-06 ===
+2026-05-06 12:22:03,398 INFO ── Step 1: RSS Feeds ──
+2026-05-06 12:22:22,366 INFO RSS feeds: 270 headlines stored, 209 older than 24h skipped
+2026-05-06 12:22:22,366 INFO Step 1 complete: 19.0s (headlines=270)
+2026-05-06 12:22:22,366 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-06 12:22:22,369 INFO Opus analysis: sending 257 headlines to claude CLI...
+2026-05-06 12:23:20,591 INFO Opus analysis: 37 tickers, 15 movers, 11 themes from 257 headlines
+2026-05-06 12:23:20,592 INFO Step 2 complete: 58.2s (opus_tickers=37)
+2026-05-06 12:23:20,592 INFO ── Step 3: Schwab + External APIs ──
+2026-05-06 12:23:28,598 INFO Schwab quotes: 151 symbols
+2026-05-06 12:23:28,599 INFO Auto-detected movers (|change| > 3%): 41 symbols
+2026-05-06 12:23:28,600 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-05-06 12:26:35,114 INFO Schwab technicals: 132/132 symbols
+2026-05-06 12:29:38,220 INFO SMA200: 132/132 symbols
+2026-05-06 12:29:39,042 INFO Schwab market context: collected
+2026-05-06 12:31:48,813 INFO Schwab earnings: 69 entries
+2026-05-06 12:31:48,828 INFO Economic calendar: 5 events
+2026-05-06 12:31:48,926 INFO CoinGecko: 2 coins
+2026-05-06 12:31:53,106 INFO Stooq: 3/3 symbols
+2026-05-06 12:32:41,381 WARNING FRED failed: The read operation timed out
+2026-05-06 12:32:43,502 INFO Yahoo backup: 1 symbols
+2026-05-06 12:32:43,503 INFO Step 3 complete: 562.9s (quotes=151, tech=132, sma200=132, earnings=69, econ=5, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-06 12:32:43,503 INFO ── Step 4: Validation + Retry ──
+2026-05-06 12:32:43,508 INFO ANOMALY: $DAX price=24975.35 avg=24135.68 z=3.8
+2026-05-06 12:32:43,572 INFO ANOMALY: CGNX price=61.00 avg=54.61 z=5.5
+2026-05-06 12:32:43,608 INFO ANOMALY: GLW price=191.69 avg=165.62 z=3.6
+2026-05-06 12:32:43,627 INFO ANOMALY: INTC price=112.86 avg=62.86 z=3.0
+2026-05-06 12:32:43,660 INFO ANOMALY: MU price=668.57 avg=476.25 z=3.7
+2026-05-06 12:32:43,662 INFO ANOMALY: NET price=246.43 avg=203.69 z=3.0
+2026-05-06 12:32:43,669 INFO ANOMALY: NVO price=47.52 avg=38.27 z=4.5
+2026-05-06 12:32:43,701 INFO ANOMALY: ROK price=442.98 avg=404.82 z=3.4
+2026-05-06 12:32:43,748 INFO ANOMALY: WDC price=479.00 avg=298.37 z=3.5
+2026-05-06 12:32:43,763 INFO Anomaly detection: 9 flagged
+2026-05-06 12:32:43,764 INFO Cross-validation: 0 discrepancies
+2026-05-06 12:32:43,774 INFO Retry check: 2 failed call(s) found, retrying...
+2026-05-06 12:32:43,775 INFO   Retrying earnings for FTNT (original error: timed out)
+2026-05-06 12:32:45,071 INFO   ✓ FTNT earnings recovered
+2026-05-06 12:32:45,071 INFO   Retrying earnings for OKTA (original error: timed out)
+2026-05-06 12:32:46,425 INFO   ✓ OKTA earnings recovered
+2026-05-06 12:32:46,434 INFO Retry complete: 2/2 recovered
+2026-05-06 12:32:46,453 INFO Step 4 complete: 2.9s (anomalies=9, cross_val=0, retried=2, completeness=100%)
+2026-05-06 12:32:46,456 INFO ── Step 5: Generate Briefing ──
+2026-05-06 12:32:46,745 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-06.md (35976 bytes)
+2026-05-06 12:32:46,763 INFO Pruned 228 rows from headlines (older than 14 days)
+2026-05-06 12:32:46,953 INFO Cleanup complete
+2026-05-06 12:32:46,954 INFO === Collection complete: 643.1s total, completeness=100%, exit_code=0 ===
+[2026-05-06 12:32:47] Data collection complete — briefing file ready
+[2026-05-06 12:32:47] Found 9 research files (sector theses + structural calendar)
+[2026-05-06 12:32:47] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning brief written: `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-06_Wed.md`
+
+**Summary of what's in the brief:**
+
+- **Event Load: HEAVY** (~2,700 words per the calibration rubric)
+- **Headline tape:** Risk-on rally on U.S.–Iran peace-deal hopes — oil −7.65%/−6.64%, futures up 0.78%–1.38% with small-caps leading, VIX −4.89%, gold +2.63%, dollar weak, duration bid (10Y −6 bp).
+- **Pre-market movers flagged with full Tier annotation:** AMD +16.32%, GLW +18.25% (both flagged anomalies), SMCI +12.92%, plus the entire AI-infra complex; ANET −8.01% as the lone Tier 1 bear; AZTA −14.91% / OUST −5.71% as drawdowns to investigate.
+- **Earnings table:** All nine watchlist names reporting today are listed with EPS Actual = "—" preserved (no fabrication). The ADP 109K print is sourced from the briefing's Economic Context block with explicit caveat about the Calendar table's stale "—".
+- **RSI extremes:** Defense Tier 1 deeply oversold (NOC 20, LMT 24, LHX 24, RTX 30); CGNX 70 / VRT 69 / AVGO 69 on the overbought side.
+- **Approaching catalysts:** RKLB / VST / MP all 2026-05-07, CEG 2026-05-11, NVDA 2026-05-20.
+- **Risk factors:** Iran-deal-pricing, nine z-score anomalies likely to mean-revert, defensives squeeze risk, FRED + 2 Schwab timeouts noted.
+- **Sources block** includes collection time (12:32:46 PT) and completeness score (100%, 66/66).
+[2026-05-06 12:36:38] Claude [report (attempt 1)] finished successfully
+[2026-05-06 12:36:38] Report attempt 1 succeeded: 19944 bytes
+[2026-05-06 12:36:38] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-06_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 42 symbols...
+  Got quotes for 35 symbols
+
+--- Database cross-checks (market_date=2026-05-06) ---
+  5 database corrections:
+    FABRICATION: ADP EMPLOYMENT (EARLY READING) actual 'Released — see Economic Context' → 'Pending' (not released)
+    FABRICATION: ADP NON-FARM EMPLOYMENT CHANGE actual 'Released — see Economic Context' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER MUSALEM SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER GOOLSBEE SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  5 total corrections needed:
+    FABRICATION: ADP EMPLOYMENT (EARLY READING) actual 'Released — see Economic Context' → 'Pending' (not released)
+    FABRICATION: ADP NON-FARM EMPLOYMENT CHANGE actual 'Released — see Economic Context' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER MUSALEM SPEAKS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FOMC MEMBER GOOLSBEE SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  5 corrections written to 2026-05-06_Wed.md
+=== Fact-check complete ===
+[2026-05-06 12:36:44] Running Claude [html-publish] (timeout: 900s)...
