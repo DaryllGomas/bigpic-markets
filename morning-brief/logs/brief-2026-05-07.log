@@ -1,0 +1,111 @@
+[2026-05-07 11:30:02] === Morning Brief Started ===
+[2026-05-07 11:30:02] Date: Thursday, 2026-05-07
+[2026-05-07 11:30:02] Output: morning-brief/2026-05/2026-05-07_Thu.md + 2026-05-07_Thu.html
+[2026-05-07 11:30:02] All dependencies verified
+[2026-05-07 11:30:02] Running data collection pipeline...
+2026-05-07 11:30:02,153 INFO === Market Data Collection — 2026-05-07 ===
+2026-05-07 11:30:02,176 INFO ── Step 1: RSS Feeds ──
+2026-05-07 11:30:24,176 INFO RSS feeds: 263 headlines stored, 206 older than 24h skipped
+2026-05-07 11:30:24,177 INFO Step 1 complete: 22.0s (headlines=263)
+2026-05-07 11:30:24,177 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-07 11:30:24,178 INFO Opus analysis: sending 242 headlines to claude CLI...
+2026-05-07 11:30:27,974 WARNING Opus analysis: claude CLI exited 1: 
+2026-05-07 11:30:27,974 INFO Step 2 complete: 3.8s (opus_tickers=0)
+2026-05-07 11:30:27,974 ERROR PIPELINE FAILED at Step 2 (Opus auth): claude CLI exited 1 with empty output — credentials likely expired. Run `claude /login` on the host.
+2026-05-07 11:30:29,093 INFO Failure email sent to daryll@bigpicsolutions.com
+[2026-05-07 11:30:29] ERROR: Data collection FAILED — claude CLI auth expired (run `claude /login` on host)
+[2026-05-07 11:30:30] ERROR: Script exited with code 1
+[2026-05-07 11:30:30] Post-mortem written to /home/bigpic/projects/bigpic-markets/morning-brief/logs/postmortem-2026-05-07.md
+[2026-05-07 14:08:05] === Morning Brief Started ===
+[2026-05-07 14:08:05] Date: Thursday, 2026-05-07
+[2026-05-07 14:08:05] Output: morning-brief/2026-05/2026-05-07_Thu.md + 2026-05-07_Thu.html
+[2026-05-07 14:08:05] All dependencies verified
+[2026-05-07 14:08:05] Running data collection pipeline...
+2026-05-07 14:08:06,046 INFO === Market Data Collection — 2026-05-07 ===
+2026-05-07 14:08:06,096 INFO ── Step 1: RSS Feeds ──
+2026-05-07 14:08:28,724 INFO RSS feeds: 263 headlines stored, 206 older than 24h skipped
+2026-05-07 14:08:28,725 INFO Step 1 complete: 22.6s (headlines=263)
+2026-05-07 14:08:28,725 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-07 14:08:28,728 INFO Opus analysis: sending 251 headlines to claude CLI...
+2026-05-07 14:09:33,465 INFO Opus analysis: 62 tickers, 20 movers, 11 themes from 251 headlines
+2026-05-07 14:09:33,466 INFO Step 2 complete: 64.7s (opus_tickers=62)
+2026-05-07 14:09:33,466 INFO ── Step 3: Schwab + External APIs ──
+2026-05-07 14:09:53,166 INFO Schwab quotes: 169 symbols
+2026-05-07 14:09:53,167 INFO Auto-detected movers (|change| > 3%): 60 symbols
+2026-05-07 14:09:53,168 INFO Technicals + SMA200 for 150 quoted symbols (sequential)
+2026-05-07 14:15:58,703 INFO Schwab technicals: 150/150 symbols
+2026-05-07 14:20:38,975 INFO SMA200: 149/150 symbols
+2026-05-07 14:20:41,721 INFO Schwab market context: collected
+2026-05-07 14:23:51,188 INFO Schwab earnings: 71 entries
+2026-05-07 14:23:51,208 INFO Economic calendar: 12 events
+2026-05-07 14:23:51,294 INFO CoinGecko: 2 coins
+2026-05-07 14:23:55,306 INFO Stooq: 3/3 symbols
+2026-05-07 14:24:43,651 WARNING FRED failed: The read operation timed out
+2026-05-07 14:24:45,765 INFO Yahoo backup: 1 symbols
+2026-05-07 14:24:45,766 INFO Step 3 complete: 912.3s (quotes=169, tech=150, sma200=149, earnings=71, econ=12, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-07 14:24:45,766 INFO ── Step 4: Validation + Retry ──
+2026-05-07 14:24:45,779 INFO ANOMALY: $N225 price=62833.84 avg=58882.70 z=3.2
+2026-05-07 14:24:45,790 INFO ANOMALY: /BZN26 price=96.80 avg=108.36 z=-3.0
+2026-05-07 14:24:45,825 INFO ANOMALY: AZTA price=18.28 avg=24.26 z=-3.9
+2026-05-07 14:24:45,852 INFO ANOMALY: CGNX price=70.65 avg=54.95 z=8.5
+2026-05-07 14:24:45,884 INFO ANOMALY: FLNC price=17.62 avg=13.29 z=4.6
+2026-05-07 14:24:45,886 INFO ANOMALY: FTNT price=110.94 avg=83.59 z=8.4
+2026-05-07 14:24:45,917 INFO ANOMALY: LDOS price=132.72 avg=151.69 z=-3.2
+2026-05-07 14:24:45,992 INFO ANOMALY: ROK price=452.31 avg=407.87 z=3.5
+2026-05-07 14:24:46,043 INFO ANOMALY: UUUU price=24.86 avg=20.67 z=3.3
+2026-05-07 14:24:46,058 INFO Anomaly detection: 9 flagged
+2026-05-07 14:24:46,059 INFO Cross-validation: 0 discrepancies
+2026-05-07 14:24:46,075 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-07 14:24:46,075 INFO   Retrying sma200 for BWXT (original error: timed out)
+2026-05-07 14:24:49,886 INFO   ✓ BWXT sma200 recovered
+2026-05-07 14:24:49,893 INFO Retry complete: 1/1 recovered
+2026-05-07 14:24:49,912 INFO Step 4 complete: 4.1s (anomalies=9, cross_val=0, retried=1, completeness=100%)
+2026-05-07 14:24:49,914 INFO ── Step 5: Generate Briefing ──
+2026-05-07 14:24:50,243 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-07.md (37485 bytes)
+2026-05-07 14:24:50,260 INFO Pruned 245 rows from headlines (older than 14 days)
+2026-05-07 14:24:50,262 INFO Pruned 125 rows from levels (older than 30 days)
+2026-05-07 14:24:50,263 INFO Pruned 27 rows from opus_tickers (older than 30 days)
+2026-05-07 14:24:50,263 INFO Pruned 12 rows from opus_movers (older than 30 days)
+2026-05-07 14:24:50,264 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-05-07 14:24:50,264 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-07 14:24:50,265 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-05-07 14:24:50,265 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-05-07 14:24:50,488 INFO Cleanup complete
+2026-05-07 14:24:50,489 INFO === Collection complete: 1003.8s total, completeness=100%, exit_code=0 ===
+[2026-05-07 14:24:50] Data collection complete — briefing file ready
+[2026-05-07 14:24:50] Found 9 research files (sector theses + structural calendar)
+[2026-05-07 14:24:50] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief for Thursday, May 7, 2026 has been written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-07_Thu.md`.
+
+**Key highlights captured:**
+
+- **Event Load: HEAVY** — Four watchlist earnings before open (RKLB, VST, MP, NET), three Fed speakers in afternoon (Kashkari/Hammack/Williams), Jobless Claims + Productivity at 8:30, and **9 z-score anomalies** flagged.
+
+- **Cross-asset profile**: Defensive drift in cash (Russell −0.78%, Dow −0.16%, Nasdaq +0.41%), VIX 17.16 (normal regime), oil collapsing for a second day on Iran-deal hopes (WTI −4.53%, Brent −4.41% / −3.0σ), gold +1.36%, BTC pulling back from near-breakout.
+
+- **Big watchlist signals**:
+  - **Cybersecurity melt-up** on PAN-OS RCE active exploitation: FTNT +23.34% (+8.4σ), ZS +8.84%, PANW +7.44%, CRWD +6.05%
+  - **Lithium reignition**: ALB +12.69%, SQM +3.38%, FLNC +29.98%
+  - **Robotics machine-vision**: CGNX +13.48% (+8.5σ — the day's largest anomaly)
+  - **AI Infrastructure bifurcating**: software bid (NOW, PLTR), picks-and-shovels sold (VRT, CIEN −8.55%, MRVL, PWR)
+  - **Defense deeply oversold**: NOC RSI 20, LHX RSI 24, LMT RSI 28 — Iran-deal trade has eaten the premium
+  - **Space all red** into RKLB print
+
+- **Followed all critical rules**: Every Calendar event marked "Pending" (no fabricated actuals), all earnings flagged "—" not reported, every figure attributed to the briefing file, anomaly caveats included, and the Nikkei +5.58% / +3.2σ flagged for data-integrity verification.
+
+Word count: ~2,750 words — within the HEAVY depth target.
+[2026-05-07 14:28:45] Claude [report (attempt 1)] finished successfully
+[2026-05-07 14:28:46] Report attempt 1 succeeded: 23258 bytes
+[2026-05-07 14:28:46] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-07_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 31 symbols...
+  Got quotes for 24 symbols
+
+--- Database cross-checks (market_date=2026-05-07) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-07 14:28:50] Running Claude [html-publish] (timeout: 900s)...
