@@ -1,0 +1,84 @@
+[2026-05-08 11:30:01] === Morning Brief Started ===
+[2026-05-08 11:30:01] Date: Friday, 2026-05-08
+[2026-05-08 11:30:01] Output: morning-brief/2026-05/2026-05-08_Fri.md + 2026-05-08_Fri.html
+[2026-05-08 11:30:01] All dependencies verified
+[2026-05-08 11:30:01] Running data collection pipeline...
+2026-05-08 11:30:01,214 INFO === Market Data Collection — 2026-05-08 ===
+2026-05-08 11:30:01,228 INFO ── Step 1: RSS Feeds ──
+2026-05-08 11:30:24,250 INFO RSS feeds: 252 headlines stored, 227 older than 24h skipped
+2026-05-08 11:30:24,251 INFO Step 1 complete: 23.0s (headlines=252)
+2026-05-08 11:30:24,251 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-08 11:30:24,254 INFO Opus analysis: sending 214 headlines to claude CLI...
+2026-05-08 11:31:17,111 INFO Opus analysis: 54 tickers, 13 movers, 9 themes from 214 headlines
+2026-05-08 11:31:17,111 INFO Step 2 complete: 52.9s (opus_tickers=54)
+2026-05-08 11:31:17,111 INFO ── Step 3: Schwab + External APIs ──
+2026-05-08 11:31:24,934 INFO Schwab quotes: 163 symbols
+2026-05-08 11:31:24,935 INFO Auto-detected movers (|change| > 3%): 17 symbols
+2026-05-08 11:31:24,936 INFO Technicals + SMA200 for 144 quoted symbols (sequential)
+2026-05-08 11:34:39,310 INFO Schwab technicals: 144/144 symbols
+2026-05-08 11:36:25,171 INFO SMA200: 144/144 symbols
+2026-05-08 11:36:25,519 INFO Schwab market context: collected
+2026-05-08 11:38:05,311 INFO Schwab earnings: 71 entries
+2026-05-08 11:38:05,329 INFO Economic calendar: 13 events
+2026-05-08 11:38:05,494 INFO CoinGecko: 2 coins
+2026-05-08 11:38:10,091 INFO Stooq: 3/3 symbols
+2026-05-08 11:38:58,396 WARNING FRED failed: The read operation timed out
+2026-05-08 11:39:00,751 INFO Yahoo backup: 1 symbols
+2026-05-08 11:39:00,752 INFO Step 3 complete: 463.6s (quotes=163, tech=144, sma200=144, earnings=71, econ=13, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-08 11:39:00,752 INFO ── Step 4: Validation + Retry ──
+2026-05-08 11:39:00,853 INFO ANOMALY: FLNC price=23.65 avg=13.51 z=7.5
+2026-05-08 11:39:00,857 INFO ANOMALY: FTNT price=106.70 avg=84.99 z=3.1
+2026-05-08 11:39:00,943 INFO ANOMALY: ROK price=460.32 avg=411.19 z=3.2
+2026-05-08 11:39:01,004 INFO Anomaly detection: 3 flagged
+2026-05-08 11:39:01,004 INFO Cross-validation: 0 discrepancies
+2026-05-08 11:39:01,013 INFO Retry check: 0 failures — nothing to retry
+2026-05-08 11:39:01,029 INFO Step 4 complete: 0.3s (anomalies=3, cross_val=0, retried=0, completeness=100%)
+2026-05-08 11:39:01,031 INFO ── Step 5: Generate Briefing ──
+2026-05-08 11:39:01,326 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-08.md (33235 bytes)
+2026-05-08 11:39:01,343 INFO Pruned 231 rows from headlines (older than 14 days)
+2026-05-08 11:39:01,344 INFO Pruned 128 rows from levels (older than 30 days)
+2026-05-08 11:39:01,345 INFO Pruned 37 rows from opus_tickers (older than 30 days)
+2026-05-08 11:39:01,345 INFO Pruned 11 rows from opus_movers (older than 30 days)
+2026-05-08 11:39:01,346 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-05-08 11:39:01,346 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-08 11:39:01,346 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-05-08 11:39:01,347 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-05-08 11:39:01,513 INFO Cleanup complete
+2026-05-08 11:39:01,514 INFO === Collection complete: 539.8s total, completeness=100%, exit_code=0 ===
+[2026-05-08 11:39:01] Data collection complete — briefing file ready
+[2026-05-08 11:39:01] Found 9 research files (sector theses + structural calendar)
+[2026-05-08 11:39:01] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-08_Fri.md`.
+
+**Highlights of the brief:**
+
+- **Event Load: HEAVY** — calibrated to ~2,800 words. The day is dominated by 8:30 ET NFP (consensus 65K vs. prior 178K), 10:00 UoM Sentiment + 1-yr inflation expectations, Trump at noon, and a four-Fed-governor cluster post-close at 19:30 ET.
+
+- **Setup:** Risk-on into the print — futures green (Nasdaq +0.73% leading), VIX 17.06 (no fear bid), DXY -0.28%, gold +0.46%, curve steepening (+59 bps). Crypto the lone dent (BTC sub-$80K, $300M liquidated).
+
+- **Watchlist movers flagged:** FLNC +24.67% (Energy Storage Tier 1, anomaly z=7.5), RKLB +7.92% (Golden Dome JV), MP +3.93%, PL +3.13%; downside NET -16.99% (cyber/AI dislocation), CRWV -7.24%.
+
+- **Defense-prime oversold cluster** called out (NOC RSI 19, LDOS 22, LHX 24, SYK 27, LMT 28) against space-name strength — a clear rotation signal.
+
+- **Data-quality caveats** preserved per the briefing: FRED 2Y timeout (prior close used), FLNC/FTNT/ROK z-score anomalies flagged with reasoned confirmation rather than fabrication.
+
+- **All numbers sourced from the briefing file** — no actuals reported for unreleased events; consensus/prior format used throughout the calendar table.
+[2026-05-08 11:42:30] Claude [report (attempt 1)] finished successfully
+[2026-05-08 11:42:30] Report attempt 1 succeeded: 19262 bytes
+[2026-05-08 11:42:30] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-08_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 42 symbols...
+  Got quotes for 35 symbols
+
+--- Database cross-checks (market_date=2026-05-08) ---
+  1 database corrections:
+    FABRICATION: FOMC MEMBER COOK SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: FOMC MEMBER COOK SPEAKS actual 'Scheduled' → 'Pending' (not released)
+
+  1 corrections written to 2026-05-08_Fri.md
+=== Fact-check complete ===
+[2026-05-08 11:42:37] Running Claude [html-publish] (timeout: 900s)...
