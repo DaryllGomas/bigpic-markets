@@ -1,0 +1,84 @@
+[2026-05-12 11:30:01] === Morning Brief Started ===
+[2026-05-12 11:30:01] Date: Tuesday, 2026-05-12
+[2026-05-12 11:30:01] Output: morning-brief/2026-05/2026-05-12_Tue.md + 2026-05-12_Tue.html
+[2026-05-12 11:30:01] All dependencies verified
+[2026-05-12 11:30:01] Running data collection pipeline...
+2026-05-12 11:30:01,409 INFO === Market Data Collection — 2026-05-12 ===
+2026-05-12 11:30:01,427 INFO ── Step 1: RSS Feeds ──
+2026-05-12 11:30:23,122 INFO RSS feeds: 242 headlines stored, 227 older than 24h skipped
+2026-05-12 11:30:23,122 INFO Step 1 complete: 21.7s (headlines=242)
+2026-05-12 11:30:23,122 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-12 11:30:23,125 INFO Opus analysis: sending 230 headlines to claude CLI...
+2026-05-12 11:30:56,377 INFO Opus analysis: 42 tickers, 13 movers, 11 themes from 230 headlines
+2026-05-12 11:30:56,377 INFO Step 2 complete: 33.3s (opus_tickers=42)
+2026-05-12 11:30:56,377 INFO ── Step 3: Schwab + External APIs ──
+2026-05-12 11:31:03,247 INFO Schwab quotes: 157 symbols
+2026-05-12 11:31:03,247 INFO Auto-detected movers (|change| > 3%): 15 symbols
+2026-05-12 11:31:03,248 INFO Technicals + SMA200 for 138 quoted symbols (sequential)
+2026-05-12 11:34:08,750 INFO Schwab technicals: 138/138 symbols
+2026-05-12 11:35:51,047 INFO SMA200: 137/138 symbols
+2026-05-12 11:35:51,428 INFO Schwab market context: collected
+2026-05-12 11:37:31,341 INFO Schwab earnings: 71 entries
+2026-05-12 11:37:31,357 INFO Economic calendar: 13 events
+2026-05-12 11:37:31,459 INFO CoinGecko: 2 coins
+2026-05-12 11:37:35,346 INFO Stooq: 3/3 symbols
+2026-05-12 11:38:23,631 WARNING FRED failed: The read operation timed out
+2026-05-12 11:38:25,806 INFO Yahoo backup: 1 symbols
+2026-05-12 11:38:25,807 INFO Step 3 complete: 449.4s (quotes=157, tech=138, sma200=137, earnings=71, econ=13, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-12 11:38:25,807 INFO ── Step 4: Validation + Retry ──
+2026-05-12 11:38:25,839 INFO ANOMALY: AAPL price=291.65 avg=260.27 z=3.1
+2026-05-12 11:38:25,908 INFO ANOMALY: FLNC price=26.15 avg=14.52 z=3.4
+2026-05-12 11:38:25,916 INFO ANOMALY: GLW price=206.83 avg=169.96 z=3.1
+2026-05-12 11:38:25,939 INFO ANOMALY: IONQ price=58.59 avg=44.78 z=3.1
+2026-05-12 11:38:25,944 INFO ANOMALY: ISRG price=419.92 avg=464.01 z=-4.4
+2026-05-12 11:38:26,012 INFO ANOMALY: QCOM price=230.50 avg=141.81 z=6.2
+2026-05-12 11:38:26,017 INFO ANOMALY: QUBT price=12.66 avg=9.24 z=5.1
+2026-05-12 11:38:26,021 INFO ANOMALY: RKLB price=113.40 avg=82.97 z=4.1
+2026-05-12 11:38:26,071 INFO Anomaly detection: 8 flagged
+2026-05-12 11:38:26,071 INFO Cross-validation: 0 discrepancies
+2026-05-12 11:38:26,080 INFO Retry check: 0 failures — nothing to retry
+2026-05-12 11:38:26,097 INFO Step 4 complete: 0.3s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-05-12 11:38:26,099 INFO ── Step 5: Generate Briefing ──
+2026-05-12 11:38:26,382 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-12.md (32508 bytes)
+2026-05-12 11:38:26,398 INFO Pruned 128 rows from headlines (older than 14 days)
+2026-05-12 11:38:26,570 INFO Cleanup complete
+2026-05-12 11:38:26,571 INFO === Collection complete: 504.7s total, completeness=100%, exit_code=0 ===
+[2026-05-12 11:38:26] Data collection complete — briefing file ready
+[2026-05-12 11:38:26] Found 9 research files (sector theses + structural calendar)
+[2026-05-12 11:38:26] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief complete. Key highlights of what I wrote:
+
+**File:** `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-12_Tue.md` (~2,700 words, HEAVY-load depth)
+
+**Day setup:**
+- **HEAVY event load**: US CPI at 8:30 ET (3.7% y/y expected vs 3.3% prior — re-acceleration baked in), Fed Chair nomination vote at noon, Google I/O 2026 all day, 10Y auction at 1:01 PM.
+- Pre-bell red across the board (ES −0.40%, NQ −0.88%), VIX +2.29% to 18.80.
+- Oil spike (+3%, WTI $101, Brent $107) on Iran tensions adds stagflation flavor.
+- Kospi −4.29% overnight on AI-build cost questions — major signal for the Mag-7/chip complex.
+
+**Watchlist takeaways:**
+- 4 watchlist names broke the 3% mover threshold: FLNC (+3.63%), RKLB (−3.37%), LUNR (−3.02%), and ASTS-adjacent space froth.
+- Overbought cluster: FTNT (RSI 85), FLNC (83), CGNX (82), PANW (78), CRWD (76).
+- Deeply oversold (mean-reversion candidates if CPI cools): NOC (RSI 18), LDOS (20), SYK (22), LHX (27), ISRG (30 — with z=−4.4 anomaly), LMT (30).
+- Next watchlist earnings: NVDA on 5/20.
+
+**Data quality notes:** Flagged the FRED timeout, the listed anomalies, and the BTC Schwab proxy discrepancy ($35.67 Schwab figure vs. ~$80–82K Opus market intel context — handled by labeling the table entry as a Schwab proxy).
+[2026-05-12 11:40:46] Claude [report (attempt 1)] finished successfully
+[2026-05-12 11:40:46] Report attempt 1 succeeded: 17330 bytes
+[2026-05-12 11:40:46] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-12_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 52 symbols...
+  Got quotes for 42 symbols
+
+--- Database cross-checks (market_date=2026-05-12) ---
+  1 database corrections:
+    FABRICATION: GOOG: GOOGLE I/O 2026 actual 'Scheduled' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: GOOG: GOOGLE I/O 2026 actual 'Scheduled' → 'Pending' (not released)
+
+  1 corrections written to 2026-05-12_Tue.md
+=== Fact-check complete ===
+[2026-05-12 11:40:54] Running Claude [html-publish] (timeout: 900s)...
