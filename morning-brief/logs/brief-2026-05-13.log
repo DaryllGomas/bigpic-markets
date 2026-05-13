@@ -1,0 +1,71 @@
+[2026-05-13 11:30:01] === Morning Brief Started ===
+[2026-05-13 11:30:01] Date: Wednesday, 2026-05-13
+[2026-05-13 11:30:01] Output: morning-brief/2026-05/2026-05-13_Wed.md + 2026-05-13_Wed.html
+[2026-05-13 11:30:01] All dependencies verified
+[2026-05-13 11:30:01] Running data collection pipeline...
+2026-05-13 11:30:01,320 INFO === Market Data Collection — 2026-05-13 ===
+2026-05-13 11:30:01,334 INFO ── Step 1: RSS Feeds ──
+2026-05-13 11:30:26,347 INFO RSS feeds: 263 headlines stored, 206 older than 24h skipped
+2026-05-13 11:30:26,348 INFO Step 1 complete: 25.0s (headlines=263)
+2026-05-13 11:30:26,348 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-13 11:30:26,351 INFO Opus analysis: sending 255 headlines to claude CLI...
+2026-05-13 11:30:57,160 INFO Opus analysis: 38 tickers, 10 movers, 10 themes from 255 headlines
+2026-05-13 11:30:57,160 INFO Step 2 complete: 30.8s (opus_tickers=38)
+2026-05-13 11:30:57,160 INFO ── Step 3: Schwab + External APIs ──
+2026-05-13 11:31:03,720 INFO Schwab quotes: 147 symbols
+2026-05-13 11:31:03,720 INFO Auto-detected movers (|change| > 3%): 13 symbols
+2026-05-13 11:31:03,721 INFO Technicals + SMA200 for 128 quoted symbols (sequential)
+2026-05-13 11:33:55,762 INFO Schwab technicals: 128/128 symbols
+2026-05-13 11:35:31,499 INFO SMA200: 127/128 symbols
+2026-05-13 11:35:31,856 INFO Schwab market context: collected
+2026-05-13 11:37:10,768 INFO Schwab earnings: 71 entries
+2026-05-13 11:37:10,786 INFO Economic calendar: 9 events
+2026-05-13 11:37:10,873 INFO CoinGecko: 2 coins
+2026-05-13 11:37:14,609 INFO Stooq: 3/3 symbols
+2026-05-13 11:38:03,055 WARNING FRED failed: The read operation timed out
+2026-05-13 11:38:05,240 INFO Yahoo backup: 1 symbols
+2026-05-13 11:38:05,240 INFO Step 3 complete: 428.1s (quotes=147, tech=128, sma200=127, earnings=71, econ=9, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-13 11:38:05,240 INFO ── Step 4: Validation + Retry ──
+2026-05-13 11:38:05,315 INFO ANOMALY: CSCO price=99.07 avg=77.74 z=7.6
+2026-05-13 11:38:05,319 INFO ANOMALY: DELL price=244.00 avg=145.25 z=4.3
+2026-05-13 11:38:05,380 INFO ANOMALY: LUNR price=34.39 avg=26.53 z=3.8
+2026-05-13 11:38:05,420 INFO ANOMALY: QS price=9.03 avg=7.37 z=3.3
+2026-05-13 11:38:05,425 INFO ANOMALY: RKLB price=124.95 avg=85.00 z=4.1
+2026-05-13 11:38:05,479 INFO Anomaly detection: 5 flagged
+2026-05-13 11:38:05,479 INFO Cross-validation: 0 discrepancies
+2026-05-13 11:38:05,488 INFO Retry check: 0 failures — nothing to retry
+2026-05-13 11:38:05,505 INFO Step 4 complete: 0.3s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-05-13 11:38:05,507 INFO ── Step 5: Generate Briefing ──
+2026-05-13 11:38:05,798 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-13.md (32542 bytes)
+2026-05-13 11:38:05,815 INFO Pruned 228 rows from headlines (older than 14 days)
+2026-05-13 11:38:05,996 INFO Cleanup complete
+2026-05-13 11:38:05,997 INFO === Collection complete: 484.2s total, completeness=100%, exit_code=0 ===
+[2026-05-13 11:38:06] Data collection complete — briefing file ready
+[2026-05-13 11:38:06] Found 9 research files (sector theses + structural calendar)
+[2026-05-13 11:38:06] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-13_Wed.md`.
+
+**Key highlights from today's HEAVY-load tape:**
+
+- **Pre-market:** NQ +0.65%, ES +0.19%, YM -0.28% — Nasdaq-led tape with rate-sensitive Dow lagging post-CPI. VIX 17.90, 30-Y at 5.031%.
+- **Binary day setup:** PPI at 8:30 ET (Core +0.3% est. vs +0.1% prior) plus **Fed Chair Nomination Vote at 12:29 ET** plus 30-Y auction at 13:01 ET — a triple-stack that can produce a sharp reversal if anything tails.
+- **Space sector ripping:** RKLB +6.29%, LUNR +7.17%, SPIR +6.33% (earnings BMO), PL +3.56%, MNTS +5.06%, RDW +3.81%.
+- **AI Infra strong:** MU +5.24%, GLW +4.80%, CRWV +3.83%, NVDA +2.12% (earnings May 20).
+- **RSI extremes flagged:** Cyber overbought cluster (FTNT 81, PANW 79, CRWD 77); Defense oversold (LDOS 22, NOC 26).
+- **Earnings today:** USAR + SPIR (both BMO, no actuals yet).
+- **Data quality:** Flagged pipeline z-score anomalies on CSCO/DELL (likely stale, recommended verification at open) — LUNR/QS/RKLB anomalies corroborated by genuine momentum + news.
+[2026-05-13 11:40:25] Claude [report (attempt 1)] finished successfully
+[2026-05-13 11:40:25] Report attempt 1 succeeded: 17316 bytes
+[2026-05-13 11:40:25] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-13_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 53 symbols...
+  Got quotes for 48 symbols
+
+--- Database cross-checks (market_date=2026-05-13) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-13 11:40:33] Running Claude [html-publish] (timeout: 900s)...
