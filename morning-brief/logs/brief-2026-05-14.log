@@ -1,0 +1,89 @@
+[2026-05-14 11:30:01] === Morning Brief Started ===
+[2026-05-14 11:30:01] Date: Thursday, 2026-05-14
+[2026-05-14 11:30:01] Output: morning-brief/2026-05/2026-05-14_Thu.md + 2026-05-14_Thu.html
+[2026-05-14 11:30:01] All dependencies verified
+[2026-05-14 11:30:01] Running data collection pipeline...
+2026-05-14 11:30:01,466 INFO === Market Data Collection — 2026-05-14 ===
+2026-05-14 11:30:01,481 INFO ── Step 1: RSS Feeds ──
+2026-05-14 11:30:23,480 INFO RSS feeds: 264 headlines stored, 215 older than 24h skipped
+2026-05-14 11:30:23,481 INFO Step 1 complete: 22.0s (headlines=264)
+2026-05-14 11:30:23,481 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-14 11:30:23,484 INFO Opus analysis: sending 253 headlines to claude CLI...
+2026-05-14 11:31:08,665 INFO Opus analysis: 40 tickers, 15 movers, 10 themes from 253 headlines
+2026-05-14 11:31:08,665 INFO Step 2 complete: 45.2s (opus_tickers=40)
+2026-05-14 11:31:08,665 INFO ── Step 3: Schwab + External APIs ──
+2026-05-14 11:31:15,720 INFO Schwab quotes: 148 symbols
+2026-05-14 11:31:15,721 INFO Auto-detected movers (|change| > 3%): 12 symbols
+2026-05-14 11:31:15,721 INFO Technicals + SMA200 for 129 quoted symbols (sequential)
+2026-05-14 11:34:10,967 INFO Schwab technicals: 127/129 symbols
+2026-05-14 11:35:47,400 INFO SMA200: 126/129 symbols
+2026-05-14 11:35:47,749 INFO Schwab market context: collected
+2026-05-14 11:37:32,887 INFO Schwab earnings: 71 entries
+2026-05-14 11:37:32,907 INFO Economic calendar: 14 events
+2026-05-14 11:37:33,065 INFO CoinGecko: 2 coins
+2026-05-14 11:37:37,013 INFO Stooq: 3/3 symbols
+2026-05-14 11:38:25,295 WARNING FRED failed: The read operation timed out
+2026-05-14 11:38:27,410 INFO Yahoo backup: 1 symbols
+2026-05-14 11:38:27,411 INFO Step 3 complete: 438.7s (quotes=148, tech=127, sma200=126, earnings=71, econ=14, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-14 11:38:27,411 INFO ── Step 4: Validation + Retry ──
+2026-05-14 11:38:27,486 INFO ANOMALY: CSCO price=117.28 avg=80.78 z=4.3
+2026-05-14 11:38:27,495 INFO ANOMALY: ENPH price=42.20 avg=34.58 z=3.6
+2026-05-14 11:38:27,582 INFO ANOMALY: OUST price=33.56 avg=26.90 z=4.0
+2026-05-14 11:38:27,584 INFO ANOMALY: PANW price=228.00 avg=183.83 z=3.1
+2026-05-14 11:38:27,650 INFO ANOMALY: VST price=142.50 avg=158.90 z=-3.0
+2026-05-14 11:38:27,660 INFO Anomaly detection: 5 flagged
+2026-05-14 11:38:27,660 INFO Cross-validation: 0 discrepancies
+2026-05-14 11:38:27,670 INFO Retry check: 2 failed call(s) found, retrying...
+2026-05-14 11:38:27,670 INFO   Retrying technicals for SSNLF (original error: HTTP Error 400: Bad Request)
+2026-05-14 11:38:29,008 INFO   ✗ SSNLF technicals retry failed: HTTP Error 400: Bad Request
+2026-05-14 11:38:29,009 INFO   Retrying technicals for FXCOF (original error: HTTP Error 400: Bad Request)
+2026-05-14 11:38:30,192 INFO   ✗ FXCOF technicals retry failed: HTTP Error 400: Bad Request
+2026-05-14 11:38:30,199 INFO Retry complete: 0/2 recovered
+2026-05-14 11:38:30,222 WARNING Excluding 2 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): FXCOF, SSNLF
+2026-05-14 11:38:30,235 INFO Step 4 complete: 2.8s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-05-14 11:38:30,239 INFO ── Step 5: Generate Briefing ──
+2026-05-14 11:38:30,538 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-14.md (34219 bytes)
+2026-05-14 11:38:30,549 INFO Pruned 162 rows from quotes (older than 90 days)
+2026-05-14 11:38:30,553 INFO Pruned 139 rows from technicals (older than 90 days)
+2026-05-14 11:38:30,558 INFO Pruned 245 rows from headlines (older than 14 days)
+2026-05-14 11:38:30,560 INFO Pruned 123 rows from levels (older than 30 days)
+2026-05-14 11:38:30,560 INFO Pruned 24 rows from opus_tickers (older than 30 days)
+2026-05-14 11:38:30,561 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-05-14 11:38:30,561 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-05-14 11:38:30,562 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-05-14 11:38:30,563 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-05-14 11:38:30,563 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-05-14 11:38:30,573 INFO Pruned 6 rows from economic_events (older than 90 days)
+2026-05-14 11:38:30,575 INFO Pruned 67 rows from earnings (older than 90 days)
+2026-05-14 11:38:30,575 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-14 11:38:30,745 INFO Cleanup complete
+2026-05-14 11:38:30,746 INFO === Collection complete: 508.8s total, completeness=100%, exit_code=0 ===
+[2026-05-14 11:38:30] Data collection complete — briefing file ready
+[2026-05-14 11:38:30] Found 9 research files (sector theses + structural calendar)
+[2026-05-14 11:38:30] Running Claude [report (attempt 1)] (timeout: 900s)...
+Morning Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-14_Thu.md`.
+
+**Summary of what's in the brief (HEAVY event load, ~2,500 words):**
+
+- **The story:** Cisco +15.13% pre-market on AI orders is dominating tape — Dow futures +0.69% leading Nasdaq's modest +0.19%, an unusual flip for an "AI day" that signals narrow leadership.
+- **Calendar risk:** US Retail Sales (8:30 ET, consensus +0.5% vs prior +1.7%) is the asymmetric event into a tape where PPI already printed 6%. Four Fed speakers spread across the day (Schmid 10:15, Hammack 13:00, Williams 17:45, Barr 19:00).
+- **Watchlist hits in pre-market movers:** MRVL +3.86%, PSN +3.50%, RDW +3.33% to the upside; **LUNR -3.25% into BMO earnings today** (RSI 72, parabolic technicals), OKLO -3.42%.
+- **RSI extremes flagged:** Cyber complex stretched (CRWD 79, FTNT 83, PANW 83); Defense washed out (NOC 25, LMT 36); LDOS oversold at 19.
+- **Catalysts mapped:** NVDA earnings May 20 (+ today's H200 China clearance), ZS May 26, PANW/CRWD June 2-3, FERC Crane decision June/July (CEG setup), monthly OpEx tomorrow.
+- **Data-quality notes:** Five z-score anomalies surfaced (CSCO, ENPH, OUST, PANW, VST). CSCO is news-confirmed; ENPH and OUST flagged as needing verification before sizing. FRED timeout noted (2Y yield is prior close).
+- **Bias:** Cautiously constructive with high two-way risk at 8:30 ET; crypto weakness (BTC -1.69% through $80K) flagged as the cleanest risk-off whisper beneath the surface.
+[2026-05-14 11:41:06] Claude [report (attempt 1)] finished successfully
+[2026-05-14 11:41:06] Report attempt 1 succeeded: 18332 bytes
+[2026-05-14 11:41:06] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-14_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 42 symbols...
+  Got quotes for 38 symbols
+
+--- Database cross-checks (market_date=2026-05-14) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-14 11:41:13] Running Claude [html-publish] (timeout: 900s)...
