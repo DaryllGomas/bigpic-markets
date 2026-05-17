@@ -1,0 +1,61 @@
+[2026-05-17 23:00:01] === Eagle Eye W20 Started ===
+[2026-05-17 23:00:01] Week ending: 2026-05-15
+[2026-05-17 23:00:02] Output: eagle-eye/W20_2026-05-17/
+[2026-05-17 23:00:02] All dependencies verified
+[2026-05-17 23:00:02] Found 9 research files (sector theses + structural calendar)
+[2026-05-17 23:00:02] Collecting economic calendar for 2026-05-18 to 2026-05-22...
+23:00:02 [INFO] Collecting economic calendar: 2026-05-18 to 2026-05-22
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 23 upcoming events
+23:00:02 [INFO]   Filtered to 23 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W20_2026-05-17/next_week_calendar.md (23 events, 5 absences, confidence=high)
+[2026-05-17 23:00:02] Calendar collected (full confidence)
+[2026-05-17 23:00:02] Running Claude [research] (timeout: 3600s)...
+Eagle Eye W20 complete. All artifacts in `/home/bigpic/projects/bigpic-markets/eagle-eye/W20_2026-05-17/`:
+
+- **4 research reports** (01_equities_sectors, 02_rates_credit_fed, 03_commodities_forex, 04_crypto_alternative)
+- **VERIFICATION.md** — pass with minor corrections (10Y reconciled to 4.60% per WolfStreet spot-check; BTC current confirmed $77,987 per OKX; Brent $111.04 intraday confirmed per Fortune)
+- **EAGLE_EYE.md** — compiled report
+
+**Lede:** Hormuz oil shock + hot CPI/PPI + Warsh handover collided this week. SPX +0.3% but Friday tape -537 Dow; 10Y 4.60% (highest since Jan 2025), 30Y 5.12% (highest since 2007); WTI +11% to ~$105; gold -3-4%, silver -10.6% Friday; BTC broke 200-DMA, ~$78K Sunday after ~$700M weekend liquidation cascade. Weekend escalation in Hormuz (Iran reasserted blockade Sat, India summoned Iran's ambassador, UK deployed warship) plus G7 Paris meeting Mon-Tue and Warsh's first weekend at the Fed make Monday's open asymmetrically risky to the upside on oil/yields. Week ahead is data-light (no NFP/CPI/GDP/PCE/PPI) with FOMC Minutes Wed and NVDA earnings the big catalysts.
+[2026-05-17 23:10:42] Claude [research] finished successfully
+[2026-05-17 23:10:42] EAGLE_EYE.md generated: 32170 bytes
+[2026-05-17 23:10:42] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 5 absences injected into Week Ahead
+[2026-05-17 23:10:42] Calendar stamp complete
+[2026-05-17 23:10:42] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-05-17 23:10:42] Running Claude [html-build-1] (timeout: 900s)...
+Part 1 is built. The file is 1,154 lines with `<!-- CONTINUE HERE -->` on line 992 — placed after the Fed & Rates section and before the footer/JS, exactly where Part 2 (watchlist, commodities, crypto, week ahead, positioning, sources) will be inserted.
+
+What's in `/home/bigpic/projects/bigpic-markets/eagle-eye/W20_2026-05-17/report.html`:
+
+1. **Head + CSS** — full theme (Space Grotesk + Newsreader, deep-navy bg, gold/coral/amber palette, all section styles, bar-chart with `align-items:stretch`)
+2. **Fixed nav** with back-arrow → `../index.html`
+3. **Hero** — "Hormuz Reasserts. Warsh Takes Over. CPI Wave Two." with W20 dates and key stats
+4. **Market Scorecard** — 12 animated counter cards (SPX 7,408 / Nasdaq 26,225 / Dow 49,526 / RUT 2,793 / VIX 18.43 / 10Y 4.60% / 30Y 5.12% / WTI $105 / DXY 99.27 / Gold $4,530 / Silver $77.52 / BTC $78K Sun) + Fri −537 / ON RRP context block
+5. **Weekend & Breaking** — coral alert card with 8-item timeline (Hormuz reassert, oil-stress, G7 Paris, Warsh-era, Trump-Xi meagre, BTC liquidation cascade, corporate headlines, CLARITY Act)
+6. **This Week's Take** — 4 take-cards (forces collided / AI+energy leadership / weekend worse / stagflation playbook)
+7. **Sector Heatmap** — JS bar chart (XLE +1.3 → XLU −2.3) + 11-cell heatmap grid + stagflation narrative + breadth-deterioration callout
+8. **Fed & Rates** — violet alert (Warsh inherits curve), SVG yield curve (2/5/10/30 with new geometry for 4.09/4.38/4.60/5.12), yield table, FedWatch probs (June Hold 95% / 2026 cuts ~0 / Dec Hike ~50%), credit-liquidity grid (ON RRP $2B), next-week catalysts ordered by importance (FOMC Minutes Wed = top)
+9. **`<!-- CONTINUE HERE -->`** marker on its own line
+10. **Footer** with W20 attribution + archive link
+11. **Full JS block** — counters, bar-chart (W20 sector data), filters, sources toggle, scroll reveal, yield tooltips
+
+Ready for Part 2 to slot in at line 992.
+[2026-05-17 23:16:59] Claude [html-build-1] finished successfully
+[2026-05-17 23:16:59] report.html after Part 1: 67907 bytes
+[2026-05-17 23:16:59] Running Claude [html-build-2] (timeout: 900s)...
+Task complete. The `<!-- CONTINUE HERE -->` marker has been replaced with 6 new sections (Thesis Watchlist Tracker, Commodities & Forex, Crypto Snapshot, Week Ahead calendar, Positioning & Thesis Update, Sources). File grew from 1,154 → 2,148 lines with all 11 sections balanced (open/close) and footer/script untouched.
+
+Section highlights:
+- **Watchlist:** 31 filterable conviction cards across 8 theses (AI Infra, Critical Minerals, Cyber, Storage, Nuclear, Quantum, Robotics, Space) wired to existing `initFilters()` JS via `data-thesis`
+- **Commodities/Forex:** Energy alert card + Metals/Shipping/Forex futures-grids
+- **Crypto:** BTC/ETH dual-pane + altcoin heatmap + ETF/Regulation/Weekend triplet
+- **Week Ahead:** 5-day calendar grid (color-coded events: data/fed/earnings/catalyst) + 5 per-day commentary cards + earnings + notable absences
+- **Positioning:** 8-item risk radar + 8 actionable takeaways + 12 directional-posture conviction cards
+- **Sources:** Collapsible accordion (wired to existing `initSources()` JS) with 4 categorized columns of ~55 links
+[2026-05-17 23:23:39] Claude [html-build-2] finished successfully
+[2026-05-17 23:23:39] report.html after Part 2: 141767 bytes
+[2026-05-17 23:23:39] Running Claude [html-publish] (timeout: 300s)...
