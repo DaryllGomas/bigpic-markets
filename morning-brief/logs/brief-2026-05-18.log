@@ -1,0 +1,98 @@
+[2026-05-18 11:30:01] === Morning Brief Started ===
+[2026-05-18 11:30:01] Date: Monday, 2026-05-18
+[2026-05-18 11:30:01] Output: morning-brief/2026-05/2026-05-18_Mon.md + 2026-05-18_Mon.html
+[2026-05-18 11:30:01] All dependencies verified
+[2026-05-18 11:30:01] Running data collection pipeline...
+2026-05-18 11:30:01,970 INFO === Market Data Collection — 2026-05-18 ===
+2026-05-18 11:30:02,003 INFO ── Step 1: RSS Feeds ──
+2026-05-18 11:30:18,408 ERROR RSS The Robot Report FAILED: HTTP Error 403: Forbidden
+2026-05-18 11:30:23,277 INFO RSS feeds: 147 headlines stored, 317 older than 24h skipped
+2026-05-18 11:30:23,277 ERROR RSS feeds: 1 feed(s) FAILED
+2026-05-18 11:30:23,277 INFO Step 1 complete: 21.3s (headlines=147)
+2026-05-18 11:30:23,278 ERROR RSS feeds: 1 feed(s) FAILED:
+  The Robot Report (https://www.therobotreport.com/feed): HTTP Error 403: Forbidden
+2026-05-18 11:30:24,490 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-05-18 11:30:24,491 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-18 11:30:24,493 INFO Opus analysis: sending 132 headlines to claude CLI...
+2026-05-18 11:30:57,714 INFO Opus analysis: 32 tickers, 12 movers, 10 themes from 132 headlines
+2026-05-18 11:30:57,715 INFO Step 2 complete: 33.2s (opus_tickers=32)
+2026-05-18 11:30:57,715 INFO ── Step 3: Schwab + External APIs ──
+2026-05-18 11:31:04,350 INFO Schwab quotes: 146 symbols
+2026-05-18 11:31:04,351 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-05-18 11:31:04,352 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-18 11:34:01,706 INFO Schwab technicals: 126/127 symbols
+2026-05-18 11:35:41,765 INFO SMA200: 125/127 symbols
+2026-05-18 11:35:42,118 INFO Schwab market context: collected
+2026-05-18 11:37:19,079 INFO Schwab earnings: 71 entries
+2026-05-18 11:37:31,319 INFO Economic calendar: 2 events
+2026-05-18 11:37:31,481 INFO CoinGecko: 2 coins
+2026-05-18 11:37:35,271 INFO Stooq: 3/3 symbols
+2026-05-18 11:38:23,556 WARNING FRED failed: The read operation timed out
+2026-05-18 11:38:25,731 INFO Yahoo backup: 1 symbols
+2026-05-18 11:38:25,732 INFO Step 3 complete: 448.0s (quotes=146, tech=126, sma200=125, earnings=71, econ=2, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-18 11:38:25,732 INFO ── Step 4: Validation + Retry ──
+2026-05-18 11:38:25,767 INFO ANOMALY: $TNX price=45.95 avg=43.65 z=3.3
+2026-05-18 11:38:25,769 INFO ANOMALY: $TYX price=51.28 avg=49.56 z=3.5
+2026-05-18 11:38:25,845 INFO ANOMALY: CCJ price=107.46 avg=119.74 z=-3.1
+2026-05-18 11:38:25,867 INFO ANOMALY: DNN price=3.27 avg=3.79 z=-3.6
+2026-05-18 11:38:25,871 INFO ANOMALY: ENPH price=50.64 avg=35.81 z=4.0
+2026-05-18 11:38:25,948 INFO ANOMALY: NXE price=11.22 avg=12.45 z=-3.8
+2026-05-18 11:38:25,970 INFO ANOMALY: RDW price=15.01 avg=10.32 z=3.2
+2026-05-18 11:38:25,984 INFO ANOMALY: SEDG price=59.29 avg=42.69 z=5.7
+2026-05-18 11:38:26,032 INFO Anomaly detection: 8 flagged
+2026-05-18 11:38:26,032 INFO Cross-validation: 0 discrepancies
+2026-05-18 11:38:26,062 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-18 11:38:26,063 INFO   Retrying technicals for SSNLF (original error: HTTP Error 400: Bad Request)
+2026-05-18 11:38:27,474 INFO   ✗ SSNLF technicals retry failed: HTTP Error 400: Bad Request
+2026-05-18 11:38:27,485 INFO Retry complete: 0/1 recovered
+2026-05-18 11:38:27,500 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): SSNLF
+2026-05-18 11:38:27,514 INFO Step 4 complete: 1.8s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-05-18 11:38:27,516 INFO ── Step 5: Generate Briefing ──
+2026-05-18 11:38:27,801 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-18.md (26847 bytes)
+2026-05-18 11:38:27,811 INFO Pruned 150 rows from quotes (older than 90 days)
+2026-05-18 11:38:27,815 INFO Pruned 125 rows from technicals (older than 90 days)
+2026-05-18 11:38:27,820 INFO Pruned 227 rows from headlines (older than 14 days)
+2026-05-18 11:38:27,821 INFO Pruned 364 rows from levels (older than 30 days)
+2026-05-18 11:38:27,822 INFO Pruned 78 rows from opus_tickers (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 36 rows from opus_movers (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 32 rows from opus_themes (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-18 11:38:27,824 INFO Pruned 10 rows from opus_fed_signals (older than 30 days)
+2026-05-18 11:38:27,824 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-18 11:38:27,833 INFO Pruned 2 rows from economic_events (older than 90 days)
+2026-05-18 11:38:27,835 INFO Pruned 66 rows from earnings (older than 90 days)
+2026-05-18 11:38:27,836 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-18 11:38:28,012 INFO Cleanup complete
+2026-05-18 11:38:28,014 INFO === Collection complete: 504.3s total, completeness=100%, exit_code=0 ===
+[2026-05-18 11:38:28] Data collection complete — briefing file ready
+[2026-05-18 11:38:28] Found 9 research files (sector theses + structural calendar)
+[2026-05-18 11:38:28] Running Claude [report (attempt 1)] (timeout: 900s)...
+Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-18_Mon.md` — ~2,100 words covering the LIGHT calendar day with full sections. Key themes:
+
+- **Risk-off tape**: Futures -0.45 to -0.67%, VIX +4.07% to 19.18, long-end yields flagged as statistical anomalies (10Y 4.595%, 30Y 5.128%)
+- **Iran/oil shock**: WTI +1.40%, Brent +1.29% on Strait of Hormuz tensions
+- **Crypto stress**: BTC -1.81% through $77K, $563M liquidations
+- **Watchlist hits**: Space ripping (MNTS +9.17%, RDW +6.73%, LUNR +4.72%, NOW +5.15%); Energy Storage breaking (ENPH -4.25%, SEDG -4.00%, both anomaly-flagged)
+- **Week ahead**: NVDA Wed BMO, FOMC minutes mid-week
+- **Today's slate**: NAHB 10:00 ET and TIC 16:00 ET — both pending, both low impact
+
+All data sourced from the briefing file with no fabricated values. Eight z-score anomalies catalogued and contextualized.
+[2026-05-18 11:40:47] Claude [report (attempt 1)] finished successfully
+[2026-05-18 11:40:47] Report attempt 1 succeeded: 15874 bytes
+[2026-05-18 11:40:47] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-18_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 36 symbols...
+  Got quotes for 32 symbols
+
+--- Database cross-checks (market_date=2026-05-18) ---
+  No database discrepancies found
+
+  2 total corrections needed:
+    Russell 2000 Futures: 2,785 → 2,801 (0.6% off)
+    WTI Crude: $102 → 101 (1.0% off)
+
+  2 corrections written to 2026-05-18_Mon.md
+=== Fact-check complete ===
+[2026-05-18 11:40:53] Running Claude [html-publish] (timeout: 900s)...

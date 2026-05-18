@@ -1,0 +1,77 @@
+2026-05-18 11:30:01,970 INFO === Market Data Collection — 2026-05-18 ===
+2026-05-18 11:30:02,003 INFO ── Step 1: RSS Feeds ──
+2026-05-18 11:30:18,408 ERROR RSS The Robot Report FAILED: HTTP Error 403: Forbidden
+2026-05-18 11:30:23,277 INFO RSS feeds: 147 headlines stored, 317 older than 24h skipped
+2026-05-18 11:30:23,277 ERROR RSS feeds: 1 feed(s) FAILED
+2026-05-18 11:30:23,277 INFO Step 1 complete: 21.3s (headlines=147)
+2026-05-18 11:30:23,278 ERROR RSS feeds: 1 feed(s) FAILED:
+  The Robot Report (https://www.therobotreport.com/feed): HTTP Error 403: Forbidden
+2026-05-18 11:30:24,490 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-05-18 11:30:24,491 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-18 11:30:24,493 INFO Opus analysis: sending 132 headlines to claude CLI...
+2026-05-18 11:30:57,714 INFO Opus analysis: 32 tickers, 12 movers, 10 themes from 132 headlines
+2026-05-18 11:30:57,715 INFO Step 2 complete: 33.2s (opus_tickers=32)
+2026-05-18 11:30:57,715 INFO ── Step 3: Schwab + External APIs ──
+2026-05-18 11:31:04,350 INFO Schwab quotes: 146 symbols
+2026-05-18 11:31:04,351 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-05-18 11:31:04,352 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-18 11:31:32,339 DEBUG Schwab technicals SSNLF: HTTP Error 400: Bad Request
+2026-05-18 11:34:01,706 INFO Schwab technicals: 126/127 symbols
+2026-05-18 11:34:16,457 DEBUG SMA200 SSNLF: only 2 candles (need 200)
+2026-05-18 11:34:20,044 DEBUG SMA200 MZHOF: only 156 candles (need 200)
+2026-05-18 11:35:41,765 INFO SMA200: 125/127 symbols
+2026-05-18 11:35:42,118 INFO Schwab market context: collected
+2026-05-18 11:37:19,079 INFO Schwab earnings: 71 entries
+2026-05-18 11:37:31,319 INFO Economic calendar: 2 events
+2026-05-18 11:37:31,481 INFO CoinGecko: 2 coins
+2026-05-18 11:37:35,271 INFO Stooq: 3/3 symbols
+2026-05-18 11:38:23,556 WARNING FRED failed: The read operation timed out
+2026-05-18 11:38:25,731 INFO Yahoo backup: 1 symbols
+2026-05-18 11:38:25,732 INFO Step 3 complete: 448.0s (quotes=146, tech=126, sma200=125, earnings=71, econ=2, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-18 11:38:25,732 INFO ── Step 4: Validation + Retry ──
+2026-05-18 11:38:25,767 INFO ANOMALY: $TNX price=45.95 avg=43.65 z=3.3
+2026-05-18 11:38:25,769 INFO ANOMALY: $TYX price=51.28 avg=49.56 z=3.5
+2026-05-18 11:38:25,845 INFO ANOMALY: CCJ price=107.46 avg=119.74 z=-3.1
+2026-05-18 11:38:25,867 INFO ANOMALY: DNN price=3.27 avg=3.79 z=-3.6
+2026-05-18 11:38:25,871 INFO ANOMALY: ENPH price=50.64 avg=35.81 z=4.0
+2026-05-18 11:38:25,948 INFO ANOMALY: NXE price=11.22 avg=12.45 z=-3.8
+2026-05-18 11:38:25,970 INFO ANOMALY: RDW price=15.01 avg=10.32 z=3.2
+2026-05-18 11:38:25,984 INFO ANOMALY: SEDG price=59.29 avg=42.69 z=5.7
+2026-05-18 11:38:26,032 INFO Anomaly detection: 8 flagged
+2026-05-18 11:38:26,032 INFO Cross-validation: 0 discrepancies
+2026-05-18 11:38:26,062 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-18 11:38:26,063 INFO   Retrying technicals for SSNLF (original error: HTTP Error 400: Bad Request)
+2026-05-18 11:38:27,474 INFO   ✗ SSNLF technicals retry failed: HTTP Error 400: Bad Request
+2026-05-18 11:38:27,485 INFO Retry complete: 0/1 recovered
+2026-05-18 11:38:27,500 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): SSNLF
+2026-05-18 11:38:27,514 INFO Step 4 complete: 1.8s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-05-18 11:38:27,514 DEBUG   us_indices: OK
+2026-05-18 11:38:27,514 DEBUG   futures: OK
+2026-05-18 11:38:27,514 DEBUG   vix: OK
+2026-05-18 11:38:27,514 DEBUG   treasuries: OK
+2026-05-18 11:38:27,514 DEBUG   commodities: OK
+2026-05-18 11:38:27,515 DEBUG   crypto: OK
+2026-05-18 11:38:27,515 DEBUG   international: OK
+2026-05-18 11:38:27,515 DEBUG   gap_fills: OK
+2026-05-18 11:38:27,515 DEBUG   econ_calendar: OK
+2026-05-18 11:38:27,515 DEBUG   market_context: OK
+2026-05-18 11:38:27,515 DEBUG   opus_analysis: OK
+2026-05-18 11:38:27,515 DEBUG   rss: OK
+2026-05-18 11:38:27,515 DEBUG   watchlist_t1: OK
+2026-05-18 11:38:27,516 INFO ── Step 5: Generate Briefing ──
+2026-05-18 11:38:27,801 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-18.md (26847 bytes)
+2026-05-18 11:38:27,811 INFO Pruned 150 rows from quotes (older than 90 days)
+2026-05-18 11:38:27,815 INFO Pruned 125 rows from technicals (older than 90 days)
+2026-05-18 11:38:27,820 INFO Pruned 227 rows from headlines (older than 14 days)
+2026-05-18 11:38:27,821 INFO Pruned 364 rows from levels (older than 30 days)
+2026-05-18 11:38:27,822 INFO Pruned 78 rows from opus_tickers (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 36 rows from opus_movers (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 32 rows from opus_themes (older than 30 days)
+2026-05-18 11:38:27,823 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-05-18 11:38:27,824 INFO Pruned 10 rows from opus_fed_signals (older than 30 days)
+2026-05-18 11:38:27,824 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-18 11:38:27,833 INFO Pruned 2 rows from economic_events (older than 90 days)
+2026-05-18 11:38:27,835 INFO Pruned 66 rows from earnings (older than 90 days)
+2026-05-18 11:38:27,836 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-18 11:38:28,012 INFO Cleanup complete
+2026-05-18 11:38:28,014 INFO === Collection complete: 504.3s total, completeness=100%, exit_code=0 ===
