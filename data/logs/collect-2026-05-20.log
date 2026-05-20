@@ -1,0 +1,57 @@
+2026-05-20 11:30:01,862 INFO === Market Data Collection — 2026-05-20 ===
+2026-05-20 11:30:01,928 INFO ── Step 1: RSS Feeds ──
+2026-05-20 11:30:22,806 ERROR RSS The Robot Report FAILED: HTTP Error 403: Forbidden
+2026-05-20 11:30:27,463 INFO RSS feeds: 263 headlines stored, 201 older than 24h skipped
+2026-05-20 11:30:27,464 ERROR RSS feeds: 1 feed(s) FAILED
+2026-05-20 11:30:27,464 INFO Step 1 complete: 25.5s (headlines=263)
+2026-05-20 11:30:27,464 ERROR RSS feeds: 1 feed(s) FAILED:
+  The Robot Report (https://www.therobotreport.com/feed): HTTP Error 403: Forbidden
+2026-05-20 11:30:28,617 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-05-20 11:30:28,617 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-20 11:30:28,621 INFO Opus analysis: sending 251 headlines to claude CLI...
+2026-05-20 11:32:30,456 INFO Opus analysis: 38 tickers, 18 movers, 9 themes from 251 headlines
+2026-05-20 11:32:30,457 INFO Step 2 complete: 121.8s (opus_tickers=38)
+2026-05-20 11:32:30,459 INFO ── Step 3: Schwab + External APIs ──
+2026-05-20 11:32:37,708 INFO Schwab quotes: 154 symbols
+2026-05-20 11:32:37,709 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-05-20 11:32:37,710 INFO Technicals + SMA200 for 135 quoted symbols (sequential)
+2026-05-20 11:35:42,284 INFO Schwab technicals: 135/135 symbols
+2026-05-20 11:37:21,336 INFO SMA200: 135/135 symbols
+2026-05-20 11:37:21,645 INFO Schwab market context: collected
+2026-05-20 11:38:59,545 INFO Schwab earnings: 71 entries
+2026-05-20 11:38:59,566 INFO Economic calendar: 3 events
+2026-05-20 11:38:59,723 INFO CoinGecko: 2 coins
+2026-05-20 11:39:03,321 INFO Stooq: 3/3 symbols
+2026-05-20 11:39:51,935 WARNING FRED failed: The read operation timed out
+2026-05-20 11:39:54,117 INFO Yahoo backup: 1 symbols
+2026-05-20 11:39:54,117 INFO Step 3 complete: 443.7s (quotes=154, tech=135, sma200=135, earnings=71, econ=3, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-20 11:39:54,117 INFO ── Step 4: Validation + Retry ──
+2026-05-20 11:39:54,490 INFO ANOMALY: TENB price=25.17 avg=21.01 z=4.9
+2026-05-20 11:39:54,503 INFO ANOMALY: UEC price=12.20 avg=14.89 z=-3.5
+2026-05-20 11:39:54,528 INFO Anomaly detection: 2 flagged
+2026-05-20 11:39:54,529 INFO Cross-validation: 0 discrepancies
+2026-05-20 11:39:54,547 INFO Retry check: 0 failures — nothing to retry
+2026-05-20 11:39:54,569 INFO Step 4 complete: 0.5s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-05-20 11:39:54,569 DEBUG   us_indices: OK
+2026-05-20 11:39:54,569 DEBUG   futures: OK
+2026-05-20 11:39:54,569 DEBUG   vix: OK
+2026-05-20 11:39:54,570 DEBUG   treasuries: OK
+2026-05-20 11:39:54,570 DEBUG   commodities: OK
+2026-05-20 11:39:54,570 DEBUG   crypto: OK
+2026-05-20 11:39:54,570 DEBUG   international: OK
+2026-05-20 11:39:54,570 DEBUG   gap_fills: OK
+2026-05-20 11:39:54,570 DEBUG   econ_calendar: OK
+2026-05-20 11:39:54,570 DEBUG   market_context: OK
+2026-05-20 11:39:54,570 DEBUG   opus_analysis: OK
+2026-05-20 11:39:54,570 DEBUG   rss: OK
+2026-05-20 11:39:54,571 DEBUG   watchlist_t1: OK
+2026-05-20 11:39:54,571 INFO ── Step 5: Generate Briefing ──
+2026-05-20 11:39:54,905 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-20.md (33843 bytes)
+2026-05-20 11:39:54,914 INFO Pruned 151 rows from quotes (older than 90 days)
+2026-05-20 11:39:54,918 INFO Pruned 126 rows from technicals (older than 90 days)
+2026-05-20 11:39:54,923 INFO Pruned 246 rows from headlines (older than 14 days)
+2026-05-20 11:39:54,934 INFO Pruned 10 rows from economic_events (older than 90 days)
+2026-05-20 11:39:54,936 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-20 11:39:54,936 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-20 11:39:55,107 INFO Cleanup complete
+2026-05-20 11:39:55,108 INFO === Collection complete: 591.5s total, completeness=100%, exit_code=0 ===

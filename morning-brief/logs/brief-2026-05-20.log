@@ -1,0 +1,91 @@
+[2026-05-20 11:30:01] === Morning Brief Started ===
+[2026-05-20 11:30:01] Date: Wednesday, 2026-05-20
+[2026-05-20 11:30:01] Output: morning-brief/2026-05/2026-05-20_Wed.md + 2026-05-20_Wed.html
+[2026-05-20 11:30:01] All dependencies verified
+[2026-05-20 11:30:01] Running data collection pipeline...
+2026-05-20 11:30:01,862 INFO === Market Data Collection — 2026-05-20 ===
+2026-05-20 11:30:01,928 INFO ── Step 1: RSS Feeds ──
+2026-05-20 11:30:22,806 ERROR RSS The Robot Report FAILED: HTTP Error 403: Forbidden
+2026-05-20 11:30:27,463 INFO RSS feeds: 263 headlines stored, 201 older than 24h skipped
+2026-05-20 11:30:27,464 ERROR RSS feeds: 1 feed(s) FAILED
+2026-05-20 11:30:27,464 INFO Step 1 complete: 25.5s (headlines=263)
+2026-05-20 11:30:27,464 ERROR RSS feeds: 1 feed(s) FAILED:
+  The Robot Report (https://www.therobotreport.com/feed): HTTP Error 403: Forbidden
+2026-05-20 11:30:28,617 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-05-20 11:30:28,617 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-20 11:30:28,621 INFO Opus analysis: sending 251 headlines to claude CLI...
+2026-05-20 11:32:30,456 INFO Opus analysis: 38 tickers, 18 movers, 9 themes from 251 headlines
+2026-05-20 11:32:30,457 INFO Step 2 complete: 121.8s (opus_tickers=38)
+2026-05-20 11:32:30,459 INFO ── Step 3: Schwab + External APIs ──
+2026-05-20 11:32:37,708 INFO Schwab quotes: 154 symbols
+2026-05-20 11:32:37,709 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-05-20 11:32:37,710 INFO Technicals + SMA200 for 135 quoted symbols (sequential)
+2026-05-20 11:35:42,284 INFO Schwab technicals: 135/135 symbols
+2026-05-20 11:37:21,336 INFO SMA200: 135/135 symbols
+2026-05-20 11:37:21,645 INFO Schwab market context: collected
+2026-05-20 11:38:59,545 INFO Schwab earnings: 71 entries
+2026-05-20 11:38:59,566 INFO Economic calendar: 3 events
+2026-05-20 11:38:59,723 INFO CoinGecko: 2 coins
+2026-05-20 11:39:03,321 INFO Stooq: 3/3 symbols
+2026-05-20 11:39:51,935 WARNING FRED failed: The read operation timed out
+2026-05-20 11:39:54,117 INFO Yahoo backup: 1 symbols
+2026-05-20 11:39:54,117 INFO Step 3 complete: 443.7s (quotes=154, tech=135, sma200=135, earnings=71, econ=3, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-20 11:39:54,117 INFO ── Step 4: Validation + Retry ──
+2026-05-20 11:39:54,490 INFO ANOMALY: TENB price=25.17 avg=21.01 z=4.9
+2026-05-20 11:39:54,503 INFO ANOMALY: UEC price=12.20 avg=14.89 z=-3.5
+2026-05-20 11:39:54,528 INFO Anomaly detection: 2 flagged
+2026-05-20 11:39:54,529 INFO Cross-validation: 0 discrepancies
+2026-05-20 11:39:54,547 INFO Retry check: 0 failures — nothing to retry
+2026-05-20 11:39:54,569 INFO Step 4 complete: 0.5s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-05-20 11:39:54,571 INFO ── Step 5: Generate Briefing ──
+2026-05-20 11:39:54,905 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-20.md (33843 bytes)
+2026-05-20 11:39:54,914 INFO Pruned 151 rows from quotes (older than 90 days)
+2026-05-20 11:39:54,918 INFO Pruned 126 rows from technicals (older than 90 days)
+2026-05-20 11:39:54,923 INFO Pruned 246 rows from headlines (older than 14 days)
+2026-05-20 11:39:54,934 INFO Pruned 10 rows from economic_events (older than 90 days)
+2026-05-20 11:39:54,936 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-20 11:39:54,936 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-20 11:39:55,107 INFO Cleanup complete
+2026-05-20 11:39:55,108 INFO === Collection complete: 591.5s total, completeness=100%, exit_code=0 ===
+[2026-05-20 11:39:55] Data collection complete — briefing file ready
+[2026-05-20 11:39:55] Found 9 research files (sector theses + structural calendar)
+[2026-05-20 11:39:55] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-20_Wed.md`.
+
+## Summary
+
+**HEAVY day** driven by two colliding catalysts: **NVDA earnings** (results pending — not fabricated) and the **2:00 PM ET FOMC Minutes**. I calibrated to the HEAVY depth target (~2,600 words) with full scenario analysis and an expanded playbook.
+
+Key things I handled per the rules:
+- **No fabrication of unreleased data.** All three economic events (Barr 9:15, Crude Inventories 10:30, FOMC Minutes 2:00 PM) marked "Pending." NVDA EPS Actual = "—" → reported as pending, not a result.
+- **Flagged the POET conflict** — the price feed shows +8.26% while the news-driven table tags it bearish ("brutal proof phase"). Surfaced the discrepancy rather than picking one.
+- **Surfaced the data-quality caveats** — FRED timeout (2Y on prior close), RSS 403, and the anomalous z-scores on TENB and UEC, which I explicitly told the reader not to treat as signals.
+
+Analytical highlights worth noting:
+- **The macro tension:** market has flipped to pricing a possible Fed *hike* (a reversal from 3 cuts), 30Y at 5.18%, mortgage rates 6.75% — the "bond bloodbath" is the real story under the green futures.
+- **Cybersecurity is screaming overbought** — CRWD 84, FTNT 87, PANW 78, ZS 73 RSI, into an earnings cluster (ZS next week). Cross-referenced against thesis catalyst dates.
+- **Nuclear oversold-but-leading** (VST/CEG/CCJ/LEU RSI 32–37) flagged as mean-reversion.
+- Cross-referenced approaching catalysts to the thesis files: NVDA's +142%→+66% data-center decel watch, the SpaceX/Goldman IPO headline, the Nov 2026 US-China trade-expiry for critical minerals, and the June 16–17 FOMC.
+
+One judgment call: NVDA's earnings row is labeled `before_open` but EPS Actual was still "—" at the 2:39 PM ET collection time. Rather than resolve that contradiction by guessing, I reported it as "scheduled today, results pending" and leaned on the briefing's own forward-looking framing ("ahead of Nvidia earnings").
+[2026-05-20 11:43:37] Claude [report (attempt 1)] finished successfully
+[2026-05-20 11:43:37] Report attempt 1 succeeded: 16220 bytes
+[2026-05-20 11:43:37] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-20_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 41 symbols...
+  Got quotes for 34 symbols
+
+--- Database cross-checks (market_date=2026-05-20) ---
+  2 database corrections:
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Pending — scheduled 10:30' → 'Pending' (not released)
+    FABRICATION: FOMC MEETING MINUTES actual 'Pending — scheduled 2:00 PM' → 'Pending' (not released)
+
+  2 total corrections needed:
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Pending — scheduled 10:30' → 'Pending' (not released)
+    FABRICATION: FOMC MEETING MINUTES actual 'Pending — scheduled 2:00 PM' → 'Pending' (not released)
+
+  2 corrections written to 2026-05-20_Wed.md
+=== Fact-check complete ===
+[2026-05-20 11:43:44] Running Claude [html-publish] (timeout: 900s)...
