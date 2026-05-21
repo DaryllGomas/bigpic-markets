@@ -77,7 +77,7 @@ FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv"
 
 FAILURE_EMAIL = "daryll@bigpicsolutions.com"
 
-SCHWAB_TIMEOUT = 8
+SCHWAB_TIMEOUT = 20
 EXTERNAL_TIMEOUT = 15
 RSS_TIMEOUT = 10
 MAX_RETRIES = 2
