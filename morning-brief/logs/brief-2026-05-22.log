@@ -1,0 +1,93 @@
+[2026-05-22 11:30:01] === Morning Brief Started ===
+[2026-05-22 11:30:01] Date: Friday, 2026-05-22
+[2026-05-22 11:30:01] Output: morning-brief/2026-05/2026-05-22_Fri.md + 2026-05-22_Fri.html
+[2026-05-22 11:30:01] All dependencies verified
+[2026-05-22 11:30:01] Running data collection pipeline...
+2026-05-22 11:30:01,722 INFO === Market Data Collection — 2026-05-22 ===
+2026-05-22 11:30:01,737 INFO ── Step 1: RSS Feeds ──
+2026-05-22 11:30:24,075 INFO RSS feeds: 245 headlines stored, 234 older than 24h skipped
+2026-05-22 11:30:24,075 INFO Step 1 complete: 22.3s (headlines=245)
+2026-05-22 11:30:24,075 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-22 11:30:24,078 INFO Opus analysis: sending 193 headlines to claude CLI...
+2026-05-22 11:31:57,071 INFO Opus analysis: 60 tickers, 27 movers, 9 themes from 193 headlines
+2026-05-22 11:31:57,072 INFO Step 2 complete: 93.0s (opus_tickers=60)
+2026-05-22 11:31:57,072 INFO ── Step 3: Schwab + External APIs ──
+2026-05-22 11:32:05,450 INFO Schwab quotes: 167 symbols
+2026-05-22 11:32:05,451 INFO Auto-detected movers (|change| > 3%): 11 symbols
+2026-05-22 11:32:05,452 INFO Technicals + SMA200 for 148 quoted symbols (sequential)
+2026-05-22 11:35:25,435 INFO Schwab technicals: 148/148 symbols
+2026-05-22 11:37:10,450 INFO SMA200: 147/148 symbols
+2026-05-22 11:37:10,773 INFO Schwab market context: collected
+2026-05-22 11:38:48,867 INFO Schwab earnings: 71 entries
+2026-05-22 11:38:48,882 INFO Economic calendar: 4 events
+2026-05-22 11:38:48,984 INFO CoinGecko: 2 coins
+2026-05-22 11:38:52,949 INFO Stooq: 3/3 symbols
+2026-05-22 11:39:41,232 WARNING FRED failed: The read operation timed out
+2026-05-22 11:39:43,358 INFO Yahoo backup: 1 symbols
+2026-05-22 11:39:43,359 INFO Step 3 complete: 466.3s (quotes=167, tech=148, sma200=147, earnings=71, econ=4, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-22 11:39:43,359 INFO ── Step 4: Validation + Retry ──
+2026-05-22 11:39:43,445 INFO ANOMALY: /YMM26 price=50506.00 avg=49648.50 z=3.0
+2026-05-22 11:39:43,523 INFO ANOMALY: DIA price=504.69 avg=495.41 z=3.1
+2026-05-22 11:39:43,529 INFO ANOMALY: ENPH price=62.00 avg=39.23 z=3.2
+2026-05-22 11:39:43,567 INFO ANOMALY: HON price=225.41 avg=214.82 z=3.2
+2026-05-22 11:39:43,568 INFO ANOMALY: IBM price=258.01 avg=227.22 z=4.9
+2026-05-22 11:39:43,610 INFO ANOMALY: MNTS price=7.55 avg=5.43 z=3.0
+2026-05-22 11:39:43,670 INFO ANOMALY: RGTI price=22.62 avg=17.98 z=3.0
+2026-05-22 11:39:43,740 INFO Anomaly detection: 7 flagged
+2026-05-22 11:39:43,740 INFO Cross-validation: 0 discrepancies
+2026-05-22 11:39:43,763 INFO Retry check: 0 failures — nothing to retry
+2026-05-22 11:39:43,781 INFO Step 4 complete: 0.4s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-05-22 11:39:43,783 INFO ── Step 5: Generate Briefing ──
+2026-05-22 11:39:44,108 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-22.md (34652 bytes)
+2026-05-22 11:39:44,118 INFO Pruned 161 rows from quotes (older than 90 days)
+2026-05-22 11:39:44,122 INFO Pruned 136 rows from technicals (older than 90 days)
+2026-05-22 11:39:44,122 INFO Pruned 12 rows from anomalies (older than 90 days)
+2026-05-22 11:39:44,127 INFO Pruned 251 rows from headlines (older than 14 days)
+2026-05-22 11:39:44,128 INFO Pruned 135 rows from levels (older than 30 days)
+2026-05-22 11:39:44,129 INFO Pruned 42 rows from opus_tickers (older than 30 days)
+2026-05-22 11:39:44,129 INFO Pruned 10 rows from opus_movers (older than 30 days)
+2026-05-22 11:39:44,130 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-05-22 11:39:44,130 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-05-22 11:39:44,131 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-05-22 11:39:44,141 INFO Pruned 13 rows from economic_events (older than 90 days)
+2026-05-22 11:39:44,143 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-22 11:39:44,144 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-22 11:39:44,314 INFO Cleanup complete
+2026-05-22 11:39:44,315 INFO === Collection complete: 582.0s total, completeness=100%, exit_code=0 ===
+[2026-05-22 11:39:44] Data collection complete — briefing file ready
+[2026-05-22 11:39:44] Found 9 research files (sector theses + structural calendar)
+[2026-05-22 11:39:44] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief for Friday, May 22, 2026 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-22_Fri.md` (~2,700 words, HEAVY calibration per the briefing header).
+
+**Key calls I made from the data:**
+
+- **Event Load HEAVY** despite a thin 10:00 ET macro slate — the weight is in the breadth: a 2.7% Nikkei surge, broad semi/quantum/critical-minerals rallies, ~3% oil spike, and a hawkish Fed narrative.
+- **The notable tension I surfaced:** Fed signals show rate-*hike* odds climbing (Warsh swearing-in, 30Y above 5%, steepening 2s/10s) — a hawkish shift from the CALENDAR.md's stale "3 cuts priced" framing. I led the playbook with that, alongside oil's geopolitical premium and the market-top warnings (Buffett Indicator, mega-IPO froth, Goldman hedge note).
+
+**Data-integrity handling (per your rules):**
+- All four calendar events showed Actual = "—" → reported as **Pending**, no fabricated values.
+- **BAH** earnings (EPS Est/Actual both "—") → flagged as **not yet reported**; explicitly warned not to read its +5.68% pre-market pop as a result.
+- **FRED timeout** → 2Y yield labeled as previous-close carry.
+- **Seven z-score anomalies** flagged up top and in the sources caveat, with **IBM (z 4.9)** called out specifically — and I discounted IBM's +1.99% "move" in the watchlist section accordingly.
+
+**Watchlist cross-references:** PPTA (+8.65%, $2.9B loan) and RKLB (Space Force GEO win) tied to their thesis catalysts; ZS earnings flagged as the nearest watchlist event (Tue May 26); the June convergence (FOMC/Triple Witch/Russell) and "Sell in May" window noted; cyber's overbought RSI cluster (FTNT 87, CRWD 86, PANW 82) vs. defense's washed-out readings (LDOS 24, NOC 32) contrasted.
+
+One judgment call worth flagging: the briefing labels HEAVY, so I wrote to the 2,500–3,000 word band even though the *scheduled* macro calendar alone would read LIGHT. I followed the header as instructed but called out that gap in the opening so the depth is justified rather than padded.
+[2026-05-22 11:43:05] Claude [report (attempt 1)] finished successfully
+[2026-05-22 11:43:05] Report attempt 1 succeeded: 17919 bytes
+[2026-05-22 11:43:05] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-22_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 43 symbols...
+  Got quotes for 35 symbols
+
+--- Database cross-checks (market_date=2026-05-22) ---
+  No database discrepancies found
+
+  1 total corrections needed:
+    WTI Crude: 98.60 → 97.91 (0.7% off)
+
+  1 corrections written to 2026-05-22_Fri.md
+=== Fact-check complete ===
+[2026-05-22 11:43:12] Running Claude [html-publish] (timeout: 900s)...
