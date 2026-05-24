@@ -1,0 +1,81 @@
+[2026-05-24 23:00:01] === Eagle Eye W21 Started ===
+[2026-05-24 23:00:01] Week ending: 2026-05-22
+[2026-05-24 23:00:01] Output: eagle-eye/W21_2026-05-24/
+[2026-05-24 23:00:01] All dependencies verified
+[2026-05-24 23:00:01] Found 9 research files (sector theses + structural calendar)
+[2026-05-24 23:00:01] Collecting economic calendar for 2026-05-25 to 2026-05-29...
+23:00:01 [INFO] Collecting economic calendar: 2026-05-25 to 2026-05-29
+23:00:01 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:01 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:01 [INFO]   API returned 38 upcoming events
+23:00:01 [INFO]   Filtered to 38 events in range
+23:00:01 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W21_2026-05-24/next_week_calendar.md (38 events, 4 absences, confidence=high)
+[2026-05-24 23:00:01] Calendar collected (full confidence)
+[2026-05-24 23:00:01] Running Claude [research] (timeout: 3600s)...
+The Eagle Eye W21 report is complete. All deliverables are in `/home/bigpic/projects/bigpic-markets/eagle-eye/W21_2026-05-24/`.
+
+## What I did
+
+**STEP 1 — Research (4 parallel agents):** Launched all 4 in a single message. Each used WebSearch for both the weekly recap and breaking weekend news, read the 9 thesis files, and wrote its report (`01`–`04`).
+
+**STEP 2 — Verification (myself):** Read all 4 reports, cross-checked figures, and ran **14 independent spot-checks** via live search. Wrote `VERIFICATION.md` (**13 PASS / 1 corrected**). The big calls:
+
+- ⚠️ **I nearly flagged NVDA as fabricated** — Agent 1 reported an NVDA blowout "this week" while the *authoritative calendar* lists NVDA earnings for next Wed (5/27). Verification proved **Agent 1 was right** (NVDA *did* report 5/20, $81.6B) and the **calendar entry is stale** (echoes the prior calendar-data issue in your memory). Handled in the Week Ahead commentary so it won't read as an upcoming catalyst.
+- ❌ **Correction 1 (rates report):** WTI/Brent listed as ~$106/$109 at Friday's close — actual was **~$96.6 / ~$103.9** (confirmed by two other reports + live data).
+- ❌ **Correction 2 (rates report):** A Moody's Aaa→Aa1 downgrade was dated "May 16, **2026** (one week ago)." It actually happened May 16, **2025** — you can't be downgraded twice. Reworded; the fiscal narrative stays, the false "fresh catalyst" framing is gone.
+- ✅ Confirmed real and central: the **2026 U.S.–Iran war / Hormuz closure**, the **"largely negotiated" weekend peace deal**, **Warsh sworn in as Fed Chair**, markets **pricing rate hikes**, **gold ~$4,517**, **SPX 7,473 / DJIA 50,579 record**, **BTC ~$76–77K**, and the **SpaceX IPO** filing.
+
+**STEP 3 — Compile:** Wrote `EAGLE_EYE.md` with all required sections, both corrections applied. The **lede is the weekend Iran deal** (the swing factor for Tuesday's open — Monday is a Memorial Day holiday), followed by the equity melt-up/NVDA and the hawkish Warsh-era Fed pivot. Week Ahead uses the calendar's day headers verbatim with no economic tables (left for `stamp-calendar.py`), plus Earnings to Watch (Dell/HP) and Notable Absences (no CPI/NFP/PPI → Thursday's Core PCE is the lone inflation focal point).
+
+One note for the calendar maintainers: the NVDA earnings row in `next_week_calendar.md` is misdated (5/27 vs. actual 5/20) — `stamp-calendar.py` will still inject it, so you may want to correct that upstream entry.
+[2026-05-24 23:17:22] Claude [research] finished successfully
+[2026-05-24 23:17:22] EAGLE_EYE.md generated: 27126 bytes
+[2026-05-24 23:17:22] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 4 absences injected into Week Ahead
+[2026-05-24 23:17:22] Calendar stamp complete
+[2026-05-24 23:17:22] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-05-24 23:17:23] Running Claude [html-build-1] (timeout: 900s)...
+Part 1 is complete and validated. Here's what I built at `eagle-eye/W21_2026-05-24/report.html`:
+
+## Full page scaffold
+- `<!DOCTYPE html>` + complete `<head>` with **all** CSS (theme variables, all component styles) and **all** JS (counter animation, bar chart, watchlist filters, collapsible sources, scroll-reveal, yield-dot tooltips) — the Part-2 functions (`initFilters`, `initSources`) are present and safely no-op until their elements exist.
+- Theme matched exactly: `#0a0f1a` bg, `rgba(18,26,46,0.88)` cards, gold `#e8b87d` / amber `#f4a261` / coral `#ef8354`, Space Grotesk + Newsreader fonts, green/red semantics.
+- **`align-items: stretch` on `.bar-chart`** (the bar-height bug fix) — verified at line 246.
+- Fixed nav with back-arrow `→ ../index.html` (also in footer), full 10-link nav (anchors for Part-2 sections already wired).
+
+## First 5 content sections
+1. **Hero** — "Iran Deal *Largely Negotiated*. Warsh *Takes the Chair*. Hikes, *Not Cuts*." with badge + subtitle.
+2. **Market Scorecard** — 12 animated counters (SPX 7,473.47, Dow record 50,579.70, Nasdaq, RUT, VIX 16.76, 2Y/10Y/30Y, WTI $96.60, DXY, Gold, BTC) + coral note box on the Iran binary / NVDA / Memorial Day.
+3. **Weekend & Breaking** — coral alert-card with `LIVE` pulse tag and a 4-item timeline (Iran deal "THE story", SpaceX IPO, crypto liquidation, Warsh-era framing) + signal box mapping the deal-closes/deal-collapses scenarios.
+4. **This Week's Take** — three color-coded take-cards (coral/green/violet) with signal callouts, including the "record highs + sub-17 VIX + shooting war" paradox.
+5. **Sector Heatmap** — interactive bar chart (directional, clearly captioned; XLE ≈ −4% the firm figure) + heatmap grid best→worst + narrative with breadth caveat.
+6. **Fed & Rates** — violet headline card, SVG **yield curve** (recomputed coords for 4.13/4.26/4.56/5.08 with hover tooltips), yields table, rate-pricing prob bars (hikes, not cuts), credit/liquidity grid, the **Moody's date correction** box, and Key Fed Catalysts (Core PCE Thu, Logan/Cook, June FOMC).
+
+Then **`<!-- CONTINUE HERE -->`** on its own line (line 969), followed by the footer and `</body></html>`.
+
+Validation results: DOCTYPE present, zero parser errors, nothing unclosed, exactly 1 marker, 12 counters, 5 sections in order, and the watchlist/commodities/crypto/week-ahead/positioning sections are correctly **absent as sections** but present as nav anchors — ready for Part 2 to slot in at the marker.
+[2026-05-24 23:23:37] Claude [html-build-1] finished successfully
+[2026-05-24 23:23:37] report.html after Part 1: 67964 bytes
+[2026-05-24 23:23:37] Running Claude [html-build-2] (timeout: 900s)...
+Part 2 of the Eagle Eye W21 HTML report is complete. The `<!-- CONTINUE HERE -->` marker has been fully replaced with the six remaining content sections, all using the existing theme.
+
+## What was added (lines 970–1616, slotting cleanly between the Fed & Rates section and the footer)
+
+1. **Thesis Watchlist Tracker** (`#watchlist`) — 9 filter buttons wired to the existing `initFilters()` JS, plus 8 thesis-group cards (`data-thesis`) covering all 26 names from EAGLE_EYE.md, each with color-coded tier badges (T1=gold, T2=cyan, Core=violet, Watch=muted), Friday close, Friday % (using the existing `.pct-up/.pct-down/.pct-flat` classes), and weekly notes.
+2. **Commodities & Forex Snapshot** (`#commodities`) — the WTI/Brent correction callout, Energy + Metals `futures-cell` grids, and a Forex/Shipping table (incl. the Baltic Dry stress signal).
+3. **Crypto Snapshot** (`#crypto`) — asset `conviction-card`s (BTC/ETH risk-off, HYPE bullish, alts mixed), a weekend-flush stats grid, and ETF-flow + regulation cards.
+4. **The Week Ahead** (`#ahead`) — all five day-by-day event tables rendered **verbatim** from EAGLE_EYE.md (Mon–Fri, including the source's exact row order on Thursday and the stale-NVDA flag on Wednesday), with HIGH/MED/LOW impact badges, per-day commentary, plus Earnings to Watch and Notable Absences cards.
+5. **Positioning & Thesis Update** (`#positioning`) — a `risk-grid` radar (Iran=critical, rates/breadth=high, etc.), a `conviction-grid` by thesis, and the 6 numbered actionable takeaways.
+6. **Sources** (`#sources`) — collapsible, wired to the existing `#sourcesToggle`/`#sourcesContent` JS, with all sources consolidated into 8 categories plus the VERIFICATION.md note.
+
+## Verification
+- **Marker removed:** 0 occurrences of `CONTINUE HERE` remain.
+- **Tags balanced:** 11 `<section>` / 11 `</section>` (5 original + 6 new); Sources closes cleanly into the untouched footer at line 1618.
+- **JS hooks honored:** 8 `data-thesis` cards match the filter buttons; sources toggle IDs match.
+- **Nothing before the marker or after the footer was modified** — only the marker line was replaced.
+
+All numbers, corrections, and calendar data were taken directly from `EAGLE_EYE.md` (no new figures invented), and HTML entities were escaped throughout (`S&amp;P`, `Fear &amp; Greed`, etc.).
+[2026-05-24 23:29:54] Claude [html-build-2] finished successfully
+[2026-05-24 23:29:54] report.html after Part 2: 136986 bytes
+[2026-05-24 23:29:54] Running Claude [html-publish] (timeout: 300s)...
