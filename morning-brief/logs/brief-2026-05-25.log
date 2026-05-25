@@ -1,0 +1,85 @@
+[2026-05-25 11:30:01] === Morning Brief Started ===
+[2026-05-25 11:30:01] Date: Monday, 2026-05-25
+[2026-05-25 11:30:01] Output: morning-brief/2026-05/2026-05-25_Mon.md + 2026-05-25_Mon.html
+[2026-05-25 11:30:01] All dependencies verified
+[2026-05-25 11:30:01] Running data collection pipeline...
+2026-05-25 11:30:02,143 INFO === Market Data Collection — 2026-05-25 ===
+2026-05-25 11:30:02,178 INFO ── Step 1: RSS Feeds ──
+2026-05-25 11:30:24,499 INFO RSS feeds: 122 headlines stored, 357 older than 24h skipped
+2026-05-25 11:30:24,500 INFO Step 1 complete: 22.3s (headlines=122)
+2026-05-25 11:30:24,500 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-25 11:30:24,502 INFO Opus analysis: sending 109 headlines to claude CLI...
+2026-05-25 11:31:25,607 INFO Opus analysis: 25 tickers, 4 movers, 8 themes from 109 headlines
+2026-05-25 11:31:25,607 INFO Step 2 complete: 61.1s (opus_tickers=25)
+2026-05-25 11:31:25,607 INFO ── Step 3: Schwab + External APIs ──
+2026-05-25 11:31:32,440 INFO Schwab quotes: 146 symbols
+2026-05-25 11:31:32,441 INFO Auto-detected movers (|change| > 3%): 36 symbols
+2026-05-25 11:31:32,443 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-25 11:34:26,446 INFO Schwab technicals: 127/127 symbols
+2026-05-25 11:35:57,250 INFO SMA200: 127/127 symbols
+2026-05-25 11:35:57,682 INFO Schwab market context: collected
+2026-05-25 11:37:38,637 INFO Schwab earnings: 71 entries
+2026-05-25 11:37:38,653 INFO Economic calendar: 2 events
+2026-05-25 11:37:38,768 INFO CoinGecko: 2 coins
+2026-05-25 11:37:42,409 INFO Stooq: 3/3 symbols
+2026-05-25 11:38:30,705 WARNING FRED failed: The read operation timed out
+2026-05-25 11:38:32,820 INFO Yahoo backup: 1 symbols
+2026-05-25 11:38:32,821 INFO Step 3 complete: 427.2s (quotes=146, tech=127, sma200=127, earnings=71, econ=2, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-25 11:38:32,821 INFO ── Step 4: Validation + Retry ──
+2026-05-25 11:38:32,826 INFO ANOMALY: $DAX price=25236.01 avg=24360.12 z=3.1
+2026-05-25 11:38:32,849 INFO ANOMALY: /CLN26 price=91.09 avg=101.20 z=-5.2
+2026-05-25 11:38:32,855 INFO ANOMALY: /YMM26 price=51108.00 avg=49694.75 z=4.1
+2026-05-25 11:38:32,936 INFO ANOMALY: HON price=228.25 avg=215.40 z=3.1
+2026-05-25 11:38:32,999 INFO ANOMALY: QBTS price=28.63 avg=21.14 z=3.2
+2026-05-25 11:38:33,007 INFO ANOMALY: RGTI price=25.86 avg=18.25 z=4.2
+2026-05-25 11:38:33,065 INFO Anomaly detection: 6 flagged
+2026-05-25 11:38:33,066 INFO Cross-validation: 0 discrepancies
+2026-05-25 11:38:33,090 INFO Retry check: 0 failures — nothing to retry
+2026-05-25 11:38:33,108 INFO Step 4 complete: 0.3s (anomalies=6, cross_val=0, retried=0, completeness=100%)
+2026-05-25 11:38:33,110 INFO ── Step 5: Generate Briefing ──
+2026-05-25 11:38:33,398 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-25.md (25913 bytes)
+2026-05-25 11:38:33,409 INFO Pruned 156 rows from quotes (older than 90 days)
+2026-05-25 11:38:33,413 INFO Pruned 134 rows from technicals (older than 90 days)
+2026-05-25 11:38:33,414 INFO Pruned 26 rows from anomalies (older than 90 days)
+2026-05-25 11:38:33,418 INFO Pruned 214 rows from headlines (older than 14 days)
+2026-05-25 11:38:33,420 INFO Pruned 390 rows from levels (older than 30 days)
+2026-05-25 11:38:33,420 INFO Pruned 110 rows from opus_tickers (older than 30 days)
+2026-05-25 11:38:33,421 INFO Pruned 36 rows from opus_movers (older than 30 days)
+2026-05-25 11:38:33,421 INFO Pruned 27 rows from opus_themes (older than 30 days)
+2026-05-25 11:38:33,422 INFO Pruned 5 rows from opus_econ_events (older than 30 days)
+2026-05-25 11:38:33,422 INFO Pruned 7 rows from opus_fed_signals (older than 30 days)
+2026-05-25 11:38:33,423 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-25 11:38:33,432 INFO Pruned 2 rows from economic_events (older than 90 days)
+2026-05-25 11:38:33,434 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-25 11:38:33,435 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-25 11:38:33,609 INFO Cleanup complete
+2026-05-25 11:38:33,610 INFO === Collection complete: 510.9s total, completeness=100%, exit_code=0 ===
+[2026-05-25 11:38:33] Data collection complete — briefing file ready
+[2026-05-25 11:38:33] Found 9 research files (sector theses + structural calendar)
+[2026-05-25 11:38:33] Running Claude [report (attempt 1)] (timeout: 900s)...
+Done. Wrote the Morning Brief to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-25_Mon.md` (~1,700 words, MEDIUM calibration).
+
+**Key judgment call I flagged at the top:** US equity markets are **closed today for Memorial Day** — confirmed by the calendar's "Bank Holiday" entry and the MarketWatch headline. So I framed the whole brief accordingly: stock-level changes (RGTI +17%, LUNR +11%, etc.) reflect Friday May 22's close, while futures/global/crypto/commodities are live overnight data. There were no US economic releases to report, and the two "Economic Calendar" rows are markers (Bank Holiday + a WWDC T-10 countdown), not data — so nothing was fabricated as an "Actual."
+
+**The story the data tells:**
+- **Dominant macro driver:** WTI −5.7% to $91 (flagged anomaly) on US-Iran de-escalation / Strait of Hormuz reopening hopes — fueling a global risk-on tape (Nikkei +2.87%, European stocks at March highs, all US futures green, small caps leading).
+- **The cross-current I emphasized:** equities rallying on geopolitics while the Fed is being repriced *hawkish* (rate hikes priced through 2027, 30Y > 5%). The bid is real but event-driven and reversible.
+- **Watchlist:** Quantum + Space momentum complex ripped Friday; cyber large-caps (FTNT/CRWD/PANW RSI 84–88) are dangerously overbought — flagged as mean-reversion risk. **ZS reports tomorrow (May 26)**, still below its 200-day. SMCI carries a negative weekend overhang (smuggling-bust news) despite a green Friday close.
+- **Catalysts cross-referenced** from thesis files: Vast Haven-1 launch this month, FCX Grasberg restart Q2, AVGO June 3, June 17 FOMC (Warsh's first), etc.
+
+I also carried through the briefing's data-quality caveats (FRED timeout → 2Y is a prior-close carry; the z-score anomaly flags, noting which are news-corroborated vs. genuine rallies).
+[2026-05-25 11:41:31] Claude [report (attempt 1)] finished successfully
+[2026-05-25 11:41:31] Report attempt 1 succeeded: 13568 bytes
+[2026-05-25 11:41:31] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-25_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 32 symbols...
+  Got quotes for 24 symbols
+
+--- Database cross-checks (market_date=2026-05-25) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-25 11:41:35] Running Claude [html-publish] (timeout: 900s)...

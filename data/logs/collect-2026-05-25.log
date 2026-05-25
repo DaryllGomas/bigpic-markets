@@ -1,0 +1,64 @@
+2026-05-25 11:30:02,143 INFO === Market Data Collection — 2026-05-25 ===
+2026-05-25 11:30:02,178 INFO ── Step 1: RSS Feeds ──
+2026-05-25 11:30:24,499 INFO RSS feeds: 122 headlines stored, 357 older than 24h skipped
+2026-05-25 11:30:24,500 INFO Step 1 complete: 22.3s (headlines=122)
+2026-05-25 11:30:24,500 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-25 11:30:24,502 INFO Opus analysis: sending 109 headlines to claude CLI...
+2026-05-25 11:31:25,607 INFO Opus analysis: 25 tickers, 4 movers, 8 themes from 109 headlines
+2026-05-25 11:31:25,607 INFO Step 2 complete: 61.1s (opus_tickers=25)
+2026-05-25 11:31:25,607 INFO ── Step 3: Schwab + External APIs ──
+2026-05-25 11:31:32,440 INFO Schwab quotes: 146 symbols
+2026-05-25 11:31:32,441 INFO Auto-detected movers (|change| > 3%): 36 symbols
+2026-05-25 11:31:32,443 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-25 11:34:26,446 INFO Schwab technicals: 127/127 symbols
+2026-05-25 11:35:57,250 INFO SMA200: 127/127 symbols
+2026-05-25 11:35:57,682 INFO Schwab market context: collected
+2026-05-25 11:37:38,637 INFO Schwab earnings: 71 entries
+2026-05-25 11:37:38,653 INFO Economic calendar: 2 events
+2026-05-25 11:37:38,768 INFO CoinGecko: 2 coins
+2026-05-25 11:37:42,409 INFO Stooq: 3/3 symbols
+2026-05-25 11:38:30,705 WARNING FRED failed: The read operation timed out
+2026-05-25 11:38:32,820 INFO Yahoo backup: 1 symbols
+2026-05-25 11:38:32,821 INFO Step 3 complete: 427.2s (quotes=146, tech=127, sma200=127, earnings=71, econ=2, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-25 11:38:32,821 INFO ── Step 4: Validation + Retry ──
+2026-05-25 11:38:32,826 INFO ANOMALY: $DAX price=25236.01 avg=24360.12 z=3.1
+2026-05-25 11:38:32,849 INFO ANOMALY: /CLN26 price=91.09 avg=101.20 z=-5.2
+2026-05-25 11:38:32,855 INFO ANOMALY: /YMM26 price=51108.00 avg=49694.75 z=4.1
+2026-05-25 11:38:32,936 INFO ANOMALY: HON price=228.25 avg=215.40 z=3.1
+2026-05-25 11:38:32,999 INFO ANOMALY: QBTS price=28.63 avg=21.14 z=3.2
+2026-05-25 11:38:33,007 INFO ANOMALY: RGTI price=25.86 avg=18.25 z=4.2
+2026-05-25 11:38:33,065 INFO Anomaly detection: 6 flagged
+2026-05-25 11:38:33,066 INFO Cross-validation: 0 discrepancies
+2026-05-25 11:38:33,090 INFO Retry check: 0 failures — nothing to retry
+2026-05-25 11:38:33,108 INFO Step 4 complete: 0.3s (anomalies=6, cross_val=0, retried=0, completeness=100%)
+2026-05-25 11:38:33,108 DEBUG   us_indices: OK
+2026-05-25 11:38:33,109 DEBUG   futures: OK
+2026-05-25 11:38:33,109 DEBUG   vix: OK
+2026-05-25 11:38:33,109 DEBUG   treasuries: OK
+2026-05-25 11:38:33,109 DEBUG   commodities: OK
+2026-05-25 11:38:33,109 DEBUG   crypto: OK
+2026-05-25 11:38:33,109 DEBUG   international: OK
+2026-05-25 11:38:33,109 DEBUG   gap_fills: OK
+2026-05-25 11:38:33,110 DEBUG   econ_calendar: OK
+2026-05-25 11:38:33,110 DEBUG   market_context: OK
+2026-05-25 11:38:33,110 DEBUG   opus_analysis: OK
+2026-05-25 11:38:33,110 DEBUG   rss: OK
+2026-05-25 11:38:33,110 DEBUG   watchlist_t1: OK
+2026-05-25 11:38:33,110 INFO ── Step 5: Generate Briefing ──
+2026-05-25 11:38:33,398 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-25.md (25913 bytes)
+2026-05-25 11:38:33,409 INFO Pruned 156 rows from quotes (older than 90 days)
+2026-05-25 11:38:33,413 INFO Pruned 134 rows from technicals (older than 90 days)
+2026-05-25 11:38:33,414 INFO Pruned 26 rows from anomalies (older than 90 days)
+2026-05-25 11:38:33,418 INFO Pruned 214 rows from headlines (older than 14 days)
+2026-05-25 11:38:33,420 INFO Pruned 390 rows from levels (older than 30 days)
+2026-05-25 11:38:33,420 INFO Pruned 110 rows from opus_tickers (older than 30 days)
+2026-05-25 11:38:33,421 INFO Pruned 36 rows from opus_movers (older than 30 days)
+2026-05-25 11:38:33,421 INFO Pruned 27 rows from opus_themes (older than 30 days)
+2026-05-25 11:38:33,422 INFO Pruned 5 rows from opus_econ_events (older than 30 days)
+2026-05-25 11:38:33,422 INFO Pruned 7 rows from opus_fed_signals (older than 30 days)
+2026-05-25 11:38:33,423 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-05-25 11:38:33,432 INFO Pruned 2 rows from economic_events (older than 90 days)
+2026-05-25 11:38:33,434 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-25 11:38:33,435 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-25 11:38:33,609 INFO Cleanup complete
+2026-05-25 11:38:33,610 INFO === Collection complete: 510.9s total, completeness=100%, exit_code=0 ===
