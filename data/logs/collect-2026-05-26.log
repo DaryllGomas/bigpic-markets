@@ -1,0 +1,64 @@
+2026-05-26 11:30:02,012 INFO === Market Data Collection — 2026-05-26 ===
+2026-05-26 11:30:02,026 INFO ── Step 1: RSS Feeds ──
+2026-05-26 11:30:24,231 INFO RSS feeds: 182 headlines stored, 297 older than 24h skipped
+2026-05-26 11:30:24,232 INFO Step 1 complete: 22.2s (headlines=182)
+2026-05-26 11:30:24,232 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-26 11:30:24,234 INFO Opus analysis: sending 170 headlines to claude CLI...
+2026-05-26 11:31:14,555 INFO Opus analysis: 29 tickers, 6 movers, 8 themes from 170 headlines
+2026-05-26 11:31:14,555 INFO Step 2 complete: 50.3s (opus_tickers=29)
+2026-05-26 11:31:14,555 INFO ── Step 3: Schwab + External APIs ──
+2026-05-26 11:31:21,137 INFO Schwab quotes: 146 symbols
+2026-05-26 11:31:21,138 INFO Auto-detected movers (|change| > 3%): 31 symbols
+2026-05-26 11:31:21,139 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-26 11:32:04,968 DEBUG Schwab technicals DTTLY: HTTP Error 400: Bad Request
+2026-05-26 11:34:13,662 INFO Schwab technicals: 126/127 symbols
+2026-05-26 11:34:36,577 DEBUG SMA200 DTTLY: only 12 candles (need 200)
+2026-05-26 11:35:44,587 INFO SMA200: 126/127 symbols
+2026-05-26 11:35:45,020 INFO Schwab market context: collected
+2026-05-26 11:37:24,427 INFO Schwab earnings: 71 entries
+2026-05-26 11:37:24,442 INFO Economic calendar: 4 events
+2026-05-26 11:37:24,549 INFO CoinGecko: 2 coins
+2026-05-26 11:37:28,177 INFO Stooq: 3/3 symbols
+2026-05-26 11:38:16,451 WARNING FRED failed: The read operation timed out
+2026-05-26 11:38:18,567 INFO Yahoo backup: 1 symbols
+2026-05-26 11:38:18,568 INFO Step 3 complete: 424.0s (quotes=146, tech=126, sma200=126, earnings=71, econ=4, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-26 11:38:18,568 INFO ── Step 4: Validation + Retry ──
+2026-05-26 11:38:18,646 INFO ANOMALY: DIA price=509.20 avg=496.63 z=3.0
+2026-05-26 11:38:18,673 INFO ANOMALY: HON price=231.00 avg=216.19 z=3.0
+2026-05-26 11:38:18,680 INFO ANOMALY: IRDM price=53.76 avg=41.74 z=3.6
+2026-05-26 11:38:18,701 INFO ANOMALY: MNTS price=11.91 avg=5.62 z=6.7
+2026-05-26 11:38:18,747 INFO ANOMALY: RDW price=20.28 avg=11.71 z=3.1
+2026-05-26 11:38:18,749 INFO ANOMALY: RGTI price=26.36 avg=18.71 z=3.1
+2026-05-26 11:38:18,768 INFO ANOMALY: SPIR price=23.00 avg=18.12 z=3.4
+2026-05-26 11:38:18,812 INFO Anomaly detection: 7 flagged
+2026-05-26 11:38:18,812 INFO Cross-validation: 0 discrepancies
+2026-05-26 11:38:18,822 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-26 11:38:18,823 INFO   Retrying technicals for DTTLY (original error: HTTP Error 400: Bad Request)
+2026-05-26 11:38:19,996 INFO   ✗ DTTLY technicals retry failed: HTTP Error 400: Bad Request
+2026-05-26 11:38:20,003 INFO Retry complete: 0/1 recovered
+2026-05-26 11:38:20,018 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): DTTLY
+2026-05-26 11:38:20,032 INFO Step 4 complete: 1.5s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-05-26 11:38:20,033 DEBUG   us_indices: OK
+2026-05-26 11:38:20,033 DEBUG   futures: OK
+2026-05-26 11:38:20,033 DEBUG   vix: OK
+2026-05-26 11:38:20,033 DEBUG   treasuries: OK
+2026-05-26 11:38:20,033 DEBUG   commodities: OK
+2026-05-26 11:38:20,033 DEBUG   crypto: OK
+2026-05-26 11:38:20,033 DEBUG   international: OK
+2026-05-26 11:38:20,033 DEBUG   gap_fills: OK
+2026-05-26 11:38:20,034 DEBUG   econ_calendar: OK
+2026-05-26 11:38:20,034 DEBUG   market_context: OK
+2026-05-26 11:38:20,034 DEBUG   opus_analysis: OK
+2026-05-26 11:38:20,034 DEBUG   rss: OK
+2026-05-26 11:38:20,034 DEBUG   watchlist_t1: OK
+2026-05-26 11:38:20,034 INFO ── Step 5: Generate Briefing ──
+2026-05-26 11:38:20,327 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-26.md (30130 bytes)
+2026-05-26 11:38:20,337 INFO Pruned 148 rows from quotes (older than 90 days)
+2026-05-26 11:38:20,341 INFO Pruned 123 rows from technicals (older than 90 days)
+2026-05-26 11:38:20,341 INFO Pruned 26 rows from anomalies (older than 90 days)
+2026-05-26 11:38:20,345 INFO Pruned 136 rows from headlines (older than 14 days)
+2026-05-26 11:38:20,357 INFO Pruned 13 rows from economic_events (older than 90 days)
+2026-05-26 11:38:20,359 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-26 11:38:20,359 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-26 11:38:20,528 INFO Cleanup complete
+2026-05-26 11:38:20,529 INFO === Collection complete: 498.0s total, completeness=100%, exit_code=0 ===

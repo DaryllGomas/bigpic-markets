@@ -1,0 +1,87 @@
+[2026-05-26 11:30:01] === Morning Brief Started ===
+[2026-05-26 11:30:01] Date: Tuesday, 2026-05-26
+[2026-05-26 11:30:01] Output: morning-brief/2026-05/2026-05-26_Tue.md + 2026-05-26_Tue.html
+[2026-05-26 11:30:01] All dependencies verified
+[2026-05-26 11:30:01] Running data collection pipeline...
+2026-05-26 11:30:02,012 INFO === Market Data Collection — 2026-05-26 ===
+2026-05-26 11:30:02,026 INFO ── Step 1: RSS Feeds ──
+2026-05-26 11:30:24,231 INFO RSS feeds: 182 headlines stored, 297 older than 24h skipped
+2026-05-26 11:30:24,232 INFO Step 1 complete: 22.2s (headlines=182)
+2026-05-26 11:30:24,232 INFO ── Step 2: Opus Feed Analysis ──
+2026-05-26 11:30:24,234 INFO Opus analysis: sending 170 headlines to claude CLI...
+2026-05-26 11:31:14,555 INFO Opus analysis: 29 tickers, 6 movers, 8 themes from 170 headlines
+2026-05-26 11:31:14,555 INFO Step 2 complete: 50.3s (opus_tickers=29)
+2026-05-26 11:31:14,555 INFO ── Step 3: Schwab + External APIs ──
+2026-05-26 11:31:21,137 INFO Schwab quotes: 146 symbols
+2026-05-26 11:31:21,138 INFO Auto-detected movers (|change| > 3%): 31 symbols
+2026-05-26 11:31:21,139 INFO Technicals + SMA200 for 127 quoted symbols (sequential)
+2026-05-26 11:34:13,662 INFO Schwab technicals: 126/127 symbols
+2026-05-26 11:35:44,587 INFO SMA200: 126/127 symbols
+2026-05-26 11:35:45,020 INFO Schwab market context: collected
+2026-05-26 11:37:24,427 INFO Schwab earnings: 71 entries
+2026-05-26 11:37:24,442 INFO Economic calendar: 4 events
+2026-05-26 11:37:24,549 INFO CoinGecko: 2 coins
+2026-05-26 11:37:28,177 INFO Stooq: 3/3 symbols
+2026-05-26 11:38:16,451 WARNING FRED failed: The read operation timed out
+2026-05-26 11:38:18,567 INFO Yahoo backup: 1 symbols
+2026-05-26 11:38:18,568 INFO Step 3 complete: 424.0s (quotes=146, tech=126, sma200=126, earnings=71, econ=4, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-05-26 11:38:18,568 INFO ── Step 4: Validation + Retry ──
+2026-05-26 11:38:18,646 INFO ANOMALY: DIA price=509.20 avg=496.63 z=3.0
+2026-05-26 11:38:18,673 INFO ANOMALY: HON price=231.00 avg=216.19 z=3.0
+2026-05-26 11:38:18,680 INFO ANOMALY: IRDM price=53.76 avg=41.74 z=3.6
+2026-05-26 11:38:18,701 INFO ANOMALY: MNTS price=11.91 avg=5.62 z=6.7
+2026-05-26 11:38:18,747 INFO ANOMALY: RDW price=20.28 avg=11.71 z=3.1
+2026-05-26 11:38:18,749 INFO ANOMALY: RGTI price=26.36 avg=18.71 z=3.1
+2026-05-26 11:38:18,768 INFO ANOMALY: SPIR price=23.00 avg=18.12 z=3.4
+2026-05-26 11:38:18,812 INFO Anomaly detection: 7 flagged
+2026-05-26 11:38:18,812 INFO Cross-validation: 0 discrepancies
+2026-05-26 11:38:18,822 INFO Retry check: 1 failed call(s) found, retrying...
+2026-05-26 11:38:18,823 INFO   Retrying technicals for DTTLY (original error: HTTP Error 400: Bad Request)
+2026-05-26 11:38:19,996 INFO   ✗ DTTLY technicals retry failed: HTTP Error 400: Bad Request
+2026-05-26 11:38:20,003 INFO Retry complete: 0/1 recovered
+2026-05-26 11:38:20,018 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): DTTLY
+2026-05-26 11:38:20,032 INFO Step 4 complete: 1.5s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-05-26 11:38:20,034 INFO ── Step 5: Generate Briefing ──
+2026-05-26 11:38:20,327 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-05-26.md (30130 bytes)
+2026-05-26 11:38:20,337 INFO Pruned 148 rows from quotes (older than 90 days)
+2026-05-26 11:38:20,341 INFO Pruned 123 rows from technicals (older than 90 days)
+2026-05-26 11:38:20,341 INFO Pruned 26 rows from anomalies (older than 90 days)
+2026-05-26 11:38:20,345 INFO Pruned 136 rows from headlines (older than 14 days)
+2026-05-26 11:38:20,357 INFO Pruned 13 rows from economic_events (older than 90 days)
+2026-05-26 11:38:20,359 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-05-26 11:38:20,359 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-05-26 11:38:20,528 INFO Cleanup complete
+2026-05-26 11:38:20,529 INFO === Collection complete: 498.0s total, completeness=100%, exit_code=0 ===
+[2026-05-26 11:38:20] Data collection complete — briefing file ready
+[2026-05-26 11:38:20] Found 9 research files (sector theses + structural calendar)
+[2026-05-26 11:38:20] Running Claude [report (attempt 1)] (timeout: 900s)...
+Done. The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-05/2026-05-26_Tue.md`.
+
+**Summary of what I produced (LIGHT event load, ~1,300 words):**
+
+- **Top story:** A powerful Space-sector rally dominates the movers — LUNR +10.4%, PL +9.6%, RKLB +5.7%, IRDM +10%, SPIR +8.7%, RDW +16%, and MNTS +61% (flagged as an anomaly with no catalyst in the data). I cross-referenced these to the space thesis (SpaceX IPO mid-2026 positioning, Vast Haven-1 this month).
+- **Macro setup:** Risk-on — futures green with small caps leading, VIX 16.62 (normal), oil cracking 4–5% on Iran peace/Hormuz-reopening hopes. Tempered by sticky 4.5%+ yields and fading rate-cut hopes.
+- **Earnings today:** Both ZS (Cybersecurity) and SQM (Energy Storage) report before open — I noted their technical setups (ZS overbought at RSI 73; SQM weak at 39) and explicitly marked **EPS actuals as not yet reported**.
+- **Notable RSI extremes:** Cybersecurity broadly overbought (CRWD 87, FTNT 88, PANW 84) ahead of their early-June reports.
+
+**Rules I followed strictly:**
+- All four economic releases showed `Actual = "—"`, so I marked every one **Pending** with consensus/prior — no fabricated values.
+- Both earnings show `EPS Actual = "—"`, reported as not-yet-released.
+- I surfaced the data-quality caveats (FRED timeout → 2Y yield is prior close; 2 Schwab errors; z-score anomalies on the Space names) in both the movers section and the Sources footer, since several headline moves overlap with flagged anomalies.
+
+One thing worth flagging: the collection timestamp (11:38 PT ≈ 14:38 ET) is after the calendar's scheduled release times, yet the briefing recorded no actuals — I followed your rule and reported them as pending rather than guessing, but that timing mismatch may be worth checking in the pipeline.
+[2026-05-26 11:40:54] Claude [report (attempt 1)] finished successfully
+[2026-05-26 11:40:54] Report attempt 1 succeeded: 11971 bytes
+[2026-05-26 11:40:54] Running Schwab fact-check verification...
+=== Fact-Check: 2026-05-26_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 44 symbols...
+  Got quotes for 39 symbols
+
+--- Database cross-checks (market_date=2026-05-26) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-05-26 11:41:00] Running Claude [html-publish] (timeout: 900s)...
