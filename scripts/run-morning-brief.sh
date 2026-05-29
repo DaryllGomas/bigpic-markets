@@ -544,6 +544,12 @@ main() {
     local briefing_file="$BRIEFING_DIR/briefing-${TARGET_DATE}.md"
     if [[ ! -f "$briefing_file" ]]; then
         log "Running data collection pipeline..."
+        # -- Calendar hygiene guard (added 2026-05-27): drop stale manual
+        #    earnings events the authoritative earnings table contradicts, so a
+        #    mis-dated hand-seeded catalyst (e.g. NVDA Q1 FY27 left on 5/27 after
+        #    its real 5/20 print) can never make the brief announce a past event.
+        #    Non-fatal -- always exits 0. See reconcile-stale-earnings.py.
+        python3 "$REPO_DIR/scripts/reconcile-stale-earnings.py" --date "$TARGET_DATE" 2>&1 | tee -a "$LOG_FILE" || true
         set +e
         python3 "$COLLECT_SCRIPT" --date "$TARGET_DATE" 2>&1 | tee -a "$LOG_FILE"
         local collect_rc=${PIPESTATUS[0]}
