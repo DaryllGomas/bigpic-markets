@@ -22,7 +22,7 @@ Confidence: HIGH
 
 | Time (ET) | Event | Impact |
 |-----------|-------|--------|
-| — | ~~NVDA: Q1 FY2027 Earnings~~ **(CORRECTED 2026-05-27: NVDA reported 5/20, not 5/27 — stale manual entry; fixed in DB + guard added)** | High |
+| — | NVDA: Q1 FY2027 Earnings | High |
 | 4:00 | FOMC Member Logan Speaks | Low |
 | 8:15 | ADP Weekly Employment Change | Low |
 | 10:00 | Richmond Manufacturing Index | Low |
