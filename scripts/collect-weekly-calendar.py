@@ -269,8 +269,16 @@ def fetch_forex_factory(start_date, end_date):
 
 
 def _resolve_ff_dates(events, start_date, end_date):
-    """Convert FF date strings (e.g., 'Mon Mar 23') to YYYY-MM-DD."""
-    year = start_date.year
+    """Convert FF date strings (e.g., 'Mon Mar 23') to YYYY-MM-DD.
+
+    FF date strings carry no year. Assigning start_date.year unconditionally
+    mis-years events at a Dec/Jan window boundary (a January event gets the
+    December year, lands ~11 months in the past, and is silently dropped by the
+    range filter below). Instead, try each candidate year the window spans and
+    keep the one that lands the date inside [start_date, end_date].
+    """
+    # A week-long window spans one year, except at the Dec/Jan boundary (two).
+    candidate_years = sorted({start_date.year, end_date.year})
     resolved = []
     last_date = ""
 
@@ -280,11 +288,31 @@ def _resolve_ff_dates(events, start_date, end_date):
             # Try parsing "Mon Mar 23" or "Mar 23" patterns
             for fmt in ("%a %b %d", "%b %d"):
                 try:
-                    parsed = datetime.datetime.strptime(raw, fmt).replace(year=year)
-                    last_date = parsed.strftime("%Y-%m-%d")
-                    break
+                    base = datetime.datetime.strptime(raw, fmt)
                 except ValueError:
                     continue
+                # Pick the candidate year that lands the date in-window; fall
+                # back to the earliest candidate (which the range filter then
+                # drops, also dropping any same-day rows that inherit it).
+                chosen = None
+                for y in candidate_years:
+                    try:
+                        cand = base.replace(year=y).date()
+                    except ValueError:
+                        continue  # e.g. Feb 29 in a non-leap candidate year
+                    if start_date <= cand <= end_date:
+                        chosen = cand
+                        break
+                if chosen is None:
+                    for y in candidate_years:
+                        try:
+                            chosen = base.replace(year=y).date()
+                            break
+                        except ValueError:
+                            continue
+                if chosen is not None:
+                    last_date = chosen.strftime("%Y-%m-%d")
+                break
 
         if last_date:
             dt = datetime.datetime.strptime(last_date, "%Y-%m-%d").date()

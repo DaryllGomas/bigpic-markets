@@ -27,12 +27,19 @@ DB_PATH="$REPO_DIR/data/market.db"
 CALENDAR_SCRIPT="$REPO_DIR/scripts/collect-weekly-calendar.py"
 
 # ── Date & week calculation ──────────────────────────────────────────────────
-DOW=$(date +%u)  # 1=Mon, 7=Sun
-if [ "$DOW" -eq 7 ]; then
-    SUNDAY_DATE=$(date +%Y-%m-%d)
+# EAGLE_EYE_SUNDAY_DATE override lets the Monday backup cron target the Sunday
+# that just passed. Without it, a Monday run computes NEXT Sunday (DOW-based) and
+# would generate a future week instead of recovering the failed one.
+if [ -n "${EAGLE_EYE_SUNDAY_DATE:-}" ]; then
+    SUNDAY_DATE="$EAGLE_EYE_SUNDAY_DATE"
 else
-    DAYS_UNTIL_SUNDAY=$((7 - DOW))
-    SUNDAY_DATE=$(date -d "+${DAYS_UNTIL_SUNDAY} days" +%Y-%m-%d)
+    DOW=$(date +%u)  # 1=Mon, 7=Sun
+    if [ "$DOW" -eq 7 ]; then
+        SUNDAY_DATE=$(date +%Y-%m-%d)
+    else
+        DAYS_UNTIL_SUNDAY=$((7 - DOW))
+        SUNDAY_DATE=$(date -d "+${DAYS_UNTIL_SUNDAY} days" +%Y-%m-%d)
+    fi
 fi
 
 WEEK_NUM=$(date -d "$SUNDAY_DATE" +%V)
@@ -152,6 +159,14 @@ If a major event happened after Friday's close (geopolitical crisis, policy chan
 corporate news, natural disaster, etc.), it MUST be prominently covered — not buried
 or ignored because it falls outside the Mon-Fri trading week. Weekend developments
 that will move Monday's open are MORE important than last Tuesday's sector rotation.
+
+DATE & RECENCY DISCIPLINE (ALL agents — prevents stale/misdated catalysts):
+- Any event you call "this week", "today", "N days ago", or a current catalyst MUST be backed by a
+  source URL dated INSIDE the report window. Always state the FULL date including the YEAR.
+- If you cannot confirm an event occurred in this window, label it as historical context with its
+  real date (e.g., "Moody's stripped the US AAA in May 2025") — never let a year-old event read as fresh.
+- Any number tagged "Friday close" must come from a source showing THAT Friday's date. A weekend or
+  current-spot price is NOT a Friday close — label weekend/current prices "as of <date>" instead.
 
 Agent 1 — Equities & Sectors (writes $WEEK_DIR/01_equities_sectors.md):
   Research: Major indices (SPX, NDX, DJIA, RUT) weekly performance with levels.
@@ -357,32 +372,51 @@ run_claude() {
     local timeout_secs="$2"
     local prompt="$3"
     local claude_exit=0
+    local attempt=1
+    local max_attempts=3
 
-    log "Running Claude [$phase_name] (timeout: ${timeout_secs}s)..."
+    # Retry transient claude/API failures (e.g. "socket connection closed
+    # unexpectedly", exit 1) up to max_attempts — long HTML-build generations
+    # occasionally drop their streaming socket. Hard timeouts (124/137) are a
+    # hang, not a transient drop, so they are NOT retried (would burn another
+    # full timeout window). env -u CLAUDECODE avoids the nested-session crash on
+    # manual re-runs; --model opus pins the model.
+    while (( attempt <= max_attempts )); do
+        log "Running Claude [$phase_name] (timeout: ${timeout_secs}s, attempt ${attempt}/${max_attempts})..."
+        set +e
+        env -u CLAUDECODE timeout --kill-after=30 "$timeout_secs" "$CLAUDE_BIN" \
+            --model opus \
+            -p "$prompt" \
+            --dangerously-skip-permissions \
+            2>&1 | tee -a "$LOG_FILE"
+        claude_exit=${PIPESTATUS[0]}
+        set -e
 
-    set +e
-    timeout --kill-after=30 "$timeout_secs" "$CLAUDE_BIN" \
-        -p "$prompt" \
-        --dangerously-skip-permissions \
-        2>&1 | tee -a "$LOG_FILE"
-    claude_exit=${PIPESTATUS[0]}
-    set -e
+        if [[ $claude_exit -eq 0 ]]; then
+            log "Claude [$phase_name] finished successfully"
+            return 0
+        fi
+        if [[ $claude_exit -eq 124 || $claude_exit -eq 137 ]]; then
+            break  # hard timeout — a hang, not transient; do not retry
+        fi
+        if (( attempt < max_attempts )); then
+            log "Claude [$phase_name] exited $claude_exit (transient?) — retrying in 15s"
+            sleep 15
+        fi
+        attempt=$((attempt + 1))
+    done
 
     if [[ $claude_exit -eq 124 ]]; then
         log_error "Claude [$phase_name] timed out (SIGTERM) after ${timeout_secs}s"
         send_failure_alert "Claude [$phase_name] timed out (SIGTERM) after ${timeout_secs} seconds" || true
-        exit 1
     elif [[ $claude_exit -eq 137 ]]; then
         log_error "Claude [$phase_name] timed out (SIGKILL) after $((timeout_secs + 30))s — process ignored SIGTERM"
         send_failure_alert "Claude [$phase_name] had to be force-killed (SIGKILL) — ignored SIGTERM for 30s" || true
-        exit 1
-    elif [[ $claude_exit -ne 0 ]]; then
-        log_error "Claude [$phase_name] exited with code $claude_exit"
-        send_failure_alert "Claude [$phase_name] exited with code $claude_exit" || true
-        exit 1
+    else
+        log_error "Claude [$phase_name] failed after ${max_attempts} attempts (last exit $claude_exit)"
+        send_failure_alert "Claude [$phase_name] failed after ${max_attempts} attempts (last exit code $claude_exit)" || true
     fi
-
-    log "Claude [$phase_name] finished successfully"
+    exit 1
 }
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -393,10 +427,15 @@ main() {
 
     check_deps
     log "All dependencies verified"
+    log "Claude CLI $(env -u CLAUDECODE "$CLAUDE_BIN" --version 2>/dev/null || echo '(version unknown)') — model pinned: opus"
 
-    # Skip if already generated this week
-    if [[ -f "$WEEK_DIR/report.html" ]]; then
-        log "Report already exists for W${WEEK_NUM} — skipping"
+    # Skip only if a COMPLETE report already exists. A run that fails during
+    # html-build-2 leaves a partial Part-1 report.html still containing the
+    # <!-- CONTINUE HERE --> marker; that must NOT count as done, otherwise the
+    # backup cron sees the file and skips recovery. EAGLE_EYE.md is preserved, so
+    # a recovery run reuses the compiled report and just rebuilds the HTML.
+    if [[ -f "$WEEK_DIR/report.html" ]] && ! grep -q '<!-- CONTINUE HERE -->' "$WEEK_DIR/report.html"; then
+        log "Complete report already exists for W${WEEK_NUM} — skipping"
         exit 0
     fi
 
