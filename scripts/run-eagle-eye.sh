@@ -33,13 +33,13 @@ CALENDAR_SCRIPT="$REPO_DIR/scripts/collect-weekly-calendar.py"
 if [ -n "${EAGLE_EYE_SUNDAY_DATE:-}" ]; then
     SUNDAY_DATE="$EAGLE_EYE_SUNDAY_DATE"
 else
-    DOW=$(date +%u)  # 1=Mon, 7=Sun
-    if [ "$DOW" -eq 7 ]; then
-        SUNDAY_DATE=$(date +%Y-%m-%d)
-    else
-        DAYS_UNTIL_SUNDAY=$((7 - DOW))
-        SUNDAY_DATE=$(date -d "+${DAYS_UNTIL_SUNDAY} days" +%Y-%m-%d)
-    fi
+    # Target the MOST RECENT Sunday (today if Sunday, else the Sunday just past).
+    # The report is a RETROSPECTIVE on the week that ended, so a non-Sunday run
+    # must NOT compute the UPCOMING Sunday — doing so generates a future, not-yet-
+    # happened week (it once published a premature W23 report for week-ending +6d).
+    # DOW: 1=Mon..7=Sun; (DOW % 7) days back lands on the most recent Sunday.
+    DOW=$(date +%u)
+    SUNDAY_DATE=$(date -d "-$((DOW % 7)) days" +%Y-%m-%d)
 fi
 
 WEEK_NUM=$(date -d "$SUNDAY_DATE" +%V)
