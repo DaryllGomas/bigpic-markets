@@ -1,0 +1,101 @@
+[2026-06-01 11:30:01] === Morning Brief Started ===
+[2026-06-01 11:30:01] Date: Monday, 2026-06-01
+[2026-06-01 11:30:01] Output: morning-brief/2026-06/2026-06-01_Mon.md + 2026-06-01_Mon.html
+[2026-06-01 11:30:01] All dependencies verified
+[2026-06-01 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-06-01 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-06-01 11:30:02,419 INFO === Market Data Collection — 2026-06-01 ===
+2026-06-01 11:30:02,463 INFO ── Step 1: RSS Feeds ──
+2026-06-01 11:30:25,253 INFO RSS feeds: 165 headlines stored, 314 older than 24h skipped
+2026-06-01 11:30:25,253 INFO Step 1 complete: 22.8s (headlines=165)
+2026-06-01 11:30:25,254 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-01 11:30:25,258 INFO Opus analysis: sending 148 headlines to claude CLI...
+2026-06-01 11:31:31,546 INFO Opus analysis: 41 tickers, 14 movers, 6 themes from 148 headlines
+2026-06-01 11:31:31,546 INFO Step 2 complete: 66.3s (opus_tickers=41)
+2026-06-01 11:31:31,546 INFO ── Step 3: Schwab + External APIs ──
+2026-06-01 11:31:38,802 INFO Schwab quotes: 152 symbols
+2026-06-01 11:31:38,803 INFO Auto-detected movers (|change| > 3%): 33 symbols
+2026-06-01 11:31:38,804 INFO Technicals + SMA200 for 133 quoted symbols (sequential)
+2026-06-01 11:34:36,697 INFO Schwab technicals: 133/133 symbols
+2026-06-01 11:36:11,527 INFO SMA200: 133/133 symbols
+2026-06-01 11:36:11,909 INFO Schwab market context: collected
+2026-06-01 11:37:52,523 INFO Schwab earnings: 70 entries
+2026-06-01 11:37:52,541 INFO Economic calendar: 6 events
+2026-06-01 11:37:52,733 INFO CoinGecko: 2 coins
+2026-06-01 11:37:56,434 INFO Stooq: 3/3 symbols
+2026-06-01 11:38:44,742 WARNING FRED failed: The read operation timed out
+2026-06-01 11:38:46,862 INFO Yahoo backup: 1 symbols
+2026-06-01 11:38:46,862 INFO Step 3 complete: 435.3s (quotes=152, tech=133, sma200=133, earnings=70, econ=6, crypto=2, stooq=3, fred=0, yahoo=1)
+2026-06-01 11:38:46,862 INFO ── Step 4: Validation + Retry ──
+2026-06-01 11:38:46,914 INFO ANOMALY: ARM price=397.84 avg=169.92 z=5.5
+2026-06-01 11:38:46,917 INFO ANOMALY: AVGO price=458.93 avg=421.31 z=5.9
+2026-06-01 11:38:46,919 INFO ANOMALY: BBAI price=5.27 avg=4.21 z=3.6
+2026-06-01 11:38:46,934 INFO ANOMALY: ESTC price=67.49 avg=52.42 z=6.1
+2026-06-01 11:38:46,953 INFO ANOMALY: IBM price=340.46 avg=235.49 z=6.2
+2026-06-01 11:38:46,977 INFO ANOMALY: MSFT price=471.10 avg=402.83 z=3.0
+2026-06-01 11:38:46,982 INFO ANOMALY: NOW price=138.00 avg=97.76 z=5.5
+2026-06-01 11:38:46,990 INFO ANOMALY: OKTA price=126.69 avg=85.24 z=5.9
+2026-06-01 11:38:46,994 INFO ANOMALY: PLTR price=162.47 avg=136.64 z=6.2
+2026-06-01 11:38:47,009 INFO ANOMALY: RPD price=8.83 avg=6.77 z=5.5
+2026-06-01 11:38:47,013 INFO ANOMALY: SAIL price=19.65 avg=13.66 z=3.6
+2026-06-01 11:38:47,031 INFO ANOMALY: TENB price=29.15 avg=23.00 z=3.1
+2026-06-01 11:38:47,050 INFO Anomaly detection: 12 flagged
+2026-06-01 11:38:47,050 INFO Cross-validation: 0 discrepancies
+2026-06-01 11:38:47,056 INFO Retry check: 0 failures — nothing to retry
+2026-06-01 11:38:47,067 INFO Step 4 complete: 0.2s (anomalies=12, cross_val=0, retried=0, completeness=100%)
+2026-06-01 11:38:47,068 INFO ── Step 5: Generate Briefing ──
+2026-06-01 11:38:47,230 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-01.md (29045 bytes)
+2026-06-01 11:38:47,239 INFO Pruned 146 rows from quotes (older than 90 days)
+2026-06-01 11:38:47,241 INFO Pruned 121 rows from technicals (older than 90 days)
+2026-06-01 11:38:47,241 INFO Pruned 18 rows from anomalies (older than 90 days)
+2026-06-01 11:38:47,243 INFO Pruned 230 rows from headlines (older than 14 days)
+2026-06-01 11:38:47,244 INFO Pruned 385 rows from levels (older than 30 days)
+2026-06-01 11:38:47,244 INFO Pruned 98 rows from opus_tickers (older than 30 days)
+2026-06-01 11:38:47,245 INFO Pruned 48 rows from opus_movers (older than 30 days)
+2026-06-01 11:38:47,245 INFO Pruned 31 rows from opus_themes (older than 30 days)
+2026-06-01 11:38:47,245 INFO Pruned 5 rows from opus_econ_events (older than 30 days)
+2026-06-01 11:38:47,245 INFO Pruned 10 rows from opus_fed_signals (older than 30 days)
+2026-06-01 11:38:47,245 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-06-01 11:38:47,251 INFO Pruned 3 rows from economic_events (older than 90 days)
+2026-06-01 11:38:47,252 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-01 11:38:47,253 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-01 11:38:47,354 INFO Cleanup complete
+2026-06-01 11:38:47,355 INFO === Collection complete: 524.6s total, completeness=100%, exit_code=0 ===
+[2026-06-01 11:38:47] Data collection complete — briefing file ready
+[2026-06-01 11:38:47] Found 9 research files (sector theses + structural calendar)
+[2026-06-01 11:38:47] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-06/2026-06-01_Mon.md`.
+
+## Summary
+
+**Event Load: HEAVY** — calibrated to ~2,700 words with full scenario analysis and expanded playbook.
+
+Key judgment calls and how I handled the data:
+
+- **No fabricated actuals.** Every calendar release shows `—`, so all six are marked **Pending / Scheduled** with consensus + prior only. The 10:00 ISM Manufacturing PMI (consensus 53.3 vs 52.7) is flagged as the day's high-impact swing factor.
+
+- **Data-integrity callout up top.** Two issues from the briefing were surfaced honestly rather than buried:
+  1. **FRED timed out** → the 2Y yield (3.800%) is a stale previous-close value, so the 2s/10s spread is flagged approximate.
+  2. The pipeline's **z-score anomaly flags** on the big movers (IBM +14.33%, ARM +12.61%, etc.). Rather than silently trusting or discarding them, I cross-checked against the news-driven movers feed — they line up with the Nvidia-Computex cluster, so I treated them as genuine but recommended verifying IBM/ARM before acting. This connects to your prior memory about Schwab feed anomalies.
+
+- **The unifying narrative** — Nvidia's Arm-based RTX Spark PC superchip — drives the whole tape: AI/cyber/IBM up, x86 incumbents (INTC, AMD, QCOM) down, Kospi +4.10%.
+
+- **Watchlist actionability:** no earnings today, but I flagged the three-name Tier-1 gauntlet this week (PANW Jun 2, AVGO + CRWD Jun 3) into heavily overbought RSIs (CRWD 84, PANW 80), plus the June structural convergence (FOMC Jun 17 / Triple Witch Jun 19 / Russell Jun 26) and turn-of-month/Sell-in-May seasonals from CALENDAR.md.
+
+Every number traces to the briefing file with source attribution, and no WebSearch was used.
+[2026-06-01 11:42:23] Claude [report (attempt 1)] finished successfully
+[2026-06-01 11:42:23] Report attempt 1 succeeded: 19417 bytes
+[2026-06-01 11:42:23] Running Schwab fact-check verification...
+=== Fact-Check: 2026-06-01_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 67 symbols...
+  Got quotes for 59 symbols
+
+--- Database cross-checks (market_date=2026-06-01) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-06-01 11:42:33] Running Claude [html-publish] (timeout: 900s)...
