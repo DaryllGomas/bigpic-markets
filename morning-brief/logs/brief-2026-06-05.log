@@ -1,0 +1,88 @@
+[2026-06-05 11:30:01] === Morning Brief Started ===
+[2026-06-05 11:30:01] Date: Friday, 2026-06-05
+[2026-06-05 11:30:01] Output: morning-brief/2026-06/2026-06-05_Fri.md + 2026-06-05_Fri.html
+[2026-06-05 11:30:01] All dependencies verified
+[2026-06-05 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-06-05 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-06-05 11:30:01,429 INFO === Market Data Collection — 2026-06-05 ===
+2026-06-05 11:30:01,444 INFO ── Step 1: RSS Feeds ──
+2026-06-05 11:30:24,451 INFO RSS feeds: 239 headlines stored, 230 older than 24h skipped
+2026-06-05 11:30:24,451 INFO Step 1 complete: 23.0s (headlines=239)
+2026-06-05 11:30:24,451 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-05 11:30:24,453 INFO Opus analysis: sending 225 headlines to claude CLI...
+2026-06-05 11:32:06,593 INFO Opus analysis: 56 tickers, 8 movers, 9 themes from 225 headlines
+2026-06-05 11:32:06,594 INFO Step 2 complete: 102.1s (opus_tickers=56)
+2026-06-05 11:32:06,594 INFO ── Step 3: Schwab + External APIs ──
+2026-06-05 11:32:14,292 INFO Schwab quotes: 168 symbols
+2026-06-05 11:32:14,293 INFO Auto-detected movers (|change| > 3%): 15 symbols
+2026-06-05 11:32:14,294 INFO Technicals + SMA200 for 149 quoted symbols (sequential)
+2026-06-05 11:35:51,571 INFO Schwab technicals: 148/149 symbols
+2026-06-05 11:37:44,518 INFO SMA200: 149/149 symbols
+2026-06-05 11:37:44,824 INFO Schwab market context: collected
+2026-06-05 11:39:14,354 INFO Schwab earnings: 70 entries
+2026-06-05 11:39:14,371 INFO Economic calendar: 5 events
+2026-06-05 11:39:14,479 INFO CoinGecko: 2 coins
+2026-06-05 11:39:15,469 WARNING Stooq FTSE failed: could not convert string to float: '0)).join("");if(x.startsWith(t))break;n++}const r=await fetch("/__verify"'
+2026-06-05 11:39:18,294 INFO Stooq: 2/3 symbols
+2026-06-05 11:40:06,555 WARNING FRED failed: The read operation timed out
+2026-06-05 11:40:10,752 INFO Yahoo backup: 2 symbols
+2026-06-05 11:40:10,753 INFO Step 3 complete: 484.2s (quotes=168, tech=148, sma200=149, earnings=70, econ=5, crypto=2, stooq=2, fred=0, yahoo=2)
+2026-06-05 11:40:10,753 INFO ── Step 4: Validation + Retry ──
+2026-06-05 11:40:11,052 INFO Anomaly detection: 0 flagged
+2026-06-05 11:40:11,053 INFO Cross-validation: 0 discrepancies
+2026-06-05 11:40:11,064 INFO Retry check: 1 failed call(s) found, retrying...
+2026-06-05 11:40:11,064 INFO   Retrying technicals for CW (original error: timed out)
+2026-06-05 11:40:12,398 INFO   ✓ CW technicals recovered
+2026-06-05 11:40:12,404 INFO Retry complete: 1/1 recovered
+2026-06-05 11:40:12,424 INFO Step 4 complete: 1.7s (anomalies=0, cross_val=0, retried=1, completeness=100%)
+2026-06-05 11:40:12,426 INFO ── Step 5: Generate Briefing ──
+2026-06-05 11:40:12,759 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-05.md (31622 bytes)
+2026-06-05 11:40:12,769 INFO Pruned 155 rows from quotes (older than 90 days)
+2026-06-05 11:40:12,773 INFO Pruned 130 rows from technicals (older than 90 days)
+2026-06-05 11:40:12,773 INFO Pruned 8 rows from anomalies (older than 90 days)
+2026-06-05 11:40:12,778 INFO Pruned 262 rows from headlines (older than 14 days)
+2026-06-05 11:40:12,780 INFO Pruned 135 rows from levels (older than 30 days)
+2026-06-05 11:40:12,780 INFO Pruned 45 rows from opus_tickers (older than 30 days)
+2026-06-05 11:40:12,780 INFO Pruned 14 rows from opus_movers (older than 30 days)
+2026-06-05 11:40:12,781 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-06-05 11:40:12,781 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-06-05 11:40:12,782 INFO Pruned 1 rows from opus_fed_signals (older than 30 days)
+2026-06-05 11:40:12,782 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-06-05 11:40:12,793 INFO Pruned 11 rows from economic_events (older than 90 days)
+2026-06-05 11:40:12,795 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-05 11:40:12,796 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-05 11:40:12,977 INFO Cleanup complete
+2026-06-05 11:40:12,979 INFO === Collection complete: 611.0s total, completeness=100%, exit_code=0 ===
+[2026-06-05 11:40:13] Data collection complete — briefing file ready
+[2026-06-05 11:40:13] Found 9 research files (sector theses + structural calendar)
+[2026-06-05 11:40:13] Running Claude [report (attempt 1)] (timeout: 900s)...
+Done. The HEAVY-load Morning Brief for Friday, June 5, 2026 is written to:
+`/home/bigpic/projects/bigpic-markets/morning-brief/2026-06/2026-06-05_Fri.md`
+
+**What it covers (~2,600 words):**
+- **Event Load: HEAVY** — built around Jobs Friday landing on a stalling AI rally + new hawkish Fed chair (Warsh).
+- **Pre-market** — flagged the key tell: Dow futures green (+0.16%) vs. Nasdaq red (-0.99%), a textbook risk-rotation signature, with oil bid on Hormuz headlines and crypto soft (ETH -4%).
+- **Today's Calendar** — May jobs report and all releases marked **Pending** with consensus/prior only.
+- **Movers, Watchlist, Playbook, Sector Snapshot, News** — all per the structure, with three NFP scenarios and the Warsh "reaction-function" angle.
+
+**Two things worth flagging:**
+
+1. **I did not report any jobs numbers.** Per your rules, every Actual in the Economic Calendar reads "—", so I wrote "Pending" throughout. Note there's an internal inconsistency in the source data: the collection timestamp is **11:40 PT (≈2:40 PM ET)** — well past the 8:30 ET release — yet the briefing still shows the print as unreleased. I followed the rule strictly (Actual = "—" → Pending) rather than guess, but you may want to check why the pipeline's econ-calendar Actual field didn't populate given the afternoon collection time.
+
+2. **Data-quality caveats** surfaced from the header: FRED timed out (2Y yield is prior close), 1 of 383 Schwab calls failed, and Stooq logged one parse error — though the completeness score still read 100%. I noted these in the snapshot and Sources.
+[2026-06-05 11:43:28] Claude [report (attempt 1)] finished successfully
+[2026-06-05 11:43:28] Report attempt 1 succeeded: 17466 bytes
+[2026-06-05 11:43:28] Running Schwab fact-check verification...
+=== Fact-Check: 2026-06-05_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 29 symbols...
+  Got quotes for 23 symbols
+
+--- Database cross-checks (market_date=2026-06-05) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-06-05 11:43:33] Running Claude [html-publish] (timeout: 900s)...
