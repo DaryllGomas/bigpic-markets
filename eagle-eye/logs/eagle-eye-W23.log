@@ -105,3 +105,92 @@ One thing worth flagging: `git add -A` also swept in a previously-uncommitted **
 [2026-06-01 01:55:37] Claude [html-publish] finished successfully
 [2026-06-01 01:55:37] === Eagle Eye W23 Complete ===
 [2026-06-01 01:55:37] Published: markets.bigpicsolutions.com/eagle-eye/W23_2026-06-07/report.html
+[2026-06-07 23:00:01] === Eagle Eye W23 Started ===
+[2026-06-07 23:00:01] Week ending: 2026-06-05
+[2026-06-07 23:00:01] Output: eagle-eye/W23_2026-06-07/
+[2026-06-07 23:00:01] All dependencies verified
+[2026-06-07 23:00:01] Claude CLI 2.1.161 (Claude Code) — model pinned: opus
+[2026-06-07 23:00:01] Found 9 research files (sector theses + structural calendar)
+[2026-06-07 23:00:01] Collecting economic calendar for 2026-06-08 to 2026-06-12...
+23:00:02 [INFO] Collecting economic calendar: 2026-06-08 to 2026-06-12
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 25 upcoming events
+23:00:02 [INFO]   Filtered to 25 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W23_2026-06-07/next_week_calendar.md (25 events, 4 absences, confidence=high)
+[2026-06-07 23:00:02] Calendar collected (full confidence)
+[2026-06-07 23:00:02] Running Claude [research] (timeout: 3600s, attempt 1/3)...
+All three steps are complete. The Eagle Eye W23 report is finished and stored in `/home/bigpic/projects/bigpic-markets/eagle-eye/W23_2026-06-07/`.
+
+## Summary
+
+**Step 1 — Research (4 parallel agents):** All four wrote their reports. They independently converged on a coherent macro narrative, which gave me strong cross-corroboration.
+
+**Step 2 — Verification (VERIFICATION.md, status: PASS):** I caught one apparent red flag up front — Agent 3 framed the Strait of Hormuz as "closed since March, largest oil disruption in history" while reporting oil at only ~$92, which looked contradictory. Since every event here post-dates my Jan 2026 knowledge cutoff, I web-verified **10 key data points** rather than trusting memory. All passed:
+- The **Iran war / Hormuz crisis is real** (Operation Epic Fury Feb 28; Strait declared closed Mar 4; ~20% of oil disrupted). The contradiction **resolved** — oil is ~$92 because crude retreated double-digits on repeated reopening optimism + demand-destruction fears, not because the disruption is fake. Both agent framings were facets of the truth.
+- May jobs (+172K vs 80K, 4.3%), **Warsh confirmed Fed Chair** (54-45, May 13), June 5 index closes (exact to the decimal), the $1T chip rout, **BTC** >50% below its ~$126K Oct-2025 ATH, **Quantinuum's** $15.7B IPO, oil levels, and the surprisingly-high **$4,340 gold** — all confirmed.
+- I also fetched verified 2025 year-end closes to replace Agent 1's estimated YTD figures with exact ones (**SPX +7.9%, Nasdaq +10.6%, Dow +5.8%**).
+
+**Step 3 — Compile (EAGLE_EYE.md):** Led with the regime shift (jobs shock → Fed flips toward a *hike* → chip rout) plus the live Iran/Hormuz weekend escalation as co-lede. Includes a prominent **Weekend & Breaking** section (Day-100 strikes, OPEC+ 4th quota hike, crypto weekend bounce), Scorecard, Sector Heatmap, a tier-accurate **Thesis Watchlist Tracker** (tiers cross-checked against all 9 THESIS files), Fed/Rates, Commodities/FX, Crypto, and a **Week Ahead** using the calendar's exact day headers (no econ tables — left for stamp-calendar.py) with CPI Wednesday framed as the fulcrum, ORCL/ADBE earnings, and the blackout/absences.
+
+One note on remaining soft spots, all explicitly labeled in the report: Sunday-night futures levels weren't retrievable (no number fabricated), and per-sector weekly ETF percentages, exact IG/HY OAS closes, and a few watchlist names (CEG/VST/CCJ/PL/LUNR/LMT) lack name-specific verified weekly moves.
+[2026-06-07 23:16:43] Claude [research] finished successfully
+[2026-06-07 23:16:43] EAGLE_EYE.md generated: 26892 bytes
+[2026-06-07 23:16:43] Stamping calendar into Week Ahead...
+ERROR: No '## The Week Ahead' section found in report
+[2026-06-07 23:16:43] ERROR: Script exited with code 1
+[2026-06-08 03:00:01] === Eagle Eye W23 Started ===
+[2026-06-08 03:00:01] Week ending: 2026-06-05
+[2026-06-08 03:00:01] Output: eagle-eye/W23_2026-06-07/
+[2026-06-08 03:00:01] All dependencies verified
+[2026-06-08 03:00:01] Claude CLI 2.1.161 (Claude Code) — model pinned: opus
+[2026-06-08 03:00:01] EAGLE_EYE.md already exists — skipping research phase
+[2026-06-08 03:00:01] Running Claude [html-build-1] (timeout: 900s, attempt 1/3)...
+Part 1 of the W23 Eagle Eye report is built and verified.
+
+## Summary
+
+Created `/home/bigpic/projects/bigpic-markets/eagle-eye/W23_2026-06-07/report.html` with the full page shell and the first 5 content sections, matching the W22 BigPic theme exactly (copied the CSS/JS framework verbatim, then populated with W23 data from `EAGLE_EYE.md`).
+
+**What's in the file:**
+- **Full `<!DOCTYPE html>` + `<head>`** — all CSS variables (deep navy, gold/amber/coral, Space Grotesk + Newsreader fonts) and all JS (animated counters, bar chart, heatmap, filters, sources toggle, scroll reveal, yield-curve tooltips).
+- **Fixed nav** with back-arrow `<svg>` linking to `../index.html` (Eagle Eye archive) + section anchors.
+- **Hero** — "Good News Is Bad News / From 'When Do They Cut' to 'Do They Hike.'" with the +172K jobs → hike-repricing → $1T chip rout narrative.
+- **§1 Market Scorecard** — 12 animated counter cells (SPX 7,383.74, Nasdaq, DJIA, RUT, VIX 21.51, 2Y/10Y/30Y yields, WTI, Gold, DXY, BTC) + context box, with all data caveats.
+- **§2 Weekend & Breaking** — coral `alert-card` with a `LIVE` tag and timeline: Iran "Day 100" escalation, OPEC+ 4th quota hike, crypto bounce, futures-not-available.
+- **§3 This Week's Take** — 4 themed executive-summary cards (regime flip, $1T chip rout, Iran/Hormuz, inflation referendum).
+- **§4 Sector Heatmap** — YTD bar chart + 11-cell color-coded weekly-move grid + narrative.
+- **§5 Fed & Rates** — yield-curve SVG (bear-flattener, recomputed coordinates), yield table, rate-path probability bars (June Hold 97% / YE Hike 70% / cuts priced out), leadership 8-4 split, credit & liquidity grid, and next-week catalysts.
+
+**Verification:**
+- `<!-- CONTINUE HERE -->` appears exactly once (line 985), on its own line, **after** the rates `</section>` and **before** the footer ✓
+- `<section>`/`</section>` balanced (5/5); single `<!DOCTYPE>`, `</body>`, `</html>` ✓
+- **`align-items: stretch` on `.bar-chart`** present (the critical bar-height bug fix) ✓
+- Two `../index.html` back-links (nav + footer) ✓
+
+Part 2 sections (watchlist, commodities, crypto, week ahead, positioning, sources) drop in at the marker — the filter buttons, sources toggle, and conviction-card CSS/JS are already wired up and waiting for them.
+[2026-06-08 03:07:52] Claude [html-build-1] finished successfully
+[2026-06-08 03:07:52] report.html after Part 1: 73016 bytes
+[2026-06-08 03:07:52] Running Claude [html-build-2] (timeout: 900s, attempt 1/3)...
+Everything checks out. The build is complete.
+
+## Summary
+
+I completed Part 2 of the W23 Eagle Eye HTML report by replacing the `<!-- CONTINUE HERE -->` marker with six new content sections, all matching the existing theme (gold-on-deep-navy glass cards, `.conviction-card`/`.futures-cell`/`.cal-day`/`.risk-item` components, entity-encoded typography, and `.reveal` scroll animations).
+
+**Sections inserted (6–11):**
+
+1. **Thesis Watchlist Tracker** (`#watchlist`) — 26 filterable cards grouped by thesis, each with ticker, name, color-coded tier badge (T1/T2/T3/Caution/HON play/other), thesis tag, and weekly/Friday delta. Filter buttons use `data-filter` and cards use `data-thesis`, wiring into the existing `initFilters()`. Includes the quantum policy-tailwind callout and the robotics footnote.
+2. **Commodities & Forex** (`#commodities`) — Energy, Metals, and Forex sub-cards with key-stat cells + narrative (Hormuz disruption, OPEC+ hike, the counterintuitive precious-metals selloff, strong-dollar bid).
+3. **Crypto Snapshot** (`#crypto`) — Fri-close vs Sun-spot price table, "flush in numbers" stat grid, and the five narrative bullets (ETF outflows, MSTR sale, altcoin capitulation, CLARITY Act, quantum×crypto).
+4. **The Week Ahead** (`#ahead`) — 5-day calendar grid with typed event chips (data/earnings/fed/catalyst/geopolitical, CPI & inflation-expectations starred), full day-by-day commentary rendered verbatim from the MD, plus Earnings-to-Watch and Notable-Absences cards.
+5. **Positioning & Thesis Update** (`#positioning`) — 6-item Risk Radar (critical/high/medium levels) + the five actionable takeaways, with takeaway #4's thesis nuances rendered as direction-badged conviction cards.
+6. **Sources** (`#sources`) — collapsible panel wired to the existing `initSources()` via `#sourcesToggle`/`#sourcesContent`, consolidated and categorized.
+
+**Verification:**
+- `CONTINUE HERE` marker: **fully removed** (zero matches).
+- All 11 sections present in order; footer untouched at line 1758; nothing before the marker or after the footer was modified.
+- Filter/thesis values align (8 `data-filter` buttons + 26 `data-thesis` cards = 34), and the sources/filter IDs match the pre-existing JS handlers — no script changes were needed.
+[2026-06-08 03:15:13] Claude [html-build-2] finished successfully
+[2026-06-08 03:15:13] report.html after Part 2: 141458 bytes
+[2026-06-08 03:15:13] Running Claude [html-publish] (timeout: 300s, attempt 1/3)...
