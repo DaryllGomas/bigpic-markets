@@ -1,0 +1,90 @@
+[2026-06-08 11:30:01] === Morning Brief Started ===
+[2026-06-08 11:30:01] Date: Monday, 2026-06-08
+[2026-06-08 11:30:01] Output: morning-brief/2026-06/2026-06-08_Mon.md + 2026-06-08_Mon.html
+[2026-06-08 11:30:01] All dependencies verified
+[2026-06-08 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-06-08 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-06-08 11:30:02,396 INFO === Market Data Collection — 2026-06-08 ===
+2026-06-08 11:30:02,439 INFO ── Step 1: RSS Feeds ──
+2026-06-08 11:30:25,677 INFO RSS feeds: 150 headlines stored, 329 older than 24h skipped
+2026-06-08 11:30:25,678 INFO Step 1 complete: 23.2s (headlines=150)
+2026-06-08 11:30:25,678 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-08 11:30:25,681 INFO Opus analysis: sending 137 headlines to claude CLI...
+2026-06-08 11:31:55,550 INFO Opus analysis: 38 tickers, 16 movers, 9 themes from 137 headlines
+2026-06-08 11:31:55,550 INFO Step 2 complete: 89.9s (opus_tickers=38)
+2026-06-08 11:31:55,551 INFO ── Step 3: Schwab + External APIs ──
+2026-06-08 11:32:03,088 INFO Schwab quotes: 152 symbols
+2026-06-08 11:32:03,089 INFO Auto-detected movers (|change| > 3%): 33 symbols
+2026-06-08 11:32:03,090 INFO Technicals + SMA200 for 133 quoted symbols (sequential)
+2026-06-08 11:35:03,398 INFO Schwab technicals: 133/133 symbols
+2026-06-08 11:36:38,247 INFO SMA200: 133/133 symbols
+2026-06-08 11:36:38,600 INFO Schwab market context: collected
+2026-06-08 11:38:05,300 INFO Schwab earnings: 70 entries
+2026-06-08 11:38:05,319 INFO Economic calendar: 1 events
+2026-06-08 11:38:05,419 INFO CoinGecko: 2 coins
+2026-06-08 11:38:10,715 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-06-08 11:38:16,413 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-06-08 11:38:22,101 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-06-08 11:38:22,609 INFO Stooq: 0/3 symbols
+2026-06-08 11:39:10,892 WARNING FRED failed: The read operation timed out
+2026-06-08 11:39:19,502 INFO Yahoo backup: 4 symbols
+2026-06-08 11:39:19,502 INFO Step 3 complete: 444.0s (quotes=152, tech=133, sma200=133, earnings=70, econ=1, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-06-08 11:39:19,502 INFO ── Step 4: Validation + Retry ──
+2026-06-08 11:39:19,531 INFO ANOMALY: /GCQ26 price=4353.70 avg=4506.31 z=-3.2
+2026-06-08 11:39:19,574 INFO ANOMALY: CIEN price=486.58 avg=573.96 z=-3.3
+2026-06-08 11:39:19,591 INFO ANOMALY: EWA price=28.13 avg=29.04 z=-3.2
+2026-06-08 11:39:19,633 INFO ANOMALY: LLY price=1160.00 avg=965.59 z=3.1
+2026-06-08 11:39:19,732 INFO ANOMALY: UAL price=105.00 avg=95.23 z=3.1
+2026-06-08 11:39:19,753 INFO Anomaly detection: 5 flagged
+2026-06-08 11:39:19,753 INFO Cross-validation: 0 discrepancies
+2026-06-08 11:39:19,765 INFO Retry check: 0 failures — nothing to retry
+2026-06-08 11:39:19,785 INFO Step 4 complete: 0.3s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-06-08 11:39:19,787 INFO ── Step 5: Generate Briefing ──
+2026-06-08 11:39:20,086 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-08.md (28822 bytes)
+2026-06-08 11:39:20,095 INFO Pruned 143 rows from quotes (older than 90 days)
+2026-06-08 11:39:20,099 INFO Pruned 118 rows from technicals (older than 90 days)
+2026-06-08 11:39:20,100 INFO Pruned 29 rows from anomalies (older than 90 days)
+2026-06-08 11:39:20,105 INFO Pruned 193 rows from headlines (older than 14 days)
+2026-06-08 11:39:20,107 INFO Pruned 426 rows from levels (older than 30 days)
+2026-06-08 11:39:20,108 INFO Pruned 153 rows from opus_tickers (older than 30 days)
+2026-06-08 11:39:20,109 INFO Pruned 48 rows from opus_movers (older than 30 days)
+2026-06-08 11:39:20,110 INFO Pruned 31 rows from opus_themes (older than 30 days)
+2026-06-08 11:39:20,110 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-06-08 11:39:20,111 INFO Pruned 5 rows from opus_fed_signals (older than 30 days)
+2026-06-08 11:39:20,111 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-06-08 11:39:20,125 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-08 11:39:20,126 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-08 11:39:20,315 INFO Cleanup complete
+2026-06-08 11:39:20,316 INFO === Collection complete: 557.3s total, completeness=100%, exit_code=0 ===
+[2026-06-08 11:39:20] Data collection complete — briefing file ready
+[2026-06-08 11:39:20] Found 9 research files (sector theses + structural calendar)
+[2026-06-08 11:39:20] Running Claude [report (attempt 1)] (timeout: 900s)...
+The BigPic Morning Brief for Monday, June 8, 2026 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-06/2026-06-08_Mon.md`.
+
+**Summary of what the data drove:**
+
+- **Event Load: MEDIUM** (~1,900 words). The day's defining tension: a sharp overnight Asia risk-off (Kospi **-8.29%**, Nikkei **-3.85%** on Iran-Israel strikes + AI unwind) vs. a high-beta US bargain-hunting bounce (Nasdaq fut **+1.39%**, Russell **+1.37%**, VIX **-12.37%**).
+
+- **Calendar:** No US economic releases today — I marked CPI and the ECB decision as *pending/week-ahead* per the rules. **Apple WWDC 2026** is the only high-impact item. I added the structural note that **today (Jun 8) is the T-9 "Long Monday" positioning start for June Triple Witch week**, with FOMC (Jun 17) + Triple Witch/S&P rebalance (Jun 19) stacking next week (from CALENDAR.md).
+
+- **Watchlist tie-ins:** Flagged **MRVL +8.93%** (S&P 500 inclusion — directly relevant to the Jun 19 rebalance), **NVDA** SK hynix HBM pact, **ASML** as Europe's most valuable company, plus the broad nuclear/space/quantum green sweep. No watchlist earnings today. Cross-referenced approaching catalysts (SpaceX IPO, Grasberg restart, USAR magnet line) from the thesis files.
+
+- **Data-integrity handling:** I did **not** fabricate any actuals. I surfaced the briefing's data-quality flags in Sources — the FRED timeout (2Y is prior close), Stooq 404s, and the **Gold 4,354 anomaly (z-score -3.2)**, which I caveated inline rather than presenting as clean.
+
+One discrepancy worth noting: the briefing lists VIX two ways (18.85 in the snapshot, 18.81 in Market Context) — I used both with attribution rather than silently picking one.
+[2026-06-08 11:42:08] Claude [report (attempt 1)] finished successfully
+[2026-06-08 11:42:08] Report attempt 1 succeeded: 13750 bytes
+[2026-06-08 11:42:08] Running Schwab fact-check verification...
+=== Fact-Check: 2026-06-08_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 50 symbols...
+  Got quotes for 43 symbols
+
+--- Database cross-checks (market_date=2026-06-08) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-06-08 11:42:15] Running Claude [html-publish] (timeout: 900s)...
