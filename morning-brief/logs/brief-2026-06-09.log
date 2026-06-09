@@ -1,0 +1,86 @@
+[2026-06-09 11:30:01] === Morning Brief Started ===
+[2026-06-09 11:30:01] Date: Tuesday, 2026-06-09
+[2026-06-09 11:30:01] Output: morning-brief/2026-06/2026-06-09_Tue.md + 2026-06-09_Tue.html
+[2026-06-09 11:30:01] All dependencies verified
+[2026-06-09 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-06-09 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-06-09 11:30:01,986 INFO === Market Data Collection — 2026-06-09 ===
+2026-06-09 11:30:02,013 INFO ── Step 1: RSS Feeds ──
+2026-06-09 11:30:23,508 INFO RSS feeds: 242 headlines stored, 237 older than 24h skipped
+2026-06-09 11:30:23,508 INFO Step 1 complete: 21.5s (headlines=242)
+2026-06-09 11:30:23,508 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-09 11:30:23,510 INFO Opus analysis: sending 230 headlines to claude CLI...
+2026-06-09 11:32:15,085 INFO Opus analysis: 40 tickers, 7 movers, 9 themes from 230 headlines
+2026-06-09 11:32:15,086 INFO Step 2 complete: 111.6s (opus_tickers=40)
+2026-06-09 11:32:15,086 INFO ── Step 3: Schwab + External APIs ──
+2026-06-09 11:32:22,274 INFO Schwab quotes: 156 symbols
+2026-06-09 11:32:22,274 INFO Auto-detected movers (|change| > 3%): 14 symbols
+2026-06-09 11:32:22,275 INFO Technicals + SMA200 for 137 quoted symbols (sequential)
+2026-06-09 11:35:26,825 INFO Schwab technicals: 137/137 symbols
+2026-06-09 11:37:04,634 INFO SMA200: 137/137 symbols
+2026-06-09 11:37:04,946 INFO Schwab market context: collected
+2026-06-09 11:38:26,120 INFO Schwab earnings: 70 entries
+2026-06-09 11:38:26,128 INFO Economic calendar: 6 events
+2026-06-09 11:38:26,224 INFO CoinGecko: 2 coins
+2026-06-09 11:38:31,264 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-06-09 11:38:36,558 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-06-09 11:38:42,460 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-06-09 11:38:42,965 INFO Stooq: 0/3 symbols
+2026-06-09 11:39:31,244 WARNING FRED failed: The read operation timed out
+2026-06-09 11:39:39,679 INFO Yahoo backup: 4 symbols
+2026-06-09 11:39:39,680 INFO Step 3 complete: 444.6s (quotes=156, tech=137, sma200=137, earnings=70, econ=6, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-06-09 11:39:39,680 INFO ── Step 4: Validation + Retry ──
+2026-06-09 11:39:39,870 INFO ANOMALY: CIEN price=465.25 avg=570.84 z=-3.2
+2026-06-09 11:39:39,975 INFO ANOMALY: ORCL price=214.79 avg=159.49 z=4.1
+2026-06-09 11:39:40,060 INFO Anomaly detection: 2 flagged
+2026-06-09 11:39:40,061 INFO Cross-validation: 0 discrepancies
+2026-06-09 11:39:40,078 INFO Retry check: 0 failures — nothing to retry
+2026-06-09 11:39:40,097 INFO Step 4 complete: 0.4s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-06-09 11:39:40,101 INFO ── Step 5: Generate Briefing ──
+2026-06-09 11:39:40,402 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-09.md (32155 bytes)
+2026-06-09 11:39:40,412 INFO Pruned 160 rows from quotes (older than 90 days)
+2026-06-09 11:39:40,415 INFO Pruned 135 rows from technicals (older than 90 days)
+2026-06-09 11:39:40,416 INFO Pruned 3 rows from anomalies (older than 90 days)
+2026-06-09 11:39:40,419 INFO Pruned 109 rows from headlines (older than 14 days)
+2026-06-09 11:39:40,430 INFO Pruned 4 rows from economic_events (older than 90 days)
+2026-06-09 11:39:40,432 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-09 11:39:40,432 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-09 11:39:40,588 INFO Cleanup complete
+2026-06-09 11:39:40,589 INFO === Collection complete: 578.1s total, completeness=100%, exit_code=0 ===
+[2026-06-09 11:39:40] Data collection complete — briefing file ready
+[2026-06-09 11:39:40] Found 9 research files (sector theses + structural calendar)
+[2026-06-09 11:39:40] Running Claude [report (attempt 1)] (timeout: 900s)...
+The BigPic Morning Brief for Tuesday, June 9, 2026 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-06/2026-06-09_Tue.md`.
+
+## Summary
+
+**Event Load: MEDIUM** — a light macro calendar sitting inside a structurally heavy week (Triple Witch positioning + FOMC next Wednesday). I calibrated to ~1,900 words.
+
+**Key signals from the data:**
+- **Risk-on rebound** — all four index futures green, led by Nasdaq (+0.83%) and Russell (+0.88%); VIX bleeding -4.55% to 18.06; DXY soft; WTI sub-90 on Iran/Hormuz headlines.
+- **Space led the watchlist** — LUNR +4.52%, RKLB +4.34%, MNTS +5.16% on SpaceX-IPO momentum; AI infra rebound in MU/MRVL/GLW.
+- **NUVL +38.78%** on GSK's $10.6B oncology acquisition; **SAIL -12.49%** the worst mover.
+- **Structural overlay flagged**: we're in Triple Witch week (Jun 19 expiration), with the **June FOMC decision next Wednesday (Jun 17)** where the briefing notes markets are pricing *rate-hike fears* — a hawkish tilt I called out against the calendar's structural cut-priced baseline.
+
+**Rules I held to strictly:**
+- All economic-calendar entries showed Actual = "—", so I marked every one **Pending** and added a note that the 14:39 ET pull didn't capture morning actuals — no fabricated values.
+- **UEC earnings** (today, before open) reported as *not yet released* — no inferred results.
+- Flagged the feed's own data-quality caveats: FRED timeout (2Y = prior close), Stooq 404s, and the **CIEN/ORCL price anomalies** (treat those two levels with caution).
+
+One thing worth your attention: the **CIEN (465) and ORCL (215) anomaly flags** in the briefing header match a known pattern. Your memory already notes a recurring Schwab overflow bug on TRIN/volume — these look like a different vendor price glitch, but if ORCL/CIEN distortions keep recurring at collection time it may be worth a similar upstream note. Want me to log that?
+[2026-06-09 11:43:36] Claude [report (attempt 1)] finished successfully
+[2026-06-09 11:43:36] Report attempt 1 succeeded: 13262 bytes
+[2026-06-09 11:43:36] Running Schwab fact-check verification...
+=== Fact-Check: 2026-06-09_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 44 symbols...
+  Got quotes for 39 symbols
+
+--- Database cross-checks (market_date=2026-06-09) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-06-09 11:43:42] Running Claude [html-publish] (timeout: 900s)...
