@@ -1,0 +1,62 @@
+2026-06-10 11:30:01,535 INFO === Market Data Collection — 2026-06-10 ===
+2026-06-10 11:30:01,561 INFO ── Step 1: RSS Feeds ──
+2026-06-10 11:30:22,734 INFO RSS feeds: 250 headlines stored, 229 older than 24h skipped
+2026-06-10 11:30:22,734 INFO Step 1 complete: 21.2s (headlines=250)
+2026-06-10 11:30:22,734 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-10 11:30:22,737 INFO Opus analysis: sending 236 headlines to claude CLI...
+2026-06-10 11:32:25,493 INFO Opus analysis: 49 tickers, 14 movers, 10 themes from 236 headlines
+2026-06-10 11:32:25,493 INFO Step 2 complete: 122.8s (opus_tickers=49)
+2026-06-10 11:32:25,494 INFO ── Step 3: Schwab + External APIs ──
+2026-06-10 11:32:32,804 INFO Schwab quotes: 164 symbols
+2026-06-10 11:32:32,805 INFO Auto-detected movers (|change| > 3%): 38 symbols
+2026-06-10 11:32:32,805 INFO Technicals + SMA200 for 145 quoted symbols (sequential)
+2026-06-10 11:36:05,489 INFO Schwab technicals: 145/145 symbols
+2026-06-10 11:37:52,758 INFO SMA200: 145/145 symbols
+2026-06-10 11:37:53,187 INFO Schwab market context: collected
+2026-06-10 11:39:10,813 INFO Schwab earnings: 70 entries
+2026-06-10 11:39:10,833 INFO Economic calendar: 8 events
+2026-06-10 11:39:10,929 INFO CoinGecko: 2 coins
+2026-06-10 11:39:16,291 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-06-10 11:39:21,988 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-06-10 11:39:27,748 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-06-10 11:39:28,255 INFO Stooq: 0/3 symbols
+2026-06-10 11:40:16,508 WARNING FRED failed: The read operation timed out
+2026-06-10 11:40:24,986 INFO Yahoo backup: 4 symbols
+2026-06-10 11:40:24,986 INFO Step 3 complete: 479.5s (quotes=164, tech=145, sma200=145, earnings=70, econ=8, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-06-10 11:40:24,987 INFO ── Step 4: Validation + Retry ──
+2026-06-10 11:40:25,005 INFO ANOMALY: $VIX price=22.07 avg=17.19 z=4.5
+2026-06-10 11:40:25,014 INFO ANOMALY: /GCQ26 price=4185.50 avg=4476.68 z=-3.9
+2026-06-10 11:40:25,054 INFO ANOMALY: CIEN price=430.01 avg=565.49 z=-3.3
+2026-06-10 11:40:25,103 INFO ANOMALY: LEU price=149.37 avg=182.08 z=-3.3
+2026-06-10 11:40:25,112 INFO ANOMALY: LYSCF price=11.68 avg=13.39 z=-3.1
+2026-06-10 11:40:25,142 INFO ANOMALY: PEP price=143.67 avg=156.59 z=-3.5
+2026-06-10 11:40:25,203 INFO ANOMALY: UEC price=10.41 avg=13.63 z=-3.4
+2026-06-10 11:40:25,206 INFO ANOMALY: UUUU price=13.97 avg=18.08 z=-3.1
+2026-06-10 11:40:25,223 INFO Anomaly detection: 8 flagged
+2026-06-10 11:40:25,224 INFO Cross-validation: 0 discrepancies
+2026-06-10 11:40:25,233 INFO Retry check: 0 failures — nothing to retry
+2026-06-10 11:40:25,250 INFO Step 4 complete: 0.3s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-06-10 11:40:25,251 DEBUG   us_indices: OK
+2026-06-10 11:40:25,251 DEBUG   futures: OK
+2026-06-10 11:40:25,251 DEBUG   vix: OK
+2026-06-10 11:40:25,251 DEBUG   treasuries: OK
+2026-06-10 11:40:25,251 DEBUG   commodities: OK
+2026-06-10 11:40:25,251 DEBUG   crypto: OK
+2026-06-10 11:40:25,251 DEBUG   international: OK
+2026-06-10 11:40:25,251 DEBUG   gap_fills: OK
+2026-06-10 11:40:25,251 DEBUG   econ_calendar: OK
+2026-06-10 11:40:25,252 DEBUG   market_context: OK
+2026-06-10 11:40:25,252 DEBUG   opus_analysis: OK
+2026-06-10 11:40:25,252 DEBUG   rss: OK
+2026-06-10 11:40:25,252 DEBUG   watchlist_t1: OK
+2026-06-10 11:40:25,252 INFO ── Step 5: Generate Briefing ──
+2026-06-10 11:40:25,461 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-10.md (35430 bytes)
+2026-06-10 11:40:25,468 INFO Pruned 157 rows from quotes (older than 90 days)
+2026-06-10 11:40:25,471 INFO Pruned 132 rows from technicals (older than 90 days)
+2026-06-10 11:40:25,471 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-06-10 11:40:25,474 INFO Pruned 170 rows from headlines (older than 14 days)
+2026-06-10 11:40:25,483 INFO Pruned 8 rows from economic_events (older than 90 days)
+2026-06-10 11:40:25,485 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-10 11:40:25,485 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-10 11:40:25,653 INFO Cleanup complete
+2026-06-10 11:40:25,654 INFO === Collection complete: 623.7s total, completeness=100%, exit_code=0 ===

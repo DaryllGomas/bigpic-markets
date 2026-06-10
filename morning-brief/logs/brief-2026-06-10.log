@@ -1,0 +1,105 @@
+[2026-06-10 11:30:01] === Morning Brief Started ===
+[2026-06-10 11:30:01] Date: Wednesday, 2026-06-10
+[2026-06-10 11:30:01] Output: morning-brief/2026-06/2026-06-10_Wed.md + 2026-06-10_Wed.html
+[2026-06-10 11:30:01] All dependencies verified
+[2026-06-10 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-06-10 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-06-10 11:30:01,535 INFO === Market Data Collection — 2026-06-10 ===
+2026-06-10 11:30:01,561 INFO ── Step 1: RSS Feeds ──
+2026-06-10 11:30:22,734 INFO RSS feeds: 250 headlines stored, 229 older than 24h skipped
+2026-06-10 11:30:22,734 INFO Step 1 complete: 21.2s (headlines=250)
+2026-06-10 11:30:22,734 INFO ── Step 2: Opus Feed Analysis ──
+2026-06-10 11:30:22,737 INFO Opus analysis: sending 236 headlines to claude CLI...
+2026-06-10 11:32:25,493 INFO Opus analysis: 49 tickers, 14 movers, 10 themes from 236 headlines
+2026-06-10 11:32:25,493 INFO Step 2 complete: 122.8s (opus_tickers=49)
+2026-06-10 11:32:25,494 INFO ── Step 3: Schwab + External APIs ──
+2026-06-10 11:32:32,804 INFO Schwab quotes: 164 symbols
+2026-06-10 11:32:32,805 INFO Auto-detected movers (|change| > 3%): 38 symbols
+2026-06-10 11:32:32,805 INFO Technicals + SMA200 for 145 quoted symbols (sequential)
+2026-06-10 11:36:05,489 INFO Schwab technicals: 145/145 symbols
+2026-06-10 11:37:52,758 INFO SMA200: 145/145 symbols
+2026-06-10 11:37:53,187 INFO Schwab market context: collected
+2026-06-10 11:39:10,813 INFO Schwab earnings: 70 entries
+2026-06-10 11:39:10,833 INFO Economic calendar: 8 events
+2026-06-10 11:39:10,929 INFO CoinGecko: 2 coins
+2026-06-10 11:39:16,291 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-06-10 11:39:21,988 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-06-10 11:39:27,748 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-06-10 11:39:28,255 INFO Stooq: 0/3 symbols
+2026-06-10 11:40:16,508 WARNING FRED failed: The read operation timed out
+2026-06-10 11:40:24,986 INFO Yahoo backup: 4 symbols
+2026-06-10 11:40:24,986 INFO Step 3 complete: 479.5s (quotes=164, tech=145, sma200=145, earnings=70, econ=8, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-06-10 11:40:24,987 INFO ── Step 4: Validation + Retry ──
+2026-06-10 11:40:25,005 INFO ANOMALY: $VIX price=22.07 avg=17.19 z=4.5
+2026-06-10 11:40:25,014 INFO ANOMALY: /GCQ26 price=4185.50 avg=4476.68 z=-3.9
+2026-06-10 11:40:25,054 INFO ANOMALY: CIEN price=430.01 avg=565.49 z=-3.3
+2026-06-10 11:40:25,103 INFO ANOMALY: LEU price=149.37 avg=182.08 z=-3.3
+2026-06-10 11:40:25,112 INFO ANOMALY: LYSCF price=11.68 avg=13.39 z=-3.1
+2026-06-10 11:40:25,142 INFO ANOMALY: PEP price=143.67 avg=156.59 z=-3.5
+2026-06-10 11:40:25,203 INFO ANOMALY: UEC price=10.41 avg=13.63 z=-3.4
+2026-06-10 11:40:25,206 INFO ANOMALY: UUUU price=13.97 avg=18.08 z=-3.1
+2026-06-10 11:40:25,223 INFO Anomaly detection: 8 flagged
+2026-06-10 11:40:25,224 INFO Cross-validation: 0 discrepancies
+2026-06-10 11:40:25,233 INFO Retry check: 0 failures — nothing to retry
+2026-06-10 11:40:25,250 INFO Step 4 complete: 0.3s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-06-10 11:40:25,252 INFO ── Step 5: Generate Briefing ──
+2026-06-10 11:40:25,461 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-06-10.md (35430 bytes)
+2026-06-10 11:40:25,468 INFO Pruned 157 rows from quotes (older than 90 days)
+2026-06-10 11:40:25,471 INFO Pruned 132 rows from technicals (older than 90 days)
+2026-06-10 11:40:25,471 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-06-10 11:40:25,474 INFO Pruned 170 rows from headlines (older than 14 days)
+2026-06-10 11:40:25,483 INFO Pruned 8 rows from economic_events (older than 90 days)
+2026-06-10 11:40:25,485 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-06-10 11:40:25,485 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-06-10 11:40:25,653 INFO Cleanup complete
+2026-06-10 11:40:25,654 INFO === Collection complete: 623.7s total, completeness=100%, exit_code=0 ===
+[2026-06-10 11:40:25] Data collection complete — briefing file ready
+[2026-06-10 11:40:25] Found 9 research files (sector theses + structural calendar)
+[2026-06-10 11:40:25] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-06/2026-06-10_Wed.md`.
+
+## Summary
+
+**HEAVY event load day** — calibrated to ~2,600 words with full scenario analysis, as the template specifies. The brief captures a clean, broad-based risk-off setup driven by two colliding forces:
+
+1. **May CPI at 8:30 ET** — the day's pivot. Consensus has headline y/y *accelerating* to 4.2% (from 3.8%), which is the market's fear. I reported all calendar items as **Pending/Scheduled** since every Actual showed "—" — no values fabricated.
+2. **U.S. strikes on Iran** — driving WTI toward $90, futures down across the board (Nasdaq -1.59% leading), VIX +11% to 22.07.
+
+Key analytical threads I surfaced from the data:
+- **Cross-asset tell:** Gold AND bitcoin falling *with* equities → the dominant fear is hawkish rate repricing, not generic flight-to-safety.
+- **Structural overlay:** Cross-referenced CALENDAR.md — this is **Triple Witch positioning week** (Jun 19) with **FOMC Jun 16–17** and **Russell reconstitution Jun 26** directly ahead.
+- **Watchlist:** No earnings today; flagged all Tier 1 movers >3%, oversold RSI extremes (LYSCF 30, ALB 31, PL/SYM/LDOS/CEG), and noted FTNT (RSI 63) and FLNC (+2.90%) as the only relative-strength names.
+- **Catalysts cross-referenced to thesis files:** NRC Crane/TMI restart (CEG), China–Japan rare-earth restrictions, SpaceX IPO 4x oversubscribed, Viasat/BlackSky defense contracts, Quantinuum IPO.
+- **Defense primes (LMT/RTX/NOC green)** flagged as the day's safe harbor.
+
+**Data integrity:** I preserved and surfaced the pipeline's data-quality caveats (FRED timeout, Stooq 404s, and the z-score anomalies on VIX/gold/several watchlist names) rather than smoothing them over — and noted the SMCI -12.13% / FLEX -4.54% single-name stories from the news-driven movers feed.
+[2026-06-10 11:43:28] Claude [report (attempt 1)] finished successfully
+[2026-06-10 11:43:28] Report attempt 1 succeeded: 19868 bytes
+[2026-06-10 11:43:28] Running Schwab fact-check verification...
+=== Fact-Check: 2026-06-10_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 54 symbols...
+  Got quotes for 47 symbols
+
+--- Database cross-checks (market_date=2026-06-10) ---
+  6 database corrections:
+    FABRICATION: CPI M/M (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CPI Y/Y (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CORE CPI M/M (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CORE CPI Y/Y (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: FEDERAL BUDGET BALANCE actual 'Scheduled — Pending' → 'Pending' (not released)
+
+  6 total corrections needed:
+    FABRICATION: CPI M/M (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CPI Y/Y (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CORE CPI M/M (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CORE CPI Y/Y (MAY) actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Scheduled — Pending' → 'Pending' (not released)
+    FABRICATION: FEDERAL BUDGET BALANCE actual 'Scheduled — Pending' → 'Pending' (not released)
+
+  6 corrections written to 2026-06-10_Wed.md
+=== Fact-check complete ===
+[2026-06-10 11:43:36] Running Claude [html-publish] (timeout: 900s)...
