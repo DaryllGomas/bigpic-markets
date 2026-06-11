@@ -1216,6 +1216,36 @@ def get_big_movers(conn, market_date, threshold=3.0):
     return {row[0] for row in cur.fetchall()}
 
 
+# Opus feed-analysis retry policy — a transient CLI/API hiccup (non-JSON output,
+# empty response, timeout, transient API error) should not abort the whole brief.
+# See postmortem 2026-06-11 (parse_error "char 0", reproduced clean afterward).
+# Auth failure and a missing binary are NOT retried — they won't self-heal.
+OPUS_MAX_ATTEMPTS = 3
+OPUS_RETRY_BACKOFF = [10, 30]  # seconds to wait before retry 2 and retry 3
+
+
+def _opus_retry_wait(attempt, log):
+    """Sleep with backoff before the next Opus attempt; no-op after the last one."""
+    if attempt >= OPUS_MAX_ATTEMPTS:
+        return
+    delay = OPUS_RETRY_BACKOFF[min(attempt - 1, len(OPUS_RETRY_BACKOFF) - 1)]
+    log.info(f"Opus analysis: retrying in {delay}s (next attempt {attempt + 1}/{OPUS_MAX_ATTEMPTS})...")
+    time.sleep(delay)
+
+
+def _dump_opus_raw(market_date, tag, raw, log):
+    """Persist raw CLI stdout on a parse failure so the next postmortem has ground truth."""
+    if not raw:
+        return
+    try:
+        LOG_DIR.mkdir(parents=True, exist_ok=True)
+        path = LOG_DIR / f"opus-raw-{market_date}-{tag}.out"
+        path.write_text(raw)
+        log.warning(f"Opus analysis: raw CLI output saved to {path} ({len(raw)} bytes)")
+    except Exception as e:
+        log.warning(f"Opus analysis: could not save raw output for diagnosis: {e}")
+
+
 def analyze_headlines_with_opus(conn, market_date, log):
     """Feed today's headlines to Opus for structured intelligence extraction.
 
@@ -1284,152 +1314,195 @@ Rules:
     # Reset failure classification before each invocation
     analyze_headlines_with_opus.last_error = None
 
-    try:
-        log.info(f"Opus analysis: sending {headline_count} headlines to claude CLI...")
-        # Clean env: remove CLAUDECODE var so claude CLI works when called from
-        # inside a Claude Code session (e.g., during testing)
-        clean_env = {k: v for k, v in os.environ.items() if not k.startswith("CLAUDE")}
-        claude_bin = os.path.expanduser("~/.local/bin/claude")
-        result = subprocess.run(
-            [claude_bin, "-p", "--model", "opus", "--output-format", "json", prompt],
-            capture_output=True, text=True, timeout=180, env=clean_env,
-        )
+    # Clean env: remove CLAUDE* vars so the claude CLI works when called from
+    # inside a Claude Code session (e.g., during testing).
+    clean_env = {k: v for k, v in os.environ.items() if not k.startswith("CLAUDE")}
+    claude_bin = os.path.expanduser("~/.local/bin/claude")
 
-        if result.returncode != 0:
-            stderr_snip = (result.stderr or "")[:200]
-            stdout_snip = (result.stdout or "")[:200]
-            combined = (stderr_snip + " " + stdout_snip).lower()
-            auth_keywords = ("invalid api key", "not authenticated", "please run /login",
-                             "authentication", "credentials", "401", "403", "unauthorized")
-            if any(kw in combined for kw in auth_keywords) or (
-                result.returncode == 1 and not stderr_snip.strip() and not stdout_snip.strip()
-            ):
-                analyze_headlines_with_opus.last_error = (
-                    "auth_failure",
-                    "claude CLI exited 1 with empty output — credentials likely expired. "
-                    "Run `claude /login` on the host.",
-                )
-            else:
+    # Retry transient hiccups (non-JSON output, empty response, timeout, transient
+    # API error) with backoff. Auth failure / missing binary fail fast (no retry).
+    last_raw = None
+    for attempt in range(1, OPUS_MAX_ATTEMPTS + 1):
+        try:
+            log.info(f"Opus analysis: sending {headline_count} headlines to claude CLI "
+                     f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})...")
+            result = subprocess.run(
+                [claude_bin, "-p", "--model", "opus", "--output-format", "json", prompt],
+                capture_output=True, text=True, timeout=180, env=clean_env,
+            )
+            last_raw = result.stdout
+
+            if result.returncode != 0:
+                stderr_snip = (result.stderr or "")[:200]
+                stdout_snip = (result.stdout or "")[:200]
+                combined = (stderr_snip + " " + stdout_snip).lower()
+                auth_keywords = ("invalid api key", "not authenticated", "please run /login",
+                                 "authentication", "credentials", "401", "403", "unauthorized")
+                if any(kw in combined for kw in auth_keywords) or (
+                    result.returncode == 1 and not stderr_snip.strip() and not stdout_snip.strip()
+                ):
+                    # Credentials expired — retrying won't help. Fail fast.
+                    analyze_headlines_with_opus.last_error = (
+                        "auth_failure",
+                        "claude CLI exited 1 with empty output — credentials likely expired. "
+                        "Run `claude /login` on the host.",
+                    )
+                    log.warning(f"Opus analysis: auth failure (exit {result.returncode}) — not retrying")
+                    return {}
+                # Other non-zero exit — likely transient, retry.
                 analyze_headlines_with_opus.last_error = (
                     "cli_error",
                     f"claude CLI exited {result.returncode}: {stderr_snip or '(no stderr)'}",
                 )
-            log.warning(f"Opus analysis: claude CLI exited {result.returncode}: {stderr_snip}")
-            return {}
+                log.warning(f"Opus analysis: claude CLI exited {result.returncode}: {stderr_snip} "
+                            f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+                _opus_retry_wait(attempt, log)
+                continue
 
-        # Parse the response — claude --output-format json wraps in {"result": ...}
-        raw = result.stdout.strip()
-        if not raw:
-            log.warning("Opus analysis: empty response from claude CLI")
-            return {}
+            # Parse the response — claude --output-format json wraps in {"result": ...}
+            raw = (result.stdout or "").strip()
+            if not raw:
+                analyze_headlines_with_opus.last_error = (
+                    "empty", "empty response from claude CLI")
+                log.warning(f"Opus analysis: empty response from claude CLI "
+                            f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+                _opus_retry_wait(attempt, log)
+                continue
 
-        outer = json.loads(raw)
-        # claude --output-format json returns {"result": "...text..."} or the content directly
-        if isinstance(outer, dict) and "result" in outer:
-            inner_text = outer["result"]
-            # The result field contains the JSON string Opus produced
-            if isinstance(inner_text, str):
-                # Strip any markdown fences if Opus added them despite instructions
-                inner_text = inner_text.strip()
-                if inner_text.startswith("```"):
-                    inner_text = re.sub(r"^```(?:json)?\s*", "", inner_text)
-                    inner_text = re.sub(r"\s*```\s*$", "", inner_text)
-                analysis = json.loads(inner_text)
-            elif isinstance(inner_text, dict):
-                analysis = inner_text
+            outer = json.loads(raw)
+            # claude --output-format json returns {"result": "...text..."} or content directly
+            if isinstance(outer, dict) and "result" in outer:
+                inner_text = outer["result"]
+                # The result field contains the JSON string Opus produced
+                if isinstance(inner_text, str):
+                    # Strip any markdown fences if Opus added them despite instructions
+                    inner_text = inner_text.strip()
+                    if inner_text.startswith("```"):
+                        inner_text = re.sub(r"^```(?:json)?\s*", "", inner_text)
+                        inner_text = re.sub(r"\s*```\s*$", "", inner_text)
+                    analysis = json.loads(inner_text)
+                elif isinstance(inner_text, dict):
+                    analysis = inner_text
+                else:
+                    analyze_headlines_with_opus.last_error = (
+                        "bad_structure", f"unexpected result type: {type(inner_text).__name__}")
+                    log.warning(f"Opus analysis: unexpected result type: {type(inner_text)} "
+                                f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+                    _opus_retry_wait(attempt, log)
+                    continue
+            elif isinstance(outer, dict) and "tickers" in outer:
+                # Direct JSON output (no wrapper)
+                analysis = outer
             else:
-                log.warning(f"Opus analysis: unexpected result type: {type(inner_text)}")
-                return {}
-        elif isinstance(outer, dict) and "tickers" in outer:
-            # Direct JSON output (no wrapper)
-            analysis = outer
-        else:
-            log.warning(f"Opus analysis: unexpected response structure")
+                analyze_headlines_with_opus.last_error = (
+                    "bad_structure", "unexpected response structure")
+                log.warning(f"Opus analysis: unexpected response structure "
+                            f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+                _opus_retry_wait(attempt, log)
+                continue
+
+            # Validate expected keys exist
+            for key in ("tickers", "movers", "sector_themes", "sentiment"):
+                if key not in analysis:
+                    analysis[key] = [] if key != "sentiment" else ""
+            for key in ("econ_events", "fed_signals"):
+                if key not in analysis:
+                    analysis[key] = []
+
+            # Store in normalized tables
+            now = datetime.datetime.now().isoformat()
+
+            for ticker in analysis.get("tickers", []):
+                conn.execute(
+                    "INSERT INTO opus_tickers (market_date, ticker, analyzed_at) VALUES (?,?,?)",
+                    (market_date, ticker, now),
+                )
+
+            for m in analysis.get("movers", []):
+                conn.execute(
+                    "INSERT INTO opus_movers (market_date, ticker, direction, reason, headline, analyzed_at) "
+                    "VALUES (?,?,?,?,?,?)",
+                    (market_date, m.get("ticker", ""), m.get("direction"),
+                     m.get("reason"), m.get("headline"), now),
+                )
+
+            for t in analysis.get("sector_themes", []):
+                conn.execute(
+                    "INSERT INTO opus_themes (market_date, sector, narrative, analyzed_at) VALUES (?,?,?,?)",
+                    (market_date, t.get("sector", ""), t.get("narrative"), now),
+                )
+
+            for e in analysis.get("econ_events", []):
+                conn.execute(
+                    "INSERT INTO opus_econ_events (market_date, event, status, context, analyzed_at) "
+                    "VALUES (?,?,?,?,?)",
+                    (market_date, e.get("event", ""), e.get("status"), e.get("context"), now),
+                )
+
+            for sig in analysis.get("fed_signals", []):
+                conn.execute(
+                    "INSERT INTO opus_fed_signals (market_date, signal, analyzed_at) VALUES (?,?,?)",
+                    (market_date, sig, now),
+                )
+
+            sentiment = analysis.get("sentiment", "")
+            if sentiment:
+                conn.execute(
+                    "INSERT OR REPLACE INTO opus_sentiment "
+                    "(market_date, sentiment, headline_count, model_used, analyzed_at) "
+                    "VALUES (?,?,?,?,?)",
+                    (market_date, sentiment, headline_count, "opus", now),
+                )
+
+            conn.commit()
+
+            ticker_count = len(analysis.get("tickers", []))
+            mover_count = len(analysis.get("movers", []))
+            theme_count = len(analysis.get("sector_themes", []))
+            log.info(f"Opus analysis: {ticker_count} tickers, {mover_count} movers, "
+                     f"{theme_count} themes from {headline_count} headlines "
+                     f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+            return analysis
+
+        except subprocess.TimeoutExpired:
+            analyze_headlines_with_opus.last_error = (
+                "timeout", "claude CLI timed out after 180s")
+            log.warning(f"Opus analysis: claude CLI timed out after 180s "
+                        f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+            _opus_retry_wait(attempt, log)
+            continue
+        except json.JSONDecodeError as e:
+            analyze_headlines_with_opus.last_error = (
+                "parse_error", f"claude CLI returned non-JSON: {e}")
+            log.warning(f"Opus analysis: failed to parse JSON: {e} "
+                        f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+            _dump_opus_raw(market_date, f"attempt{attempt}", last_raw, log)
+            _opus_retry_wait(attempt, log)
+            continue
+        except FileNotFoundError:
+            # No binary — retrying won't help. Fail fast.
+            analyze_headlines_with_opus.last_error = (
+                "binary_missing", f"claude CLI not found at {claude_bin}")
+            log.warning(f"Opus analysis: claude CLI not found at {claude_bin} — not retrying")
             return {}
+        except Exception as e:
+            # Could be a post-parse DB error mid-insert — discard partial writes so a
+            # retry doesn't double-insert when it later commits on the same connection.
+            try:
+                conn.rollback()
+            except Exception:
+                pass
+            analyze_headlines_with_opus.last_error = (
+                "unexpected", f"unexpected error: {e}")
+            log.warning(f"Opus analysis: unexpected error: {e} "
+                        f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
+            _opus_retry_wait(attempt, log)
+            continue
 
-        # Validate expected keys exist
-        for key in ("tickers", "movers", "sector_themes", "sentiment"):
-            if key not in analysis:
-                analysis[key] = [] if key != "sentiment" else ""
-        for key in ("econ_events", "fed_signals"):
-            if key not in analysis:
-                analysis[key] = []
-
-        # Store in normalized tables
-        now = datetime.datetime.now().isoformat()
-
-        for ticker in analysis.get("tickers", []):
-            conn.execute(
-                "INSERT INTO opus_tickers (market_date, ticker, analyzed_at) VALUES (?,?,?)",
-                (market_date, ticker, now),
-            )
-
-        for m in analysis.get("movers", []):
-            conn.execute(
-                "INSERT INTO opus_movers (market_date, ticker, direction, reason, headline, analyzed_at) "
-                "VALUES (?,?,?,?,?,?)",
-                (market_date, m.get("ticker", ""), m.get("direction"),
-                 m.get("reason"), m.get("headline"), now),
-            )
-
-        for t in analysis.get("sector_themes", []):
-            conn.execute(
-                "INSERT INTO opus_themes (market_date, sector, narrative, analyzed_at) VALUES (?,?,?,?)",
-                (market_date, t.get("sector", ""), t.get("narrative"), now),
-            )
-
-        for e in analysis.get("econ_events", []):
-            conn.execute(
-                "INSERT INTO opus_econ_events (market_date, event, status, context, analyzed_at) "
-                "VALUES (?,?,?,?,?)",
-                (market_date, e.get("event", ""), e.get("status"), e.get("context"), now),
-            )
-
-        for sig in analysis.get("fed_signals", []):
-            conn.execute(
-                "INSERT INTO opus_fed_signals (market_date, signal, analyzed_at) VALUES (?,?,?)",
-                (market_date, sig, now),
-            )
-
-        sentiment = analysis.get("sentiment", "")
-        if sentiment:
-            conn.execute(
-                "INSERT OR REPLACE INTO opus_sentiment "
-                "(market_date, sentiment, headline_count, model_used, analyzed_at) "
-                "VALUES (?,?,?,?,?)",
-                (market_date, sentiment, headline_count, "opus", now),
-            )
-
-        conn.commit()
-
-        ticker_count = len(analysis.get("tickers", []))
-        mover_count = len(analysis.get("movers", []))
-        theme_count = len(analysis.get("sector_themes", []))
-        log.info(f"Opus analysis: {ticker_count} tickers, {mover_count} movers, "
-                 f"{theme_count} themes from {headline_count} headlines")
-        return analysis
-
-    except subprocess.TimeoutExpired:
-        analyze_headlines_with_opus.last_error = (
-            "timeout", "claude CLI timed out after 180s")
-        log.warning("Opus analysis: claude CLI timed out after 180s")
-        return {}
-    except json.JSONDecodeError as e:
-        analyze_headlines_with_opus.last_error = (
-            "parse_error", f"claude CLI returned non-JSON: {e}")
-        log.warning(f"Opus analysis: failed to parse JSON: {e}")
-        log.debug(f"Opus raw output: {result.stdout[:500] if 'result' in dir() else 'N/A'}")
-        return {}
-    except FileNotFoundError:
-        analyze_headlines_with_opus.last_error = (
-            "binary_missing", f"claude CLI not found at {claude_bin}")
-        log.warning(f"Opus analysis: claude CLI not found at {claude_bin}")
-        return {}
-    except Exception as e:
-        analyze_headlines_with_opus.last_error = (
-            "unexpected", f"unexpected error: {e}")
-        log.warning(f"Opus analysis: unexpected error: {e}")
-        return {}
+    # All attempts exhausted — last_error is set; caller hard-fails the pipeline.
+    log.error(f"Opus analysis: all {OPUS_MAX_ATTEMPTS} attempts failed "
+              f"(last_error={analyze_headlines_with_opus.last_error})")
+    return {}
 
 
 # ── Phase 4: Validation ───────────────────────────────────────────────────────
