@@ -1,0 +1,88 @@
+[2026-06-14 23:00:01] === Eagle Eye W24 Started ===
+[2026-06-14 23:00:01] Week ending: 2026-06-12
+[2026-06-14 23:00:01] Output: eagle-eye/W24_2026-06-14/
+[2026-06-14 23:00:01] All dependencies verified
+[2026-06-14 23:00:02] Claude CLI 2.1.177 (Claude Code) — model pinned: opus
+[2026-06-14 23:00:02] Found 9 research files (sector theses + structural calendar)
+[2026-06-14 23:00:02] Collecting economic calendar for 2026-06-15 to 2026-06-19...
+23:00:02 [INFO] Collecting economic calendar: 2026-06-15 to 2026-06-19
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 30 upcoming events
+23:00:02 [INFO]   Filtered to 30 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W24_2026-06-14/next_week_calendar.md (30 events, 6 absences, confidence=high)
+[2026-06-14 23:00:02] Calendar collected (full confidence)
+[2026-06-14 23:00:02] Running Claude [research] (timeout: 3600s, attempt 1/3)...
+The Eagle Eye W24 report is complete. All deliverables are in `/home/bigpic/projects/bigpic-markets/eagle-eye/W24_2026-06-14/`.
+
+## Summary
+
+**STEP 1 — Research (4 parallel agents):** Each read the 9 sector theses and ran WebSearch for both the weekly recap and breaking weekend news. Wrote `01_equities_sectors.md`, `02_rates_credit_fed.md`, `03_commodities_forex.md`, `04_crypto_alternative.md`.
+
+**STEP 2 — Verify (`VERIFICATION.md`):** Cross-checked all four reports and spot-checked 10 data points via WebFetch. Status: **PASS**. Direct source checks confirmed the hard data to within rounding:
+- ✅ **Exact:** WTI $81.31, Brent $84.16, natgas $3.09, uranium $86.1/lb, silver $66.69 (all 6/12–14); Treasury curve (2Y 4.09 / 5Y 4.21 / 10Y 4.48 / 30Y 4.97, 2s10s +39, 3m10y +70, recession 15.9%); SpaceX IPO ($135 → $160.95 close, +19.2%)
+- ⚠️ **3 corrections applied in compile:** (1) crypto report's Brent "~$90" was wrong → ~$84; (2) gold $4,216 → ~$4,195–4,200; (3) Hormuz framing harmonized — Trump *announced* ending the blockade, but the strait is **still physically shut** (reopening ~Q3). Also clarified SpaceX's $1.77T IPO valuation vs ~$2.1T close market cap (both correct).
+- Good agent calls preserved: rejected an outlier "BTC $77K" headline and a stale 2021 RRP figure.
+
+**STEP 3 — Compile (`EAGLE_EYE.md`):** Full report with all required sections. Key editorial choices:
+- **Lede = the weekend**, per instructions: the US–Iran peace-deal framework (signing slated Fri 6/19, Switzerland) + the Sunday Beirut strike that threatens it, alongside the record SpaceX IPO — both elevated above last week's sector rotation.
+- Week Ahead day headers copied **verbatim** from `next_week_calendar.md` (Mon 6/15 → Fri 6/19), no economic tables (left for `stamp-calendar.py`), no parenthetical labels in headers. Flagged the Friday Quad-Witch/Juneteenth bank-holiday tension without overriding the authoritative calendar.
+- Thesis Watchlist Tracker grouped by thesis with tiers pulled directly from the THESIS.md files.
+
+**The big picture:** A value-led grind-higher week (RUT +3.9% vs mega-caps ~+0.65%) overwhelmed by a weekend Iran de-escalation + lower oil, sitting on a hawkish-inflation fault line (CPI +4.2%, PPI +6.5%) into Warsh's FOMC debut (6/17) and Quad Witch (6/19).
+
+One note for your awareness: CNBC, etftrends, and growbeansprout block WebFetch (HTTP 403), so the index levels and FedWatch odds couldn't be fetched directly — they're multiply-sourced across agents and internally consistent, and I flagged that limitation in VERIFICATION.md.
+[2026-06-14 23:14:02] Claude [research] finished successfully
+[2026-06-14 23:14:02] EAGLE_EYE.md generated: 31845 bytes
+[2026-06-14 23:14:02] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 6 absences injected into Week Ahead
+[2026-06-14 23:14:02] Calendar stamp complete
+[2026-06-14 23:14:02] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-06-14 23:14:02] Running Claude [html-build-1] (timeout: 900s, attempt 1/3)...
+All 10 `conviction-card` references are CSS rules (lines 353–369, inside the `<style>` block) — zero in the body, as expected. Part 1 is complete and verified.
+
+## Summary
+
+Built `/home/bigpic/projects/bigpic-markets/eagle-eye/W24_2026-06-14/report.html` (Part 1) — read the compiled `EAGLE_EYE.md` and used the W23 `report.html` as the quality/theme reference.
+
+**Full page structure**
+- Complete `<!DOCTYPE html>` → `<head>` with the entire BigPic theme CSS (exact color tokens: `#0a0f1a` bg, `rgba(18,26,46,0.88)` cards, gold `#e8b87d` / amber `#f4a261` / coral `#ef8354`, green `#22c55e` / red `#ef4444`) and Space Grotesk + Newsreader fonts.
+- All JS at the bottom: animated counters, sector bar chart, watchlist filters, collapsible sources, scroll-reveal, and yield-curve tooltips (filter/sources init is guarded with null checks so it's safe until Part 2 adds those sections).
+- **`align-items: stretch` on `.bar-chart`** — the critical bar-height bug fix, preserved.
+- Fixed nav with back-arrow `<svg>` linking to `../index.html`, plus a footer archive link.
+
+**The 5 content sections (in order)**
+1. **Hero** — "Peace Declared, Oil Cracks, and the Largest IPO in History" with badge + full subtitle.
+2. **Market Scorecard** (`#scorecard`) — 12 animated counter cells (indices, VIX, yields, WTI/Gold/DXY/BTC), with weekend-futures and weekend-spot labeling notes.
+3. **Weekend & Breaking** (`#breaking`) — coral alert-card with a 6-item timeline (Iran peace deal, ⚠️ Beirut-strike tripwire, Hormuz still shut, oil gap-down, futures risk-on, crypto).
+4. **This Week's Take** (`#take`) — 4 executive-summary take-cards.
+5. **Sector Heatmap** (`#sectors`) — weekly SPDR bar chart (XLF +1.35% → XLV −0.16%, XLK omitted/noted) + heatmap grid + narrative.
+6. **Fed & Rates** (`#rates`) — yield-curve SVG (2Y 4.09 → 30Y 4.97, recomputed coordinates), yield table, FedWatch probability bars, leadership/blackout, credit & liquidity, catalysts.
+
+**Marker & closing** — `<!-- CONTINUE HERE -->` sits on its own line immediately after the rates section's `</section>` and before the footer; footer + `</body></html>` follow. Verified: 5/5 sections, 220/220 balanced divs, zero Part-2 content (no watchlist/commodities/crypto/week-ahead/positioning/sources sections).
+
+The remaining sections (watchlist, commodities, crypto, week ahead, positioning, sources) go in Part 2 at the marker.
+[2026-06-14 23:20:42] Claude [html-build-1] finished successfully
+[2026-06-14 23:20:42] report.html after Part 1: 74178 bytes
+[2026-06-14 23:20:42] Running Claude [html-build-2] (timeout: 900s, attempt 1/3)...
+Part 2 is complete and verified. The `<!-- CONTINUE HERE -->` marker has been replaced with all 6 sections, and everything checks out:
+
+**Structural integrity**
+- Marker fully removed (no remaining `CONTINUE HERE`)
+- `<section>`/`</section>` tags balanced (11/11)
+- Sources section closes cleanly at line 1661; the original footer (1663) and `<script>` block are untouched — nothing before the marker or after the footer was modified
+- Nav links all resolve: `#watchlist`, `#commodities`, `#crypto`, `#ahead`, `#positioning` all exist
+
+**Sections added (matching existing theme/JS hooks)**
+1. **Thesis Watchlist Tracker** (`#watchlist`) — 8 filter buttons + 14 `data-thesis` conviction cards grouped by thesis, each with a tier pill (Tier 1 / Tier 2 / NEW LISTING) and a weekly-delta direction badge. The filter keys (`space`, `ai`, `nuclear`, `minerals`, `cyber`, `quantum`, `other`) map 1:1 to the existing `initFilters()` logic.
+2. **Commodities & Forex Snapshot** (`#commodities`) — full 11-row table + "Energy is the one story" commentary card.
+3. **Crypto Snapshot** (`#crypto`) — 5-asset table, 3 structure/flows/regulation cards, and the "$60K BTC / $1,600 ETH" tripwire signal.
+4. **The Week Ahead** (`#ahead`) — 5-day `calendar-grid` rendering every event/time/impact verbatim (FOMC day highlighted violet, Friday rose), color-coded legend, day-by-day commentary, Earnings to Watch, and Notable Absences chips.
+5. **Positioning & Thesis Update** (`#positioning`) — 8-item risk radar (critical→low) plus the 6 numbered actionable takeaways and the bottom-line card.
+6. **Sources** (`#sources`) — collapsible block wired to the existing `#sourcesToggle`/`#sourcesContent` handler, with all ~50 sources consolidated under 10 category headers.
+
+Styling reuses the existing classes (`card`, `conviction-card`, `watchlist-table`, `cal-day`, `risk-item`, `futures-cell`, `sources-list`) and CSS variables throughout, and relies on the already-present `initFilters()` / `initSources()` / `initReveal()` functions — no JS changes were needed.
+[2026-06-14 23:26:47] Claude [html-build-2] finished successfully
+[2026-06-14 23:26:47] report.html after Part 2: 138962 bytes
+[2026-06-14 23:26:47] Running Claude [html-publish] (timeout: 300s, attempt 1/3)...
