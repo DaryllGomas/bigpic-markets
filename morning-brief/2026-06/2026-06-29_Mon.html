@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Brief — Monday, June 29, 2026 | BigPic Solutions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap');
+
+:root {
+  --bg-deep: #0a0f1a;
+  --bg-card: rgba(18, 26, 46, 0.88);
+  --bg-card-hover: rgba(26, 39, 68, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --border-subtle: rgba(232,184,125,0.08);
+  --border-glow: rgba(232,184,125,0.18);
+  --text-primary: #fdf6ec;
+  --text-secondary: #c9d6df;
+  --text-muted: #6b7d8e;
+  --gold: #e8b87d;
+  --gold-light: #f4a261;
+  --gold-dark: #ef8354;
+  --green: #22c55e;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --rose: #f43f5e;
+  --blue: #3b82f6;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Newsreader', Georgia, serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--bg-deep); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-left { display: flex; align-items: center; gap: 8px; }
+.nav-left a.back {
+  color: var(--text-secondary); text-decoration: none;
+  display: flex; align-items: center; transition: var(--transition);
+}
+.nav-left a.back:hover { color: var(--gold); }
+.nav-brand { font-weight: 700; font-size: 16px; color: var(--gold-light); letter-spacing: 1px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500;
+  padding: 6px 12px; border-radius: 6px; transition: var(--transition);
+}
+.nav-links a:hover { color: var(--gold); background: rgba(232,184,125,0.08); }
+
+/* HERO */
+.hero { padding: 92px 24px 40px; text-align: center; }
+.hero-date { font-family: var(--font-mono); font-size: 14px; color: var(--gold-dark); letter-spacing: 1px; margin-bottom: 12px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px;
+}
+.hero-badge.heavy { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.35); color: var(--red); }
+.hero-badge.heavy::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-red 2s infinite; }
+.hero-badge.medium { background: rgba(244,162,97,0.1); border: 1px solid rgba(244,162,97,0.3); color: var(--gold-light); }
+.hero-badge.medium::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); }
+.hero-badge.light { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
+.hero-badge.light::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero .subtitle {
+  font-family: var(--font-mono); font-size: 1rem; color: var(--text-secondary);
+  max-width: 760px; margin: 0 auto; line-height: 1.7;
+}
+
+/* SECTIONS */
+section { padding: 60px 0; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-header h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+.section-header .icon { font-size: 20px; }
+.section-header .tag {
+  margin-left: auto; font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(232,184,125,0.1); color: var(--gold);
+  border: 1px solid rgba(232,184,125,0.15);
+}
+
+/* CARDS */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 20px;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.card:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(232,184,125,0.06); }
+
+/* SNAPSHOT GRID */
+.snapshot-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px; background: var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden;
+}
+.snap-cell {
+  background: var(--bg-card); padding: 16px; text-align: center;
+  transition: var(--transition); backdrop-filter: blur(20px);
+}
+.snap-cell:hover { background: var(--bg-card-hover); }
+.snap-cell .label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.snap-cell .value { font-size: 1.3rem; font-weight: 800; font-family: var(--font-mono); color: var(--text-primary); }
+.snap-cell .overnight { font-size: 11px; font-weight: 600; margin-top: 2px; }
+.snap-cell .direction { font-size: 10px; color: var(--text-muted); margin-top: 2px; line-height: 1.3; }
+.up { color: var(--green); }
+.down { color: var(--red); }
+.flat { color: var(--text-muted); }
+.mixed { color: var(--amber); }
+
+/* OVERNIGHT CARDS */
+.overnight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.overnight-card { padding: 20px; }
+.overnight-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--gold); }
+.overnight-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+/* TABLES */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  text-align: left; padding: 10px 12px; font-size: 10px;
+  font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px; border-bottom: 1px solid var(--border-subtle);
+}
+.data-table td {
+  padding: 10px 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.data-table tr { transition: var(--transition); }
+.data-table tbody tr:hover { background: rgba(232,184,125,0.04); }
+.data-table .ticker { font-family: var(--font-mono); font-weight: 700; color: var(--gold); }
+.data-table .sector-tag {
+  font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: rgba(232,184,125,0.08); color: var(--gold-light); font-weight: 600;
+}
+
+/* PRIORITY TAGS */
+.priority { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.priority.critical { background: rgba(239,68,68,0.18); color: var(--red); }
+.priority.high { background: rgba(239,68,68,0.12); color: var(--red); }
+.priority.medium { background: rgba(245,158,11,0.12); color: var(--amber); }
+.priority.low { background: rgba(100,116,139,0.12); color: var(--text-muted); }
+
+/* CATALYST TIMELINE */
+.catalyst-timeline { position: relative; padding-left: 28px; }
+.catalyst-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border-subtle); }
+.catalyst-item {
+  position: relative; margin-bottom: 16px; padding: 16px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); transition: var(--transition); backdrop-filter: blur(20px);
+}
+.catalyst-item:hover { border-color: var(--border-glow); box-shadow: 0 0 30px rgba(232,184,125,0.06); }
+.catalyst-item::before {
+  content: ''; position: absolute; left: -24px; top: 20px;
+  width: 10px; height: 10px; border-radius: 50%; border: 2px solid;
+}
+.catalyst-item.critical::before { border-color: var(--red); background: rgba(239,68,68,0.3); }
+.catalyst-item.high::before { border-color: var(--gold-light); background: rgba(244,162,97,0.3); }
+.catalyst-item.medium::before { border-color: var(--amber); background: rgba(245,158,11,0.3); }
+.catalyst-item.low::before { border-color: var(--text-muted); background: rgba(100,116,139,0.3); }
+.catalyst-item .catalyst-date { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+.catalyst-item .catalyst-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.catalyst-item .catalyst-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+/* SECTOR IMPACT */
+.sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; margin-top: 16px; }
+.sector-pill {
+  display: flex; align-items: flex-start; gap: 8px; padding: 10px 14px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 8px; font-size: 12px; transition: var(--transition);
+}
+.sector-pill:hover { border-color: var(--border-glow); }
+.sector-pill .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.sector-pill .dot.green { background: var(--green); }
+.sector-pill .dot.red { background: var(--red); }
+.sector-pill .dot.amber { background: var(--amber); }
+.sector-pill .name { font-weight: 600; color: var(--text-primary); }
+.sector-pill .impact { color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+
+/* PLAYBOOK */
+.playbook-card {
+  background: linear-gradient(135deg, rgba(232,184,125,0.05) 0%, rgba(18,26,46,0.95) 100%);
+  border: 1px solid rgba(232,184,125,0.15); border-radius: var(--radius-lg);
+  padding: 28px;
+}
+.playbook-card .bias { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+.playbook-card h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.playbook-card ul { list-style: none; padding: 0; }
+.playbook-card li {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+  padding: 4px 0 4px 16px; position: relative;
+}
+.playbook-card li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; }
+.playbook-card .watch li::before { background: var(--cyan); }
+.playbook-card .risk li::before { background: var(--amber); }
+.playbook-card .levels li::before { background: var(--gold); }
+
+/* KEY READ CARD */
+.key-read {
+  margin-top: 20px; padding: 20px;
+  background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.12);
+  border-radius: var(--radius); font-size: 13px; color: var(--text-secondary); line-height: 1.7;
+}
+.key-read strong { color: var(--cyan); }
+
+/* MOVERS HIGHLIGHTS */
+.watchlist-flag {
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+  background: rgba(232,184,125,0.12); color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tier-flag {
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+  background: rgba(139,92,246,0.12); color: var(--violet); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tier-flag.t1 { background: rgba(244,63,94,0.14); color: var(--rose); }
+
+/* NEWS GRID */
+.news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.news-card { padding: 20px; }
+.news-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--gold); }
+.news-card ul { list-style: none; padding: 0; }
+.news-card li { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 4px 0; }
+
+/* COLLAPSIBLE SOURCES */
+.sources-toggle {
+  width: 100%; padding: 14px 20px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  color: var(--text-primary); font-size: 14px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-sans); transition: var(--transition);
+}
+.sources-toggle:hover { border-color: var(--border-glow); }
+.sources-toggle .arrow { transition: transform 0.3s; }
+.sources-toggle.open .arrow { transform: rotate(180deg); }
+.sources-content {
+  max-height: 0; overflow: hidden; transition: max-height 0.5s ease;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+}
+.sources-content.open { max-height: 3000px; }
+.sources-list { padding: 16px 20px; list-style: none; }
+.sources-list li { font-size: 12px; color: var(--text-secondary); padding: 4px 0; line-height: 1.6; }
+
+/* SCROLL ANIMATION */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 40px 24px; color: var(--text-muted);
+  font-size: 0.8rem; border-top: 1px solid var(--border-subtle); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+  .overnight-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .sector-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="../../morning-brief/index.html" class="back" title="Back to Morning Brief Archive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <span class="nav-brand">MORNING BRIEF</span>
+  </div>
+  <div class="nav-links">
+    <a href="#snapshot">Snapshot</a>
+    <a href="#overnight">Global</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#movers">Movers</a>
+    <a href="#watchlist">Watchlist</a>
+    <a href="#catalysts">Catalysts</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#news">News</a>
+    <a href="#playbook">Playbook</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-date">Monday, June 29, 2026</div>
+  <div class="hero-badge light">LIGHT EVENT LOAD</div>
+  <h1>Headlines, Not the Calendar, Drive a <span class="accent">Selective Relief Rally</span></h1>
+  <p class="subtitle">No scheduled economic releases and a single watchlist earnings name (<strong>AVAV</strong>, time TBD) &mdash; the tape is driven by headlines, not data. A reported <strong>U.S.&ndash;Iran de-escalation</strong> is fueling a relief rally in futures, while a <strong>Comcast/NBCUniversal spin-off bombshell (CMCSA +23%)</strong> and a fresh leg of <strong>AI/crypto skepticism</strong> color the backdrop. The catch: gold and Bitcoin are <em>not</em> confirming, the SPY trend filter reads bearish, and we head into a pivotal jobs-report week &mdash; keep position sizing modest and treat strength as a bounce to respect, not chase.</p>
+</header>
+
+<!-- PRE-MARKET SNAPSHOT -->
+<section id="snapshot">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4CA;</span>
+      <h2>Pre-Market Snapshot</h2>
+      <span class="tag">Risk-On, but Selectively &middot; VIX 18.27 &middot; Gold &amp; Crypto Not Confirming</span>
+    </div>
+    <div class="snapshot-grid reveal">
+      <div class="snap-cell">
+        <div class="label">S&amp;P 500 Futures</div>
+        <div class="value">7,467</div>
+        <div class="overnight up">+0.88%</div>
+        <div class="direction">vs 7,354 Friday cash &mdash; firm</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Nasdaq 100 Futures</div>
+        <div class="value">29,736</div>
+        <div class="overnight up"><strong>+1.25%</strong></div>
+        <div class="direction">Leads &mdash; tech rout ebbs</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Dow Futures</div>
+        <div class="value">52,460</div>
+        <div class="overnight up">+0.48%</div>
+        <div class="direction">Lags &mdash; growth over value</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Russell 2000 Futures</div>
+        <div class="value">3,035</div>
+        <div class="overnight up">+0.41%</div>
+        <div class="direction">Small-caps participate modestly</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">VIX</div>
+        <div class="value">18.27</div>
+        <div class="overnight up">&minus;0.76%</div>
+        <div class="direction">Easing &mdash; reduced hedging demand</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">10Y Yield</div>
+        <div class="value">4.372%</div>
+        <div class="overnight flat">+0.00%</div>
+        <div class="direction">Schwab $TNX&divide;10</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">2Y Yield</div>
+        <div class="value">3.840%</div>
+        <div class="overnight flat">&mdash;</div>
+        <div class="direction">FRED prior close (read timed out)</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">30Y Yield</div>
+        <div class="value">4.864%</div>
+        <div class="overnight flat">+0.00%</div>
+        <div class="direction">Schwab $TYX&divide;10</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">2s/10s Spread</div>
+        <div class="value">+53.2 bps</div>
+        <div class="overnight flat">&mdash;</div>
+        <div class="direction">Comfortably positive slope</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">DXY</div>
+        <div class="value">101.0</div>
+        <div class="overnight down">&minus;0.11%</div>
+        <div class="direction">Dollar softer</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">WTI Crude</div>
+        <div class="value">$69.84</div>
+        <div class="overnight up">+0.88%</div>
+        <div class="direction">Firms despite Hormuz de-escalation</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Brent Crude</div>
+        <div class="value">$72.84</div>
+        <div class="overnight up">+0.33%</div>
+        <div class="direction">Modestly higher with WTI</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Gold</div>
+        <div class="value">$4,050</div>
+        <div class="overnight down"><strong>&minus;1.13%</strong></div>
+        <div class="direction">Off &mdash; not confirming the rally</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Bitcoin</div>
+        <div class="value">$59,873</div>
+        <div class="overnight down">&minus;0.55%</div>
+        <div class="direction">Below $60K psychological pivot</div>
+      </div>
+      <div class="snap-cell">
+        <div class="label">Ethereum</div>
+        <div class="value">$1,573</div>
+        <div class="overnight down">&minus;0.34%</div>
+        <div class="direction">Soft with BTC</div>
+      </div>
+    </div>
+    <div class="key-read reveal">
+      <strong>Color:</strong> A classic &ldquo;risk-on, but selectively&rdquo; set-up. Equity futures lead with the <strong>Nasdaq 100 (+1.25%)</strong> outpacing the Dow (+0.48%) as the tech rout ebbs. VIX easing to <strong>18.27</strong> confirms reduced hedging demand. The 2s/10s curve sits comfortably positive (<strong>+53.2 bps</strong>), and yields are flat. Notably, <strong>gold is off &minus;1.13% and Bitcoin is below $60K</strong> &mdash; the relief rally is lifting equities but <em>not</em> the usual safe-haven or crypto trades, a sign this is a risk-appetite move rather than broad liquidity. Oil firms modestly despite the Hormuz de-escalation narrative.<br><br><strong style="color:var(--red);">Data-quality callout:</strong> FRED timed out, so the <strong>2Y (3.840%) is a prior-close print</strong> and the 10Y/30Y change fields read flat. Stooq returned a 404 on three calls (backfilled). Price anomalies flagged on <strong>SYK (335, z 4.7), QLYS (123, z 3.8) and AZTA (25.50, z 3.3)</strong> &mdash; verify against a second source before acting.
+    </div>
+  </div>
+</section>
+
+<!-- OVERNIGHT & GLOBAL -->
+<section id="overnight">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F30D;</span>
+      <h2>Overnight &amp; Global</h2>
+      <span class="tag">Hang Seng +1.57% &middot; Tech-Led Bounce with Rotation, Not a Melt-Up</span>
+    </div>
+    <div class="overnight-grid reveal">
+      <div class="card overnight-card">
+        <h4>Asia &mdash; Mixed, China Tech the Standout</h4>
+        <p>Mixed, with the <strong>Hang Seng the standout (+1.57%)</strong> &mdash; Baidu&rsquo;s reported <strong>$50B Kunlunxin AI-chip IPO</strong> and broad China tech strength led the move. The <strong>Nikkei was flat (+0.15%)</strong>; <strong>Kospi slipped &minus;0.20%</strong> even as Korea&rsquo;s semiconductor mega-push dominates headlines.</p>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(34,197,94,0.14);color:var(--green);">Hang Seng +1.57%</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(34,197,94,0.08);color:var(--green);">Nikkei +0.15%</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(239,68,68,0.08);color:var(--red);">Kospi &minus;0.20%</span>
+        </div>
+      </div>
+      <div class="card overnight-card">
+        <h4>Europe &mdash; Off the Lows, Uneven</h4>
+        <p>Off the lows but uneven &mdash; <strong>DAX flat (+0.02%)</strong>, <strong>CAC &minus;0.33%</strong> and <strong>FTSE &minus;0.28%</strong> modestly red, though the broad <strong>IEV ETF reads +2.41%</strong> (treat with mild caution given it diverges sharply from the cash indices). FEZ (STOXX 50) firmer at +0.58%.</p>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(34,197,94,0.08);color:var(--green);">DAX +0.02%</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(239,68,68,0.08);color:var(--red);">CAC &minus;0.33%</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(245,158,11,0.12);color:var(--amber);">IEV +2.41% (caution)</span>
+        </div>
+      </div>
+      <div class="card overnight-card">
+        <h4>Takeaway &mdash; Bounce with Rotation</h4>
+        <p>The overall global tone matches the U.S.: a <strong>tech-led bounce with rotation, not a uniform melt-up</strong>. China tech (Baidu/Kunlunxin) and the ebbing memory rout do the lifting; Europe&rsquo;s cash indices stay subdued and the IEV outlier flags a data divergence worth discounting.</p>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(232,184,125,0.08);color:var(--gold-light);">China-tech led</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(34,197,94,0.08);color:var(--green);">Tech rout ebbing</span>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(245,158,11,0.08);color:var(--amber);">Rotation, not melt-up</span>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal" style="padding: 0; overflow-x: auto; margin-top: 16px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Market</th>
+            <th>Level</th>
+            <th>Change</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Nikkei 225</td><td>69,468</td><td class="up">+0.15%</td><td>schwab</td></tr>
+          <tr><td>Hang Seng</td><td>23,027</td><td class="up"><strong>+1.57%</strong></td><td>schwab</td></tr>
+          <tr><td>DAX</td><td>24,676</td><td class="up">+0.02%</td><td>schwab</td></tr>
+          <tr><td>CAC 40</td><td>8,357</td><td class="down">&minus;0.33%</td><td>schwab</td></tr>
+          <tr><td>FTSE 100</td><td>10,479</td><td class="down">&minus;0.28%</td><td>yahoo</td></tr>
+          <tr><td>Kospi</td><td>8,395</td><td class="down">&minus;0.20%</td><td>yahoo</td></tr>
+          <tr><td>Europe STOXX 50 (FEZ)</td><td>67.50</td><td class="up">+0.58%</td><td>schwab</td></tr>
+          <tr><td>Europe Broad (IEV)</td><td>73.49</td><td class="up">+2.41%</td><td>schwab</td></tr>
+          <tr><td>Australia (EWA)</td><td>28.06</td><td class="up">+0.32%</td><td>schwab</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY'S CALENDAR -->
+<section id="calendar">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4C5;</span>
+      <h2>Today&rsquo;s Calendar</h2>
+      <span class="tag">No Scheduled Releases &middot; Turn-of-Month Window &middot; NFP Later This Week</span>
+    </div>
+    <div class="card reveal">
+      <p style="font-size:14px;color:var(--text-primary);font-weight:700;margin-bottom:10px;">No scheduled economic releases today.</p>
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;">Per the briefing econ calendar, the data slate is empty &mdash; the session is headline-driven. The next macro event is the <strong>June jobs report (NFP) later this week</strong>, flagged as the key macro catalyst; FOMC follows <strong>Jul 28&ndash;29</strong>.</p>
+    </div>
+    <div class="card reveal" style="padding: 0; overflow-x: auto; margin-top: 16px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Window</th>
+            <th>Structural Item</th>
+            <th>Detail</th>
+            <th>Prior / Stat</th>
+            <th>Significance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Now</td>
+            <td>Post-Triple-Witch window</td>
+            <td>Bearish week-after (Jun 22&ndash;26) just passed; Russell reconstitution settled Fri Jun 26</td>
+            <td>&mdash;</td>
+            <td><span class="priority low">Context</span></td>
+          </tr>
+          <tr>
+            <td>Jun 30 &rarr; early Jul</td>
+            <td><strong>Turn-of-Month window</strong></td>
+            <td>Last trading day Jun 30 + first three of July</td>
+            <td>+0.14% avg</td>
+            <td><span class="priority medium">Med</span></td>
+          </tr>
+          <tr>
+            <td>~Jun 25 onward</td>
+            <td>AAPL Q3-FY26 buyback blackout</td>
+            <td>Seasonally <strong>strongest</strong> AAPL blackout cycle</td>
+            <td>+3.46% hist.</td>
+            <td><span class="priority medium">Med</span></td>
+          </tr>
+          <tr>
+            <td><strong>Later this week</strong></td>
+            <td><strong>June Jobs Report (NFP)</strong></td>
+            <td>The key macro event of the week</td>
+            <td>&mdash;</td>
+            <td><span class="priority high">High</span></td>
+          </tr>
+          <tr>
+            <td>Jul 28&ndash;29</td>
+            <td>FOMC meeting</td>
+            <td>Next rate decision</td>
+            <td>&mdash;</td>
+            <td><span class="priority medium">Med</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="key-read reveal">
+      <strong>What matters:</strong> With no data to trade, the structural calendar carries the load. We are entering the <strong>turn-of-month window</strong> (historically +0.14% avg) and sit inside the seasonally strongest <strong>AAPL buyback blackout</strong> (+3.46% historical) &mdash; both mild tailwinds. The dominant forward risk is the <strong>June jobs report later this week</strong>; positioning into it argues for restraint.
+    </div>
+  </div>
+</section>
+
+<!-- PRE-MARKET MOVERS -->
+<section id="movers">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4C9;</span>
+      <h2>Pre-Market Movers</h2>
+      <span class="tag">CMCSA +23% on NBCU Spin-Off &middot; Watchlist Names Dominate the Leaderboard</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px;">Auto-detected movers (|change| &gt; 3%). Watchlist names flagged with &#9733;. <strong>Watchlist names dominate the leaderboard today</strong> &mdash; Space is the clear standout. The headline single-stock event is <strong>CMCSA +23%</strong> on the plan to spin off NBCUniversal&rsquo;s media and tech wings.</p>
+
+    <h3 style="font-size:14px; color:var(--green); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px;">Gainers</h3>
+    <div class="card reveal" style="padding: 0; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ticker">CMCSA</span></td><td>28.59</td><td class="up"><strong>+23.39%</strong></td><td><span class="sector-tag">Media</span> NBCUniversal media/tech spin-off announced &mdash; the day&rsquo;s headline driver</td></tr>
+          <tr><td><span class="ticker">RKLB</span> <span class="watchlist-flag">&#9733;</span></td><td>90.49</td><td class="up"><strong>+7.04%</strong></td><td><span class="sector-tag">Space</span> <span class="tier-flag t1">T1</span> Space leads broadly &mdash; oversold bounce (RSI 37)</td></tr>
+          <tr><td><span class="ticker">BE</span> <span class="watchlist-flag">&#9733;</span></td><td>268</td><td class="up">+6.32%</td><td><span class="sector-tag">Energy Storage</span> <span class="tier-flag">T3</span> Fuel-cell beta leads the sector</td></tr>
+          <tr><td><span class="ticker">RDW</span> <span class="watchlist-flag">&#9733;</span></td><td>11.53</td><td class="up">+5.49%</td><td><span class="sector-tag">Space</span> <span class="tier-flag">T3</span> Tier 3 space confirms sector-wide impulse</td></tr>
+          <tr><td><span class="ticker">OUST</span> <span class="watchlist-flag">&#9733;</span></td><td>44.10</td><td class="up">+4.95%</td><td><span class="sector-tag">Robotics</span> <span class="tier-flag">T3</span> Lidar high-beta leads robotics</td></tr>
+          <tr><td><span class="ticker">AXON</span></td><td>485</td><td class="up">+4.34%</td><td><span class="sector-tag">Defense</span> Reported Trump $5M stake / ICE Taser deal</td></tr>
+          <tr><td><span class="ticker">LUNR</span> <span class="watchlist-flag">&#9733;</span></td><td>20.63</td><td class="up">+4.24%</td><td><span class="sector-tag">Space</span> <span class="tier-flag t1">T1</span> Oversold bounce (RSI 35)</td></tr>
+          <tr><td><span class="ticker">MNTS</span> <span class="watchlist-flag">&#9733;</span></td><td>7.34</td><td class="up">+4.11%</td><td><span class="sector-tag">Space</span> <span class="tier-flag">T3</span> Tier 3 space in the move</td></tr>
+          <tr><td><span class="ticker">PL</span> <span class="watchlist-flag">&#9733;</span></td><td>28.17</td><td class="up">+4.06%</td><td><span class="sector-tag">Space</span> <span class="tier-flag t1">T1</span> Oversold bounce (RSI 34)</td></tr>
+          <tr><td><span class="ticker">PLTR</span> <span class="watchlist-flag">&#9733;</span></td><td>117</td><td class="up">+3.51%</td><td><span class="sector-tag">AI Infra</span> <span class="tier-flag">T2</span> Software shrugs off the OpenAI threat</td></tr>
+          <tr><td><span class="ticker">USAR</span> <span class="watchlist-flag">&#9733;</span></td><td>21.16</td><td class="up">+3.37%</td><td><span class="sector-tag">Critical Minerals</span> <span class="tier-flag">T2</span> Minerals firm</td></tr>
+          <tr><td><span class="ticker">GLW</span> <span class="watchlist-flag">&#9733;</span></td><td>228</td><td class="up">+3.13%</td><td><span class="sector-tag">AI Infra</span> <span class="tier-flag">T2</span> AI-infra rebound</td></tr>
+          <tr><td><span class="ticker">AVAV</span> <span class="watchlist-flag">&#9733;</span></td><td>142</td><td class="up">+3.02%</td><td><span class="sector-tag">Defense</span> <span class="tier-flag">T2</span> <strong>Reports earnings today</strong> (time TBD)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--red); margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 1px;">Decliners</h3>
+    <div class="card reveal" style="padding: 0; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ticker">HON</span> <span class="watchlist-flag">&#9733;</span></td><td>231</td><td class="down"><strong>&minus;5.00%</strong></td><td><span class="sector-tag">Quantum</span> <span class="tier-flag t1">T1</span> Only sizable Tier 1 decliner &mdash; <strong>no catalyst in briefing</strong> (RSI 58, above all SMAs); flag for follow-up</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--gold); margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 1px;">News-Driven Movers (Opus Feed Analysis)</h3>
+    <div class="card reveal" style="padding: 0; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Dir</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ticker">CMCSA</span></td><td class="up">&#9650;</td><td>+23% on the plan to spin NBCUniversal&rsquo;s media and tech wings into separate public companies</td></tr>
+          <tr><td><span class="ticker">BIDU</span></td><td class="up">&#9650;</td><td>+7% on the Kunlunxin $50B Hong Kong AI-chip IPO</td></tr>
+          <tr><td><span class="ticker">AXON</span></td><td class="up">&#9650;</td><td>Reported Trump $5M stake / ICE Taser deal</td></tr>
+          <tr><td><span class="ticker">HOOD</span></td><td class="up">&#9650;</td><td>Record June trading volumes</td></tr>
+          <tr><td><span class="ticker">GRAB / ATR</span></td><td class="up">&#9650;</td><td>Rating upgrades</td></tr>
+          <tr><td><span class="ticker">MSTR</span></td><td class="down">&#9660;</td><td>Lower as the bitcoin-financing machine stalls</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="key-read reveal">
+      The headline single-stock event is <strong>CMCSA +23.39%</strong> on the plan to spin NBCUniversal&rsquo;s media and tech wings into separate public companies. Beyond it, <strong>watchlist names dominate the leaderboard</strong> &mdash; Space is the clear standout (RKLB +7.04%, LUNR/PL +4%, plus Tier 3 RDW/MNTS), confirming a sector-wide risk-on impulse. The single notable laggard is <strong>HON &minus;5.00%</strong> (Quantum Tier 1) with no catalyst in the briefing &mdash; worth flagging given the Quantinuum-stake thesis.
+    </div>
+  </div>
+</section>
+
+<!-- THESIS WATCHLIST -->
+<section id="watchlist">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F50D;</span>
+      <h2>Thesis Watchlist</h2>
+      <span class="tag">AVAV Reports Today &middot; Space Oversold Bounce &middot; LDOS RSI 21</span>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--gold); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px;">Earnings Reporting Today</h3>
+    <div class="card reveal">
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;"><strong style="color:var(--gold);">AVAV</strong> (Defense &amp; Aerospace, Tier 2) &mdash; time unknown, EPS estimate not provided; results <strong>NOT yet reported</strong>. Shares <span class="up">+3.02%</span> pre-market.</p>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--gold); margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 1px;">Notable Tier 1 Moves (&gt;3%)</h3>
+    <div class="card reveal" style="padding: 0; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Move / RSI</th>
+            <th>Read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ticker">RKLB</span> <span class="sector-tag">Space T1</span></td><td class="up"><strong>+7.04%</strong> &middot; RSI 37</td><td>Space leads broadly. Deeply below 20/50-day SMAs &mdash; reads as an oversold bounce within a downtrend, not a trend reversal.</td></tr>
+          <tr><td><span class="ticker">LUNR</span> <span class="sector-tag">Space T1</span></td><td class="up"><strong>+4.24%</strong> &middot; RSI 35</td><td>Oversold; bounces with the space complex. Earnings Aug 6.</td></tr>
+          <tr><td><span class="ticker">PL</span> <span class="sector-tag">Space T1</span></td><td class="up"><strong>+4.06%</strong> &middot; RSI 34</td><td>Oversold; part of the sector-wide risk-on impulse (Tier 3 RDW/MNTS confirm).</td></tr>
+          <tr><td><span class="ticker">HON</span> <span class="sector-tag">Quantum T1</span></td><td class="down"><strong>&minus;5.00%</strong> &middot; RSI 58</td><td>The only sizable Tier 1 decliner, with <strong>no catalyst in the briefing</strong>. Still above all major SMAs &mdash; flag for follow-up on the Quantinuum-stake thesis.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--gold); margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 1px;">RSI Extremes (Tier 1)</h3>
+    <div class="card reveal" style="padding: 0; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>RSI</th>
+            <th>Read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ticker">LDOS</span> <span class="sector-tag">Cyber</span></td><td class="down"><strong>21</strong></td><td>$102, below 20/50/200-SMA &mdash; deeply washed out.</td></tr>
+          <tr><td><span class="ticker">ALB</span> <span class="sector-tag">Minerals</span></td><td class="down"><strong>28</strong></td><td>Critical minerals oversold.</td></tr>
+          <tr><td><span class="ticker">NOC / SQM / CACI</span> <span class="sector-tag">Defense / Storage / Defense IT</span></td><td class="down">31 / 34 / 35</td><td>Oversold complex across defense and lithium.</td></tr>
+          <tr><td><span class="ticker">PL / LUNR / RKLB</span> <span class="sector-tag">Space</span></td><td class="down">34 / 35 / 37</td><td>Space cluster washed out &mdash; today&rsquo;s bounce off oversold.</td></tr>
+          <tr><td><span class="ticker">NVDA</span> <span class="sector-tag">AI Infra</span></td><td class="down">37</td><td>Below trend even as the AI complex rebounds.</td></tr>
+          <tr><td><span class="ticker">PANW / FTNT</span> <span class="sector-tag">Cyber</span></td><td class="up"><strong>70 / 68</strong></td><td>Overbought / extended &mdash; cyber momentum stretched even as the group rebounds.</td></tr>
+          <tr><td><span class="ticker">SYK / CRWD</span> <span class="sector-tag">Robotics / Cyber</span></td><td class="up">65 / 61</td><td>Extended (note: SYK price is a flagged data anomaly).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:14px; color:var(--gold); margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 1px;">Key Reads &amp; Data-Quality Flags</h3>
+    <div class="card reveal">
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;"><strong style="color:var(--gold);">Space oversold bounce:</strong> RKLB +7.04% (RSI 37), PL +4.06% (RSI 34), LUNR +4.24% (RSI 35) &mdash; all deeply below their 20/50-day SMAs; treat as a bounce within a downtrend, not a reversal.<br><strong style="color:var(--gold);">No Tier 1 overbought concern:</strong> highest are cyber momentum names &mdash; PANW 70, FTNT 68.<br><strong style="color:var(--red);">Data-quality flags (treat with caution, not as real moves):</strong> price anomalies on <strong>SYK (335, z 4.7)</strong>, <strong>QLYS (123, z 3.8)</strong> and <strong>AZTA (25.50, z 3.3)</strong> &mdash; verify against a second source before acting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACHING CATALYSTS -->
+<section id="catalysts">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4C5;</span>
+      <h2>Approaching Catalysts</h2>
+      <span class="tag">NFP This Week &middot; TSM Jul 16 &middot; Defense Cluster Jul 21 &middot; Nov 2026 Trade-Expiry</span>
+    </div>
+    <div class="catalyst-timeline reveal">
+      <div class="catalyst-item critical">
+        <div class="catalyst-date">Later this week &middot; macro</div>
+        <div class="catalyst-title">&#x1F534; June Jobs Report (NFP)</div>
+        <div class="catalyst-detail">The key macro event of the week and the dominant forward risk for a headline-driven tape. Positioning into it argues for modest sizing. FOMC follows <strong>Jul 28&ndash;29</strong>.</div>
+      </div>
+      <div class="catalyst-item high">
+        <div class="catalyst-date">Jul 16 (before open) &middot; AI infra</div>
+        <div class="catalyst-title">AI Infrastructure &mdash; TSM Earnings</div>
+        <div class="catalyst-detail">First major AI-infra print of the cycle (NVDA follows Aug 26). Sector-repricing IPOs loom: <strong>Cerebras (Q2 2026)</strong> and <strong>Databricks (H2 2026)</strong>.</div>
+      </div>
+      <div class="catalyst-item high">
+        <div class="catalyst-date">Jul 21 &middot; defense</div>
+        <div class="catalyst-title">Defense &amp; Aerospace &mdash; Prime Earnings Cluster</div>
+        <div class="catalyst-detail"><strong>LMT / RTX / NOC</strong> all report Jul 21. AVAV reports today (Tier 2). The defense complex is broadly oversold (NOC RSI 31, CACI 35).</div>
+      </div>
+      <div class="catalyst-item medium">
+        <div class="catalyst-date">Jul 23 &rarr; Jan 2027 &middot; quantum</div>
+        <div class="catalyst-title">Quantum &mdash; HON Earnings &amp; PQC Tailwinds</div>
+        <div class="catalyst-detail">HON earnings <strong>Jul 23</strong> (watch after today&rsquo;s &minus;5% with no catalyst); <strong>Quantinuum IPO</strong> (S-1 filed Jan 2026); <strong>CNSA 2.0 PQC compliance deadline Jan 2027</strong> &mdash; a tailwind for PANW.</div>
+      </div>
+      <div class="catalyst-item medium">
+        <div class="catalyst-date">mid &ndash; late 2026 &middot; space</div>
+        <div class="catalyst-title">Space &mdash; SpaceX IPO &amp; RKLB Neutron</div>
+        <div class="catalyst-detail"><strong>SpaceX IPO (mid-2026)</strong> is the sector-defining catalyst; <strong>RKLB Neutron first flight (late 2026)</strong>; LUNR earnings Aug 6.</div>
+      </div>
+      <div class="catalyst-item low">
+        <div class="catalyst-date">Q2 2026 &rarr; Nov 2026 &middot; minerals</div>
+        <div class="catalyst-title">Critical Minerals &mdash; Trade-Expiry &amp; Grasberg</div>
+        <div class="catalyst-detail">The <strong>Nov 2026 U.S.&ndash;China trade-agreement expiry is THE catalyst</strong>; FCX Grasberg restart underway (Q2 2026); FEOC threshold steps to 70% in 2026.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTOR SNAPSHOT -->
+<section id="sectors">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4CB;</span>
+      <h2>Sector Snapshot</h2>
+      <span class="tag">Space the Standout &middot; Broad Green &middot; Quantum Bifurcated on HON</span>
+    </div>
+    <div class="sector-grid reveal">
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">AI Infrastructure</div>
+          <div class="impact"><strong>Rebounding.</strong> PLTR +3.5%, GLW +3.1%, TSM +1.7% as the tech rout ebbs and software shrugs off the OpenAI threat &mdash; but sentiment fragile amid bubble warnings.</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Space</div>
+          <div class="impact"><strong>Sector standout.</strong> RKLB +7%, LUNR/PL +4%; an oversold bounce led the entire watchlist.</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Critical Minerals</div>
+          <div class="impact"><strong>Firm.</strong> USAR +3.4%, MP +1.8%, SCCO +1.0%; ALB oversold (RSI 28).</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Cybersecurity</div>
+          <div class="impact"><strong>Broad green.</strong> NET +2%, OKTA +1.7%; momentum names overbought (PANW 70, FTNT 68); LDOS deeply oversold (RSI 21).</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Nuclear Energy</div>
+          <div class="impact"><strong>Modestly higher.</strong> OKLO +2.7%, SMR +2.1%, TLN +1.7%; PEG &minus;2.1% the laggard.</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot amber"></span>
+        <div>
+          <div class="name">Energy Storage</div>
+          <div class="impact"><strong>Mixed but BE leads.</strong> BE +6.3%, FLNC +2.3%, SEDG +2.4%; SQM &minus;1.4% (oversold, RSI 34).</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot amber"></span>
+        <div>
+          <div class="name">Quantum Computing</div>
+          <div class="impact"><strong>Bifurcated.</strong> RGTI +2.7%, IONQ +2.8%, but HON &minus;5.0% drags the Tier 1 read.</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Robotics &amp; Automation</div>
+          <div class="impact"><strong>Firm.</strong> OUST +4.95% leads; CGNX +2.6%, TER +1.4%; SYK price flagged as a data anomaly.</div>
+        </div>
+      </div>
+      <div class="sector-pill">
+        <span class="dot green"></span>
+        <div>
+          <div class="name">Defense &amp; Aerospace</div>
+          <div class="impact"><strong>Steady.</strong> AVAV +3.0% (earnings today), KTOS +2.2%; primes flat to slightly up.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS HIGHLIGHTS -->
+<section id="news">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4F0;</span>
+      <h2>News Highlights</h2>
+      <span class="tag">Comcast Spin-Off &middot; AI-Trade Skepticism &middot; RAMageddon &middot; Crypto Pivot Week</span>
+    </div>
+    <div class="news-grid reveal">
+      <div class="card news-card">
+        <h4>Markets &amp; Macro</h4>
+        <ul>
+          <li>&#9642; <strong>Comcast to spin off NBCUniversal</strong> after 15 years &mdash; media and tech wings to become separate public companies; CMCSA +23% (CNBC/MarketWatch).</li>
+          <li>&#9642; <strong>AI-trade skepticism intensifies:</strong> Morgan Stanley&rsquo;s Wilson likens the chip trade to silver; BIS warns the AI frenzy could trigger a market slump (MarketWatch/CNBC).</li>
+        </ul>
+      </div>
+      <div class="card news-card">
+        <h4>Semiconductors / Tech</h4>
+        <ul>
+          <li>&#9642; <strong>Memory crunch deepens:</strong> &ldquo;RAMageddon&rdquo; called the new normal (Tom&rsquo;s Hardware).</li>
+          <li>&#9642; Apple&rsquo;s pivot to China for memory <strong>may not fix big tech&rsquo;s microchip crisis</strong> (MarketWatch).</li>
+          <li>&#9642; <strong>Baidu&rsquo;s Kunlunxin $50B Hong Kong AI-chip IPO</strong> led Hang Seng strength (BIDU +7%).</li>
+        </ul>
+      </div>
+      <div class="card news-card">
+        <h4>Crypto</h4>
+        <ul>
+          <li>&#9642; <strong>Bitcoin below $60K</strong> in &ldquo;technical no-man&rsquo;s land&rdquo; (CoinDesk).</li>
+          <li>&#9642; Spot BTC ETFs on track for a <strong>record ~$4B outflow month</strong> &mdash; a contagion watch item.</li>
+          <li>&#9642; Europe&rsquo;s <strong>MiCA deadline</strong> threatens unlicensed firms; MSTR lower as the bitcoin-financing machine stalls.</li>
+        </ul>
+      </div>
+      <div class="card news-card">
+        <h4>Space</h4>
+        <ul>
+          <li>&#9642; <strong>SpaceX&rsquo;s $25B bond sale</strong> drives huge demand &mdash; and a potential headache for investors (CNBC).</li>
+          <li>&#9642; Satellite / Space sentiment supportive &mdash; the watchlist&rsquo;s standout sector today (RKLB +7%, LUNR/PL +4%).</li>
+        </ul>
+      </div>
+      <div class="card news-card">
+        <h4>Energy</h4>
+        <ul>
+          <li>&#9642; <strong>Putin&rsquo;s fuel-shortage admission</strong> signals strain on Russia&rsquo;s energy infrastructure (CNBC).</li>
+          <li>&#9642; Oil forecasts seen as <strong>too high</strong> (Seeking Alpha); WTI nonetheless firms +0.88% despite the Hormuz de-escalation narrative.</li>
+        </ul>
+      </div>
+      <div class="card news-card">
+        <h4>Single-Stock &amp; Defense</h4>
+        <ul>
+          <li>&#9642; <strong>AXON +4.3%</strong> on a reported Trump $5M stake / ICE Taser deal.</li>
+          <li>&#9642; <strong>HOOD</strong> posts record June trading volumes; <strong>GRAB and ATR</strong> get rating upgrades.</li>
+          <li>&#9642; <strong>AVAV</strong> (Defense, Tier 2) reports earnings today &mdash; time TBD, not yet out.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYBOOK -->
+<section id="playbook">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="icon">&#x1F4DD;</span>
+      <h2>Today&rsquo;s Playbook</h2>
+      <span class="tag">Bias &middot; Watch-Fors &middot; Risks</span>
+    </div>
+    <div class="playbook-card reveal">
+      <div class="bias"><span style="color:var(--gold-light);">Bias: Cautiously bullish / relief-rally.</span> The U.S.&ndash;Iran de-escalation, an ebbing tech rout, and a leaderboard full of oversold growth names argue for an up day. But the move&rsquo;s quality is suspect &mdash; <strong>gold and crypto are not confirming</strong>, the SPY trend filter reads <strong>bearish</strong>, and Morgan Stanley/BIS warnings on the AI trade hang over the tape. Risk appetite reads <strong>moderate</strong>. Net: treat strength as a <strong>bounce to be respected, not chased</strong>, and keep sizing modest into a pivotal jobs-report week. VIX 18.26 sits in a normal regime, easing &mdash; no stress signal, but not complacent either.</div>
+
+      <h4>What to Watch For (Bull Case)</h4>
+      <ul class="watch">
+        <li><strong>The oversold growth/space bounce broadening</strong> &mdash; RKLB, LUNR, PL leading the watchlist higher with breadth following</li>
+        <li><strong>AI-infra holding its rebound</strong> (PLTR, GLW, TSM) as software shrugs off the OpenAI threat</li>
+        <li><strong>VIX holding sub-18</strong> &mdash; confirming reduced hedging demand and an orderly tape</li>
+        <li><strong>Turn-of-month / AAPL-blackout seasonality</strong> (mild historical tailwinds) reinforcing the relief move</li>
+      </ul>
+
+      <h4>What to Watch For (Bear Case)</h4>
+      <ul class="risk">
+        <li><strong>The non-confirmation</strong> &mdash; gold &minus;1.13% and BTC sub-$60K signal a risk-appetite move, not broad liquidity</li>
+        <li><strong>A negative AI-capex or chip headline</strong> erasing the bounce amid the &ldquo;June Swoon&rdquo; fatigue</li>
+        <li><strong>Crypto contagion</strong> &mdash; the record ~$4B ETF outflow month and BTC&rsquo;s &ldquo;no-man&rsquo;s land&rdquo; below $60K</li>
+        <li><strong>HON &minus;5% with no catalyst</strong> spreading &mdash; an unexplained Tier 1 break worth monitoring</li>
+      </ul>
+
+      <h4>Key Levels</h4>
+      <ul class="levels">
+        <li><strong>S&amp;P futures 7,467 vs Friday cash 7,354</strong> &middot; <strong>Nasdaq 100 futures 29,736</strong></li>
+        <li><strong>VIX 18</strong> &mdash; the line between calm and concern</li>
+        <li><strong>WTI ~$70</strong> &middot; <strong>Bitcoin $60K</strong> the psychological pivot (CoinDesk: &ldquo;technical no-man&rsquo;s land&rdquo; below)</li>
+      </ul>
+
+      <h4>Ranked Risk Factors</h4>
+      <ul class="risk">
+        <li><strong>AI-fatigue / &ldquo;June Swoon&rdquo;</strong> &mdash; any negative AI-capex or chip headline could erase the bounce</li>
+        <li><strong>Crypto outflows</strong> &mdash; on track for its worst-ever ETF outflow month (~$4B), a contagion watch item</li>
+        <li><strong>DRAM / &ldquo;RAMageddon&rdquo;</strong> &mdash; the memory shortage rippling through hardware</li>
+        <li><strong>Jobs-report risk later this week</strong> &mdash; into a Fed kept cautious by sticky inflation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="container">
+    <button class="sources-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
+      <span>&#x1F4DA; Sources &amp; Data Quality Notes</span>
+      <span class="arrow">&#x25BC;</span>
+    </button>
+    <div class="sources-content">
+      <ul class="sources-list">
+        <li><strong>Collection:</strong> 11:38:22 PT via the BigPic automated pipeline.</li>
+        <li><strong>Sources:</strong> Schwab API (futures, indices, yields, commodities, technicals), CoinGecko (crypto), Stooq, FRED (2Y yield, prev-close), and RSS feeds. Structural-calendar context (post-Triple-Witch window, turn-of-month, AAPL buyback blackout) from BigPic Market Calendar; catalyst timelines from sector THESIS files.</li>
+        <li><strong>Completeness:</strong> 100% (66/66 data points).</li>
+        <li><strong>Caveat &mdash; FRED timeout:</strong> the FRED read timed out, so the 2Y yield (3.840%) is a prior-close value and the 10Y/30Y change fields read flat.</li>
+        <li><strong>Caveat &mdash; Stooq error:</strong> Stooq returned a 404 on three calls.</li>
+        <li><strong>Caveat &mdash; price anomalies:</strong> flagged on <strong>AZTA (25.50, z 3.3)</strong>, <strong>QLYS (123, z 3.8)</strong> and <strong>SYK (335, z 4.7)</strong> &mdash; verify against a second source before acting.</li>
+        <li><strong>Caveat &mdash; IEV divergence:</strong> the Europe Broad ETF (IEV +2.41%) reads sharply above the cash indices &mdash; treat with mild caution.</li>
+        <li><strong>Disclaimer:</strong> Not investment advice &mdash; educational research only. All actionable items require independent confirmation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Generated Monday, June 29, 2026 &middot; BigPic Solutions Morning Brief &middot; <a href="../../index.html" style="color:var(--gold);text-decoration:none;">bigpic.solutions</a>
+</footer>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
