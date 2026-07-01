@@ -1,0 +1,61 @@
+2026-07-01 11:30:01,561 INFO === Market Data Collection — 2026-07-01 ===
+2026-07-01 11:30:01,587 INFO ── Step 1: RSS Feeds ──
+2026-07-01 11:30:22,789 INFO RSS feeds: 257 headlines stored, 222 older than 24h skipped
+2026-07-01 11:30:22,790 INFO Step 1 complete: 21.2s (headlines=257)
+2026-07-01 11:30:22,790 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-01 11:30:22,791 INFO Opus analysis: sending 253 headlines to claude CLI (attempt 1/3)...
+2026-07-01 11:31:45,782 INFO Opus analysis: 35 tickers, 7 movers, 9 themes from 253 headlines (attempt 1/3)
+2026-07-01 11:31:45,783 INFO Step 2 complete: 83.0s (opus_tickers=35)
+2026-07-01 11:31:45,783 INFO ── Step 3: Schwab + External APIs ──
+2026-07-01 11:31:52,328 INFO Schwab quotes: 149 symbols
+2026-07-01 11:31:52,329 INFO Auto-detected movers (|change| > 3%): 8 symbols
+2026-07-01 11:31:52,330 INFO Technicals + SMA200 for 130 quoted symbols (sequential)
+2026-07-01 11:34:49,229 INFO Schwab technicals: 130/130 symbols
+2026-07-01 11:36:22,102 INFO SMA200: 130/130 symbols
+2026-07-01 11:36:22,440 INFO Schwab market context: collected
+2026-07-01 11:37:35,883 INFO Schwab earnings: 70 entries
+2026-07-01 11:37:35,906 INFO Economic calendar: 12 events
+2026-07-01 11:37:36,026 INFO CoinGecko: 2 coins
+2026-07-01 11:37:41,160 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-01 11:37:46,857 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-01 11:37:52,515 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-01 11:37:53,025 INFO Stooq: 0/3 symbols
+2026-07-01 11:38:41,340 WARNING FRED failed: The read operation timed out
+2026-07-01 11:38:49,702 INFO Yahoo backup: 4 symbols
+2026-07-01 11:38:49,702 INFO Step 3 complete: 423.9s (quotes=149, tech=130, sma200=130, earnings=70, econ=12, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-01 11:38:49,702 INFO ── Step 4: Validation + Retry ──
+2026-07-01 11:38:49,743 INFO ANOMALY: $IRX price=37.32 avg=36.45 z=3.2
+2026-07-01 11:38:49,873 INFO ANOMALY: CGNX price=73.00 avg=65.27 z=3.1
+2026-07-01 11:38:49,961 INFO ANOMALY: NKE price=40.25 avg=44.90 z=-3.3
+2026-07-01 11:38:49,972 INFO ANOMALY: OUST price=61.00 avg=44.02 z=5.0
+2026-07-01 11:38:49,973 INFO ANOMALY: PANW price=342.21 avg=284.88 z=3.8
+2026-07-01 11:38:49,985 INFO ANOMALY: QLYS price=138.70 avg=113.75 z=4.8
+2026-07-01 11:38:49,997 INFO ANOMALY: ROK price=495.04 avg=465.91 z=3.3
+2026-07-01 11:38:50,025 INFO ANOMALY: TENB price=37.00 avg=28.23 z=4.5
+2026-07-01 11:38:50,051 INFO Anomaly detection: 8 flagged
+2026-07-01 11:38:50,051 INFO Cross-validation: 0 discrepancies
+2026-07-01 11:38:50,076 INFO Retry check: 0 failures — nothing to retry
+2026-07-01 11:38:50,097 INFO Step 4 complete: 0.4s (anomalies=8, cross_val=0, retried=0, completeness=100%)
+2026-07-01 11:38:50,097 DEBUG   us_indices: OK
+2026-07-01 11:38:50,097 DEBUG   futures: OK
+2026-07-01 11:38:50,098 DEBUG   vix: OK
+2026-07-01 11:38:50,098 DEBUG   treasuries: OK
+2026-07-01 11:38:50,098 DEBUG   commodities: OK
+2026-07-01 11:38:50,098 DEBUG   crypto: OK
+2026-07-01 11:38:50,098 DEBUG   international: OK
+2026-07-01 11:38:50,098 DEBUG   gap_fills: OK
+2026-07-01 11:38:50,098 DEBUG   econ_calendar: OK
+2026-07-01 11:38:50,098 DEBUG   market_context: OK
+2026-07-01 11:38:50,098 DEBUG   opus_analysis: OK
+2026-07-01 11:38:50,099 DEBUG   rss: OK
+2026-07-01 11:38:50,099 DEBUG   watchlist_t1: OK
+2026-07-01 11:38:50,099 INFO ── Step 5: Generate Briefing ──
+2026-07-01 11:38:50,397 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-01.md (32557 bytes)
+2026-07-01 11:38:50,406 INFO Pruned 148 rows from quotes (older than 90 days)
+2026-07-01 11:38:50,410 INFO Pruned 123 rows from technicals (older than 90 days)
+2026-07-01 11:38:50,415 INFO Pruned 235 rows from headlines (older than 14 days)
+2026-07-01 11:38:50,430 INFO Pruned 13 rows from economic_events (older than 90 days)
+2026-07-01 11:38:50,432 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-01 11:38:50,432 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-01 11:38:50,625 INFO Cleanup complete
+2026-07-01 11:38:50,627 INFO === Collection complete: 528.5s total, completeness=100%, exit_code=0 ===
