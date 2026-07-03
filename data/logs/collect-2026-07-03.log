@@ -1,0 +1,65 @@
+2026-07-03 11:30:01,681 INFO === Market Data Collection — 2026-07-03 ===
+2026-07-03 11:30:01,728 INFO ── Step 1: RSS Feeds ──
+2026-07-03 11:30:28,318 INFO RSS feeds: 228 headlines stored, 251 older than 24h skipped
+2026-07-03 11:30:28,318 INFO Step 1 complete: 26.6s (headlines=228)
+2026-07-03 11:30:28,318 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-03 11:30:28,320 INFO Opus analysis: sending 211 headlines to claude CLI (attempt 1/3)...
+2026-07-03 11:31:44,817 INFO Opus analysis: 38 tickers, 16 movers, 8 themes from 211 headlines (attempt 1/3)
+2026-07-03 11:31:44,818 INFO Step 2 complete: 76.5s (opus_tickers=38)
+2026-07-03 11:31:44,818 INFO ── Step 3: Schwab + External APIs ──
+2026-07-03 11:31:52,239 INFO Schwab quotes: 152 symbols
+2026-07-03 11:31:52,239 INFO Auto-detected movers (|change| > 3%): 3 symbols
+2026-07-03 11:31:52,241 INFO Technicals + SMA200 for 133 quoted symbols (sequential)
+2026-07-03 11:34:48,910 INFO Schwab technicals: 133/133 symbols
+2026-07-03 11:36:22,972 INFO SMA200: 133/133 symbols
+2026-07-03 11:36:23,319 INFO Schwab market context: collected
+2026-07-03 11:37:34,915 INFO Schwab earnings: 70 entries
+2026-07-03 11:37:34,931 INFO Economic calendar: 1 events
+2026-07-03 11:37:35,059 INFO CoinGecko: 2 coins
+2026-07-03 11:37:40,084 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-03 11:37:45,350 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-03 11:37:50,667 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-03 11:37:51,171 INFO Stooq: 0/3 symbols
+2026-07-03 11:38:39,465 WARNING FRED failed: The read operation timed out
+2026-07-03 11:38:48,110 INFO Yahoo backup: 4 symbols
+2026-07-03 11:38:48,111 INFO Step 3 complete: 423.3s (quotes=152, tech=133, sma200=133, earnings=70, econ=1, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-03 11:38:48,111 INFO ── Step 4: Validation + Retry ──
+2026-07-03 11:38:48,143 INFO ANOMALY: $DAX price=25681.48 avg=24850.75 z=3.5
+2026-07-03 11:38:48,279 INFO ANOMALY: CRWD price=194.82 avg=663.73 z=-4.1
+2026-07-03 11:38:48,397 INFO ANOMALY: QLYS price=150.00 avg=116.65 z=3.4
+2026-07-03 11:38:48,409 INFO ANOMALY: RPD price=9.30 avg=7.33 z=3.3
+2026-07-03 11:38:48,410 INFO ANOMALY: RTX price=199.26 avg=184.94 z=3.3
+2026-07-03 11:38:48,474 INFO Anomaly detection: 5 flagged
+2026-07-03 11:38:48,475 INFO Cross-validation: 0 discrepancies
+2026-07-03 11:38:48,503 INFO Retry check: 0 failures — nothing to retry
+2026-07-03 11:38:48,525 INFO Step 4 complete: 0.4s (anomalies=5, cross_val=0, retried=0, completeness=100%)
+2026-07-03 11:38:48,525 DEBUG   us_indices: OK
+2026-07-03 11:38:48,526 DEBUG   futures: OK
+2026-07-03 11:38:48,526 DEBUG   vix: OK
+2026-07-03 11:38:48,526 DEBUG   treasuries: OK
+2026-07-03 11:38:48,526 DEBUG   commodities: OK
+2026-07-03 11:38:48,526 DEBUG   crypto: OK
+2026-07-03 11:38:48,526 DEBUG   international: OK
+2026-07-03 11:38:48,526 DEBUG   gap_fills: OK
+2026-07-03 11:38:48,526 DEBUG   econ_calendar: OK
+2026-07-03 11:38:48,527 DEBUG   market_context: OK
+2026-07-03 11:38:48,527 DEBUG   opus_analysis: OK
+2026-07-03 11:38:48,527 DEBUG   rss: OK
+2026-07-03 11:38:48,527 DEBUG   watchlist_t1: OK
+2026-07-03 11:38:48,527 INFO ── Step 5: Generate Briefing ──
+2026-07-03 11:38:48,834 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-03.md (32296 bytes)
+2026-07-03 11:38:48,844 INFO Pruned 155 rows from quotes (older than 90 days)
+2026-07-03 11:38:48,848 INFO Pruned 130 rows from technicals (older than 90 days)
+2026-07-03 11:38:48,848 INFO Pruned 8 rows from anomalies (older than 90 days)
+2026-07-03 11:38:48,853 INFO Pruned 237 rows from headlines (older than 14 days)
+2026-07-03 11:38:48,855 INFO Pruned 137 rows from levels (older than 30 days)
+2026-07-03 11:38:48,855 INFO Pruned 46 rows from opus_tickers (older than 30 days)
+2026-07-03 11:38:48,856 INFO Pruned 13 rows from opus_movers (older than 30 days)
+2026-07-03 11:38:48,857 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-07-03 11:38:48,857 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-07-03 11:38:48,858 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-07-03 11:38:48,871 INFO Pruned 5 rows from economic_events (older than 90 days)
+2026-07-03 11:38:48,873 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-03 11:38:48,873 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-03 11:38:49,071 INFO Cleanup complete
+2026-07-03 11:38:49,072 INFO === Collection complete: 526.8s total, completeness=100%, exit_code=0 ===
