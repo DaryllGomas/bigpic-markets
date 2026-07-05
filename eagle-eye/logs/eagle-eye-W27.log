@@ -1,0 +1,87 @@
+[2026-07-05 23:00:01] === Eagle Eye W27 Started ===
+[2026-07-05 23:00:01] Week ending: 2026-07-03
+[2026-07-05 23:00:01] Output: eagle-eye/W27_2026-07-05/
+[2026-07-05 23:00:01] All dependencies verified
+[2026-07-05 23:00:03] Claude CLI 2.1.201 (Claude Code) — model pinned: opus
+[2026-07-05 23:00:03] Found 9 research files (sector theses + structural calendar)
+[2026-07-05 23:00:03] Collecting economic calendar for 2026-07-06 to 2026-07-10...
+23:00:03 [INFO] Collecting economic calendar: 2026-07-06 to 2026-07-10
+23:00:03 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:03 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:03 [INFO]   API returned 20 upcoming events
+23:00:03 [INFO]   Filtered to 20 events in range
+23:00:03 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W27_2026-07-05/next_week_calendar.md (20 events, 6 absences, confidence=high)
+[2026-07-05 23:00:03] Calendar collected (full confidence)
+[2026-07-05 23:00:03] Running Claude [research] (timeout: 3600s, attempt 1/3)...
+✅ **Eagle Eye W27 (2026-07-05) is complete.** All three steps ran end-to-end and the final report is stamped and ready in `/home/bigpic/projects/bigpic-markets/eagle-eye/W27_2026-07-05/`.
+
+## What happened
+
+**STEP 1 — Research (4 parallel agents):** All four wrote their reports and independently nailed the critical framing — **July 4 fell on a Saturday, so US equity/bond markets were closed Friday July 3; the trading-week "close" is Thursday July 2.** No agent mislabeled a weekend price as a Friday close.
+
+**STEP 2 — Verification (`VERIFICATION.md`):** **PASS.** Cross-checked all four reports for consistency and spot-checked 7 headline claims against independent sources — every one matched exactly:
+
+- June jobs **+57k**, 4.2% unemployment, participation 61.5% ✓
+- OPEC+ **+188k b/d for August**, decided Sunday 7/5, 7 nations ✓
+- Tesla **480,126** deliveries, stock **−7%** ✓
+- BTC **~$62.9k** weekend, July 4 short squeeze ✓
+- Fed **median 2026 dot 3.8%** vs 3.50–3.75% (hike bias) — WebFetch of federalreserve.gov ✓
+- Gold **$4,170**, first weekly gain in a month ✓
+- Rocket Lab–Iridium **$8.0B / $54 a share** ✓
+
+Only immaterial cross-source rounding variances (Brent $70.6 Thu vs ~$72 Fri; Sept hike odds ~50–55% from ~65%). One figure (Micron's exact revenue) was flagged unverified and deliberately omitted.
+
+**STEP 3 — Compile (`EAGLE_EYE.md`):** Full report written with all required sections, then run through `stamp-calendar.py`, which injected the authoritative economic tables (5 days, 6 absences) while preserving my day-by-day commentary and the correct calendar day headers.
+
+## The story it tells
+The lede is a **soft June jobs print landing on a structurally hawkish, Warsh-led Fed** — a dovish-at-the-margin surprise (lower *hike* odds, not higher *cut* odds) inside a tightening regime, driving a Dow-record/tech-fade rotation tape, gold to $4,170, and a capped dollar. The top discrete **weekend catalyst is OPEC+'s +188k b/d August hike** into an already-soft crude tape, with the July 4 Strait of Hormuz "transit fee" dispute as the two-way oil risk — and, importantly, an otherwise quiet geopolitical weekend (no fresh war/crisis/shock).
+[2026-07-05 23:14:40] Claude [research] finished successfully
+[2026-07-05 23:14:40] EAGLE_EYE.md generated: 25669 bytes
+[2026-07-05 23:14:40] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 6 absences injected into Week Ahead
+[2026-07-05 23:14:40] Calendar stamp complete
+[2026-07-05 23:14:40] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-07-05 23:14:40] Running Claude [html-build-1] (timeout: 900s, attempt 1/3)...
+Part 1 of the W27 Eagle Eye HTML report is built and verified.
+
+## `report.html` — Part 1 complete (1,121 lines)
+
+**Full page scaffolding**
+- `<!DOCTYPE html>` + `<head>` with the complete BigPic theme CSS (all custom properties: `#0a0f1a` bg, `rgba(18,26,46,0.88)` cards, gold `#e8b87d` / amber `#f4a261` / coral `#ef8354`, green/red, Space Grotesk + Newsreader) and **all** JS (counters, bar chart, watchlist filters, sources toggle, scroll-reveal, yield-dot tooltips).
+- Fixed nav with the SVG back-arrow → `../index.html`, plus the full anchor set (Part 2 anchors already wired).
+- Hero with animated badge, gold/violet/green headline, and a full subtitle.
+- Footer + closing `</body></html>` **after** the marker.
+- **`.bar-chart { align-items: stretch }`** — the bar-height bug guard is in place.
+
+**The 5 content sections**
+1. **Market Scorecard** — 12 cells (11 animated counters + a static NDX −1.61% tile), a violet "dovish-at-the-margin" summary, a coral holiday-labeling caveat (Fri 7/3 closed; WTI/Gold = 7/3 settle; BTC = weekend spot), and the 52,844-vs-52,900 wire note.
+2. **Weekend & Breaking Developments** — coral alert-card + 5-item timeline (OPEC+ +188k b/d, Hormuz fee dispute, July-4 crypto squeeze, CLARITY stall, "no new shock / Aptos = old news"), framed as a quiet weekend with OPEC+ as the one discrete catalyst.
+3. **This Week's Take** — 4 take-cards (soft jobs × hawkish Fed → rotation → OPEC+ → the setup).
+4. **Sector Heatmap** — a "July 2 one-session rotation" bar chart (hard-sourced daily moves, stretch-safe) + a 6-cell heatmap grid (XLK +33 / XLE +21 / XLI +20 H1, XLF/XLV directional, semis down) + narrative.
+5. **Fed & Rates Outlook** — violet regime alert, yield-curve SVG (2Y 4.14 → 30Y 4.99, correctly scaled), yields table, a 4-row rate-path (July hold 76%, Sep now ~53% vs pre-jobs 65%, cuts ~0%), credit/liquidity tiles, and the July-8-minutes catalyst card.
+
+**Marker:** exactly one `<!-- CONTINUE HERE -->` at line 960, immediately after the rates `</section>` and before the footer — Part 2's watchlist/commodities/crypto/week-ahead/positioning/sources drop in there. None of those sections are included.
+
+Validation passed: 5/5 sections balanced, marker placement correct, 12 scorecard cells, 5 timeline items, `align-items: stretch` present, and two `../index.html` back-links (nav + footer).
+[2026-07-05 23:22:46] Claude [html-build-1] finished successfully
+[2026-07-05 23:22:46] report.html after Part 1: 74957 bytes
+[2026-07-05 23:22:46] Running Claude [html-build-2] (timeout: 900s, attempt 1/3)...
+The build is complete and verified. Everything checks out:
+
+- **Marker removed** — 0 occurrences of `CONTINUE HERE` remain.
+- **All 6 sections inserted** at the marker location with the correct IDs the nav already links to: `#watchlist`, `#commodities`, `#crypto`, `#ahead`, `#positioning`, plus `#sources`.
+- **JS hooks wired** — the watchlist uses 10 `.filter-btn[data-filter]` buttons + 18 `data-thesis` cards (drives the existing `initFilters()`), and the Sources section has `#sourcesToggle`/`#sourcesContent` (drives `initSources()`). No new JS needed — the Part 1 script already handles these.
+- **Structure intact** — 11 `<section>` opens/closes balanced, 418/418 `<div>`, 6/6 `<table>`, and the final `</section>` connects cleanly straight into the untouched `<footer>`. Content before the marker and the footer were not modified.
+
+What each section contains, matching the existing theme (gold-on-deep-navy glass cards, `--font-mono` numerics, `.futures-cell`, `.conviction-card`, `.risk-item`, `.cal-day`, `.sources-list`):
+
+1. **Thesis Watchlist Tracker** — 18 filterable ticker cards grouped into 9 theses, each with a tier badge (T1/T2/crossover) and a 🟢/🔴 weekly-delta pill.
+2. **Commodities & Forex** — three cards (Energy / Metals / Forex) with futures-cell number tiles + narrative, all values labeled to their dates.
+3. **Crypto Snapshot** — a 6-tile price/sentiment strip plus four narrative cards (BTC-ETH, alts/DeFi, ETF flows, weekend squeeze).
+4. **The Week Ahead** — five stacked day cards, each with the full Time/Event/Impact table (impact color-coded High/Medium/Low) and the commentary rendered verbatim from `EAGLE_EYE.md`, plus Earnings-to-Watch and Notable-Absences cards.
+5. **Positioning & Thesis Update** — a 6-item Risk Radar (`.risk-item` with severity bars) and 6 actionable-takeaway conviction cards with direction pills.
+6. **Sources** — collapsible, consolidated into the 5 original categories with the "full URLs preserved in research files" footnote.
+[2026-07-05 23:29:07] Claude [html-build-2] finished successfully
+[2026-07-05 23:29:07] report.html after Part 2: 131982 bytes
+[2026-07-05 23:29:07] Running Claude [html-publish] (timeout: 300s, attempt 1/3)...
