@@ -1,0 +1,60 @@
+2026-07-07 11:30:01,701 INFO === Market Data Collection — 2026-07-07 ===
+2026-07-07 11:30:01,721 INFO ── Step 1: RSS Feeds ──
+2026-07-07 11:30:19,030 INFO RSS feeds: 240 headlines stored, 229 older than 24h skipped
+2026-07-07 11:30:19,030 INFO Step 1 complete: 17.3s (headlines=240)
+2026-07-07 11:30:19,030 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-07 11:30:19,033 INFO Opus analysis: sending 226 headlines to claude CLI (attempt 1/3)...
+2026-07-07 11:32:07,206 INFO Opus analysis: 39 tickers, 6 movers, 11 themes from 226 headlines (attempt 1/3)
+2026-07-07 11:32:07,207 INFO Step 2 complete: 108.2s (opus_tickers=39)
+2026-07-07 11:32:07,207 INFO ── Step 3: Schwab + External APIs ──
+2026-07-07 11:32:13,578 INFO Schwab quotes: 148 symbols
+2026-07-07 11:32:13,579 INFO Auto-detected movers (|change| > 3%): 16 symbols
+2026-07-07 11:32:13,580 INFO Technicals + SMA200 for 129 quoted symbols (sequential)
+2026-07-07 11:33:28,571 DEBUG Schwab technicals SPCX: HTTP Error 400: Bad Request
+2026-07-07 11:35:06,320 INFO Schwab technicals: 128/129 symbols
+2026-07-07 11:35:46,308 DEBUG SMA200 SPCX: only 15 candles (need 200)
+2026-07-07 11:36:37,406 INFO SMA200: 128/129 symbols
+2026-07-07 11:36:37,771 INFO Schwab market context: collected
+2026-07-07 11:37:49,454 INFO Schwab earnings: 70 entries
+2026-07-07 11:37:49,471 INFO Economic calendar: 5 events
+2026-07-07 11:37:49,572 INFO CoinGecko: 2 coins
+2026-07-07 11:37:54,687 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-07 11:38:00,377 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-07 11:38:06,080 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-07 11:38:06,588 INFO Stooq: 0/3 symbols
+2026-07-07 11:38:54,851 WARNING FRED failed: The read operation timed out
+2026-07-07 11:39:03,495 INFO Yahoo backup: 4 symbols
+2026-07-07 11:39:03,496 INFO Step 3 complete: 416.3s (quotes=148, tech=128, sma200=128, earnings=70, econ=5, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-07 11:39:03,496 INFO ── Step 4: Validation + Retry ──
+2026-07-07 11:39:03,683 INFO ANOMALY: RPD price=10.70 avg=7.49 z=3.8
+2026-07-07 11:39:03,745 INFO Anomaly detection: 1 flagged
+2026-07-07 11:39:03,746 INFO Cross-validation: 0 discrepancies
+2026-07-07 11:39:03,760 INFO Retry check: 1 failed call(s) found, retrying...
+2026-07-07 11:39:03,760 INFO   Retrying technicals for SPCX (original error: HTTP Error 400: Bad Request)
+2026-07-07 11:39:04,766 INFO   ✗ SPCX technicals retry failed: HTTP Error 400: Bad Request
+2026-07-07 11:39:04,774 INFO Retry complete: 0/1 recovered
+2026-07-07 11:39:04,791 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): SPCX
+2026-07-07 11:39:04,810 INFO Step 4 complete: 1.3s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-07-07 11:39:04,810 DEBUG   us_indices: OK
+2026-07-07 11:39:04,810 DEBUG   futures: OK
+2026-07-07 11:39:04,810 DEBUG   vix: OK
+2026-07-07 11:39:04,810 DEBUG   treasuries: OK
+2026-07-07 11:39:04,811 DEBUG   commodities: OK
+2026-07-07 11:39:04,811 DEBUG   crypto: OK
+2026-07-07 11:39:04,811 DEBUG   international: OK
+2026-07-07 11:39:04,811 DEBUG   gap_fills: OK
+2026-07-07 11:39:04,811 DEBUG   econ_calendar: OK
+2026-07-07 11:39:04,811 DEBUG   market_context: OK
+2026-07-07 11:39:04,811 DEBUG   opus_analysis: OK
+2026-07-07 11:39:04,811 DEBUG   rss: OK
+2026-07-07 11:39:04,812 DEBUG   watchlist_t1: OK
+2026-07-07 11:39:04,812 INFO ── Step 5: Generate Briefing ──
+2026-07-07 11:39:05,166 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-07.md (32829 bytes)
+2026-07-07 11:39:05,182 INFO Pruned 153 rows from quotes (older than 90 days)
+2026-07-07 11:39:05,189 INFO Pruned 128 rows from technicals (older than 90 days)
+2026-07-07 11:39:05,198 INFO Pruned 138 rows from headlines (older than 14 days)
+2026-07-07 11:39:05,230 INFO Pruned 9 rows from economic_events (older than 90 days)
+2026-07-07 11:39:05,232 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-07 11:39:05,232 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-07 11:39:05,428 INFO Cleanup complete
+2026-07-07 11:39:05,429 INFO === Collection complete: 543.1s total, completeness=100%, exit_code=0 ===
