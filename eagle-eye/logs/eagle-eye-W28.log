@@ -1,0 +1,94 @@
+[2026-07-12 23:00:01] === Eagle Eye W28 Started ===
+[2026-07-12 23:00:01] Week ending: 2026-07-10
+[2026-07-12 23:00:01] Output: eagle-eye/W28_2026-07-12/
+[2026-07-12 23:00:01] All dependencies verified
+[2026-07-12 23:00:02] Claude CLI 2.1.201 (Claude Code) — model pinned: opus
+[2026-07-12 23:00:02] Found 9 research files (sector theses + structural calendar)
+[2026-07-12 23:00:02] Collecting economic calendar for 2026-07-13 to 2026-07-17...
+23:00:02 [INFO] Collecting economic calendar: 2026-07-13 to 2026-07-17
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 50 upcoming events
+23:00:02 [INFO]   Filtered to 50 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W28_2026-07-12/next_week_calendar.md (50 events, 3 absences, confidence=high)
+[2026-07-12 23:00:03] Calendar collected (full confidence)
+[2026-07-12 23:00:03] Running Claude [research] (timeout: 3600s, attempt 1/3)...
+The Eagle Eye W28 report is complete. All files are in place at `/home/bigpic/projects/bigpic-markets/eagle-eye/W28_2026-07-12/`.
+
+## Summary
+
+**STEP 1 — Research (4 parallel agents):** Launched in a single message, each searched for both the weekly recap *and* breaking weekend news, read the 9 sector theses, and wrote to disk.
+
+**STEP 2 — Verify (VERIFICATION.md, PASS):** Cross-checked overlapping figures across reports and ran WebFetch spot-checks. **6 of 6 key claims confirmed** against sources:
+- Warsh is Fed Chair (took office 5/22/2026) ✓
+- SK Hynix $26.5B IPO, +14% day one ✓
+- BTC $64,340 / ETH $1,796 on 7/10 ✓
+- 10Y 4.56% / 2Y 4.21% ✓
+- Hormuz weekend escalation + shipping halt, Brent ~$76.58 Fri ✓
+- Gold ~$4,135–4,144 ✓
+
+Only minor discrepancies logged (Sept hike odds 50–61%, WTI $71.41 vs $71.84) — resolved in the compile. No stale-as-fresh date violations.
+
+**STEP 3 — Compile (EAGLE_EYE.md, 276 lines):** All required sections written, with the correct lede.
+
+## The story this week
+
+Two shocks dominate, and **the biggest broke over the weekend**:
+
+1. **🛢️ Strait of Hormuz re-escalation (the lede):** US–Iran ceasefire collapsed July 8; over July 11–12 Iran struck the *GFS Galaxy* and declared the Strait closed, US CENTCOM hit ~140 sites. Status disputed; no large vessel transited since July 7. Oil +4–5% on the week, VLCC rates at records — **a gap-risk Monday open.**
+2. **🏦 Hawkish Warsh Fed:** 10Y at 4.56% (+8bps), zero 2026 cuts priced, **~50–61% odds of a September *hike*.** The oil spike feeds the inflation fear directly.
+
+Underneath: a narrow AI melt-up (NVDA reclaimed ~$5T, SK Hynix's record IPO), gold/silver at multi-decade highs, and defensively risk-off crypto (BTC ~$64K, Extreme Fear). The Week Ahead uses the calendar's exact day headers (no econ tables — left for `stamp-calendar.py`), flagging **Tuesday July 14** as the fulcrum: June CPI + five mega-bank earnings + Warsh's debut testimony, with no NFP/GDP/PCE to offset.
+
+Ready for the `stamp-calendar.py` post-processing step to inject the economic tables.
+[2026-07-12 23:15:34] Claude [research] finished successfully
+[2026-07-12 23:15:34] EAGLE_EYE.md generated: 25316 bytes
+[2026-07-12 23:15:34] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 3 absences injected into Week Ahead
+[2026-07-12 23:15:34] Calendar stamp complete
+[2026-07-12 23:15:34] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-07-12 23:15:34] Running Claude [html-build-1] (timeout: 900s, attempt 1/3)...
+Part 1 of the W28 Eagle Eye report is built and validated. 
+
+## Summary
+
+Created `/home/bigpic/projects/bigpic-markets/eagle-eye/W28_2026-07-12/report.html` (77 KB) matching the BigPic Solutions theme exactly, using the completed W27 report as the quality reference.
+
+**Full page scaffold:**
+- `<!DOCTYPE html>` + `<head>` with the complete CSS (all `:root` theme tokens — `#0a0f1a` bg, `rgba(18,26,46,0.88)` cards, gold `#e8b87d`/amber/coral accents, Space Grotesk + Newsreader fonts, green/red semantics) and the full JS block (animated counters, sector bar chart, watchlist filters, collapsible sources, scroll-reveal, yield-dot tooltips)
+- **Critical bar-chart fix applied**: `.bar-chart { align-items: stretch }` (not `flex-end`)
+- Fixed nav with back-arrow → `../index.html`, hero/header with W28 headline and stat badge
+
+**First 5 content sections (all present, in order):**
+1. **Market Scorecard** — 12 animated counters (Fri 7/10 closes: S&P 7,575.39, Nasdaq 26,281.61, Dow 52,637.01, yields, WTI, gold, BTC) + two callout boxes + Sunday-futures caveat
+2. **Weekend & Breaking Developments** — coral `.alert-card` alert styling with a timeline of the Hormuz escalation (GFS Galaxy strike, CENTCOM ~140-site assault, disputed status, Fed, crypto squeeze)
+3. **This Week's Take** — 4 executive-summary take-cards (coral/violet/green/gold)
+4. **Sector Heatmap** — interactive bar chart (5 hard-sourced weekly SPDR returns) + 11-cell heat grid + rotation narrative
+5. **Fed & Rates Outlook** — SVG yield-curve viz (2Y 4.21 → 30Y 5.07, bear-steepening), yield table, rate-path probability bars, credit/liquidity cells, Warsh-testimony catalyst
+
+**Structure markers:** `<!-- CONTINUE HERE -->` appears exactly once on its own line (994), positioned after rates and before the footer; the footer and `</body></html>` follow it. No Part-2 sections (watchlist, commodities, crypto, week ahead, positioning, sources) were included — they'll insert at the marker. Validated: DOCTYPE correct, ends with `</html>`, all 5 `<section>` tags balanced, HTML parses cleanly, and `rates < marker < footer` ordering confirmed.
+[2026-07-12 23:23:11] Claude [html-build-1] finished successfully
+[2026-07-12 23:23:11] report.html after Part 1: 77210 bytes
+[2026-07-12 23:23:11] Running Claude [html-build-2] (timeout: 900s, attempt 1/3)...
+Complete. The `<!-- CONTINUE HERE -->` marker has been replaced with the six remaining content sections, and everything before it (through the Fed & Rates section) and after it (footer + scripts) is untouched.
+
+## What was inserted (in order)
+
+1. **Thesis Watchlist Tracker** (`#watchlist`) — 9 filter buttons (All + 8 theses) wired to the existing `initFilters()` JS via `data-filter`/`data-thesis`. Eight thesis cards (AI Infra, Cyber & Defense, Nuclear, Critical Minerals, Energy Storage, Quantum, Robotics, Space), each with a per-thesis direction badge, per-ticker **tier badges** (T1/T2/T3/mixed) and the weekly reads, plus a cross-thesis signal card.
+2. **Commodities & Forex Snapshot** (`#commodities`) — Energy, Metals (with a freight-dislocation callout), and Forex cards using the existing `.futures-grid`/`.futures-cell` style.
+3. **Crypto Snapshot** (`#crypto`) — key-metric grid (BTC, ETH, ETH/BTC, dominance, DeFi TVL, F&G) + the six sourced bullet points.
+4. **The Week Ahead** (`#ahead`) — a compact 5-day `.calendar-grid` overview, then day-by-day tables (Mon–Fri) rendered verbatim from EAGLE_EYE.md with High/Medium/Low impact badges and the exact commentary, plus Earnings to Watch and Notable Absences cards.
+5. **Positioning & Thesis Update** (`#positioning`) — an 8-item **Risk Radar** (`.risk-grid` with critical→low levels) and the six numbered actionable takeaways.
+6. **Sources** (`#sources`) — collapsible via the existing `#sourcesToggle`/`#sourcesContent` hooks and `initSources()`, grouped into the four source categories.
+
+## Verification
+- Marker: **0 occurrences** remaining.
+- Section order intact: scorecard → breaking → take → sectors → rates → **watchlist → commodities → crypto → ahead → positioning → sources** → footer.
+- Tag balance in the inserted region: 6 `<section>` / 6 `</section>`; Sources closes at line 1812, footer opens at 1814.
+- Filter wiring: 9 filter buttons ↔ 8 `data-thesis` cards; `</html>` and both JS init functions still present.
+
+I reused only theme classes and variables already defined in the file; the one addition is a scoped `<style>` block (inside the inserted content, since I couldn't touch the `<head>`) defining helper classes — tier badges, impact badges, the thesis grid and day-table styling — all built from the existing CSS custom properties so they match the palette and spacing.
+[2026-07-12 23:30:37] Claude [html-build-2] finished successfully
+[2026-07-12 23:30:37] report.html after Part 2: 138938 bytes
+[2026-07-12 23:30:37] Running Claude [html-publish] (timeout: 300s, attempt 1/3)...
