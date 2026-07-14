@@ -1,0 +1,83 @@
+[2026-07-14 11:30:01] === Morning Brief Started ===
+[2026-07-14 11:30:01] Date: Tuesday, 2026-07-14
+[2026-07-14 11:30:01] Output: morning-brief/2026-07/2026-07-14_Tue.md + 2026-07-14_Tue.html
+[2026-07-14 11:30:01] All dependencies verified
+[2026-07-14 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-14 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-14 11:30:02,018 INFO === Market Data Collection — 2026-07-14 ===
+2026-07-14 11:30:02,054 INFO ── Step 1: RSS Feeds ──
+2026-07-14 11:30:23,066 INFO RSS feeds: 242 headlines stored, 227 older than 24h skipped
+2026-07-14 11:30:23,066 INFO Step 1 complete: 21.0s (headlines=242)
+2026-07-14 11:30:23,066 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-14 11:30:23,069 INFO Opus analysis: sending 229 headlines to claude CLI (attempt 1/3)...
+2026-07-14 11:31:20,245 INFO Opus analysis: 37 tickers, 8 movers, 7 themes from 229 headlines (attempt 1/3)
+2026-07-14 11:31:20,246 INFO Step 2 complete: 57.2s (opus_tickers=37)
+2026-07-14 11:31:20,246 INFO ── Step 3: Schwab + External APIs ──
+2026-07-14 11:31:27,501 INFO Schwab quotes: 153 symbols
+2026-07-14 11:31:27,501 INFO Auto-detected movers (|change| > 3%): 16 symbols
+2026-07-14 11:31:27,503 INFO Technicals + SMA200 for 134 quoted symbols (sequential)
+2026-07-14 11:34:26,965 INFO Schwab technicals: 134/134 symbols
+2026-07-14 11:36:00,898 INFO SMA200: 134/134 symbols
+2026-07-14 11:36:01,302 INFO Schwab market context: collected
+2026-07-14 11:37:15,802 INFO Schwab earnings: 70 entries
+2026-07-14 11:37:15,827 INFO Economic calendar: 13 events
+2026-07-14 11:37:15,940 INFO CoinGecko: 2 coins
+2026-07-14 11:37:20,955 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-14 11:37:26,429 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-14 11:37:32,185 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-14 11:37:32,693 INFO Stooq: 0/3 symbols
+2026-07-14 11:38:20,994 WARNING FRED failed: The read operation timed out
+2026-07-14 11:38:29,701 INFO Yahoo backup: 4 symbols
+2026-07-14 11:38:29,701 INFO Step 3 complete: 429.5s (quotes=153, tech=134, sma200=134, earnings=70, econ=13, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-14 11:38:29,701 INFO ── Step 4: Validation + Retry ──
+2026-07-14 11:38:29,777 INFO ANOMALY: /BZU26 price=86.01 avg=74.29 z=3.9
+2026-07-14 11:38:30,071 INFO Anomaly detection: 1 flagged
+2026-07-14 11:38:30,071 INFO Cross-validation: 0 discrepancies
+2026-07-14 11:38:30,097 INFO Retry check: 0 failures — nothing to retry
+2026-07-14 11:38:30,119 INFO Step 4 complete: 0.4s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-07-14 11:38:30,121 INFO ── Step 5: Generate Briefing ──
+2026-07-14 11:38:30,424 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-14.md (31477 bytes)
+2026-07-14 11:38:30,434 INFO Pruned 152 rows from quotes (older than 90 days)
+2026-07-14 11:38:30,437 INFO Pruned 127 rows from technicals (older than 90 days)
+2026-07-14 11:38:30,438 INFO Pruned 8 rows from anomalies (older than 90 days)
+2026-07-14 11:38:30,442 INFO Pruned 124 rows from headlines (older than 14 days)
+2026-07-14 11:38:30,458 INFO Pruned 11 rows from economic_events (older than 90 days)
+2026-07-14 11:38:30,460 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-07-14 11:38:30,460 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-14 11:38:30,664 INFO Cleanup complete
+2026-07-14 11:38:30,665 INFO === Collection complete: 508.1s total, completeness=100%, exit_code=0 ===
+[2026-07-14 11:38:30] Data collection complete — briefing file ready
+[2026-07-14 11:38:30] Found 9 research files (sector theses + structural calendar)
+[2026-07-14 11:38:30] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief for Tuesday, July 14, 2026 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-07/2026-07-14_Tue.md` (~2,700 words, HEAVY depth per the briefing header).
+
+**The setup, in one line:** A CPI day inside a rare *hawkish* regime — rates market lifting hike bets on the U.S.-Iran oil shock even as June CPI is forecast to cool (headline 3.8% vs 4.2%, core 2.8% vs 2.9%).
+
+**Key threads I built the report around:**
+- **Split tape** — Nasdaq futures +0.57% on a memory-chip melt-up (MU/MRVL/GLW/AMD) vs. Dow -0.45% dragged by **IBM -19.37%** (guidance miss, broke its entire SMA stack).
+- **AI trade bifurcation** — memory/optical rip while software/services crack (NOW -7.43%, PLTR -3.61%); cyber in a broad risk-off retreat (ZS, ESTC, S all -3%+).
+- **Calendar** — everything still Pending; anchored on 8:30 CPI + Warsh's 10:00 congressional debut, with three-scenario playbook (hot/in-line/cool).
+- **Watchlist** — no earnings today; TSM Thursday (7/16) is the next catalyst; flagged four washed-out Tier 1 names (ALB 28, LUNR 29, IONQ 30, CCJ 31 RSI, all below every SMA).
+
+**Data caveats I surfaced rather than smoothed over** (per your no-fabrication rules):
+- FRED timed out → 2Y yield is a prior close.
+- Brent `/BZU26` = 86.01 carries a z-score 3.9 anomaly flag; IEV's +3.10% looks outsized vs. the underlying European indices — I told the reader to confirm both at the cash open.
+- **SNDK conflict:** the movers table shows +4.66% but the news feed tags it a double-digit *loser* — I reported the table figure and explicitly flagged the contradiction rather than picking one.
+
+All numbers trace to the briefing file with source attribution; every unreleased data point is marked Pending.
+[2026-07-14 11:42:16] Claude [report (attempt 1)] finished successfully
+[2026-07-14 11:42:16] Report attempt 1 succeeded: 17217 bytes
+[2026-07-14 11:42:16] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-14_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 50 symbols...
+  Got quotes for 40 symbols
+
+--- Database cross-checks (market_date=2026-07-14) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-07-14 11:42:23] Running Claude [html-publish] (timeout: 900s)...
