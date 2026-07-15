@@ -1,0 +1,55 @@
+2026-07-15 11:30:01,735 INFO === Market Data Collection — 2026-07-15 ===
+2026-07-15 11:30:01,750 INFO ── Step 1: RSS Feeds ──
+2026-07-15 11:30:22,778 INFO RSS feeds: 244 headlines stored, 235 older than 24h skipped
+2026-07-15 11:30:22,778 INFO Step 1 complete: 21.0s (headlines=244)
+2026-07-15 11:30:22,778 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-15 11:30:22,780 INFO Opus analysis: sending 238 headlines to claude CLI (attempt 1/3)...
+2026-07-15 11:32:02,856 INFO Opus analysis: 41 tickers, 11 movers, 9 themes from 238 headlines (attempt 1/3)
+2026-07-15 11:32:02,857 INFO Step 2 complete: 100.1s (opus_tickers=41)
+2026-07-15 11:32:02,858 INFO ── Step 3: Schwab + External APIs ──
+2026-07-15 11:32:09,981 INFO Schwab quotes: 155 symbols
+2026-07-15 11:32:09,982 INFO Auto-detected movers (|change| > 3%): 5 symbols
+2026-07-15 11:32:09,983 INFO Technicals + SMA200 for 136 quoted symbols (sequential)
+2026-07-15 11:35:15,884 INFO Schwab technicals: 136/136 symbols
+2026-07-15 11:36:53,907 INFO SMA200: 136/136 symbols
+2026-07-15 11:36:54,312 INFO Schwab market context: collected
+2026-07-15 11:38:11,122 INFO Schwab earnings: 70 entries
+2026-07-15 11:38:11,140 INFO Economic calendar: 10 events
+2026-07-15 11:38:11,279 INFO CoinGecko: 2 coins
+2026-07-15 11:38:16,663 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-15 11:38:21,986 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-15 11:38:27,675 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-15 11:38:28,182 INFO Stooq: 0/3 symbols
+2026-07-15 11:39:16,496 WARNING FRED failed: The read operation timed out
+2026-07-15 11:39:25,124 INFO Yahoo backup: 4 symbols
+2026-07-15 11:39:25,124 INFO Step 3 complete: 442.3s (quotes=155, tech=136, sma200=136, earnings=70, econ=10, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-15 11:39:25,124 INFO ── Step 4: Validation + Retry ──
+2026-07-15 11:39:25,364 INFO ANOMALY: UAL price=121.00 avg=98.98 z=4.0
+2026-07-15 11:39:25,388 INFO Anomaly detection: 1 flagged
+2026-07-15 11:39:25,388 INFO Cross-validation: 0 discrepancies
+2026-07-15 11:39:25,403 INFO Retry check: 0 failures — nothing to retry
+2026-07-15 11:39:25,426 INFO Step 4 complete: 0.3s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-07-15 11:39:25,426 DEBUG   us_indices: OK
+2026-07-15 11:39:25,426 DEBUG   futures: OK
+2026-07-15 11:39:25,426 DEBUG   vix: OK
+2026-07-15 11:39:25,426 DEBUG   treasuries: OK
+2026-07-15 11:39:25,426 DEBUG   commodities: OK
+2026-07-15 11:39:25,427 DEBUG   crypto: OK
+2026-07-15 11:39:25,427 DEBUG   international: OK
+2026-07-15 11:39:25,427 DEBUG   gap_fills: OK
+2026-07-15 11:39:25,427 DEBUG   econ_calendar: OK
+2026-07-15 11:39:25,427 DEBUG   market_context: OK
+2026-07-15 11:39:25,427 DEBUG   opus_analysis: OK
+2026-07-15 11:39:25,427 DEBUG   rss: OK
+2026-07-15 11:39:25,427 DEBUG   watchlist_t1: OK
+2026-07-15 11:39:25,428 INFO ── Step 5: Generate Briefing ──
+2026-07-15 11:39:25,725 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-15.md (32061 bytes)
+2026-07-15 11:39:25,734 INFO Pruned 148 rows from quotes (older than 90 days)
+2026-07-15 11:39:25,738 INFO Pruned 123 rows from technicals (older than 90 days)
+2026-07-15 11:39:25,738 INFO Pruned 8 rows from anomalies (older than 90 days)
+2026-07-15 11:39:25,743 INFO Pruned 237 rows from headlines (older than 14 days)
+2026-07-15 11:39:25,758 INFO Pruned 11 rows from economic_events (older than 90 days)
+2026-07-15 11:39:25,759 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-15 11:39:25,760 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-15 11:39:25,945 INFO Cleanup complete
+2026-07-15 11:39:25,946 INFO === Collection complete: 563.7s total, completeness=100%, exit_code=0 ===
