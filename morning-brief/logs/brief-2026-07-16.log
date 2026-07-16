@@ -1,0 +1,102 @@
+[2026-07-16 11:30:01] === Morning Brief Started ===
+[2026-07-16 11:30:01] Date: Thursday, 2026-07-16
+[2026-07-16 11:30:01] Output: morning-brief/2026-07/2026-07-16_Thu.md + 2026-07-16_Thu.html
+[2026-07-16 11:30:01] All dependencies verified
+[2026-07-16 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-16 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-16 11:30:01,812 INFO === Market Data Collection — 2026-07-16 ===
+2026-07-16 11:30:01,847 INFO ── Step 1: RSS Feeds ──
+2026-07-16 11:30:23,433 INFO RSS feeds: 256 headlines stored, 223 older than 24h skipped
+2026-07-16 11:30:23,433 INFO Step 1 complete: 21.6s (headlines=256)
+2026-07-16 11:30:23,433 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-16 11:30:23,435 INFO Opus analysis: sending 247 headlines to claude CLI (attempt 1/3)...
+2026-07-16 11:31:39,450 INFO Opus analysis: 36 tickers, 8 movers, 8 themes from 247 headlines (attempt 1/3)
+2026-07-16 11:31:39,450 INFO Step 2 complete: 76.0s (opus_tickers=36)
+2026-07-16 11:31:39,450 INFO ── Step 3: Schwab + External APIs ──
+2026-07-16 11:31:47,036 INFO Schwab quotes: 151 symbols
+2026-07-16 11:31:47,037 INFO Auto-detected movers (|change| > 3%): 15 symbols
+2026-07-16 11:31:47,038 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-07-16 11:34:48,868 INFO Schwab technicals: 132/132 symbols
+2026-07-16 11:36:24,137 INFO SMA200: 127/132 symbols
+2026-07-16 11:36:24,478 INFO Schwab market context: collected
+2026-07-16 11:37:40,205 INFO Schwab earnings: 70 entries
+2026-07-16 11:37:40,225 INFO Economic calendar: 14 events
+2026-07-16 11:37:40,332 INFO CoinGecko: 2 coins
+2026-07-16 11:37:45,545 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-16 11:37:50,745 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-16 11:37:56,579 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-16 11:37:57,087 INFO Stooq: 0/3 symbols
+2026-07-16 11:38:45,384 WARNING FRED failed: The read operation timed out
+2026-07-16 11:38:54,184 INFO Yahoo backup: 4 symbols
+2026-07-16 11:38:54,184 INFO Step 3 complete: 434.7s (quotes=151, tech=132, sma200=127, earnings=70, econ=14, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-16 11:38:54,185 INFO ── Step 4: Validation + Retry ──
+2026-07-16 11:38:54,646 INFO ANOMALY: TSM price=399.52 avg=443.30 z=-3.1
+2026-07-16 11:38:54,676 INFO Anomaly detection: 1 flagged
+2026-07-16 11:38:54,681 INFO Cross-validation: 0 discrepancies
+2026-07-16 11:38:54,722 INFO Retry check: 5 failed call(s) found, retrying...
+2026-07-16 11:38:54,723 INFO   Retrying sma200 for RJF (original error: <urlopen error [Errno 111] Connection refused>)
+2026-07-16 11:38:55,957 INFO   ✓ RJF sma200 recovered
+2026-07-16 11:38:55,958 INFO   Retrying sma200 for COIN (original error: <urlopen error [Errno 111] Connection refused>)
+2026-07-16 11:38:58,797 INFO   ✓ COIN sma200 recovered
+2026-07-16 11:38:58,798 INFO   Retrying sma200 for TER (original error: <urlopen error [Errno 111] Connection refused>)
+2026-07-16 11:39:00,796 INFO   ✓ TER sma200 recovered
+2026-07-16 11:39:00,802 INFO   Retrying sma200 for PWR (original error: <urlopen error [Errno 111] Connection refused>)
+2026-07-16 11:39:02,083 INFO   ✓ PWR sma200 recovered
+2026-07-16 11:39:02,083 INFO   Retrying sma200 for RPD (original error: <urlopen error [Errno 111] Connection refused>)
+2026-07-16 11:39:04,020 INFO   ✓ RPD sma200 recovered
+2026-07-16 11:39:04,027 INFO Retry complete: 5/5 recovered
+2026-07-16 11:39:04,064 INFO Step 4 complete: 9.9s (anomalies=1, cross_val=0, retried=5, completeness=100%)
+2026-07-16 11:39:04,067 INFO ── Step 5: Generate Briefing ──
+2026-07-16 11:39:04,614 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-16.md (31968 bytes)
+2026-07-16 11:39:04,628 INFO Pruned 146 rows from quotes (older than 90 days)
+2026-07-16 11:39:04,632 INFO Pruned 121 rows from technicals (older than 90 days)
+2026-07-16 11:39:04,633 INFO Pruned 9 rows from anomalies (older than 90 days)
+2026-07-16 11:39:04,642 INFO Pruned 253 rows from headlines (older than 14 days)
+2026-07-16 11:39:04,644 INFO Pruned 129 rows from levels (older than 30 days)
+2026-07-16 11:39:04,645 INFO Pruned 31 rows from opus_tickers (older than 30 days)
+2026-07-16 11:39:04,651 INFO Pruned 6 rows from opus_movers (older than 30 days)
+2026-07-16 11:39:04,658 INFO Pruned 6 rows from opus_themes (older than 30 days)
+2026-07-16 11:39:04,659 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-07-16 11:39:04,659 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-07-16 11:39:04,659 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-07-16 11:39:04,692 INFO Pruned 9 rows from economic_events (older than 90 days)
+2026-07-16 11:39:04,694 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-16 11:39:04,696 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-16 11:39:05,024 INFO Cleanup complete
+2026-07-16 11:39:05,026 INFO === Collection complete: 542.2s total, completeness=100%, exit_code=0 ===
+[2026-07-16 11:39:05] Data collection complete — briefing file ready
+[2026-07-16 11:39:05] Found 9 research files (sector theses + structural calendar)
+[2026-07-16 11:39:05] Running Claude [report (attempt 1)] (timeout: 900s)...
+Done. The **BigPic Morning Brief for Thursday, July 16, 2026** is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-07/2026-07-16_Thu.md` (~2,600 words, HEAVY calibration).
+
+**The through-line:** a tech-specific AI/chip risk-off wave, not a macro shock. Key points I surfaced:
+
+- **Dispersion tape** — Dow futures green (+0.18%) while Nasdaq 100 futures −0.83%; VIX contained at 16. The chips-to-Mag-7-to-defensives rotation is playing out cleanly.
+- **Asia was the epicenter** — Kospi −6.37%, Nikkei −2.79% on semiconductor unwind (SK Hynix vol spike + Korea rate hike).
+- **The "good news sold" tell:** TSMC reportedly posted a record Q2 profit (+77%) yet TSM is down 4.76% — the proximate cause of the global chip slide.
+- **8:30 Retail Sales flagged as the swing factor** (consensus +0.2% headline / 0.0% core, both sharp decelerations). All calendar items correctly marked Pending.
+- **Watchlist skew:** the red side is disproportionately watchlist names (TSM, MU, GLW, MRVL, PL, TER); green movers are idiosyncratic earnings (UNH +7%, JBHT, ATAI +34%).
+- **Relative strength in Cybersecurity + Defense** (PANW/CRWD/FTNT above averages, RSIs in the 60s) vs. a washed-out oversold cluster (IBM, IONQ, LUNR, ALB all RSI ≤30).
+
+**Rules honored:**
+- No fabricated actuals — TSM/ISRG EPS left unstated (calendar shows "—"); the TSM beat is reported qualitatively from the news feed only, with an explicit note.
+- Flagged the data-quality caveats (FRED timeout, Schwab refusals, Stooq 404s) and explained the TSM z-score anomaly is corroborated as a real move.
+- Cross-referenced catalysts from the thesis files (Nov 2026 US-China expiry, FCX/Grasberg, FOMC Jul 28–29, defense earnings wave Jul 21–23, tomorrow's monthly OpEx).
+
+One judgment call worth flagging: the Economic Calendar had duplicate stub rows at 4:30 for Retail Sales/Jobless Claims (all fields blank) — I treated the populated 8:30 rows as the real releases and noted the stubs.
+[2026-07-16 11:42:56] Claude [report (attempt 1)] finished successfully
+[2026-07-16 11:42:56] Report attempt 1 succeeded: 18855 bytes
+[2026-07-16 11:42:56] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-16_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 47 symbols...
+  Got quotes for 39 symbols
+
+--- Database cross-checks (market_date=2026-07-16) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-07-16 11:43:02] Running Claude [html-publish] (timeout: 900s)...
