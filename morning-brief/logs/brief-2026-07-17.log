@@ -1,0 +1,98 @@
+[2026-07-17 11:30:01] === Morning Brief Started ===
+[2026-07-17 11:30:01] Date: Friday, 2026-07-17
+[2026-07-17 11:30:01] Output: morning-brief/2026-07/2026-07-17_Fri.md + 2026-07-17_Fri.html
+[2026-07-17 11:30:01] All dependencies verified
+[2026-07-17 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-17 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-17 11:30:01,351 INFO === Market Data Collection — 2026-07-17 ===
+2026-07-17 11:30:01,384 INFO ── Step 1: RSS Feeds ──
+2026-07-17 11:30:23,753 INFO RSS feeds: 242 headlines stored, 237 older than 24h skipped
+2026-07-17 11:30:23,753 INFO Step 1 complete: 22.4s (headlines=242)
+2026-07-17 11:30:23,753 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-17 11:30:23,755 INFO Opus analysis: sending 235 headlines to claude CLI (attempt 1/3)...
+2026-07-17 11:32:12,941 INFO Opus analysis: 39 tickers, 9 movers, 8 themes from 235 headlines (attempt 1/3)
+2026-07-17 11:32:12,941 INFO Step 2 complete: 109.2s (opus_tickers=39)
+2026-07-17 11:32:12,942 INFO ── Step 3: Schwab + External APIs ──
+2026-07-17 11:32:20,316 INFO Schwab quotes: 153 symbols
+2026-07-17 11:32:20,317 INFO Auto-detected movers (|change| > 3%): 8 symbols
+2026-07-17 11:32:20,319 INFO Technicals + SMA200 for 134 quoted symbols (sequential)
+2026-07-17 11:35:23,949 INFO Schwab technicals: 134/134 symbols
+2026-07-17 11:37:01,919 INFO SMA200: 133/134 symbols
+2026-07-17 11:37:02,262 INFO Schwab market context: collected
+2026-07-17 11:38:18,757 INFO Schwab earnings: 70 entries
+2026-07-17 11:38:18,772 INFO Economic calendar: 12 events
+2026-07-17 11:38:18,870 INFO CoinGecko: 2 coins
+2026-07-17 11:38:23,980 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-17 11:38:29,911 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-17 11:38:35,732 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-17 11:38:36,239 INFO Stooq: 0/3 symbols
+2026-07-17 11:39:24,542 WARNING FRED failed: The read operation timed out
+2026-07-17 11:39:33,151 INFO Yahoo backup: 4 symbols
+2026-07-17 11:39:33,152 INFO Step 3 complete: 440.2s (quotes=153, tech=134, sma200=133, earnings=70, econ=12, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-17 11:39:33,152 INFO ── Step 4: Validation + Retry ──
+2026-07-17 11:39:33,166 INFO ANOMALY: $N225 price=64141.12 avg=69223.29 z=-3.2
+2026-07-17 11:39:33,237 INFO ANOMALY: CW price=708.93 avg=762.42 z=-3.8
+2026-07-17 11:39:33,242 INFO ANOMALY: DNN price=2.84 avg=3.17 z=-4.0
+2026-07-17 11:39:33,273 INFO ANOMALY: ISRG price=359.60 avg=408.60 z=-3.8
+2026-07-17 11:39:33,422 INFO Anomaly detection: 4 flagged
+2026-07-17 11:39:33,422 INFO Cross-validation: 0 discrepancies
+2026-07-17 11:39:33,458 INFO Retry check: 0 failures — nothing to retry
+2026-07-17 11:39:33,481 INFO Step 4 complete: 0.3s (anomalies=4, cross_val=0, retried=0, completeness=100%)
+2026-07-17 11:39:33,483 INFO ── Step 5: Generate Briefing ──
+2026-07-17 11:39:33,801 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-17.md (32400 bytes)
+2026-07-17 11:39:33,811 INFO Pruned 145 rows from quotes (older than 90 days)
+2026-07-17 11:39:33,815 INFO Pruned 120 rows from technicals (older than 90 days)
+2026-07-17 11:39:33,816 INFO Pruned 6 rows from anomalies (older than 90 days)
+2026-07-17 11:39:33,820 INFO Pruned 241 rows from headlines (older than 14 days)
+2026-07-17 11:39:33,822 INFO Pruned 134 rows from levels (older than 30 days)
+2026-07-17 11:39:33,822 INFO Pruned 40 rows from opus_tickers (older than 30 days)
+2026-07-17 11:39:33,823 INFO Pruned 10 rows from opus_movers (older than 30 days)
+2026-07-17 11:39:33,823 INFO Pruned 8 rows from opus_themes (older than 30 days)
+2026-07-17 11:39:33,824 INFO Pruned 4 rows from opus_econ_events (older than 30 days)
+2026-07-17 11:39:33,824 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-07-17 11:39:33,824 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-07-17 11:39:33,842 INFO Pruned 4 rows from economic_events (older than 90 days)
+2026-07-17 11:39:33,844 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-17 11:39:33,845 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-17 11:39:34,058 INFO Cleanup complete
+2026-07-17 11:39:34,060 INFO === Collection complete: 572.1s total, completeness=100%, exit_code=0 ===
+[2026-07-17 11:39:34] Data collection complete — briefing file ready
+[2026-07-17 11:39:34] Found 9 research files (sector theses + structural calendar)
+[2026-07-17 11:39:34] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-07/2026-07-17_Fri.md`.
+
+## Summary
+
+**Event Load: MEDIUM** — calibrated to ~1,900 words. The tape is risk-off into monthly OpEx, driven by a global semiconductor/AI unwind that started in Asia (Kospi -6.37%, Nikkei -4.03%) and is dragging US futures lower (Nasdaq 100 -1.62% vs. S&P -0.81%), with a Netflix guidance miss and a scrubbed SpaceX Starship launch compounding the mood. Oil is bid (+2.4%) on Strait of Hormuz supply fears.
+
+**Key judgment calls I made:**
+
+1. **Flagged the ISRG -10.62% move as unverified.** It appears in both the movers table and the watchlist (Robotics Tier 1), but the pipeline auto-flagged it as a statistical anomaly (z-score -3.8) *and* there's no corroborating catalyst anywhere in the news feed — unlike NFLX's confirmed earnings miss. I reported the number as given but explicitly called it a likely data artifact pending confirmation, rather than fabricating a catalyst.
+
+2. **Kept all pending economic data as "Pending."** Every Actual was "—", so nothing was reported as released. Highlighted 10:00 UoM Sentiment (51.0 cons. / 48.9 prior) as the only real mover.
+
+3. **Corrected the OpEx framing** using CALENDAR.md — today is *monthly* expiration, not quarterly triple-witching (those are Mar/Jun/Sep/Dec), so I noted the notional overhang is smaller.
+
+4. **Surfaced the oversold cluster** (Space, Quantum, Critical Minerals all with RSI 26–33 but trading below their moving averages) as "washed out, not breaking out," and flagged Defense as the day's relative safe-haven winner.
+
+Data-quality caveats (FRED timeout, Stooq 404s, four anomaly flags) are carried into the Sources section rather than buried.
+[2026-07-17 11:42:58] Claude [report (attempt 1)] finished successfully
+[2026-07-17 11:42:58] Report attempt 1 succeeded: 13774 bytes
+[2026-07-17 11:42:58] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-17_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 32 symbols...
+  Got quotes for 27 symbols
+
+--- Database cross-checks (market_date=2026-07-17) ---
+  1 database corrections:
+    FABRICATION: MONTHLY OPTIONS EXPIRATION actual 'July OpEx (3rd Friday)' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: MONTHLY OPTIONS EXPIRATION actual 'July OpEx (3rd Friday)' → 'Pending' (not released)
+
+  1 corrections written to 2026-07-17_Fri.md
+=== Fact-check complete ===
+[2026-07-17 11:43:03] Running Claude [html-publish] (timeout: 900s)...
