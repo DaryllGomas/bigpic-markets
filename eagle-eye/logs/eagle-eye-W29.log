@@ -1,0 +1,95 @@
+[2026-07-19 23:00:01] === Eagle Eye W29 Started ===
+[2026-07-19 23:00:01] Week ending: 2026-07-17
+[2026-07-19 23:00:01] Output: eagle-eye/W29_2026-07-19/
+[2026-07-19 23:00:01] All dependencies verified
+[2026-07-19 23:00:02] Claude CLI 2.1.201 (Claude Code) — model pinned: opus
+[2026-07-19 23:00:02] Found 9 research files (sector theses + structural calendar)
+[2026-07-19 23:00:02] Collecting economic calendar for 2026-07-20 to 2026-07-24...
+23:00:02 [INFO] Collecting economic calendar: 2026-07-20 to 2026-07-24
+23:00:02 [INFO] Source 1: Calendar API /upcoming (FRED + Forex Factory)
+23:00:02 [INFO]   Fetching upcoming calendar: http://192.168.10.60:3000/api/calendar/upcoming?days=7
+23:00:02 [INFO]   API returned 13 upcoming events
+23:00:02 [INFO]   Filtered to 13 events in range
+23:00:02 [INFO] Wrote /home/bigpic/projects/bigpic-markets/eagle-eye/W29_2026-07-19/next_week_calendar.md (13 events, 7 absences, confidence=high)
+[2026-07-19 23:00:02] Calendar collected (full confidence)
+[2026-07-19 23:00:02] Running Claude [research] (timeout: 3600s, attempt 1/3)...
+✅ **Eagle Eye W29 (2026-07-19) complete.** All files written to `/home/bigpic/projects/bigpic-markets/eagle-eye/W29_2026-07-19/`.
+
+## What was produced
+
+**STEP 1 — Research (4 parallel agents):** `01_equities_sectors.md`, `02_rates_credit_fed.md`, `03_commodities_forex.md`, `04_crypto_alternative.md` — each covering the Jul 13–17 trading week **and** weekend/breaking developments, with dated source URLs.
+
+**STEP 2 — Verification:** `VERIFICATION.md` — **PASS**. I independently confirmed the highest-value data points via WebFetch against alternate/primary sources:
+- Index moves & JPMorgan's record **$21.2B** — ts2.tech ✓
+- Goldman/bank numbers — CryptoBriefing ✓
+- **Kevin Warsh = Fed Chair**, Jul 14 testimony — federalreserve.gov (primary) ✓
+- 10Y **4.55%** / 2Y **4.18%** — Pluang ✓
+- BTC ~$62.9K / −47% YoY — Fortune ✓
+- Iran/Hormuz escalation (Kuwait desal strike, Hormuz traffic collapse) — PBS ✓
+
+Corrections applied: reconciled conflicting US-casualty figures (presented as fluid, no single number), corrected a stale "Hormuz blocked since Feb 28" reference, harmonized oil's weekly move (~12%, >14% intraweek), and enforced Friday-close vs. current-weekend labeling.
+
+**STEP 3 — Compilation:** `EAGLE_EYE.md` with all required sections, using the calendar's exact day headers (Mon Jul 20 → Fri Jul 24) and no economic tables in Week Ahead (left for stamp-calendar.py).
+
+## The three stories that define the report
+1. **🔴 LEDE — the 2026 US–Iran war escalated through the weekend**, with the IRGC re-closing the Strait of Hormuz early Sunday. Oil ran ~12% on the week and is set to gap up Monday. This dominates the open, not last week's rotation.
+2. **AI-semiconductor selloff** — a $1T+ SOX rout (~−10% wk) on China's Kimi K3 model + TSMC's capex shock drove equities to their first weekly loss in ~3 months (SPX −1.6%).
+3. **Hawkish Fed regime under new Chair Warsh** — market has flipped from pricing cuts to **>70% odds of a year-end hike**, and tellingly **gold *fell* ~3%** during a shooting war — the tape is trading Iran as an inflation shock, not a safe-haven event.
+
+The report is ready for the `stamp-calendar.py` post-processing step to inject the Week Ahead economic tables.
+[2026-07-19 23:17:49] Claude [research] finished successfully
+[2026-07-19 23:17:49] EAGLE_EYE.md generated: 27885 bytes
+[2026-07-19 23:17:49] Stamping calendar into Week Ahead...
+STAMPED: 5 days, 7 absences injected into Week Ahead
+[2026-07-19 23:17:49] Calendar stamp complete
+[2026-07-19 23:17:49] Running post-stamp verification...
+PASS: Week Ahead calendar data verified.
+[2026-07-19 23:17:49] Running Claude [html-build-1] (timeout: 900s, attempt 1/3)...
+The file is complete and validated. Part 1 of the W29 Eagle Eye report is built.
+
+## Summary
+
+Created `/home/bigpic/projects/bigpic-markets/eagle-eye/W29_2026-07-19/report.html` (79.5 KB) — the full page structure plus the first 5 content sections, matching the BigPic Solutions theme exactly (deep-navy `#0a0f1a` bg, gold `#e8b87d`/coral `#ef8354` accents, Space Grotesk + Newsreader fonts) using the W28 report as quality reference.
+
+**Structure verified:**
+- Full `<!DOCTYPE html>`, `<head>` with the complete CSS system and all JS (counter animation, sector bar chart, watchlist filters, collapsible sources, scroll-reveal, yield tooltips)
+- Fixed nav with back-arrow SVG → `../index.html`, plus a second archive link in the footer
+- Hero with W29 badge/headline/subtitle (Hormuz war · $1T AI-semi selloff · hawkish Fed)
+- **§1 Market Scorecard** — 12 animated counters + reconciliation/labeling notes
+- **§2 Weekend & Breaking Developments** — coral alert card with a 7-item timeline (Fri 7/17 → Sun 7/19 Hormuz re-closure) and the "blocked since Feb 28" stale-source reconciliation note
+- **§3 This Week's Take** — 4 executive-summary take-cards (war / AI-semi selloff / hawkish regime / setup)
+- **§4 Sector Heatmap** — 11-sector bar chart + interactive heatmap grid (all Fri 7/17 daily SPDR moves, XLE +1.42% → XLK −2.47%)
+- **§5 Fed & Rates Outlook** — yield-curve SVG, yields table, rate-path probability bars, credit/liquidity tiles
+- `<!-- CONTINUE HERE -->` on its own line (after rates, before footer)
+- Footer + `</body></html>` after the marker
+
+**Quality checks passed:** HTML parses with zero unclosed/mismatched tags; `.bar-chart` uses `align-items: stretch` (the critical bar-height fix); 5 `<section>` open/close balanced; 12 counters wired to `data-target`; no Part 2 sections present (watchlist, commodities, crypto, week-ahead, positioning, sources — 0 matches, correctly deferred).
+
+Part 2 can append its sections at the `<!-- CONTINUE HERE -->` marker; the JS `initFilters()`/`initSources()` hooks are already in place and no-op gracefully until those sections exist.
+[2026-07-19 23:25:56] Claude [html-build-1] finished successfully
+[2026-07-19 23:25:56] report.html after Part 1: 79524 bytes
+[2026-07-19 23:25:56] Running Claude [html-build-2] (timeout: 900s, attempt 1/3)...
+Part 2 of the Eagle Eye W29 report is complete and validated. Here's what I did:
+
+## Summary
+
+I replaced the single `<!-- CONTINUE HERE -->` marker line (at line 1008) with the six remaining content sections, matching the existing gold-on-dark theme, card styles, and spacing throughout. Nothing before the marker or after the footer was touched.
+
+**Sections inserted (all wired to the existing JS/nav):**
+
+1. **Thesis Watchlist Tracker** (`#watchlist`) — 9 filter buttons (`All` + 8 theses) driving 8 filterable `data-thesis` cards (AI Infra, Nuclear & Power, Cybersecurity, AI Software/Defense, Critical Minerals, Space, Quantum, Robotics/EV). Each ticker shows its **T1/T2 tier badge** + **weekly delta** + note. Uses the existing `.conviction-card` / `.direction` / `.pct-*` classes so the pre-built `initFilters()` works out of the box.
+2. **Commodities & Forex Snapshot** (`#commodities`) — key-print `futures-cell` grid (WTI, Brent, gold, copper, uranium, wheat, VLCC rates…), energy/metals narrative cards, and an FX grid (DXY, EUR/USD, USD/JPY, GBP/USD).
+3. **Crypto Snapshot** (`#crypto`) — structure-metrics tiles, the 5-asset price table (Fri close → Sun spot → week %), and ETF-flow / catalyst cards.
+4. **The Week Ahead** (`#ahead`) — a 5-day `calendar-grid` overview plus day-by-day cards reproducing the **exact Mon–Fri event tables and commentary verbatim** from `EAGLE_EYE.md`, with Medium-impact rows amber-highlighted, plus Earnings-to-Watch and Notable-Absences cards.
+5. **Positioning & Thesis Update** (`#positioning`) — a 7-item `risk-grid` radar (critical→low) and all 7 numbered actionable takeaways.
+6. **Sources** (`#sources`) — collapsible using the existing `#sourcesToggle`/`#sourcesContent` hooks, with all ~44 links consolidated into the 5 categories.
+
+**Validation:**
+- ✅ Marker fully removed
+- ✅ 11 `<section>` open = 11 close; div (478/478), table (7/7), ul (2/2), button (10/10) all balanced
+- ✅ All new section IDs match the nav anchors (`#watchlist`, `#commodities`, `#crypto`, `#ahead`, `#positioning`)
+- ✅ Sources/filter JS hooks line up with the existing `<script>`
+- ✅ Footer and `</html>` intact
+[2026-07-19 23:34:24] Claude [html-build-2] finished successfully
+[2026-07-19 23:34:24] report.html after Part 2: 146639 bytes
+[2026-07-19 23:34:24] Running Claude [html-publish] (timeout: 300s, attempt 1/3)...
