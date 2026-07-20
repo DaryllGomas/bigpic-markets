@@ -1,0 +1,93 @@
+[2026-07-20 11:30:01] === Morning Brief Started ===
+[2026-07-20 11:30:01] Date: Monday, 2026-07-20
+[2026-07-20 11:30:01] Output: morning-brief/2026-07/2026-07-20_Mon.md + 2026-07-20_Mon.html
+[2026-07-20 11:30:01] All dependencies verified
+[2026-07-20 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-20 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-20 11:30:02,080 INFO === Market Data Collection — 2026-07-20 ===
+2026-07-20 11:30:02,140 INFO ── Step 1: RSS Feeds ──
+2026-07-20 11:30:23,782 INFO RSS feeds: 156 headlines stored, 323 older than 24h skipped
+2026-07-20 11:30:23,783 INFO Step 1 complete: 21.6s (headlines=156)
+2026-07-20 11:30:23,783 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-20 11:30:23,785 INFO Opus analysis: sending 145 headlines to claude CLI (attempt 1/3)...
+2026-07-20 11:31:28,384 INFO Opus analysis: 33 tickers, 13 movers, 6 themes from 145 headlines (attempt 1/3)
+2026-07-20 11:31:28,384 INFO Step 2 complete: 64.6s (opus_tickers=33)
+2026-07-20 11:31:28,385 INFO ── Step 3: Schwab + External APIs ──
+2026-07-20 11:31:35,348 INFO Schwab quotes: 144 symbols
+2026-07-20 11:31:35,349 INFO Auto-detected movers (|change| > 3%): 18 symbols
+2026-07-20 11:31:35,350 INFO Technicals + SMA200 for 125 quoted symbols (sequential)
+2026-07-20 11:34:27,965 INFO Schwab technicals: 125/125 symbols
+2026-07-20 11:36:02,503 INFO SMA200: 125/125 symbols
+2026-07-20 11:36:02,907 INFO Schwab market context: collected
+2026-07-20 11:37:22,462 INFO Schwab earnings: 70 entries
+2026-07-20 11:37:22,479 INFO Economic calendar: 1 events
+2026-07-20 11:37:22,572 INFO CoinGecko: 2 coins
+2026-07-20 11:37:28,157 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-20 11:37:33,647 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-20 11:37:39,091 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-20 11:37:39,599 INFO Stooq: 0/3 symbols
+2026-07-20 11:38:27,868 WARNING FRED failed: The read operation timed out
+2026-07-20 11:38:36,555 INFO Yahoo backup: 4 symbols
+2026-07-20 11:38:36,556 INFO Step 3 complete: 428.2s (quotes=144, tech=125, sma200=125, earnings=70, econ=1, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-20 11:38:36,556 INFO ── Step 4: Validation + Retry ──
+2026-07-20 11:38:36,712 INFO ANOMALY: ISRG price=346.49 avg=406.19 z=-3.5
+2026-07-20 11:38:36,841 INFO Anomaly detection: 1 flagged
+2026-07-20 11:38:36,841 INFO Cross-validation: 0 discrepancies
+2026-07-20 11:38:36,872 INFO Retry check: 0 failures — nothing to retry
+2026-07-20 11:38:36,894 INFO Step 4 complete: 0.3s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-07-20 11:38:36,896 INFO ── Step 5: Generate Briefing ──
+2026-07-20 11:38:37,214 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-20.md (27891 bytes)
+2026-07-20 11:38:37,223 INFO Pruned 146 rows from quotes (older than 90 days)
+2026-07-20 11:38:37,227 INFO Pruned 121 rows from technicals (older than 90 days)
+2026-07-20 11:38:37,227 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-07-20 11:38:37,232 INFO Pruned 211 rows from headlines (older than 14 days)
+2026-07-20 11:38:37,234 INFO Pruned 438 rows from levels (older than 30 days)
+2026-07-20 11:38:37,236 INFO Pruned 153 rows from opus_tickers (older than 30 days)
+2026-07-20 11:38:37,236 INFO Pruned 33 rows from opus_movers (older than 30 days)
+2026-07-20 11:38:37,237 INFO Pruned 27 rows from opus_themes (older than 30 days)
+2026-07-20 11:38:37,237 INFO Pruned 9 rows from opus_econ_events (older than 30 days)
+2026-07-20 11:38:37,238 INFO Pruned 14 rows from opus_fed_signals (older than 30 days)
+2026-07-20 11:38:37,238 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-07-20 11:38:37,253 INFO Pruned 7 rows from economic_events (older than 90 days)
+2026-07-20 11:38:37,255 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-20 11:38:37,255 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-20 11:38:37,463 INFO Cleanup complete
+2026-07-20 11:38:37,464 INFO === Collection complete: 514.8s total, completeness=100%, exit_code=0 ===
+[2026-07-20 11:38:37] Data collection complete — briefing file ready
+[2026-07-20 11:38:37] Found 9 research files (sector theses + structural calendar)
+[2026-07-20 11:38:37] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief for Monday, 2026-07-20 is written to the target path. Summary of what it captures:
+
+**Event Load: LIGHT** — one low-impact release (CB Leading Index, 10:00 ET, pending), calibrated to ~1,100 words.
+
+**The two stories that mattered in the data:**
+1. **Bifurcated semiconductors** — SOXX in a bear market with Asia getting hit hard overnight (Nikkei -4.03%, Kospi -4.46%), yet US futures rose (Nasdaq +1.0%) because memory (MU +4.91%, SNDK) and neocloud (CRWV, IREN +9.37%) rebounded "after a brutal week." Rebound-inside-a-drawdown, not an all-clear.
+2. **Get-positioned session** ahead of Big Tech Q2 earnings, with oil softening (-1.5% WTI on Iran-talks signal) and VIX unwinding to ~18.
+
+**Rules followed:**
+- The pending CB Leading Index and all "—" earnings marked **Pending / not reporting** — no fabricated actuals.
+- Every number traces to the briefing file with source attribution.
+- Flagged the **ISRG data anomaly** (z-score -3.5) that the briefing header called out, plus the FRED timeout and Stooq 404 in a data-quality footnote.
+- Cross-referenced thesis files for the **approaching catalyst cluster**: NOC tomorrow (7/21); LMT/RTX/FCX/HON Thursday (7/23).
+- Highlighted RSI extremes: oversold Tier 1 bounce names (IONQ 26, LUNR 26, ALB/CCJ 28) vs. cyber platform strength (PANW 67, CRWD 63).
+
+One thing worth flagging to you: the briefing's own feed analysis notes several of today's *gainers* (MU, SNDK, CRWV, IREN, NBIS) appear in the "News-Driven Movers" table with mixed direction tags (e.g., NBIS marked "down 38%" in a headline while printing +4.60% today) — I treated the **price/change columns as authoritative** for direction and used the headlines only as context, since the quote table is the verified data source.
+[2026-07-20 11:40:54] Claude [report (attempt 1)] finished successfully
+[2026-07-20 11:40:54] Report attempt 1 succeeded: 9584 bytes
+[2026-07-20 11:40:54] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-20_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 30 symbols...
+  Got quotes for 24 symbols
+
+--- Database cross-checks (market_date=2026-07-20) ---
+  No database discrepancies found
+
+  1 total corrections needed:
+    WTI Crude: 80.55 → 79.75 (1.0% off)
+
+  1 corrections written to 2026-07-20_Mon.md
+=== Fact-check complete ===
+[2026-07-20 11:40:58] Running Claude [html-publish] (timeout: 900s)...
