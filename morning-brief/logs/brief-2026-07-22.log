@@ -1,0 +1,90 @@
+[2026-07-22 11:30:01] === Morning Brief Started ===
+[2026-07-22 11:30:01] Date: Wednesday, 2026-07-22
+[2026-07-22 11:30:01] Output: morning-brief/2026-07/2026-07-22_Wed.md + 2026-07-22_Wed.html
+[2026-07-22 11:30:01] All dependencies verified
+[2026-07-22 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-22 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-22 11:30:02,079 INFO === Market Data Collection — 2026-07-22 ===
+2026-07-22 11:30:02,103 INFO ── Step 1: RSS Feeds ──
+2026-07-22 11:30:29,023 INFO RSS feeds: 264 headlines stored, 205 older than 24h skipped
+2026-07-22 11:30:29,023 INFO Step 1 complete: 26.9s (headlines=264)
+2026-07-22 11:30:29,023 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-22 11:30:29,026 INFO Opus analysis: sending 253 headlines to claude CLI (attempt 1/3)...
+2026-07-22 11:32:05,860 INFO Opus analysis: 40 tickers, 11 movers, 7 themes from 253 headlines (attempt 1/3)
+2026-07-22 11:32:05,861 INFO Step 2 complete: 96.8s (opus_tickers=40)
+2026-07-22 11:32:05,861 INFO ── Step 3: Schwab + External APIs ──
+2026-07-22 11:32:13,036 INFO Schwab quotes: 151 symbols
+2026-07-22 11:32:13,037 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-07-22 11:32:13,038 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-07-22 11:35:13,384 INFO Schwab technicals: 132/132 symbols
+2026-07-22 11:36:48,718 INFO SMA200: 132/132 symbols
+2026-07-22 11:36:49,079 INFO Schwab market context: collected
+2026-07-22 11:38:03,658 INFO Schwab earnings: 70 entries
+2026-07-22 11:38:03,675 INFO Economic calendar: 2 events
+2026-07-22 11:38:03,792 INFO CoinGecko: 2 coins
+2026-07-22 11:38:09,001 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-22 11:38:14,707 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-22 11:38:20,350 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-22 11:38:20,857 INFO Stooq: 0/3 symbols
+2026-07-22 11:39:09,127 WARNING FRED failed: The read operation timed out
+2026-07-22 11:39:17,959 INFO Yahoo backup: 4 symbols
+2026-07-22 11:39:17,960 INFO Step 3 complete: 432.1s (quotes=151, tech=132, sma200=132, earnings=70, econ=2, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-22 11:39:17,960 INFO ── Step 4: Validation + Retry ──
+2026-07-22 11:39:18,215 INFO ANOMALY: SCCO price=188.30 avg=174.00 z=3.8
+2026-07-22 11:39:18,281 INFO Anomaly detection: 1 flagged
+2026-07-22 11:39:18,282 INFO Cross-validation: 0 discrepancies
+2026-07-22 11:39:18,326 INFO Retry check: 0 failures — nothing to retry
+2026-07-22 11:39:18,351 INFO Step 4 complete: 0.4s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-07-22 11:39:18,353 INFO ── Step 5: Generate Briefing ──
+2026-07-22 11:39:18,657 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-22.md (32274 bytes)
+2026-07-22 11:39:18,667 INFO Pruned 152 rows from quotes (older than 90 days)
+2026-07-22 11:39:18,671 INFO Pruned 127 rows from technicals (older than 90 days)
+2026-07-22 11:39:18,671 INFO Pruned 6 rows from anomalies (older than 90 days)
+2026-07-22 11:39:18,676 INFO Pruned 226 rows from headlines (older than 14 days)
+2026-07-22 11:39:18,692 INFO Pruned 3 rows from economic_events (older than 90 days)
+2026-07-22 11:39:18,694 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-22 11:39:18,695 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-22 11:39:18,893 INFO Cleanup complete
+2026-07-22 11:39:18,894 INFO === Collection complete: 556.2s total, completeness=100%, exit_code=0 ===
+[2026-07-22 11:39:18] Data collection complete — briefing file ready
+[2026-07-22 11:39:18] Found 9 research files (sector theses + structural calendar)
+[2026-07-22 11:39:18] Running Claude [report (attempt 1)] (timeout: 900s)...
+The BigPic Morning Brief for Wednesday, July 22, 2026 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-07/2026-07-22_Wed.md`.
+
+## Summary
+
+**Event Load: LIGHT** — I calibrated depth to ~1,100 words per the LIGHT spec (quick snapshot, no scenario analysis).
+
+**The day's setup:**
+- Quiet macro calendar — only weekly crude inventories (10:30 ET, pending) and a Trump address (3:00 PM ET). Both `Actual = —` events were written as **Pending/Scheduled**, never fabricated.
+- The tape is driven by a **~4% oil spike** (WTI $87.43, six-week high) on renewed U.S.–Iran tensions, plus **GOOG and TSLA earnings after the close** — all watchlist earnings today (IBM, TSLA, IRDM, GOOG, QS) show `EPS Actual = —`, so I flagged them as *reporting today, not yet reported*.
+- Defensive tilt: Nasdaq futures -0.72% led lower by chips (MU -3.2%, TSM -2.2%), gold +1.2% and VIX +2.5% confirming a haven bid.
+
+**Watchlist highlights I surfaced:**
+- **RKLB +3.4%** — the only Tier 1 name up >3% (top gainer), yet still oversold (RSI 34).
+- **ALB (RSI 28)** and **IONQ (RSI 29)** flagged as the deepest-oversold Tier 1 extremes.
+- Cross-referenced thesis catalysts: heavy defense/minerals earnings tomorrow (LMT/RTX/NOC/FCX/HON), plus the Nov 2026 U.S.–China trade expiry and SpaceX IPO.
+
+**Data-integrity notes carried through:** I preserved the briefing's quality caveats — FRED timeout (2Y from prior close), Stooq 404, and the **SCCO z-score 3.8 anomaly** (flagged in-line so the reader discounts that print). Every number traces to the briefing file with source attribution.
+
+One thing worth flagging for the pipeline: **MU printing $940 (-3.2%) against a $491 SMA200** looks anomalous like SCCO, but it wasn't flagged upstream, so I reported it faithfully as-is rather than guessing. You may want the collector to add a z-score check there too.
+[2026-07-22 11:41:26] Claude [report (attempt 1)] finished successfully
+[2026-07-22 11:41:26] Report attempt 1 succeeded: 8416 bytes
+[2026-07-22 11:41:26] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-22_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 31 symbols...
+  Got quotes for 28 symbols
+
+--- Database cross-checks (market_date=2026-07-22) ---
+  1 database corrections:
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled 3:00 PM ET' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled 3:00 PM ET' → 'Pending' (not released)
+
+  1 corrections written to 2026-07-22_Wed.md
+=== Fact-check complete ===
+[2026-07-22 11:41:30] Running Claude [html-publish] (timeout: 900s)...
