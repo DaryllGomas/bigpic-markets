@@ -1,0 +1,107 @@
+[2026-07-24 11:30:01] === Morning Brief Started ===
+[2026-07-24 11:30:01] Date: Friday, 2026-07-24
+[2026-07-24 11:30:01] Output: morning-brief/2026-07/2026-07-24_Fri.md + 2026-07-24_Fri.html
+[2026-07-24 11:30:01] All dependencies verified
+[2026-07-24 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-07-24 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-07-24 11:30:02,262 INFO === Market Data Collection — 2026-07-24 ===
+2026-07-24 11:30:02,310 INFO ── Step 1: RSS Feeds ──
+2026-07-24 11:30:26,305 INFO RSS feeds: 243 headlines stored, 226 older than 24h skipped
+2026-07-24 11:30:26,305 INFO Step 1 complete: 24.0s (headlines=243)
+2026-07-24 11:30:26,305 INFO ── Step 2: Opus Feed Analysis ──
+2026-07-24 11:30:26,308 INFO Opus analysis: sending 230 headlines to claude CLI (attempt 1/3)...
+2026-07-24 11:31:24,862 INFO Opus analysis: 33 tickers, 7 movers, 8 themes from 230 headlines (attempt 1/3)
+2026-07-24 11:31:24,863 INFO Step 2 complete: 58.6s (opus_tickers=33)
+2026-07-24 11:31:24,863 INFO ── Step 3: Schwab + External APIs ──
+2026-07-24 11:31:31,529 INFO Schwab quotes: 147 symbols
+2026-07-24 11:31:31,530 INFO Auto-detected movers (|change| > 3%): 3 symbols
+2026-07-24 11:31:31,531 INFO Technicals + SMA200 for 128 quoted symbols (sequential)
+2026-07-24 11:34:24,671 INFO Schwab technicals: 128/128 symbols
+2026-07-24 11:35:57,835 INFO SMA200: 128/128 symbols
+2026-07-24 11:35:58,276 INFO Schwab market context: collected
+2026-07-24 11:37:37,442 INFO Schwab earnings: 70 entries
+2026-07-24 11:37:37,461 INFO Economic calendar: 5 events
+2026-07-24 11:37:37,568 INFO CoinGecko: 2 coins
+2026-07-24 11:37:42,705 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-07-24 11:37:48,365 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-07-24 11:37:53,871 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-07-24 11:37:54,379 INFO Stooq: 0/3 symbols
+2026-07-24 11:38:42,713 WARNING FRED failed: The read operation timed out
+2026-07-24 11:38:51,339 INFO Yahoo backup: 4 symbols
+2026-07-24 11:38:51,340 INFO Step 3 complete: 446.5s (quotes=147, tech=128, sma200=128, earnings=70, econ=5, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-07-24 11:38:51,340 INFO ── Step 4: Validation + Retry ──
+2026-07-24 11:38:51,370 INFO ANOMALY: $IRX price=38.00 avg=37.00 z=4.2
+2026-07-24 11:38:51,447 INFO ANOMALY: AZTA price=28.71 avg=25.78 z=4.2
+2026-07-24 11:38:51,505 INFO ANOMALY: GOOG price=319.29 avg=352.22 z=-3.3
+2026-07-24 11:38:51,508 INFO ANOMALY: GOOGL price=319.13 avg=356.88 z=-3.2
+2026-07-24 11:38:51,515 INFO ANOMALY: HON price=246.74 avg=226.86 z=4.7
+2026-07-24 11:38:51,542 INFO ANOMALY: LMT price=569.43 avg=522.33 z=3.4
+2026-07-24 11:38:51,640 INFO ANOMALY: TSLA price=322.58 avg=393.79 z=-3.9
+2026-07-24 11:38:51,666 INFO Anomaly detection: 7 flagged
+2026-07-24 11:38:51,666 INFO Cross-validation: 0 discrepancies
+2026-07-24 11:38:51,696 INFO Retry check: 0 failures — nothing to retry
+2026-07-24 11:38:51,720 INFO Step 4 complete: 0.4s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-07-24 11:38:51,722 INFO ── Step 5: Generate Briefing ──
+2026-07-24 11:38:52,184 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-07-24.md (30810 bytes)
+2026-07-24 11:38:52,207 INFO Pruned 146 rows from quotes (older than 90 days)
+2026-07-24 11:38:52,211 INFO Pruned 121 rows from technicals (older than 90 days)
+2026-07-24 11:38:52,212 INFO Pruned 7 rows from anomalies (older than 90 days)
+2026-07-24 11:38:52,221 INFO Pruned 228 rows from headlines (older than 14 days)
+2026-07-24 11:38:52,223 INFO Pruned 128 rows from levels (older than 30 days)
+2026-07-24 11:38:52,224 INFO Pruned 34 rows from opus_tickers (older than 30 days)
+2026-07-24 11:38:52,224 INFO Pruned 14 rows from opus_movers (older than 30 days)
+2026-07-24 11:38:52,225 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-07-24 11:38:52,225 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-07-24 11:38:52,226 INFO Pruned 4 rows from opus_fed_signals (older than 30 days)
+2026-07-24 11:38:52,226 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-07-24 11:38:52,252 INFO Pruned 6 rows from economic_events (older than 90 days)
+2026-07-24 11:38:52,260 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-07-24 11:38:52,260 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-07-24 11:38:52,595 INFO Cleanup complete
+2026-07-24 11:38:52,596 INFO === Collection complete: 529.4s total, completeness=100%, exit_code=0 ===
+[2026-07-24 11:38:52] Data collection complete — briefing file ready
+[2026-07-24 11:38:52] Found 9 research files (sector theses + structural calendar)
+[2026-07-24 11:38:52] Running Claude [report (attempt 1)] (timeout: 900s)...
+The Morning Brief for Friday, 2026-07-24 is written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-07/2026-07-24_Fri.md`.
+
+## Summary
+
+**Event Load: MEDIUM** — a digestion day after Thursday's ~$800B mega-cap AI/tech selloff (Alphabet + Tesla). Key takeaways from the data:
+
+- **The green in futures is oil-driven, not tech-driven.** WTI −2.65% / Brent −3.01% is pulling rate-hike pressure off the front end, so Dow (+0.38%) and Russell (+0.41%) lead while Nasdaq futures barely move (+0.08%).
+- **Kospi −5.72%** was the overnight standout — a Korea chip selloff dragging Micron and the memory/HBM complex; Europe decoupled higher.
+- **Calendar is light/pending** — nothing before the 9:45 ET flash PMIs (all actuals "—", written as Scheduled/Pending). The real macro pivot is **next week's FOMC (Jul 28–29)** with reportedly tripled hike odds on oil.
+- **BAH** is the only watchlist name reporting today (before open) — flagged as not-yet-reported, no fabricated results.
+- **No Tier 1 moved >3%**; RPD (+6.59%, Tier 3) is the only outsized watchlist mover. I flagged RSI extremes: RTX overbought (72), and a washed-out oversold cohort in Space (LUNR/PL/RKLB), Critical Minerals (ALB 26), and Quantum (IONQ 27, IBM 30).
+
+Every figure traces to the briefing file, with data caveats (FRED timeout, Stooq 404s, $IRX anomaly) surfaced rather than papered over. I avoided WebSearch entirely and cross-referenced the thesis files only for catalyst timelines.
+
+One thing worth noting: the briefing lists **Housing Starts and Durable Goods at 4:30 ET** — unusual for those releases (normally 8:30 ET). I reported the times faithfully as given, but you may want to check the econ_calendar source for a timezone/parsing quirk.
+[2026-07-24 11:41:45] Claude [report (attempt 1)] finished successfully
+[2026-07-24 11:41:45] Report attempt 1 succeeded: 13546 bytes
+[2026-07-24 11:41:45] Running Schwab fact-check verification...
+=== Fact-Check: 2026-07-24_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 32 symbols...
+  Got quotes for 27 symbols
+
+--- Database cross-checks (market_date=2026-07-24) ---
+  5 database corrections:
+    FABRICATION: HOUSING STARTS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: DURABLE GOODS ORDERS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FLASH MANUFACTURING PMI actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FLASH SERVICES PMI actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: NEW HOME SALES actual 'Scheduled' → 'Pending' (not released)
+
+  5 total corrections needed:
+    FABRICATION: HOUSING STARTS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: DURABLE GOODS ORDERS actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FLASH MANUFACTURING PMI actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: FLASH SERVICES PMI actual 'Scheduled' → 'Pending' (not released)
+    FABRICATION: NEW HOME SALES actual 'Scheduled' → 'Pending' (not released)
+
+  5 corrections written to 2026-07-24_Fri.md
+=== Fact-check complete ===
+[2026-07-24 11:41:49] Running Claude [html-publish] (timeout: 900s)...
