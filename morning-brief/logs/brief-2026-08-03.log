@@ -1,0 +1,106 @@
+[2026-08-03 11:30:02] === Morning Brief Started ===
+[2026-08-03 11:30:02] Date: Monday, 2026-08-03
+[2026-08-03 11:30:02] Output: morning-brief/2026-08/2026-08-03_Mon.md + 2026-08-03_Mon.html
+[2026-08-03 11:30:02] All dependencies verified
+[2026-08-03 11:30:02] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-03 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-03 11:30:02,628 INFO === Market Data Collection — 2026-08-03 ===
+2026-08-03 11:30:02,669 INFO ── Step 1: RSS Feeds ──
+2026-08-03 11:30:25,407 INFO RSS feeds: 149 headlines stored, 330 older than 24h skipped
+2026-08-03 11:30:25,408 INFO Step 1 complete: 22.7s (headlines=149)
+2026-08-03 11:30:25,408 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-03 11:30:25,410 INFO Opus analysis: sending 138 headlines to claude CLI (attempt 1/3)...
+2026-08-03 11:31:44,449 INFO Opus analysis: 47 tickers, 8 movers, 11 themes from 138 headlines (attempt 1/3)
+2026-08-03 11:31:44,449 INFO Step 2 complete: 79.0s (opus_tickers=47)
+2026-08-03 11:31:44,449 INFO ── Step 3: Schwab + External APIs ──
+2026-08-03 11:31:52,073 INFO Schwab quotes: 165 symbols
+2026-08-03 11:31:52,074 INFO Auto-detected movers (|change| > 3%): 20 symbols
+2026-08-03 11:31:52,076 INFO Technicals + SMA200 for 146 quoted symbols (sequential)
+2026-08-03 11:35:18,502 INFO Schwab technicals: 146/146 symbols
+2026-08-03 11:37:07,694 INFO SMA200: 145/146 symbols
+2026-08-03 11:37:08,023 INFO Schwab market context: collected
+2026-08-03 11:38:19,538 INFO Schwab earnings: 71 entries
+2026-08-03 11:38:19,556 INFO Economic calendar: 7 events
+2026-08-03 11:38:19,716 INFO CoinGecko: 2 coins
+2026-08-03 11:38:25,037 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-03 11:38:30,459 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-03 11:38:36,201 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-03 11:38:36,709 INFO Stooq: 0/3 symbols
+2026-08-03 11:39:25,007 WARNING FRED failed: The read operation timed out
+2026-08-03 11:39:33,361 INFO Yahoo backup: 4 symbols
+2026-08-03 11:39:33,361 INFO Step 3 complete: 468.9s (quotes=165, tech=146, sma200=145, earnings=71, econ=7, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-03 11:39:33,362 INFO ── Step 4: Validation + Retry ──
+2026-08-03 11:39:33,429 INFO ANOMALY: AMZN price=276.34 avg=242.08 z=4.9
+2026-08-03 11:39:33,499 INFO ANOMALY: ESTC price=68.03 avg=60.59 z=3.8
+2026-08-03 11:39:33,573 INFO ANOMALY: MSFT price=474.00 avg=388.69 z=4.1
+2026-08-03 11:39:33,618 INFO ANOMALY: SAIL price=17.40 avg=15.16 z=3.2
+2026-08-03 11:39:33,684 INFO Anomaly detection: 4 flagged
+2026-08-03 11:39:33,684 INFO Cross-validation: 0 discrepancies
+2026-08-03 11:39:33,725 INFO Retry check: 0 failures — nothing to retry
+2026-08-03 11:39:33,749 INFO Step 4 complete: 0.4s (anomalies=4, cross_val=0, retried=0, completeness=100%)
+2026-08-03 11:39:33,751 INFO ── Step 5: Generate Briefing ──
+2026-08-03 11:39:34,067 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-03.md (29497 bytes)
+2026-08-03 11:39:34,079 INFO Pruned 144 rows from quotes (older than 90 days)
+2026-08-03 11:39:34,083 INFO Pruned 118 rows from technicals (older than 90 days)
+2026-08-03 11:39:34,083 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-08-03 11:39:34,088 INFO Pruned 235 rows from headlines (older than 14 days)
+2026-08-03 11:39:34,090 INFO Pruned 402 rows from levels (older than 30 days)
+2026-08-03 11:39:34,090 INFO Pruned 117 rows from opus_tickers (older than 30 days)
+2026-08-03 11:39:34,091 INFO Pruned 36 rows from opus_movers (older than 30 days)
+2026-08-03 11:39:34,092 INFO Pruned 25 rows from opus_themes (older than 30 days)
+2026-08-03 11:39:34,092 INFO Pruned 10 rows from opus_econ_events (older than 30 days)
+2026-08-03 11:39:34,092 INFO Pruned 11 rows from opus_fed_signals (older than 30 days)
+2026-08-03 11:39:34,093 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-08-03 11:39:34,108 INFO Pruned 3 rows from economic_events (older than 90 days)
+2026-08-03 11:39:34,110 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-03 11:39:34,111 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-03 11:39:34,325 INFO Cleanup complete
+2026-08-03 11:39:34,326 INFO === Collection complete: 571.1s total, completeness=100%, exit_code=0 ===
+[2026-08-03 11:39:34] Data collection complete — briefing file ready
+[2026-08-03 11:39:34] Found 9 research files (sector theses + structural calendar)
+[2026-08-03 11:39:34] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-03_Mon.md` (~1,900 words, MEDIUM calibration).
+
+**Lead story:** Risk-on on Iran de-escalation — WTI -5.80%, futures green across all four indices with Dow (+0.99%) leading Nasdaq (+0.32%), which is a breadth-broadening tape rather than a megacap bid.
+
+**Things I flagged rather than smoothed over:**
+
+- **Cybersecurity owns the gainers list** — 7 of 12 pre-market gainers are watchlist cyber names (TENB, SAIL, OKTA, ESTC, RPD, PANW, PSN), against a genuine incident wave in the feed (N-able takeovers, GHOSTBLADE on iOS, Iranian attacks on water utilities in 45 municipalities). Event bid, not rotation.
+- **Kospi -5.12%** — the largest move in the dataset with *no* explanatory headline anywhere in the briefing. Written up as an unresolved flag, not backfilled with a guess.
+- **PLTR into earnings at 126 vs a 153 200-day** — ~18% below trend. EPS Actual is "—" for both PLTR and BWXT, so both are reported as not-yet-released.
+- **NVDA at 200 against a 193 200-day** — called out as the pivot level for the whole AI complex.
+- **Data caveats surfaced in Sources:** FRED timed out (2Y is a carry-forward), Stooq 404'd 3/3, and two of the collector's four anomaly flags (ESTC z=3.8, SAIL z=3.2) land directly in the movers list — noted inline with a verify-before-acting caution. The US Indices prior-close table shows +0.00% for all four, which I called a stale field rather than treating it as a flat session.
+
+**Catalyst cross-referencing** pulled from the thesis files: CEG (Aug 6) and VST (Aug 7) reporting back-to-back this week, the Nov 2026 US-China trade expiry the critical-minerals thesis calls "THE catalyst event," and PQC spend accelerating into the Jan 2027 CNSA 2.0 deadline. I also worked in the turn-of-month seasonal from CALENDAR.md — Aug 3 sits inside that window.
+
+Every figure traces to the briefing file; nothing was sourced from the web.
+[2026-08-03 11:42:29] Claude [report (attempt 1)] finished successfully
+[2026-08-03 11:42:29] Report attempt 1 succeeded: 14116 bytes
+[2026-08-03 11:42:29] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-03_Mon.md ===
+
+--- Live Schwab API checks ---
+  Looking up 33 symbols...
+  Got quotes for 26 symbols
+
+--- Database cross-checks (market_date=2026-08-03) ---
+  6 database corrections:
+    FABRICATION: FINAL MANUFACTURING PMI actual 'Scheduled 9:45' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PMI actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PRICES actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: CONSTRUCTION SPENDING M/M actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: OMDIA TOTAL VEHICLE SALES actual 'Scheduled 10:15' → 'Pending' (not released)
+    FABRICATION: LOAN OFFICER SURVEY actual 'Scheduled 14:03' → 'Pending' (not released)
+
+  6 total corrections needed:
+    FABRICATION: FINAL MANUFACTURING PMI actual 'Scheduled 9:45' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PMI actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: ISM MANUFACTURING PRICES actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: CONSTRUCTION SPENDING M/M actual 'Scheduled 10:00' → 'Pending' (not released)
+    FABRICATION: OMDIA TOTAL VEHICLE SALES actual 'Scheduled 10:15' → 'Pending' (not released)
+    FABRICATION: LOAN OFFICER SURVEY actual 'Scheduled 14:03' → 'Pending' (not released)
+
+  6 corrections written to 2026-08-03_Mon.md
+=== Fact-check complete ===
+[2026-08-03 11:42:34] Running Claude [html-publish] (timeout: 900s)...
