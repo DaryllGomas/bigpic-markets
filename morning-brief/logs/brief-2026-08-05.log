@@ -1,0 +1,113 @@
+[2026-08-05 11:30:01] === Morning Brief Started ===
+[2026-08-05 11:30:01] Date: Wednesday, 2026-08-05
+[2026-08-05 11:30:01] Output: morning-brief/2026-08/2026-08-05_Wed.md + 2026-08-05_Wed.html
+[2026-08-05 11:30:01] All dependencies verified
+[2026-08-05 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-05 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-05 11:30:01,591 INFO === Market Data Collection — 2026-08-05 ===
+2026-08-05 11:30:01,628 INFO ── Step 1: RSS Feeds ──
+2026-08-05 11:30:22,941 INFO RSS feeds: 255 headlines stored, 224 older than 24h skipped
+2026-08-05 11:30:22,941 INFO Step 1 complete: 21.3s (headlines=255)
+2026-08-05 11:30:22,941 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-05 11:30:22,942 INFO Opus analysis: sending 245 headlines to claude CLI (attempt 1/3)...
+2026-08-05 11:31:49,825 WARNING Opus analysis: failed to parse JSON: Expecting ',' delimiter: line 47 column 326 (char 10858) (attempt 1/3)
+2026-08-05 11:31:49,826 WARNING Opus analysis: raw CLI output saved to /home/bigpic/projects/bigpic-markets/data/logs/opus-raw-2026-08-05-attempt1.out (13134 bytes)
+2026-08-05 11:31:49,826 INFO Opus analysis: retrying in 10s (next attempt 2/3)...
+2026-08-05 11:31:59,826 INFO Opus analysis: sending 245 headlines to claude CLI (attempt 2/3)...
+2026-08-05 11:33:28,309 INFO Opus analysis: 56 tickers, 19 movers, 10 themes from 245 headlines (attempt 2/3)
+2026-08-05 11:33:28,309 INFO Step 2 complete: 185.4s (opus_tickers=56)
+2026-08-05 11:33:28,309 INFO ── Step 3: Schwab + External APIs ──
+2026-08-05 11:33:36,653 INFO Schwab quotes: 169 symbols
+2026-08-05 11:33:36,654 INFO Auto-detected movers (|change| > 3%): 24 symbols
+2026-08-05 11:33:36,655 INFO Technicals + SMA200 for 150 quoted symbols (sequential)
+2026-08-05 11:37:08,952 INFO Schwab technicals: 149/150 symbols
+2026-08-05 11:39:01,033 INFO SMA200: 148/150 symbols
+2026-08-05 11:39:01,194 INFO Schwab market context: collected
+2026-08-05 11:40:14,101 INFO Schwab earnings: 71 entries
+2026-08-05 11:40:14,121 INFO Economic calendar: 8 events
+2026-08-05 11:40:14,208 INFO CoinGecko: 2 coins
+2026-08-05 11:40:19,639 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-05 11:40:25,057 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-05 11:40:30,498 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-05 11:40:31,006 INFO Stooq: 0/3 symbols
+2026-08-05 11:41:19,252 WARNING FRED failed: The read operation timed out
+2026-08-05 11:41:27,880 INFO Yahoo backup: 4 symbols
+2026-08-05 11:41:27,881 INFO Step 3 complete: 479.6s (quotes=169, tech=149, sma200=148, earnings=71, econ=8, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-05 11:41:27,881 INFO ── Step 4: Validation + Retry ──
+2026-08-05 11:41:27,911 INFO ANOMALY: $DJI price=54085.88 avg=52371.80 z=4.1
+2026-08-05 11:41:27,918 INFO ANOMALY: $RUT price=3036.98 avg=2961.17 z=3.0
+2026-08-05 11:41:27,920 INFO ANOMALY: $SPX price=7736.52 avg=7489.74 z=3.5
+2026-08-05 11:41:27,950 INFO ANOMALY: /ESU26 price=7796.75 avg=7532.44 z=4.4
+2026-08-05 11:41:27,956 INFO ANOMALY: /RTYU26 price=3050.90 avg=2977.05 z=3.4
+2026-08-05 11:41:27,957 INFO ANOMALY: /YMU26 price=54465.00 avg=52676.60 z=4.1
+2026-08-05 11:41:27,999 INFO ANOMALY: ANET price=214.30 avg=175.24 z=4.6
+2026-08-05 11:41:28,039 INFO ANOMALY: CGNX price=71.77 avg=63.95 z=3.1
+2026-08-05 11:41:28,071 INFO ANOMALY: DIA price=542.60 avg=523.94 z=4.2
+2026-08-05 11:41:28,086 INFO ANOMALY: ESTC price=72.03 avg=61.58 z=3.8
+2026-08-05 11:41:28,093 INFO ANOMALY: FCX price=68.43 avg=61.36 z=3.3
+2026-08-05 11:41:28,125 INFO ANOMALY: IWM price=302.30 avg=294.47 z=3.8
+2026-08-05 11:41:28,134 INFO ANOMALY: KTOS price=57.27 avg=48.74 z=3.9
+2026-08-05 11:41:28,138 INFO ANOMALY: LDOS price=131.50 avg=110.33 z=4.5
+2026-08-05 11:41:28,162 INFO ANOMALY: NET price=305.94 avg=272.20 z=4.0
+2026-08-05 11:41:28,186 INFO ANOMALY: PLTR price=161.55 avg=129.64 z=6.0
+2026-08-05 11:41:28,194 INFO ANOMALY: QLYS price=180.32 avg=149.87 z=3.1
+2026-08-05 11:41:28,209 INFO ANOMALY: S price=21.25 avg=18.71 z=3.3
+2026-08-05 11:41:28,227 INFO ANOMALY: SPY price=774.50 avg=746.87 z=4.7
+2026-08-05 11:41:28,232 INFO ANOMALY: SYM price=47.96 avg=42.41 z=3.7
+2026-08-05 11:41:28,273 INFO ANOMALY: ZS price=165.78 avg=147.23 z=3.6
+2026-08-05 11:41:28,281 INFO Anomaly detection: 21 flagged
+2026-08-05 11:41:28,281 INFO Cross-validation: 0 discrepancies
+2026-08-05 11:41:28,308 INFO Retry check: 1 failed call(s) found, retrying...
+2026-08-05 11:41:28,308 INFO   Retrying technicals for VTEPF (original error: HTTP Error 400: Bad Request)
+2026-08-05 11:41:29,317 INFO   ✗ VTEPF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-05 11:41:29,326 INFO Retry complete: 0/1 recovered
+2026-08-05 11:41:29,355 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): VTEPF
+2026-08-05 11:41:29,378 INFO Step 4 complete: 1.5s (anomalies=21, cross_val=0, retried=0, completeness=100%)
+2026-08-05 11:41:29,380 INFO ── Step 5: Generate Briefing ──
+2026-08-05 11:41:29,752 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-05.md (40449 bytes)
+2026-08-05 11:41:29,761 INFO Pruned 157 rows from quotes (older than 90 days)
+2026-08-05 11:41:29,765 INFO Pruned 132 rows from technicals (older than 90 days)
+2026-08-05 11:41:29,765 INFO Pruned 9 rows from anomalies (older than 90 days)
+2026-08-05 11:41:29,770 INFO Pruned 220 rows from headlines (older than 14 days)
+2026-08-05 11:41:29,786 INFO Pruned 5 rows from economic_events (older than 90 days)
+2026-08-05 11:41:29,788 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-05 11:41:29,788 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-05 11:41:29,998 INFO Cleanup complete
+2026-08-05 11:41:29,999 INFO === Collection complete: 687.7s total, completeness=100%, exit_code=0 ===
+[2026-08-05 11:41:30] Data collection complete — briefing file ready
+[2026-08-05 11:41:30] Found 9 research files (sector theses + structural calendar)
+[2026-08-05 11:41:30] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-05_Wed.md` (4,467 words incl. tables — HEAVY depth, in line with the Mon/Tue calibration in that folder).
+
+**What the data actually said:**
+
+- **Event Load HEAVY** — driven less by the macro calendar (ADP, ISM Services) than by 11 watchlist earnings, a live Hormuz headline, and the AI-capex trade fracturing internally.
+- **The session's signal event is AMD -7.75% on an earnings beat.** Data center doubled y/y; gaming -31% and consumer pricing killed it. SPCX -11.93% on AI spending is the same trade. Meanwhile ANET +12.49% and Kospi/Nikkei both +3.7% overnight — Asia is trading the memory/GPU *pricing* story while AMD absorbs it.
+- **Tape has rotated defensive.** Dow +0.36% leading Nasdaq +0.20%, with gains carried by LLY, CVS, DIS. Gold +2.09% and silver +3.75% on a supposed peace-deal day is a contradiction worth flagging; bitcoin flat at $64,073 is refusing to confirm record equities.
+- **Nuclear is the densest read** — 4 of 11 reporters, plus CEG tomorrow and VST Friday back-to-back.
+
+**Three things I flagged rather than smoothed over:**
+
+1. **The 100% completeness score is not trustworthy.** The same header reports FRED timeout, Schwab HTTP 400, and Stooq 0/3. The 2Y yield is a cached prior close for the second consecutive session, and the 2s/10s spread is calculated off it — so the ~6bp "flattening" vs. yesterday is an artifact, not a signal. This is the stale-FRED pattern from the prior calendar fix.
+2. **Two direction conflicts inside the briefing.** The news-analysis table labels TSAT "up" on its $1.63B Canadian MILSATCOM award and PLTR "up" on an upgrade; the price tables show **-3.20%** and **-0.68%**. I resolved both in favor of the price table and said so.
+3. **VTEPF -99.01% is a bad print** (Videndum, corporate-action artifact) — excluded from the movers discussion. Most other z-score anomalies are just indices at record highs against a trailing window, not errors.
+
+Per the rules, every "—" was written as **Pending** — no actuals reported for any of the 8 calendar events or 11 earnings, including SEDG, which is indicated -9.25% but has no reported figures in the feed, so I did not attribute the move to results. One caveat I noted in-line: the 11:41:29 PT collection stamp sits *after* several of the ET calendar times, so "Pending" here means "no actual in the feed" rather than a confirmed pre-release state.
+
+Unrelated to this task: the claude.ai **Notion** connector needs authorization via your claude.ai connector settings before its tools are usable — this session can't run the OAuth flow.
+[2026-08-05 11:46:13] Claude [report (attempt 1)] finished successfully
+[2026-08-05 11:46:13] Report attempt 1 succeeded: 26479 bytes
+[2026-08-05 11:46:13] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-05_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 66 symbols...
+  Got quotes for 51 symbols
+
+--- Database cross-checks (market_date=2026-08-05) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-08-05 11:46:24] Running Claude [html-publish] (timeout: 900s)...
