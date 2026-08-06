@@ -1,0 +1,102 @@
+[2026-08-06 11:30:01] === Morning Brief Started ===
+[2026-08-06 11:30:01] Date: Thursday, 2026-08-06
+[2026-08-06 11:30:01] Output: morning-brief/2026-08/2026-08-06_Thu.md + 2026-08-06_Thu.html
+[2026-08-06 11:30:01] All dependencies verified
+[2026-08-06 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-06 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-06 11:30:02,064 INFO === Market Data Collection — 2026-08-06 ===
+2026-08-06 11:30:02,099 INFO ── Step 1: RSS Feeds ──
+2026-08-06 11:30:34,471 INFO RSS feeds: 256 headlines stored, 223 older than 24h skipped
+2026-08-06 11:30:34,471 INFO Step 1 complete: 32.4s (headlines=256)
+2026-08-06 11:30:34,471 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-06 11:30:34,473 INFO Opus analysis: sending 241 headlines to claude CLI (attempt 1/3)...
+2026-08-06 11:32:24,156 INFO Opus analysis: 61 tickers, 20 movers, 14 themes from 241 headlines (attempt 1/3)
+2026-08-06 11:32:24,157 INFO Step 2 complete: 109.7s (opus_tickers=61)
+2026-08-06 11:32:24,157 INFO ── Step 3: Schwab + External APIs ──
+2026-08-06 11:32:32,477 INFO Schwab quotes: 174 symbols
+2026-08-06 11:32:32,478 INFO Auto-detected movers (|change| > 3%): 25 symbols
+2026-08-06 11:32:32,479 INFO Technicals + SMA200 for 155 quoted symbols (sequential)
+2026-08-06 11:36:17,453 INFO Schwab technicals: 154/155 symbols
+2026-08-06 11:38:16,444 INFO SMA200: 151/155 symbols
+2026-08-06 11:38:16,663 INFO Schwab market context: collected
+2026-08-06 11:39:31,532 INFO Schwab earnings: 71 entries
+2026-08-06 11:39:31,560 INFO Economic calendar: 9 events
+2026-08-06 11:39:31,676 INFO CoinGecko: 2 coins
+2026-08-06 11:39:36,829 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-06 11:39:42,343 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-06 11:39:47,969 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-06 11:39:48,477 INFO Stooq: 0/3 symbols
+2026-08-06 11:40:36,794 WARNING FRED failed: The read operation timed out
+2026-08-06 11:40:45,177 INFO Yahoo backup: 4 symbols
+2026-08-06 11:40:45,177 INFO Step 3 complete: 501.0s (quotes=174, tech=154, sma200=151, earnings=71, econ=9, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-06 11:40:45,177 INFO ── Step 4: Validation + Retry ──
+2026-08-06 11:40:45,206 INFO ANOMALY: $DJI price=54349.12 avg=52423.29 z=3.5
+2026-08-06 11:40:45,254 INFO ANOMALY: /GCZ26 price=4324.60 avg=4142.12 z=3.3
+2026-08-06 11:40:45,259 INFO ANOMALY: /YMU26 price=54636.00 avg=52724.75 z=3.4
+2026-08-06 11:40:45,318 INFO ANOMALY: AZTA price=32.11 avg=26.95 z=3.0
+2026-08-06 11:40:45,351 INFO ANOMALY: CGNX price=72.92 avg=64.12 z=3.0
+2026-08-06 11:40:45,378 INFO ANOMALY: DIA price=544.37 avg=524.50 z=3.4
+2026-08-06 11:40:45,519 INFO ANOMALY: RDW price=11.89 avg=9.38 z=3.1
+2026-08-06 11:40:45,595 INFO Anomaly detection: 7 flagged
+2026-08-06 11:40:45,595 INFO Cross-validation: 0 discrepancies
+2026-08-06 11:40:45,624 INFO Retry check: 1 failed call(s) found, retrying...
+2026-08-06 11:40:45,625 INFO   Retrying technicals for TCAPF (original error: HTTP Error 400: Bad Request)
+2026-08-06 11:40:46,632 INFO   ✗ TCAPF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-06 11:40:46,638 INFO Retry complete: 0/1 recovered
+2026-08-06 11:40:46,658 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): TCAPF
+2026-08-06 11:40:46,679 INFO Step 4 complete: 1.5s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-08-06 11:40:46,681 INFO ── Step 5: Generate Briefing ──
+2026-08-06 11:40:47,016 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-06.md (39450 bytes)
+2026-08-06 11:40:47,026 INFO Pruned 175 rows from quotes (older than 90 days)
+2026-08-06 11:40:47,030 INFO Pruned 150 rows from technicals (older than 90 days)
+2026-08-06 11:40:47,030 INFO Pruned 9 rows from anomalies (older than 90 days)
+2026-08-06 11:40:47,035 INFO Pruned 253 rows from headlines (older than 14 days)
+2026-08-06 11:40:47,037 INFO Pruned 134 rows from levels (older than 30 days)
+2026-08-06 11:40:47,037 INFO Pruned 35 rows from opus_tickers (older than 30 days)
+2026-08-06 11:40:47,038 INFO Pruned 6 rows from opus_movers (older than 30 days)
+2026-08-06 11:40:47,038 INFO Pruned 7 rows from opus_themes (older than 30 days)
+2026-08-06 11:40:47,038 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-08-06 11:40:47,039 INFO Pruned 4 rows from opus_fed_signals (older than 30 days)
+2026-08-06 11:40:47,039 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-08-06 11:40:47,055 INFO Pruned 12 rows from economic_events (older than 90 days)
+2026-08-06 11:40:47,057 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-06 11:40:47,057 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-06 11:40:47,285 INFO Cleanup complete
+2026-08-06 11:40:47,286 INFO === Collection complete: 644.6s total, completeness=100%, exit_code=0 ===
+[2026-08-06 11:40:47] Data collection complete — briefing file ready
+[2026-08-06 11:40:47] Found 9 research files (sector theses + structural calendar)
+[2026-08-06 11:40:47] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-06_Thu.md` — HEAVY depth, closely matching Wednesday's length (4,627 words vs 4,467).
+
+**What the data said:**
+
+- **The tape is two markets.** Dow futures +0.26% at a record (54,636) against Nasdaq 100 futures -0.42% — a 68bp spread. Memory is the epicenter: Kospi **-4.58%** on an SK Hynix flash-crash, SNDK -9.53%, WDC -15.54%, MU -4.44%, DDOG -18.22%.
+- **VIX fell to 15.94** (from 16.68) through all of that. No bid for index protection during a visible sector unwind — I flagged that as the tape's key internal contradiction.
+- **FLNC -13.42%** is the most thesis-damaging print: Fluence won its first big data-centre deals but manufacturing ramp delays hit revenue. That's the exact failure mode a backlog-driven Tier 1 thesis can't absorb.
+- **Cook is "prepared to act" on a rate HIKE** — landing the day before unit labor costs print at 2.2%. Two Fed speakers close the day.
+
+**Rules honored:** every calendar event shows Actual = "—" and is marked **Pending**; all four earnings (CEG, MP, NET, RGTI) have no estimates or actuals and nothing is attributed to them — including CEG's +4.44%.
+
+**Three data issues I flagged rather than smoothed over:**
+
+1. **The 2Y yield at 3.961% is now stale for a third consecutive session** (FRED timed out again), and the 2s/10s spread is calculated off it — so the curve reading isn't a signal. This is the same stale-FRED pattern in your saved memory.
+2. **Duplicate calendar entry** — "4:30 Jobless Claims" appears to be the 8:30 release with a bad timestamp, the same defect that hit ADP yesterday.
+3. **Two feed/price conflicts**, resolved toward the price table: the CoinDesk headline says WDC "crashed 10%" when it printed -15.54%; and HON is labeled "down" on a downgrade while trading -0.00%.
+
+One gap worth your attention: the feed's Economic Context flags **July nonfarm payrolls as pending and a key catalyst, but it isn't on today's calendar** — most likely tomorrow, alongside VST earnings. I stated that as an absence rather than assuming a date.
+[2026-08-06 11:45:20] Claude [report (attempt 1)] finished successfully
+[2026-08-06 11:45:20] Report attempt 1 succeeded: 27640 bytes
+[2026-08-06 11:45:20] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-06_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 63 symbols...
+  Got quotes for 49 symbols
+
+--- Database cross-checks (market_date=2026-08-06) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-08-06 11:45:29] Running Claude [html-publish] (timeout: 900s)...
