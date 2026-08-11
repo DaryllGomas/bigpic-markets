@@ -1,0 +1,85 @@
+[2026-08-11 11:30:01] === Morning Brief Started ===
+[2026-08-11 11:30:01] Date: Tuesday, 2026-08-11
+[2026-08-11 11:30:01] Output: morning-brief/2026-08/2026-08-11_Tue.md + 2026-08-11_Tue.html
+[2026-08-11 11:30:01] All dependencies verified
+[2026-08-11 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-11 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-11 11:30:02,264 INFO === Market Data Collection — 2026-08-11 ===
+2026-08-11 11:30:02,343 INFO ── Step 1: RSS Feeds ──
+2026-08-11 11:30:24,088 INFO RSS feeds: 253 headlines stored, 216 older than 24h skipped
+2026-08-11 11:30:24,088 INFO Step 1 complete: 21.7s (headlines=253)
+2026-08-11 11:30:24,089 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-11 11:30:24,090 INFO Opus analysis: sending 249 headlines to claude CLI (attempt 1/3)...
+2026-08-11 11:31:12,765 INFO Opus analysis: 47 tickers, 18 movers, 10 themes from 249 headlines (attempt 1/3)
+2026-08-11 11:31:12,766 INFO Step 2 complete: 48.7s (opus_tickers=47)
+2026-08-11 11:31:12,766 INFO ── Step 3: Schwab + External APIs ──
+2026-08-11 11:31:21,078 INFO Schwab quotes: 152 symbols
+2026-08-11 11:31:21,079 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-08-11 11:31:21,081 INFO Technicals + SMA200 for 133 quoted symbols (sequential)
+2026-08-11 11:34:38,251 INFO Schwab technicals: 133/133 symbols
+2026-08-11 11:36:19,608 INFO SMA200: 130/133 symbols
+2026-08-11 11:36:19,881 INFO Schwab market context: collected
+2026-08-11 11:37:33,166 INFO Schwab earnings: 71 entries
+2026-08-11 11:37:33,190 INFO Economic calendar: 4 events
+2026-08-11 11:37:33,287 INFO CoinGecko: 2 coins
+2026-08-11 11:37:38,727 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-11 11:37:44,143 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-11 11:37:49,779 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-11 11:37:50,286 INFO Stooq: 0/3 symbols
+2026-08-11 11:38:38,583 WARNING FRED failed: The read operation timed out
+2026-08-11 11:38:46,962 INFO Yahoo backup: 4 symbols
+2026-08-11 11:38:46,962 INFO Step 3 complete: 454.2s (quotes=152, tech=133, sma200=130, earnings=71, econ=4, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-11 11:38:46,963 INFO ── Step 4: Validation + Retry ──
+2026-08-11 11:38:47,205 INFO ANOMALY: CACI price=660.67 avg=497.91 z=3.1
+2026-08-11 11:38:47,530 INFO Anomaly detection: 1 flagged
+2026-08-11 11:38:47,531 INFO Cross-validation: 0 discrepancies
+2026-08-11 11:38:47,592 INFO Retry check: 0 failures — nothing to retry
+2026-08-11 11:38:47,634 INFO Step 4 complete: 0.7s (anomalies=1, cross_val=0, retried=0, completeness=100%)
+2026-08-11 11:38:47,636 INFO ── Step 5: Generate Briefing ──
+2026-08-11 11:38:48,173 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-11.md (35694 bytes)
+2026-08-11 11:38:48,191 INFO Pruned 163 rows from quotes (older than 90 days)
+2026-08-11 11:38:48,195 INFO Pruned 138 rows from technicals (older than 90 days)
+2026-08-11 11:38:48,196 INFO Pruned 8 rows from anomalies (older than 90 days)
+2026-08-11 11:38:48,199 INFO Pruned 120 rows from headlines (older than 14 days)
+2026-08-11 11:38:48,228 INFO Pruned 13 rows from economic_events (older than 90 days)
+2026-08-11 11:38:48,230 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-11 11:38:48,231 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-11 11:38:48,543 INFO Cleanup complete
+2026-08-11 11:38:48,544 INFO === Collection complete: 525.3s total, completeness=100%, exit_code=0 ===
+[2026-08-11 11:38:48] Data collection complete — briefing file ready
+[2026-08-11 11:38:48] Found 9 research files (sector theses + structural calendar)
+[2026-08-11 11:38:48] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-11_Tue.md`.
+
+**Lead findings:**
+
+- **RKLB is the day's watchlist story.** -5.13% to 75.93, which is **-11.0% from yesterday's pre-market 85.34** and now **below its 200-day (78.05)**. Today's SpaceNews headline — *"First Neutron launch may slip to 2027"* — is the cause, and the space thesis names Neutron's late-2026 first flight as make-or-break for the bull case at current valuation. Yesterday's brief said the post-print gap would resolve into either the 50-day or the 200-day; it went through the 200-day.
+- **The 10Y hit 4.699% on oil, not CPI.** WTI +3.6% to 82.33 with the SPR below 300M barrels. Yesterday's brief named 4.70% as the level a hot CPI would breach — it got there without the print, which is the more concerning path.
+- **Bias: neutral.** Futures green by 6–33bp is noise after all four cash indices closed lower Monday (Russell -0.56%). AI infrastructure is the only clean leadership (ASML +2.81%, every Tier 1 green).
+
+**Four data-quality problems, all flagged inline rather than reported as fact:**
+
+1. **The Bitcoin row regressed.** It reads $28.42 from the Schwab proxy — yesterday it was correctly sourced from CoinGecko at $65,033. CoinDesk *in the same file* reports bitcoin below $65,000. I flagged it and did not report $28.42 as a price. This is the same Schwab-proxy failure mode as your stored TRIN/volume note.
+2. **The Nikkei row is stale** — 66,970 / +2.08% is byte-identical to yesterday's brief. Korea is the only usable Asian semis read today.
+3. **CACI unverified for a third session** (531 → 625 → 644 → 661 against sub-2% reported daily changes; 30% above its own 20-day).
+4. **FRED timed out for a sixth consecutive session**, so the 2s/10s spread is not a curve signal.
+
+Per your economic-calendar memory, I did not fabricate a CPI date: the file references July CPI as pending five times and never dates it, and it is not on today's calendar — written as `[Data unavailable]`. All four calendar events show Actual = "—" and are marked Pending. I also flagged *Existing Home Sales* at 6:00 ET with no forecast and no prior as a likely feed artifact (it normally releases at 10:00).
+
+One deviation to note: at 2,912 words this exceeds your LIGHT target of 800–1,200. The mandated 10-section structure costs ~740 words in tables alone, which would leave ~460 for all prose. I cut ~520 words from my first pass but stopped short of the target rather than drop the data-quality flags or the RKLB analysis. If you want it genuinely at 1,200, the structure needs to shed sections on LIGHT days — say the word and I'll propose which.
+[2026-08-11 11:44:59] Claude [report (attempt 1)] finished successfully
+[2026-08-11 11:44:59] Report attempt 1 succeeded: 17366 bytes
+[2026-08-11 11:44:59] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-11_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 62 symbols...
+  Got quotes for 50 symbols
+
+--- Database cross-checks (market_date=2026-08-11) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-08-11 11:45:09] Running Claude [html-publish] (timeout: 900s)...
