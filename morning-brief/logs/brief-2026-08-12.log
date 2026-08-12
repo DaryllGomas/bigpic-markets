@@ -1,0 +1,95 @@
+[2026-08-12 11:30:01] === Morning Brief Started ===
+[2026-08-12 11:30:01] Date: Wednesday, 2026-08-12
+[2026-08-12 11:30:01] Output: morning-brief/2026-08/2026-08-12_Wed.md + 2026-08-12_Wed.html
+[2026-08-12 11:30:01] All dependencies verified
+[2026-08-12 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-12 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-12 11:30:02,221 INFO === Market Data Collection — 2026-08-12 ===
+2026-08-12 11:30:02,339 INFO ── Step 1: RSS Feeds ──
+2026-08-12 11:30:24,493 INFO RSS feeds: 259 headlines stored, 214 older than 24h skipped
+2026-08-12 11:30:24,493 INFO Step 1 complete: 22.2s (headlines=259)
+2026-08-12 11:30:24,494 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-12 11:30:24,495 INFO Opus analysis: sending 239 headlines to claude CLI (attempt 1/3)...
+2026-08-12 11:31:56,366 INFO Opus analysis: 57 tickers, 11 movers, 11 themes from 239 headlines (attempt 1/3)
+2026-08-12 11:31:56,366 INFO Step 2 complete: 91.9s (opus_tickers=57)
+2026-08-12 11:31:56,366 INFO ── Step 3: Schwab + External APIs ──
+2026-08-12 11:32:05,414 INFO Schwab quotes: 173 symbols
+2026-08-12 11:32:05,415 INFO Auto-detected movers (|change| > 3%): 11 symbols
+2026-08-12 11:32:05,416 INFO Technicals + SMA200 for 154 quoted symbols (sequential)
+2026-08-12 11:35:54,945 INFO Schwab technicals: 150/154 symbols
+2026-08-12 11:37:55,692 INFO SMA200: 147/154 symbols
+2026-08-12 11:37:55,993 INFO Schwab market context: collected
+2026-08-12 11:39:11,284 INFO Schwab earnings: 71 entries
+2026-08-12 11:39:11,305 INFO Economic calendar: 8 events
+2026-08-12 11:39:11,429 INFO CoinGecko: 2 coins
+2026-08-12 11:39:16,726 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-12 11:39:22,155 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-12 11:39:27,798 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-12 11:39:28,306 INFO Stooq: 0/3 symbols
+2026-08-12 11:40:16,635 WARNING FRED failed: The read operation timed out
+2026-08-12 11:40:25,223 INFO Yahoo backup: 4 symbols
+2026-08-12 11:40:25,224 INFO Step 3 complete: 508.9s (quotes=173, tech=150, sma200=147, earnings=71, econ=8, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-12 11:40:25,224 INFO ── Step 4: Validation + Retry ──
+2026-08-12 11:40:25,395 INFO ANOMALY: CRWV price=107.02 avg=80.02 z=3.5
+2026-08-12 11:40:25,631 INFO ANOMALY: UBER price=78.23 avg=71.49 z=3.3
+2026-08-12 11:40:25,659 INFO Anomaly detection: 2 flagged
+2026-08-12 11:40:25,659 INFO Cross-validation: 0 discrepancies
+2026-08-12 11:40:25,688 INFO Retry check: 4 failed call(s) found, retrying...
+2026-08-12 11:40:25,688 INFO   Retrying technicals for THYKF (original error: HTTP Error 400: Bad Request)
+2026-08-12 11:40:26,696 INFO   ✗ THYKF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-12 11:40:26,696 INFO   Retrying technicals for VGLIF (original error: HTTP Error 400: Bad Request)
+2026-08-12 11:40:27,703 INFO   ✗ VGLIF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-12 11:40:27,703 INFO   Retrying technicals for BDGSF (original error: HTTP Error 400: Bad Request)
+2026-08-12 11:40:28,710 INFO   ✗ BDGSF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-12 11:40:28,711 INFO   Retrying technicals for CLIHF (original error: HTTP Error 400: Bad Request)
+2026-08-12 11:40:29,718 INFO   ✗ CLIHF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-12 11:40:29,725 INFO Retry complete: 0/4 recovered
+2026-08-12 11:40:29,795 WARNING Excluding 4 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): BDGSF, CLIHF, THYKF, VGLIF
+2026-08-12 11:40:29,817 INFO Step 4 complete: 4.6s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-08-12 11:40:29,818 INFO ── Step 5: Generate Briefing ──
+2026-08-12 11:40:30,162 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-12.md (35535 bytes)
+2026-08-12 11:40:30,174 INFO Pruned 153 rows from quotes (older than 90 days)
+2026-08-12 11:40:30,178 INFO Pruned 128 rows from technicals (older than 90 days)
+2026-08-12 11:40:30,178 INFO Pruned 5 rows from anomalies (older than 90 days)
+2026-08-12 11:40:30,183 INFO Pruned 225 rows from headlines (older than 14 days)
+2026-08-12 11:40:30,201 INFO Pruned 9 rows from economic_events (older than 90 days)
+2026-08-12 11:40:30,203 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-12 11:40:30,203 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-12 11:40:30,433 INFO Cleanup complete
+2026-08-12 11:40:30,435 INFO === Collection complete: 627.5s total, completeness=100%, exit_code=0 ===
+[2026-08-12 11:40:30] Data collection complete — briefing file ready
+[2026-08-12 11:40:30] Found 9 research files (sector theses + structural calendar)
+[2026-08-12 11:40:30] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-12_Wed.md` (~3,300 words prose + tables — modestly above the HEAVY spec, below the recent HEAVY-day precedent of 4,400–5,000).
+
+**What today's data actually says:**
+
+- **Event Load HEAVY is earned** — four high-impact CPI rows at 8:30 ET, a 10Y auction at 13:01, crude inventories, and the budget balance. The undated CPI that hung over the last two briefs finally has a date and forecasts.
+- **Every release is reported as Pending.** All Actuals read "—" in the briefing file. Worth flagging: the collection stamp (11:40:29 PT = 14:40 ET) *postdates* every scheduled release, yet the calendar feed never populated. I noted that as a data-quality issue and reported no actuals.
+- **The consensus points two ways** — both y/y rates forecast down (base effect) while both m/m rates accelerate (headline -0.4% → +0.1%). That's what makes the feed's "binary" label credible.
+- **The bid is one sector deep.** Nasdaq +0.63% > S&P +0.25% > Dow +0.16% > Russell +0.14%, and five of the six watchlist movers are AI infrastructure (CRWV +18.49% on a $2.58B quarter, CIEN +4.68%, MRVL +3.22%, GLW +3.19%, VRT +3.09%).
+- **Kospi +3.68%** is the largest print in the file — fourth straight session on the memory cycle.
+
+**Data-quality items carried forward:** FRED timed out a 7th session (2Y frozen at 3.961%, so the 2s/10s is not a curve signal — costly on CPI day specifically); CACI unverified a 5th session at RSI 80 and 30% above its own 20-day; stooq 3/3 failed; US indices previous-close change column stale at +0.00%.
+
+**Two things resolved from yesterday:** the Bitcoin row is fixed (coingecko $64,112, not the broken $28.42 schwab proxy), and the Nikkei row un-stuck with an internally consistent delta. RKLB also reclaimed its 200-day after the Neutron-slip break.
+[2026-08-12 11:47:28] Claude [report (attempt 1)] finished successfully
+[2026-08-12 11:47:28] Report attempt 1 succeeded: 25153 bytes
+[2026-08-12 11:47:28] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-12_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 63 symbols...
+  Got quotes for 50 symbols
+
+--- Database cross-checks (market_date=2026-08-12) ---
+  1 database corrections:
+    FABRICATION: CPI REPORT actual 'Artifact — see flags' → 'Pending' (not released)
+
+  1 total corrections needed:
+    FABRICATION: CPI REPORT actual 'Artifact — see flags' → 'Pending' (not released)
+
+  1 corrections written to 2026-08-12_Wed.md
+=== Fact-check complete ===
+[2026-08-12 11:47:38] Running Claude [html-publish] (timeout: 900s)...
