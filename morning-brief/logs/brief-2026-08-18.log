@@ -1,0 +1,90 @@
+[2026-08-18 11:30:01] === Morning Brief Started ===
+[2026-08-18 11:30:01] Date: Tuesday, 2026-08-18
+[2026-08-18 11:30:01] Output: morning-brief/2026-08/2026-08-18_Tue.md + 2026-08-18_Tue.html
+[2026-08-18 11:30:01] All dependencies verified
+[2026-08-18 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-18 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-18 11:30:01,888 INFO === Market Data Collection — 2026-08-18 ===
+2026-08-18 11:30:01,921 INFO ── Step 1: RSS Feeds ──
+2026-08-18 11:30:26,216 INFO RSS feeds: 226 headlines stored, 237 older than 24h skipped
+2026-08-18 11:30:26,216 INFO Step 1 complete: 24.3s (headlines=226)
+2026-08-18 11:30:26,216 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-18 11:30:26,218 INFO Opus analysis: sending 211 headlines to claude CLI (attempt 1/3)...
+2026-08-18 11:31:21,840 INFO Opus analysis: 52 tickers, 8 movers, 10 themes from 211 headlines (attempt 1/3)
+2026-08-18 11:31:21,840 INFO Step 2 complete: 55.6s (opus_tickers=52)
+2026-08-18 11:31:21,841 INFO ── Step 3: Schwab + External APIs ──
+2026-08-18 11:31:30,113 INFO Schwab quotes: 166 symbols
+2026-08-18 11:31:30,114 INFO Auto-detected movers (|change| > 3%): 23 symbols
+2026-08-18 11:31:30,116 INFO Technicals + SMA200 for 147 quoted symbols (sequential)
+2026-08-18 11:34:54,068 INFO Schwab technicals: 147/147 symbols
+2026-08-18 11:36:43,789 INFO SMA200: 146/147 symbols
+2026-08-18 11:36:44,007 INFO Schwab market context: collected
+2026-08-18 11:37:56,960 INFO Schwab earnings: 71 entries
+2026-08-18 11:37:56,977 INFO Economic calendar: 10 events
+2026-08-18 11:37:57,082 INFO CoinGecko: 2 coins
+2026-08-18 11:38:02,049 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-18 11:38:07,280 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-18 11:38:13,289 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-18 11:38:13,797 INFO Stooq: 0/3 symbols
+2026-08-18 11:39:02,095 WARNING FRED failed: The read operation timed out
+2026-08-18 11:39:10,487 INFO Yahoo backup: 4 symbols
+2026-08-18 11:39:10,488 INFO Step 3 complete: 468.6s (quotes=166, tech=147, sma200=146, earnings=71, econ=10, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-18 11:39:10,488 INFO ── Step 4: Validation + Retry ──
+2026-08-18 11:39:10,883 INFO Anomaly detection: 0 flagged
+2026-08-18 11:39:10,883 INFO Cross-validation: 0 discrepancies
+2026-08-18 11:39:10,913 INFO Retry check: 0 failures — nothing to retry
+2026-08-18 11:39:10,939 INFO Step 4 complete: 0.5s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-08-18 11:39:10,940 INFO ── Step 5: Generate Briefing ──
+2026-08-18 11:39:11,268 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-18.md (33239 bytes)
+2026-08-18 11:39:11,278 INFO Pruned 165 rows from quotes (older than 90 days)
+2026-08-18 11:39:11,282 INFO Pruned 140 rows from technicals (older than 90 days)
+2026-08-18 11:39:11,283 INFO Pruned 12 rows from anomalies (older than 90 days)
+2026-08-18 11:39:11,286 INFO Pruned 138 rows from headlines (older than 14 days)
+2026-08-18 11:39:11,305 INFO Pruned 5 rows from economic_events (older than 90 days)
+2026-08-18 11:39:11,307 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-18 11:39:11,307 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-18 11:39:11,561 INFO Cleanup complete
+2026-08-18 11:39:11,562 INFO === Collection complete: 549.0s total, completeness=100%, exit_code=0 ===
+[2026-08-18 11:39:11] Data collection complete — briefing file ready
+[2026-08-18 11:39:11] Found 9 research files (sector theses + structural calendar)
+[2026-08-18 11:39:11] Running Claude [report (attempt 1)] (timeout: 900s)...
+Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-18_Tue.md`.
+
+**What the data showed:**
+
+- **Event Load MEDIUM, but hollow.** Ten calendar rows; the only two medium-impact tags (Housing Starts 4:30, Industrial Production 5:15) have **no forecast and no previous**, and the calendar duplicates itself three times across the 4:30/5:15 and 8:30/9:15 blocks. All ten Actuals are "—" → all reported as Pending.
+- **Yesterday's brief scored well.** It called neutral; Monday's cash closed **S&P -0.53%, Dow -0.51%, Nasdaq -0.31%, Russell -0.33%**. Two of its named risk factors fired within one session: **Brent cleared the $90 line (89.02 → 90.86)** and **memory reversed hard (SNDK +4.51% → -4.80%, MU +2.94% → -4.42%)**.
+- **Today's tape is a real-rate shock, not a growth scare** — Nasdaq futures -1.15% vs Dow -0.04% (1.1 pts of duration spread), 30Y at a 2007 high, and **gold *fell* -0.61%** on a risk-off day. Nikkei -2.54% and Kospi -1.55% are the same chip trade in Asia.
+- **Movers board is 22 decliners, zero advancers, VIX the only green print.** Four Tier 1 names broke -3% (VRT, MP, LUNR, IONQ), ending the three-session "motionless core" streak.
+- **All three of Monday's 200-day reclaims reversed in one session** — MP, USAR and IONQ all lost their lines.
+- **Two sector inversions:** cybersecurity went from Monday's laggard (15/19 red) to today's leader (12/19 green); nuclear mirrored exactly (12/13 green → 12/13 red, PEG the lone exception both days).
+
+**Fabrication guards applied:** no economic actuals (fifth straight session with none, despite a 14:39 ET collection stamp), no SQM EPS estimate or result, FRED stale for an 11th session (2Y byte-identical), and I flagged two contradictions inside the briefing file itself — the feed calls VIX a "2026-low" while it rose two sessions straight, and lists SNDK as "up" against its own -4.80% print.
+
+One caveat worth your attention: the snapshot is labeled pre-market but stamped mid-session, so cross-session level comparisons and the intraday change column measure different things (LUNR reads 19.61 at -3.78%, implying a Monday close of 20.38 against Monday's 19.10 print). I flagged this rather than silently reconciling it.
+
+At ~3,100 prose words it runs above the 1,500–2,000 MEDIUM band, but in line with the existing corpus (Monday's LIGHT brief ran ~2,300 prose) and with a genuinely fuller data day. Say the word if you want it cut to the stated band.
+[2026-08-18 11:45:59] Claude [report (attempt 1)] finished successfully
+[2026-08-18 11:45:59] Report attempt 1 succeeded: 26033 bytes
+[2026-08-18 11:45:59] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-18_Tue.md ===
+
+--- Live Schwab API checks ---
+  Looking up 85 symbols...
+  Got quotes for 74 symbols
+
+--- Database cross-checks (market_date=2026-08-18) ---
+  3 database corrections:
+    FABRICATION: IMPORT/EXPORT PRICES actual 'Pending — no data in file' → 'Pending' (not released)
+    FABRICATION: HOUSING STARTS actual 'Pending — no forecast, no prior' → 'Pending' (not released)
+    FABRICATION: INDUSTRIAL PRODUCTION actual 'Pending — no forecast, no prior' → 'Pending' (not released)
+
+  3 total corrections needed:
+    FABRICATION: IMPORT/EXPORT PRICES actual 'Pending — no data in file' → 'Pending' (not released)
+    FABRICATION: HOUSING STARTS actual 'Pending — no forecast, no prior' → 'Pending' (not released)
+    FABRICATION: INDUSTRIAL PRODUCTION actual 'Pending — no forecast, no prior' → 'Pending' (not released)
+
+  3 corrections written to 2026-08-18_Tue.md
+=== Fact-check complete ===
+[2026-08-18 11:46:12] Running Claude [html-publish] (timeout: 900s)...
