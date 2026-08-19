@@ -88,3 +88,23 @@ At ~3,100 prose words it runs above the 1,500–2,000 MEDIUM band, but in line w
   3 corrections written to 2026-08-18_Tue.md
 === Fact-check complete ===
 [2026-08-18 11:46:12] Running Claude [html-publish] (timeout: 900s)...
+Done — built, published, and pushed.
+
+**Built** `morning-brief/2026-08/2026-08-18_Tue.html` (~60KB) matching the site theme exactly (same CSS variables, fonts, radii, reveal observer, backdrop-filter as the Aug 17 brief). All sections present in the specified order with the specified ids:
+
+`snapshot` → `overnight` → `calendar` → `movers` → `watchlist` → `catalysts` → `sectors` → `news` → `playbook` → `sources` → footer.
+
+**Scenarios omitted** — the brief is MEDIUM event load, so per your spec that section is absent entirely. Hero badge is amber MEDIUM.
+
+A few build decisions worth flagging:
+- **Gainers table** — the brief has 22 decliners and zero equity advancers, so the gainers table holds only `$VIX +3.49%` plus an explicit "zero equity advancers" row rather than being left empty.
+- **Sector dots** — Cyber and Defense green, Robotics amber (medtech green / automation red), the other six red. That's a near-inversion of Monday's grid, which the brief calls out.
+- **Data-quality flags** got their own amber-bordered card under the snapshot — nine flags including the 14:39 ET collection stamp that makes the "pre-market" snapshot mid-session, the 11th-session FRED staleness, and the two internal feed contradictions (VIX "2026-low," SNDK "up").
+
+**Verified:** HTML parses with zero unclosed tags and zero mismatches; archive has exactly one `Latest` badge, now on the Aug 18 entry (moved off Aug 17), placed at the top of the existing August 2026 month-group.
+
+**Pushed:** commit `65d1685` to `main`. Nine files went in — alongside the HTML and markdown, the commit picked up `data/briefing-2026-08-18.md` and two pipeline logs that were untracked in the working tree, since the instruction was `git add -A`.
+[2026-08-18 11:54:24] Claude [html-publish] finished successfully
+[2026-08-18 11:54:24] HTML generated: 99795 bytes
+[2026-08-18 11:54:24] === Morning Brief Complete ===
+[2026-08-18 11:54:24] Published: markets.bigpicsolutions.com/morning-brief/2026-08/2026-08-18_Tue.html

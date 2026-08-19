@@ -1,0 +1,90 @@
+[2026-08-19 11:30:01] === Morning Brief Started ===
+[2026-08-19 11:30:01] Date: Wednesday, 2026-08-19
+[2026-08-19 11:30:01] Output: morning-brief/2026-08/2026-08-19_Wed.md + 2026-08-19_Wed.html
+[2026-08-19 11:30:01] All dependencies verified
+[2026-08-19 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-19 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-19 11:30:02,522 INFO === Market Data Collection — 2026-08-19 ===
+2026-08-19 11:30:02,586 INFO ── Step 1: RSS Feeds ──
+2026-08-19 11:30:24,260 INFO RSS feeds: 242 headlines stored, 234 older than 24h skipped
+2026-08-19 11:30:24,260 INFO Step 1 complete: 21.7s (headlines=242)
+2026-08-19 11:30:24,260 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-19 11:30:24,262 INFO Opus analysis: sending 229 headlines to claude CLI (attempt 1/3)...
+2026-08-19 11:31:28,128 INFO Opus analysis: 48 tickers, 8 movers, 10 themes from 229 headlines (attempt 1/3)
+2026-08-19 11:31:28,129 INFO Step 2 complete: 63.9s (opus_tickers=48)
+2026-08-19 11:31:28,129 INFO ── Step 3: Schwab + External APIs ──
+2026-08-19 11:31:35,780 INFO Schwab quotes: 162 symbols
+2026-08-19 11:31:35,780 INFO Auto-detected movers (|change| > 3%): 6 symbols
+2026-08-19 11:31:35,782 INFO Technicals + SMA200 for 143 quoted symbols (sequential)
+2026-08-19 11:34:54,261 INFO Schwab technicals: 143/143 symbols
+2026-08-19 11:36:38,455 INFO SMA200: 142/143 symbols
+2026-08-19 11:36:38,798 INFO Schwab market context: collected
+2026-08-19 11:37:52,121 INFO Schwab earnings: 71 entries
+2026-08-19 11:37:52,138 INFO Economic calendar: 3 events
+2026-08-19 11:37:52,329 INFO CoinGecko: 2 coins
+2026-08-19 11:37:57,107 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-19 11:38:02,837 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-19 11:38:08,553 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-19 11:38:09,061 INFO Stooq: 0/3 symbols
+2026-08-19 11:38:57,377 WARNING FRED failed: The read operation timed out
+2026-08-19 11:39:05,743 INFO Yahoo backup: 4 symbols
+2026-08-19 11:39:05,743 INFO Step 3 complete: 457.6s (quotes=162, tech=143, sma200=142, earnings=71, econ=3, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-19 11:39:05,744 INFO ── Step 4: Validation + Retry ──
+2026-08-19 11:39:06,138 INFO Anomaly detection: 0 flagged
+2026-08-19 11:39:06,139 INFO Cross-validation: 0 discrepancies
+2026-08-19 11:39:06,169 INFO Retry check: 0 failures — nothing to retry
+2026-08-19 11:39:06,196 INFO Step 4 complete: 0.5s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-08-19 11:39:06,199 INFO ── Step 5: Generate Briefing ──
+2026-08-19 11:39:06,532 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-19.md (33876 bytes)
+2026-08-19 11:39:06,543 INFO Pruned 160 rows from quotes (older than 90 days)
+2026-08-19 11:39:06,547 INFO Pruned 135 rows from technicals (older than 90 days)
+2026-08-19 11:39:06,548 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-08-19 11:39:06,552 INFO Pruned 224 rows from headlines (older than 14 days)
+2026-08-19 11:39:06,571 INFO Pruned 4 rows from economic_events (older than 90 days)
+2026-08-19 11:39:06,573 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-19 11:39:06,574 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-19 11:39:06,813 INFO Cleanup complete
+2026-08-19 11:39:06,814 INFO === Collection complete: 543.6s total, completeness=100%, exit_code=0 ===
+[2026-08-19 11:39:06] Data collection complete — briefing file ready
+[2026-08-19 11:39:06] Found 9 research files (sector theses + structural calendar)
+[2026-08-19 11:39:06] Running Claude [report (attempt 1)] (timeout: 900s)...
+Brief written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-19_Wed.md` (5,438 words incl. tables — HEAVY calibration, vs. 4,298 for Tuesday's MEDIUM).
+
+**What the data said:**
+
+- **Yesterday's bearish call verified on all four indices** — S&P -0.68%, Nasdaq -1.33%, Dow -0.22%, Russell -1.31%, with the Nasdaq/Dow duration spread delivering almost exactly as the futures flagged it.
+- **Today is one event.** FOMC Minutes 14:00 ET (the Jul 28–29 meeting — the three-week lag lines up with `CALENDAR.md`) is the first high-impact row in over a week; the other two rows bracket it. Both long tenors retreated (30Y -2.4bp, 10Y -1.8bp) and the file itself attributes that to positioning ahead of the release, so the flat-to-green futures bid has no source independent of 14:00.
+- **Kospi -5.80% / Nikkei -3.16% did not cross the Pacific.** Europe is inside ±0.41% and US semis are flat-to-green. That decoupling is the open's main question.
+- **Bias: neutral, upward tilt entirely borrowed and entirely reversible.**
+
+**Three things I flagged rather than interpreted, per the rules:**
+
+1. **The stamp postdates the release it calls pending.** Collection is 11:39:06 PT = 14:39 ET, against a 14:00 ET minutes row — yet the Actual is "—" and the file's own intelligence block labels it "(pending)." I reported Pending as instructed and stated the consequence plainly: if the stamp is right, the calm in this snapshot *is* the reaction, and nothing in the file resolves which reading holds.
+2. **The change column is understating moves badly.** CRWV prints -2.17% at 91.15 against Tuesday's 103 — a **-11.5% session-over-session move**, and it lost its 200-day. TLN prints +0.06% at 318 against 352 (**-9.7%**). Both are derived from level comparison, not the change field, and I marked them as needing verification before anyone trades them. Same pattern in BE, OUST, TER.
+3. **Five watchlist change fields read exactly +0.00% while their levels moved** (LYSCF third session, plus USAR, ENPH, QS, PEG), alongside a 12th consecutive FRED timeout leaving the 2Y byte-identical and the 2s/10s spread moving only because the 10Y did.
+
+**Thesis intersections worth your attention:** the White House added post-quantum cryptography to the critical technology list while **removing data centers and batteries** — a policy leg gained and two lost on the same day, and it moved nothing. Quantum had its busiest commercial news day of August and printed zero green tickers. Unitree's IPO (+~600%) fired the exact catalyst the robotics thesis named, with no response in the listed proxies. SQM is listed as "reporting today" for the **second consecutive session** with no estimate and no actual — I noted the file can't distinguish a rolling date field from an uncaptured result.
+[2026-08-19 11:47:41] Claude [report (attempt 1)] finished successfully
+[2026-08-19 11:47:41] Report attempt 1 succeeded: 33600 bytes
+[2026-08-19 11:47:41] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-19_Wed.md ===
+
+--- Live Schwab API checks ---
+  Looking up 67 symbols...
+  Got quotes for 56 symbols
+
+--- Database cross-checks (market_date=2026-08-19) ---
+  3 database corrections:
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Pending — no actual in file' → 'Pending' (not released)
+    FABRICATION: FOMC MEETING MINUTES actual 'Pending — scheduled 14:00 ET' → 'Pending' (not released)
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Pending — scheduled 14:30 ET' → 'Pending' (not released)
+
+  3 total corrections needed:
+    FABRICATION: CRUDE OIL INVENTORIES actual 'Pending — no actual in file' → 'Pending' (not released)
+    FABRICATION: FOMC MEETING MINUTES actual 'Pending — scheduled 14:00 ET' → 'Pending' (not released)
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Pending — scheduled 14:30 ET' → 'Pending' (not released)
+
+  WARNING: corrections identified but could not be applied
+=== Fact-check complete ===
+[2026-08-19 11:47:51] Running Claude [html-publish] (timeout: 900s)...
