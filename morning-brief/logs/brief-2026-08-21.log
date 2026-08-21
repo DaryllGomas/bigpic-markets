@@ -1,0 +1,106 @@
+[2026-08-21 11:30:01] === Morning Brief Started ===
+[2026-08-21 11:30:01] Date: Friday, 2026-08-21
+[2026-08-21 11:30:01] Output: morning-brief/2026-08/2026-08-21_Fri.md + 2026-08-21_Fri.html
+[2026-08-21 11:30:01] All dependencies verified
+[2026-08-21 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-21 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-21 11:30:01,953 INFO === Market Data Collection — 2026-08-21 ===
+2026-08-21 11:30:01,984 INFO ── Step 1: RSS Feeds ──
+2026-08-21 11:30:18,428 INFO RSS feeds: 239 headlines stored, 237 older than 24h skipped
+2026-08-21 11:30:18,428 INFO Step 1 complete: 16.4s (headlines=239)
+2026-08-21 11:30:18,428 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-21 11:30:18,433 INFO Opus analysis: sending 233 headlines to claude CLI (attempt 1/3)...
+2026-08-21 11:32:12,024 INFO Opus analysis: 48 tickers, 8 movers, 13 themes from 233 headlines (attempt 1/3)
+2026-08-21 11:32:12,025 INFO Step 2 complete: 113.6s (opus_tickers=48)
+2026-08-21 11:32:12,025 INFO ── Step 3: Schwab + External APIs ──
+2026-08-21 11:32:19,815 INFO Schwab quotes: 161 symbols
+2026-08-21 11:32:19,815 INFO Auto-detected movers (|change| > 3%): 15 symbols
+2026-08-21 11:32:19,816 INFO Technicals + SMA200 for 142 quoted symbols (sequential)
+2026-08-21 11:35:33,711 INFO Schwab technicals: 139/142 symbols
+2026-08-21 11:37:16,339 INFO SMA200: 137/142 symbols
+2026-08-21 11:37:16,502 INFO Schwab market context: collected
+2026-08-21 11:38:28,096 INFO Schwab earnings: 71 entries
+2026-08-21 11:38:28,121 INFO Economic calendar: 4 events
+2026-08-21 11:38:28,239 INFO CoinGecko: 2 coins
+2026-08-21 11:38:32,997 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-21 11:38:38,246 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-21 11:38:43,946 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-21 11:38:44,454 INFO Stooq: 0/3 symbols
+2026-08-21 11:39:32,829 WARNING FRED failed: The read operation timed out
+2026-08-21 11:39:41,207 INFO Yahoo backup: 4 symbols
+2026-08-21 11:39:41,208 INFO Step 3 complete: 449.2s (quotes=161, tech=139, sma200=137, earnings=71, econ=4, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-21 11:39:41,208 INFO ── Step 4: Validation + Retry ──
+2026-08-21 11:39:41,505 INFO ANOMALY: MSTR price=121.16 avg=96.02 z=4.3
+2026-08-21 11:39:41,577 INFO ANOMALY: SQM price=81.00 avg=70.75 z=3.2
+2026-08-21 11:39:41,621 INFO Anomaly detection: 2 flagged
+2026-08-21 11:39:41,621 INFO Cross-validation: 0 discrepancies
+2026-08-21 11:39:41,653 INFO Retry check: 3 failed call(s) found, retrying...
+2026-08-21 11:39:41,653 INFO   Retrying technicals for BTRCF (original error: HTTP Error 400: Bad Request)
+2026-08-21 11:39:42,661 INFO   ✗ BTRCF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-21 11:39:42,661 INFO   Retrying technicals for RPNMF (original error: HTTP Error 400: Bad Request)
+2026-08-21 11:39:43,669 INFO   ✗ RPNMF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-21 11:39:43,669 INFO   Retrying technicals for HYPRF (original error: HTTP Error 400: Bad Request)
+2026-08-21 11:39:44,683 INFO   ✗ HYPRF technicals retry failed: HTTP Error 400: Bad Request
+2026-08-21 11:39:44,690 INFO Retry complete: 0/3 recovered
+2026-08-21 11:39:44,774 WARNING Excluding 3 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): BTRCF, HYPRF, RPNMF
+2026-08-21 11:39:44,805 INFO Step 4 complete: 3.6s (anomalies=2, cross_val=0, retried=0, completeness=100%)
+2026-08-21 11:39:44,807 INFO ── Step 5: Generate Briefing ──
+2026-08-21 11:39:45,167 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-21.md (36862 bytes)
+2026-08-21 11:39:45,177 INFO Pruned 173 rows from quotes (older than 90 days)
+2026-08-21 11:39:45,181 INFO Pruned 148 rows from technicals (older than 90 days)
+2026-08-21 11:39:45,182 INFO Pruned 7 rows from anomalies (older than 90 days)
+2026-08-21 11:39:45,186 INFO Pruned 241 rows from headlines (older than 14 days)
+2026-08-21 11:39:45,188 INFO Pruned 130 rows from levels (older than 30 days)
+2026-08-21 11:39:45,188 INFO Pruned 39 rows from opus_tickers (older than 30 days)
+2026-08-21 11:39:45,189 INFO Pruned 9 rows from opus_movers (older than 30 days)
+2026-08-21 11:39:45,189 INFO Pruned 8 rows from opus_themes (older than 30 days)
+2026-08-21 11:39:45,190 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-08-21 11:39:45,190 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-08-21 11:39:45,210 INFO Pruned 4 rows from economic_events (older than 90 days)
+2026-08-21 11:39:45,212 INFO Pruned 71 rows from earnings (older than 90 days)
+2026-08-21 11:39:45,213 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-21 11:39:45,538 INFO Cleanup complete
+2026-08-21 11:39:45,540 INFO === Collection complete: 582.8s total, completeness=100%, exit_code=0 ===
+[2026-08-21 11:39:45] Data collection complete — briefing file ready
+[2026-08-21 11:39:45] Found 9 research files (sector theses + structural calendar)
+[2026-08-21 11:39:45] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-21_Fri.md`.
+
+**Event Load: LIGHT** — depth calibrated accordingly (~1,900 words including tables; prose body sits in the LIGHT-to-MEDIUM band since the watchlist section had real signal).
+
+Key judgment calls:
+
+- **No fabricated actuals.** All three pending calendar items (Flash Mfg PMI, Flash Services PMI, Trump 19:00) are marked "Scheduled — Pending" with forecast/prior only. No watchlist earnings today, so that section says so explicitly.
+- **Flagged three data-integrity issues** rather than reporting them cleanly. MSTR at 121 carries a z-score 4.3 anomaly *and* sits below its 200-day of 145 despite bitcoin's best week since 2023 — I marked the level suspect. SQM is anomaly-flagged too. EXK appears as a +3.65% gainer in the movers table while the news analysis tags it *down* on the Endeavour blockade; I surfaced the contradiction rather than picking a side.
+- **BTC discrepancy noted**, not smoothed over: the CoinGecko snapshot is $76,850 but feed headlines reference $79,500+ intraday. Both stated with attribution.
+- **The lead observation** is that 10 of 14 pre-market movers are watchlist names and they cluster in uranium, copper/rare earth, and lithium — plus gold +1.78% and a soft dollar. That's a hard-asset/debasement bid, not broad beta, which is why I set the bias at cautiously constructive rather than bullish despite green futures across all four indices and a compressing VIX.
+- **OpEx correctly scoped.** CALENDAR.md confirms Aug 21 is the regular August monthly expiration, *not* triple witch (Sep 18, which converges with the Sep 16 FOMC). I said so explicitly so the pinning expectation isn't oversized.
+- **Technicals section** leads with AVGO at 368 against a 200-day of 369 with RSI 36 — the tightest level on the Tier 1 board — plus CRWV sitting dead on its 200-day, and LUNR/MP both testing theirs from below.
+
+Two things I could not resolve from the briefing: the US Indices previous-close table shows +0.00% for all four indices (I flagged these as levels-only), and the 2Y yield is a stale FRED previous close after a read timeout, so the 2s10s spread inherits that staleness.
+[2026-08-21 11:42:05] Claude [report (attempt 1)] finished successfully
+[2026-08-21 11:42:05] Report attempt 1 succeeded: 14970 bytes
+[2026-08-21 11:42:05] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-21_Fri.md ===
+
+--- Live Schwab API checks ---
+  Looking up 42 symbols...
+  Got quotes for 37 symbols
+
+--- Database cross-checks (market_date=2026-08-21) ---
+  4 database corrections:
+    FABRICATION: MONTHLY OPTIONS EXPIRATION actual 'All day' → 'Pending' (not released)
+    FABRICATION: FLASH MANUFACTURING PMI actual 'Scheduled 9:45 — Pending' → 'Pending' (not released)
+    FABRICATION: FLASH SERVICES PMI actual 'Scheduled 9:45 — Pending' → 'Pending' (not released)
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled 19:00 — Pending' → 'Pending' (not released)
+
+  4 total corrections needed:
+    FABRICATION: MONTHLY OPTIONS EXPIRATION actual 'All day' → 'Pending' (not released)
+    FABRICATION: FLASH MANUFACTURING PMI actual 'Scheduled 9:45 — Pending' → 'Pending' (not released)
+    FABRICATION: FLASH SERVICES PMI actual 'Scheduled 9:45 — Pending' → 'Pending' (not released)
+    FABRICATION: PRESIDENT TRUMP SPEAKS actual 'Scheduled 19:00 — Pending' → 'Pending' (not released)
+
+  4 corrections written to 2026-08-21_Fri.md
+=== Fact-check complete ===
+[2026-08-21 11:42:11] Running Claude [html-publish] (timeout: 900s)...
