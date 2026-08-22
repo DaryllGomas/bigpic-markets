@@ -525,7 +525,7 @@ run_claude() {
 main() {
     log "=== Morning Brief Started ==="
     log "Date: $DAY_FULL, $TARGET_DATE"
-    log "Output: morning-brief/$MONTH/$OUTPUT_MD + $OUTPUT_HTML"
+    log "Output: morning-brief/$MONTH/$OUTPUT_MD"
 
     # Check dependencies
     check_deps
@@ -534,8 +534,9 @@ main() {
     # Clean up stale team/task artifacts from any previous failed runs
     cleanup_stale_teams
 
-    # Skip if already generated today (check HTML — MD alone means a partial run)
-    if [[ -f "$MONTH_DIR/$OUTPUT_HTML" ]]; then
+    # Skip if already generated today. Keys on the MD since the HTML build was
+    # retired 2026-08-22 — an HTML check here would never fire again.
+    if [[ -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
         log "Brief already exists for $TARGET_DATE — skipping"
         exit 0
     fi
@@ -631,36 +632,32 @@ main() {
     log "Running Schwab fact-check verification..."
     python3 "$REPO_DIR/scripts/verify-brief.py" "$MONTH_DIR/$OUTPUT_MD" 2>&1 | tee -a "$LOG_FILE" || true
 
-    # ── Invocation 2: HTML Build + Publish ───────────────────────────────────
-    set +e
-    run_claude "html-publish" "$TIMEOUT_HTML" "$(build_html_prompt)"
-    local html_rc=$?
-    set -e
+    # ── HTML build + site publish: RETIRED 2026-08-22 ───────────────────────
+    # Stopped with the weekly report. This was a second Opus invocation whose
+    # only product was the rendered page + archive card on
+    # markets.bigpicsolutions.com. Nothing downstream reads the HTML —
+    # inject-morning.sh consumes $OUTPUT_MD. The published archive is frozen at
+    # its last entry. To restore, re-enable:
+    #   run_claude "html-publish" "$TIMEOUT_HTML" "$(build_html_prompt)"
+    #
+    # The commit+push used to ride inside that Opus prompt; it is replaced here
+    # by a deterministic one so the collector's output still backs up off-host
+    # and .61's working tree does not accumulate uncommitted files each run.
+    log "Committing data artifacts (HTML build retired)..."
+    (
+        cd "$REPO_DIR" || exit 1
+        git add -A data/ "morning-brief/$MONTH/$OUTPUT_MD" morning-brief/logs 2>/dev/null || true
+        if git diff --cached --quiet; then
+            echo "Nothing to commit"
+        else
+            git commit -q -m "Market data — $DAY_FULL $TARGET_DATE"
+            git pull --rebase -q origin main || true
+            git push -q origin main || echo "push failed — will retry next run"
+        fi
+    ) 2>&1 | tee -a "$LOG_FILE" || log_error "git step failed (non-fatal)"
 
-    if [[ $html_rc -ne 0 ]]; then
-        send_failure_alert "Claude [html-publish] failed (rc=$html_rc)" || true
-        exit 1
-    fi
-
-    # Verify HTML was created
-    if [[ ! -f "$MONTH_DIR/$OUTPUT_HTML" ]]; then
-        log_error "HTML file not found at $MONTH_DIR/$OUTPUT_HTML"
-        send_failure_alert "HTML file was not created by Claude [html-publish]" || true
-        exit 1
-    fi
-
-    local html_size
-    html_size=$(stat -c%s "$MONTH_DIR/$OUTPUT_HTML")
-    log "HTML generated: $html_size bytes"
-
-    if [[ $html_size -lt 2000 ]]; then
-        log_error "HTML too small ($html_size bytes), may be incomplete"
-        send_failure_alert "HTML generated but suspiciously small ($html_size bytes)" || true
-        exit 1
-    fi
-
-    log "=== Morning Brief Complete ==="
-    log "Published: markets.bigpicsolutions.com/morning-brief/$MONTH/$OUTPUT_HTML"
+    log "=== Morning Brief Complete (markdown only) ==="
+    log "Output: morning-brief/$MONTH/$OUTPUT_MD — consumed by inject-morning.sh"
     track_run "SUCCESS"
     exit 0
 }
