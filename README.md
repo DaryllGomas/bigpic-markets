@@ -1,6 +1,6 @@
 # BigPic Solutions — Investment Research & Market Intelligence
 
-Thematic investment research covering high-conviction secular growth sectors, weekly macro analysis, and daily pre-market briefings.
+Thematic investment research covering high-conviction secular growth sectors and daily pre-market briefings.
 
 ## Sector Research
 
@@ -16,9 +16,8 @@ Thematic investment research covering high-conviction secular growth sectors, we
 | Defense & Aerospace | [THESIS.md](research/defense/THESIS.md) | [report.html](research/defense/report.html) |
 | Energy Storage | [THESIS.md](research/energy-storage/THESIS.md) | [report.html](research/energy-storage/report.html) |
 
-## Weekly & Daily Reports
+## Daily Reports
 
-- **Eagle Eye** — Weekly macro report covering equities, rates, commodities, crypto, and thesis watchlist tracking. See [eagle-eye/](eagle-eye/).
 - **Morning Brief** — Daily pre-market analysis with overnight recap, calendar, and watchlist activity. See [morning-brief/](morning-brief/).
 
 ## Supplementary Research

@@ -69,7 +69,6 @@ Visceral, transformative, powerful — you can *feel* the atoms being shaped. Th
 - Standard 52px fixed nav matching site pattern
 - BigPic Solutions gradient brand
 - Sectors dropdown
-- Eagle Eye link
 - Dark glassmorphic background with ember-tinted accents
 
 ## Share/OG Tags

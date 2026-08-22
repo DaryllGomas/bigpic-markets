@@ -3,7 +3,7 @@
 *Last updated: 2026-02-22*
 *Disclaimer: Educational research — not investment advice.*
 
-This calendar tracks recurring structural market events that create tradeable edges. These are events no API provides — they come from our own strategy research. Both the Morning Brief and Eagle Eye pipelines read this file automatically.
+This calendar tracks recurring structural market events that create tradeable edges. These are events no API provides — they come from our own strategy research. The Morning Brief pipeline reads this file automatically.
 
 ---
 

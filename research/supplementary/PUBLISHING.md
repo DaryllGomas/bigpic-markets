@@ -171,7 +171,6 @@ Insert after `<body>`, before the first `<section>`:
         <a href="../../../research/energy-storage/report.html">Energy Storage</a>
       </div>
     </div>
-    <a class="nav-link" href="../../../eagle-eye/">Eagle Eye</a>
   </div>
 </nav>
 
@@ -270,7 +269,7 @@ git push origin main   # GitHub Pages deploys automatically
 ## Step 7: Verify
 
 - [ ] Article loads at `https://markets.bigpicsolutions.com/research/supplementary/{DIR}/{article}.html`
-- [ ] Nav bar links work (sector dropdown, Eagle Eye)
+- [ ] Nav bar links work (sector dropdown)
 - [ ] Share dropdown works (copy link + share to X)
 - [ ] Index page shows card with thumbnail at top of Supplementary grid
 - [ ] Social preview renders (test with [X Card Validator](https://cards-dev.twitter.com/validator))

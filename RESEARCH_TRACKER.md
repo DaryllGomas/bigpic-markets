@@ -232,8 +232,7 @@ After all 6 sectors are done:
 
 - [ ] Update this tracker — move all sectors to "Completed" table with dates and file names
 - [ ] Update `/home/spicymeatball/Google-Drive/BigPic - Invest/PROMPTS.md` — add all 6 to the "Completed Research" table
-- [ ] Update thesis integration in Eagle Eye and Morning Brief (add new sector watchlists to the prompts)
-  - Edit `/home/spicymeatball/projects/namkuzu-da/toolbox/eagle-eye` — add new THESIS_* variables
+- [ ] Update thesis integration in Morning Brief (add new sector watchlists to the prompts)
   - Edit `/home/spicymeatball/projects/namkuzu-da/toolbox/morning-brief` — add new THESIS_* variables
 - [ ] Verify each sector has exactly 6 files: 4 reports + THESIS.md + HTML
 
