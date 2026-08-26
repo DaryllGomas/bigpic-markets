@@ -1220,6 +1220,46 @@ def get_big_movers(conn, market_date, threshold=3.0):
 # empty response, timeout, transient API error) should not abort the whole brief.
 # See postmortem 2026-06-11 (parse_error "char 0", reproduced clean afterward).
 # Auth failure and a missing binary are NOT retried — they won't self-heal.
+def _parse_claude_json(stdout):
+    """(result_text, is_error) from `claude --output-format json` stdout.
+
+    Returns (None, None) when stdout is not the expected JSON, so callers fall
+    back to stderr and an unparseable failure is still reported, never swallowed.
+    """
+    raw = (stdout or "").strip()
+    if not raw:
+        return None, None
+    try:
+        d = json.loads(raw)
+    except (ValueError, TypeError):
+        return None, None
+    if not isinstance(d, dict):
+        return None, None
+    res = d.get("result")
+    return (res if isinstance(res, str) else None), d.get("is_error")
+
+
+#: Matched against the CLI's OWN message only — never the whole JSON blob, whose
+#: session_id/uuid fields can contain "401"/"403" and produce a false auth verdict.
+_AUTH_MARKERS = (
+    "authenticate", "authentication", "not logged in", "please log in", "/login",
+    "oauth", "session expired", "credential", "invalid api key", "unauthorized",
+    "401", "403",
+)
+
+
+def _is_auth_failure(detail, stderr_snip, returncode, stdout):
+    """Auth failures never heal on retry, so they must fail fast and say so."""
+    text = " ".join(x for x in (detail, stderr_snip) if x).lower()
+    if text and any(m in text for m in _AUTH_MARKERS):
+        return True
+    # Legacy shape retained: older CLI builds exited 1 with both streams empty,
+    # which in practice only ever meant expired credentials.
+    return (returncode == 1
+            and not (stdout or "").strip()
+            and not (stderr_snip or "").strip())
+
+
 OPUS_MAX_ATTEMPTS = 3
 OPUS_RETRY_BACKOFF = [10, 30]  # seconds to wait before retry 2 and retry 3
 
@@ -1334,27 +1374,35 @@ Rules:
 
             if result.returncode != 0:
                 stderr_snip = (result.stderr or "")[:200]
-                stdout_snip = (result.stdout or "")[:200]
-                combined = (stderr_snip + " " + stdout_snip).lower()
-                auth_keywords = ("invalid api key", "not authenticated", "please run /login",
-                                 "authentication", "credentials", "401", "403", "unauthorized")
-                if any(kw in combined for kw in auth_keywords) or (
-                    result.returncode == 1 and not stderr_snip.strip() and not stdout_snip.strip()
-                ):
+                # `claude --output-format json` puts the REAL reason in a JSON body
+                # on STDOUT, not stderr. Parse it instead of grepping a truncated
+                # blob. On 2026-08-26 an expired OAuth session ("Failed to
+                # authenticate: OAuth session expired and could not be refreshed")
+                # was misreported as a generic retryable cli_error and burned all
+                # 3 retries, because: (a) that text sits at offset ~671 and the old
+                # check only read stdout[:200], so no keyword could ever match;
+                # (b) the list held "authentication" while the CLI says
+                # "authenticate:"; (c) the empty-output fallback required stdout
+                # empty, but the JSON fills it. The brief then went dark for 8h.
+                detail, _is_err = _parse_claude_json(result.stdout)
+                reason = detail or stderr_snip or "(no output)"
+
+                if _is_auth_failure(detail, stderr_snip, result.returncode, result.stdout):
                     # Credentials expired — retrying won't help. Fail fast.
                     analyze_headlines_with_opus.last_error = (
                         "auth_failure",
-                        "claude CLI exited 1 with empty output — credentials likely expired. "
-                        "Run `claude /login` on the host.",
+                        f"claude CLI auth failure: {reason} — "
+                        "run `claude /login` on the host.",
                     )
-                    log.warning(f"Opus analysis: auth failure (exit {result.returncode}) — not retrying")
+                    log.warning(f"Opus analysis: auth failure (exit {result.returncode}): "
+                                f"{reason} — not retrying")
                     return {}
                 # Other non-zero exit — likely transient, retry.
                 analyze_headlines_with_opus.last_error = (
                     "cli_error",
-                    f"claude CLI exited {result.returncode}: {stderr_snip or '(no stderr)'}",
+                    f"claude CLI exited {result.returncode}: {reason}",
                 )
-                log.warning(f"Opus analysis: claude CLI exited {result.returncode}: {stderr_snip} "
+                log.warning(f"Opus analysis: claude CLI exited {result.returncode}: {reason} "
                             f"(attempt {attempt}/{OPUS_MAX_ATTEMPTS})")
                 _opus_retry_wait(attempt, log)
                 continue
