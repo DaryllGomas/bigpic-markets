@@ -1894,7 +1894,26 @@ def generate_briefing(conn, market_date, log):
     ).fetchall()
     for xv in xvals:
         w(f"> - DISCREPANCY: {xv['data_point']}: {xv['source_a']}={xv['value_a']:.3f} vs {xv['source_b']}={xv['value_b']:.3f} ({xv['discrepancy_pct']:.2f}% off)")
-    if not failures and not anomalies and not xvals:
+    # Missing completeness categories — the SAME `details` dict Step 4's gate
+    # reads (score, details = calculate_completeness at the top of this
+    # function). This block is the FIRST thing in the briefing file, and
+    # inject-morning.sh cats the file wholesale into the prompt that writes the
+    # Daily Notes entry — so this is the most visible possible place to put a
+    # gap. Without it, a degraded run publishes silently and the whole point of
+    # degrading instead of blacking out is lost.
+    #
+    # The explicit "do NOT estimate" line matters: handing an LLM a brief full
+    # of "—" placeholders invites the opposite failure of a blackout, which is
+    # confident fabrication. Opus failures land here too, with no special-casing
+    # — opus_analysis is one of calculate_completeness()'s own categories.
+    missing_categories = [(k, p, e) for k, (p, e) in details.items() if p < e]
+    if missing_categories:
+        gaps = ", ".join(f"{k} {p}/{e}" for k, p, e in missing_categories)
+        w(f"> - **INCOMPLETE:** {gaps}")
+        w("> - The figures above are what was actually collected. Do NOT "
+          "estimate, infer, or carry forward a prior day's value for any "
+          "missing category above — report it as unavailable.")
+    if not failures and not anomalies and not xvals and not missing_categories:
         w("> - All sources healthy, no anomalies detected")
     w("")
     w("---")
@@ -2491,6 +2510,61 @@ This pipeline will need manual intervention before the morning brief can run.
         return False
 
 
+def send_degraded_email(market_date, degradations, score, log):
+    """ONE summary email for a DEGRADED run — every gap Steps 2/4 hit, sent once.
+
+    Deliberately distinct from send_failure_email: a degraded run still produces
+    and delivers a briefing, so the subject and body must say so plainly. Reading
+    like an outage is exactly the conflation ("a partial data outage became a
+    total blackout") that this whole degrade path exists to undo.
+    """
+    import shutil
+    if not shutil.which("msmtp"):
+        log.error("Cannot send degraded email: msmtp not installed")
+        return False
+
+    hostname = os.uname().nodename
+    log_file = LOG_DIR / f"collect-{market_date}.log"
+    subject = f"[DEGRADED] Market Data Collection — {market_date} ({score:.0%} complete)"
+    issues = "\n".join(f"- {step}: {detail}" for step, detail in degradations)
+    body = f"""Market data collection completed on {hostname}, but {len(degradations)} issue(s) left gaps.
+
+Date: {market_date}
+Completeness: {score:.0%}
+
+{issues}
+
+The pipeline CONTINUED — a briefing file was generated and will still be
+injected into Daily Notes, with these gaps annotated inline (see the Data
+Quality Notes block at the top of the briefing). This is NOT a blackout.
+No action is needed unless a listed gap needs a manual fix (e.g. an expired
+claude OAuth session — run `claude /login` on this host).
+
+Log file: {log_file}
+"""
+    try:
+        msg = (
+            f"From: collect-market-data@{hostname}\n"
+            f"To: {FAILURE_EMAIL}\n"
+            f"Subject: {subject}\n"
+            f"Content-Type: text/plain; charset=utf-8\n"
+            f"\n"
+            f"{body}"
+        )
+        result = subprocess.run(
+            ["msmtp", FAILURE_EMAIL],
+            input=msg, text=True, capture_output=True, timeout=30,
+        )
+        if result.returncode == 0:
+            log.info(f"Degraded-run email sent to {FAILURE_EMAIL}")
+            return True
+        log.error(f"msmtp failed (exit {result.returncode}): {result.stderr[:200]}")
+        return False
+    except Exception as e:
+        log.error(f"Failed to send degraded email: {e}")
+        return False
+
+
 def get_market_date(override=None):
     """Get the market date (today, adjusted for weekends)."""
     if override:
@@ -2536,6 +2610,28 @@ def main():
         send_failure_email(market_date, step, detail, log)
         conn.close()
         return 2
+
+    # Gaps that do NOT justify a total blackout. Steps 2 and 4 used to call
+    # fail() for these, aborting BEFORE Step 5 ever ran — so on 2026-08-25 a
+    # 73%-complete run (only global-macro context missing; RSS, earnings, econ
+    # and all 155 equities fine) produced total silence instead of an annotated
+    # brief, and on 2026-08-26 an expired OAuth session killed the run at Step 2
+    # with 238 headlines already collected. A PARTIAL data outage became a TOTAL
+    # Daily Notes blackout both times.
+    #
+    # The threshold is PRESENCE, not percentage. No completeness cutoff is used,
+    # deliberately: 73% of purely contextual categories is publishable, while a
+    # hypothetical 90% whose missing slice is watchlist_t1 would gut the entry's
+    # actionable sections. One number cannot tell those apart. So the only hard
+    # gates left are "there is nothing to report at all" — zero headlines
+    # (Step 1) and Schwab unreachable / zero quotes (Step 3). Everything else
+    # degrades: log it, queue it, annotate it in the brief, keep going.
+    degradations = []
+
+    def degrade(step, detail):
+        """Log a non-fatal gap and queue it — unlike fail(), never exits."""
+        log.warning(f"PIPELINE DEGRADED at {step}: {detail}")
+        degradations.append((step, detail))
 
     try:
         # Fresh run — clear today's data and start clean
@@ -2586,13 +2682,20 @@ def main():
         if not opus_analysis:
             err = getattr(analyze_headlines_with_opus, "last_error", None)
             if err and err[0] == "auth_failure":
-                return fail("Step 2 (Opus auth)", err[1])
+                degrade("Step 2 (Opus auth)", err[1])
             elif err:
-                return fail(f"Step 2 (Opus {err[0]})", err[1])
+                degrade(f"Step 2 (Opus {err[0]})", err[1])
             else:
-                return fail("Step 2 (Opus)",
-                            "Opus feed analysis returned empty — claude CLI may be down or timed out")
-        step_results["step2_opus"] = "ok"
+                degrade("Step 2 (Opus)",
+                        "Opus feed analysis returned empty — claude CLI may be down or timed out")
+            # Step 1's headlines are still worth a brief without this enrichment,
+            # and Step 3 collects the full watchlist regardless. 'opus_analysis'
+            # is already one of calculate_completeness()'s categories, so this
+            # gap surfaces in the SAME Data Quality Notes block Step 4 uses — no
+            # separate plumbing needed to get it in front of a reader.
+            step_results["step2_opus"] = "degraded"
+        else:
+            step_results["step2_opus"] = "ok"
 
         # ── STEP 3: Collect Numbers (Schwab + External APIs) ──
         log.info("── Step 3: Schwab + External APIs ──")
@@ -2689,12 +2792,12 @@ def main():
             real_gaps = [s for s in syms if s not in http400_syms]
 
             if real_gaps:
-                return fail("Step 4 (Data gaps)",
+                degrade("Step 4 (Data gaps)",
                             f"{len(real_gaps)} symbol(s) still missing technicals after retry: {', '.join(real_gaps)}")
 
         score, details = calculate_completeness(conn, market_date)
         s4_time = time.monotonic() - t0
-        step_results["step4_validate"] = "ok"
+        step_results["step4_validate"] = "ok"   # may be downgraded below
         log.info(f"Step 4 complete: {s4_time:.1f}s (anomalies={s4_anomalies}, "
                  f"cross_val={s4_xval}, retried={s4_recovered}, completeness={score:.0%})")
 
@@ -2705,7 +2808,13 @@ def main():
 
         if score < 1.0:
             missing = [f"  {k}: {p}/{e}" for k, (p, e) in details.items() if p < e]
-            return fail("Step 4 (Completeness)", f"Completeness {score:.0%} — not 100%:\n" + "\n".join(missing))
+            degrade("Step 4 (Completeness)",
+                    f"Completeness {score:.0%} — not 100%:\n" + "\n".join(missing))
+
+        # ONE consolidated email per degraded run, not one per gap, fired before
+        # Step 5 so it goes out even if briefing generation later trips.
+        if degradations:
+            send_degraded_email(market_date, degradations, score, log)
 
         # ── STEP 5: Generate Briefing File ──
         log.info("── Step 5: Generate Briefing ──")
@@ -2719,7 +2828,17 @@ def main():
             "SELECT COUNT(*) FROM headlines WHERE market_date = ?", (market_date,)
         ).fetchone()[0]
 
-        exit_code = 0
+        # 0 = fully complete. 1 = degraded but published — run-morning-brief.sh
+        # has ALWAYS had a `collect_rc -eq 1` branch that proceeds; main() just
+        # never returned 1, so it was dead code until now. 2 = fail() aborted
+        # before Step 5, so no briefing file exists at all.
+        exit_code = 1 if degradations else 0
+        if degradations:
+            step_results["step4_validate"] = "degraded"
+            log.warning(
+                f"PIPELINE DEGRADED ({len(degradations)} issue(s), completeness={score:.0%}): "
+                + ", ".join(step for step, _ in degradations)
+            )
 
         conn.execute(
             "UPDATE collections SET finished_at = ?, phase1_status = ?, phase2_status = ?, "

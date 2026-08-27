@@ -51,6 +51,11 @@ LOG_DIR="$BRIEF_DIR/logs"
 LOG_FILE="$LOG_DIR/brief-${TARGET_DATE}.log"
 TRACKING_FILE="$LOG_DIR/run-history.csv"
 RUN_START_EPOCH=$(date +%s)
+# Set by the collect_rc==1 branch when the collector ran Steps 2-5 but flagged
+# gaps (its degrade() path). Empty = a clean run. Read by the final track_run to
+# write DEGRADED instead of SUCCESS. Declared here, not just assigned later,
+# because `set -u` rejects an unset reference if that branch never runs.
+PIPELINE_DEGRADED_NOTES=""
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 mkdir -p "$LOG_DIR" "$MONTH_DIR"
@@ -580,7 +585,18 @@ main() {
             fi
             exit 1
         elif [[ $collect_rc -eq 1 ]]; then
-            log "Data collection PARTIAL — some sources failed, proceeding with available data"
+            # DEGRADED, not FAILED: the collector still ran Steps 4-5 and wrote
+            # an annotated briefing. It already sent its own [DEGRADED] email,
+            # and FAILURE_EMAIL (python) == EMAIL_TO (here), so deliberately do
+            # NOT call send_failure_alert — that would double-send one event.
+            local degrade_line
+            degrade_line=$(grep -E "PIPELINE DEGRADED \(" "$LOG_FILE" | tail -1 || true)
+            local degrade_reason="${degrade_line#*PIPELINE DEGRADED }"
+            # run-history.csv is comma-delimited and this becomes its last
+            # field — strip commas/newlines so a multi-gap list cannot shift
+            # later columns out of alignment for anything parsing the file.
+            PIPELINE_DEGRADED_NOTES=$(echo "${degrade_reason:-not specified}" | tr ',\n' '; ' | cut -c1-200)
+            log "Data collection DEGRADED — ${PIPELINE_DEGRADED_NOTES}"
         else
             log "Data collection complete — briefing file ready"
         fi
@@ -688,7 +704,16 @@ main() {
 
     log "=== Morning Brief Complete (data collection only) ==="
     log "Output: data/briefing-${TARGET_DATE}.md — consumed by inject-morning.sh"
-    track_run "SUCCESS"
+    if [[ -n "$PIPELINE_DEGRADED_NOTES" ]]; then
+        # DEGRADED, not SUCCESS: the run did NOT fail — the brief exists and
+        # will be injected — but it carries named gaps. inject-morning.sh and
+        # brief-watchdog.py both treat DEGRADED as a go-ahead; see their own
+        # comments for why a bare "!= SUCCESS" test was unsafe to leave once
+        # this status exists.
+        track_run "DEGRADED" "$PIPELINE_DEGRADED_NOTES"
+    else
+        track_run "SUCCESS"
+    fi
     exit 0
 }
 
