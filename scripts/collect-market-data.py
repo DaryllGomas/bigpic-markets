@@ -1244,14 +1244,22 @@ def _parse_claude_json(stdout):
 _AUTH_MARKERS = (
     "authenticate", "authentication", "not logged in", "please log in", "/login",
     "oauth", "session expired", "credential", "invalid api key", "unauthorized",
-    "401", "403",
 )
+
+#: HTTP status codes need WORD BOUNDARIES, not substring matching. `stderr_snip`
+#: is still raw, unparsed text, and "403" is a substring of "14033" — so a stack
+#: trace like "at bundle.js:14033:22 - ECONNRESET" (a transient network error)
+#: matched the old plain-substring list and was misclassified as an auth failure,
+#: losing all 3 retries it should have had. \b401\b does not match inside a
+#: longer digit run, so only a standalone status code counts.
+_AUTH_STATUS_RE = re.compile(r"\b(?:401|403)\b")
 
 
 def _is_auth_failure(detail, stderr_snip, returncode, stdout):
     """Auth failures never heal on retry, so they must fail fast and say so."""
     text = " ".join(x for x in (detail, stderr_snip) if x).lower()
-    if text and any(m in text for m in _AUTH_MARKERS):
+    if text and (any(m in text for m in _AUTH_MARKERS)
+                 or _AUTH_STATUS_RE.search(text)):
         return True
     # Legacy shape retained: older CLI builds exited 1 with both streams empty,
     # which in practice only ever meant expired credentials.
