@@ -1,0 +1,93 @@
+[2026-08-27 11:30:01] === Morning Brief Started ===
+[2026-08-27 11:30:01] Date: Thursday, 2026-08-27
+[2026-08-27 11:30:01] Output: morning-brief/2026-08/2026-08-27_Thu.md
+[2026-08-27 11:30:01] All dependencies verified
+[2026-08-27 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-27 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-27 11:30:02,083 INFO === Market Data Collection — 2026-08-27 ===
+2026-08-27 11:30:02,121 INFO ── Step 1: RSS Feeds ──
+2026-08-27 11:30:19,640 INFO RSS feeds: 253 headlines stored, 221 older than 24h skipped
+2026-08-27 11:30:19,640 INFO Step 1 complete: 17.5s (headlines=253)
+2026-08-27 11:30:19,640 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-27 11:30:19,642 INFO Opus analysis: sending 240 headlines to claude CLI (attempt 1/3)...
+2026-08-27 11:31:42,063 INFO Opus analysis: 44 tickers, 13 movers, 12 themes from 240 headlines (attempt 1/3)
+2026-08-27 11:31:42,064 INFO Step 2 complete: 82.4s (opus_tickers=44)
+2026-08-27 11:31:42,064 INFO ── Step 3: Schwab + External APIs ──
+2026-08-27 11:31:49,885 INFO Schwab quotes: 153 symbols
+2026-08-27 11:31:49,886 INFO Auto-detected movers (|change| > 3%): 25 symbols
+2026-08-27 11:31:49,887 INFO Technicals + SMA200 for 134 quoted symbols (sequential)
+2026-08-27 11:34:53,837 INFO Schwab technicals: 134/134 symbols
+2026-08-27 11:36:29,665 INFO SMA200: 134/134 symbols
+2026-08-27 11:36:29,829 INFO Schwab market context: collected
+2026-08-27 11:38:20,494 INFO Schwab earnings: 71 entries
+2026-08-27 11:38:20,510 INFO Economic calendar: 5 events
+2026-08-27 11:38:20,595 INFO CoinGecko: 2 coins
+2026-08-27 11:38:25,926 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-27 11:38:31,605 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-27 11:38:37,280 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-27 11:38:37,787 INFO Stooq: 0/3 symbols
+2026-08-27 11:39:26,121 WARNING FRED failed: The read operation timed out
+2026-08-27 11:39:36,184 INFO Yahoo backup: 4 symbols
+2026-08-27 11:39:36,185 INFO Step 3 complete: 474.1s (quotes=153, tech=134, sma200=134, earnings=71, econ=5, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-27 11:39:36,185 INFO ── Step 4: Validation + Retry ──
+2026-08-27 11:39:36,559 INFO Anomaly detection: 0 flagged
+2026-08-27 11:39:36,559 INFO Cross-validation: 0 discrepancies
+2026-08-27 11:39:36,603 INFO Retry check: 0 failures — nothing to retry
+2026-08-27 11:39:36,630 INFO Step 4 complete: 0.4s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-08-27 11:39:36,632 INFO ── Step 5: Generate Briefing ──
+2026-08-27 11:39:36,959 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-27.md (36566 bytes)
+2026-08-27 11:39:36,970 INFO Pruned 460 rows from quotes (older than 90 days)
+2026-08-27 11:39:36,974 INFO Pruned 384 rows from technicals (older than 90 days)
+2026-08-27 11:39:36,975 INFO Pruned 20 rows from anomalies (older than 90 days)
+2026-08-27 11:39:36,984 INFO Pruned 615 rows from headlines (older than 14 days)
+2026-08-27 11:39:36,985 INFO Pruned 130 rows from levels (older than 30 days)
+2026-08-27 11:39:36,986 INFO Pruned 35 rows from opus_tickers (older than 30 days)
+2026-08-27 11:39:36,986 INFO Pruned 4 rows from opus_movers (older than 30 days)
+2026-08-27 11:39:36,987 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-08-27 11:39:36,987 INFO Pruned 6 rows from opus_econ_events (older than 30 days)
+2026-08-27 11:39:36,987 INFO Pruned 3 rows from opus_fed_signals (older than 30 days)
+2026-08-27 11:39:36,988 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-08-27 11:39:37,006 INFO Pruned 30 rows from economic_events (older than 90 days)
+2026-08-27 11:39:37,008 INFO Pruned 211 rows from earnings (older than 90 days)
+2026-08-27 11:39:37,008 INFO Pruned 3 rows from market_context (older than 90 days)
+2026-08-27 11:39:37,246 INFO Cleanup complete
+2026-08-27 11:39:37,248 INFO === Collection complete: 574.5s total, completeness=100%, exit_code=0 ===
+[2026-08-27 11:39:37] Data collection complete — briefing file ready
+[2026-08-27 11:39:37] Found 9 research files (sector theses + structural calendar)
+[2026-08-27 11:39:37] Running Claude [report (attempt 1)] (timeout: 900s)...
+Written to `/home/bigpic/projects/bigpic-markets/morning-brief/2026-08/2026-08-27_Thu.md` — MEDIUM event load, all sections per the requested structure, ~1,900 words of analysis plus tables.
+
+**What the data said:**
+
+- **Narrowest possible risk-on.** Nasdaq futures +1.01% against Dow -0.02% and Russell +0.01%. The S&P's +0.45% is cap-weight dilution of the Nasdaq move, not participation. Meanwhile the briefing's own Market Context flags **SPY trend: bearish** with VIX at 14.99 — an event-driven bounce inside a deteriorating trend, and that tension is the spine of the playbook section.
+
+- **18 of 25 auto-detected movers are watchlist names, 9 of them cybersecurity.** OKTA +18.29%, CRWD +9.13%, PANW +4.30%, ZS +3.04%, plus NVDA +6.08%. Four separate beats (NVDA, CRWD, OKTA, CRM) — breadth *within* the theme, not across the market.
+
+- **The most actionable divergence: AVGO.** RSI 34 at 361, below its SMA20 (393), SMA50 (387) *and* SMA200 (369) — a broken chart in the strongest sector on the tape, reporting **September 2**. Next week is a Tier 1 cluster: PANW Sep 1, AVGO Sep 2, ZS Sep 3.
+
+- **Kospi +1.53%** is the mirror image of Monday's -3.12% memory collapse — independent confirmation of NVDA's $160B memory commitment number.
+
+**On the pending-data rules:** all five calendar items and all three earnings (MRVL, S, ESTC) show Actual = "—" and are written as Pending / Not yet reported. Nothing fabricated.
+
+**Three data caveats I flagged in the brief rather than papering over:**
+1. The 2Y yield is a stale FRED previous close (3.961%, identical to Monday's), so the calculated 2s/10s spread is indicative only.
+2. The collection stamp reads 11:39:36 PT — post-open — yet every 8:30 ET release is still blank. I treated everything as unreleased and said so explicitly.
+3. RSI values don't reflect today's gaps (CRWD reads RSI 42 after a +9% move), so the technicals and the change column are as-of different moments.
+
+Also noted: the "4:30 Jobless Claims" and "8:30 Unemployment Claims" rows appear to be the same release duplicated by the feed with a timezone artifact.
+[2026-08-27 11:44:03] Claude [report (attempt 1)] finished successfully
+[2026-08-27 11:44:03] Report attempt 1 succeeded: 19069 bytes
+[2026-08-27 11:44:03] Running Schwab fact-check verification...
+=== Fact-Check: 2026-08-27_Thu.md ===
+
+--- Live Schwab API checks ---
+  Looking up 53 symbols...
+  Got quotes for 47 symbols
+
+--- Database cross-checks (market_date=2026-08-27) ---
+  No database discrepancies found
+
+  All claims within tolerance — no corrections needed
+=== Fact-check complete ===
+[2026-08-27 11:44:11] Committing data artifacts (HTML build retired)...

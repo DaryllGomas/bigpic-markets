@@ -1,0 +1,49 @@
+# Post-Mortem: Morning Brief 2026-08-26
+
+**Status:** FAILED (exit code 1)
+**Start:** 2026-08-26 11:30:01
+**End:** 2026-08-26 11:31:17
+
+## Research Files
+- `markets-research.md`: NOT CREATED
+- `watchlist-research.md`: NOT CREATED
+- `2026-08-26_Wed.md`: NOT CREATED
+
+## Team Members
+- No team config found
+
+## Task Statuses
+- No task directory found
+
+## Inbox Messages
+- No inbox messages
+
+## Log Tail (last 50 lines)
+```
+[2026-08-26 11:30:01] === Morning Brief Started ===
+[2026-08-26 11:30:01] Date: Wednesday, 2026-08-26
+[2026-08-26 11:30:01] Output: morning-brief/2026-08/2026-08-26_Wed.md
+[2026-08-26 11:30:01] All dependencies verified
+[2026-08-26 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-26 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-26 11:30:01,672 INFO === Market Data Collection — 2026-08-26 ===
+2026-08-26 11:30:01,727 INFO ── Step 1: RSS Feeds ──
+2026-08-26 11:30:25,215 INFO RSS feeds: 238 headlines stored, 227 older than 24h skipped
+2026-08-26 11:30:25,216 INFO Step 1 complete: 23.5s (headlines=238)
+2026-08-26 11:30:25,216 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-26 11:30:25,219 INFO Opus analysis: sending 223 headlines to claude CLI (attempt 1/3)...
+2026-08-26 11:30:30,199 WARNING Opus analysis: claude CLI exited 1:  (attempt 1/3)
+2026-08-26 11:30:30,199 INFO Opus analysis: retrying in 10s (next attempt 2/3)...
+2026-08-26 11:30:40,199 INFO Opus analysis: sending 223 headlines to claude CLI (attempt 2/3)...
+2026-08-26 11:30:43,061 WARNING Opus analysis: claude CLI exited 1:  (attempt 2/3)
+2026-08-26 11:30:43,061 INFO Opus analysis: retrying in 30s (next attempt 3/3)...
+2026-08-26 11:31:13,062 INFO Opus analysis: sending 223 headlines to claude CLI (attempt 3/3)...
+2026-08-26 11:31:14,484 WARNING Opus analysis: claude CLI exited 1:  (attempt 3/3)
+2026-08-26 11:31:14,484 ERROR Opus analysis: all 3 attempts failed (last_error=('cli_error', 'claude CLI exited 1: (no stderr)'))
+2026-08-26 11:31:14,484 INFO Step 2 complete: 49.3s (opus_tickers=0)
+2026-08-26 11:31:14,484 ERROR PIPELINE FAILED at Step 2 (Opus cli_error): claude CLI exited 1: (no stderr)
+2026-08-26 11:31:15,750 INFO Failure email sent to daryll@bigpicsolutions.com
+[2026-08-26 11:31:15] ERROR: Data collection FAILED — Step 2 (Opus cli_error): claude CLI exited 1: (no stderr)
+[2026-08-26 11:31:17] ERROR: Script exited with code 1
+```
