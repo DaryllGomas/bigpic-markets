@@ -79,8 +79,14 @@ track_run() {
         echo "date,status,duration_seconds,research_size_bytes,html_size_bytes,notes" > "$TRACKING_FILE"
     fi
 
+    # research_size_bytes repointed 2026-08-27: $MONTH_DIR/$OUTPUT_MD (the prose
+    # brief) is no longer written — the report-writer leg was retired. This now
+    # measures the data-only briefing file, which IS the deliverable of this
+    # script going forward. Column name kept: inject-morning.sh's check_ready()
+    # and brief-watchdog.py both read only columns 1-2, so nothing downstream
+    # depends on what this column means.
     local md_size=0 html_size=0
-    [[ -f "$MONTH_DIR/$OUTPUT_MD" ]] && md_size=$(stat -c%s "$MONTH_DIR/$OUTPUT_MD")
+    [[ -f "$BRIEFING_DIR/briefing-${TARGET_DATE}.md" ]] && md_size=$(stat -c%s "$BRIEFING_DIR/briefing-${TARGET_DATE}.md")
     [[ -f "$MONTH_DIR/$OUTPUT_HTML" ]] && html_size=$(stat -c%s "$MONTH_DIR/$OUTPUT_HTML")
 
     echo "${TARGET_DATE},${status},${duration},${md_size},${html_size},${notes}" >> "$TRACKING_FILE"
@@ -525,7 +531,7 @@ run_claude() {
 main() {
     log "=== Morning Brief Started ==="
     log "Date: $DAY_FULL, $TARGET_DATE"
-    log "Output: morning-brief/$MONTH/$OUTPUT_MD"
+    log "Output: data/briefing-${TARGET_DATE}.md"
 
     # Check dependencies
     check_deps
@@ -534,10 +540,12 @@ main() {
     # Clean up stale team/task artifacts from any previous failed runs
     cleanup_stale_teams
 
-    # Skip if already generated today. Keys on the MD since the HTML build was
-    # retired 2026-08-22 — an HTML check here would never fire again.
-    if [[ -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
-        log "Brief already exists for $TARGET_DATE — skipping"
+    # Skip if already generated today. Keys on the data-only briefing file since
+    # the report-writer leg retired 2026-08-27 — $OUTPUT_MD is never written now,
+    # so keying on it would never fire again. That is exactly the stale-guard
+    # failure this same comment warned about when the HTML leg retired.
+    if [[ -f "$BRIEFING_DIR/briefing-${TARGET_DATE}.md" ]]; then
+        log "Briefing data already exists for $TARGET_DATE — skipping"
         exit 0
     fi
 
@@ -586,51 +594,73 @@ main() {
         log "Briefing file already exists — skipping data collection"
     fi
 
-    # ── Step 2: Claude writes the morning brief (reads briefing file) ──────
-    if [[ ! -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
-        discover_theses
-        log "Found $THESIS_COUNT research files (sector theses + structural calendar)"
-
-        local attempt=1
-        local research_success=0
-
-        while [[ $attempt -le $MAX_RESEARCH_ATTEMPTS && $research_success -eq 0 ]]; do
-            if [[ $attempt -gt 1 ]]; then
-                log "=== Report writing retry $attempt ==="
-            fi
-
-            set +e
-            run_claude "report (attempt $attempt)" "$TIMEOUT_RESEARCH" "$(build_research_prompt)"
-            local rc=$?
-            set -e
-
-            if [[ $rc -eq 0 && -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
-                local md_size
-                md_size=$(stat -c%s "$MONTH_DIR/$OUTPUT_MD")
-                if [[ $md_size -ge 500 ]]; then
-                    research_success=1
-                    log "Report attempt $attempt succeeded: $md_size bytes"
-                else
-                    log_error "Report attempt $attempt produced undersized output ($md_size bytes)"
-                fi
-            else
-                log_error "Report attempt $attempt failed (rc=$rc, md exists=$([ -f "$MONTH_DIR/$OUTPUT_MD" ] && echo yes || echo no))"
-            fi
-
-            attempt=$((attempt + 1))
-        done
-
-        if [[ $research_success -eq 0 ]]; then
-            send_failure_alert "Report writing failed after $MAX_RESEARCH_ATTEMPTS attempts" || true
-            exit 1
-        fi
-    else
-        log "Markdown already exists — skipping report writing"
-    fi
-
-    # ── Schwab fact-check: correct any hallucinated prices/moves ─────────────
-    log "Running Schwab fact-check verification..."
-    python3 "$REPO_DIR/scripts/verify-brief.py" "$MONTH_DIR/$OUTPUT_MD" 2>&1 | tee -a "$LOG_FILE" || true
+    # ── Report-writer leg: RETIRED 2026-08-27 ────────────────────────────────
+    # The second Opus invocation. It read the data-only briefing plus the sector
+    # THESIS.md/CALENDAR.md files and wrote prose to $MONTH_DIR/$OUTPUT_MD.
+    #
+    # Verified before removal that inject-morning.sh was its ONLY consumer —
+    # searched the repo, every .claude/skills tree on the Drive across all four
+    # divisions, and crontab. Nothing else reads morning-brief/YYYY-MM/*.md.
+    # (github/wingman's thesis-loader.js idea in rnd/ideas/ was never built.)
+    #
+    # inject-morning.sh now reads the data file directly AND is passed the
+    # thesis-file paths, because the prose carried catalyst content the data
+    # file has never contained (CMMC, Quantinuum, US-China expiry — grepped:
+    # zero hits in briefing-*.md). Without that second half, this retirement
+    # would have silently thinned Daily Notes every day with no error.
+    #
+    # verify-brief.py went with it: it only ever fact-checked THIS prose file,
+    # never Daily notes.md, so no fact-check coverage is lost.
+    #
+    # Functions (discover_theses, build_research_prompt, run_claude) are left
+    # intact for rollback — same convention as the 2026-08-22 HTML retirement.
+    # To restore: uncomment below, re-key the skip-guard and track_run() on
+    # $MONTH_DIR/$OUTPUT_MD, and revert inject-morning.sh's BRIEF_FILE paths.
+    # # ── Step 2: Claude writes the morning brief (reads briefing file) ──────
+    # if [[ ! -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
+    # discover_theses
+    # log "Found $THESIS_COUNT research files (sector theses + structural calendar)"
+    #
+    # local attempt=1
+    # local research_success=0
+    #
+    # while [[ $attempt -le $MAX_RESEARCH_ATTEMPTS && $research_success -eq 0 ]]; do
+    # if [[ $attempt -gt 1 ]]; then
+    # log "=== Report writing retry $attempt ==="
+    # fi
+    #
+    # set +e
+    # run_claude "report (attempt $attempt)" "$TIMEOUT_RESEARCH" "$(build_research_prompt)"
+    # local rc=$?
+    # set -e
+    #
+    # if [[ $rc -eq 0 && -f "$MONTH_DIR/$OUTPUT_MD" ]]; then
+    # local md_size
+    # md_size=$(stat -c%s "$MONTH_DIR/$OUTPUT_MD")
+    # if [[ $md_size -ge 500 ]]; then
+    # research_success=1
+    # log "Report attempt $attempt succeeded: $md_size bytes"
+    # else
+    # log_error "Report attempt $attempt produced undersized output ($md_size bytes)"
+    # fi
+    # else
+    # log_error "Report attempt $attempt failed (rc=$rc, md exists=$([ -f "$MONTH_DIR/$OUTPUT_MD" ] && echo yes || echo no))"
+    # fi
+    #
+    # attempt=$((attempt + 1))
+    # done
+    #
+    # if [[ $research_success -eq 0 ]]; then
+    # send_failure_alert "Report writing failed after $MAX_RESEARCH_ATTEMPTS attempts" || true
+    # exit 1
+    # fi
+    # else
+    # log "Markdown already exists — skipping report writing"
+    # fi
+    #
+    # # ── Schwab fact-check: correct any hallucinated prices/moves ─────────────
+    # log "Running Schwab fact-check verification..."
+    # python3 "$REPO_DIR/scripts/verify-brief.py" "$MONTH_DIR/$OUTPUT_MD" 2>&1 | tee -a "$LOG_FILE" || true
 
     # ── HTML build + site publish: RETIRED 2026-08-22 ───────────────────────
     # Stopped with the weekly report. This was a second Opus invocation whose
@@ -643,10 +673,10 @@ main() {
     # The commit+push used to ride inside that Opus prompt; it is replaced here
     # by a deterministic one so the collector's output still backs up off-host
     # and .61's working tree does not accumulate uncommitted files each run.
-    log "Committing data artifacts (HTML build retired)..."
+    log "Committing data artifacts (HTML + report-writer legs retired)..."
     (
         cd "$REPO_DIR" || exit 1
-        git add -A data/ "morning-brief/$MONTH/$OUTPUT_MD" morning-brief/logs 2>/dev/null || true
+        git add -A data/ morning-brief/logs 2>/dev/null || true
         if git diff --cached --quiet; then
             echo "Nothing to commit"
         else
@@ -656,8 +686,8 @@ main() {
         fi
     ) 2>&1 | tee -a "$LOG_FILE" || log_error "git step failed (non-fatal)"
 
-    log "=== Morning Brief Complete (markdown only) ==="
-    log "Output: morning-brief/$MONTH/$OUTPUT_MD — consumed by inject-morning.sh"
+    log "=== Morning Brief Complete (data collection only) ==="
+    log "Output: data/briefing-${TARGET_DATE}.md — consumed by inject-morning.sh"
     track_run "SUCCESS"
     exit 0
 }
