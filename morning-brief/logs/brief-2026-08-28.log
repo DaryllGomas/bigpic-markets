@@ -1,0 +1,64 @@
+[2026-08-28 11:30:01] === Morning Brief Started ===
+[2026-08-28 11:30:01] Date: Friday, 2026-08-28
+[2026-08-28 11:30:01] Output: data/briefing-2026-08-28.md
+[2026-08-28 11:30:01] All dependencies verified
+[2026-08-28 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-08-28 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-08-28 11:30:02,747 INFO === Market Data Collection — 2026-08-28 ===
+2026-08-28 11:30:02,811 INFO ── Step 1: RSS Feeds ──
+2026-08-28 11:30:25,513 INFO RSS feeds: 231 headlines stored, 241 older than 24h skipped
+2026-08-28 11:30:25,513 INFO Step 1 complete: 22.7s (headlines=231)
+2026-08-28 11:30:25,513 INFO ── Step 2: Opus Feed Analysis ──
+2026-08-28 11:30:25,516 INFO Opus analysis: sending 216 headlines to claude CLI (attempt 1/3)...
+2026-08-28 11:31:05,899 INFO Opus analysis: 40 tickers, 12 movers, 9 themes from 216 headlines (attempt 1/3)
+2026-08-28 11:31:05,899 INFO Step 2 complete: 40.4s (opus_tickers=40)
+2026-08-28 11:31:05,899 INFO ── Step 3: Schwab + External APIs ──
+2026-08-28 11:31:13,153 INFO Schwab quotes: 148 symbols
+2026-08-28 11:31:13,158 INFO Auto-detected movers (|change| > 3%): 5 symbols
+2026-08-28 11:31:13,163 INFO Technicals + SMA200 for 129 quoted symbols (sequential)
+2026-08-28 11:34:06,026 INFO Schwab technicals: 128/129 symbols
+2026-08-28 11:35:38,233 INFO SMA200: 128/129 symbols
+2026-08-28 11:35:38,421 INFO Schwab market context: collected
+2026-08-28 11:36:54,345 INFO Schwab earnings: 71 entries
+2026-08-28 11:36:54,362 INFO Economic calendar: 7 events
+2026-08-28 11:36:54,443 INFO CoinGecko: 2 coins
+2026-08-28 11:36:59,402 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-08-28 11:37:05,046 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-08-28 11:37:10,633 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-08-28 11:37:11,140 INFO Stooq: 0/3 symbols
+2026-08-28 11:37:59,500 WARNING FRED failed: The read operation timed out
+2026-08-28 11:38:07,967 INFO Yahoo backup: 4 symbols
+2026-08-28 11:38:07,968 INFO Step 3 complete: 422.1s (quotes=148, tech=128, sma200=128, earnings=71, econ=7, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-08-28 11:38:07,968 INFO ── Step 4: Validation + Retry ──
+2026-08-28 11:38:08,152 INFO ANOMALY: COIN price=189.29 avg=158.56 z=3.1
+2026-08-28 11:38:08,160 INFO ANOMALY: CRCL price=93.39 avg=66.99 z=3.7
+2026-08-28 11:38:08,250 INFO ANOMALY: OKTA price=172.00 avg=145.25 z=3.8
+2026-08-28 11:38:08,337 INFO Anomaly detection: 3 flagged
+2026-08-28 11:38:08,337 INFO Cross-validation: 0 discrepancies
+2026-08-28 11:38:08,367 INFO Retry check: 1 failed call(s) found, retrying...
+2026-08-28 11:38:08,367 INFO   Retrying technicals for PSQL (original error: HTTP Error 400: Bad Request)
+2026-08-28 11:38:09,373 INFO   ✗ PSQL technicals retry failed: HTTP Error 400: Bad Request
+2026-08-28 11:38:09,381 INFO Retry complete: 0/1 recovered
+2026-08-28 11:38:09,405 WARNING Excluding 1 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): PSQL
+2026-08-28 11:38:09,430 INFO Step 4 complete: 1.5s (anomalies=3, cross_val=0, retried=0, completeness=100%)
+2026-08-28 11:38:09,432 INFO ── Step 5: Generate Briefing ──
+2026-08-28 11:38:09,766 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-08-28.md (33493 bytes)
+2026-08-28 11:38:09,776 INFO Pruned 153 rows from quotes (older than 90 days)
+2026-08-28 11:38:09,780 INFO Pruned 128 rows from technicals (older than 90 days)
+2026-08-28 11:38:09,780 INFO Pruned 7 rows from anomalies (older than 90 days)
+2026-08-28 11:38:09,785 INFO Pruned 250 rows from headlines (older than 14 days)
+2026-08-28 11:38:09,786 INFO Pruned 135 rows from levels (older than 30 days)
+2026-08-28 11:38:09,787 INFO Pruned 41 rows from opus_tickers (older than 30 days)
+2026-08-28 11:38:09,787 INFO Pruned 10 rows from opus_movers (older than 30 days)
+2026-08-28 11:38:09,788 INFO Pruned 9 rows from opus_themes (older than 30 days)
+2026-08-28 11:38:09,788 INFO Pruned 1 rows from opus_econ_events (older than 30 days)
+2026-08-28 11:38:09,789 INFO Pruned 5 rows from opus_fed_signals (older than 30 days)
+2026-08-28 11:38:09,789 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-08-28 11:38:09,807 INFO Pruned 8 rows from economic_events (older than 90 days)
+2026-08-28 11:38:09,809 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-08-28 11:38:09,809 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-08-28 11:38:10,050 INFO Cleanup complete
+2026-08-28 11:38:10,051 INFO === Collection complete: 486.6s total, completeness=100%, exit_code=0 ===
+[2026-08-28 11:38:10] Data collection complete — briefing file ready
+[2026-08-28 11:38:10] Committing data artifacts (HTML + report-writer legs retired)...
