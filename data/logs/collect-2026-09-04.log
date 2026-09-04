@@ -1,0 +1,122 @@
+2026-09-04 11:30:02,103 INFO === Market Data Collection — 2026-09-04 ===
+2026-09-04 11:30:02,153 INFO ── Step 1: RSS Feeds ──
+2026-09-04 11:30:23,691 ERROR RSS Robotics & Automation News FAILED: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-04 11:30:25,630 INFO RSS feeds: 214 headlines stored, 238 older than 24h skipped
+2026-09-04 11:30:25,630 ERROR RSS feeds: 1 feed(s) FAILED
+2026-09-04 11:30:25,631 INFO Step 1 complete: 23.5s (headlines=214)
+2026-09-04 11:30:25,631 ERROR RSS feeds: 1 feed(s) FAILED:
+  Robotics & Automation News (https://roboticsandautomationnews.com/feed): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-04 11:30:26,952 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-09-04 11:30:26,953 INFO ── Step 2: Opus Feed Analysis ──
+2026-09-04 11:30:26,955 INFO Opus analysis: sending 200 headlines to claude CLI (attempt 1/3)...
+2026-09-04 11:31:50,396 INFO Opus analysis: 50 tickers, 11 movers, 11 themes from 200 headlines (attempt 1/3)
+2026-09-04 11:31:50,397 INFO Step 2 complete: 83.4s (opus_tickers=50)
+2026-09-04 11:31:50,397 INFO ── Step 3: Schwab + External APIs ──
+2026-09-04 11:31:57,847 INFO Schwab quotes: 166 symbols
+2026-09-04 11:31:57,848 INFO Auto-detected movers (|change| > 3%): 9 symbols
+2026-09-04 11:31:57,849 INFO Technicals + SMA200 for 147 quoted symbols (sequential)
+2026-09-04 11:33:05,502 DEBUG Schwab technicals CACI: HTTP Error 404: Not Found
+2026-09-04 11:33:08,008 DEBUG Schwab technicals CHY: HTTP Error 404: Not Found
+2026-09-04 11:33:12,039 DEBUG Schwab technicals GOOG: HTTP Error 404: Not Found
+2026-09-04 11:33:17,440 DEBUG Schwab technicals TSLA: HTTP Error 404: Not Found
+2026-09-04 11:33:36,721 DEBUG Schwab technicals ISRG: HTTP Error 404: Not Found
+2026-09-04 11:33:56,409 DEBUG Schwab technicals IWM: HTTP Error 404: Not Found
+2026-09-04 11:36:04,563 INFO Schwab technicals: 141/147 symbols
+2026-09-04 11:36:33,803 DEBUG SMA200 CSCO: HTTP Error 404: Not Found
+2026-09-04 11:36:39,877 DEBUG SMA200 GLW: HTTP Error 404: Not Found
+2026-09-04 11:37:00,255 DEBUG SMA200 TER: HTTP Error 404: Not Found
+2026-09-04 11:37:50,538 DEBUG SMA200 HON: HTTP Error 404: Not Found
+2026-09-04 11:37:52,546 DEBUG SMA200 OLN: HTTP Error 404: Not Found
+2026-09-04 11:37:54,554 DEBUG SMA200 RTX: HTTP Error 404: Not Found
+2026-09-04 11:37:56,562 DEBUG SMA200 CEG: HTTP Error 404: Not Found
+2026-09-04 11:37:58,645 DEBUG SMA200 HMC: HTTP Error 404: Not Found
+2026-09-04 11:38:05,602 DEBUG SMA200 IRDM: HTTP Error 404: Not Found
+2026-09-04 11:38:08,510 DEBUG SMA200 RGTI: HTTP Error 404: Not Found
+2026-09-04 11:38:12,722 DEBUG SMA200 FTNT: HTTP Error 404: Not Found
+2026-09-04 11:38:15,808 DEBUG SMA200 NXE: HTTP Error 404: Not Found
+2026-09-04 11:38:23,848 INFO SMA200: 135/147 symbols
+2026-09-04 11:38:23,854 INFO Schwab market context: collected
+2026-09-04 11:39:42,302 INFO Schwab earnings: 71 entries
+2026-09-04 11:39:43,112 INFO Economic calendar: 4 events
+2026-09-04 11:39:43,185 INFO CoinGecko: 2 coins
+2026-09-04 11:39:48,130 WARNING Stooq FTSE failed: HTTP Error 404: Not Found
+2026-09-04 11:39:53,364 WARNING Stooq KOSPI failed: HTTP Error 404: Not Found
+2026-09-04 11:39:58,424 WARNING Stooq DXY failed: HTTP Error 404: Not Found
+2026-09-04 11:39:58,937 INFO Stooq: 0/3 symbols
+2026-09-04 11:40:47,246 WARNING FRED failed: The read operation timed out
+2026-09-04 11:40:55,751 INFO Yahoo backup: 4 symbols
+2026-09-04 11:40:55,751 INFO Step 3 complete: 545.4s (quotes=166, tech=141, sma200=135, earnings=71, econ=4, crypto=2, stooq=0, fred=0, yahoo=4)
+2026-09-04 11:40:55,751 INFO ── Step 4: Validation + Retry ──
+2026-09-04 11:40:55,801 INFO ANOMALY: ADBE price=276.90 avg=212.50 z=7.6
+2026-09-04 11:40:55,838 INFO ANOMALY: CIEN price=325.00 avg=401.90 z=-3.1
+2026-09-04 11:40:55,933 INFO Anomaly detection: 2 flagged
+2026-09-04 11:40:55,933 INFO Cross-validation: 0 discrepancies
+2026-09-04 11:40:55,951 INFO Retry check: 18 failed call(s) found, retrying...
+2026-09-04 11:40:55,951 INFO   Retrying technicals for CACI (original error: HTTP Error 404: Not Found)
+2026-09-04 11:40:57,208 INFO   ✓ CACI technicals recovered
+2026-09-04 11:40:57,208 INFO   Retrying technicals for CHY (original error: HTTP Error 404: Not Found)
+2026-09-04 11:40:58,527 INFO   ✓ CHY technicals recovered
+2026-09-04 11:40:58,527 INFO   Retrying technicals for GOOG (original error: HTTP Error 404: Not Found)
+2026-09-04 11:40:59,759 INFO   ✓ GOOG technicals recovered
+2026-09-04 11:40:59,759 INFO   Retrying technicals for TSLA (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:00,994 INFO   ✓ TSLA technicals recovered
+2026-09-04 11:41:00,994 INFO   Retrying technicals for ISRG (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:02,232 INFO   ✓ ISRG technicals recovered
+2026-09-04 11:41:02,233 INFO   Retrying technicals for IWM (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:03,350 INFO   ✓ IWM technicals recovered
+2026-09-04 11:41:03,350 INFO   Retrying sma200 for CSCO (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:04,130 INFO   ✓ CSCO sma200 recovered
+2026-09-04 11:41:04,131 INFO   Retrying sma200 for GLW (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:04,977 INFO   ✓ GLW sma200 recovered
+2026-09-04 11:41:04,977 INFO   Retrying sma200 for TER (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:05,853 INFO   ✓ TER sma200 recovered
+2026-09-04 11:41:05,853 INFO   Retrying sma200 for HON (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:06,912 INFO   ✓ HON sma200 recovered
+2026-09-04 11:41:06,912 INFO   Retrying sma200 for OLN (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:07,648 INFO   ✓ OLN sma200 recovered
+2026-09-04 11:41:07,648 INFO   Retrying sma200 for RTX (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:08,479 INFO   ✓ RTX sma200 recovered
+2026-09-04 11:41:08,479 INFO   Retrying sma200 for CEG (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:09,306 INFO   ✓ CEG sma200 recovered
+2026-09-04 11:41:09,306 INFO   Retrying sma200 for HMC (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:10,066 INFO   ✓ HMC sma200 recovered
+2026-09-04 11:41:10,066 INFO   Retrying sma200 for IRDM (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:10,823 INFO   ✓ IRDM sma200 recovered
+2026-09-04 11:41:10,823 INFO   Retrying sma200 for RGTI (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:11,682 INFO   ✓ RGTI sma200 recovered
+2026-09-04 11:41:11,682 INFO   Retrying sma200 for FTNT (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:12,449 INFO   ✓ FTNT sma200 recovered
+2026-09-04 11:41:12,449 INFO   Retrying sma200 for NXE (original error: HTTP Error 404: Not Found)
+2026-09-04 11:41:13,194 INFO   ✓ NXE sma200 recovered
+2026-09-04 11:41:13,197 INFO Retry complete: 18/18 recovered
+2026-09-04 11:41:13,212 INFO Step 4 complete: 17.5s (anomalies=2, cross_val=0, retried=18, completeness=100%)
+2026-09-04 11:41:13,212 DEBUG   us_indices: OK
+2026-09-04 11:41:13,212 DEBUG   futures: OK
+2026-09-04 11:41:13,212 DEBUG   vix: OK
+2026-09-04 11:41:13,212 DEBUG   treasuries: OK
+2026-09-04 11:41:13,212 DEBUG   commodities: OK
+2026-09-04 11:41:13,212 DEBUG   crypto: OK
+2026-09-04 11:41:13,212 DEBUG   international: OK
+2026-09-04 11:41:13,212 DEBUG   gap_fills: OK
+2026-09-04 11:41:13,212 DEBUG   econ_calendar: OK
+2026-09-04 11:41:13,212 DEBUG   market_context: OK
+2026-09-04 11:41:13,213 DEBUG   opus_analysis: OK
+2026-09-04 11:41:13,213 DEBUG   rss: OK
+2026-09-04 11:41:13,213 DEBUG   watchlist_t1: OK
+2026-09-04 11:41:13,213 INFO ── Step 5: Generate Briefing ──
+2026-09-04 11:41:13,402 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-09-04.md (33637 bytes)
+2026-09-04 11:41:13,406 INFO Pruned 174 rows from quotes (older than 90 days)
+2026-09-04 11:41:13,408 INFO Pruned 149 rows from technicals (older than 90 days)
+2026-09-04 11:41:13,410 INFO Pruned 248 rows from headlines (older than 14 days)
+2026-09-04 11:41:13,410 INFO Pruned 147 rows from levels (older than 30 days)
+2026-09-04 11:41:13,411 INFO Pruned 63 rows from opus_tickers (older than 30 days)
+2026-09-04 11:41:13,411 INFO Pruned 23 rows from opus_movers (older than 30 days)
+2026-09-04 11:41:13,411 INFO Pruned 12 rows from opus_themes (older than 30 days)
+2026-09-04 11:41:13,411 INFO Pruned 2 rows from opus_econ_events (older than 30 days)
+2026-09-04 11:41:13,411 INFO Pruned 4 rows from opus_fed_signals (older than 30 days)
+2026-09-04 11:41:13,412 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-09-04 11:41:13,419 INFO Pruned 5 rows from economic_events (older than 90 days)
+2026-09-04 11:41:13,420 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-09-04 11:41:13,420 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-09-04 11:41:13,543 INFO Cleanup complete
+2026-09-04 11:41:13,543 INFO === Collection complete: 669.7s total, completeness=100%, exit_code=0 ===
