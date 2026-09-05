@@ -29,6 +29,7 @@ import io
 import xml.etree.ElementTree as ET
 import time
 import datetime
+import zoneinfo
 import logging
 import statistics
 import os
@@ -1847,7 +1848,7 @@ def generate_briefing(conn, market_date, log):
     output_path = DATA_DIR / f"briefing-{market_date}.md"
     score, details = calculate_completeness(conn, market_date)
     event_load = determine_event_load(conn, market_date)
-    now_str = datetime.datetime.now().strftime("%H:%M:%S PT")
+    now_str = datetime.datetime.now(zoneinfo.ZoneInfo("America/Los_Angeles")).strftime("%H:%M:%S PT")
     day_name = datetime.date.fromisoformat(market_date).strftime("%A, %B %-d, %Y")
 
     lines = []
