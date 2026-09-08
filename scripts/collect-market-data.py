@@ -75,6 +75,14 @@ COINGECKO_URL = (
     "?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true"
 )
 FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv"
+# FRED's edge black-holes the bare "BigPic-Markets/1.0" UA: it accepts the
+# connection and then never answers, so every run burned EXTERNAL_TIMEOUT x
+# (MAX_RETRIES + 1) = ~48s and logged "FRED failed: The read operation timed out".
+# That had happened on EVERY run since at least 2026-08-17 without anyone noticing,
+# because YAHOO_BACKUP silently covered DGS2. Adding the contact URL makes it answer
+# in ~0.1s - verified 3/3 trials on 2026-09-08. A browser UA does NOT work here;
+# the parenthetical contact is what it wants. Do not shorten this string.
+FRED_HEADERS = {"User-Agent": "BigPic-Markets/1.0 (+https://bigpicsolutions.com)"}
 
 FAILURE_EMAIL = "daryll@bigpicsolutions.com"
 
@@ -135,6 +143,15 @@ SYMBOL_NAMES = {
     "DGS2": "2Y Yield", "DGS10": "10Y Yield", "DGS30": "30Y Yield",
     "SPY": "SPY", "QQQ": "QQQ", "IWM": "IWM", "DIA": "DIA",
 }
+
+# RETIRED 2026-09-08 - Stooq is no longer machine-readable. Its /q/l/ CSV endpoint
+# now 404s for EVERY symbol (checked ^ukx, ^kospi, dx.f and the known-good ^spx and
+# ^dji), and /q/d/l/ serves a JavaScript proof-of-work bot challenge. This is not a
+# symbol problem and not a User-Agent problem - there is nothing to fix on our side.
+# FTSE/KOSPI/DXY come from YAHOO_BACKUP instead, which has silently been carrying
+# them at 100% completeness. Definitions are kept so the source can be revived if
+# Stooq ever restores a plain CSV endpoint: flip STOOQ_ENABLED back to True.
+STOOQ_ENABLED = False
 
 STOOQ_SYMBOLS = {
     "FTSE": {"url": "https://stooq.com/q/l/?s=^ukx&f=sd2t2ohlcv&h&e=csv", "name": "FTSE 100"},
@@ -576,9 +593,14 @@ def fetch_json(url, timeout=10, retries=MAX_RETRIES):
     return json.loads(data), elapsed
 
 
-def fetch_csv_text(url, timeout=10, retries=MAX_RETRIES):
-    """Fetch CSV text. Returns (text_string, elapsed_ms)."""
-    data, elapsed = fetch_url(url, timeout, retries)
+def fetch_csv_text(url, timeout=10, retries=MAX_RETRIES, headers=None):
+    """Fetch CSV text. Returns (text_string, elapsed_ms).
+
+    `headers` exists so a single source can override the default User-Agent without
+    changing it for the other ~28 external endpoints this module talks to (see
+    FRED_HEADERS).
+    """
+    data, elapsed = fetch_url(url, timeout, retries, headers)
     return data.decode("utf-8", errors="replace"), elapsed
 
 
@@ -947,7 +969,11 @@ def collect_coingecko(conn, market_date, log):
 
 
 def collect_stooq(conn, market_date, log):
-    """Fetch FTSE, Kospi, DXY from Stooq CSV."""
+    """Fetch FTSE, Kospi, DXY from Stooq CSV. Disabled - see STOOQ_ENABLED."""
+    if not STOOQ_ENABLED:
+        log.info("Stooq: skipped (retired 2026-09-08 - endpoint gone; "
+                 "FTSE/KOSPI/DXY served by Yahoo backup)")
+        return 0
     total = 0
     for sym_key, info in STOOQ_SYMBOLS.items():
         url = info["url"]
@@ -988,7 +1014,7 @@ def collect_stooq(conn, market_date, log):
         time.sleep(0.5)
 
     conn.commit()
-    log.info(f"Stooq: {total}/3 symbols")
+    log.info(f"Stooq: {total}/{len(STOOQ_SYMBOLS)} symbols")
     return total
 
 
@@ -1000,7 +1026,7 @@ def collect_fred(conn, market_date, log):
     url = f"{FRED_BASE}?id={series_ids}&cosd={start_date}&coed={end_date}"
 
     try:
-        text, elapsed = fetch_csv_text(url, timeout=EXTERNAL_TIMEOUT)
+        text, elapsed = fetch_csv_text(url, timeout=EXTERNAL_TIMEOUT, headers=FRED_HEADERS)
         reader = csv.DictReader(io.StringIO(text.strip()))
         rows = list(reader)
         if not rows:
@@ -2738,10 +2764,16 @@ def main():
         # External APIs
         s3_crypto = collect_coingecko(conn, market_date, log)
         s3_stooq = collect_stooq(conn, market_date, log)
-        if s3_stooq < 3:
+        if s3_stooq < len(STOOQ_SYMBOLS):
+            # With Stooq retired this always trips, which is exactly what routes
+            # FTSE/KOSPI/DXY to collect_yahoo_backup below. Intentional, not a bug.
             failed_sources.add("stooq")
         s3_fred = collect_fred(conn, market_date, log)
-        if s3_fred < 3:
+        if s3_fred < len(FRED_SERIES):
+            # Was hardcoded "< 3" while FRED_SERIES has held a single series (DGS2)
+            # ever since 10Y/30Y moved to Schwab - so "fred" was marked failed on
+            # every run even when it had succeeded, permanently forcing the Yahoo
+            # backup for 2Y. len() keeps this honest if the series list changes.
             failed_sources.add("fred")
         s3_yahoo = collect_yahoo_backup(conn, market_date, log, failed_sources)
 
