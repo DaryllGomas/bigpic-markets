@@ -1,0 +1,59 @@
+[2026-09-10 11:30:01] === Morning Brief Started ===
+[2026-09-10 11:30:01] Date: Thursday, 2026-09-10
+[2026-09-10 11:30:02] Output: data/briefing-2026-09-10.md
+[2026-09-10 11:30:02] All dependencies verified
+[2026-09-10 11:30:02] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-09-10 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-09-10 11:30:02,479 INFO === Market Data Collection — 2026-09-10 ===
+2026-09-10 11:30:02,536 INFO ── Step 1: RSS Feeds ──
+2026-09-10 11:30:25,461 ERROR RSS Robotics & Automation News FAILED: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-10 11:30:27,132 INFO RSS feeds: 236 headlines stored, 212 older than 24h skipped
+2026-09-10 11:30:27,133 ERROR RSS feeds: 1 feed(s) FAILED
+2026-09-10 11:30:27,133 INFO Step 1 complete: 24.6s (headlines=236)
+2026-09-10 11:30:27,133 ERROR RSS feeds: 1 feed(s) FAILED:
+  Robotics & Automation News (https://roboticsandautomationnews.com/feed): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-10 11:30:28,250 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-09-10 11:30:28,250 INFO ── Step 2: Opus Feed Analysis ──
+2026-09-10 11:30:28,251 INFO Opus analysis: sending 223 headlines to claude CLI (attempt 1/3)...
+2026-09-10 11:31:39,535 INFO Opus analysis: 56 tickers, 13 movers, 10 themes from 223 headlines (attempt 1/3)
+2026-09-10 11:31:39,535 INFO Step 2 complete: 71.3s (opus_tickers=56)
+2026-09-10 11:31:39,536 INFO ── Step 3: Schwab + External APIs ──
+2026-09-10 11:31:47,522 INFO Schwab quotes: 169 symbols
+2026-09-10 11:31:47,523 INFO Auto-detected movers (|change| > 3%): 10 symbols
+2026-09-10 11:31:47,524 INFO Technicals + SMA200 for 150 quoted symbols (sequential)
+2026-09-10 11:35:52,676 INFO Schwab technicals: 148/150 symbols
+2026-09-10 11:38:04,294 INFO SMA200: 148/150 symbols
+2026-09-10 11:38:04,309 INFO Schwab market context: collected
+2026-09-10 11:39:24,073 INFO Schwab earnings: 71 entries
+2026-09-10 11:39:24,092 INFO Economic calendar: 13 events
+2026-09-10 11:39:24,198 INFO CoinGecko: 2 coins
+2026-09-10 11:39:24,198 INFO Stooq: skipped (retired 2026-09-08 - endpoint gone; FTSE/KOSPI/DXY served by Yahoo backup)
+2026-09-10 11:39:25,562 INFO FRED: 1/3 series
+2026-09-10 11:39:31,855 INFO Yahoo backup: 3 symbols
+2026-09-10 11:39:31,855 INFO Step 3 complete: 472.3s (quotes=169, tech=148, sma200=148, earnings=71, econ=13, crypto=2, stooq=0, fred=1, yahoo=3)
+2026-09-10 11:39:31,855 INFO ── Step 4: Validation + Retry ──
+2026-09-10 11:39:32,279 INFO Anomaly detection: 0 flagged
+2026-09-10 11:39:32,280 INFO Cross-validation: 0 discrepancies
+2026-09-10 11:39:32,316 INFO Retry check: 2 failed call(s) found, retrying...
+2026-09-10 11:39:32,316 INFO   Retrying technicals for GLVHF (original error: HTTP Error 400: Bad Request)
+2026-09-10 11:39:33,442 INFO   ✗ GLVHF technicals retry failed: HTTP Error 400: Bad Request
+2026-09-10 11:39:33,443 INFO   Retrying technicals for BUBSF (original error: HTTP Error 400: Bad Request)
+2026-09-10 11:39:34,581 INFO   ✗ BUBSF technicals retry failed: HTTP Error 400: Bad Request
+2026-09-10 11:39:34,587 INFO Retry complete: 0/2 recovered
+2026-09-10 11:39:34,623 WARNING Excluding 2 symbol(s) — Schwab technicals API returned HTTP 400 (unsupported): BUBSF, GLVHF
+2026-09-10 11:39:34,642 INFO Step 4 complete: 2.8s (anomalies=0, cross_val=0, retried=0, completeness=100%)
+2026-09-10 11:39:34,644 INFO ── Step 5: Generate Briefing ──
+2026-09-10 11:39:34,960 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-09-10.md (34117 bytes)
+2026-09-10 11:39:34,977 INFO Pruned 223 rows from headlines (older than 14 days)
+2026-09-10 11:39:34,978 INFO Pruned 133 rows from levels (older than 30 days)
+2026-09-10 11:39:34,979 INFO Pruned 39 rows from opus_tickers (older than 30 days)
+2026-09-10 11:39:34,979 INFO Pruned 5 rows from opus_movers (older than 30 days)
+2026-09-10 11:39:34,980 INFO Pruned 10 rows from opus_themes (older than 30 days)
+2026-09-10 11:39:34,980 INFO Pruned 3 rows from opus_econ_events (older than 30 days)
+2026-09-10 11:39:34,980 INFO Pruned 2 rows from opus_fed_signals (older than 30 days)
+2026-09-10 11:39:34,981 INFO Pruned 1 rows from opus_sentiment (older than 30 days)
+2026-09-10 11:39:35,244 INFO Cleanup complete
+2026-09-10 11:39:35,246 INFO === Collection complete: 571.0s total, completeness=100%, exit_code=0 ===
+[2026-09-10 11:39:35] Data collection complete — briefing file ready
+[2026-09-10 11:39:35] Committing data artifacts (HTML + report-writer legs retired)...
