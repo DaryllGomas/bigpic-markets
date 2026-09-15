@@ -1,0 +1,61 @@
+[2026-09-15 11:30:01] === Morning Brief Started ===
+[2026-09-15 11:30:01] Date: Tuesday, 2026-09-15
+[2026-09-15 11:30:01] Output: data/briefing-2026-09-15.md
+[2026-09-15 11:30:01] All dependencies verified
+[2026-09-15 11:30:01] Running data collection pipeline...
+[reconcile-stale-earnings] date=2026-09-15 db=/home/bigpic/projects/bigpic-markets/data/market.db dry_run=False
+[reconcile-stale-earnings] No stale manual earnings events. OK.
+2026-09-15 11:30:02,004 INFO === Market Data Collection — 2026-09-15 ===
+2026-09-15 11:30:02,084 INFO ── Step 1: RSS Feeds ──
+2026-09-15 11:30:13,321 ERROR RSS Semiconductor Engineering FAILED: HTTP Error 403: Forbidden
+2026-09-15 11:30:20,970 ERROR RSS Robotics & Automation News FAILED: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-15 11:30:22,751 INFO RSS feeds: 238 headlines stored, 195 older than 24h skipped
+2026-09-15 11:30:22,751 ERROR RSS feeds: 2 feed(s) FAILED
+2026-09-15 11:30:22,751 INFO Step 1 complete: 20.7s (headlines=238)
+2026-09-15 11:30:22,751 ERROR RSS feeds: 2 feed(s) FAILED:
+  Semiconductor Engineering (https://semiengineering.com/feed/): HTTP Error 403: Forbidden
+  Robotics & Automation News (https://roboticsandautomationnews.com/feed): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-15 11:30:23,950 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-09-15 11:30:23,950 INFO ── Step 2: Opus Feed Analysis ──
+2026-09-15 11:30:23,952 INFO Opus analysis: sending 223 headlines to claude CLI (attempt 1/3)...
+2026-09-15 11:31:33,957 INFO Opus analysis: 41 tickers, 7 movers, 12 themes from 223 headlines (attempt 1/3)
+2026-09-15 11:31:33,957 INFO Step 2 complete: 70.0s (opus_tickers=41)
+2026-09-15 11:31:33,958 INFO ── Step 3: Schwab + External APIs ──
+2026-09-15 11:31:41,007 INFO Schwab quotes: 154 symbols
+2026-09-15 11:31:41,008 INFO Auto-detected movers (|change| > 3%): 5 symbols
+2026-09-15 11:31:41,009 INFO Technicals + SMA200 for 135 quoted symbols (sequential)
+2026-09-15 11:34:28,655 INFO Schwab technicals: 135/135 symbols
+2026-09-15 11:35:57,494 INFO SMA200: 135/135 symbols
+2026-09-15 11:35:57,509 INFO Schwab market context: collected
+2026-09-15 11:37:07,604 INFO Schwab earnings: 71 entries
+2026-09-15 11:37:07,625 INFO Economic calendar: 3 events
+2026-09-15 11:37:07,748 INFO CoinGecko: 2 coins
+2026-09-15 11:37:07,749 INFO Stooq: skipped (retired 2026-09-08 - endpoint gone; FTSE/KOSPI/DXY served by Yahoo backup)
+2026-09-15 11:37:07,905 INFO FRED: 1/3 series
+2026-09-15 11:37:14,215 INFO Yahoo backup: 3 symbols
+2026-09-15 11:37:14,215 INFO Step 3 complete: 340.3s (quotes=154, tech=135, sma200=135, earnings=71, econ=3, crypto=2, stooq=0, fred=1, yahoo=3)
+2026-09-15 11:37:14,215 INFO ── Step 4: Validation + Retry ──
+2026-09-15 11:37:14,255 INFO ANOMALY: $IRX price=39.35 avg=37.44 z=3.3
+2026-09-15 11:37:14,430 INFO ANOMALY: EWA price=28.68 avg=29.86 z=-3.6
+2026-09-15 11:37:14,433 INFO ANOMALY: FEZ price=68.13 avg=70.85 z=-3.1
+2026-09-15 11:37:14,463 INFO ANOMALY: IBM price=246.48 avg=234.38 z=3.1
+2026-09-15 11:37:14,482 INFO ANOMALY: LEU price=147.98 avg=177.46 z=-3.0
+2026-09-15 11:37:14,488 INFO ANOMALY: LYSCF price=9.98 avg=11.27 z=-3.0
+2026-09-15 11:37:14,602 INFO ANOMALY: UUUU price=12.40 avg=14.60 z=-3.2
+2026-09-15 11:37:14,622 INFO Anomaly detection: 7 flagged
+2026-09-15 11:37:14,623 INFO Cross-validation: 0 discrepancies
+2026-09-15 11:37:14,655 INFO Retry check: 0 failures — nothing to retry
+2026-09-15 11:37:14,684 INFO Step 4 complete: 0.5s (anomalies=7, cross_val=0, retried=0, completeness=100%)
+2026-09-15 11:37:14,686 INFO ── Step 5: Generate Briefing ──
+2026-09-15 11:37:15,003 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-09-15.md (33554 bytes)
+2026-09-15 11:37:15,014 INFO Pruned 160 rows from quotes (older than 90 days)
+2026-09-15 11:37:15,018 INFO Pruned 134 rows from technicals (older than 90 days)
+2026-09-15 11:37:15,019 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-09-15 11:37:15,022 INFO Pruned 124 rows from headlines (older than 14 days)
+2026-09-15 11:37:15,044 INFO Pruned 6 rows from economic_events (older than 90 days)
+2026-09-15 11:37:15,045 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-09-15 11:37:15,046 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-09-15 11:37:15,295 INFO Cleanup complete
+2026-09-15 11:37:15,300 INFO === Collection complete: 431.4s total, completeness=100%, exit_code=0 ===
+[2026-09-15 11:37:15] Data collection complete — briefing file ready
+[2026-09-15 11:37:15] Committing data artifacts (HTML + report-writer legs retired)...
