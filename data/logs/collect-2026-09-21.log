@@ -1,0 +1,69 @@
+2026-09-21 11:30:02,625 INFO === Market Data Collection — 2026-09-21 ===
+2026-09-21 11:30:02,677 INFO ── Step 1: RSS Feeds ──
+2026-09-21 11:30:45,867 ERROR RSS The Quantum Insider FAILED: The read operation timed out
+2026-09-21 11:30:51,893 ERROR RSS Robotics & Automation News FAILED: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-21 11:30:53,672 INFO RSS feeds: 141 headlines stored, 297 older than 24h skipped
+2026-09-21 11:30:53,672 ERROR RSS feeds: 2 feed(s) FAILED
+2026-09-21 11:30:53,672 INFO Step 1 complete: 51.0s (headlines=141)
+2026-09-21 11:30:53,672 ERROR RSS feeds: 2 feed(s) FAILED:
+  The Quantum Insider (https://thequantuminsider.com/feed): The read operation timed out
+  Robotics & Automation News (https://roboticsandautomationnews.com/feed): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-21 11:30:54,712 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-09-21 11:30:54,712 INFO ── Step 2: Opus Feed Analysis ──
+2026-09-21 11:30:54,713 INFO Opus analysis: sending 127 headlines to claude CLI (attempt 1/3)...
+2026-09-21 11:32:01,874 INFO Opus analysis: 35 tickers, 12 movers, 9 themes from 127 headlines (attempt 1/3)
+2026-09-21 11:32:01,875 INFO Step 2 complete: 67.2s (opus_tickers=35)
+2026-09-21 11:32:01,875 INFO ── Step 3: Schwab + External APIs ──
+2026-09-21 11:32:09,449 INFO Schwab quotes: 151 symbols
+2026-09-21 11:32:09,450 INFO Auto-detected movers (|change| > 3%): 11 symbols
+2026-09-21 11:32:09,452 INFO Technicals + SMA200 for 132 quoted symbols (sequential)
+2026-09-21 11:34:59,938 INFO Schwab technicals: 132/132 symbols
+2026-09-21 11:35:43,962 DEBUG SMA200 SPCX: only 68 candles (need 200)
+2026-09-21 11:36:32,884 INFO SMA200: 131/132 symbols
+2026-09-21 11:36:32,906 INFO Schwab market context: collected
+2026-09-21 11:37:49,594 INFO Schwab earnings: 71 entries
+2026-09-21 11:37:49,610 INFO Economic calendar: 1 events
+2026-09-21 11:37:49,702 INFO CoinGecko: 2 coins
+2026-09-21 11:37:49,703 INFO Stooq: skipped (retired 2026-09-08 - endpoint gone; FTSE/KOSPI/DXY served by Yahoo backup)
+2026-09-21 11:37:50,640 INFO FRED: 1/3 series
+2026-09-21 11:37:56,921 INFO Yahoo backup: 3 symbols
+2026-09-21 11:37:56,921 INFO Step 3 complete: 355.0s (quotes=151, tech=132, sma200=131, earnings=71, econ=1, crypto=2, stooq=0, fred=1, yahoo=3)
+2026-09-21 11:37:56,922 INFO ── Step 4: Validation + Retry ──
+2026-09-21 11:37:57,000 INFO ANOMALY: /NQ price=30231.50 avg=29419.96 z=3.6
+2026-09-21 11:37:57,028 INFO ANOMALY: AMD price=574.33 avg=486.24 z=3.5
+2026-09-21 11:37:57,192 INFO ANOMALY: NVO price=41.42 avg=45.16 z=-3.6
+2026-09-21 11:37:57,289 INFO Anomaly detection: 3 flagged
+2026-09-21 11:37:57,289 INFO Cross-validation: 0 discrepancies
+2026-09-21 11:37:57,323 INFO Retry check: 0 failures — nothing to retry
+2026-09-21 11:37:57,350 INFO Step 4 complete: 0.4s (anomalies=3, cross_val=0, retried=0, completeness=100%)
+2026-09-21 11:37:57,351 DEBUG   us_indices: OK
+2026-09-21 11:37:57,351 DEBUG   futures: OK
+2026-09-21 11:37:57,351 DEBUG   vix: OK
+2026-09-21 11:37:57,351 DEBUG   treasuries: OK
+2026-09-21 11:37:57,351 DEBUG   commodities: OK
+2026-09-21 11:37:57,351 DEBUG   crypto: OK
+2026-09-21 11:37:57,351 DEBUG   international: OK
+2026-09-21 11:37:57,352 DEBUG   gap_fills: OK
+2026-09-21 11:37:57,352 DEBUG   econ_calendar: OK
+2026-09-21 11:37:57,352 DEBUG   market_context: OK
+2026-09-21 11:37:57,352 DEBUG   opus_analysis: OK
+2026-09-21 11:37:57,352 DEBUG   rss: OK
+2026-09-21 11:37:57,352 DEBUG   watchlist_t1: OK
+2026-09-21 11:37:57,352 INFO ── Step 5: Generate Briefing ──
+2026-09-21 11:37:57,672 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-09-21.md (28766 bytes)
+2026-09-21 11:37:57,681 INFO Pruned 154 rows from quotes (older than 90 days)
+2026-09-21 11:37:57,684 INFO Pruned 128 rows from technicals (older than 90 days)
+2026-09-21 11:37:57,684 INFO Pruned 2 rows from anomalies (older than 90 days)
+2026-09-21 11:37:57,688 INFO Pruned 200 rows from headlines (older than 14 days)
+2026-09-21 11:37:57,689 INFO Pruned 425 rows from levels (older than 30 days)
+2026-09-21 11:37:57,690 INFO Pruned 150 rows from opus_tickers (older than 30 days)
+2026-09-21 11:37:57,690 INFO Pruned 28 rows from opus_movers (older than 30 days)
+2026-09-21 11:37:57,691 INFO Pruned 34 rows from opus_themes (older than 30 days)
+2026-09-21 11:37:57,691 INFO Pruned 6 rows from opus_econ_events (older than 30 days)
+2026-09-21 11:37:57,692 INFO Pruned 16 rows from opus_fed_signals (older than 30 days)
+2026-09-21 11:37:57,692 INFO Pruned 3 rows from opus_sentiment (older than 30 days)
+2026-09-21 11:37:57,711 INFO Pruned 1 rows from economic_events (older than 90 days)
+2026-09-21 11:37:57,712 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-09-21 11:37:57,713 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-09-21 11:37:57,967 INFO Cleanup complete
+2026-09-21 11:37:57,968 INFO === Collection complete: 473.6s total, completeness=100%, exit_code=0 ===
