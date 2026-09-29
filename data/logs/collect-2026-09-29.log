@@ -1,0 +1,67 @@
+2026-09-29 11:30:02,259 INFO === Market Data Collection — 2026-09-29 ===
+2026-09-29 11:30:02,490 INFO ── Step 1: RSS Feeds ──
+2026-09-29 11:30:18,944 ERROR RSS Robotics & Automation News FAILED: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+2026-09-29 11:30:22,583 ERROR RSS Energy Storage News FAILED: HTTP Error 403: Forbidden
+2026-09-29 11:30:23,403 INFO RSS feeds: 222 headlines stored, 209 older than 24h skipped
+2026-09-29 11:30:23,403 ERROR RSS feeds: 2 feed(s) FAILED
+2026-09-29 11:30:23,403 INFO Step 1 complete: 20.9s (headlines=222)
+2026-09-29 11:30:23,404 ERROR RSS feeds: 2 feed(s) FAILED:
+  Robotics & Automation News (https://roboticsandautomationnews.com/feed): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+  Energy Storage News (https://energy-storage.news/feed): HTTP Error 403: Forbidden
+2026-09-29 11:30:25,377 INFO Warning email sent to daryll@bigpicsolutions.com
+2026-09-29 11:30:25,377 INFO ── Step 2: Opus Feed Analysis ──
+2026-09-29 11:30:25,379 INFO Opus analysis: sending 208 headlines to claude CLI (attempt 1/3)...
+2026-09-29 11:30:27,928 WARNING Opus analysis: auth failure (exit 1): Failed to authenticate: OAuth session expired and could not be refreshed — not retrying
+2026-09-29 11:30:27,929 INFO Step 2 complete: 2.6s (opus_tickers=0)
+2026-09-29 11:30:27,929 WARNING PIPELINE DEGRADED at Step 2 (Opus auth): claude CLI auth failure: Failed to authenticate: OAuth session expired and could not be refreshed — run `claude /login` on the host.
+2026-09-29 11:30:27,930 INFO ── Step 3: Schwab + External APIs ──
+2026-09-29 11:30:33,487 INFO Schwab quotes: 122 symbols
+2026-09-29 11:30:33,488 INFO Auto-detected movers (|change| > 3%): 2 symbols
+2026-09-29 11:30:33,488 INFO Technicals + SMA200 for 103 quoted symbols (sequential)
+2026-09-29 11:32:39,617 INFO Schwab technicals: 103/103 symbols
+2026-09-29 11:33:47,713 INFO SMA200: 103/103 symbols
+2026-09-29 11:33:47,730 INFO Schwab market context: collected
+2026-09-29 11:34:58,833 INFO Schwab earnings: 71 entries
+2026-09-29 11:34:58,854 INFO Economic calendar: 11 events
+2026-09-29 11:35:02,107 WARNING CoinGecko failed: HTTP Error 403: Forbidden
+2026-09-29 11:35:02,107 INFO Stooq: skipped (retired 2026-09-08 - endpoint gone; FTSE/KOSPI/DXY served by Yahoo backup)
+2026-09-29 11:35:02,288 INFO FRED: 1/3 series
+2026-09-29 11:35:08,547 INFO Yahoo backup: 3 symbols
+2026-09-29 11:35:08,548 INFO Step 3 complete: 280.6s (quotes=122, tech=103, sma200=103, earnings=71, econ=11, crypto=0, stooq=0, fred=1, yahoo=3)
+2026-09-29 11:35:08,548 INFO ── Step 4: Validation + Retry ──
+2026-09-29 11:35:08,586 INFO ANOMALY: $TYX price=55.61 avg=53.21 z=3.3
+2026-09-29 11:35:08,665 INFO ANOMALY: BA price=185.20 avg=205.08 z=-3.6
+2026-09-29 11:35:08,752 INFO ANOMALY: QS price=4.58 avg=5.23 z=-3.1
+2026-09-29 11:35:08,810 INFO Anomaly detection: 3 flagged
+2026-09-29 11:35:08,811 INFO Cross-validation: 0 discrepancies
+2026-09-29 11:35:08,847 INFO Retry check: 0 failures — nothing to retry
+2026-09-29 11:35:08,888 INFO Step 4 complete: 0.3s (anomalies=3, cross_val=0, retried=0, completeness=95%)
+2026-09-29 11:35:08,888 DEBUG   us_indices: OK
+2026-09-29 11:35:08,888 DEBUG   futures: OK
+2026-09-29 11:35:08,888 DEBUG   vix: OK
+2026-09-29 11:35:08,888 DEBUG   treasuries: OK
+2026-09-29 11:35:08,889 DEBUG   commodities: OK
+2026-09-29 11:35:08,889 DEBUG   crypto: MISSING (0/2)
+2026-09-29 11:35:08,889 DEBUG   international: OK
+2026-09-29 11:35:08,889 DEBUG   gap_fills: OK
+2026-09-29 11:35:08,889 DEBUG   econ_calendar: OK
+2026-09-29 11:35:08,889 DEBUG   market_context: OK
+2026-09-29 11:35:08,889 DEBUG   opus_analysis: MISSING (0/1)
+2026-09-29 11:35:08,889 DEBUG   rss: OK
+2026-09-29 11:35:08,890 DEBUG   watchlist_t1: OK
+2026-09-29 11:35:08,890 WARNING PIPELINE DEGRADED at Step 4 (Completeness): Completeness 95% — not 100%:
+  crypto: 0/2
+  opus_analysis: 0/1
+2026-09-29 11:35:11,026 INFO Degraded-run email sent to daryll@bigpicsolutions.com
+2026-09-29 11:35:11,026 INFO ── Step 5: Generate Briefing ──
+2026-09-29 11:35:11,397 INFO Briefing file written: /home/bigpic/projects/bigpic-markets/data/briefing-2026-09-29.md (25210 bytes)
+2026-09-29 11:35:11,399 WARNING PIPELINE DEGRADED (2 issue(s), completeness=95%): Step 2 (Opus auth), Step 4 (Completeness)
+2026-09-29 11:35:11,407 INFO Pruned 157 rows from quotes (older than 90 days)
+2026-09-29 11:35:11,411 INFO Pruned 132 rows from technicals (older than 90 days)
+2026-09-29 11:35:11,411 INFO Pruned 7 rows from anomalies (older than 90 days)
+2026-09-29 11:35:11,415 INFO Pruned 127 rows from headlines (older than 14 days)
+2026-09-29 11:35:11,434 INFO Pruned 6 rows from economic_events (older than 90 days)
+2026-09-29 11:35:11,436 INFO Pruned 70 rows from earnings (older than 90 days)
+2026-09-29 11:35:11,436 INFO Pruned 1 rows from market_context (older than 90 days)
+2026-09-29 11:35:11,652 INFO Cleanup complete
+2026-09-29 11:35:11,653 INFO === Collection complete: 304.4s total, completeness=95%, exit_code=1 ===
