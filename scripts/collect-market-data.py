@@ -215,10 +215,13 @@ RSS_FEEDS = {
     ],
     "robotics_automation": [
         ("The Robot Report", "https://www.therobotreport.com/feed"),
-        ("Robotics & Automation News", "https://roboticsandautomationnews.com/feed"),
+        # Replaced Robotics & Automation News 2026-09-30: their server has sent a broken
+        # TLS chain since at least 2026-08-31, so it failed every morning.
+        ("IEEE Spectrum Robotics", "https://spectrum.ieee.org/feeds/topic/robotics.rss"),
     ],
     "energy_storage": [
-        ("Energy Storage News", "https://energy-storage.news/feed"),
+        # The bare domain 403s behind Cloudflare; the www host serves the feed.
+        ("Energy Storage News", "https://www.energy-storage.news/feed/"),
         ("CleanTechnica", "https://cleantechnica.com/feed"),
     ],
 }
