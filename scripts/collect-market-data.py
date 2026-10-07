@@ -207,7 +207,7 @@ RSS_FEEDS = {
         ("BleepingComputer", "https://www.bleepingcomputer.com/feed/"),
     ],
     "quantum_computing": [
-        ("The Quantum Insider", "https://thequantuminsider.com/feed"),
+        ("The Quantum Insider", "https://thequantuminsider.com/feed/"),
         ("Quantum Computing Report", "https://quantumcomputingreport.com/feed/"),
     ],
     "critical_minerals": [
@@ -223,7 +223,8 @@ RSS_FEEDS = {
     "energy_storage": [
         # The bare domain 403s behind Cloudflare; the www host serves the feed.
         ("Energy Storage News", "https://www.energy-storage.news/feed/"),
-        ("CleanTechnica", "https://cleantechnica.com/feed"),
+        # CleanTechnica replaced 2026-10-06: it 403s every scripted request (Cloudflare), any host/UA.
+        ("Electrek", "https://electrek.co/feed/"),
     ],
 }
 
