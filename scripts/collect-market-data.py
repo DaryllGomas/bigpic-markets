@@ -38,7 +38,8 @@ import re
 
 
 def utc_to_et(time_str):
-    """Convert UTC HH:MM to Eastern Time. Calendar API stores UTC."""
+    """Convert UTC HH:MM to Eastern Time. Only for calendar rows WITHOUT event_tz:
+    since 2026-10-06 the Data calendar stores ET and stamps event_tz='ET' (PROCESS.md #97)."""
     if not time_str or time_str in ("", "\u2014"):
         return time_str
     try:
@@ -2092,7 +2093,7 @@ def generate_briefing(conn, market_date, log):
         w("|-----------|-------|--------|----------|----------|--------|")
         for ev in events:
             actual = ev["actual"] if ev["actual"] is not None else "—"
-            w(f"| {utc_to_et(ev['event_time'] or '—')} | {ev['event_name']} | {ev['impact'] or '—'} | {ev['forecast'] or '—'} | {ev['previous'] or '—'} | {actual} |")
+            w(f"| {ev.get('event_time_label') or (ev['event_time'] if ev.get('event_tz') == 'ET' else utc_to_et(ev['event_time'] or '—'))} | {ev['event_name']} | {ev['impact'] or '—'} | {ev['forecast'] or '—'} | {ev['previous'] or '—'} | {actual} |")
         w("")
         w("**IMPORTANT:** Events with Actual = \"—\" have NOT been released yet. Do NOT report actual values for these events. Write \"Pending\" or \"Scheduled for [time]\".")
     else:
