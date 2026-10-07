@@ -689,18 +689,14 @@ main() {
     # The commit+push used to ride inside that Opus prompt; it is replaced here
     # by a deterministic one so the collector's output still backs up off-host
     # and .61's working tree does not accumulate uncommitted files each run.
-    log "Committing data artifacts (HTML + report-writer legs retired)..."
-    (
-        cd "$REPO_DIR" || exit 1
-        git add -A data/ morning-brief/logs 2>/dev/null || true
-        if git diff --cached --quiet; then
-            echo "Nothing to commit"
-        else
-            git commit -q -m "Market data — $DAY_FULL $TARGET_DATE"
-            git pull --rebase -q origin main || true
-            git push -q origin main || echo "push failed — will retry next run"
-        fi
-    ) 2>&1 | tee -a "$LOG_FILE" || log_error "git step failed (non-fatal)"
+    # -- Publishing RETIRED 2026-10-07 (Daryll: "we're not publishing that anymore") --
+    # This used to git add/commit/push data/ + morning-brief/logs to the PUBLIC
+    # bigpic-markets GitHub Pages repo, which exposed briefing-*.md, market.db
+    # and the run logs on markets.bigpicsolutions.com. All outputs now stay
+    # local on .61 only: inject-morning.sh, vix_character_change.py and
+    # hermes brief-watchdog.py read them here. data/ and morning-brief/ are
+    # gitignored. To restore, see ~/run-morning-brief.sh.bak-2026-10-07-unpublish.
+    log "Outputs kept local (publishing retired 2026-10-07)"
 
     log "=== Morning Brief Complete (data collection only) ==="
     log "Output: data/briefing-${TARGET_DATE}.md — consumed by inject-morning.sh"
