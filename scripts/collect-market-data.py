@@ -336,7 +336,9 @@ CREATE TABLE IF NOT EXISTS economic_events (
     forecast TEXT,
     previous TEXT,
     source TEXT,
-    fetched_at TEXT NOT NULL
+    fetched_at TEXT NOT NULL,
+    event_tz TEXT,
+    event_time_label TEXT
 );
 
 CREATE TABLE IF NOT EXISTS earnings (
@@ -538,6 +540,11 @@ def init_db():
     conn = sqlite3.connect(str(DB_PATH))
     conn.row_factory = sqlite3.Row
     conn.executescript(SCHEMA)
+    # 2026-10-07: the Data calendar stamps event_tz / event_time_label (PROCESS.md #97); keep them.
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(economic_events)")}
+    for col in ("event_tz", "event_time_label"):
+        if col not in cols:
+            conn.execute(f"ALTER TABLE economic_events ADD COLUMN {col} TEXT")
     conn.commit()
     return conn
 
@@ -915,8 +922,9 @@ def collect_economic_calendar(conn, market_date, log):
         for ev in events:
             conn.execute(
                 "INSERT INTO economic_events (market_date, event_time, event_name, "
-                "impact, actual, forecast, previous, source, fetched_at) "
-                "VALUES (?,?,?,?,?,?,?,?,?)",
+                "impact, actual, forecast, previous, source, fetched_at, "
+                "event_tz, event_time_label) "
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                 (market_date,
                  ev.get("event_time") or ev.get("time"),
                  ev.get("event_name") or ev.get("name") or ev.get("event", "Unknown"),
@@ -925,7 +933,9 @@ def collect_economic_calendar(conn, market_date, log):
                  ev.get("forecast") or ev.get("consensus"),
                  ev.get("previous") or ev.get("prior"),
                  ev.get("source", "econ_calendar"),
-                 now),
+                 now,
+                 ev.get("event_tz"),
+                 ev.get("event_time_label")),
             )
             total += 1
 
@@ -2093,6 +2103,7 @@ def generate_briefing(conn, market_date, log):
         w("| Time (ET) | Event | Impact | Forecast | Previous | Actual |")
         w("|-----------|-------|--------|----------|----------|--------|")
         for ev in events:
+            ev = dict(ev)  # sqlite3.Row has no .get()
             actual = ev["actual"] if ev["actual"] is not None else "—"
             w(f"| {ev.get('event_time_label') or (ev['event_time'] if ev.get('event_tz') == 'ET' else utc_to_et(ev['event_time'] or '—'))} | {ev['event_name']} | {ev['impact'] or '—'} | {ev['forecast'] or '—'} | {ev['previous'] or '—'} | {actual} |")
         w("")
